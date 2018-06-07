@@ -9,30 +9,33 @@
         .checkbox .input-group__details {
             display: none;
         }
+
+        [v-cloak] {
+            display: none;
+        }
     </style>
 </head>
 <body>
 <div id="app">
-    <v-app dark>
+    <v-app dark v-cloak>
         <v-content>
-            <v-container mx0>
+            <v-container px-1>
                 <v-layout justify-center>
                     <v-flex xs12 md6 lg4>
-                        <v-expansion-panel expand popout>
+                        <v-expansion-panel expand popout v-if="generalCategories">
                             <v-expansion-panel-content
-                                    v-for="(el,i) in elements" :key="i"
-                                    :value="el.selected"
-                                    @input="panelClick($event,i,el)">
+                                    v-for="(gQuestion,i) in generalCategories" :key="i">
                                 <!--<div slot="header">{{item.name}}</div>-->
                                 <v-checkbox
                                         slot="header"
-                                        :input-value="el.selected "
-                                        :label="el.name">
+                                        v-model="gQuestion.selected"
+                                        @click.stop=""
+                                        :label="gQuestion.text">
                                 </v-checkbox>
                                 <v-card>
                                     <v-layout column>
                                         <v-flex xs12
-                                                v-for="(question,i) in el.questions"
+                                                v-for="(question,i) in gQuestion.questions"
                                                 :key="`question_${i}`">
                                             <v-card-title class="pb-0">
                                                 {{question.text}}
@@ -51,9 +54,9 @@
                                 </v-card>
                             </v-expansion-panel-content>
                         </v-expansion-panel>
+                        <h4 v-else>loading...</h4>
                     </v-flex>
                 </v-layout>
-
             </v-container>
         </v-content>
     </v-app>
@@ -70,17 +73,30 @@
             const headers = lines[0].split(",");
 
             for (let i = 1; i < lines.length; i++) {
-                let obj = {};
-                let currentline = lines[i].split(",");
-                for (let j = 0; j < headers.length; j++) {
-                    obj[headers[j]] = currentline[j];
+                let obj = csvLineToObj(lines[i], headers);
+                if (obj) {
+                    result.push(obj);
                 }
-                result.push(obj);
             }
             //return result; //JavaScript object
             resolve(result); //JSON
         });
 
+    }
+
+    function csvLineToObj(line, headers) {
+        let obj = {};
+        let currentLine = line.split(",");
+        let undefinedCount = 0;
+
+        for (let j = 0; j < headers.length; j++) {
+            if (!currentLine[j]) {
+                undefinedCount++;
+            }
+            obj[headers[j]] = currentLine[j];
+        }
+
+        return undefinedCount === headers.length ? null : obj;
     }
 </script>
 <script>
@@ -88,145 +104,94 @@
         el: '#app',
         data() {
             return {
-                elements: [
-                    {
-                        name: 'Ăn uống',
-                        selected: true,
-                        questions: [
-                            {
-                                text: 'Câu hỏi 1',
-                                answers: [
-                                    {
-                                        text: 'trả lời 1',
-                                        selected: false
-                                    },
-                                    {
-                                        text: 'trả lời 2',
-                                        selected: false
-                                    },
-                                    {
-                                        text: 'trả lời 3',
-                                        selected: true
-                                    }
-                                ]
-                            },
-                            {
-                                text: 'Câu hỏi 2',
-                                answers: [
-                                    {
-                                        text: 'trả lời 1',
-                                        selected: false
-                                    },
-                                    {
-                                        text: 'trả lời 2',
-                                        selected: false
-                                    },
-                                    {
-                                        text: 'trả lời 3',
-                                        selected: false
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        name: 'Nơi ở',
-                        selected: false
-                    },
-                    {
-                        name: 'Tham quan',
-                        selected: false
-                    },
-                    {
-                        name: 'Item 4',
-                        selected: false
-                    },
-                    {
-                        name: 'Item 5',
-                        selected: false
-                    }
-                ]
+                generalCategories: [],
             }
+        },
+        created() {
+            this.loadData();
         },
         methods: {
             panelClick($event, index, item) {
-                this.elements[index].selected = !this.elements[index].selected;
-                Vue.set(this.elements, index, this.elements[index])
-            }
-        },
-        async created() {
-            const questions = await csvJSON(
-                'id,text,parent\n' +
-                '1,câu hỏi 1,\n' +
-                '2,câu hỏi 2,1\n' +
-                '3,câu hỏi 3,1\n' +
-                '4,câu hỏi 4,1\n' +
-                '5,câu hỏi 5,\n' +
-                '6,câu hỏi 6,5\n' +
-                '7,câu hỏi 7,5\n' +
-                '8,câu hỏi 8,5\n' +
-                '9,câu hỏi 9,\n' +
-                '10,câu hỏi 10,9\n' +
-                '11,câu hỏi 11,9\n' +
-                '12,câu hỏi 12,9\n');
-            const answers = await csvJSON(
-                'id,text,question\n' +
-                '1,trả lời 1,2\n' +
-                '2,trả lời 2,2\n' +
-                '3,trả lời 3,3\n' +
-                '4,trả lời 4,2\n' +
-                '5,trả lời 5,3\n' +
-                '6,trả lời 6,4\n' +
-                '7,trả lời 7,4\n' +
-                '8,trả lời 8,4\n' +
-                '9,trả lời 9,6\n' +
-                '10,trả lời 10,6\n' +
-                '11,trả lời 11,7\n' +
-                '12,trả lời 12,8\n' +
-                '13,trả lời 13,10\n' +
-                '14,trả lời 14,10\n' +
-                '15,trả lời 15,10\n' +
-                '16,trả lời 16,10\n' +
-                '17,trả lời 17,11\n' +
-                '18,trả lời 18,11\n' +
-                '19,trả lời 19,12\n' +
-                '20,trả lời 20,12\n' +
-                '21,trả lời 21,12\n' +
-                '22,trả lời 22,12\n');
+                const category = this.generalCategories[index];
+                category.selected = !category.selected;
+                Vue.set(this.generalCategories, index, category)
+            },
 
-            for (let answer of answers) {
-                for (let question of questions) {
-                    if (answer.question === question.id) {
-                        if (question.answers) {
-                            question.answers.push(answer);
-                        } else {
-                            question.answers = [answer];
+            async loadData() {
+                const questions = await csvJSON(
+                    'id,text,parent\n' +
+                    '1,câu hỏi 1,\n' +
+                    '2,câu hỏi 2,1\n' +
+                    '3,câu hỏi 3,1\n' +
+                    '4,câu hỏi 4,1\n' +
+                    '5,câu hỏi 5,\n' +
+                    '6,câu hỏi 6,5\n' +
+                    '7,câu hỏi 7,5\n' +
+                    '8,câu hỏi 8,5\n' +
+                    '9,câu hỏi 9,\n' +
+                    '10,câu hỏi 10,9\n' +
+                    '11,câu hỏi 11,9\n' +
+                    '12,câu hỏi 12,9\n');
+                const answers = await csvJSON(
+                    'id,text,question\n' +
+                    '1,trả lời 1,2\n' +
+                    '2,trả lời 2,2\n' +
+                    '3,trả lời 3,3\n' +
+                    '4,trả lời 4,2\n' +
+                    '5,trả lời 5,3\n' +
+                    '6,trả lời 6,4\n' +
+                    '7,trả lời 7,4\n' +
+                    '8,trả lời 8,4\n' +
+                    '9,trả lời 9,6\n' +
+                    '10,trả lời 10,6\n' +
+                    '11,trả lời 11,7\n' +
+                    '12,trả lời 12,8\n' +
+                    '13,trả lời 13,10\n' +
+                    '14,trả lời 14,10\n' +
+                    '15,trả lời 15,10\n' +
+                    '16,trả lời 16,10\n' +
+                    '17,trả lời 17,11\n' +
+                    '18,trả lời 18,11\n' +
+                    '19,trả lời 19,12\n' +
+                    '20,trả lời 20,12\n' +
+                    '21,trả lời 21,12\n' +
+                    '22,trả lời 22,12\n');
+
+                for (let answer of answers) {
+                    for (let question of questions) {
+                        if (answer.question === question.id) {
+                            if (question.answers) {
+                                question.answers.push(answer);
+                            } else {
+                                question.answers = [answer];
+                            }
                         }
                     }
                 }
-            }
 
-            let result = [];
-
-            for (let question of questions) {
-                if (!question.parent) {
-                    result.push(question)
-                }
-            }
-            for (let question of questions) {
-                if (question.parent) {
-                    let parent = result.find((q) => {return q.id === question.parent});
-                    if (parent.questions) {
-                        parent.questions.push(question);
-                    } else {
-                        parent.questions = [question];
+                let result = [];
+                for (let question of questions) {
+                    if (!question.parent) {
+                        result.push(question);
                     }
                 }
-            }
 
-            this.questions = result;
-            console.debug("created",this.elements, result);
-        }
+                for (let question of questions) {
+                    if (question.parent) {
+                        let parent = result.find((q) => {
+                            return q.id === question.parent
+                        });
+                        if (parent.questions) {
+                            parent.questions.push(question);
+                        } else {
+                            parent.questions = [question];
+                        }
+                    }
+                }
+
+                this.generalCategories = result;
+            }
+        },
     })
 </script>
 </body>
