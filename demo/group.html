@@ -3,6 +3,8 @@
 <head>
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
     <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+          integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <meta charset="UTF-8">
     <style>
@@ -17,17 +19,79 @@
 </head>
 <body>
 <div id="app">
-    <v-app dark v-cloak>
+    <v-app v-cloak>
         <v-content>
             <v-container px-1>
-                <v-layout justify-center wrap>
+                <v-layout column wrap>
                     <v-flex xs12 md6 lg4>
-
+                        <v-card>
+                            <v-layout row wrap>
+                                <v-flex xs12 ms8 md9>
+                                    <v-card-title class="display-1">
+                                        Hiệp hội phượt ko giấy tờ
+                                    </v-card-title>
+                                </v-flex>
+                                <v-flex xs12 ms4 md2 offset-md1 style="text-align: center">
+                                    <v-container d-flex justify-evenly align-content-center>
+                                        <v-icon>fas fa-envelope</v-icon>
+                                        <v-icon>fas fa-suitcase</v-icon>
+                                        <v-icon>fas fa-user-plus</v-icon>
+                                    </v-container>
+                                </v-flex>
+                            </v-layout>
+                        </v-card>
+                        <v-tabs grow>
+                            <v-tab>
+                                Kế hoạch
+                            </v-tab>
+                            <v-tab>
+                                Thành viên
+                            </v-tab>
+                            <v-tab-item>
+                                <v-card>
+                                    <v-list two-line>
+                                        <template v-for="n in 5">
+                                            <v-container>
+                                                <v-card flat>
+                                                    <v-card-title class="subheading px-0">
+                                                        Chuyến đi thứ {{n}}
+                                                    </v-card-title>
+                                                    <v-text>20/4/2018 - 25/4/2018</v-text>
+                                                    <div style="width: 100%;overflow-x: auto">
+                                                        <v-container px-0 grid-list-md>
+                                                            <v-layout row>
+                                                                <v-flex v-for="n in 6">
+                                                                    <img alt="link vào detail"
+                                                                         src="https://www.placehold.it/150x150"/>
+                                                                </v-flex>
+                                                            </v-layout>
+                                                        </v-container>
+                                                    </div>
+                                                </v-card>
+                                            </v-container>
+                                        </template>
+                                    </v-list>
+                                </v-card>
+                            </v-tab-item>
+                            <v-tab-item>
+                                <v-card>
+                                    <v-list>
+                                        <v-list-tile v-for="n in 5" avatar>
+                                            <v-list-tile-avatar>
+                                                <img src="https://www.placehold.it/50x50">
+                                            </v-list-tile-avatar>
+                                            <v-list-tile-content>
+                                                <v-list-tile-title>name of dude {{n}}</v-list-tile-title>
+                                            </v-list-tile-content>
+                                            <v-list-tile-action>
+                                                <v-icon color="red">fas fa-minus</v-icon>
+                                            </v-list-tile-action>
+                                        </v-list-tile>
+                                    </v-list>
+                                </v-card>
+                            </v-tab-item>
+                        </v-tabs>
                     </v-flex>
-                    <!--<v-flex xs12 md6 lg4 >-->
-                        <!--<v-btn color='success' >Submit</v-btn>-->
-                        <!--<v-btn color='secondary' >Cancel</v-btn>-->
-                    <!--</v-flex>-->
                 </v-layout>
             </v-container>
         </v-content>
@@ -40,15 +104,12 @@
     new Vue({
         el: '#app',
         data() {
-            return {
-            }
+            return {}
         },
         created() {
 
         },
-        methods: {
-            
-        },
+        methods: {},
     })
 </script>
 </body>
