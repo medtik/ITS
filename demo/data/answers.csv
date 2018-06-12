@@ -1,23 +1,39 @@
 id,text,question
-1,trả lời 1,2
-2,trả lời 2,2
-3,trả lời 3,3
-4,trả lời 4,2
-5,trả lời 5,3
-6,trả lời 6,4
-7,trả lời 7,4
-8,trả lời 8,4
-9,trả lời 9,6
-10,trả lời 10,6
-11,trả lời 11,7
-12,trả lời 12,8
-13,trả lời 13,10
-14,trả lời 14,10
-15,trả lời 15,10
-16,trả lời 16,10
-17,trả lời 17,11
-18,trả lời 18,11
-19,trả lời 19,12
-20,trả lời 20,12
-21,trả lời 21,12
-22,trả lời 22,12
+1,Nhà hàng,5
+2,Ăn vặt vỉa hè,5
+3,Café/dessert,5
+4,Quán ăn,5
+5,Ăn chay,5
+6,Đặt chỗ,9
+7,Wifi,9
+8,Có bãi đỗ xe,9
+9,Thanh toán thẻ,9
+10,Giao hàng,9
+11,Lối ra vào xe lăn,9
+12,Bữa sáng,10
+13,Bữa trưa,10
+14,Bữa tối,10
+15,Đêm muộn,10
+16,đồ ăn giá rẻ,11
+17,hạng trung,11
+18,sang trọng,11
+19,danh lam, thắng cảnh,6
+20,chùa, nhà thờ,6
+21,du lịch sinh thái,6
+22,bảo tàng, di tích,6
+23,vui chơi, giải trí,6
+25,Khách sạn,7
+26,Homestay,7
+27,Căn hộ,7
+28,Nhà nghỉ,7
+29,Wifi,12
+30,Gym,12
+31,Hồ bơi,12
+32,Cho phép pet,12
+33,Dịch vụ phòng,12
+34,Điều hòa,12
+35,Spa,12
+36,shop/cửa hàng,8
+37,siêu thị,8
+38,trung tâm thương mại,8
+39,chợ,8

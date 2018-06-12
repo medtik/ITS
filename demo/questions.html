@@ -20,22 +20,24 @@
     <v-app dark v-cloak>
         <v-content>
             <v-container px-1>
-                <v-layout justify-center>
+                <v-layout justify-center wrap>
                     <v-flex xs12 md6 lg4>
+                        <h5 class="display-1">Chọn loại hình bạn muốn được gợi ý: </h5>
                         <v-expansion-panel expand popout v-if="generalCategories">
                             <v-expansion-panel-content
-                                    v-for="(gQuestion,i) in generalCategories" :key="i">
+                                    v-for="(category,i) in generalCategories" :key="i">
                                 <!--<div slot="header">{{item.name}}</div>-->
                                 <v-checkbox
                                         slot="header"
-                                        v-model="gQuestion.selected"
+                                        v-model="selectedCategory"
                                         @click.stop=""
-                                        :label="gQuestion.text">
+                                        :value="category.id"
+                                        :label="category.text">
                                 </v-checkbox>
                                 <v-card>
                                     <v-layout column>
                                         <v-flex xs12
-                                                v-for="(question,i) in gQuestion.questions"
+                                                v-for="(question,i) in category.questions"
                                                 :key="`question_${i}`">
                                             <v-card-title class="pb-0">
                                                 {{question.text}}
@@ -45,7 +47,8 @@
                                                         v-for="(answer,i) in question.answers"
                                                         :key="`answer_${i}`"
                                                         :label="answer.text"
-                                                        v-model="answer.selected">
+                                                        :value="answer.id"
+                                                        v-model="selectedAnswers">
                                                 </v-checkbox>
                                             </v-container>
                                             <v-divider></v-divider>
@@ -56,6 +59,10 @@
                         </v-expansion-panel>
                         <h4 v-else>loading...</h4>
                     </v-flex>
+                    <!--<v-flex xs12 md6 lg4 >-->
+                        <!--<v-btn color='success' >Submit</v-btn>-->
+                        <!--<v-btn color='secondary' >Cancel</v-btn>-->
+                    <!--</v-flex>-->
                 </v-layout>
             </v-container>
         </v-content>
@@ -78,7 +85,6 @@
                     result.push(obj);
                 }
             }
-            //return result; //JavaScript object
             resolve(result); //JSON
         });
 
@@ -105,6 +111,8 @@
         data() {
             return {
                 generalCategories: [],
+                selectedCategory: [],
+                selectedAnswers: []
             }
         },
         created() {
@@ -120,42 +128,58 @@
             async loadData() {
                 const questions = await csvJSON(
                     'id,text,parent\n' +
-                    '1,câu hỏi 1,\n' +
-                    '2,câu hỏi 2,1\n' +
-                    '3,câu hỏi 3,1\n' +
-                    '4,câu hỏi 4,1\n' +
-                    '5,câu hỏi 5,\n' +
-                    '6,câu hỏi 6,5\n' +
-                    '7,câu hỏi 7,5\n' +
-                    '8,câu hỏi 8,5\n' +
-                    '9,câu hỏi 9,\n' +
-                    '10,câu hỏi 10,9\n' +
-                    '11,câu hỏi 11,9\n' +
-                    '12,câu hỏi 12,9\n');
+                    '1,ăn uống,\n' +
+                    '2,địa điểm thăm quan,\n' +
+                    '3,Mua sắm,\n' +
+                    '4,Nơi ở,\n' +
+                    '5,Loại hình ăn uống,1\n' +
+                    '6,Loại hình thăm quan,2\n' +
+                    '7,Loại nơi ở,4\n' +
+                    '8,Loại hình mua sắm,3\n' +
+                    '9,Tiện nghi ăn uống,1\n' +
+                    '10,Buổi phục vụ,1\n' +
+                    '11,Mức giá,1\n' +
+                    '12,Tiện nghi nơi ở,4\n');
                 const answers = await csvJSON(
                     'id,text,question\n' +
-                    '1,trả lời 1,2\n' +
-                    '2,trả lời 2,2\n' +
-                    '3,trả lời 3,3\n' +
-                    '4,trả lời 4,2\n' +
-                    '5,trả lời 5,3\n' +
-                    '6,trả lời 6,4\n' +
-                    '7,trả lời 7,4\n' +
-                    '8,trả lời 8,4\n' +
-                    '9,trả lời 9,6\n' +
-                    '10,trả lời 10,6\n' +
-                    '11,trả lời 11,7\n' +
-                    '12,trả lời 12,8\n' +
-                    '13,trả lời 13,10\n' +
-                    '14,trả lời 14,10\n' +
-                    '15,trả lời 15,10\n' +
-                    '16,trả lời 16,10\n' +
-                    '17,trả lời 17,11\n' +
-                    '18,trả lời 18,11\n' +
-                    '19,trả lời 19,12\n' +
-                    '20,trả lời 20,12\n' +
-                    '21,trả lời 21,12\n' +
-                    '22,trả lời 22,12\n');
+                    '1,Nhà hàng,5\n' +
+                    '2,Ăn vặt vỉa hè,5\n' +
+                    '3,Café/dessert,5\n' +
+                    '4,Quán ăn,5\n' +
+                    '5,Ăn chay,5\n' +
+                    '6,Đặt chỗ,9\n' +
+                    '7,Wifi,9\n' +
+                    '8,Có bãi đỗ xe,9\n' +
+                    '9,Thanh toán thẻ,9\n' +
+                    '10,Giao hàng,9\n' +
+                    '11,Lối ra vào xe lăn,9\n' +
+                    '12,Bữa sáng,10\n' +
+                    '13,Bữa trưa,10\n' +
+                    '14,Bữa tối,10\n' +
+                    '15,Đêm muộn,10\n' +
+                    '16,đồ ăn giá rẻ,11\n' +
+                    '17,hạng trung,11\n' +
+                    '18,sang trọng,11\n' +
+                    '19,danh lam thắng cảnh,6\n' +
+                    '20,chùa/nhà thờ,6\n' +
+                    '21,du lịch sinh thái,6\n' +
+                    '22,bảo tàng/di tích,6\n' +
+                    '23,vui chơi/giải trí,6\n' +
+                    '25,Khách sạn,7\n' +
+                    '26,Homestay,7\n' +
+                    '27,Căn hộ,7\n' +
+                    '28,Nhà nghỉ,7\n' +
+                    '29,Wifi,12\n' +
+                    '30,Gym,12\n' +
+                    '31,Hồ bơi,12\n' +
+                    '32,Cho phép pet,12\n' +
+                    '33,Dịch vụ phòng,12\n' +
+                    '34,Điều hòa,12\n' +
+                    '35,Spa,12\n' +
+                    '36,shop/cửa hàng,8\n' +
+                    '37,siêu thị,8\n' +
+                    '38,trung tâm thương mại,8\n' +
+                    '39,chợ,8\n');
 
                 for (let answer of answers) {
                     for (let question of questions) {
@@ -188,6 +212,7 @@
                         }
                     }
                 }
+
 
                 this.generalCategories = result;
             }
