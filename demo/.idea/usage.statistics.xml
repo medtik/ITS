@@ -4,16 +4,30 @@
     <session id="248912292">
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="1469" />
+          <entry key="html" value="5698" />
+          <entry key="js" value="258" />
+          <entry key="txt" value="25" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="1469" />
+          <entry key="HTML" value="5698" />
+          <entry key="JavaScript" value="258" />
+          <entry key="PLAIN_TEXT" value="25" />
         </counts>
       </usages-collector>
-      <usages-collector id="statistics.file.types.open" />
-      <usages-collector id="statistics.file.extensions.open" />
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="HTML" value="3" />
+          <entry key="JavaScript" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="html" value="3" />
+          <entry key="js" value="1" />
+        </counts>
+      </usages-collector>
     </session>
   </component>
 </project>

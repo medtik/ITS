@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0d5f92f2-ad90-4588-84d0-8436e7cc4c11" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/usage.statistics.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+    <list default="true" id="0d5f92f2-ad90-4588-84d0-8436e7cc4c11" name="Default" comment="Add group.html content">
+      <change afterPath="$PROJECT_DIR$/data/data.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/usage.statistics.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/usage.statistics.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/group.html" beforeDir="false" afterPath="$PROJECT_DIR$/group.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/LocationsRequest.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -21,12 +22,39 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/group.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1020">
-              <caret line="96" column="20" lean-forward="true" selection-start-line="96" selection-start-column="20" selection-end-line="96" selection-end-column="20" />
+            <state relative-caret-position="449">
+              <caret line="48" column="35" lean-forward="true" selection-start-line="48" selection-start-column="35" selection-end-line="48" selection-end-column="35" />
               <folding>
                 <element signature="n#style#0;n#v-flex#1;n#v-layout#0;n#v-card#0;n#v-flex#0;n#v-layout#0;n#v-container#0;n#v-content#0;n#v-app#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#v-card#0;n#v-container#0;n#template#0;n#v-list#0;n#v-card#0;n#v-tab-item#0;n#v-tabs#0;n#v-flex#0;n#v-layout#0;n#v-container#0;n#v-content#0;n#v-app#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/LocationsRequest.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="36" column="47" lean-forward="true" selection-start-line="36" selection-start-column="47" selection-end-line="36" selection-end-column="47" />
+              <folding>
+                <element signature="n#style#0;n#v-card-title#1;n#v-card#0;n#v-flex#0;n#v-layout#0;n#v-container#0;n#v-layout#0;n#v-card#0;n#v-flex#0;n#v-layout#0;n#v-container#0;n#v-app#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#v-card-title#1;n#v-card#0;n#v-flex#0;n#v-layout#0;n#v-container#0;n#v-layout#0;n#v-card#0;n#v-flex#0;n#v-layout#0;n#v-container#0;n#v-app#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#v-container#0;n#v-card#0;n#v-flex#0;n#v-layout#0;n#v-container#0;n#v-layout#0;n#v-card#0;n#v-flex#0;n#v-layout#0;n#v-container#0;n#v-app#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#style#0;n#v-icon#0;n#v-container#0;n#v-card#0;n#v-flex#0;n#v-layout#0;n#v-container#0;n#v-layout#0;n#v-card#0;n#v-flex#0;n#v-layout#0;n#v-container#0;n#v-app#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#v-card-title#2;n#v-card#0;n#v-flex#0;n#v-layout#0;n#v-container#0;n#v-layout#0;n#v-card#0;n#v-flex#0;n#v-layout#0;n#v-container#0;n#v-app#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#v-card-title#2;n#v-card#0;n#v-flex#0;n#v-layout#0;n#v-container#0;n#v-layout#0;n#v-card#0;n#v-flex#0;n#v-layout#0;n#v-container#0;n#v-app#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#v-card-actions#0;n#v-card#0;n#v-flex#0;n#v-layout#0;n#v-container#0;n#v-layout#0;n#v-card#0;n#v-flex#0;n#v-layout#0;n#v-container#0;n#v-app#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/data.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="952">
+              <caret line="56" column="79" selection-start-line="56" selection-start-column="79" selection-end-line="56" selection-end-column="79" />
             </state>
           </provider>
         </entry>
@@ -37,6 +65,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -63,6 +92,8 @@
         <option value="$PROJECT_DIR$/questions.html" />
         <option value="$PROJECT_DIR$/data/questions.csv" />
         <option value="$PROJECT_DIR$/group.html" />
+        <option value="$PROJECT_DIR$/data/data.js" />
+        <option value="$PROJECT_DIR$/LocationsRequest.html" />
       </list>
     </option>
   </component>
@@ -79,9 +110,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="width" value="1297" />
-    <option name="height" value="1398" />
+    <option name="x" value="-9" />
+    <option name="width" value="1298" />
+    <option name="height" value="1399" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -91,7 +122,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -112,6 +142,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -123,12 +154,12 @@
     <property name="settings.editor.selected.configurable" value="JavaScript.Libraries" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="G:\Project\ITS\demo" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Project\ITS\demo\data" />
       <recent name="G:\Project\ITS\demo\data" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="G:\Project\ITS\demo" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -159,7 +190,11 @@
       <workItem from="1528338188966" duration="242000" />
       <workItem from="1528338711337" duration="6376000" />
       <workItem from="1528788583119" duration="4454000" />
-      <workItem from="1528812792482" duration="7235000" />
+      <workItem from="1528812792482" duration="7270000" />
+      <workItem from="1528845119819" duration="2394000" />
+      <workItem from="1528859506743" duration="1056000" />
+      <workItem from="1528869342002" duration="9644000" />
+      <workItem from="1528889589989" duration="691000" />
     </task>
     <task id="LOCAL-00001" summary="Add questions">
       <created>1528293168090</created>
@@ -175,18 +210,25 @@
       <option name="project" value="LOCAL" />
       <updated>1528330296993</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Add group.html content">
+      <created>1528820436674</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1528820436674</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37289000" />
+    <option name="totallyTimeSpent" value="51109000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="0" width="1037" height="1118" extended-state="0" />
+    <frame x="-7" y="0" width="1038" height="1119" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49264705" visible="true" weight="0.19344933" />
-      <window_info id="Structure" order="1" sideWeight="0.50735295" side_tool="true" visible="true" weight="0.19344933" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.48751837" visible="true" weight="0.19325154" />
+      <window_info id="Structure" order="1" sideWeight="0.51248163" side_tool="true" visible="true" weight="0.19325154" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -197,7 +239,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49846467" visible="true" weight="0.32872656" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49846467" visible="true" weight="0.32840237" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5015353" side_tool="true" weight="0.33168805" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -214,16 +256,10 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Add questions" />
     <MESSAGE value="Update ITS demo" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update ITS demo" />
+    <MESSAGE value="Add group.html content" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add group.html content" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/questions.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
@@ -245,10 +281,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/index.html" />
+    <entry file="file://$PROJECT_DIR$/data/data.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="952">
+          <caret line="56" column="79" selection-start-line="56" selection-start-column="79" selection-end-line="56" selection-end-column="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LocationsRequest.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="36" column="47" lean-forward="true" selection-start-line="36" selection-start-column="47" selection-end-line="36" selection-end-column="47" />
+          <folding>
+            <element signature="n#style#0;n#v-card-title#1;n#v-card#0;n#v-flex#0;n#v-layout#0;n#v-container#0;n#v-layout#0;n#v-card#0;n#v-flex#0;n#v-layout#0;n#v-container#0;n#v-app#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#v-card-title#1;n#v-card#0;n#v-flex#0;n#v-layout#0;n#v-container#0;n#v-layout#0;n#v-card#0;n#v-flex#0;n#v-layout#0;n#v-container#0;n#v-app#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#v-container#0;n#v-card#0;n#v-flex#0;n#v-layout#0;n#v-container#0;n#v-layout#0;n#v-card#0;n#v-flex#0;n#v-layout#0;n#v-container#0;n#v-app#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#style#0;n#v-icon#0;n#v-container#0;n#v-card#0;n#v-flex#0;n#v-layout#0;n#v-container#0;n#v-layout#0;n#v-card#0;n#v-flex#0;n#v-layout#0;n#v-container#0;n#v-app#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#v-card-title#2;n#v-card#0;n#v-flex#0;n#v-layout#0;n#v-container#0;n#v-layout#0;n#v-card#0;n#v-flex#0;n#v-layout#0;n#v-container#0;n#v-app#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#v-card-title#2;n#v-card#0;n#v-flex#0;n#v-layout#0;n#v-container#0;n#v-layout#0;n#v-card#0;n#v-flex#0;n#v-layout#0;n#v-container#0;n#v-app#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="n#v-card-actions#0;n#v-card#0;n#v-flex#0;n#v-layout#0;n#v-container#0;n#v-layout#0;n#v-card#0;n#v-flex#0;n#v-layout#0;n#v-container#0;n#v-app#0;n#div#0;n#body#0;n#html#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/group.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1020">
-          <caret line="96" column="20" lean-forward="true" selection-start-line="96" selection-start-column="20" selection-end-line="96" selection-end-column="20" />
+        <state relative-caret-position="449">
+          <caret line="48" column="35" lean-forward="true" selection-start-line="48" selection-start-column="35" selection-end-line="48" selection-end-column="35" />
           <folding>
             <element signature="n#style#0;n#v-flex#1;n#v-layout#0;n#v-card#0;n#v-flex#0;n#v-layout#0;n#v-container#0;n#v-content#0;n#v-app#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#v-card#0;n#v-container#0;n#template#0;n#v-list#0;n#v-card#0;n#v-tab-item#0;n#v-tabs#0;n#v-flex#0;n#v-layout#0;n#v-container#0;n#v-content#0;n#v-app#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />

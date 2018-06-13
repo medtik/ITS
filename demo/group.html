@@ -33,7 +33,9 @@
                                 </v-flex>
                                 <v-flex xs12 ms4 md2 offset-md1 style="text-align: center">
                                     <v-container d-flex justify-evenly align-content-center>
-                                        <v-icon>fas fa-envelope</v-icon>
+                                        <a href="./LocationsRequest.html">
+                                            <v-icon>fas fa-envelope</v-icon>
+                                        </a>
                                         <v-icon>fas fa-suitcase</v-icon>
                                         <v-icon>fas fa-user-plus</v-icon>
                                     </v-container>
@@ -50,19 +52,18 @@
                             <v-tab-item>
                                 <v-card>
                                     <v-list two-line>
-                                        <template v-for="n in 5">
+                                        <template v-for="trip in trips">
                                             <v-container>
                                                 <v-card flat>
                                                     <v-card-title class="subheading px-0">
-                                                        Chuyến đi thứ {{n}}
+                                                        {{trip.title}}
                                                     </v-card-title>
-                                                    <v-text>20/4/2018 - 25/4/2018</v-text>
+                                                    <v-text>{{trip.startDate}} - {{trip.endDate}}</v-text>
                                                     <div style="width: 100%;overflow-x: auto">
                                                         <v-container px-0 grid-list-md>
                                                             <v-layout row>
-                                                                <v-flex v-for="n in 6">
-                                                                    <img alt="link vào detail"
-                                                                         src="https://www.placehold.it/150x150"/>
+                                                                <v-flex v-for="location in trip.locations">
+                                                                    <img :src="location.photo"/>
                                                                 </v-flex>
                                                             </v-layout>
                                                         </v-container>
@@ -76,12 +77,12 @@
                             <v-tab-item>
                                 <v-card>
                                     <v-list>
-                                        <v-list-tile v-for="n in 5" avatar>
+                                        <v-list-tile v-for="member in members" avatar>
                                             <v-list-tile-avatar>
-                                                <img src="https://www.placehold.it/50x50">
+                                                <img :src="member.avatar">
                                             </v-list-tile-avatar>
                                             <v-list-tile-content>
-                                                <v-list-tile-title>name of dude {{n}}</v-list-tile-title>
+                                                <v-list-tile-title>{{member.name}}</v-list-tile-title>
                                             </v-list-tile-content>
                                             <v-list-tile-action>
                                                 <v-icon color="red">fas fa-minus</v-icon>
@@ -100,11 +101,15 @@
 
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/vuetify/dist/vuetify.js"></script>
+<script src="data/data.js"></script>
 <script>
     new Vue({
         el: '#app',
         data() {
-            return {}
+            return {
+                trips,
+                members
+            }
         },
         created() {
 
