@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	<link rel="shortcut icon" href="img/logo.ico" type="image/x-icon">
+    <title>Tìm kiếm nâng cao</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+    <!-- Plugin CSS -->
+    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet">
+
+  </head>
+
+  <body id="page-top">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a href="index.html" class="navbar-brand">Intelligent Tourist</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link">Đăng nhập</a> 
+            </li>
+			<li class="nav-item">
+              <a class="nav-link js-scroll-trigger">Thông báo</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#hanoi">Hà Nội</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#danang">Đà Nẵng</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#saigon">TP Hồ Chí Minh</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <header class="masthead text-center text-white d-flex">
+      <div class="container my-auto">
+        <div class="row">
+          <div class="col-lg-10 mx-auto">
+            <h1 class="text-uppercase" style="font-size: 40px">
+              <strong>Tìm kiếm nâng cao</strong>
+            </h1>
+            <hr>
+          </div>
+        </div>
+      </div>
+    </header>
+	
+    <!-- Advance Search -->
+    <section class="bg-primary">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto text-center">
+            <h2 class="section-heading text-white text-uppercase">Chọn loại hình</h2>
+            <hr class="light my-4">
+				<form required aria-required="true" style="margin-bottom: 30px">
+                    <h4 style="color: white">
+                        Thành phố:
+                    </h4>
+                    <select class="btn">
+                       <option class="option-item">Hà Nội</option>
+					   <option class="option-item">Đà Nẵng</option>
+					   <option class="option-item">TP Hồ Chí Minh</option>
+                    </select>
+				</form>
+				
+				<h4 style="color: white">
+                        Loại hình muốn tìm:
+                </h4>
+					<!-- Ăn uống -->
+					<button class="accordion">
+						<input type="checkbox" id="eat" class="custom-control-input" name="advance" value="eat">
+						<label class="custom-control-label" style="margin-left: 10px" for="eat">Ăn uống</input>
+					</button>
+					<div class="panel">
+						<div class="panel-content">
+							<h5 style="padding: 5px"></h5>
+							<!-- Loại hình -->
+							<h6><strong> Loại hình ăn uống: </strong></h6>
+							<div class="custom-control custom-checkbox mb-3" style="margin-top: 13px">
+							  <input type="checkbox" id="nhahang" class="custom-control-input" name="advance" value="nhahang">
+							  <label class="custom-control-label" style="padding-left: 4px" for="nhahang">Nhà hàng</label>
+							</div>
+							<div class="custom-control custom-checkbox mb-3" style="margin-top: 13px">
+							  <input type="checkbox" id="viahe" class="custom-control-input" name="advance" value="viahe">
+							  <label class="custom-control-label" style="padding-left: 4px" for="viahe">Ăn vặt / Vỉa hè</label>
+							</div>
+							<div class="custom-control custom-checkbox mb-3" style="margin-top: 13px">
+							  <input type="checkbox" id="cafe" class="custom-control-input" name="advance" value="cafe">
+							  <label class="custom-control-label" style="padding-left: 4px" for="cafe">Café / Dessert</label>
+							</div>
+							<div class="custom-control custom-checkbox mb-3" style="margin-top: 13px">
+							  <input type="checkbox" id="quanan" class="custom-control-input" name="advance" value="quanan">
+							  <label class="custom-control-label" style="padding-left: 4px" for="quanan">Quán ăn</label>
+							</div>
+							<div class="custom-control custom-checkbox mb-3" style="margin-top: 13px">
+							  <input type="checkbox" id="anchay" class="custom-control-input" name="advance" value="anchay">
+							  <label class="custom-control-label" style="padding-left: 4px" for="anchay">Ăn chay</label>
+							</div>
+							<hr>
+							<!-- Tiện nghi -->
+							<h6><strong> Tiện nghi ăn uống: </strong></h6>
+							<div class="custom-control custom-checkbox mb-3" style="margin-top: 13px">
+							  <input type="checkbox" id="datcho" class="custom-control-input" name="advance" value="datcho">
+							  <label class="custom-control-label" style="padding-left: 4px" for="datcho">Đặt chỗ</label>
+							</div>
+							<div class="custom-control custom-checkbox mb-3" style="margin-top: 13px">
+							  <input type="checkbox" id="wifi" class="custom-control-input" name="advance" value="wifi">
+							  <label class="custom-control-label" style="padding-left: 4px" for="wifi">Wifi</label>
+							</div>
+							<div class="custom-control custom-checkbox mb-3" style="margin-top: 13px">
+							  <input type="checkbox" id="dauxe" class="custom-control-input" name="advance" value="dauxe">
+							  <label class="custom-control-label" style="padding-left: 4px" for="dauxe">Có bãi đỗ xe</label>
+							</div>
+							<div class="custom-control custom-checkbox mb-3" style="margin-top: 13px">
+							  <input type="checkbox" id="the" class="custom-control-input" name="advance" value="the">
+							  <label class="custom-control-label" style="padding-left: 4px" for="the">Thanh toán thẻ</label>
+							</div>
+							<div class="custom-control custom-checkbox mb-3" style="margin-top: 13px">
+							  <input type="checkbox" id="ship" class="custom-control-input" name="advance" value="ship">
+							  <label class="custom-control-label" style="padding-left: 4px" for="ship">Giao hàng</label>
+							</div>
+							<div class="custom-control custom-checkbox mb-3" style="margin-top: 13px">
+							  <input type="checkbox" id="xelan" class="custom-control-input" name="advance" value="xelan">
+							  <label class="custom-control-label" style="padding-left: 4px" for="xelan">Lối ra vào xe lăn</label>
+							</div>
+							<hr>
+							<!-- Buổi phục vụ -->
+							<h6><strong> Buổi phục vụ: </strong></h6>
+							<div class="custom-control custom-checkbox mb-3" style="margin-top: 13px">
+							  <input type="checkbox" id="sang" class="custom-control-input" name="advance" value="sang">
+							  <label class="custom-control-label" style="padding-left: 4px" for="sang">Buổi sáng</label>
+							</div>
+							<div class="custom-control custom-checkbox mb-3" style="margin-top: 13px">
+							  <input type="checkbox" id="trua" class="custom-control-input" name="advance" value="trua">
+							  <label class="custom-control-label" style="padding-left: 4px" for="trua">Buổi trưa</label>
+							</div>
+							<div class="custom-control custom-checkbox mb-3" style="margin-top: 13px">
+							  <input type="checkbox" id="toi" class="custom-control-input" name="advance" value="toi">
+							  <label class="custom-control-label" style="padding-left: 4px" for="toi">Buổi tối</label>
+							</div>
+							<div class="custom-control custom-checkbox mb-3" style="margin-top: 13px">
+							  <input type="checkbox" id="dem" class="custom-control-input" name="advance" value="dem">
+							  <label class="custom-control-label" style="padding-left: 4px" for="dem">Đêm muộn</label>
+							</div>
+							<hr>
+							<!-- Mức giá -->
+							<h6><strong> Mức giá: </strong></h6>
+							<div class="custom-control custom-checkbox mb-3" style="margin-top: 13px">
+							  <input type="checkbox" id="re" class="custom-control-input" name="advance" value="re">
+							  <label class="custom-control-label" style="padding-left: 4px" for="re">Giá rẻ</label>
+							</div>
+							<div class="custom-control custom-checkbox mb-3" style="margin-top: 13px">
+							  <input type="checkbox" id="trung" class="custom-control-input" name="advance" value="trung">
+							  <label class="custom-control-label" style="padding-left: 4px" for="trung">Trung bình</label>
+							</div>
+							<div class="custom-control custom-checkbox mb-3" style="margin-top: 13px">
+							  <input type="checkbox" id="sang" class="custom-control-input" name="advance" value="sang">
+							  <label class="custom-control-label" style="padding-left: 4px" for="sang">Sang trọng</label>
+							</div>
+							<h5 style="padding: 5px"></h5>
+						</div>
+					</div>
+					
+					<!-- Nơi ở -->
+					<button class="accordion">
+						<input type="checkbox" id="stay" class="custom-control-input" name="advance" value="stay">
+						<label class="custom-control-label" style="margin-left: 10px" for="stay">Nơi ở</input>
+					</button>
+					<div class="panel">
+						<div class="panel-content">
+							<h5 style="padding: 5px"></h5>
+							<!-- Loại hình -->
+							<h6><strong> Loại nơi ở: </strong></h6>
+							<div class="custom-control custom-checkbox mb-3" style="margin-top: 13px">
+							  <input type="checkbox" id="ks" class="custom-control-input" name="advance" value="ks">
+							  <label class="custom-control-label" style="padding-left: 4px" for="ks">Khách sạn</label>
+							</div>
+							<div class="custom-control custom-checkbox mb-3" style="margin-top: 13px">
+							  <input type="checkbox" id="home" class="custom-control-input" name="advance" value="home">
+							  <label class="custom-control-label" style="padding-left: 4px" for="home">Homestay</label>
+							</div>
+							<div class="custom-control custom-checkbox mb-3" style="margin-top: 13px">
+							  <input type="checkbox" id="canho" class="custom-control-input" name="advance" value="canho">
+							  <label class="custom-control-label" style="padding-left: 4px" for="canho">Căn hộ</label>
+							</div>
+							<div class="custom-control custom-checkbox mb-3" style="margin-top: 13px">
+							  <input type="checkbox" id="nhanghi" class="custom-control-input" name="advance" value="nhanghi">
+							  <label class="custom-control-label" style="padding-left: 4px" for="nhanghi">Nhà nghỉ</label>
+							</div>
+							<hr>
+							<!-- Tiện nghi -->
+							<h6><strong> Tiện nghi nơi ở: </strong></h6>
+							<div class="custom-control custom-checkbox mb-3" style="margin-top: 13px">
+							  <input type="checkbox" id="wf" class="custom-control-input" name="advance" value="wf">
+							  <label class="custom-control-label" style="padding-left: 4px" for="wf">Wifi</label>
+							</div>
+							<div class="custom-control custom-checkbox mb-3" style="margin-top: 13px">
+							  <input type="checkbox" id="gym" class="custom-control-input" name="advance" value="gym">
+							  <label class="custom-control-label" style="padding-left: 4px" for="gym">Gym</label>
+							</div>
+							<div class="custom-control custom-checkbox mb-3" style="margin-top: 13px">
+							  <input type="checkbox" id="hoboi" class="custom-control-input" name="advance" value="hoboi">
+							  <label class="custom-control-label" style="padding-left: 4px" for="hoboi">Hồ bơi</label>
+							</div>
+							<div class="custom-control custom-checkbox mb-3" style="margin-top: 13px">
+							  <input type="checkbox" id="pet" class="custom-control-input" name="advance" value="pet">
+							  <label class="custom-control-label" style="padding-left: 4px" for="pet">Cho phép thú nuôi</label>
+							</div>
+							<div class="custom-control custom-checkbox mb-3" style="margin-top: 13px">
+							  <input type="checkbox" id="service" class="custom-control-input" name="advance" value="service">
+							  <label class="custom-control-label" style="padding-left: 4px" for="service"Dịch vụ phòng</label>
+							</div>
+							<div class="custom-control custom-checkbox mb-3" style="margin-top: 13px">
+							  <input type="checkbox" id="ac" class="custom-control-input" name="advance" value="ac">
+							  <label class="custom-control-label" style="padding-left: 4px" for="ac">Điều hòa</label>
+							</div>
+							<div class="custom-control custom-checkbox mb-3" style="margin-top: 13px">
+							  <input type="checkbox" id="spa" class="custom-control-input" name="advance" value="spa">
+							  <label class="custom-control-label" style="padding-left: 4px" for="spa">Spa</label>
+							</div>
+							<h5 style="padding: 5px"></h5>
+						</div>
+					</div>
+					
+					<!-- Tham quan -->
+					<button class="accordion">
+						<input type="checkbox" id="thamquan" class="custom-control-input" name="advance" value="thamquan">
+						<label class="custom-control-label" style="margin-left: 10px" for="thamquan">Tham quan:</input>
+					</button>
+					<div class="panel">
+						<div class="panel-content">
+							<h5 style="padding: 5px"></h5>
+							<h6><strong> Loại hình tham quan: </strong></h6>
+							<div class="custom-control custom-checkbox mb-3" style="margin-top: 13px">
+							  <input type="checkbox" id="danhlam" class="custom-control-input" name="advance" value="danhlam">
+							  <label class="custom-control-label" style="padding-left: 4px" for="danhlam">Danh lam / thắng cảnh</label>
+							</div>
+							<div class="custom-control custom-checkbox mb-3" style="margin-top: 13px">
+							  <input type="checkbox" id="chua" class="custom-control-input" name="advance" value="chua">
+							  <label class="custom-control-label" style="padding-left: 4px" for="chua">Chùa / Nhà thờ</label>
+							</div>
+							<div class="custom-control custom-checkbox mb-3" style="margin-top: 13px">
+							  <input type="checkbox" id="sinhthai" class="custom-control-input" name="advance" value="sinhthai">
+							  <label class="custom-control-label" style="padding-left: 4px" for="sinhthai">Du lịch sinh thái</label>
+							</div>
+							<div class="custom-control custom-checkbox mb-3" style="margin-top: 13px">
+							  <input type="checkbox" id="baotang" class="custom-control-input" name="advance" value="baotang">
+							  <label class="custom-control-label" style="padding-left: 4px" for="baotang">Bảo tàng / Di tích</label>
+							</div>
+							<div class="custom-control custom-checkbox mb-3" style="margin-top: 13px">
+							  <input type="checkbox" id="play" class="custom-control-input" name="advance" value="play">
+							  <label class="custom-control-label" style="padding-left: 4px" for="play">Vui chơi / Giải trí</label>
+							</div>
+							<h5 style="padding: 5px"></h5>
+						</div>
+					</div>
+					
+					<!-- Mua sắm -->
+					<button class="accordion">
+						<input type="checkbox" id="buy" class="custom-control-input" name="advance" value="buy">
+						<label class="custom-control-label" style="margin-left: 10px" for="buy">Mua sắm</input>
+					</button>
+					<div class="panel">
+						<div class="panel-content">
+							<h5 style="padding: 5px"></h5>
+							<h6><strong> Loại hình mua sắm: </strong></h6>
+							<div class="custom-control custom-checkbox mb-3" style="margin-top: 13px">
+							  <input type="checkbox" id="shop" class="custom-control-input" name="advance" value="shop">
+							  <label class="custom-control-label" style="padding-left: 4px" for="shop">Cửa hàng</label>
+							</div>
+							<div class="custom-control custom-checkbox mb-3" style="margin-top: 13px">
+							  <input type="checkbox" id="sieuthi" class="custom-control-input" name="advance" value="sieuthi">
+							  <label class="custom-control-label" style="padding-left: 4px" for="sieuthi">Siêu thị</label>
+							</div>
+							<div class="custom-control custom-checkbox mb-3" style="margin-top: 13px">
+							  <input type="checkbox" id="trungtam" class="custom-control-input" name="advance" value="trungtam">
+							  <label class="custom-control-label" style="padding-left: 4px" for="trungtam">Trung tâm thương mại</label>
+							</div>
+							<div class="custom-control custom-checkbox mb-3" style="margin-top: 13px">
+							  <input type="checkbox" id="cho" class="custom-control-input" name="advance" value="cho">
+							  <label class="custom-control-label" style="padding-left: 4px" for="cho">Chợ</label>
+							</div>
+							<h5 style="padding: 5px"></h5>
+						</div>
+					</div>
+					
+            <a class="btn btn-dark btn-xl text-white">Tìm kiếm</a>
+          </div>
+        </div>
+      </div>
+    </section>
+	
+	<script>
+	var Select_List_Data = {
+    
+    'choices': { // name of associated select box
+        
+        // names match option values in controlling select box
+        eat: {
+            text: ['Nhà hàng', 'Ăn vặt', 'Café/Dessert', 'Quán ăn', 'Ăn chay']
+        },
+        view: {
+            text: ['Danh lam thắng cảnh', 'Chùa/Nhà thờ', 'Du lịch sinh thái', 'Bảo tàng/Di tích', 'Vui chơi/Giải trí']
+        },
+        buy: {
+            text: ['Cửa hàng', 'Siêu thị', 'Trung tâm thương mại', 'Chợ']
+        },
+		hotel: {
+            text: ['Khách sạn', 'Homestay', 'Căn hộ', 'Nhà nghỉ']
+        }
+    }    
+};
+	
+	function removeAllOptions(sel, removeGrp) {
+    var len, groups, par;
+    if (removeGrp) {
+        groups = sel.getElementsByTagName('optgroup');
+        len = groups.length;
+        for (var i=len; i; i--) {
+            sel.removeChild( groups[i-1] );
+        }
+    }
+    
+    len = sel.options.length;
+    for (var i=len; i; i--) {
+        par = sel.options[i-1].parentNode;
+        par.removeChild( sel.options[i-1] );
+    }
+}
+
+function appendDataToSelect(sel, obj) {
+    var f = document.createDocumentFragment();
+    var labels = [], group, opts;
+    
+    function addOptions(obj) {
+        var f = document.createDocumentFragment();
+        var o;
+        
+        for (var i=0, len=obj.text.length; i<len; i++) {
+            o = document.createElement('option');
+            o.appendChild( document.createTextNode( obj.text[i] ) );
+            
+            if ( obj.value ) {
+                o.value = obj.value[i];
+            }
+            
+            f.appendChild(o);
+        }
+        return f;
+    }
+    
+    if ( obj.text ) {
+        opts = addOptions(obj);
+        f.appendChild(opts);
+    } else {
+        for ( var prop in obj ) {
+            if ( obj.hasOwnProperty(prop) ) {
+                labels.push(prop);
+            }
+        }
+        
+        for (var i=0, len=labels.length; i<len; i++) {
+            group = document.createElement('optgroup');
+            group.label = labels[i];
+            f.appendChild(group);
+            opts = addOptions(obj[ labels[i] ] );
+            group.appendChild(opts);
+        }
+    }
+    sel.appendChild(f);
+}
+
+	document.forms['demoForm'].elements['category'].onchange = function(e) {
+    // name of associated select box
+    var relName = 'choices';
+    
+    // reference to associated select box 
+    var relList = this.form.elements[ relName ];
+    
+    // get data from object literal based on selection in controlling select box (this.value)
+    var obj = Select_List_Data[ relName ][ this.value ];
+    
+    // remove current option elements
+    removeAllOptions(relList, true);
+    
+    // call function to add optgroup/option elements
+    // pass reference to associated select box and data for new options
+    appendDataToSelect(relList, obj);
+};
+
+
+// populate associated select box as page loads
+(function() { // immediate function to avoid globals
+    
+    var form = document.forms['demoForm'];
+    
+    // reference to controlling select box
+    var sel = form.elements['category'];
+    sel.selectedIndex = 0;
+    
+    // name of associated select box
+    var relName = 'choices';
+    // reference to associated select box
+    var rel = form.elements[ relName ];
+    
+    // get data for associated select box passing its name
+    // and value of selected in controlling select box
+    var data = Select_List_Data[ relName ][ sel.value ];
+    
+    // add options to associated select box
+    appendDataToSelect(rel, data);
+    
+}());
+	</script>
+	
+	<footer>
+		<a class="btn btn-dark btn-xl text-white" style="margin: 20px 20px 20px 10px" id="div-buy">Liên hệ đăng ký địa điểm</a>
+		<div class="footer">
+			<h6>Email:</h6>
+			<h6>Số điện thoại: </h6>
+		</div>
+	</footer>
+	
+	<script>
+	var acc = document.getElementsByClassName("accordion");
+	var i;
+
+	for (i = 0; i < acc.length; i++) {
+	  acc[i].addEventListener("click", function() {
+		this.classList.toggle("active");
+		var panel = this.nextElementSibling;
+		if (panel.style.maxHeight){
+		  panel.style.maxHeight = null;
+		} else {
+		  panel.style.maxHeight = panel.scrollHeight + "px";
+		} 
+	  });
+	}
+	</script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="vendor/scrollreveal/scrollreveal.min.js"></script>
+    <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/creative.min.js"></script>
+	</body>
+</html>

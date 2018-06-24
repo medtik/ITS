@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	<link rel="shortcut icon" href="img/logo.ico" type="image/x-icon">
+    <title>Đăng nhập</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+    <!-- Plugin CSS -->
+    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet">
+    
+  </head>
+
+  <body id="page-top" style="height: 450px">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a href="index.html" class="navbar-brand">Intelligent Tourist</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link">Đăng nhập</a> 
+            </li>
+			<li class="nav-item">
+              <a class="nav-link js-scroll-trigger">Thông báo</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#hanoi">Hà Nội</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#danang">Đà Nẵng</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#saigon">TP Hồ Chí Minh</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <header class="text-center text-black d-flex" style="height: 140px; margin-top: 100px">
+      <div class="container my-auto">
+        <div class="row">
+          <div class="col-lg-10 mx-auto">
+			<img src="img/user.png" class="user-img">
+            <h4 class="text-uppercase" style="font-size: 30px">
+              <strong>Đăng nhập</strong>
+            </h4>
+            <hr>
+          </div>
+        </div>
+      </div>
+    </header>
+   		
+	<!-- Result item -->
+	<div class="result_item_box">
+		<div class="container" style="height: 400px; text-align: center">
+			<h5 style="padding-top: 20px"></h5>
+			<div class="col-lg-8 mx-auto search-box-2">
+				<input class="search-text" type="text" name="" placeholder="Tài khoản.." autocomplete="on" required>
+          	</div>
+			<br>
+			<h5 style="padding-top: 40px"></h5>
+			<div class="col-lg-8 mx-auto search-box-2">
+				<input class="search-text" type="password" name="" placeholder="Mật khẩu.." autocomplete="on" required>
+          	</div>
+			<br>
+			<br>
+			<table style="margin: auto">
+				<td>
+					<div class="custom-control custom-checkbox mb-3" style="margin-top: 13px">
+					  <input type="checkbox" class="custom-control-input" id="customCheck" name="remember" checked>
+					  <label class="custom-control-label" for="customCheck">Remember me</label>
+					</div>
+				</td>
+				<td>
+					<div class="container" style="text-align: right">
+					<span class="psw">Quên<span id="myLink" style="color: #007aff"> mật khẩu?</span></span>
+					<div id="myModal" class="modal">
+						  <!-- Modal content -->
+						  <div class="modal-content">
+							<span class="close">&times;</span>
+							<h5 style="text-align: center">Quên mật khẩu</h5>
+							<a href="#">
+							<div class="container" style="text-align: center; background-color: white; border-radius: 40px; margin-bottom: 30px">
+								<h5 style="padding-top: 10px; text-align: center"></h5>
+								<div class="col-lg-8 mx-auto search-box-2" style="margin-bottom: 30px">
+									<input class="search-text" type="text" name="" placeholder="Nhập email xác nhận.." autocomplete="on" required style="border: solid 2px #007AFF">
+								</div>
+								<br>
+								<br>
+								<table style="margin: auto">
+									<td>
+										<button class="btn btn-primary" style="margin-top: 20px; width: 120px">Xác nhận</button>
+									<td>
+									<td>
+										<button class="btn" style="margin-top: 20px; background-color: red; color: white; width: 120px">Thoát</button>
+								</div>
+									</td>
+								</table>
+							</div>
+						  </div>
+						</div>
+  			</div>
+				</td>
+			</table>
+			<button class="btn btn-dark" style="margin-top: 10px; height: 40px">Đăng nhập</button>
+			<br>
+			
+			<div class="container" style="text-align: center; margin: 20px 0 10px 0">
+    			<span class="psw">Chưa có tài khoản?<a href="#"> Đăng ký</a></span>
+  			</div>
+			<hr>
+			<table style="margin: auto">
+				<td>
+					<button class="btn" style="width: 120px; background-color: #0066ff; color: white">Facebook</button>
+				<td>
+				<td>
+					<button class="btn" style="width: 120px; background-color: #ff3300; color: white">Google</button>
+  			</div>
+				</td>
+			</table>
+  			
+  		</div>
+	</div>
+  <!-- End Result item -->
+   
+	<footer>
+		<a class="btn btn-dark btn-xl text-white" style="margin: 20px 20px 20px 10px" id="div-buy">Liên hệ đăng ký địa điểm</a>
+		<div class="footer">
+			<h6>Email:</h6>
+			<h6>Số điện thoại: </h6>
+		</div>
+	</footer>
+	
+	<script>
+	// Get the modal
+	var modal = document.getElementById('myModal');
+
+	// Get the button that opens the modal
+	var btn = document.getElementById("myLink");
+
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
+
+	// When the user clicks the button, open the modal 
+	btn.onclick = function() {
+		modal.style.display = "block";
+	}
+
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function() {
+		modal.style.display = "none";
+	}
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+		if (event.target == modal) {
+			modal.style.display = "none";
+		}
+	}
+	</script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="vendor/scrollreveal/scrollreveal.min.js"></script>
+    <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/creative.min.js"></script>
+	</body>
+</html>

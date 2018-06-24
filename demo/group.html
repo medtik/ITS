@@ -27,7 +27,7 @@
                         <v-card>
                             <v-layout row wrap>
                                 <v-flex xs12 ms8 md9>
-                                    <v-card-title class="display-1">
+                                    <v-card-title class="title">
                                         Hiệp hội phượt ko giấy tờ
                                     </v-card-title>
                                 </v-flex>
@@ -37,7 +37,10 @@
                                             <v-icon>fas fa-envelope</v-icon>
                                         </a>
                                         <v-icon>fas fa-suitcase</v-icon>
-                                        <v-icon>fas fa-user-plus</v-icon>
+                                        <a href="./InviteUser.html">
+                                            <v-icon>fas fa-user-plus</v-icon>
+                                        </a>
+
                                     </v-container>
                                 </v-flex>
                             </v-layout>
@@ -85,7 +88,9 @@
                                                 <v-list-tile-title>{{member.name}}</v-list-tile-title>
                                             </v-list-tile-content>
                                             <v-list-tile-action>
-                                                <v-icon color="red">fas fa-minus</v-icon>
+                                                <v-btn icon flat>
+                                                    <v-icon color="red">fas fa-minus</v-icon>
+                                                </v-btn>
                                             </v-list-tile-action>
                                         </v-list-tile>
                                     </v-list>
@@ -110,11 +115,7 @@
                 trips,
                 members
             }
-        },
-        created() {
-
-        },
-        methods: {},
+        }
     })
 </script>
 </body>

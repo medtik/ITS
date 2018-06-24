@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
+    <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+          integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <meta charset="UTF-8">
+    <style>
+        .checkbox .input-group__details {
+            display: none;
+        }
+
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <v-app v-cloak>
+        <v-content>
+            <v-container px-1>
+                <v-layout wrap justify-center>
+                    <v-flex xs12 md6 lg4>
+                        <v-card>
+                            <v-card-title class="title">
+                                Mời vào nhóm
+                            </v-card-title>
+                            <v-container>
+                                <v-text-field
+                                        append-icon="fas fa-search"
+                                        v-model="input"
+                                        v-on:input="handleInputting"></v-text-field>
+                                <v-list>
+                                    <v-list-tile v-for="user in usersSearchResult">
+                                        <v-list-tile-avatar>
+                                            <img :src="user.avatar">
+                                        </v-list-tile-avatar>
+                                        <v-list-tile-content>
+                                            <v-list-tile-title>{{user.name}}</v-list-tile-title>
+                                        </v-list-tile-content>
+                                        <v-list-tile-action>
+                                            <v-btn icon flat>
+                                                <v-icon color="success" size="15">fas fa-user-plus</v-icon>
+                                            </v-btn>
+                                        </v-list-tile-action>
+                                    </v-list-tile>
+                                </v-list>
+                            </v-container>
+                        </v-card>
+                    </v-flex>
+                </v-layout>
+            </v-container>
+        </v-content>
+    </v-app>
+</div>
+
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vuetify/dist/vuetify.js"></script>
+<script src="data/data.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                input: 'olson',
+                members,
+                usersSearchResult: []
+            }
+        },
+        created(){
+          this.handleInputting();
+        },
+        methods: {
+            handleInputting() {
+                this.usersSearchResult = members
+                    .filter(member => member.name.indexOf(this.input) > 0);
+            }
+        },
+    })
+</script>
+</body>
+</html>
