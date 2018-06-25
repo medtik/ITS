@@ -4,7 +4,7 @@
     "icon": "./resource/slipper.png",
     "version": "1.0.0",
     "slug": "ITS_app",
-    "sdkVersion": "25.0.0",
+    "sdkVersion": "27.0.0",
     "ios": {
       "bundleIdentifier": "com.tlp.ITS"
     },
