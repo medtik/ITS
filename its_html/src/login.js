@@ -1,19 +1,22 @@
 new Vue({
-    el: 'body',
+    el: 'div.result_item_box',
     data() {
         return {
             password: '',
-            email: ''
+            email: '',
+            error: undefined
         }
     },
     methods: {
         emailLogin() {
-            firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
-                // Handle Errors here.
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                // ...
-            });
+            console.log('yo');
+            firebase.auth()
+                .signInWithEmailAndPassword(this.email, this.password)
+                .then(data => window.location = "/index.html")
+                .catch((error) => {
+                    console.warn(error);
+                    this.error = error;
+                });
         },
         googleLogin() {
 

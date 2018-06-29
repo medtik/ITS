@@ -73,12 +73,14 @@
 		<div class="container" style="height: 400px; text-align: center">
 			<h5 style="padding-top: 20px"></h5>
 			<div class="col-lg-8 mx-auto search-box-2">
-				<input class="search-text" type="text" name="" placeholder="Tài khoản.." autocomplete="on" required>
+				<input class="search-text" type="text" name="" placeholder="Tài khoản.." autocomplete="on" required
+                v-model="email">
           	</div>
 			<br>
 			<h5 style="padding-top: 40px"></h5>
 			<div class="col-lg-8 mx-auto search-box-2">
-				<input class="search-text" type="password" name="" placeholder="Mật khẩu.." autocomplete="on" required>
+				<input class="search-text" type="password" name="" placeholder="Mật khẩu.." autocomplete="on" required
+                       v-model="password">
           	</div>
 			<br>
 			<br>
@@ -106,21 +108,27 @@
 								<br>
 								<br>
 								<table style="margin: auto">
+                                    <tr>
 									<td>
 										<button class="btn btn-primary" style="margin-top: 20px; width: 120px">Xác nhận</button>
 									<td>
 									<td>
 										<button class="btn" style="margin-top: 20px; background-color: red; color: white; width: 120px">Thoát</button>
-								</div>
-									</td>
-								</table>
+                                    </td>
+                                    </tr>
+                                </table>
+                            </div>
 							</div>
 						  </div>
 						</div>
   			</div>
 				</td>
 			</table>
-			<button class="btn btn-dark" style="margin-top: 10px; height: 40px">Đăng nhập</button>
+			<button class="btn btn-dark" style="margin-top: 10px; height: 40px" v-on:click="emailLogin">Đăng nhập</button>
+            <div class="alert alert-danger mt-3" role="alert"
+                v-if="error">
+                Sai email hoặc mật khẩu
+            </div>
 			<br>
 
 			<div class="container" style="text-align: center; margin: 20px 0 10px 0">
