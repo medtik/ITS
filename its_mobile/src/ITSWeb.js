@@ -1,8 +1,9 @@
 import React from "react" ;
-import {View, WebView, StyleSheet, Dimensions,BackHandler} from "react-native" ;
+import {View, WebView, StyleSheet, Dimensions, BackHandler} from "react-native" ;
+import {Notifications} from 'expo';
 
 const ref = {
-  webview: "WEBVIEW_REF"
+    webview: "WEBVIEW_REF"
 };
 export default class ITSWeb extends React.Component {
     constructor(props) {
@@ -10,17 +11,17 @@ export default class ITSWeb extends React.Component {
 
         this.state = {
             uri: 'http://its8.gear.host/',
-            // uri: 'http://192.168.42.14:8080/',
             canGoBack: false
         };
+
         this.onLayout = this.onLayout.bind(this);
         this.onHardwareBack = this.onHardwareBack.bind(this);
         this.onNavigationStateChange = this.onNavigationStateChange.bind(this);
+        this.onMessage = this.onMessage.bind(this);
     }
 
     componentDidMount() {
         this.onLayout();
-
         BackHandler.addEventListener('hardwareBackPress', this.onHardwareBack);
     }
 
@@ -30,25 +31,46 @@ export default class ITSWeb extends React.Component {
 
     onLayout() {
         const dimension = Dimensions.get('window');
-
         this.setState({
             width: dimension.width,
             height: dimension.height
         });
     }
 
-    onHardwareBack(){
+    onHardwareBack() {
 
-        if(this.state.canGoBack){
+        if (this.state.canGoBack) {
             this.refs[ref.webview].goBack();
         }
         return this.state.canGoBack;
     }
 
-    onNavigationStateChange(ex){
+    onNavigationStateChange(ex) {
         this.setState({
             canGoBack: ex.canGoBack
         });
+    }
+
+    onMessage(data) {
+        // console.debug('onMessage', data);
+        //         // let notification = {
+        //         //     title: "the title for notification 1",
+        //         //     body: "text for body, and anoter one in 7 secs"
+        //         // };
+        //         // let notification2 = {
+        //         //     title: "the title for noti 2",
+        //         //     body: "scheduled notification"
+        //         // };
+        //         //
+        //         // let schedule = {
+        //         //     time: (new Date()).getTime() + 7000
+        //         // };
+        //         // Notifications.presentLocalNotificationAsync(notification);
+        //         // Notifications.scheduleLocalNotificationAsync(notification2, schedule);
+        let notifications = JSON.parse(data);
+        for(let notification of notifications){
+            Notifications.presentLocalNotificationAsync(notification);
+        }
     }
 
     render() {
@@ -63,14 +85,13 @@ export default class ITSWeb extends React.Component {
             }
         });
 
-        console.log(this.state);
-
         return (
-            <View style={style.container}>
+            <View style={style.container}
+                  onLayout={this.onLayout}>
                 <WebView
                     ref={ref.webview}
                     onNavigationStateChange={this.onNavigationStateChange}
-                    onLayout={this.onLayout}
+                    onMessage={(event) => this.onMessage(event.nativeEvent.data)}
                     source={{uri: this.state.uri}}
                     style={style.webView}
                 />
