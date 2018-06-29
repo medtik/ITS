@@ -1,24 +1,42 @@
 new Vue({
-    el: 'body',
+    el: 'div.result_item_box',
     data() {
         return {
             name: '',
             password: '',
             confirmPassword: '',
-            email: ''
+            email: '',
+            error: undefined,
+            success: undefined
         }
     },
     methods: {
         emailSignup() {
+            if (this.password != this.confirmPassword) {
+                this.error = {
+                    message: "Mật khẩu nhập lại không khớp"
+                };
+                return;
+            }
             firebase.auth()
                 .createUserWithEmailAndPassword(this.email, this.password)
-                .then(data => console.log(data))
-                .catch(function (error) {
-                // Handle Errors here.
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                // ...
-            });
+                .then(data => {
+                    var user = firebase.auth().currentUser;
+                    user.updateProfile({
+
+                        displayName: this.name
+                    }).then(() => {
+                        this.success = data;
+                    })
+                    this.error = undefined;
+                })
+                .catch((error) => {
+                    console.log(error);
+                    this.error = error
+                });
+        },
+        exit(){
+            window.location = '/login.html'
         }
     }
 });

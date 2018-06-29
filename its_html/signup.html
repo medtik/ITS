@@ -22,7 +22,7 @@
     <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
-    
+
   </head>
 
   <body id="page-top" style="height: 450px">
@@ -36,7 +36,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link">Đăng nhập</a> 
+              <a class="nav-link">Đăng nhập</a>
             </li>
 			<li class="nav-item">
               <a class="nav-link js-scroll-trigger">Thông báo</a>
@@ -67,48 +67,58 @@
         </div>
       </div>
     </header>
-   		
+
 	<!-- Result item -->
 	<div class="result_item_box">
 		<div class="container" style="height: 450px; text-align: center">
 			<h5 style="padding-top: 50px"></h5>
 			<div class="col-lg-8 mx-auto search-box-2">
-				<input class="search-text" type="text" name="" placeholder="Tài khoản.." autocomplete="on" required>
+				<input class="search-text" type="text" name="" placeholder="Tài khoản.." autocomplete="on" required
+                v-model="name">
           	</div>
 			<br>
 			<h5 style="padding-top: 40px"></h5>
 			<div class="col-lg-8 mx-auto search-box-2">
-				<input class="search-text" type="password" name="" placeholder="Mật khẩu.." autocomplete="on" required>
+				<input class="search-text" type="password" name="" placeholder="Mật khẩu.." autocomplete="on" required
+                v-model="password">
           	</div>
 			<br>
 			<h5 style="padding-top: 40px"></h5>
 			<div class="col-lg-8 mx-auto search-box-2">
-				<input class="search-text" type="password" name="" placeholder="Nhập lại mật khẩu.." autocomplete="on" required>
+				<input class="search-text" type="password" name="" placeholder="Nhập lại mật khẩu.." autocomplete="on" required
+                       v-model="confirmPassword">
           	</div>
 			<br>
 			<h5 style="padding-top: 40px"></h5>
 			<div class="col-lg-8 mx-auto search-box-2">
-				<input class="search-text" type="text" name="" placeholder="Email.." autocomplete="on" required>
+				<input class="search-text" type="text" name="" placeholder="Email.." autocomplete="on" required
+                v-model="email">
           	</div>
-			<br>
-			<br>
+            <div style="width: 100%; height: 4rem">
+                <!--place holder-->
+            </div>
+            <div class="alert alert-danger mb-0" role="alert" style="position:relative"
+                 v-if="error">
+                {{error.message}}
+            </div>
+
 			<table style="margin: auto">
 				<td>
-					<button class="btn btn-primary" style="margin-top: 20px; width: 120px">Đăng ký</button>
+					<button class="btn btn-primary" @click="emailSignup" style="margin-top: 20px; width: 120px">Đăng ký</button>
 				<td>
 				<td>
-					<button class="btn" style="margin-top: 20px; background-color: red; color: white; width: 120px">Thoát</button>
+					<button class="btn" style="margin-top: 20px; background-color: red; color: white; width: 120px" @click="exit">Thoát</button>
   			</div>
 				</td>
 			</table>
-			
+
 			<br>
-			
+
 			<br>
   		</div>
 	</div>
   <!-- End Result item -->
-   
+
 	<footer>
 		<a class="btn btn-dark btn-xl text-white" style="margin: 20px 20px 20px 10px" id="div-buy">Liên hệ đăng ký địa điểm</a>
 		<div class="footer">
@@ -116,8 +126,8 @@
 			<h6>Số điện thoại: </h6>
 		</div>
 	</footer>
-   
-   
+
+
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -129,5 +139,11 @@
 
     <!-- Custom scripts for this template -->
     <script src="js/creative.min.js"></script>
-	</body>
+
+    <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+    <script src="src/firebaseConfig.js"></script>
+    <script src="js/vue_2.5.13.js"></script>
+    <script src="js/vuex_3.0.1.js"></script>
+    <script src="src/signup.js"></script>
+  </body>
 </html>
