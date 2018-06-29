@@ -9,8 +9,8 @@ export default class ITSWeb extends React.Component {
         super(props);
 
         this.state = {
-            // uri: 'http://its8.gear.host/'
-            uri: 'http://192.168.42.14:8080/',
+            uri: 'http://its8.gear.host/',
+            // uri: 'http://192.168.42.14:8080/',
             canGoBack: false
         };
         this.onLayout = this.onLayout.bind(this);
