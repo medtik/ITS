@@ -1,6 +1,6 @@
 import React from "react" ;
 import {View, WebView, StyleSheet, Dimensions, BackHandler} from "react-native" ;
-import {Notifications} from 'expo';
+import notification from './SetupNotification'
 
 const ref = {
     webview: "WEBVIEW_REF"
@@ -68,9 +68,7 @@ export default class ITSWeb extends React.Component {
         //         // Notifications.presentLocalNotificationAsync(notification);
         //         // Notifications.scheduleLocalNotificationAsync(notification2, schedule);
         let notifications = JSON.parse(data);
-        for(let notification of notifications){
-            Notifications.presentLocalNotificationAsync(notification);
-        }
+        notification.handleNotifications(notifications[0])
     }
 
     render() {

@@ -2,32 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3faae3ea-4864-4583-a103-5707258b3457" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/../its_html/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../its_html/run.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/SetupNotification.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_html/add-plan.html" beforeDir="false" afterPath="$PROJECT_DIR$/../its_html/add-plan.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_html/advance-result.html" beforeDir="false" afterPath="$PROJECT_DIR$/../its_html/advance-result.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_html/advance-search.html" beforeDir="false" afterPath="$PROJECT_DIR$/../its_html/advance-search.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_html/area.html" beforeDir="false" afterPath="$PROJECT_DIR$/../its_html/area.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_html/change-image.html" beforeDir="false" afterPath="$PROJECT_DIR$/../its_html/change-image.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_html/group-plan.html" beforeDir="false" afterPath="$PROJECT_DIR$/../its_html/group-plan.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_html/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../its_html/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_html/list-location.html" beforeDir="false" afterPath="$PROJECT_DIR$/../its_html/list-location.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_html/location-detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/../its_html/location-detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_html/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/../its_html/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_html/my-plan.html" beforeDir="false" afterPath="$PROJECT_DIR$/../its_html/my-plan.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_html/nearby.html" beforeDir="false" afterPath="$PROJECT_DIR$/../its_html/nearby.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_html/notification.html" beforeDir="false" afterPath="$PROJECT_DIR$/../its_html/notification.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_html/plan-home.html" beforeDir="false" afterPath="$PROJECT_DIR$/../its_html/plan-home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_html/rating.html" beforeDir="false" afterPath="$PROJECT_DIR$/../its_html/rating.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_html/report.html" beforeDir="false" afterPath="$PROJECT_DIR$/../its_html/report.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_html/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/../its_html/search.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_html/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/../its_html/signup.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_html/update-info.html" beforeDir="false" afterPath="$PROJECT_DIR$/../its_html/update-info.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/its_mobile.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/its_mobile.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ITSWeb.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/ITSWeb.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SetupNotification.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/SetupNotification.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -41,11 +20,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ITSWeb.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ITSWeb.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ITSWeb.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2">
-              <caret line="58" column="24" lean-forward="true" selection-start-line="58" selection-start-column="24" selection-end-line="58" selection-end-column="24" />
+            <state relative-caret-position="245">
+              <caret line="70" column="31" selection-start-line="70" selection-start-column="31" selection-end-line="70" selection-end-column="31" />
               <folding>
                 <element signature="e#0#27#0" expanded="true" />
               </folding>
@@ -53,14 +32,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="App.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/App.js">
+      <file leaf-file-name="SetupNotification.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/SetupNotification.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" selection-start-line="3" selection-end-line="3" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="160">
+              <caret line="34" column="6" lean-forward="true" selection-start-line="34" selection-start-column="6" selection-end-line="34" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -96,9 +72,9 @@
       <list>
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/setupNotification.js" />
-        <option value="$PROJECT_DIR$/src/SetupNotification.js" />
         <option value="$PROJECT_DIR$/App.js" />
         <option value="$PROJECT_DIR$/src/ITSWeb.js" />
+        <option value="$PROJECT_DIR$/src/SetupNotification.js" />
       </list>
     </option>
   </component>
@@ -155,6 +131,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="D:/software/NodeJS/node" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="JavaScript.Libraries" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -210,11 +187,12 @@
       <workItem from="1530075515424" duration="1521000" />
       <workItem from="1530078027291" duration="3458000" />
       <workItem from="1530081761248" duration="4854000" />
+      <workItem from="1530318676568" duration="2103000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24975000" />
+    <option name="totallyTimeSpent" value="27078000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -228,14 +206,13 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.48051947" visible="true" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4788961" visible="true" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32954547" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5014881" side_tool="true" weight="0.32954547" />
-      <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32954547" />
-      <window_info id="npm" order="2" sideWeight="0.5194805" side_tool="true" visible="true" weight="0.25" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4985119" weight="0.19805194" />
+      <window_info active="true" id="npm" order="2" sideWeight="0.5211039" side_tool="true" visible="true" weight="0.25" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4985119" weight="0.4301948" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.96753246" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -247,6 +224,7 @@
       <window_info anchor="bottom" id="Messages" order="7" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -256,6 +234,33 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/ITSWeb.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="986">
+          <caret line="58" column="24" lean-forward="true" selection-start-line="58" selection-start-column="24" selection-end-line="58" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#27#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/ITSWeb.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -494,28 +499,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        <state relative-caret-position="153">
+          <caret line="9" column="19" lean-forward="true" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/SetupNotification.js">
+    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es5.d.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+        <state relative-caret-position="248">
+          <caret line="993" column="29" lean-forward="true" selection-start-line="993" selection-start-column="29" selection-end-line="993" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ITSWeb.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2">
-          <caret line="58" column="24" lean-forward="true" selection-start-line="58" selection-start-column="24" selection-end-line="58" selection-end-column="24" />
+        <state relative-caret-position="245">
+          <caret line="70" column="31" selection-start-line="70" selection-start-column="31" selection-end-line="70" selection-end-column="31" />
           <folding>
             <element signature="e#0#27#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SetupNotification.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="34" column="6" lean-forward="true" selection-start-line="34" selection-start-column="6" selection-end-line="34" selection-end-column="6" />
         </state>
       </provider>
     </entry>
