@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 	<link rel="shortcut icon" href="img/logo.ico" type="image/x-icon">
-    <title>Chi tiết lịch trình</title>
+    <title>Lịch trình của nhóm</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -35,7 +35,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
+			<li class="nav-item">
               <a href="group.html" class="nav-link">Nhóm</a>
             </li>
 			<li class="nav-item">
@@ -48,7 +48,7 @@
               <a href="profile.html" class="nav-link">Cá nhân</a>
             </li>
 			 <li class="nav-item">
-              <a href="login.html" class="nav-link">Đăng nhập</a>
+              <a href="login.html" class="nav-link">Đăng nhập</a> 
             </li>
           </ul>
         </div>
@@ -59,18 +59,80 @@
         <div class="row">
           <div class="col-lg-10 mx-auto">
             <h1 class="text-uppercase" style="font-size: 40px">
-              <strong>Lịch trình<br> của tôi</strong>
+              <strong>Nhóm A</strong>
             </h1>
             <hr>
           </div>
         </div>
       </div>
     </header>
-
+	
+	<div class="result_item_box">
+		<div class="container" style="height: 150px; text-align: center">
+			<table style="margin: auto">
+				<td>
+					<button id="myLink" class="btn btn-primary" style="margin-top: 20px; width: 120px">Chỉnh sửa</button>
+					<div id="myModal" class="modal">
+						<!-- Modal content -->
+						<div class="modal-content">
+							<span class="close">&times;</span>
+							<h5 style="text-align: center">Chỉnh sửa tên lịch trình</h5>
+							<a href="#">
+							<div class="container" style="text-align: center; background-color: white; border-radius: 40px; height: 150px">
+								<h5 style="padding-top: 10px; text-align: center"></h5>
+								<div class="col-lg-8 mx-auto search-box-2" style="margin-bottom: 30px">
+									<input class="search-text" type="text" name="" placeholder="Nhập tên.." autocomplete="on" required>
+									<a href="group-plan(member).html"><button class="btn btn-primary" onclick="myNextFunction()" style="margin-top: 20px; color: white; width: 120px">Xác nhận</button></a>
+								</div>
+							</div>
+							</a>
+						</div>
+					</div>
+				<td>
+				<td>
+					<a href="index.html"><button class="btn" onclick="deleteFunction()" style="margin-top: 20px; background-color: red; color: white; width: 120px">Xóa</button></a> 			
+				</td>
+			</table>
+			<h5 style="padding-top: 10px"></h5>
+			<button id="myLink-2" class="btn btn-dark" style="margin-top: 10px">Thành Viên</button>
+			<div id="myModal-2" class="modal">
+				<!-- Modal content -->
+				<div class="modal-content">
+					<span class="close-2">&times;</span>
+					<h5 style="text-align: center">Tìm kiếm thành viên</h5>
+					<a href="#">
+					<div class="container" style="text-align: center; background-color: white; border-radius: 40px">
+						<h5 style="padding-top: 10px; text-align: center"></h5>
+						<div class="col-lg-8 mx-auto search-box-2" style="margin-bottom: 30px">
+							<input class="search-text" type="text" name="" placeholder="Thêm thành viên.." autocomplete="on" required>
+						</div>
+						<br>
+						<a href="group-plan(member).html"><button class="btn" onclick="addFunction()" style="background-color: red; color: white; margin-top: 40px">Xác nhận</button></a>
+						<br>
+						
+						<div class="user-plan">
+							<a style="color: white; padding-top: 10px">Thành viên A</a>
+							<span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
+						</div>
+						<div class="user-plan">
+							<a style="color: white; padding-top: 10px">Thành viên B</a>
+							<span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
+						</div>
+						<div class="user-plan">
+							<a style="color: white; padding-top: 10px">Thành viên C</a>
+							<span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
+						</div>
+					</div>
+					</a>
+				</div>
+  		</div>
+	</div>
+	</div>
+	
 	<!-- Result item -->
 	<!-- Plan A -->
 	<div class="result_item_box">
-    <a class="btn btn-primary btn-xl text-white" style="margin: 20px 0 10px 10px; float: left" id="planA">Plan A</a>
+    <a class="btn btn-primary btn-xl text-white" style="margin: 20px 0 10px 10px; float: left" id="planA">Phượt xuyên màn đêm</a>
 	<a href="group-plan-detail.html"><h6 class="section-heading text-primary" style="color: black; padding-top: 45px">Xem thêm...</h6></a>
     <div id="plan-a" class="carousel slide" data-ride="carousel" data-interval="3200">
 	   <ul class="carousel-indicators">
@@ -84,7 +146,7 @@
 		<div class="carousel-item active">
 		  <a><img src="img/portfolio/thumbnails/4.jpg" alt=""></a>
 		  <div class="carousel-caption">
-			<h4>New World</h4>
+			<h4>New World</h4>	
 			<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
 			<i class="fa fa-location-arrow"> 76 Lê Lai, Q.1, TPHCM</i><br>
 		  <a href="location-detail.html">
@@ -95,7 +157,7 @@
 		<div class="carousel-item">
 		  <img src="img/portfolio/thumbnails/4.jpg" alt="">
 		  <div class="carousel-caption">
-			<h4>New World</h4>
+			<h4>New World</h4>	
 			<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
 			<i class="fa fa-location-arrow"> 76 Lê Lai, Q.1, TPHCM</i><br>
 		  <a href="location-detail.html">
@@ -106,7 +168,7 @@
 		<div class="carousel-item">
 		  <img src="img/portfolio/thumbnails/4.jpg" alt="">
 		  <div class="carousel-caption">
-			<h4>New World</h4>
+			<h4>New World</h4>	
 			<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
 			<i class="fa fa-location-arrow"> 76 Lê Lai, Q.1, TPHCM</i><br>
 		  <a href="location-detail.html">
@@ -126,7 +188,7 @@
   	  <hr>
 	</div>
 	</div>
-
+	
 	<!-- Plan B -->
 	<div class="result_item_box">
     <a class="btn btn-primary btn-xl text-white" style="margin: 20px 0 10px 10px; float: left" id="planB">Plan B</a>
@@ -143,7 +205,7 @@
 		<div class="carousel-item active">
 		  <a><img src="img/portfolio/thumbnails/4.jpg" alt=""></a>
 		  <div class="carousel-caption">
-			<h4>New World</h4>
+			<h4>New World</h4>	
 			<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
 			<i class="fa fa-location-arrow"> 76 Lê Lai, Q.1, TPHCM</i><br>
 		  <a href="location-detail.html">
@@ -154,7 +216,7 @@
 		<div class="carousel-item">
 		  <img src="img/portfolio/thumbnails/4.jpg" alt="">
 		  <div class="carousel-caption">
-			<h4>New World</h4>
+			<h4>New World</h4>	
 			<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
 			<i class="fa fa-location-arrow"> 76 Lê Lai, Q.1, TPHCM</i><br>
 		  <a href="location-detail.html">
@@ -165,7 +227,7 @@
 		<div class="carousel-item">
 		  <img src="img/portfolio/thumbnails/4.jpg" alt="">
 		  <div class="carousel-caption">
-			<h4>New World</h4>
+			<h4>New World</h4>	
 			<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
 			<i class="fa fa-location-arrow"> 76 Lê Lai, Q.1, TPHCM</i><br>
 		  <a href="location-detail.html">
@@ -186,7 +248,19 @@
 	</div>
 	</div>
   <!-- End Result item -->
-	<button id="fixedbutton"><a href="add-plan.html"><i class="fa fa-plus" style="color: white"></i></a></button>
+  
+	<!-- Result item -->
+	<div class="result_item_box">
+		<div class="container" style="height: 320px; text-align: center">
+			<a class="btn btn-primary btn-xl text-white" style="margin-top: 10px">Ghi chú</a>
+			<div class="col-lg-8 mx-auto" style="height: 200px; margin-top: 20px">
+				<textarea id="textarea" class="text-small" style="padding: 20px 10px; border: 1px solid #ccc; border-radius: 40px" placeholder="Nhập ghi chú..."></textarea>          	
+			</div>
+  		</div>
+		<button class="btn" onclick="myFunction()" style="width: 150px; margin-bottom: 30px; background-color: red; color: white">Xác nhận</button>
+  		
+	</div>
+  <!-- End Result item -->
 	<footer>
 		<a class="btn btn-dark btn-xl text-white" style="margin: 20px 20px 20px 10px" id="div-buy">Liên hệ đăng ký địa điểm</a>
 		<div class="footer">
@@ -194,7 +268,31 @@
 			<h6>Số điện thoại: </h6>
 		</div>
 	</footer>
-
+	
+	<script>
+	  $(function() {
+		$('textarea#textarea').editable({
+		  inlineMode: false
+		})
+	  });
+	</script>
+	
+	<script>
+	function myFunction() {
+    confirm("Xác nhận ghi chú?");
+	}
+	</script>
+	<script>
+	function addFunction() {
+    confirm("Việc này cần sự đồng ý của quản lý nhóm, tiếp tục?");
+	}
+	</script>
+	<script>
+	function deleteFunction() {
+    confirm("Xác nhận xóa group?");
+	}
+	</script>
+	
 	<script>
 	// Get the modal
 	var modal = document.getElementById('myModal');
@@ -205,7 +303,7 @@
 	// Get the <span> element that closes the modal
 	var span = document.getElementsByClassName("close")[0];
 
-	// When the user clicks the button, open the modal
+	// When the user clicks the button, open the modal 
 	btn.onclick = function() {
 		modal.style.display = "block";
 	}
@@ -222,7 +320,6 @@
 		}
 	}
 	</script>
-
 	<script>
 	// Get the modal
 	var modal2 = document.getElementById('myModal-2');
@@ -231,9 +328,9 @@
 	var btn2 = document.getElementById("myLink-2");
 
 	// Get the <span> element that closes the modal
-	var span2 = document.getElementsByClassName("close")[0];
+	var span2 = document.getElementsByClassName("close-2")[0];
 
-	// When the user clicks the button, open the modal
+	// When the user clicks the button, open the modal 
 	btn2.onclick = function() {
 		modal2.style.display = "block";
 	}
@@ -250,45 +347,6 @@
 		}
 	}
 	</script>
-
-	<script>
-	// Get the modal
-	var modal3 = document.getElementById('myModal-3');
-
-	// Get the button that opens the modal
-	var btn3 = document.getElementById("myLink-3");
-
-	// Get the <span> element that closes the modal
-	var span3 = document.getElementsByClassName("close-3")[0];
-
-	// When the user clicks the button, open the modal
-	btn3.onclick = function() {
-		modal3.style.display = "block";
-	}
-
-	// When the user clicks on <span> (x), close the modal
-	span3.onclick = function() {
-		modal3.style.display = "none";
-	}
-
-	// When the user clicks anywhere outside of the modal, close it
-	window.onclick = function(event) {
-		if (event.target == modal3) {
-			modal3.style.display = "none";
-		}
-	}
-	</script>
-
-	<script>
-	function myFunction() {
-    confirm("Xác nhận xóa lịch trình?");
-	}
-	</script>
-	<script>
-	function myNextFunction() {
-    confirm("Xác nhận đổi tên lịch trình?");
-	}
-	</script>
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -300,15 +358,5 @@
 
     <!-- Custom scripts for this template -->
     <script src="js/creative.min.js"></script>
-    <!---->
-	<script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/vuex/3.0.1/vuex.js"></script>
-	<!--Firebase config-->
-	<script src='./tlp/firebaseConfig.js'></script>
-	<!--Store-->
-	<script src='./tlp/vuexStore.js'></script>
-	<!--Page logic-->
-    <script src="./tlp/src/my-plan.js"></script>
-  </body>
+	</body>
 </html>

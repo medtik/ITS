@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 	<link rel="shortcut icon" href="img/logo.ico" type="image/x-icon">
-    <title>Danh sách khách sạn ở TPHCM</title>
+    <title>Chi tiết lịch trình</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -22,6 +22,7 @@
     <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
+
   </head>
 
   <body id="page-top">
@@ -34,7 +35,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-			<li class="nav-item">
+            <li class="nav-item">
               <a href="group.html" class="nav-link">Nhóm</a>
             </li>
 			<li class="nav-item">
@@ -58,16 +59,42 @@
         <div class="row">
           <div class="col-lg-10 mx-auto">
             <h1 class="text-uppercase" style="font-size: 40px">
-              <strong>Khách sạn<br> TP HCM</strong>
+              <strong>Lịch trình<br> A</strong>
             </h1>
             <hr>
           </div>
         </div>
       </div>
     </header>
+	
+	<div class="result_item_box">
+		<div class="container" style="height: 120px; text-align: center">
+			
+			<h5 style="padding-top: 15px">Có tất cả 100 lượt thích</h5>
+			<h5 style="padding-top: 10px"></h5>
+			<table style="margin: 10px 0 0 95px">
+				<tr>
+					<td>
+						<h6 style="color: black">Copy Plan</h6>
+					</td>
+					<td>
+					
+					<label class="switch">
+						<input type="checkbox">
+						<span class="slider round"></span>
+					</label>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+					
 	<!-- Result item -->
 	<div class="row">
-	<div class="result_item_box col-12">
+	
+	<div class="btn btn-primary" style="margin: 13px; 10px">Ngày 1</div>
+	
+	<div class="result_item_box">
 		<a href="index.html">
 			<div class="item_box">
 				<div class="title-name m-display">
@@ -89,8 +116,9 @@
 			</div>
 		</a>
 	</div>
-	<div class="result_item_box col-12">
-		<a href="index.html">
+	
+	<div class="btn btn-primary" style="margin: 13px; 10px">Ngày 2</div>
+	<div class="result_item_box">
 			<div class="item_box">
 				<div class="title-name m-display">
 					<h4><a href="location-detail.html" title="New World">New World</a></h4>
@@ -109,9 +137,8 @@
 						<i class="fa fa-location-arrow"> 76 Lê Lai, Q.1, Thành Phố Hồ Chí Minh</i>
 				</div>
 			</div>
-		</a>
 	</div>
-	<div class="result_item_box col-12">
+	<div class="result_item_box">
 		<a>
 			<div class="item_box">
 				<div class="title-name m-display">
@@ -133,8 +160,8 @@
 			</div>
 		</a>
 	</div>
-	<div class="result_item_box col-12">
-		<a>
+	<div class="btn btn-primary" style="margin: 13px; 10px">Ngày 3</div>
+	<div class="result_item_box">
 			<div class="item_box">
 				<div class="title-name m-display">
 					<h4><a href="location-detail.html" title="New World">New World</a></h4>
@@ -149,16 +176,15 @@
 					</div>
 				</div>
 				<div class="content_box">
-						<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
-						<i class="fa fa-location-arrow"> 76 Lê Lai, Q.1, Thành Phố Hồ Chí Minh</i>
+					<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+					<i class="fa fa-location-arrow"> 76 Lê Lai, Q.1, Thành Phố Hồ Chí Minh</i>
 				</div>
 			</div>
-		</a>
 	</div>
 	</div>
   <!-- End Result item -->
-  
-   <footer>
+	
+	<footer>
 		<a class="btn btn-dark btn-xl text-white" style="margin: 20px 20px 20px 10px" id="div-buy">Liên hệ đăng ký địa điểm</a>
 		<div class="footer">
 			<h6>Email:</h6>
@@ -166,6 +192,100 @@
 		</div>
 	</footer>
 	
+	<script>
+	// Get the modal
+	var modal = document.getElementById('myModal');
+
+	// Get the button that opens the modal
+	var btn = document.getElementById("myLink");
+
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
+
+	// When the user clicks the button, open the modal 
+	btn.onclick = function() {
+		modal.style.display = "block";
+	}
+
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function() {
+		modal.style.display = "none";
+	}
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+		if (event.target == modal) {
+			modal.style.display = "none";
+		}
+	}
+	</script>
+
+	<script>
+	// Get the modal
+	var modal2 = document.getElementById('myModal-2');
+
+	// Get the button that opens the modal
+	var btn2 = document.getElementById("myLink-2");
+
+	// Get the <span> element that closes the modal
+	var span2 = document.getElementsByClassName("close")[0];
+
+	// When the user clicks the button, open the modal 
+	btn2.onclick = function() {
+		modal2.style.display = "block";
+	}
+
+	// When the user clicks on <span> (x), close the modal
+	span2.onclick = function() {
+		modal2.style.display = "none";
+	}
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+		if (event.target == modal2) {
+			modal2.style.display = "none";
+		}
+	}
+	</script>
+	
+	<script>
+	// Get the modal
+	var modal3 = document.getElementById('myModal-3');
+
+	// Get the button that opens the modal
+	var btn3 = document.getElementById("myLink-3");
+
+	// Get the <span> element that closes the modal
+	var span3 = document.getElementsByClassName("close-3")[0];
+
+	// When the user clicks the button, open the modal 
+	btn3.onclick = function() {
+		modal3.style.display = "block";
+	}
+
+	// When the user clicks on <span> (x), close the modal
+	span3.onclick = function() {
+		modal3.style.display = "none";
+	}
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+		if (event.target == modal3) {
+			modal3.style.display = "none";
+		}
+	}
+	</script>
+	
+	<script>
+	function myFunction() {
+    confirm("Xác nhận xóa lịch trình?");
+	}
+	</script>
+	<script>
+	function myNextFunction() {
+    confirm("Xác nhận đổi tên lịch trình?");
+	}
+	</script>
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

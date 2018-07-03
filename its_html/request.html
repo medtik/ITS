@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 	<link rel="shortcut icon" href="img/logo.ico" type="image/x-icon">
-    <title>Chỉnh sửa thông tin</title>
+    <title>Xử lý yêu cầu</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -22,7 +22,12 @@
     <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
-    
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<style>
+	a:visited{
+	color: #ccc;
+	}
+	</style>
   </head>
 
   <body id="page-top" style="height: 450px">
@@ -54,16 +59,12 @@
         </div>
       </div>
     </nav>
-    <header class="text-center text-black d-flex" style="height: 150px; margin-top: 100px">
+    <header class="text-center text-black d-flex" style="height: 100px; margin-top: 100px">
       <div class="container my-auto">
         <div class="row">
           <div class="col-lg-12 mx-auto">
-			<img src="img/user.png" class="user-img">
-			<br>
-			<a href="change-image.html" style="color: black"><u class="myLink" data-toggle="modal" data-target="#myModal">Thay đổi ảnh đại diện</u></a>
-			
-            <h4 class="text-uppercase" style="font-size: 25px">
-              <strong>Chỉnh sửa thông tin</strong>
+            <h4 class="text-uppercase" style="font-size: 30px">
+              <strong>Yêu cầu</strong>
             </h4>
             <hr>
           </div>
@@ -73,50 +74,57 @@
    		
 	<!-- Result item -->
 	<div class="result_item_box">
-		<div class="container" style="height: 570px; text-align: center">
-			<h5 style="padding-top: 50px"></h5>
-			<div class="col-lg-8 mx-auto search-box-2">
-				<input class="search-text" type="text" name="" placeholder="Tài khoản.." autocomplete="on" required>
-          	</div>
-			<br>
-			<h5 style="padding-top: 40px"></h5>
-			<div class="col-lg-8 mx-auto search-box-2">
-				<input class="search-text" type="password" name="" placeholder="Mật khẩu.." autocomplete="on" required>
-          	</div>
-			<br>
-			<h5 style="padding-top: 40px"></h5>
-			<div class="col-lg-8 mx-auto search-box-2">
-				<input class="search-text" type="password" name="" placeholder="Nhập lại mật khẩu.." autocomplete="on" required>
-          	</div>
-			<br>
-			<h5 style="padding-top: 40px"></h5>
-			<div class="col-lg-8 mx-auto search-box-2">
-				<input class="search-text" type="text" name="" placeholder="Email.." autocomplete="on" required>
-          	</div>
-			<br>
-			<h5 style="padding-top: 40px"></h5>
-			<div class="col-lg-8 mx-auto search-box-2">
-				<form style="font-size: 16px; padding-left: 15px; font-style: normal; opacity: 0.7">
-				Ngày sinh:
-				<input type="date" name="bday">
-				</form>
-          	</div>
-			<br>
-			<h5 style="padding-top: 40px"></h5>
-			<div class="col-lg-8 mx-auto search-box-2">
-				<input class="search-text" type="text" name="" placeholder="Địa chỉ.." autocomplete="on" required>
-          	</div>
-			<br>
-			<br>
-			<table style="margin: auto">
+		<div class="container" style="text-align: center">
+			<h5 style="padding-top: 30px"></h5>
+			<div class="col-lg-8 mx-auto search-box-4" id="request-1">
+				<h6><strong>Nguyễn Văn A</strong> đã thêm địa điểm <a href="location-detail.html">New World</a> vào lịch trình nhóm.</h6	>
+				<table style="margin: auto">
 				<td>
-					<button class="btn btn-primary" style="margin-top: 20px; width: 120px">Xác nhận</button>
+					<button class="btn btn-primary" style="width: 120px">Chấp nhận</button>
 				<td>
 				<td>
-					<a href="index.html"><button class="btn" style="margin-top: 20px; background-color: red; color: white; width: 120px">Thoát</button></a>
-  			</div>
+					<button class="btn" style="background-color: red; color: white; width: 120px">Từ chối</button>			
 				</td>
 			</table>
+          	</div>
+			<h5 style="padding-top: 100px"></h5>
+			<div class="col-lg-8 mx-auto search-box-4">
+				<h6><strong>Nguyễn Văn A</strong> đã thêm địa điểm <a href="location-detail.html">New World</a> vào lịch trình nhóm.</h6	>
+				<table style="margin: auto">
+				<td>
+					<button class="btn btn-primary" style="width: 120px">Chấp nhận</button>
+				<td>
+				<td>
+					<button class="btn" style="background-color: red; color: white; width: 120px">Từ chối</button>			
+				</td>
+			</table>
+          	</div>
+			<h5 style="padding-top: 100px"></h5>
+			<div class="col-lg-8 mx-auto search-box-4">
+				<h6><strong>Nguyễn Văn A</strong> đã thêm địa điểm <a href="location-detail.html">New World</a> vào lịch trình nhóm.</h6	>
+				<table style="margin: auto">
+				<td>
+					<button class="btn btn-primary" style="width: 120px">Chấp nhận</button>
+				<td>
+				<td>
+					<button class="btn" style="background-color: red; color: white; width: 120px">Từ chối</button>			
+				</td>
+			</table>
+          	</div>
+			<h5 style="padding-top: 100px"></h5>
+			<div class="col-lg-8 mx-auto search-box-4">
+				<h6><strong>Nguyễn Văn A</strong> đã thêm địa điểm <a href="location-detail.html">New World</a> vào lịch trình nhóm.</h6	>
+				<table style="margin: auto">
+				<td>
+					<button class="btn btn-primary" style="width: 120px">Chấp nhận</button>
+				<td>
+				<td>
+					<button class="btn" style="background-color: red; color: white; width: 120px">Từ chối</button>			
+				</td>
+			</table>
+          	</div>
+			<h5 style="padding-top: 20px"></h5>
+			<br>
 			<br>
   		</div>
 	</div>
@@ -129,9 +137,7 @@
 			<h6>Số điện thoại: </h6>
 		</div>
 	</footer>
-	
-	
-	
+		
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

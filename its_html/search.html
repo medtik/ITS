@@ -17,12 +17,13 @@
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
-
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+	
     <!-- Plugin CSS -->
     <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
-
+	
   </head>
 
   <body id="page-top">
@@ -36,24 +37,25 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link">Đăng nhập</a> 
+              <a href="group.html" class="nav-link">Nhóm</a>
             </li>
 			<li class="nav-item">
-              <a class="nav-link js-scroll-trigger">Thông báo</a>
+              <a href="plan-home.html" class="nav-link">Lịch trình</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="area.html">Hà Nội</a>
+			<li class="nav-item">
+              <a href="notification.html" class="nav-link">Thông báo</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="area.html">Đà Nẵng</a>
+			<li class="nav-item">
+              <a href="profile.html" class="nav-link">Cá nhân</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="area.html">TP Hồ Chí Minh</a>
+			 <li class="nav-item">
+              <a href="login.html" class="nav-link">Đăng nhập</a> 
             </li>
           </ul>
         </div>
       </div>
     </nav>
+	
     <header class="masthead text-center text-white d-flex">
       <div class="container my-auto">
         <div class="row">
@@ -61,216 +63,36 @@
             <h1 class="text-uppercase" style="font-size: 40px">
               <strong>Tìm kiếm</strong>
             </h1>
-            <hr>
+			<hr>
+			<div class="col-xs-12">
+			<form required aria-required="true" style="margin-top: 30px">
+                <h4 style="color: white">
+                    Chọn khu vực
+                </h4>
+                <select class="btn">
+                    <option class="option-item">Hà Nội</option>
+					<option class="option-item">Đà Nẵng</option>
+					<option class="option-item">TP Hồ Chí Minh</option>
+                </select>
+			</form>	
+			</div>
+            
           </div>
+		  
           <div class="search-box">
 			<input class="search-text" type="text" name="" placeholder="Nhập địa điểm.." autocomplete="on">
           </div>
-          <div class="col-lg-8 mx-auto" style="margin-top: 60px">
-            <a class="btn btn-primary btn-xl js-scroll-trigger search-btn" href="#about">Tìm kiếm</a>
-          </div>
+		  
+			<div class="col-lg-8 mx-auto" style="margin-top: 100px">
+				<a class="btn btn-primary btn-xl js-scroll-trigger search-btn" href="./search-result.html">Tìm kiếm</a>
+			</div>
+			
+			<div class="col-lg-8 mx-auto" style="margin-top: 30px">
+				<a href="map.html" class="btn" style="background-color: red; color: white"><i class="fas fa-map-marker-alt">Gần đây</i></a>
+			</div>
         </div>
       </div>
     </header>
-	
-    <!-- Plans -->
-    <section class="bg-dark" id="plans">
-      <div class="container">
-        <div class="row">
-          <div class="mx-auto text-center">
-            <h3 class="section-heading text-uppercase" style="color: #ffffff">Lịch trình gần đây<br> của bạn</h3>
-            <hr class="light">
-			<div class="container" style="text-align: center; background-color: white; border-radius: 30px">
-				<h5 style="padding-top: 15px"></h5>
-				<div class="user-plan">
-					<a href="my-plan.html" style="color: white">Lịch trình A</a>
-					<span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
-				</div>
-				<br>
-				<div class="user-plan" style="margin-top: 15px">
-				<a href="my-plan.html" style="color: white">Lịch trình B</a>
-					<span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
-				</div>
-				<a><h6 style="padding: 20px 0; color: black">Xem thêm...</h6></a>
-			</div>
-            <div class="col-lg-8 mx-auto">
-            <button onclick="myFunction()" class="btn btn-primary btn-xl text-white search-btn" style="margin: 20px 0">Thêm mới</button>
-			<div id="snackbar"><h6>Đăng nhập để thực hiện<br> chức năng này</h6></div>
-            <h6 class="section-heading text-uppercase" style="color: #ffffff; margin-top: 10px"><u>Đăng nhập</u></h6>
-          </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    
-   <!-- Hà Nội -->
-    <a class="btn btn-primary btn-xl text-white" style="margin: 20px" id="hanoi">Hà Nội</a>
-    <a href="area.html"><h6 class="section-heading text-primary" style="color: black; float: right; margin: 45px 20px 0 0 ">Xem thêm...</h6></a>
-	<div id="stay" class="carousel slide" data-ride="carousel" data-interval="3500">
-	   <ul class="carousel-indicators">
-		<li data-slide-to="0" class="active"></li>
-		<li data-slide-to="1"></li>
-		<li data-slide-to="2"></li>
-	  </ul>
-
-	  <!-- The slideshow -->
-	  <div class="carousel-inner">
-		<div class="carousel-item active">
-		  <img src="img/portfolio/thumbnails/4.jpg" alt="">
-		  <div class="carousel-caption">
-		  	<h4>New World</h4>	
-			<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
-			<i class="fa fa-location-arrow"> 76 Lê Lai, Q.1, TPHCM</i><br>
-		  <a href="stay.html">
-		  	<h6>Xem chi tiết...</h6>
-		  </a>
-		  </div>
-		</div>
-		<div class="carousel-item">
-		  <img src="img/portfolio/thumbnails/4.jpg" alt="">
-		  <div class="carousel-caption">
-			<h4>New World</h4>	
-			<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
-			<i class="fa fa-location-arrow"> 76 Lê Lai, Q.1, TPHCM</i><br>
-		  <a href="stay.html">
-		  	<h6>Xem chi tiết...</h6>
-		  </a>
-		  </div>
-		</div>
-		<div class="carousel-item">
-		  <img src="img/portfolio/thumbnails/4.jpg" alt="">
-		  <div class="carousel-caption">
-			<h4>New World</h4>	
-			<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
-			<i class="fa fa-location-arrow"> 76 Lê Lai, Q.1, TPHCM</i><br>
-		  <a href="stay.html">
-		  	<h6>Xem chi tiết...</h6>
-		  </a>
-		  </div>
-		</div>
-	  </div>
-
-	  <!-- Left and right controls -->
-	  <a class="carousel-control-prev" href="#stay" data-slide="prev">
-    	<span class="carousel-control-prev-icon"></span>
-  	  </a>
-  	  <a class="carousel-control-next" href="#stay" data-slide="next">
-    	<span class="carousel-control-next-icon"></span>
-	  </a> 
-  	  <hr></div>
-   
-	  
-   <!-- Đà Nẵng -->
-    <a class="btn btn-primary btn-xl text-white" style="margin: 20px" id="danang">Đà Nẵng</a>
-    <a href="area.html"><h6 class="section-heading text-primary" style="color: black; float: right; margin: 45px 20px 0 0 ">Xem thêm...</h6></a>
-	<div id="eat" class="carousel slide" data-ride="carousel" data-interval="3000">
-	   <ul class="carousel-indicators">
-		<li data-slide-to="0" class="active"></li>
-		<li data-slide-to="1"></li>
-		<li data-slide-to="2"></li>
-	  </ul>
-
-	  <!-- The slideshow -->
-	  <div class="carousel-inner">
-		<div class="carousel-item active">
-		  <img src="img/portfolio/thumbnails/4.jpg" alt="">
-		  <div class="carousel-caption">
-		  	<h4>New World</h4>	
-			<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
-			<i class="fa fa-location-arrow"> 76 Lê Lai, Q.1, TPHCM</i><br>
-		  <a href="stay.html">
-		  	<h6>Xem chi tiết...</h6>
-		  </a>
-		  </div>
-		</div>
-		<div class="carousel-item">
-		  <img src="img/portfolio/thumbnails/4.jpg" alt="">
-		  <div class="carousel-caption">
-			<h4>New World</h4>	
-			<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
-			<i class="fa fa-location-arrow"> 76 Lê Lai, Q.1, TPHCM</i><br>
-		  <a href="stay.html">
-		  	<h6>Xem chi tiết...</h6>
-		  </a>
-		  </div>
-		</div>
-		<div class="carousel-item">
-		  <img src="img/portfolio/thumbnails/4.jpg" alt="">
-		  <div class="carousel-caption">
-			<h4>New World</h4>	
-			<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
-			<i class="fa fa-location-arrow"> 76 Lê Lai, Q.1, TPHCM</i><br>
-		  <a href="stay.html">
-		  	<h6>Xem chi tiết...</h6>
-		  </a>
-		  </div>
-		</div>
-	  </div>
-
-	  <!-- Left and right controls -->
-	  <a class="carousel-control-prev" href="#eat" data-slide="prev">
-    	<span class="carousel-control-prev-icon"></span>
-  	  </a>
-  	  <a class="carousel-control-next" href="#eat" data-slide="next">
-    	<span class="carousel-control-next-icon"></span>
-	  </a> 
-  	  <hr></div>
-   
-   <!-- Sài Gòn -->
-    <a class="btn btn-primary btn-xl text-white" style="margin: 20px" id="saigon">TP Hồ Chí Minh</a>
-    <a href="area.html"><h6 class="section-heading text-primary" style="color: black; float: right; margin: 45px 20px 0 0 ">Xem thêm...</h6></a>
-	<div id="view" class="carousel slide" data-ride="carousel" data-interval="3500">
-	   <ul class="carousel-indicators">
-		<li data-target="#view" data-slide-to="0" class="active"></li>
-		<li data-target="#view" data-slide-to="1"></li>
-		<li data-target="#view" data-slide-to="2"></li>
-	  </ul>
-
-	  <!-- The slideshow -->
-	  <div class="carousel-inner">
-		<div class="carousel-item active">
-		  <img src="img/portfolio/thumbnails/4.jpg" alt="">
-		  <div class="carousel-caption">
-			<h4>New World</h4>	
-			<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
-			<i class="fa fa-location-arrow"> 76 Lê Lai, Q.1, TPHCM</i><br>
-		  <a href="stay.html">
-		  	<h6>Xem chi tiết...</h6>
-		  </a>
-		  </div>
-		</div>
-		<div class="carousel-item">
-		  <img src="img/portfolio/thumbnails/4.jpg" alt="">
-		  <div class="carousel-caption">
-			<h4>New World</h4>	
-			<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
-			<i class="fa fa-location-arrow"> 76 Lê Lai, Q.1, TPHCM</i><br>
-		  <a href="stay.html">
-		  	<h6>Xem chi tiết...</h6>
-		  </a>
-		  </div>
-		</div>
-		<div class="carousel-item">
-		  <img src="img/portfolio/thumbnails/4.jpg" alt="">
-		  <div class="carousel-caption">
-			<h4>New World</h4>	
-			<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
-			<i class="fa fa-location-arrow"> 76 Lê Lai, Q.1, TPHCM</i><br>
-		  <a href="stay.html">
-		  	<h6>Xem chi tiết...</h6>
-		  </a>
-		  </div>
-		</div>
-	  </div>
-
-	  <!-- Left and right controls -->
-	  <a class="carousel-control-prev" href="#view" data-slide="prev">
-    	<span class="carousel-control-prev-icon"></span>
-  	  </a>
-  	  <a class="carousel-control-next" href="#view" data-slide="next">
-    	<span class="carousel-control-next-icon"></span>
-  	  </a>
-	</div>
 	
 	<footer>
 		<a class="btn btn-dark btn-xl text-white" style="margin: 20px 20px 20px 10px" id="div-buy">Liên hệ đăng ký địa điểm</a>

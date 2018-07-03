@@ -36,19 +36,19 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link">Đăng nhập</a> 
+              <a href="group.html" class="nav-link">Nhóm</a>
             </li>
 			<li class="nav-item">
-              <a class="nav-link js-scroll-trigger">Thông báo</a>
+              <a href="plan-home.html" class="nav-link">Lịch trình</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="area.html">Hà Nội</a>
+			<li class="nav-item">
+              <a href="notification.html" class="nav-link">Thông báo</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="area.html">Đà Nẵng</a>
+			<li class="nav-item">
+              <a href="profile.html" class="nav-link">Cá nhân</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="area.html">TP Hồ Chí Minh</a>
+			 <li class="nav-item">
+              <a href="login.html" class="nav-link">Đăng nhập</a> 
             </li>
           </ul>
         </div>
@@ -70,47 +70,44 @@
    	
 	<!-- Result item -->
 	<div class="result_item_box" style="height: 640px; padding-top: 20px; text-align: center">
-	<div class="user-plan">
-		<a href="#" style="color: white"><img src="img/user.png" alt="Person">
-		Nguyễn Văn A
+	<div class="user-plan" v-if="!loading">
+		<a href="#" style="color: white"><img :src="currentUser.photoURL" alt="Person" style="border-radius: 50%;padding-left: 0 !important;">
+		{{currentUser.displayName}}
 		</a>
 	</div>
 		<!-- Cá nhân -->
 		<h6 style="padding: 30px 0 0 20px; text-align: left">Lịch trình gần đây của bạn</h6>
-		<a href="#"><div class="container" style="height: 200px; text-align: center; background-color: white; border-radius: 40px">
+		<a href="#">
+			<div class="container" style="height: 200px; text-align: center; background-color: #e6e6e6; border-radius: 40px"
+			v-if="!loading">
 		<h5 style="padding-top: 10px; text-align: center"></h5>
-			<div class="user-plan">
-			<a href="#" style="color: white">Lịch trình A</a>
-				<span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
+
+			<div class="d-flex flex-column">
+				<div class="user-plan" v-for="plan in plans">
+					<a href="my-plan.html" style="color: white; padding-top: 10px">{{plan.name}}</a>
+					<span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
+				</div>
 			</div>
-			<br>
-			<div class="user-plan">
-			<a href="#" style="color: white; padding-top: 10px">Lịch trình B</a>
-				<span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
-			</div>
-			<h6 id="myLink" style="padding-top: 20px; color: black">Xem thêm...</h6>
+
+			<h6 id="myLink" style="padding: 10px 0; color: black">Xem thêm...</h6>
 			<div id="myModal" class="modal">
 				<!-- Modal content -->
 				<div class="modal-content">
 					<span class="close">&times;</span>
 					<h6 style="padding: 30px 0 0 20px; text-align: center">Lịch trình của bạn</h6>
-					<a href="#">
+					<a href="my-plan.html">
 					<div class="container" style="text-align: center; background-color: white; border-radius: 40px">
 						<h5 style="padding-top: 10px; text-align: center"></h5>
 						<div class="user-plan">
-							<a href="#" style="color: white">Lịch trình A</a>
+							<a href="my-plan.html" style="color: white">Lịch trình A</a>
 							<span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
 						</div>
 						<div class="user-plan">
-							<a href="#" style="color: white; padding-top: 10px">Lịch trình B</a>
+							<a href="my-plan.html" style="color: white; padding-top: 10px">Lịch trình B</a>
 							<span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
 						</div>
 						<div class="user-plan">
-							<a href="#" style="color: white; padding-top: 10px">Lịch trình C</a>
-							<span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
-						</div>
-						<div class="user-plan">
-							<a href="#" style="color: white; padding-top: 10px">Lịch trình D</a>
+							<a href="my-plan.html" style="color: white; padding-top: 10px">Lịch trình C</a>
 							<span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
 						</div>
 					</div>
@@ -122,40 +119,44 @@
 		
 		<!-- Nhóm -->
 		<h6 style="padding: 40px 0 0 20px; text-align: left">Lịch trình nhóm của bạn</h6>
-		<div class="container" style="height: 200px; text-align: center; background-color: white; border-radius: 40px">
+		<div class="container" style="height: 200px; text-align: center; background-color: #e6e6e6; border-radius: 40px">
 		<h5 style="padding-top: 10px; text-align: center"></h5>
 			<div class="user-plan">
-			<a href="#" style="color: white; padding-top: 37px">Lịch trình A</a>
+			<a href="group-plan-detail.html" style="color: white; padding-top: 37px">Lịch trình A</a>
 				<span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
 			</div>
 			<br>
 			<div class="user-plan">
-			<a href="#" style="color: white">Lịch trình B</a>
+			<a href="group-plan-detail.html" style="color: white">Lịch trình B</a>
 				<span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
 			</div>
-			<h6 id="myNextLink" style="padding-top: 20px; color: black">Xem thêm...</h6>
+			<h6 id="myNextLink" style="padding: 10px 0; color: black">Xem thêm...</h6>
 			<div id="myNextModal" class="modal">
 				<!-- Modal content -->
 				<div class="modal-content">
 					<span class="close">&times;</span>
 					<h6 style="padding: 30px 0 0 20px; text-align: center">Lịch trình nhóm của bạn</h6>
-					<a href="#">
+					<a href="group-plan.html">
 						<div class="container" style="text-align: center; background-color: white; border-radius: 40px">
 							<h5 style="padding-top: 10px; text-align: center"></h5>
-							<div class="user-plan">
-								<a href="#" style="color: white">Lịch trình A</a>
+							<div class="group-plan">
+								<a href="group-plan-detail.html" style="color: white">Lịch trình A</a><br>
+								<a href="group-plan.html" style="color: white">(Nhóm A)</a>
 								<span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
 							</div>
-							<div class="user-plan">
-								<a href="#" style="color: white; padding-top: 10px">Lịch trình B</a>
+							<div class="group-plan">
+								<a href="group-plan-detail.html" style="color: white; padding-top: 10px">Lịch trình B</a><br>
+								<a href="group-plan.html" style="color: white">(Nhóm B)</a>
+								<span class="closebtn" onclick="myFuncton()" onclick="this.parentElement.style.display='none'">&times;</span>
+							</div>
+							<div class="group-plan">
+								<a href="group-plan-detail.html" style="color: white; padding-top: 10px">Lịch trình C</a><br>
+								<a href="group-plan.html" style="color: white">(Nhóm C)</a>
 								<span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
 							</div>
-							<div class="user-plan">
-								<a href="#" style="color: white; padding-top: 10px">Lịch trình C</a>
-								<span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
-							</div>
-							<div class="user-plan">
-								<a href="#" style="color: white; padding-top: 10px">Lịch trình D</a>
+							<div class="group-plan">
+								<a href="group-plan-detail.html" style="color: white; padding-top: 10px">Lịch trình D</a><br>
+								<a href="group-plan.html" style="color: white">(Nhóm D)</a>
 								<span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
 							</div>
 						</div>
@@ -164,9 +165,9 @@
 			</div>
   		</div>
 	</div>
-	
-	
-	<button id="fixedbutton"><a href="#"><i class="fa fa-plus" style="color: white"></i></a></button>
+
+
+	<a href="add-plan.html"><button id="fixedbutton"><i class="fa fa-plus" style="color: white"></i></button></a>
   <!-- End Result item -->
    
 	<script>
@@ -199,32 +200,36 @@
 	
 	<script>
 	// Get the modal
-	var modal = document.getElementById('myNextModal');
+	var modal2 = document.getElementById('myNextModal');
 
 	// Get the button that opens the modal
-	var btn = document.getElementById("myNextLink");
+	var btn2 = document.getElementById("myNextLink");
 
 	// Get the <span> element that closes the modal
-	var span = document.getElementsByClassName("close")[1];
+	var span2 = document.getElementsByClassName("close")[1];
 
 	// When the user clicks the button, open the modal
-	btn.onclick = function() {
-		modal.style.display = "block";
+	btn2.onclick = function() {
+		modal2.style.display = "block";
 	}
 
 	// When the user clicks on <span> (x), close the modal
-	span.onclick = function() {
-		modal.style.display = "none";
+	span2.onclick = function() {
+		modal2.style.display = "none";
 	}
 
 	// When the user clicks anywhere outside of the modal, close it
 	window.onclick = function(event) {
-		if (event.target == modal) {
-			modal.style.display = "none";
+		if (event.target == modal2) {
+			modal2.style.display = "none";
 		}
 	}
 	</script>
-	
+	<script>
+	function myFunction() {
+    confirm("Xác nhận xóa?");
+	}
+	</script>
 	<footer>
 		<a class="btn btn-dark btn-xl text-white" style="margin: 20px 20px 20px 10px" id="div-buy">liên hệ đăng ký địa điểm</a>
 		<div class="footer">
@@ -244,5 +249,15 @@
 
     <!-- Custom scripts for this template -->
     <script src="js/creative.min.js"></script>
-	</body>
+  	<!---->
+	<script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vuex/3.0.1/vuex.js"></script>
+	<!--Firebase config-->
+	<script src='./tlp/firebaseConfig.js'></script>
+	<!--Store-->
+	<script src='./tlp/vuexStore.js'></script>
+	<!--Page logic-->
+  	<script src="./tlp/src/plan-home.js"></script>
+  </body>
 </html>

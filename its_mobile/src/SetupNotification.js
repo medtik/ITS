@@ -25,8 +25,8 @@ async function registerForPushNotificationsAsync() {
     return await Notifications.getExpoPushTokenAsync();
 }
 
-async function handleNotifications(notifications) {
-    let token = registerForPushNotificationsAsync();
+async function handleNotifications(notification) {
+    let token = await registerForPushNotificationsAsync();
 
     const notificationBody = {
         to: token,
@@ -34,22 +34,23 @@ async function handleNotifications(notifications) {
         body: "body body boy"
     };
 
-    fetch("https://exp.host/--/api/v2/push/send", {
+    notification.to = token;
+
+    console.log(notification);
+    return fetch("https://exp.host/--/api/v2/push/send", {
         method: 'POST',
         headers: new Headers({
-            'Accept': 'application/json', // <-- Specifying the Content-Type
-            'Accept-Encoding': 'gzip, deflate', // <-- Specifying the Content-Type
-            'Content-Type': 'application/json', // <-- Specifying the Content-Type
+            'Accept': 'application/json',
+            'Accept-Encoding': 'gzip, deflate',
+            'Content-Type': 'application/json',
         }),
-        body: JSON.stringify(notificationBody) // <-- Post parameters
+        body: JSON.stringify(notification)
     })
         .then((response) => response.text())
-        .then((responseText) => {
-            alert(responseText);
-        })
-        .catch((error) => {
-            console.error(error);
-        });
+
 }
 
-export default handleNotifications
+export default {
+    handleNotifications,
+    registerForPushNotificationsAsync
+}

@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 	<link rel="shortcut icon" href="img/logo.ico" type="image/x-icon">
-    <title>Chỉnh sửa thông tin</title>
+    <title>Thêm nhóm</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -35,7 +35,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
+           <li class="nav-item">
               <a href="group.html" class="nav-link">Nhóm</a>
             </li>
 			<li class="nav-item">
@@ -58,12 +58,10 @@
       <div class="container my-auto">
         <div class="row">
           <div class="col-lg-12 mx-auto">
-			<img src="img/user.png" class="user-img">
+			<img src="img/team.png" style="height: 90px">
 			<br>
-			<a href="change-image.html" style="color: black"><u class="myLink" data-toggle="modal" data-target="#myModal">Thay đổi ảnh đại diện</u></a>
-			
             <h4 class="text-uppercase" style="font-size: 25px">
-              <strong>Chỉnh sửa thông tin</strong>
+              <strong>Thêm nhóm</strong>
             </h4>
             <hr>
           </div>
@@ -73,50 +71,17 @@
    		
 	<!-- Result item -->
 	<div class="result_item_box">
-		<div class="container" style="height: 570px; text-align: center">
-			<h5 style="padding-top: 50px"></h5>
+		<div class="container" style="height: 200px; text-align: center">
+			<h5 style="padding-top: 20px"></h5>
 			<div class="col-lg-8 mx-auto search-box-2">
-				<input class="search-text" type="text" name="" placeholder="Tài khoản.." autocomplete="on" required>
-          	</div>
-			<br>
-			<h5 style="padding-top: 40px"></h5>
-			<div class="col-lg-8 mx-auto search-box-2">
-				<input class="search-text" type="password" name="" placeholder="Mật khẩu.." autocomplete="on" required>
-          	</div>
-			<br>
-			<h5 style="padding-top: 40px"></h5>
-			<div class="col-lg-8 mx-auto search-box-2">
-				<input class="search-text" type="password" name="" placeholder="Nhập lại mật khẩu.." autocomplete="on" required>
-          	</div>
-			<br>
-			<h5 style="padding-top: 40px"></h5>
-			<div class="col-lg-8 mx-auto search-box-2">
-				<input class="search-text" type="text" name="" placeholder="Email.." autocomplete="on" required>
-          	</div>
-			<br>
-			<h5 style="padding-top: 40px"></h5>
-			<div class="col-lg-8 mx-auto search-box-2">
-				<form style="font-size: 16px; padding-left: 15px; font-style: normal; opacity: 0.7">
-				Ngày sinh:
-				<input type="date" name="bday">
-				</form>
-          	</div>
-			<br>
-			<h5 style="padding-top: 40px"></h5>
-			<div class="col-lg-8 mx-auto search-box-2">
-				<input class="search-text" type="text" name="" placeholder="Địa chỉ.." autocomplete="on" required>
+				<input class="search-text" type="text" name="" placeholder="Tên nhóm.." autocomplete="on" required>
           	</div>
 			<br>
 			<br>
-			<table style="margin: auto">
-				<td>
-					<button class="btn btn-primary" style="margin-top: 20px; width: 120px">Xác nhận</button>
-				<td>
-				<td>
-					<a href="index.html"><button class="btn" style="margin-top: 20px; background-color: red; color: white; width: 120px">Thoát</button></a>
-  			</div>
-				</td>
-			</table>
+			<button class="btn btn-primary" style="margin-top: 20px; width: 150px">Xác nhận</button>
+			<br>
+			<a href="plan-home.html"><button class="btn" onclick="myFunction()" style="margin-top: 20px; background-color: red; color: white; width: 150px">Thoát</button></a>
+  			
 			<br>
   		</div>
 	</div>
@@ -130,7 +95,11 @@
 		</div>
 	</footer>
 	
-	
+	<script>
+	function myFunction() {
+    confirm("Xác nhận thoát?");
+	}
+	</script>
 	
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>

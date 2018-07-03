@@ -1,6 +1,6 @@
 import React from "react" ;
 import {View, WebView, StyleSheet, Dimensions, BackHandler} from "react-native" ;
-import {Notifications} from 'expo';
+import notification from './SetupNotification'
 
 const ref = {
     webview: "WEBVIEW_REF"
@@ -11,6 +11,7 @@ export default class ITSWeb extends React.Component {
 
         this.state = {
             uri: 'http://its8.gear.host/',
+            // uri: 'http://192.168.150.80:80',
             canGoBack: false
         };
 
@@ -52,25 +53,8 @@ export default class ITSWeb extends React.Component {
     }
 
     onMessage(data) {
-        // console.debug('onMessage', data);
-        //         // let notification = {
-        //         //     title: "the title for notification 1",
-        //         //     body: "text for body, and anoter one in 7 secs"
-        //         // };
-        //         // let notification2 = {
-        //         //     title: "the title for noti 2",
-        //         //     body: "scheduled notification"
-        //         // };
-        //         //
-        //         // let schedule = {
-        //         //     time: (new Date()).getTime() + 7000
-        //         // };
-        //         // Notifications.presentLocalNotificationAsync(notification);
-        //         // Notifications.scheduleLocalNotificationAsync(notification2, schedule);
         let notifications = JSON.parse(data);
-        for(let notification of notifications){
-            Notifications.presentLocalNotificationAsync(notification);
-        }
+        notification.handleNotifications(notifications[0])
     }
 
     render() {
@@ -94,6 +78,7 @@ export default class ITSWeb extends React.Component {
                     onMessage={(event) => this.onMessage(event.nativeEvent.data)}
                     source={{uri: this.state.uri}}
                     style={style.webView}
+                    userAgent="its8_demo"
                 />
             </View>
         );

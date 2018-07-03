@@ -36,19 +36,19 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link">Đăng nhập</a> 
+              <a href="group.html" class="nav-link">Nhóm</a>
             </li>
 			<li class="nav-item">
-              <a class="nav-link js-scroll-trigger">Thông báo</a>
+              <a href="plan-home.html" class="nav-link">Lịch trình</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="area.html">Hà Nội</a>
+			<li class="nav-item">
+              <a href="notification.html" class="nav-link">Thông báo</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="area.html">Đà Nẵng</a>
+			<li class="nav-item">
+              <a href="profile.html" class="nav-link">Cá nhân</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="area.html">TP Hồ Chí Minh</a>
+			 <li class="nav-item">
+              <a href="login.html" class="nav-link">Đăng nhập</a> 
             </li>
           </ul>
         </div>
@@ -74,14 +74,14 @@
 		<div class="container" style="height: 320px; text-align: center">
 			<h5 style="padding-top: 20px"></h5>
 			<div class="col-lg-8 mx-auto search-box-2">
-				<input class="search-text" type="text" name="" placeholder="Tên Lịch trình.." autocomplete="on" required>
+				<input class="search-text" type="text" name="" placeholder="Tên Lịch trình.." autocomplete="on" required v-model="nameInput">
           	</div>
 			<br>
 			<h5 style="padding-top: 40px"></h5>
 			<div class="col-lg-8 mx-auto search-box-2">
 				<form style="font-size: 16px; padding-left: 5px; font-style: normal; opacity: 0.7">
 				Bắt đầu:
-				<input type="date" name="bday">
+				<input type="date" name="bday" v-model="startDateInput">
 				</form>
           	</div>
 			<br>
@@ -89,17 +89,17 @@
 			<div class="col-lg-8 mx-auto search-box-2">
 				<form style="font-size: 16px; padding-left: 5px; font-style: normal; opacity: 0.7">
 				Kết thúc:
-				<input type="date" name="bday">
+				<input type="date" name="bday" v-model="endDateInput">
 				</form>
           	</div>
 			<br>
 			<br>
-			<table style="margin: auto">
+			<table style="width: 100%">
 				<td>
-					<button class="btn btn-primary" style="margin-top: 20px; width: 120px">Xác nhận</button>
+					<button class="btn btn-primary" style="margin-top: 20px; width: 150px" v-on:click="createPlan">Xác nhận</button>
 				<td>
 				<td>
-					<button class="btn" style="margin-top: 20px; background-color: red; color: white; width: 120px">Thoát</button>
+					<button class="btn" onclick="myFunction()" style="margin-top: 20px; background-color: red; color: white; width: 150px">Thoát</button>
   			</div>
 				</td>
 			</table>
@@ -116,7 +116,11 @@
 		</div>
 	</footer>
 	
-	
+	<script>
+	function myFunction() {
+        confirm("Xác nhận thoát?");
+	}
+	</script>
 	
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -129,5 +133,17 @@
 
     <!-- Custom scripts for this template -->
     <script src="js/creative.min.js"></script>
-	</body>
+    <!---->
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vuex/3.0.1/vuex.js"></script>
+    <!--Firebase config-->
+    <script src='./tlp/firebaseConfig.js'></script>
+    <!--Store-->
+    <script src='./tlp/vuexStore.js'></script>
+    <!--Page logic-->
+    <script src='./tlp/src/add-plan.js'></script>
+
+
+  </body>
 </html>
