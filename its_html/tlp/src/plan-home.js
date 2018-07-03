@@ -3,7 +3,7 @@ new Vue({
     el: "div.result_item_box",
     data() {
         return {
-            plans: []
+            plans: undefined
         }
     },
     computed: {
@@ -12,7 +12,7 @@ new Vue({
         ]),
         loading() {
             console.debug('loading', !this.currentUser, !this.plans);
-            return !this.currentUser || this.plans.length === 0
+            return !this.currentUser || !this.plans
         }
     },
     created() {
@@ -22,10 +22,16 @@ new Vue({
         ...Vuex.mapActions([
             'fetchPlansOfUser'
         ]),
+        deletePlan(id) {
+            this.$store.dispatch('deletePlan', {id});
+        },
         handleCommit(mutation, state) {
             if (mutation.type === 'setUser') {
                 this.fetchPlansOfUser()
                     .then((querySnapshot) => {
+                            if (!this.plans) {
+                                this.plans = [];
+                            }
                             querySnapshot.forEach((doc) => {
                                 this.plans.push({
                                     id: doc.id,
