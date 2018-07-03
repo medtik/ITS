@@ -76,22 +76,36 @@
 		<div class="container" style="height: 450px; text-align: center">
 			<h5 style="padding-top: 50px"></h5>
 			<div class="col-lg-8 mx-auto search-box-2">
-				<h6 style="padding:">Tài khoản: Nguyễn Văn A</h6>
+				<h6 style="padding:">
+                    Tài khoản:
+                    <span v-if="currentUser">{{currentUser.displayName}}</span>
+                    <span v-else>...</span>
+                </h6>
 			</div>
 			<br>
 			<h5 style="padding-top: 40px"></h5>
 			<div class="col-lg-8 mx-auto search-box-2">
-				<h6 style="padding:">Email: nguyenvana@gmail.com</h6>
+                <h6 style="padding:">
+                    Email:
+                    <span v-if="currentUser">{{currentUser.email}}</span>
+                    <span v-else>...</span>
+                </h6>
           	</div>
 			<br>
 			<h5 style="padding-top: 40px"></h5>
 			<div class="col-lg-8 mx-auto search-box-2">
-				<h6 style="padding:">Ngày sinh: 31/2/1990</h6>
+				<h6 style="padding:">Ngày sinh:
+                    <span v-if="currentUser && currentUser.birthdate">{{currentUser.birthdate}}</span>
+                    <span v-else>...</span>
+                </h6>
           	</div>
 			<br>
 			<h5 style="padding-top: 40px"></h5>
 			<div class="col-lg-8 mx-auto search-box-2">
-				<h6 style="padding:">Địa chỉ: Khám Chí Hòa</h6>
+				<h6 style="padding:">Địa chỉ:
+                    <span v-if="currentUser && currentUser.address">{{currentUser.address}}</span>
+                    <span v-else>...</span>
+                </h6>
           	</div>
 			<br>
 			<br>

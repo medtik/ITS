@@ -15,6 +15,9 @@ const store = new Vuex.Store({
             return url.substr(
                 url.lastIndexOf('/') + 1,
             )
+        },
+        currentUser(state){
+            return state.user
         }
     },
     actions: {
