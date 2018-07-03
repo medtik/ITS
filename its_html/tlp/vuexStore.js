@@ -16,7 +16,7 @@ const store = new Vuex.Store({
                 url.lastIndexOf('/') + 1,
             )
         },
-        currentUser(state){
+        currentUser(state) {
             return state.user
         }
     },
@@ -38,6 +38,28 @@ const store = new Vuex.Store({
                     .then(resolve)
                     .catch(reject);
             })
+        },
+        fetchPlansOfUser(context) {
+            return firestore
+                .collection("plan")
+                .where('user', '==', context.getters.currentUser.uid)
+                .get();
+        },
+        createPlan(context, payload) {
+            firestore.collection("plan").add({
+                name: payload.name,
+                startDate: payload.startDate,
+                endDate: payload.endDate,
+                user: context.getters.currentUser.uid
+            })
+                .then(() => {
+                    console.log("Document successfully written!");
+                })
+                .catch((error) => {
+                    console.error("Error writing document: ", error);
+                });
+
+
         }
     }
 });

@@ -70,24 +70,25 @@
    	
 	<!-- Result item -->
 	<div class="result_item_box" style="height: 640px; padding-top: 20px; text-align: center">
-	<div class="user-plan">
-		<a href="#" style="color: white"><img src="img/user.png" alt="Person">
-		Nguyễn Văn A
+	<div class="user-plan" v-if="!loading">
+		<a href="#" style="color: white"><img :src="currentUser.photoURL" alt="Person" style="border-radius: 50%;padding-left: 0 !important;">
+		{{currentUser.displayName}}
 		</a>
 	</div>
 		<!-- Cá nhân -->
 		<h6 style="padding: 30px 0 0 20px; text-align: left">Lịch trình gần đây của bạn</h6>
-		<a href="#"><div class="container" style="height: 200px; text-align: center; background-color: #e6e6e6; border-radius: 40px">
+		<a href="#">
+			<div class="container" style="height: 200px; text-align: center; background-color: #e6e6e6; border-radius: 40px"
+			v-if="!loading">
 		<h5 style="padding-top: 10px; text-align: center"></h5>
-			<div class="user-plan">
-			<a href="my-plan.html" style="color: white">Lịch trình A</a>
-				<span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
+
+			<div class="d-flex flex-column">
+				<div class="user-plan" v-for="plan in plans">
+					<a href="my-plan.html" style="color: white; padding-top: 10px">{{plan.name}}</a>
+					<span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
+				</div>
 			</div>
-			<br>
-			<div class="user-plan">
-			<a href="my-plan.html" style="color: white; padding-top: 10px">Lịch trình B</a>
-				<span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
-			</div>
+
 			<h6 id="myLink" style="padding: 10px 0; color: black">Xem thêm...</h6>
 			<div id="myModal" class="modal">
 				<!-- Modal content -->
@@ -164,9 +165,9 @@
 			</div>
   		</div>
 	</div>
-	
-	
-	<button id="fixedbutton"><a href="add-plan.html"><i class="fa fa-plus" style="color: white"></i></a></button>
+
+
+	<a href="add-plan.html"><button id="fixedbutton"><i class="fa fa-plus" style="color: white"></i></button></a>
   <!-- End Result item -->
    
 	<script>
@@ -248,5 +249,15 @@
 
     <!-- Custom scripts for this template -->
     <script src="js/creative.min.js"></script>
-	</body>
+  	<!---->
+	<script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vuex/3.0.1/vuex.js"></script>
+	<!--Firebase config-->
+	<script src='./tlp/firebaseConfig.js'></script>
+	<!--Store-->
+	<script src='./tlp/vuexStore.js'></script>
+	<!--Page logic-->
+  	<script src="./tlp/src/plan-home.js"></script>
+  </body>
 </html>
