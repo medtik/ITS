@@ -13,14 +13,10 @@ new Vue({
     }
 });
 
-
-
-firebase.auth().onAuthStateChanged(function (user) {
-    store.commit('setUser', {
-        user,
-    });
-
-    if(!user){
-        window.location = 'login.html?redirect=profile.html'
+store.subscribe((mutation, state) => {
+    if(mutation.type === 'setUser'){
+        if(!state.user){
+            window.location = 'login.html?redirect=profile.html'
+        }
     }
 });

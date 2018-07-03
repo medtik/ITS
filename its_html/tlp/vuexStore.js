@@ -41,3 +41,9 @@ const store = new Vuex.Store({
         }
     }
 });
+
+firebase.auth().onAuthStateChanged(function (user) {
+    store.commit('setUser', {
+        user,
+    });
+});
