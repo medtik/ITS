@@ -10,6 +10,7 @@ new Vue({
     },
     methods: {
         createPlan() {
+            //Validate plan inputs
             let payload = {
                 name: this.nameInput,
                 startDate: this.startDateInput,

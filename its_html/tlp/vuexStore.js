@@ -58,7 +58,17 @@ const store = new Vuex.Store({
                 .catch((error) => {
                     console.error("Error writing document: ", error);
                 });
-
+        },
+        deletePlan(context, payload) {
+            firestore.collection("plan")
+                .doc(payload.id)
+                .delete()
+                .then(function () {
+                    console.log("Document successfully deleted!");
+                })
+                .catch(function (error) {
+                    console.error("Error removing document: ", error);
+                });
 
         }
     }
