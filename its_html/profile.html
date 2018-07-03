@@ -22,7 +22,7 @@
     <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
-    
+
   </head>
 
   <body id="page-top" style="height: 450px">
@@ -48,7 +48,7 @@
               <a href="profile.html" class="nav-link">Cá nhân</a>
             </li>
 			 <li class="nav-item">
-              <a href="login.html" class="nav-link">Đăng nhập</a> 
+              <a href="login.html" class="nav-link">Đăng nhập</a>
             </li>
           </ul>
         </div>
@@ -61,7 +61,7 @@
 			<img src="img/user.png" class="user-img">
 			<br>
 			<a href="update-info.html" style="color: black"><u class="myLink" data-toggle="modal" data-target="#myModal">Cập nhật thông tin</u></a>
-			
+
             <h4 class="text-uppercase" style="font-size: 25px">
               <strong>Cá nhân</strong>
             </h4>
@@ -70,7 +70,7 @@
         </div>
       </div>
     </header>
-   		
+
 	<!-- Result item -->
 	<div class="result_item_box">
 		<div class="container" style="height: 450px; text-align: center">
@@ -96,11 +96,11 @@
 			<br>
 			<br>
 			<a href="my-plan.html"><button class="btn btn-primary" style="margin-top: 20px; width: 80%">Lịch trình cá nhân</button></a>
-			<a href="my-plan.html"><button class="btn text-white" onclick="myFunction()" style="margin-top: 20px; width: 150px; background-color: red">Đăng xuất	</button></a>
+			<a ><button class="btn text-white" v-on:click="signout" style="margin-top: 20px; width: 150px; background-color: red">Đăng xuất	</button></a>
   		</div>
 	</div>
   <!-- End Result item -->
-   
+
 	<footer>
 		<a class="btn btn-dark btn-xl text-white" style="margin: 20px 20px 20px 10px" id="div-buy">Liên hệ đăng ký địa điểm</a>
 		<div class="footer">
@@ -108,13 +108,13 @@
 			<h6>Số điện thoại: </h6>
 		</div>
 	</footer>
-	
+
 	<script>
 	function myFunction() {
     confirm("Xác nhận đăng xuất?");
 	}
 	</script>
-	
+
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -126,5 +126,16 @@
 
     <!-- Custom scripts for this template -->
     <script src="js/creative.min.js"></script>
-	</body>
+  <!---->
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vuex/3.0.1/vuex.js"></script>
+    <!--Firebase config-->
+    <script src='./tlp/firebaseConfig.js'></script>
+    <!--Store-->
+    <script src='./tlp/vuexStore.js'></script>
+    <!--Page logic-->
+    <script src="./tlp/src/profile.js"></script>
+
+  </body>
 </html>

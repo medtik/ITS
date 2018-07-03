@@ -6,7 +6,15 @@ const store = new Vuex.Store({
     },
     mutations: {
         setUser(state, payload) {
-            this.state.user = payload.user;
+            state.user = payload.user;
+        }
+    },
+    getters: {
+        currentFile() {
+            const url = window.location + '';
+            return url.substr(
+                url.lastIndexOf('/') + 1,
+            )
         }
     },
     actions: {
@@ -20,6 +28,7 @@ const store = new Vuex.Store({
         },
 
         signout() {
+            console.log('signout');
             return new Promise((resolve, reject) => {
                 firebase.auth()
                     .signOut()
@@ -29,11 +38,3 @@ const store = new Vuex.Store({
         }
     }
 });
-
-firebase.auth().onAuthStateChanged(function (user) {
-    store.commit('setUser',{
-        user
-    });
-});
-
-
