@@ -1,0 +1,1 @@
+INSERT INTO location (name, des) VALUES ('bánh ướt ban mê', 'nơi bảo thích , chỗ này');

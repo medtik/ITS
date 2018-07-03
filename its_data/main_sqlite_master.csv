@@ -1,0 +1,5 @@
+table,location,location,2,"CREATE TABLE location
+(
+    name text,
+    des text
+)"

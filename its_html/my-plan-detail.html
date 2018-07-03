@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	<link rel="shortcut icon" href="img/logo.ico" type="image/x-icon">
+    <title>Lịch trình của tôi</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+    <!-- Plugin CSS -->
+    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet">
+	<style>
+	.navbar-brand{
+		margin-left: 0px;
+	}
+	* {
+	  margin: 0px;
+	  padding: 0px;
+	  text-align: center;  
+	}
+	.cont_principal {
+	  position: absolute;
+	  width: 100%;
+	  height: 100%;
+	  overflow: auto;
+	  background: #faf9f7;
+	  margin-left: 1px;
+	}
+
+	.cont_centrar {
+	  position: relative;
+	 }
+
+	.cont_todo_list_top {
+	  position: relative;
+	  float: left;
+	  width: 100%;
+	  height: 60px;
+	  margin-top: 20px;
+	}
+
+	.cont_titulo_cont > h3 {
+	  text-align: left;
+	  margin-left: 20px;
+	  font-size: 18px;
+	  color: #fff;
+	  font-weight: 400;
+	  margin-top: 23px;
+	} 
+	.cont_titulo_cont {
+	  position: relative;
+	  float: left;
+	  width: 300px;
+	  height: 60px;
+	  background: rgb(42,72,107);
+	}
+
+
+	.cont_add_titulo_cont {
+	position: relative;
+	  float: left;
+	  width: 70px;
+	  height: 60px;
+	  background: rgb(42,72,107);
+
+	}
+
+	.cont_add_titulo_cont > a {
+	  display: block;
+	  color: #fff;
+	  font-size: 25px;
+	  height: 5px;
+	  margin-top: 14px;
+	}
+	.cont_crear_new {  
+	position: relative;
+	  float: left;
+	  width: 100%;
+	transition: all 0.5s;
+	transform: scale(0,0);
+	height: 0px;
+	margin: 0px;
+	 
+	}
+
+	.cont_crear_new_active{
+	transform: scale(1);
+	height: 0px;
+	  margin: 10px 0px;
+	height: 190px;  
+	}
+	.cont_add_titulo_cont > a > i{
+	  transition: all 0.2s;
+	transition: all 0.2s;
+	}
+	.cont_add_titulo_cont_active > a > i{
+	transform: rotate(130deg);
+	}
+
+	.table th {
+	  font-size: 14px;
+	  font-family: 'Open Sans', sans-serif;
+	color: #607D8B;
+	}
+
+	.table td {
+	  width: 33.33%;
+	}
+	.table td select {
+	  width: 100%;
+	  padding: 10px 0px;
+	  background-color: #fff;
+	text-align: left;
+	}
+
+	.table td input {
+	  width: 93%;
+	  padding: 10px 2%;
+	  background-color: #fff;
+	border: none;
+	text-align: left;
+	outline:none;
+	}
+
+	.btn_add_fin {
+	  position: relative;
+	  padding: 10px 20px;
+	  background-color: #4C75A1;
+	  border: none;
+	  margin: 10px auto;  
+	color: #fff;
+	cursor: pointer;
+	}
+
+	.titl_description {
+	 padding-top: 10px;
+	text-align: left;
+	margin-left: 6%;
+	position: relative;
+	float: left;
+	}
+
+	.display_none_add {
+	  
+	}
+
+	.cont_princ_lists {
+	  position: relative;
+	  float: left;
+	  width: 100%;
+	  margin-top: 15px;
+	}
+
+	.cont_princ_lists > ul > li  {
+	  position: relative;
+	  float: left;
+	  width: 100%; 
+	  height: 75px;
+	  left: 0;
+	  background-color: #F1F1EF;
+	list-style: none;
+	z-index: 2;
+	transition: all 0.5s;
+	}
+
+	.col_md_1_list {
+	  width: 125px;
+	  position: relative;
+	  float: left;
+	  height: 20px;
+	  top:50%;
+	  margin-top: -10px;
+	}
+	.col_md_1_list > p {
+	  font-family: 'Open Sans', sans-serif;
+	  font-size: 14px;
+	  font-weight: 700;
+	}
+
+	.col_md_2_list {
+	  width: 250px;
+	  position: relative;
+	  float: left;
+	  margin-top: 10px;
+	  text-align: center;
+	}
+	.col_md_2_list  > h4 {
+	  text-align: left;
+	  font-family: 'Open Sans', sans-serif;
+	  font-size: 14px;
+	  font-weight: 700;
+	}
+
+	.col_md_2_list  > p {
+	  text-align: left;
+	  font-family: 'Open Sans', sans-serif;
+	  font-size: 10px;
+	  font-weight: 700;
+	  color: #999;
+	}
+	.col_md_3_list {
+	  width: 121px;
+	  position: relative;
+	  float: left;
+	height: 14px;
+	  top:50%;
+	  margin-top: -10px;
+	}
+
+	.col_md_3_list > .cont_text_date {
+	  text-align: right;
+	  font-family: 'Open Sans', sans-serif;
+	  font-size: 14px;
+	  font-weight: 700;  
+	}
+	.col_md_3_list > .cont_text_date > p {
+		text-align: right;
+	  margin-right: 20px;
+	}
+
+	.col_md_3_list:hover > .cont_btns_options{
+	opacity: 1;  
+
+	}
+
+	.col_md_3_list > .cont_btns_options{
+	  position: absolute;
+	  width: 100%;
+	  opacity: 0;
+	  transition: all 0.5s;
+	  background-color: #F1F1EF;
+	  width: 100%;
+	  height: 47px;
+	  top: 0px;
+	}
+
+	.col_md_3_list > .cont_btns_options > ul > li{
+	  position: relative;
+	  float: right;
+	  width: 100%;
+	list-style-type: none;
+	}
+	.col_md_3_list > .cont_btns_options > ul > li > a {
+	  display: block;
+	  width: 30px;
+	  height: 30px;
+	  background-color: #007aff;
+	  padding: 3px 3px;
+	  border-radius: 50%;
+	  color: #fff;
+	  margin-top: -5px;
+	}
+
+	.col_md_3_list > .cont_btns_options > ul > li > a > i {
+	  font-size: 15px;
+	}
+
+	.list_dsp_none {
+	  display: none;
+	opacity: 0;
+	margin-top: 20px;
+	}
+
+	.list_dsp_true {
+	margin:0px;
+	opacity: 1;  
+	}
+
+
+	.list_work {
+	  z-index: 1;  
+	}
+
+	.list_shopping > .col_md_1_list {
+	  border-left: 4px solid #e45;
+	  color: #e45;
+	}
+
+	.list_work > .col_md_1_list {
+	   border-left: 4px solid #2A476B;
+	   color: #2A476B;
+	}
+
+	.list_sport > .col_md_1_list {
+	   border-left: 4px solid #EF8A18;
+	   color: #EF8A18;
+	}
+
+	.list_music > .col_md_1_list {
+	   border-left: 4px solid #EE1E65; 
+	   color: #EE1E65;
+	}
+
+	.list_finish_state {
+	  opacity: 0.3;
+	  margin: 15px 0px;
+	  z-index: 1;
+	}
+	</style>
+  </head>
+
+  <body id="page-top">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a href="index.html" class="navbar-brand">Intelligent Tourist</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a href="group.html" class="nav-link">Nhóm</a>
+            </li>
+			<li class="nav-item">
+              <a href="plan-home.html" class="nav-link">Lịch trình</a>
+            </li>
+			<li class="nav-item">
+              <a href="notification.html" class="nav-link">Thông báo</a>
+            </li>
+			<li class="nav-item">
+              <a href="profile.html" class="nav-link">Cá nhân</a>
+            </li>
+			 <li class="nav-item">
+              <a href="login.html" class="nav-link">Đăng nhập</a> 
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+	
+    <header class="masthead text-center text-white d-flex">
+      <div class="container my-auto">
+        <div class="row">
+          <div class="col-lg-10 mx-auto">
+            <h1 class="text-uppercase" style="font-size: 40px">
+              <strong>Lịch trình<br> A</strong>
+            </h1>
+            <hr>
+          </div>
+        </div>
+      </div>
+    </header>
+	
+	<div class="result_item_box">
+		<div class="container" style="height: 400px; text-align: center">
+			<table style="margin: auto">
+				<td>
+					<button id="myLink" class="btn btn-primary" style="margin-top: 30px; width: 120px">Chỉnh sửa</button>
+					<div id="myModal" class="modal">
+						<!-- Modal content -->
+						<div class="modal-content">
+							<span class="close">&times;</span>
+							<h5 style="text-align: center">Chỉnh sửa tên lịch trình</h5>
+							<a href="my-plan-detail.html">
+							<div class="container" style="text-align: center; background-color: white; border-radius: 40px; height: 150px">
+								<h5 style="padding-top: 10px; text-align: center"></h5>
+								<div class="col-lg-8 mx-auto search-box-2" style="margin-bottom: 30px">
+									<input class="search-text" type="text" name="" placeholder="Nhập tên.." autocomplete="on" required style="padding-top: 0">
+									<a href="my-plan-detail.html"><button class="btn btn-primary" onclick="myNextFunction()" style="margin-top: 20px; color: white; width: 120px">Xác nhận</button></a>
+								</div>
+								<br>
+							</div>
+							</a>
+						</div>
+					</div>
+				<td>
+				<td>
+					<a href="index.html"><button class="btn" onclick="myFunction()" style="margin-top: 30px; background-color: red; color: white; width: 120px">Xóa</button></a> 			
+				</td>
+			</table>
+			
+			<h5 style="padding-top: 15px">Có tất cả 100 lượt thích</h5>
+			<h5 style="padding-top: 10px"></h5>
+			<div class="col-xs-6 mx-auto search-box-2">
+				<h6 style="padding-top: 5px">Bắt đầu: dd/mm/yyyy</h6>
+          	</div>
+			<br>
+			<h5 style="padding-top: 40px"></h5>
+			<div class="col-xs-6 mx-auto search-box-2">
+				<h6 style="padding-top: 5px">Kết thúc: dd/mm/yyyy</h6>
+          	</div>
+			<br>
+			<br>
+			<table style="margin: 10px 0 0 95px">
+				<tr>
+					<td>
+						<h6 style="color: black">Public Plan</h6>
+					</td>
+					<td>
+					
+					<label class="switch">
+						<input type="checkbox">
+						<span class="slider round"></span>
+					</label>
+					</td>
+				</tr>
+			</table>
+			<button id="myLink-2" class="btn btn-dark" style="margin-top: 10px">Thêm vào lịch trình nhóm</button>
+			<div id="myModal-2" class="modal">
+				<!-- Modal content -->
+				<div class="modal-content">
+					<span class="close-2">&times;</span>
+					<i class="fa fa-check" style="font-size: 50px; padding-bottom: 10px; color: green"></i>
+					<h5 style="text-align: center">Đã thêm vào<br> lịch trình nhóm</h5>
+					<a href="group-plan.html"><button class="btn" style="width: 170px; margin: 45px; text-align: center; background-color: #0066ff; color: white">Đến trang nhóm</button></a>
+				</div>
+			</div>
+		</div>
+	</div>
+					
+	<!-- Result item -->
+	<div class="row">
+	<div class="btn btn-primary" style="margin: 13px; 10px">Chưa lên lịch</div>
+	<div class="result_item_box">
+			<div class="item_box" style="padding-top: 20px">
+				<div class="col-lg-8 mx-auto search-box-2">
+				<form style="font-size: 17px">
+				<input type="date" style="padding: 0 0 0 50px; text-align: center; width: 250px">
+				</form>
+        </div>
+				<div class="title-name m-display" style="padding-top: 50px">
+					<h4><a href="location-detail.html" title="New World">New World</a></h4>
+				</div>
+				<div class="slide carousel-v1 swiper-container img_result" data-item="3">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<a href="location-detail.html" title="New World">
+							<img class="img-responsive" src="img/stay/newworld.png" alt="New World" title="New World" />
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="content_box">
+						<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+						<i class="fa fa-location-arrow"> 76 Lê Lai, Q.1, Thành Phố Hồ Chí Minh</i>
+				</div>
+			</div>
+	</div>
+	
+		<div class="btn btn-primary" style="margin: 13px; 10px">Ngày 1 (dd/mm/yyyy)</div>
+	
+	<div class="result_item_box">
+			<div class="item_box">
+			<table>
+				<tr>
+					<td>
+						<div class="title-name m-display">
+							<h4><a href="location-detail.html" title="New World">New World</a></h4>
+						</div>
+					</td>
+					<td>
+						<div class="custom-control custom-checkbox mb-3" style="margin-left: 13px; float: right">
+							<input type="checkbox" id="been-1" class="custom-control-input">
+							<label class="custom-control-label" style="padding-left: 4px" for="been-1"></label>
+						</div>
+					</td>
+				</tr>
+			</table>
+				<div class="slide carousel-v1 swiper-container img_result" data-item="3">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<a href="location-detail.html" title="New World">
+							<img class="img-responsive" src="img/stay/newworld.png" alt="New World" title="New World" />
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="content_box">
+						<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+						<i class="fa fa-location-arrow"> 76 Lê Lai, Q.1, Thành Phố Hồ Chí Minh</i>
+				</div>
+			</div>
+	</div>
+	<div class="result_item_box">
+			<div class="item_box">
+				<table>
+				<tr>
+					<td>
+						<div class="title-name m-display">
+							<h4><a href="location-detail.html" title="New World">New World</a></h4>
+						</div>
+					</td>
+					<td>
+						<div class="custom-control custom-checkbox mb-3" style="margin-left: 13px; float: right">
+							<input type="checkbox" id="been-2" class="custom-control-input">
+							<label class="custom-control-label" style="padding-left: 4px" for="been-2"></label>
+						</div>
+					</td>
+				</tr>
+				</table>
+				<div class="slide carousel-v1 swiper-container img_result" data-item="3">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<a href="location-detail.html" title="New World">
+							<img class="img-responsive" src="img/stay/newworld.png" alt="New World" title="New World" />
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="content_box">
+						<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+						<i class="fa fa-location-arrow"> 76 Lê Lai, Q.1, Thành Phố Hồ Chí Minh</i>
+				</div>
+			</div>
+	</div>
+	
+	<div class="btn btn-primary" style="margin: 13px; 10px">Ngày 2 (dd/mm/yyyy)</div>
+	<div class="result_item_box">
+			<div class="item_box">
+				<table>
+				<tr>
+					<td>
+						<div class="title-name m-display">
+							<h4><a href="location-detail.html" title="New World">New World</a></h4>
+						</div>
+					</td>
+					<td>
+						<div class="custom-control custom-checkbox mb-3" style="margin-left: 13px; float: right">
+							<input type="checkbox" id="been-3" class="custom-control-input">
+							<label class="custom-control-label" style="padding-left: 4px" for="been-3"></label>
+						</div>
+					</td>
+				</tr>
+				</table>
+				<div class="slide carousel-v1 swiper-container img_result" data-item="3">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<a href="location-detail.html" title="New World">
+							<img class="img-responsive" src="img/stay/newworld.png" alt="New World" title="New World" />
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="content_box">
+						<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+						<i class="fa fa-location-arrow"> 76 Lê Lai, Q.1, Thành Phố Hồ Chí Minh</i>
+				</div>
+			</div>
+	</div>
+	<div class="result_item_box">
+			<div class="item_box">
+				<table>
+				<tr>
+					<td>
+						<div class="title-name m-display">
+							<h4><a href="location-detail.html" title="New World">New World</a></h4>
+						</div>
+					</td>
+					<td>
+						<div class="custom-control custom-checkbox mb-3" style="margin-left: 13px; float: right">
+							<input type="checkbox" id="been-4" class="custom-control-input">
+							<label class="custom-control-label" style="padding-left: 4px" for="been-4"></label>
+						</div>
+					</td>
+				</tr>
+				</table>
+				<div class="slide carousel-v1 swiper-container img_result" data-item="3">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<a href="location-detail.html" title="New World">
+							<img class="img-responsive" src="img/stay/newworld.png" alt="New World" title="New World" />
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="content_box">
+					<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+					<i class="fa fa-location-arrow"> 76 Lê Lai, Q.1, Thành Phố Hồ Chí Minh</i>
+				</div>
+			</div>
+	</div>
+	</div>
+  <!-- End Result item -->
+
+	<!-- Result item -->
+	<div class="result_item_box" style="margin-bottom: 200px">
+		<div class="cont_principal">
+		<div class="cont_centrar">
+
+		  <div class="cont_todo_list_top">
+		  <div class="cont_titulo_cont bg-primary">
+			<h3>Ghi chú</h3>
+			</div>
+		<div class="cont_add_titulo_cont">
+			<a href="#e" onclick="add_new()" style="font-size: 20px; padding-top: 3px">&#8897;</a>
+		</div>
+		 
+		<!--   End cont_todo_list_top  -->  </div>
+		<div class="cont_crear_new">
+		  <table class="table">
+		<tr>
+		  <th>Nội dung</th>
+		 <th>Ngày</th>
+			</tr>
+			<tr>
+			   <td>
+				<input type="text" class="input_title_desc" style="border: 1px solid #ccc"/>      
+				 <!-- End td 2 -->
+			  </td>
+			<td>
+		<select name="" class="input_description_title"  id="date_select">
+		 <option value="Ngày 1">Ngày 1</option>
+		 <option value="Ngày 2">Ngày 2</option> 
+		 <option value="Ngày 3">Ngày 3</option> 
+		</select>
+
+			  <!-- End td 3 -->
+			  </td>
+			</tr>
+		<tr>
+			</tr>
+			<tr>
+			<td colspan="3">
+		  <button class="btn_add_fin btn btn-primary"  onclick="add_to_list()">Thêm</button>
+		  </td>
+			</tr>
+		  </table>
+		  <!--   End cont_crear_new  --> 
+  </div>
+	<div class="cont_princ_lists">
+	<ul>
+	  <li class="list_shopping li_num_0_1">
+	<div class="col_md_2_list">
+		<h4>Sang nhà thằng Sơn</h4>
+	</div>
+	<div class="col_md_3_list">
+	<div class="cont_text_date">
+	<p>Ngày 1</p>      
+		  </div>    
+	<div class="cont_btns_options">
+	  <ul>
+		<li><a onclick="finish_action('0','0_1');">&#xD7;</a></li>
+	  </ul>    
+		  </div>
+		</div>
+	  </li>
+	 </ul>
+	 </div>
+	  <!--   End cont_central  -->
+	</div>
+	
+	<footer style="margin-top: 500px">
+		<a class="btn btn-dark btn-xl text-white" style="margin: 20px 20px 20px 10px" id="div-buy">Liên hệ đăng ký địa điểm</a>
+		<div class="footer">
+			<h6>Email:</h6>
+			<h6>Số điện thoại: </h6>
+		</div>
+	</footer>
+	
+	<script>
+	// Get the modal
+	var modal = document.getElementById('myModal');
+
+	// Get the button that opens the modal
+	var btn = document.getElementById("myLink");
+
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
+
+	// When the user clicks the button, open the modal 
+	btn.onclick = function() {
+		modal.style.display = "block";
+	}
+
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function() {
+		modal.style.display = "none";
+	}
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+		if (event.target == modal) {
+			modal.style.display = "none";
+		}
+	}
+	</script>
+
+	<script>
+	// Get the modal
+	var modal2 = document.getElementById('myModal-2');
+
+	// Get the button that opens the modal
+	var btn2 = document.getElementById("myLink-2");
+
+	// Get the <span> element that closes the modal
+	var span2 = document.getElementsByClassName("close-2")[0];
+
+	// When the user clicks the button, open the modal 
+	btn2.onclick = function() {
+		modal2.style.display = "block";
+	}
+
+	// When the user clicks on <span> (x), close the modal
+	span2.onclick = function() {
+		modal2.style.display = "none";
+	}
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+		if (event.target == modal2) {
+			modal2.style.display = "none";
+		}
+	}
+	</script>
+	
+	<script>
+	// Get the modal
+	var modal3 = document.getElementById('myModal-3');
+
+	// Get the button that opens the modal
+	var btn3 = document.getElementById("myLink-3");
+
+	// Get the <span> element that closes the modal
+	var span3 = document.getElementsByClassName("close-3")[0];
+
+	// When the user clicks the button, open the modal 
+	btn3.onclick = function() {
+		modal3.style.display = "block";
+	}
+
+	// When the user clicks on <span> (x), close the modal
+	span3.onclick = function() {
+		modal3.style.display = "none";
+	}
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+		if (event.target == modal3) {
+			modal3.style.display = "none";
+		}
+	}
+	</script>
+	
+	<script>
+	function myFunction() {
+    confirm("Xác nhận xóa lịch trình?");
+	}
+	</script>
+	<script>
+	function myNextFunction() {
+    confirm("Xác nhận đổi tên lịch trình?");
+	}
+	</script>
+	
+	<script>
+	var contador = 0,
+	select_opt = 0;
+
+	function add_to_list(){
+	var title = document.querySelector('.input_title_desc').value,
+	date = document.getElementById('date_select').value;
+	 
+	  
+	var class_li  =['list_shopping list_dsp_none','list_work list_dsp_none','list_sport list_dsp_none','list_music list_dsp_none'];  
+
+	var cont = ' <div class="col_md_2_list"> <h4>'+title+'</h4> </div>    <div class="col_md_3_list"> <div class="cont_text_date"> <p>'+date+'</p>  </div>  <div class="cont_btns_options">    <ul>  <li><a href="#finish" onclick="finish_action('+select_opt+','+contador+');" ><i class="material-icons">&#xE5CA;</i></a></li>   </ul>  </div>    </div>';  
+	 
+	var li = document.createElement('li')  
+	li.className = class_li[select_opt]+" li_num_"+contador;
+
+	li.innerHTML = cont;
+	document.querySelectorAll('.cont_princ_lists > ul')[0].appendChild(li);
+
+	setTimeout(function(){  document.querySelector('.li_num_'+contador).style.display = "block";
+	},100);
+	  
+	setTimeout(function(){
+	  document.querySelector('.li_num_'+contador).className = "list_dsp_true "+class_li[select_opt]+" li_num_"+contador;
+	contador++;
+	},200);
+
+	}
+
+	function finish_action(num,num2) {
+	 
+	var class_li  =['list_shopping list_dsp_true','list_work  list_dsp_true','list_sport list_dsp_true','list_music list_dsp_true'];   
+	console.log('.li_num_'+num2);
+	 document.querySelector('.li_num_'+num2).className = class_li[num]+" list_finish_state"; 
+	setTimeout(function(){
+			   del_finish();
+			   },500);
+	}
+
+	function del_finish(){
+	var li = document.querySelectorAll('.list_finish_state');
+		for(var e = 0; e < li.length; e++){
+	/* li[e].style.left = "-100px"; */    
+	li[e].style.opacity = "0";
+	li[e].style.height = "0px";      
+	li[e].style.margin = "0px";      
+		}
+
+	  setTimeout(function(){
+	var li = document.querySelectorAll('.list_finish_state');
+		for(var e = 0; e < li.length; e++){
+	  li[e].parentNode.removeChild(li[e]); 
+		}
+	  },500);
+	  
+	  
+	}
+	var t = 0;
+	function add_new(){  
+	if(t % 2 == 0){  
+	 document.querySelector('.cont_crear_new').className = "cont_crear_new cont_crear_new_active";
+
+	  document.querySelector('.cont_add_titulo_cont').className = "cont_add_titulo_cont cont_add_titulo_cont_active";
+	  t++;
+	}else {  document.querySelector('.cont_crear_new').className = "cont_crear_new";
+	document.querySelector('.cont_add_titulo_cont').className = "cont_add_titulo_cont";  
+	  t++;
+	  } 
+	}
+	</script>
+	
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="vendor/scrollreveal/scrollreveal.min.js"></script>
+    <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/creative.min.js"></script>
+	</body>
+</html>

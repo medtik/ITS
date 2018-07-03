@@ -31,9 +31,6 @@
 	  background-position: center center;
 	  background-image: url("../img/stay/newworld.png");
 	  background-attachment: fixed;
-	  -webkit-background-size: cover;
-	  -moz-background-size: cover;
-	  -o-background-size: cover;
 	  background-size: cover;
 	}
 	</style>
@@ -50,20 +47,20 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link">Đăng nhập</a> 
+			<li class="nav-item">
+              <a href="group.html" class="nav-link">Nhóm</a>
             </li>
 			<li class="nav-item">
-              <a class="nav-link js-scroll-trigger">Thông báo</a>
+              <a href="plan-home.html" class="nav-link">Lịch trình</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="area.html">Hà Nội</a>
+			<li class="nav-item">
+              <a href="notification.html" class="nav-link">Thông báo</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="area.html">Đà Nẵng</a>
+			<li class="nav-item">
+              <a href="profile.html" class="nav-link">Cá nhân</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="area.html">TP Hồ Chí Minh</a>
+			 <li class="nav-item">
+              <a href="login.html" class="nav-link">Đăng nhập</a> 
             </li>
           </ul>
         </div>
@@ -84,8 +81,8 @@
     </header>
 	
 	<!-- Result item -->
-<div class="row">
-<div class="result_item_box col-12">
+	<div class="row">
+		<div class="result_item_box col-12">
 			<div class="item_box">
 			<a class="btn btn-primary btn-xl text-white" style="margin: 20px 20px 5px 20px; width: 200px">Tổng quan</a>
 				<div class="content_box">
@@ -97,7 +94,8 @@
 						  <p>Thứ 2 - Thứ 6: 7h-22h</p>
 						  <p>Thứ 7 - Chủ nhật: 7h-12h</p>
 						</div>
-						
+						<button id="myLink-3" onclick="nextFunction()" class="btn btn-primary" style="margin: 10px 0"><i class="fa fa-flag"></i> Claim as owner</button>						
+						<br>
 						<u id="myLink">Thêm vào lịch trình</u>
 
 						<div id="myModal" class="modal">
@@ -108,11 +106,11 @@
 							<a href="#"><div class="container" style="height: 200px; text-align: center; background-color: white; border-radius: 40px">
 							<h5 style="padding-top: 10px; text-align: center"></h5>
 								<div class="user-plan">
-								<a href="#" style="color: white">Lịch trình A</a>
+								<a onclick="myFunction()" style="color: white">Lịch trình A</a>
 									<span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
 								</div>
 								<div class="user-plan">
-								<a href="#" style="color: white; padding-top: 10px">Lịch trình B</a>
+								<a onclick="myFunction()" style="color: white; padding-top: 10px">Lịch trình B</a>
 									<span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
 								</div>
 							</div>
@@ -122,14 +120,15 @@
 							<div class="container" style="height: 200px; text-align: center; background-color: white; border-radius: 40px">
 							<h5 style="padding-top: 10px; text-align: center"></h5>
 								<div class="user-plan">
-								<a href="#" style="color: white; padding-top: 37px">Lịch trình A</a>
+								<a onclick="myFunction()" style="color: white; padding-top: 37px">Lịch trình A</a>
 									<span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
 								</div>
 								<div class="user-plan">
-								<a href="#" style="color: white">Lịch trình B</a>
+								<a onclick="myFunction()" style="color: white">Lịch trình B</a>
 									<span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
 								</div>
 							</div>
+							<div id="snackbar"><h6>Đã thêm vào lịch trình</h6></div>
 						   </div>
 						</div>
 				</div>
@@ -150,13 +149,16 @@
 					<td>Phòng không hút thuốc</td>
 				</tr>
 				</table>
+				<a class="nav-link js-scroll-trigger" href="#detail">Xem chi tiết</a>
 				</div>
-	</div>
-</div>	
+		</div>
+	</div>	
 
 	<div class="result_item_box col-12">
-			<div class="item_box">
+			<div class="item_box" style="padding-bottom: 30px">
 			<a class="btn btn-primary btn-xl text-white" style="margin: 20px 20px 5px 20px; width: 200px">Hình ảnh</a>
+			<br>
+			<a href="add-image.html"><u>Đóng góp hình ảnh</u></a>
 				<div id="view" class="carousel slide" data-ride="carousel" data-interval="0" >
 				   <ul class="carousel-indicators">
 					<li data-target="#view" data-slide-to="0" class="active"></li>
@@ -211,6 +213,7 @@ src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJZfXdjj4vdTER1-XCk
 						<a href="#" style="color: white"><img src="img/user.png" alt="Person">
 						Nguyễn Văn A</a>
 					</div>
+					<i id="myLink-2" class="fa fa-flag" style="color: #007aff; padding-left: 10px"></i>
 					<br>
 					<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
 					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -219,22 +222,81 @@ src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJZfXdjj4vdTER1-XCk
 						<a href="#" style="color: white"><img src="img/user.png" alt="Person">
 						Nguyễn Văn B</a>
 					</div>
+					<i id="myLink-2" class="fa fa-flag" style="color: #007aff; padding-left: 10px"></i>
 					<br>
 					<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
 					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 				</div>
+			<br>
 			</div>
 	</div>
 	
+	<div id="myModal-2" class="modal">
+		<!-- Modal content -->
+		<div class="modal-content">
+		<span class="close-2">&times;</span>
+		<h6 style="text-align: center">Báo cáo đánh giá</h6>
+		<div class="container" style=" text-align: center">
+			<h5 style="padding-top: 20px"></h5>
+			<div class="col-lg-8 mx-auto" style="height: 400px;">
+				<textarea id="textarea" class="text-small" style="padding: 5px 10px" placeholder="Nhập báo cáo..."></textarea>          	
+			</div>
+			<br>
+			<a href="location-detail.html"><button class="btn" onclick="reportFunction()" style="width: 150px; margin-bottom: 30px; text-align: center; background-color: #0066ff; color: white">Xác nhận</button></a>
+  		</div>
+		</div>
+	</div>
+	
+	<!-- Chi tiết -->
+	<div class="result_item_box col-12" id="detail">
+			<div class="item_box">
+				<a class="btn btn-primary btn-xl text-white" style="margin: 20px 20px 5px 20px">Chi tiết địa điểm</a>
+				<hr>
+				<table style="text-align: left; margin-bottom: 18px; width: 100%;">
+				<tr>
+					<th>Tiện nghi hàng đầu</th>
+					<th>Tiện nghi khách sạn</th>
+				</tr>
+				<tr>
+					<td>Bể bơi</td>
+					<td>Xe buýt đưa đón</td>
+				</tr>
+				<tr>
+					<td>Nhà hàng</td>
+					<td>Phòng không hút thuốc</td>
+				</tr>
+				<tr>
+					<td>Spa</td>
+					<td>Phòng họp</td>
+				</tr>
+				<tr>
+					<td>Wifi tốc độ cao</td>
+					<td>Phòng yến tiệc</td>
+				</tr>
+				</table>
+				<h5><strong>Khoảng giá<strong><h5>
+				<h6>2.568.182-4.227.273 VNĐ</h6>
+				<br>
+				<h5><strong>Hạng khách sạn<strong></h5>
+				<div><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+				<br>
+				<h5><strong>Địa điểm<strong><h5>
+				<h6>Việt Nam > Thành phố Hồ Chí Minh</h6>
+				<br>
+			</div>
+		
+	</div>
+	
+	<!-- Lân cận -->
 	<div class="result_item_box col-12">
 			<div class="item_box">
-				<a class="btn btn-primary btn-xl text-white" style="margin: 20px 20px 5px 20px" href="nearby.html">Địa điểm liên quan</a>
+				<a class="btn btn-primary btn-xl text-white" style="margin: 20px 20px 5px 20px">Địa điểm lân cận</a>
 				<hr>
 				<div style="text-align: left; margin-left: 70px">
-					<a href="nearby.html"><h5 style="padding-bottom: 5px">Ăn uống liên quan <i class="fa fa-chevron-right"></i></h5></a>
-					<a href="nearby.html"><h5 style="padding-bottom: 5px">Nơi ở liên quan <i class="fa fa-chevron-right"></i></h5></a>
-					<a href="nearby.html"><h5 style="padding-bottom: 5px">Địa điểm liên quan <i class="fa fa-chevron-right"></i></h5></a>
-					<a href="nearby.html"><h5 style="padding-bottom: 5px">Mua sắm liên quan <i class="fa fa-chevron-right"></i></h5></a>
+					<a href="nearby.html"><h5 style="padding-bottom: 5px">Ăn uống lân cận <i class="fa fa-chevron-right"></i></h5></a>
+					<a href="nearby.html"><h5 style="padding-bottom: 5px">Nơi ở lân cận <i class="fa fa-chevron-right"></i></h5></a>
+					<a href="nearby.html"><h5 style="padding-bottom: 5px">Địa điểm lân cận <i class="fa fa-chevron-right"></i></h5></a>
+					<a href="nearby.html"><h5 style="padding-bottom: 10px">Mua sắm lân cận <i class="fa fa-chevron-right"></i></h5></a>
 				</div>
 			</div>
 	</div>
@@ -289,6 +351,36 @@ window.onclick = function(event) {
 }
 </script>
 
+
+<script>
+	// Get the modal
+	var modal2 = document.getElementById('myModal-2');
+
+	// Get the button that opens the modal
+	var btn2 = document.getElementById("myLink-2");
+
+	// Get the <span> element that closes the modal
+	var span2 = document.getElementsByClassName("close-2")[0];
+
+	// When the user clicks the button, open the modal 
+	btn2.onclick = function() {
+		modal2.style.display = "block";
+	}
+
+	// When the user clicks on <span> (x), close the modal
+	span2.onclick = function() {
+		modal2.style.display = "none";
+	}
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+		if (event.target == modal2) {
+			modal2.style.display = "none";
+		}
+	}
+</script>
+
+
 <script>
 var acc = document.getElementsByClassName("accordion");
 var i;
@@ -306,6 +398,31 @@ for (i = 0; i < acc.length; i++) {
 }
 </script>
 
+<script>
+	function myFunction() {
+		var x = document.getElementById("snackbar");
+		x.className = "show";
+		setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+	}
+</script>
+
+<script>
+function nextFunction() {
+   confirm("Xác nhận?");
+}
+</script>
+<script>
+	function reportFunction() {
+    confirm("Xác nhận báo cáo?");
+	}
+	</script>
+<script>
+	  $(function() {
+		$('textarea#textarea').editable({
+		  inlineMode: false
+		})
+	  });
+	</script>
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

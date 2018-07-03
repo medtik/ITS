@@ -36,19 +36,19 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link">Đăng nhập</a> 
+              <a href="group.html" class="nav-link">Nhóm</a>
             </li>
 			<li class="nav-item">
-              <a class="nav-link js-scroll-trigger">Thông báo</a>
+              <a href="plan-home.html" class="nav-link">Lịch trình</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="area.html">Hà Nội</a>
+			<li class="nav-item">
+              <a href="notification.html" class="nav-link">Thông báo</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="area.html">Đà Nẵng</a>
+			<li class="nav-item">
+              <a href="profile.html" class="nav-link">Cá nhân</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="area.html">TP Hồ Chí Minh</a>
+			 <li class="nav-item">
+              <a href="login.html" class="nav-link">Đăng nhập</a> 
             </li>
           </ul>
         </div>
@@ -94,12 +94,12 @@
           	</div>
 			<br>
 			<br>
-			<table style="margin: auto">
+			<table style="width: 100%">
 				<td>
-					<button class="btn btn-primary" style="margin-top: 20px; width: 120px">Xác nhận</button>
+					<button class="btn btn-primary" style="margin-top: 20px; width: 150px">Xác nhận</button>
 				<td>
 				<td>
-					<button class="btn" style="margin-top: 20px; background-color: red; color: white; width: 120px">Thoát</button>
+					<button class="btn" onclick="myFunction()" style="margin-top: 20px; background-color: red; color: white; width: 150px">Thoát</button>
   			</div>
 				</td>
 			</table>
@@ -116,7 +116,11 @@
 		</div>
 	</footer>
 	
-	
+	<script>
+	function myFunction() {
+    confirm("Xác nhận thoát?");
+	}
+	</script>
 	
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
