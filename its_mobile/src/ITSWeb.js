@@ -1,6 +1,7 @@
 import React from "react" ;
 import {View, WebView, StyleSheet, Dimensions, BackHandler} from "react-native" ;
-import notification from './SetupNotification'
+import firestore from './firestore';
+import notification from './SetupNotification';
 
 const ref = {
     webview: "WEBVIEW_REF"
@@ -10,8 +11,8 @@ export default class ITSWeb extends React.Component {
         super(props);
 
         this.state = {
-            uri: 'http://its8.gear.host/',
-            // uri: 'http://192.168.150.80:80',
+            // uri: 'http://its8.gear.host/',
+            uri: 'http://192.168.2.2:80',
             canGoBack: false
         };
 
@@ -39,7 +40,6 @@ export default class ITSWeb extends React.Component {
     }
 
     onHardwareBack() {
-
         if (this.state.canGoBack) {
             this.refs[ref.webview].goBack();
         }
@@ -53,8 +53,19 @@ export default class ITSWeb extends React.Component {
     }
 
     onMessage(data) {
-        let notifications = JSON.parse(data);
-        notification.handleNotifications(notifications[0])
+        let obj = JSON.parse(data);
+        if (obj.type === 'uid') {
+            notification.registerForPushNotificationsAsync()
+                .then(value => {
+                    firestore
+                        .collection('user')
+                        .doc(obj.uid)
+                        .set({
+                            token: value
+                        })
+                })
+
+        }
     }
 
     render() {

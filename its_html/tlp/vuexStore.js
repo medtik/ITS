@@ -46,36 +46,53 @@ const store = new Vuex.Store({
                 .get();
         },
         createPlan(context, payload) {
-            firestore.collection("plan").add({
-                name: payload.name,
-                startDate: payload.startDate,
-                endDate: payload.endDate,
-                user: context.getters.currentUser.uid
-            })
-                .then(() => {
-                    console.log("Document successfully written!");
+            return firestore
+                .collection("plan")
+                .add({
+                    name: payload.name,
+                    startDate: payload.startDate,
+                    endDate: payload.endDate,
+                    user: context.getters.currentUser.uid
                 })
-                .catch((error) => {
-                    console.error("Error writing document: ", error);
-                });
         },
         deletePlan(context, payload) {
-            firestore.collection("plan")
+            return firestore
+                .collection("plan")
                 .doc(payload.id)
-                .delete()
-                .then(function () {
-                    console.log("Document successfully deleted!");
+                .delete();
+        },
+        inviteUserToGroup(context, payload) {
+            return firestore
+                .collection('groupInvitation')
+                .add({
+                    groupUid: payload.groupId,
+                    userUid: payload.inviteeId,
                 })
-                .catch(function (error) {
-                    console.error("Error removing document: ", error);
-                });
-
+        },
+        searchUser(){
+            // return
         }
     }
 });
 
-firebase.auth().onAuthStateChanged(function (user) {
+firebase.auth().onAuthStateChanged((user) => {
     store.commit('setUser', {
         user,
     });
+
+    if (user) {
+        try{
+            window.postMessage(JSON.stringify({
+                type: 'uid',
+                uid: state.user.uid
+            }));
+        }catch (e) {
+            //DO NOTHING
+        }
+
+
+        console.debug("is new user", user.isNewUser())
+    }
+
+
 });

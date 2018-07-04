@@ -412,25 +412,25 @@
     <!-- Custom scripts for this template -->
     <script src="js/creative.min.js"></script>
     <script>
-    const mobileNotificationData = [
-        {title:'Nhắc nhở', body: 'Chuyến đi "Ăn vặt đà nẵng" chỉ còn 2 ngày nữa đến! chuẩn bị thôi nào!'},
-        {title:'Nhắc nhở', body: '"Phạm" vừa mời bạn vào nhóm "Phượt A3"'}
-    ];
+    // const mobileNotificationData = [
+    //     {title:'Nhắc nhở', body: 'Chuyến đi "Ăn vặt đà nẵng" chỉ còn 2 ngày nữa đến! chuẩn bị thôi nào!'},
+    //     {title:'Nhắc nhở', body: '"Phạm" vừa mời bạn vào nhóm "Phượt A3"'}
+    // ];
 
 
-    function waitForBridge() {
-        if (window.postMessage.length !== 1) {
-            setTimeout(waitForBridge, 500);
-        }
-        else {
-            if(typeof mobileNotificationData === 'string'){
-                window.postMessage(mobileNotificationData);
-            }else{
-                window.postMessage(JSON.stringify(mobileNotificationData));
-            }
-        }
-    }
-    window.onload = waitForBridge;
+    // function waitForBridge() {
+    //     if (window.postMessage.length !== 1) {
+    //         setTimeout(waitForBridge, 500);
+    //     }
+    //     else {
+    //         if(typeof mobileNotificationData === 'string'){
+    //             window.postMessage(mobileNotificationData);
+    //         }else{
+    //             window.postMessage(JSON.stringify(mobileNotificationData));
+    //         }
+    //     }
+    // }
+    // window.onload = waitForBridge;
   </script>
 	<script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -441,6 +441,5 @@
 	<script src='./tlp/vuexStore.js'></script>
 	<!--Page logic-->
 	<script src='./tlp/src/index.js'></script>
-
   </body>
 </html>

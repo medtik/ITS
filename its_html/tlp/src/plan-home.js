@@ -11,7 +11,6 @@ new Vue({
             'currentUser',
         ]),
         loading() {
-            console.debug('loading', !this.currentUser, !this.plans);
             return !this.currentUser || !this.plans
         }
     },

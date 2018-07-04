@@ -9,14 +9,20 @@ new Vue({
     }
 });
 
-store.subscribe((mutation, state) => {
-    if(mutation.type === 'setUser'){
-        if(state.user){
-            const currentFile = store.getters.currentFile;
-            const redirectTo = currentFile.substr(
-                currentFile.indexOf('redirect=') + 'redirect='.length,
-            );
-            window.location = redirectTo;
-        }
-    }
+store.subscribe((mutation, state) =>{
+   if(mutation.type === 'setUser'){
+       if(state.user){
+           const currentFile = store.getters.currentFile;
+           if(currentFile.indexOf('redirect=') > 0){
+               const redirectTo = currentFile.substring(
+                   currentFile.indexOf('redirect=') + 'redirect='.length
+               );
+
+               if(redirectTo){
+                   console.debug(redirectTo);
+                   window.location = redirectTo;
+               }
+           }
+       }
+   }
 });
