@@ -89,9 +89,6 @@ firebase.auth().onAuthStateChanged((user) => {
         }catch (e) {
             //DO NOTHING
         }
-
-
-        console.debug("is new user", user.isNewUser())
     }
 
 
