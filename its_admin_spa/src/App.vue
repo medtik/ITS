@@ -1,24 +1,21 @@
 <template>
   <v-app id="v-app">
-    <v-navigation-drawer persistent app
+    <v-navigation-drawer app
                          v-if="navigateAble"
+                         width="200"
                          v-model="drawer">
       <v-list>
-        <v-list-tile
-          value="true"
-          v-for="(item, i) in items"
-          :key="i"
-        >
+        <v-list-tile :to="{name:'AccountList'}">
           <v-list-tile-action>
-            <v-icon v-html="item.icon"></v-icon>
+            <v-icon>fas fa-user</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title v-text="item.title"></v-list-tile-title>
+            <v-list-tile-title v-text="'Account'"></v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar app v-if="navigateAble">
+    <v-toolbar app flat color="white" v-if="navigateAble">
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title v-text="title"></v-toolbar-title>
       <v-spacer></v-spacer>
@@ -37,17 +34,18 @@
     data() {
       return {
         navigateAble: true,
-        drawer: false,
-        items: [{
-          icon: 'bubble_chart',
-          title: 'Inspire'
-        }],
+        drawer: true,
         right: true,
         title: 'ITS'
       }
     },
     created() {
       this.navigateAble = this.$route.name !== "Signin"
+    },
+    watch:{
+      $route (to, from){
+        this.navigateAble = this.$route.name !== "Signin"
+      }
     },
     name: 'App'
   }
@@ -57,5 +55,8 @@
   #v-app {
     background-image: url("assets/budapest-hungary-magyarorszag-tajkepek-fotos-fenykepesz-fotograf-budapesta-stock-foto-kirandulas-travel-nature-photography-affarit-andras-ferencz-marosvasarhely-kolozsvar-1.jpg");
     background-position: center bottom;
+  }
+  #content {
+    background-color: whitesmoke;
   }
 </style>

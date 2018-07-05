@@ -7,9 +7,30 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import store from "./store"
 
-Vue.use(Vuetify)
+const vn = {
+  dataIterator: {
+    rowsPerPageText: 'Vật phẩm mỗi trang:',
+    rowsPerPageAll: 'Toàn bộ',
+    pageText: '{0}-{1} trên {2}',
+    noResultsText: 'Không có bản ghi phù hợp',
+    nextPage: 'Trang tiếp',
+    prevPage: 'Trang trước'
+  },
+  dataTable: {
+    rowsPerPageText: 'Bản ghi mỗi trang:'
+  },
+  noDataText: 'Không có dữ liệu'
+};
 
-Vue.config.productionTip = false
+
+Vue.use(Vuetify,{
+  lang: {
+    locales: { vn },
+    current: 'vn'
+  }
+});
+
+Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
 new Vue({

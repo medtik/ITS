@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-layout row justify-center mt-5>
-      <v-flex xs11>
+      <v-flex xs11 md4>
         <v-card id="content">
           <v-layout column>
             <v-flex>
@@ -15,7 +15,7 @@
               <v-text-field label="Mật khẩu"
                             v-model="passwordInput"
                             type="password"/>
-              <v-btn color="primary" block @click="signIn">
+              <v-btn color="primary" block @click="signIn" :loading="loading.signinBtn">
                 Đăng nhập
               </v-btn>
             </v-flex>
@@ -38,31 +38,40 @@
 </template>
 
 <script>
-
+  import router from "vue-router"
   export default {
     name: "SigninView",
     data() {
       return {
+        loading:{
+          signinBtn: false
+        },
         emailInput: 'admin@tlp.com',
         passwordInput: ''
       }
     },
     methods:{
       signIn(){
+        this.loading.signinBtn = true;
         this.$store.dispatch('authenticate/signInEmail',{
           email: this.emailInput,
           password: this.passwordInput
-        });
+        })
+          .then(value => {
+            this.$router.push({
+              name: 'AccountList'
+            })
+            this.loading.signinBtn = false;
+          })
+          .catch(reason => {
+            this.loading.signinBtn = false;
+          })
       }
     }
   }
 </script>
 
 <style scoped>
-  #content {
-    background-color: whitesmoke;
-  }
-
   #button-container {
     display: flex;
     flex-direction: column;
