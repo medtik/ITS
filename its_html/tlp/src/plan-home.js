@@ -3,7 +3,8 @@ new Vue({
     el: "div.result_item_box",
     data() {
         return {
-            plans: undefined
+            plans: [],
+            planLoaded: false
         }
     },
     computed: {
@@ -11,7 +12,7 @@ new Vue({
             'currentUser',
         ]),
         loading() {
-            return !this.currentUser || !this.plans
+            return !this.currentUser || !this.planLoaded
         }
     },
     created() {
@@ -21,24 +22,29 @@ new Vue({
         ...Vuex.mapActions([
             'fetchPlansOfUser'
         ]),
-        deletePlan(id) {
-            this.$store.dispatch('deletePlan', {id});
+        deletePlan(uid) {
+            this.plans = this.plans.filter(plan => plan.uid !== uid);
+            this.$store.dispatch('deletePlan', {uid});
         },
         handleCommit(mutation, state) {
             if (mutation.type === 'setUser') {
-                this.fetchPlansOfUser()
-                    .then((querySnapshot) => {
-                            if (!this.plans) {
-                                this.plans = [];
-                            }
-                            querySnapshot.forEach((doc) => {
-                                this.plans.push({
-                                    id: doc.id,
-                                    ...doc.data()
+                if (mutation.payload.user) {
+                    this.fetchPlansOfUser()
+                        .then((querySnapshot) => {
+                                this.planLoaded = true;
+                                querySnapshot.forEach((doc) => {
+                                    this.plans.push({
+                                        uid: doc.id,
+                                        ...doc.data()
+                                    });
                                 });
-                            });
-                        }
-                    )
+                            }
+                        )
+                        .catch(reason => {
+                            console.error(reason);
+                        })
+                }
+
             }
         }
     }

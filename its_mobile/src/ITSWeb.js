@@ -12,7 +12,7 @@ export default class ITSWeb extends React.Component {
 
         this.state = {
             // uri: 'http://its8.gear.host/',
-            uri: 'http://192.168.2.2:80',
+            uri: 'http://192.168.150.80:80',
             canGoBack: false
         };
 
@@ -60,7 +60,7 @@ export default class ITSWeb extends React.Component {
                     firestore
                         .collection('user')
                         .doc(obj.uid)
-                        .set({
+                        .update({
                             token: value
                         })
                 })

@@ -2,7 +2,8 @@ const googleProvider = new firebase.auth.GoogleAuthProvider();
 
 const store = new Vuex.Store({
     state: {
-        user: undefined
+        user: undefined,
+        firestore: firestore
     },
     mutations: {
         setUser(state, payload) {
@@ -43,7 +44,8 @@ const store = new Vuex.Store({
             return firestore
                 .collection("plan")
                 .where('user', '==', context.getters.currentUser.uid)
-                .get();
+                .get()
+
         },
         createPlan(context, payload) {
             return firestore
@@ -58,38 +60,63 @@ const store = new Vuex.Store({
         deletePlan(context, payload) {
             return firestore
                 .collection("plan")
-                .doc(payload.id)
+                .doc(payload.uid)
                 .delete();
         },
         inviteUserToGroup(context, payload) {
-            return firestore
-                .collection('groupInvitation')
-                .add({
-                    groupUid: payload.groupId,
-                    userUid: payload.inviteeId,
+            firestore
+                .collection('user')
+                .doc(payload.userUid)
+                .get()
+                .then(doc => {
+                    const groupInvitations = doc.data().groupInvitations;
+                    groupInvitations.push({
+                        groupId: payload.groupId,
+                        groupName: payload.groupName,
+                    })
                 })
         },
-        searchUser(){
-            // return
+        findUser(context, payload) {
+            const start = payload.searchStr;
+            const end = startText + '\uf8ff';
+
+            return firestore.collection('user', ref =>
+                ref.orderBy('displayName')
+                    .startAt(start)
+                    .endAt(end)
+            )
         }
+
+
     }
 });
 
 firebase.auth().onAuthStateChanged((user) => {
-    store.commit('setUser', {
-        user,
-    });
-
     if (user) {
-        try{
+        firestore
+            .collection("user")
+            .doc(user.uid)
+            .get()
+            .then(doc => {
+                store.commit('setUser', {
+                    user: {
+                        uid: user.uid,
+                        ...doc.data()
+                    }
+                });
+            });
+
+        try {
             window.postMessage(JSON.stringify({
                 type: 'uid',
-                uid: state.user.uid
+                uid: user.uid
             }));
-        }catch (e) {
+        } catch (e) {
             //DO NOTHING
         }
+    } else {
+        store.commit('setUser', {
+            user: undefined,
+        });
     }
-
-
 });

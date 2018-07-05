@@ -3,9 +3,15 @@ new Vue({
     el: "div.result_item_box",
     methods: {
         ...Vuex.mapActions([
-            'signInGoogle',
+
             'validateAuthenticate'
-        ])
+        ]),
+        signInGoogle(){
+            this.$store.dispatch('signInGoogle')
+                .catch(error => {
+                    // alert(error);
+                })
+        }
     }
 });
 

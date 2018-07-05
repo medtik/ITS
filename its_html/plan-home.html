@@ -85,7 +85,7 @@
 			<div class="d-flex flex-column">
 				<div class="user-plan" v-for="plan in plans">
 					<a href="my-plan.html" style="color: white; padding-top: 10px">{{plan.name}}</a>
-					<span class="closebtn" v-on:click="deletePlan(plan.id)">&times;</span>
+					<span class="closebtn" v-on:click="deletePlan(plan.uid)">&times;</span>
 				</div>
 			</div>
 
