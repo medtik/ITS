@@ -3,66 +3,93 @@ export default {
   actions: {
     getAll(context, payload) {
       let accounts = [{
-        "name": "Vonnie Donaldson",
-        "email": "vdonaldson0@rakuten.co.jp",
-        "phone": "189-590-2167",
-        "birthdate": "3/16/1947",
-        "address": "9698 Oriole Hill"
+        "id": 1,
+        "name": "Lou Bolderoe",
+        "email": "lbolderoe0@msu.edu",
+        "phone": "453-765-1305",
+        "birthdate": "04/15/1950",
+        "address": "9 Artisan Court aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
       }, {
-        "name": "Hendrick Jacop",
-        "email": "hjacop1@businesswire.com",
-        "phone": "639-193-4932",
-        "birthdate": "6/28/1979",
-        "address": "75 Mandrake Pass"
+        "id": 2,
+        "name": "Leighton Berringer",
+        "email": "lberringer1@pcworld.com",
+        "phone": "390-924-2762",
+        "birthdate": "07/11/1976",
+        "address": "4 Arizona Alley"
       }, {
-        "name": "Beaufort Belson",
-        "email": "bbelson2@sina.com.cn",
-        "phone": "554-783-5757",
-        "birthdate": "9/15/1995",
-        "address": "606 Arizona Court"
+        "id": 3,
+        "name": "Leanor Everix",
+        "email": "leverix2@youtu.be",
+        "phone": "413-875-6910",
+        "birthdate": "04/18/1983",
+        "address": "2948 Rutledge Point"
       }, {
-        "name": "Durant Huet",
-        "email": "dhuet3@ovh.net",
-        "phone": "537-350-6583",
-        "birthdate": "12/16/1976",
-        "address": "7 Express Pass"
+        "id": 4,
+        "name": "Maryjo Vallance",
+        "email": "mvallance3@flavors.me",
+        "phone": "240-572-8041",
+        "birthdate": "07/23/1969",
+        "address": "87883 Lighthouse Bay Pass"
       }, {
-        "name": "Jilleen Rathborne",
-        "email": "jrathborne4@ucsd.edu",
-        "phone": "747-927-3459",
-        "birthdate": "8/7/1984",
-        "address": "221 Buhler Junction"
+        "id": 5,
+        "name": "Helaine Molyneux",
+        "email": "hmolyneux4@domainmarket.com",
+        "phone": "309-569-9369",
+        "birthdate": "07/17/1948",
+        "address": "01917 Sunnyside Court"
       }, {
-        "name": "Franny Davidovich",
-        "email": "fdavidovich5@reference.com",
-        "phone": "874-834-2519",
-        "birthdate": "4/22/1986",
-        "address": "282 Huxley Circle"
+        "id": 6,
+        "name": "Liliane Tamsett",
+        "email": "ltamsett5@storify.com",
+        "phone": "656-793-8138",
+        "birthdate": "05/08/1974",
+        "address": "8963 Sunfield Terrace"
       }, {
-        "name": "Benetta Hatherill",
-        "email": "bhatherill6@about.com",
-        "phone": "858-890-2841",
-        "birthdate": "1/6/1961",
-        "address": "19 Bay Parkway"
+        "id": 7,
+        "name": "Ty Witherow",
+        "email": "twitherow6@networkadvertising.org"
       }, {
-        "name": "Betteann Chestnutt",
-        "email": "bchestnutt7@pbs.org",
-        "phone": "600-391-1848",
-        "birthdate": "2/27/1991",
-        "address": "54765 Melody Crossing"
+        "id": 8,
+        "name": "Ric Harback",
+        "email": "rharback7@tumblr.com"
       }, {
-        "name": "Zora Lawrance",
-        "email": "zlawrance8@hostgator.com",
-        "phone": "693-365-3545",
-        "birthdate": "5/28/1970",
-        "address": "890 Farwell Crossing"
+        "id": 9,
+        "name": "Felic Cannings",
+        "email": "fcannings8@google.pl",
+        "phone": "599-566-9321",
+        "birthdate": "07/06/1985",
+        "address": "165 Karstens Court"
       }, {
-        "name": "Rosella Dilloway",
-        "email": "rdilloway9@fema.gov",
-        "phone": "838-250-8269",
-        "birthdate": "10/3/1928",
-        "address": "8 Nova Plaza"
+        "id": 10,
+        "name": "Rip Willshire",
+        "email": "rwillshire9@berkeley.edu",
+        "phone": "991-473-9616",
+        "birthdate": "08/01/1978",
+        "address": "4 Drewry Hill"
+      }, {
+        "id": 11,
+        "name": "Yanaton Huie",
+        "email": "yhuiea@domainmarket.com",
+        "phone": "862-836-6455",
+        "birthdate": "07/14/1976",
+        "address": "78 Basil Park"
+      }, {
+        "id": 12,
+        "name": "Hilary Sanford",
+        "email": "hsanfordb@chron.com",
+        "phone": "197-604-7814",
+        "birthdate": "02/28/1968",
+        "address": "0 Valley Edge Junction"
+      }, {
+        "id": 13,
+        "name": "Jesselyn Swiffin",
+        "email": "jswiffinc@wired.com",
+        "phone": "296-213-7700",
+        "birthdate": "10/11/1992",
+        "address": "5644 Emmet Place"
       }];
+
+      let total = accounts.length;
 
       accounts = accounts.filter(account => {
         return account.name.indexOf(payload.search) >= 0 ||
@@ -97,7 +124,7 @@ export default {
         setTimeout(() => {
           resolve({
             accounts,
-            total: 10
+            total
           });
         }, 1500)
       })

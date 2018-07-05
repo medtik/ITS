@@ -1,7 +1,7 @@
 <template>
   <v-container>
-    <v-layout row justify-center mt-5>
-      <v-flex xs11 md4>
+    <v-layout row justify-center style="margin-top: 25%">
+      <v-flex xs12 md4>
         <v-card id="content">
           <v-layout column>
             <v-flex>

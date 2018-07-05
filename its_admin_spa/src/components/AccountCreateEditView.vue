@@ -1,5 +1,5 @@
 <template>
-  <v-container id="content">
+  <v-container id="content" fluid>
     <v-layout row pa-3>
       <v-flex xs12>
         <span class=title>Account create edit page</span>
@@ -22,8 +22,9 @@
       if (this.$route.name === 'AccountEdit') {
         if (this.$route.query) {
           this.accountId = this.$route.query.id;
+          this.mode = 'edit'
         }else{
-          this
+          //TODO some error here when no id / wrong id
         }
       }
     }

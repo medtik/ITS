@@ -1,18 +1,37 @@
 <template>
   <v-app id="v-app">
     <v-navigation-drawer app
+                         :permanent="drawer"
                          v-if="navigateAble"
                          width="200"
                          v-model="drawer">
       <v-list>
-        <v-list-tile :to="{name:'AccountList'}">
-          <v-list-tile-action>
-            <v-icon>fas fa-user</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title v-text="'Account'"></v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
+        <v-list-group>
+          <v-list-tile slot="activator">
+            <v-list-tile-action>
+              <v-icon>fas fa-user</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title>Tài khoản</v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+          <v-list-tile :to="{name:'AccountList'}">
+            <v-list-tile-action>
+              <!--Empty-->
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title v-text="'Danh sách'"></v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+          <v-list-tile :to="{name:'AccountCreate'}">
+            <v-list-tile-action>
+              <!--Empty-->
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title v-text="'Tạo mới'"></v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+        </v-list-group>
       </v-list>
     </v-navigation-drawer>
     <v-toolbar app flat color="white" v-if="navigateAble">
