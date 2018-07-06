@@ -1,7 +1,7 @@
 <template>
   <v-container id="content" fluid>
     <v-layout row pa-3 style="background-color: white" elevation-4>
-      <v-flex xs12 >
+      <v-flex xs12>
         <span class="title">Quản lí tài khoản</span>
         <v-divider class="my-3"></v-divider>
         <v-card-title>
@@ -53,12 +53,16 @@
         </v-data-table>
       </v-flex>
     </v-layout>
+    <ErrorDialog v-bind="error" v-on:close="error.dialog = false"/>
   </v-container>
 </template>
 
 <script>
+  import ErrorDialog from "./ErrorDialog";
+
   export default {
     name: "AccountListView",
+    components: {ErrorDialog},
     data() {
       return {
         loading: true,
@@ -73,41 +77,28 @@
         ],
         pagination: {},
         total: undefined,
-        searchText: ''
+        searchText: '',
+        error: {
+          dialog: false,
+          title: '',
+          message: ''
+        }
       }
     },
     watch: {
       pagination: {
         //Do not use arrow funcs
         handler: function () {
-          this.loading = true;
-          this.$store.dispatch('account/getAll', {
-            search: this.searchText,
-            pagination: this.pagination
-          })
-            .then(data => {
-              this.items = data.accounts;
-              this.total = data.total;
-              this.loading = false;
-            })
+          this.loadData();
         },
         deep: true
       }
     },
     mounted() {
-      this.loading = true;
-      this.$store.dispatch('account/getAll', {
-        search: this.searchText,
-        pagination: this.pagination
-      })
-        .then(data => {
-          this.items = data.accounts;
-          this.total = data.total;
-          this.loading = false;
-        })
+      this.loadData();
     },
     methods: {
-      onSearchEnter() {
+      loadData() {
         this.loading = true;
         this.$store.dispatch('account/getAll', {
           search: this.searchText,
@@ -118,6 +109,17 @@
             this.total = data.total;
             this.loading = false;
           })
+          .catch(error => {
+            this.error = {
+              dialog: true,
+              title: 'Chú ý',
+              message: error.message
+            };
+            // console.error('loadData', error);
+          })
+      },
+      onSearchEnter() {
+        this.loadData();
       },
       deleteItem(item) {
 

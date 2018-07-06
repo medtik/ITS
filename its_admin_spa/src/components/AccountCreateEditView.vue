@@ -22,6 +22,7 @@
                   remove: 'xóa',
                   drag: 'Hình đại diện'
                 }"
+                :zIndex="0"
                 @change="onChange"
                 @remove="onChange">
               </picture-input>
@@ -32,20 +33,22 @@
             <v-text-field label="Email" v-model="emailInput"></v-text-field>
             <v-text-field label="Điện thoại" v-model="phoneInput"></v-text-field>
             <v-text-field label="Địa chỉ" v-model="addressInput"></v-text-field>
-            <v-text-field label="Ngày sinh" v-model="birthdateInput"></v-text-field>
+            <v-text-field label="Ngày sinh" v-model="birthdateInput"
+                          type="date"></v-text-field>
           </v-flex>
 
           <v-flex>
             <v-btn color="primary"
                    v-if="mode == 'create'"
+                   :loading="this.loading.createBtn"
                    @click="onCreateClick">
               Tạo mới
             </v-btn>
             <v-btn color="success"
-                   v-else
+                   v-if="mode == 'edit'"
                    :loading="this.loading.updateBtn"
                    @click="onUpdateClick">
-              Cập nhật
+              Lưu thay đổi
             </v-btn>
             <v-btn color="secondary"
                    @click="onExitClick">
@@ -55,22 +58,26 @@
         </v-layout>
       </v-flex>
     </v-layout>
+    <ErrorDialog v-bind="error" v-on:close="error.dialog = false"/>
   </v-container>
 </template>
 
 <script>
   import PictureInput from 'vue-picture-input'
+  import ErrorDialog from "./ErrorDialog";
 
   export default {
     name: "AccountCreateEditView",
     components: {
-      PictureInput
+      PictureInput,
+      ErrorDialog
     },
     data() {
       return {
         loading: {
           page: true,
-          updateBtn: false
+          updateBtn: false,
+          createBtn: false
         },
         mode: 'create',
         accountId: '',
@@ -82,7 +89,12 @@
         birthdateInput: '',
         photoInput: '',
         // set image to this when want to add picture
-        photoPrefill: undefined
+        photoPrefill: undefined,
+        error: {
+          dialog: false,
+          title: '',
+          message: ''
+        }
       }
     },
     created() {
@@ -136,7 +148,25 @@
         this.photoInput = image;
       },
       onCreateClick() {
-
+        this.loading.createBtn = true;
+        this.$store.dispatch('account/create', {
+          name: this.nameInput,
+          email: this.emailInput,
+          phone: this.phoneInput,
+          address: this.addressInput,
+          birthdate: this.birthdateInput,
+          photo: this.photoInput
+        })
+          .then(value => {
+            this.loading.createBtn = false;
+          })
+          .catch(error => {
+            this.loading.createBtn = false;
+            this.error = {
+              dialog: true,
+              message: error.message
+            }
+          })
       },
       onUpdateClick() {
         this.loading.updateBtn = true;
@@ -150,7 +180,14 @@
           photo: this.photoInput
         })
           .then(value => {
-            this.loading.updateBtn = false
+            this.loading.updateBtn = false;
+          })
+          .catch(error => {
+            this.loading.updateBtn = false;
+            this.error = {
+              dialog: true,
+              message: error.message
+            }
           })
       },
       onExitClick() {
