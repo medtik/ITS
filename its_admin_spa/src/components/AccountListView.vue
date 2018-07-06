@@ -9,7 +9,7 @@
             v-model="searchText"
             v-on:keyup.enter="onSearchEnter"
             append-icon="search"
-            label="Search"
+            label="Tìm"
             single-line
             hide-details>
           </v-text-field>
@@ -67,15 +67,17 @@
       </v-flex>
     </v-layout>
     <ErrorDialog v-bind="error" v-on:close="error.dialog = false"/>
+    <SuccessDialog v-bind="success" v-on:close="success.dialog = false"/>
   </v-container>
 </template>
 
 <script>
   import ErrorDialog from "./ErrorDialog";
+  import SuccessDialog from "./SuccessDialog";
 
   export default {
     name: "AccountListView",
-    components: {ErrorDialog},
+    components: {ErrorDialog,SuccessDialog},
     data() {
       return {
         loading: true,
@@ -93,6 +95,11 @@
         total: undefined,
         searchText: '',
         error: {
+          dialog: false,
+          title: '',
+          message: ''
+        },
+        success: {
           dialog: false,
           title: '',
           message: ''
@@ -137,11 +144,16 @@
       },
       banClick(item) {
         this.loading = true;
-
         const handleSuccess = (account) => {
           item = {
             ...account
           };
+          let statusText = account.ban ? 'Khóa' : 'Hoạt động';
+          this.success = {
+            dialog: true,
+            message: `Tài khoản ${account.name} chuyển thành ${statusText}`
+          };
+
           this.loading = false;
         };
         const handleError = (error) => {
@@ -151,8 +163,6 @@
           };
           this.loading = false;
         };
-
-        console.log(this);
         if (item.ban) {
           this.$store.dispatch('account/unBan', {
             id: item.id

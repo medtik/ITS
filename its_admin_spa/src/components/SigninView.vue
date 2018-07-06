@@ -60,7 +60,7 @@
           .then(value => {
             this.$router.push({
               name: 'AccountList'
-            })
+            });
             this.loading.signinBtn = false;
           })
           .catch(reason => {

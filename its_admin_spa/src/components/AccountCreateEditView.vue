@@ -2,7 +2,8 @@
   <v-container id="content" fluid>
     <v-layout row pa-3>
       <v-flex xs12>
-        <span class=title>Account create edit page</span>
+        <span class=title v-if="mode == 'create'">Thêm tài khoản</span>
+        <span class=title v-if="mode == 'edit'">Chỉnh sửa tài khoản</span>
         <v-divider class="my-3"></v-divider>
         <v-progress-linear v-if="loading.page" color="primary" indeterminate></v-progress-linear>
         <v-layout column v-else>
@@ -33,7 +34,7 @@
             <v-text-field label="Email" v-model="emailInput"></v-text-field>
             <v-text-field label="Điện thoại" v-model="phoneInput"></v-text-field>
             <v-text-field label="Địa chỉ" v-model="addressInput"></v-text-field>
-            <v-text-field label="Ngày sinh" v-model="birthdateInput"
+            <v-text-field label="Ngày sinh" v-model="birthdateBrowerFormat"
                           type="date"></v-text-field>
           </v-flex>
 
@@ -59,18 +60,21 @@
       </v-flex>
     </v-layout>
     <ErrorDialog v-bind="error" v-on:close="error.dialog = false"/>
+    <SuccessDialog v-bind="success" v-on:close="success.dialog = false"/>
   </v-container>
 </template>
 
 <script>
+  import moment from 'moment';
   import PictureInput from 'vue-picture-input'
   import ErrorDialog from "./ErrorDialog";
+  import SuccessDialog from "./SuccessDialog";
 
   export default {
     name: "AccountCreateEditView",
     components: {
       PictureInput,
-      ErrorDialog
+      SuccessDialog
     },
     data() {
       return {
@@ -94,6 +98,21 @@
           dialog: false,
           title: '',
           message: ''
+        },
+        success: {
+          dialog: false,
+          title: '',
+          message: ''
+        }
+      }
+    },
+    computed: {
+      birthdateBrowerFormat: {
+        get: function () {
+          return moment(this.birthdateInput, 'MM/DD/YYYY').format('YYYY-MM-DD');
+        },
+        set: function (newValue) {
+          this.birthdateInput = moment(newValue, 'YYYY-MM-DD').format('MM/DD/YYYY');
         }
       }
     },
@@ -158,6 +177,11 @@
           photo: this.photoInput
         })
           .then(value => {
+            this.success = {
+              dialog: true,
+              message:'Tạo mới thành công'
+            };
+
             this.loading.createBtn = false;
           })
           .catch(error => {
@@ -180,6 +204,11 @@
           photo: this.photoInput
         })
           .then(value => {
+            this.success = {
+              dialog: true,
+              message:'Cập nhật thành công'
+            };
+
             this.loading.updateBtn = false;
           })
           .catch(error => {
