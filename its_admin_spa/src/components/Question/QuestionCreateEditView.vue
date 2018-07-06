@@ -4,7 +4,37 @@
       <v-flex xs12>
         <span class="title">Quản lí câu hỏi</span>
         <v-divider class="my-3"></v-divider>
-        <span class="display-1">Nội dung</span>
+        <v-progress-linear v-if="loading.page" color="primary" indeterminate></v-progress-linear>
+        <v-layout column v-else>
+          <v-flex style="width: 25rem">
+            <v-text-field label="Nội dung câu hỏi" v-model="textInput"></v-text-field>
+            <v-combobox
+              v-model="categoryInput"
+              :items="categories"
+              v-on:input="updateCategories"
+              label="Thể loại"
+              :loading="loading.categories"
+            ></v-combobox>
+          </v-flex>
+          <v-flex>
+            <v-btn color="primary"
+                   v-if="mode == 'create'"
+                   :loading="loading.createBtn"
+                   @click="onCreateClick">
+              Tạo mới
+            </v-btn>
+            <v-btn color="success"
+                   v-if="mode == 'edit'"
+                   :loading="loading.updateBtn"
+                   @click="onUpdateClick">
+              Lưu thay đổi
+            </v-btn>
+            <v-btn color="secondary"
+                   @click="onExitClick">
+              Thoát
+            </v-btn>
+          </v-flex>
+        </v-layout>
       </v-flex>
     </v-layout>
     <ErrorDialog v-bind="error" v-on:close="error.dialog = false"/>
@@ -13,6 +43,7 @@
 </template>
 
 <script>
+  import _ from 'lodash';
   import ErrorDialog from "../shared/ErrorDialog";
   import SuccessDialog from "../shared/SuccessDialog";
 
@@ -21,8 +52,19 @@
     components: {ErrorDialog, SuccessDialog},
     data() {
       return {
-        loading: true,
-
+        loading: {
+          page: true,
+          categories: true,
+          createBtn: false,
+          updateBtn: false
+        },
+        mode: 'create',
+        questionId: undefined,
+        question: undefined,
+        textInput: undefined,
+        categoryInput: undefined,
+        categories: [],
+        //boiler plane
         error: {
           dialog: false,
           title: '',
@@ -35,15 +77,97 @@
         }
       }
     },
-    watch: {
-      pagination: {
-        //Do not use arrow funcs
-        handler: function () {
-          this.loadData();
-        },
-        deep: true
+    created() {
+      if (this.$route.name === 'QuestionEdit') {
+        if (this.$route.query) {
+          this.questionId = this.$route.query.id;
+          this.mode = 'edit';
+          this.$store.dispatch('question/getById', {
+            id: this.questionId
+          })
+            .then(value => {
+              this.question = value;
+              this.fillInputs()
+                .then(() => {
+                  this.loading.page = false;
+                })
+            })
+            .catch(reason => {
+              this.error = {
+                dialog: true,
+                message: reason.message
+              }
+            })
+        } else {
+          this.error = {
+            dialog: true,
+            message: 'Đường dẫn không hợp lệ'
+          }
+        }
+      } else {
+        this.loading.page = false;
       }
+      this.updateCategories();
     },
+    methods: {
+      updateCategories(){
+        this.loading.categories = true;
+        this.$store.dispatch('question/getCategories',{
+          search: this.categoryInput
+        })
+          .then(value => {
+            this.categories = value;
+            this.loading.categories = false;
+          })
+      },
+      fillInputs() {
+        this.textInput = this.question.text;
+        this.categoryInput = this.question.category;
+        return Promise.resolve();
+      },
+      onCreateClick() {
+        this.loading.createBtn = true;
+        this.$store.dispatch('question/create', {
+          text: this.textInput,
+          category: this.categoryInput
+        }).then(question => {
+          this.success = {
+            dialog: true,
+            message: `Tạo mới thành công câu hỏi ${question.text}`
+          };
+          this.loading.createBtn = false;
+        }).catch(reason => {
+          this.error = {
+            dialog: true,
+            message: reason.message
+          };
+          this.loading.createBtn = false;
+        })
+      },
+      onUpdateClick() {
+        this.loading.updateBtn = true;
+        this.$store.dispatch('question/update', {
+          id: this.questionId,
+          text: this.textInput,
+          category: this.categoryInput
+        }).then(question => {
+          this.success = {
+            dialog: true,
+            message: `Cập nhật thành công câu hỏi ${question.text}`
+          };
+          this.loading.updateBtn = false;
+        }).catch(reason => {
+          this.error = {
+            dialog: true,
+            message: reason.message
+          };
+          this.loading.updateBtn = false;
+        })
+      },
+      onExitClick() {
+        this.$router.back();
+      }
+    }
   }
 </script>
 

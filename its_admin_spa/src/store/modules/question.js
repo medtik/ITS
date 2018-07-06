@@ -1,9 +1,9 @@
 import _question from "./Questions";
-
-function mockShell(bodyFunc) {
+import _ from 'lodash'
+function mockShell(bodyFunc, noFail) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      if (Math.random() > 0.1) {
+      if (noFail || Math.random() > 0.1) {
         //Success
         let result = bodyFunc();
         resolve(result);
@@ -58,8 +58,42 @@ export default {
         }
       });
     },
-    getById(context, payload){
-
+    getById(context, payload) {
+      return mockShell(() => {
+        return _question.find(q => q.id == payload.id);
+      })
+    },
+    getCategories(context, payload) {
+      return mockShell(() => {
+        const searchString = payload.search ? payload.search : '';
+        return _question
+          .filter(q => q.category && q.category.indexOf(searchString) >= 0)
+          .map(q => q.category)
+      }, true)
+    },
+    create(context, payload) {
+      return mockShell(() => {
+        const question = {
+          id: _question.length + 1,
+          text: payload.text,
+          category: payload.category
+        };
+        _question.push(question);
+        return question;
+      })
+    },
+    update(context, payload) {
+      return mockShell(() => {
+        const question = _question.find(q => q.id == payload.id);
+        question.text = payload.text;
+        question.category = payload.category;
+        return question;
+      })
+    },
+    delete(context,payload){
+      return mockShell(()=>{
+        _.remove(_question,q => q.id == payload.id)
+      })
     }
   }
 }

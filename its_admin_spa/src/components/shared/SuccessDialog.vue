@@ -13,7 +13,7 @@
       </v-card-text>
       <v-card-actions>
         <v-btn
-          color="error"
+          color="success"
           block
           flat
           @click="onClose">

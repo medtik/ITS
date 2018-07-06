@@ -139,7 +139,10 @@
               }
             })
         } else {
-          //TODO some error here when no id / wrong id
+          this.error = {
+            dialog: true,
+            message: 'Đường dẫn không hợp lệ'
+          }
         }
       } else {
         this.loading.page = false;

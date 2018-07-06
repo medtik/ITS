@@ -113,11 +113,26 @@ tag
               title: 'Chú ý',
               message: error.message
             };
+            this.loading = false;
             // console.error('loadData', error);
           })
       },
       onRemove(question){
-
+        this.loading = true;
+        this.$store.dispatch('question/delete', {
+          id:question.id
+        })
+          .then(value => {
+            this.pagination.page = 1;
+            this.loadData();
+          })
+          .catch(reason => {
+            this.error = {
+              dialog: true,
+              message: reason.message
+            };
+            this.loading = false;
+          })
       }
     }
   }
