@@ -95,5 +95,6 @@ export default {
         _.remove(_question,q => q.id == payload.id)
       })
     }
+
   }
 }

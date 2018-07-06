@@ -4,6 +4,21 @@
       <v-flex xs12>
         <span class="title">Quản lí câu hỏi</span>
         <v-divider class="my-3"></v-divider>
+        <v-card-title>
+          <v-text-field
+            v-model="searchText"
+            v-on:keyup.enter="onSearchEnter"
+            append-icon="search"
+            label="Tìm"
+            single-line
+            hide-details>
+          </v-text-field>
+          <v-spacer></v-spacer>
+          <v-btn color="primary"
+                 :to="{name:'QuestionCreate'}">
+            Tạo mới
+          </v-btn>
+        </v-card-title>
         <!--Content start-->
         <v-data-table
           :items="items"
@@ -116,6 +131,10 @@ tag
             this.loading = false;
             // console.error('loadData', error);
           })
+      },
+      onSearchEnter(){
+        this.pagination.page = 1;
+        this.loadData();
       },
       onRemove(question){
         this.loading = true;

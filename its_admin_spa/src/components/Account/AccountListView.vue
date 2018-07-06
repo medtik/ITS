@@ -144,6 +144,7 @@
           })
       },
       onSearchEnter() {
+        this.pagination.page = 1;
         this.loadData();
       },
       banClick(item) {

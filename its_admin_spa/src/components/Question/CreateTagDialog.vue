@@ -4,11 +4,10 @@
     v-model="dialog"
     max-width="300">
     <v-card>
-      <v-card-title class="headline" style="background-color: #3DC69E; color: white">
-        <v-spacer></v-spacer>
-        <v-icon color="white" size="60">fas fa-check</v-icon>
-        <v-spacer></v-spacer>
+      <v-card-title class="headline">
+        <span>Tạo tag mới</span>
       </v-card-title>
+      <v-divider></v-divider>
       <v-card-text class="text-xs-center text-md-left">
         <span class="body-2">{{message}}</span>
       </v-card-text>
@@ -27,11 +26,9 @@
 
 <script>
   export default {
-    name: "SuccessDialog",
+    name: "CreateTagDialog",
     props: [
       'dialog',
-      'title',
-      'message'
     ],
     methods: {
       onClose() {
