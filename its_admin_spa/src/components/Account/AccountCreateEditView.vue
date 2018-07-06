@@ -67,14 +67,15 @@
 <script>
   import moment from 'moment';
   import PictureInput from 'vue-picture-input'
-  import ErrorDialog from "./ErrorDialog";
-  import SuccessDialog from "./SuccessDialog";
+  import ErrorDialog from "../shared/ErrorDialog";
+  import SuccessDialog from "../shared/SuccessDialog";
 
   export default {
     name: "AccountCreateEditView",
     components: {
       PictureInput,
-      SuccessDialog
+      SuccessDialog,
+      ErrorDialog
     },
     data() {
       return {
@@ -109,10 +110,10 @@
     computed: {
       birthdateBrowerFormat: {
         get: function () {
-          return moment(this.birthdateInput, 'MM/DD/YYYY').format('YYYY-MM-DD');
+          return moment(this.birthdateInput, 'DD/MM/YYYY').format('YYYY-MM-DD');
         },
         set: function (newValue) {
-          this.birthdateInput = moment(newValue, 'YYYY-MM-DD').format('MM/DD/YYYY');
+          this.birthdateInput = moment(newValue, 'YYYY-MM-DD').format('DD/MM/YYYY');
         }
       }
     },

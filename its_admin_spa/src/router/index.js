@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import SigninView from '../components/SigninView'
-import AccountListView from '../components/AccountListView'
-import AccountCreateEditView from '../components/AccountCreateEditView'
+import AccountListView from '../components/Account/AccountListView'
+import AccountCreateEditView from '../components/Account/AccountCreateEditView'
 
 Vue.use(Router);
 

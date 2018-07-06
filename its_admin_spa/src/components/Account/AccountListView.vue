@@ -72,8 +72,8 @@
 </template>
 
 <script>
-  import ErrorDialog from "./ErrorDialog";
-  import SuccessDialog from "./SuccessDialog";
+  import ErrorDialog from "../shared/ErrorDialog";
+  import SuccessDialog from "../shared/SuccessDialog";
 
   export default {
     name: "AccountListView",
