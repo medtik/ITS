@@ -3,7 +3,7 @@ import _accounts from './Accounts.json';
 function mockShell(bodyFunc) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      if (Math.random() > 0.3) {
+      if (Math.random() > 0.1) {
         //Success
         let result = bodyFunc();
         resolve(result);
@@ -22,39 +22,40 @@ export default {
   namespaced: true,
   actions: {
     getAll(context, payload) {
-      let total = _accounts.length;
-      let accounts = _accounts.filter(account => {
-        return (
-          (account.name && account.name.indexOf(payload.search) >= 0) ||
-          (account.email && account.email.indexOf(payload.search) >= 0) ||
-          (account.phone && account.phone.indexOf(payload.search) >= 0) ||
-          (account.birthdate && account.birthdate.indexOf(payload.search) >= 0) ||
-          (account.address && account.address.indexOf(payload.search) >= 0)
-        )
-      });
-
-      if (payload.pagination.sortBy) {
-        accounts = accounts.sort((a, b) => {
-          const sortA = a[payload.pagination.sortBy];
-          const sortB = b[payload.pagination.sortBy];
-
-          if (payload.pagination.descending) {
-            if (sortA < sortB) return 1;
-            if (sortA > sortB) return -1;
-            return 0
-          } else {
-            if (sortA < sortB) return -1;
-            if (sortA > sortB) return 1;
-            return 0
-          }
-        })
-      }
-
-      if (payload.pagination.rowsPerPage > 0) {
-        accounts = accounts.slice((payload.pagination.page - 1) * payload.pagination.rowsPerPage, payload.pagination.page * payload.pagination.rowsPerPage)
-      }
-
       return mockShell(() => {
+        let total = _accounts.length;
+        let accounts = _accounts.filter(account => {
+          return (
+            (account.name && account.name.indexOf(payload.search) >= 0) ||
+            (account.email && account.email.indexOf(payload.search) >= 0) ||
+            (account.phone && account.phone.indexOf(payload.search) >= 0) ||
+            (account.birthdate && account.birthdate.indexOf(payload.search) >= 0) ||
+            (account.address && account.address.indexOf(payload.search) >= 0)
+          )
+        });
+
+        if (payload.pagination.sortBy) {
+          accounts = accounts.sort((a, b) => {
+            const sortA = a[payload.pagination.sortBy];
+            const sortB = b[payload.pagination.sortBy];
+
+            if (payload.pagination.descending) {
+              if (sortA < sortB) return 1;
+              if (sortA > sortB) return -1;
+              return 0
+            } else {
+              if (sortA < sortB) return -1;
+              if (sortA > sortB) return 1;
+              return 0
+            }
+          })
+        }
+
+        if (payload.pagination.rowsPerPage > 0) {
+          accounts = accounts.slice((payload.pagination.page - 1) * payload.pagination.rowsPerPage, payload.pagination.page * payload.pagination.rowsPerPage)
+        }
+
+
         return {
           accounts,
           total
@@ -81,7 +82,7 @@ export default {
         return account;
       })
     },
-    create(context,payload) {
+    create(context, payload) {
       return mockShell(() => {
         let account = {
           ...payload
@@ -89,6 +90,20 @@ export default {
         account.id = _accounts.length + 1;
 
         _accounts.push(account);
+        return account;
+      })
+    },
+    ban(context, payload) {
+      return mockShell(() => {
+        let account = _accounts.find(acc => payload.id == acc.id);
+        account.ban = true;
+        return account;
+      })
+    },
+    unBan(context, payload) {
+      return mockShell(() => {
+        let account = _accounts.find(acc => payload.id == acc.id);
+        account.ban = false;
         return account;
       })
     }

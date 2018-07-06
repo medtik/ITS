@@ -31,6 +31,19 @@
             <td>{{ props.item.phone }}</td>
             <td>{{ props.item.birthdate }}</td>
             <td>{{ props.item.address }}</td>
+            <td>
+
+              <v-chip outline disabled label color="green"
+                      v-if="!props.item.ban">
+                Hoạt động
+              </v-chip>
+              <v-chip outline disabled label color="red"
+                      v-if="props.item.ban">
+                Khóa
+              </v-chip>
+              <!--<v-label>-->
+              <!--</v-label>-->
+            </td>
             <td class="justify-center layout px-0">
               <router-link :to="{name:'AccountEdit', query:{id:props.item.id}}">
                 <v-icon
@@ -44,8 +57,8 @@
                 <v-icon
                   small
                   color="red"
-                  @click="deleteItem(props.item)">
-                  delete
+                  @click="banClick(props.item)">
+                  fas fa-ban
                 </v-icon>
               </a>
             </td>
@@ -73,6 +86,7 @@
           {text: 'Điện thoại', value: 'phone'},
           {text: 'Ngày sinh', value: 'birthdate'},
           {text: 'Địa chỉ', value: 'address'},
+          {text: 'Khóa', value: 'ban'},
           {text: 'Hành động', value: 'id', sortable: false},
         ],
         pagination: {},
@@ -121,7 +135,35 @@
       onSearchEnter() {
         this.loadData();
       },
-      deleteItem(item) {
+      banClick(item) {
+        this.loading = true;
+
+        const handleSuccess = (account) => {
+          item = {
+            ...account
+          };
+          this.loading = false;
+        };
+        const handleError = (error) => {
+          this.error = {
+            dialog: true,
+            message: error.message
+          };
+          this.loading = false;
+        };
+
+        console.log(this);
+        if (item.ban) {
+          this.$store.dispatch('account/unBan', {
+            id: item.id
+          }).then(handleSuccess)
+            .catch(handleError)
+        } else {
+          this.$store.dispatch('account/ban', {
+            id: item.id
+          }).then(handleSuccess)
+            .catch(handleError)
+        }
 
       },
     }
