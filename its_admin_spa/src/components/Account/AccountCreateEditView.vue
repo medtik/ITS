@@ -2,7 +2,7 @@
   <v-container id="content" fluid>
     <v-layout row pa-3>
       <v-flex xs12>
-        <span class=title v-if="mode == 'create'">Thêm tài khoản</span>
+        <span class=title v-if="mode == 'create'">Tạo mới tài khoản</span>
         <span class=title v-if="mode == 'edit'">Chỉnh sửa tài khoản</span>
         <v-divider class="my-3"></v-divider>
         <v-progress-linear v-if="loading.page" color="primary" indeterminate></v-progress-linear>
@@ -131,7 +131,12 @@
                 .then(() => {
                   this.loading.page = false;
                 })
-
+            })
+            .catch(reason => {
+              this.error = {
+                dialog: true,
+                message: reason.message
+              }
             })
         } else {
           //TODO some error here when no id / wrong id

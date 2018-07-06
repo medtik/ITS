@@ -6,6 +6,7 @@
                          width="200"
                          v-model="drawer">
       <v-list>
+        <!--ACCOUNT GROUP-->
         <v-list-group>
           <v-list-tile slot="activator">
             <v-list-tile-action>
@@ -17,7 +18,7 @@
           </v-list-tile>
           <v-list-tile :to="{name:'AccountList'}">
             <v-list-tile-action>
-              <!--Empty-->
+              <v-icon>fas fa-bars</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
               <v-list-tile-title v-text="'Danh sách'"></v-list-tile-title>
@@ -25,7 +26,34 @@
           </v-list-tile>
           <v-list-tile :to="{name:'AccountCreate'}">
             <v-list-tile-action>
-              <!--Empty-->
+              <v-icon>fas fa-plus</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title v-text="'Tạo mới'"></v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+        </v-list-group>
+        <!--QUESTION GROUP-->
+        <v-list-group>
+          <v-list-tile slot="activator">
+            <v-list-tile-action>
+              <v-icon>fas fa-question</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title>Câu hỏi</v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+          <v-list-tile :to="{name:'QuestionList'}">
+            <v-list-tile-action>
+              <v-icon>fas fa-bars</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title v-text="'Danh sách'"></v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+          <v-list-tile :to="{name:'QuestionCreate'}">
+            <v-list-tile-action>
+              <v-icon>fas fa-plus</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
               <v-list-tile-title v-text="'Tạo mới'"></v-list-tile-title>
@@ -34,13 +62,13 @@
         </v-list-group>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar app flat color="white" v-if="navigateAble">
+    <v-toolbar app dark v-if="navigateAble" style="background-color: #03a9f4">
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title v-text="title"></v-toolbar-title>
       <v-spacer></v-spacer>
     </v-toolbar>
     <v-content>
-      <router-view/>
+      <router-view :key="$route.fullPath"/>
     </v-content>
     <v-footer app>
       <span>&copy; 2017</span>

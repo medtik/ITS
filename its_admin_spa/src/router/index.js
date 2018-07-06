@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import SigninView from '../components/SigninView'
 import AccountListView from '../components/Account/AccountListView'
 import AccountCreateEditView from '../components/Account/AccountCreateEditView'
+import QuestionListView from '../components/Question/QuestionListView'
+import QuestionCreateEditView from '../components/Question/QuestionCreateEditView'
 
 Vue.use(Router);
 
@@ -27,6 +29,21 @@ export default new Router({
       path: '/account/edit',
       name: 'AccountEdit',
       component: AccountCreateEditView
+    },
+    {
+      path: '/question/list',
+      name: 'QuestionList',
+      component: QuestionListView
+    },{
+      path: '/question/create',
+      name: 'QuestionCreate',
+      component: QuestionCreateEditView
+    },{
+      path: '/question/edit',
+      name: 'QuestionEdit',
+      component: QuestionCreateEditView
     }
+
+
   ]
 })

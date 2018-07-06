@@ -4,6 +4,7 @@
       <v-flex xs12>
         <span class="title">Quản lí tài khoản</span>
         <v-divider class="my-3"></v-divider>
+        <!--Content start-->
         <v-card-title>
           <v-text-field
             v-model="searchText"
@@ -64,6 +65,7 @@
             </td>
           </template>
         </v-data-table>
+        <!--Content end-->
       </v-flex>
     </v-layout>
     <ErrorDialog v-bind="error" v-on:close="error.dialog = false"/>
@@ -80,6 +82,7 @@
     components: {ErrorDialog,SuccessDialog},
     data() {
       return {
+        //TABLE
         loading: true,
         items: [],
         headers: [
@@ -94,6 +97,7 @@
         pagination: {},
         total: undefined,
         searchText: '',
+        //TABLE
         error: {
           dialog: false,
           title: '',

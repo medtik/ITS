@@ -63,12 +63,9 @@ export default {
       });
     },
     getById(context, payload) {
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          let account = _accounts.find(acc => payload.id == acc.id);
-          resolve(account);
-        }, 1000)
-      })
+      return mockShell(() => {
+        return _accounts.find(acc => payload.id == acc.id);
+      });
     },
     update(context, payload) {
       return mockShell(() => {
