@@ -1,5 +1,6 @@
-import _question from "./Questions";
+import _question from "./mockdata/Questions";
 import _ from 'lodash'
+
 function mockShell(bodyFunc, noFail) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -56,12 +57,12 @@ export default {
           questions,
           total
         }
-      });
+      },true);
     },
     getById(context, payload) {
       return mockShell(() => {
         return _question.find(q => q.id == payload.id);
-      })
+      },true)
     },
     getCategories(context, payload) {
       return mockShell(() => {

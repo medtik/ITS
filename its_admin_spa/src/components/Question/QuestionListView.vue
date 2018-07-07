@@ -29,6 +29,8 @@
           <template slot="items" slot-scope="props">
             <td>{{ props.item.text }}</td>
             <td>{{ props.item.category }}</td>
+            <td>{{ props.item.area }}</td>
+            <td>{{ props.item.answers.length }}</td>
             <td class="justify-center layout px-0">
               <router-link :to="{name:'QuestionEdit', query:{id:props.item.id}}">
                 <v-icon
@@ -80,6 +82,8 @@ tag
         headers: [
           {text: 'Nội dung', value: 'text'},
           {text: 'Thể loại', value: 'category'},
+          {text: 'Khu vực', value: 'area'},
+          {text: 'Số câu trả lời', value: 'answers.length'},
           {text: 'Hành động', value: 'id', sortable: false},
         ],
         pagination: {},
