@@ -44,10 +44,10 @@
           <!--</v-card-actions>-->
         <!--</v-card>-->
       <!--</v-dialog>-->
-      <v-layout mt-5 wrap>
+      <v-layout wrap>
         <v-flex>
           <v-card-title class="headline green white--text">
-            <span>Thêm mới</span>
+            <span>Chọn thẻ</span>
           </v-card-title>
         </v-flex>
         <v-flex xs12 pa-3>

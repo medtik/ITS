@@ -6,57 +6,21 @@
                          width="200"
                          v-model="drawer">
       <v-list>
-        <!--ACCOUNT GROUP-->
-        <v-list-group>
+        <v-list-group v-for="group in navigation" :key="group.text">
           <v-list-tile slot="activator">
             <v-list-tile-action>
-              <v-icon>fas fa-user</v-icon>
+              <v-icon>{{group.icon}}</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
-              <v-list-tile-title>Tài khoản</v-list-tile-title>
+              <v-list-tile-title>{{group.text}}</v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
-          <v-list-tile :to="{name:'AccountList'}">
+          <v-list-tile v-for="item in group.items" :to="item.to" :key="item.text">
             <v-list-tile-action>
-              <v-icon>fas fa-bars</v-icon>
+              <v-icon>{{item.icon}}</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
-              <v-list-tile-title v-text="'Danh sách'"></v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
-          <v-list-tile :to="{name:'AccountCreate'}">
-            <v-list-tile-action>
-              <v-icon>fas fa-plus</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title v-text="'Tạo mới'"></v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
-        </v-list-group>
-        <!--QUESTION GROUP-->
-        <v-list-group>
-          <v-list-tile slot="activator">
-            <v-list-tile-action>
-              <v-icon>fas fa-question</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title>Câu hỏi</v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
-          <v-list-tile :to="{name:'QuestionList'}">
-            <v-list-tile-action>
-              <v-icon>fas fa-bars</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title v-text="'Danh sách'"></v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
-          <v-list-tile :to="{name:'QuestionCreate'}">
-            <v-list-tile-action>
-              <v-icon>fas fa-plus</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title v-text="'Tạo mới'"></v-list-tile-title>
+              <v-list-tile-title v-text="item.text"></v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
         </v-list-group>
@@ -83,14 +47,59 @@
         navigateAble: true,
         drawer: true,
         right: true,
-        title: 'ITS'
+        title: 'ITS',
+        navigation: [
+          {
+            text: 'Tài khoản',
+            icon: 'fas fa-user',
+            items: [
+              {
+                text: 'Danh sách',
+                icon: 'fas fa-bars',
+                to: {name: 'AccountList'}
+              },
+              {
+                text: 'Tạo mới',
+                icon: 'fas fa-plus',
+                to: {name: 'AccountCreate'}
+              }
+            ]
+          },
+          {
+            text: 'Câu hỏi',
+            icon: 'fas fa-question',
+            items: [
+              {
+                text: 'Danh sách',
+                icon: 'fas fa-bars',
+                to: {name: 'QuestionList'}
+              },
+              {
+                text: 'Tạo mới',
+                icon: 'fas fa-plus',
+                to: {name: 'QuestionCreate'}
+              }
+            ]
+          },
+          {
+            text: 'Thẻ',
+            icon: 'fas fa-tag',
+            items: [
+              {
+                text: 'Danh sách',
+                icon: 'fas fa-bars',
+                to: {name: 'TagList'}
+              }
+            ]
+          }
+        ]
       }
     },
     created() {
       this.navigateAble = this.$route.name !== "Signin"
     },
-    watch:{
-      $route (to, from){
+    watch: {
+      $route(to, from) {
         this.navigateAble = this.$route.name !== "Signin"
       }
     },
@@ -102,6 +111,7 @@
   #v-app {
     background: url("assets/budapest-hungary-magyarorszag-tajkepek-fotos-fenykepesz-fotograf-budapesta-stock-foto-kirandulas-travel-nature-photography-affarit-andras-ferencz-marosvasarhely-kolozsvar-1.jpg") center bottom;
   }
+
   #content {
     background-color: whitesmoke;
   }

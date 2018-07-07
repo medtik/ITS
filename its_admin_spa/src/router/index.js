@@ -5,6 +5,7 @@ import AccountListView from '../components/Account/AccountListView'
 import AccountCreateEditView from '../components/Account/AccountCreateEditView'
 import QuestionListView from '../components/Question/QuestionListView'
 import QuestionCreateEditView from '../components/Question/QuestionCreateEditView'
+import TagListView from '../components/Tag/TagListView'
 
 Vue.use(Router);
 
@@ -42,8 +43,10 @@ export default new Router({
       path: '/question/edit',
       name: 'QuestionEdit',
       component: QuestionCreateEditView
+    },{
+      path: '/tag/list',
+      name: 'TagList',
+      component: TagListView
     }
-
-
   ]
 })

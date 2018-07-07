@@ -2,8 +2,9 @@
   <v-container id="content" fluid>
     <v-layout row pa-3 style="background-color: white" elevation-4>
       <v-flex xs12>
-        <span class="title">Quản lí câu hỏi</span>
+        <span class="title">Quản lí thẻ</span>
         <v-divider class="my-3"></v-divider>
+        <!--Content start-->
         <v-card-title>
           <v-text-field
             v-model="searchText"
@@ -14,8 +15,7 @@
             hide-details>
           </v-text-field>
           <v-spacer></v-spacer>
-          <v-btn color="primary"
-                 :to="{name:'QuestionCreate'}">
+          <v-btn color="primary" v-on:click="onCreateClick">
             Tạo mới
           </v-btn>
         </v-card-title>
@@ -26,60 +26,61 @@
           :headers="headers"
           :loading="loading">
           <template slot="items" slot-scope="props">
-            <td>{{ props.item.text }}</td>
+            <td>{{ props.item.name }}</td>
             <td>{{ props.item.category }}</td>
-            <td>{{ props.item.answers.length }}</td>
+            <td>{{ props.item.locationCount}}</td>
             <td class="justify-center layout px-0">
-              <router-link :to="{name:'QuestionEdit', query:{id:props.item.id}}">
+              <a>
                 <v-icon
                   small
                   class="mr-2"
-                  color="green">
+                  color="green"
+                  v-on:click="onEditClick(props.item)">
                   edit
                 </v-icon>
-              </router-link>
+              </a>
               <a>
                 <v-icon
                   small
                   color="red"
-                  @click="onRemove(props.item)">
+                  v-on:click="onDeleteClick(item)">
                   delete
                 </v-icon>
               </a>
             </td>
           </template>
         </v-data-table>
+        <!--Content end-->
       </v-flex>
     </v-layout>
+    <TagCreateEditDialog
+      v-bind="createEditDialog"
+      v-on:close="createEditDialog.dialog = false"
+      v-on:edit="onDialogConfirmEdit"
+      v-on:create="onDialogConfirmCreate"
+    />
     <ErrorDialog v-bind="error" v-on:close="error.dialog = false"/>
     <SuccessDialog v-bind="success" v-on:close="success.dialog = false"/>
   </v-container>
 </template>
-<!--
-TODO
-text
-category
 
-ADVANCE
-answer
-tag
--->
 <script>
   import ErrorDialog from "../shared/ErrorDialog";
   import SuccessDialog from "../shared/SuccessDialog";
+  import TagCreateEditDialog from "./TagCreateEditDialog";
 
   export default {
-    name: "QuestionListView",
-    components: {ErrorDialog, SuccessDialog},
+    name: "TagListView",
+    components: {ErrorDialog, SuccessDialog, TagCreateEditDialog},
     data() {
       return {
         //TABLE
         loading: true,
         items: [],
         headers: [
-          {text: 'Nội dung', value: 'text'},
+          {text: 'Tên', value: 'name'},
           {text: 'Thể loại', value: 'category'},
-          {text: 'Số câu trả lời', value: 'answers.length'},
+          {text: 'Số địa điểm', value: 'locationCount'},
           {text: 'Hành động', value: 'id', sortable: false},
         ],
         pagination: {},
@@ -95,6 +96,10 @@ tag
           dialog: false,
           title: '',
           message: ''
+        },
+        createEditDialog: {
+          dialog: false,
+          item: false
         }
       }
     },
@@ -110,15 +115,15 @@ tag
     mounted() {
       this.loadData();
     },
-    methods:{
+    methods: {
       loadData() {
         this.loading = true;
-        this.$store.dispatch('question/getAll', {
+        this.$store.dispatch('tag/getAll', {
           search: this.searchText,
           pagination: this.pagination
         })
           .then(data => {
-            this.items = data.questions;
+            this.items = data.tags;
             this.total = data.total;
             this.loading = false;
           })
@@ -128,30 +133,38 @@ tag
               title: 'Chú ý',
               message: error.message
             };
-            this.loading = false;
-            // console.error('loadData', error);
           })
       },
-      onSearchEnter(){
+      onSearchEnter() {
         this.pagination.page = 1;
         this.loadData();
       },
-      onRemove(question){
+      onCreateClick() {
+        this.createEditDialog = {
+          dialog: true
+        }
+      },
+      onEditClick(item) {
+        this.createEditDialog = {
+          dialog: true,
+          item
+        }
+      },
+      onDeleteClick(item) {
         this.loading = true;
-        this.$store.dispatch('question/delete', {
-          id:question.id
-        })
-          .then(value => {
-            this.pagination.page = 1;
-            this.loadData();
-          })
-          .catch(reason => {
-            this.error = {
-              dialog: true,
-              message: reason.message
-            };
-            this.loading = false;
-          })
+        setTimeout(() => {
+          this.loading = false;
+        }, 1200)
+      },
+      onDialogConfirmCreate(item) {
+        this.createEditDialog = {
+          dialog: false
+        }
+      },
+      onDialogConfirmEdit(item) {
+        this.createEditDialog = {
+          dialog: false
+        }
       }
     }
   }
