@@ -59,6 +59,10 @@
                           </v-layout>
                         </v-flex>
                         <v-flex xs1 style="text-align: end;">
+                          <v-btn icon flat color="success"
+                          v-on:click="editAnswerDialog = true">
+                            <v-icon>edit</v-icon>
+                          </v-btn>
                           <v-btn icon flat color="red">
                             <v-icon>delete</v-icon>
                           </v-btn>
@@ -94,6 +98,22 @@
         </v-layout>
       </v-flex>
     </v-layout>
+    <v-dialog v-model="editAnswerDialog" max-width="400">
+      <v-card>
+        <v-card-title class="green">
+          <span class="title white--text">Chỉnh sửa câu trả lời</span>
+        </v-card-title>
+        <v-layout column pa-4>
+          <v-flex>
+            <v-text-field label="Tên" v-model="editedAnswer.name"></v-text-field>
+          </v-flex>
+          <v-flex>
+            <v-btn color="green" dark v-on:click="onSaveEditAnswer" >Lưu thay đổi</v-btn>
+            <v-btn color="secondary" dark v-on:click="editAnswerDialog = false">Hủy</v-btn>
+          </v-flex>
+        </v-layout>
+      </v-card>
+    </v-dialog>
     <ErrorDialog v-bind="error" v-on:close="error.dialog = false"/>
     <SuccessDialog v-bind="success" v-on:close="success.dialog = false"/>
     <TagChooseDialog v-bind="tagChoose" v-on:close="tagChoose.dialog = false"/>
@@ -136,7 +156,9 @@
         },
         tagChoose: {
           dialog: false
-        }
+        },
+        editAnswerDialog: false,
+        editedAnswer:{},
       }
     },
     computed:{
@@ -240,6 +262,9 @@
           };
           this.loading.updateBtn = false;
         })
+      },
+      onSaveEditAnswer(){
+        this.editAnswerDialog = false;
       },
       onExitClick() {
         this.$router.back();

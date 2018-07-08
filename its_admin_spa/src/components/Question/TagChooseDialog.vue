@@ -178,7 +178,7 @@
       //
       // },
       onSaveClick() {
-
+        this.$emit('close');
       },
       onCancelClick() {
         this.$emit('close');
