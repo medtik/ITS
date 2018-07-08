@@ -108,7 +108,33 @@
               }
             ]
           },
-
+          {
+            text: 'Khu vực',
+            icon: 'fas fa-map',
+            items: [
+              {
+                text: 'Danh sách',
+                icon: 'fas fa-bars',
+                to: {name: 'AreaList'}
+              },
+              {
+                text: 'Tạo mới',
+                icon: 'fas fa-plus',
+                to: {name: 'AreaCreate'}
+              }
+            ]
+          },
+          {
+            text: 'Yêu cầu',
+            icon: 'fas fa-ticket-alt',
+            items: [
+              {
+                text: 'Danh sách',
+                icon: 'fas fa-bars',
+                to: {name: 'RequestList'}
+              }
+            ]
+          }
         ]
       }
     },

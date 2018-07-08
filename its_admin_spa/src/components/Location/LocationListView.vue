@@ -1,6 +1,6 @@
 <template>
   <v-container id="content" fluid>
-    <v-layout row pa-3>
+    <v-layout row pa-3 style="background-color: white" elevation-4>
       <v-flex xs12>
         <span class=title>Danh sách địa điểm</span>
         <v-divider class="my-3"></v-divider>

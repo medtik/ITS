@@ -1,6 +1,6 @@
 <template>
   <v-container id="content" fluid>
-    <v-layout row pa-3>
+    <v-layout row pa-3 style="background-color: white" elevation-4>
       <v-flex xs12>
         <span class=title v-if="mode == 'create'">Tạo mới địa điểm</span>
         <span class=title v-if="mode == 'edit'">Chỉnh sửa địa điểm</span>

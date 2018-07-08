@@ -8,6 +8,9 @@ import QuestionCreateEditView from '../components/Question/QuestionCreateEditVie
 import TagListView from '../components/Tag/TagListView'
 import LocationListView from '../components/Location/LocationListView'
 import LocationCreateEditView from '../components/Location/LocationCreateEditView'
+import AreaListView from '../components/Area/AreaListView'
+import AreaCreateEditView from '../components/Area/AreaCreateEditView'
+import RequestListView from '../components/Request/RequestListView'
 
 Vue.use(Router);
 
@@ -67,6 +70,26 @@ export default new Router({
       path: '/location/edit',
       name: 'LocationEdit',
       component: LocationCreateEditView
+    },
+    {
+      path: '/area/list',
+      name: 'AreaList',
+      component: AreaListView
+    },
+    {
+      path: '/area/create',
+      name: 'AreaCreate',
+      component: AreaCreateEditView
+    },
+    {
+      path: '/area/edit',
+      name: 'AreaEdit',
+      component: AreaCreateEditView
+    },
+    {
+      path: '/request/list',
+      name: 'RequestList',
+      component: RequestListView
     }
   ]
 })
