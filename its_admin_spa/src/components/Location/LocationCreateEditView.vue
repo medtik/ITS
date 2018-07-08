@@ -184,7 +184,11 @@
             <span class="subheading">Đánh giá</span>
             <v-flex pl-3>
               <LocationReview
-                v-bind="{rating: 3, title:'sometitle', des:'something'}"
+                v-for="review in reviewsInput"
+                v-bind="review"
+                v-on:delete="onReviewRemove"
+                :editMode="true"
+                :key="review.id"
               />
             </v-flex>
           </v-flex>
@@ -193,16 +197,75 @@
             <v-flex pl-3>
               <TagManageSection
                 v-model="tagsInput"
+                v-bind="tagChooseDialog"
+                v-on:addTag="tagChooseDialog.dialog = true"
               />
             </v-flex>
           </v-flex>
           <v-flex my-3>
-            <span class="subheading">Ảnh</span>
-            <v-flex pl-3>
+            <span class="subheading">Hình ảnh</span>
+            <v-flex pl-3 mt-3>
+              <v-label class="subheading">Ảnh bìa</v-label>
+              <PictureInput
+                v-model="primaryPhotoInput"
+                v-bind="{
+                width:300,
+                height:300,
+                size:50,
+                text: 'Ảnh bìa'
+              }"
+              />
+            </v-flex>
 
+            <v-flex pl-3 mt-3>
+              <v-label class="subheading">Ảnh thêm</v-label>
+              <v-flex pl-3>
+                <v-layout v-if="secondaryPhotos"
+                          mb-4
+                          wrap
+                          row>
+                  <v-flex v-for="photo in secondaryPhotos"
+                          ma-2
+                          style="flex-grow: 0.05"
+                          :key="photo.id">
+                    <v-card>
+                      <v-card-media>
+                        <img :src="photo.url" width="200" height="200"/>
+                      </v-card-media>
+                      <v-card-actions>
+                        <v-btn color="red" flat block>
+                          <v-icon color="red"
+                                  class="white--text">
+                            delete
+                          </v-icon>
+                        </v-btn>
+                      </v-card-actions>
+                    </v-card>
+                  </v-flex>
+                </v-layout>
+                <PictureInput
+                  v-model="secondaryPhotoInput"
+                  v-bind="{
+                width:200,
+                height:200,
+                size:40,
+                text: 'Ảnh thêm'
+              }">
+                  <v-btn
+                    color="success"
+                    slot="extraAction"
+                    slot-scope="props"
+                    v-if="props.value"
+                    @click="secondaryConfirm(props.value)"
+                    block>
+                    <v-icon class="white--text">fas fa-file-upload</v-icon>
+                  </v-btn>
+                </PictureInput>
+              </v-flex>
             </v-flex>
           </v-flex>
-          <v-flex>
+          <v-divider/>
+          <v-flex mt-3>
             <v-btn color="primary"
                    v-if="mode == 'create'"
                    :loading="this.loading.createBtn"
@@ -231,12 +294,11 @@
 <script>
   import moment from 'moment';
   import _ from 'lodash';
-  import PictureInput from 'vue-picture-input'
+  import PictureInput from '../shared/PictureInput'
   import ErrorDialog from "../shared/ErrorDialog";
   import SuccessDialog from "../shared/SuccessDialog";
   import LocationReview from "./LocationReview";
   import TagManageSection from "../shared/TagManageSection";
-
 
   export default {
     name: "LocationCreateEditView",
@@ -269,6 +331,7 @@
         isVerifiedInput: undefined,
         isCloseInput: undefined,
         tagsInput: [],
+        reviewsInput: [],
         //BusinessHours inputs
         day1: {
           from: undefined,
@@ -298,6 +361,9 @@
           from: undefined,
           to: undefined
         },
+        primaryPhotoInput: undefined,
+        secondaryPhotoInput: undefined,
+        secondaryPhotos: undefined,
         //Dialog
         error: {
           dialog: false,
@@ -308,6 +374,9 @@
           dialog: false,
           title: '',
           message: ''
+        },
+        tagChooseDialog: {
+          dialog: false
         }
       }
     },
@@ -357,7 +426,7 @@
           this.websiteInput = location.website;
           this.phoneInput = location.phone;
           this.emailInput = location.email;
-          this.areaInput = location.area;
+          this.areaInput = 'Hà nội';
           this.tagsInput = location.tags;
           this.day1 = _.extend({}, location.businessHours[0]);
           this.day2 = _.extend({}, location.businessHours[1]);
@@ -368,12 +437,22 @@
           this.day7 = _.extend({}, location.businessHours[6]);
           this.isVerifiedInput = location.isVerified;
           this.isCloseInput = location.isClose;
-          this.nameInput = location.name;
-          this.nameInput = location.name;
-          this.nameInput = location.name;
+          this.primaryPhotoInput = location.primaryPhoto.url;
+          this.secondaryPhotos = location.photos;
+          this.reviewsInput = location.reviews;
           this.nameInput = location.name;
           resolve();
         })
+      },
+      secondaryConfirm(val) {
+        this.secondaryPhotos.push({
+          url: val
+        });
+        this.secondaryPhotoInput = undefined;
+      },
+      onReviewRemove(reviewId) {
+        this.reviewsInput = this.reviewsInput
+          .filter(review => review.id != reviewId)
       },
       onUpdateClick() {
 

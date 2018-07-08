@@ -8,26 +8,15 @@
         <v-progress-linear v-if="loading.page" color="primary" indeterminate></v-progress-linear>
         <v-layout column v-else>
           <v-flex>
-            <div style="width: 300px">
-              <picture-input
-                :prefill="photoPrefill"
-                width="300"
-                height="300"
-                accept="image/jpeg,image/png"
-                size="50"
-                :removable="true"
-                buttonClass="v-btn success"
-                removeButtonClass="v-btn danger"
-                :custom-strings="{
-                  change: 'Đổi hình',
-                  remove: 'xóa',
-                  drag: 'Hình đại diện'
-                }"
-                :zIndex="0"
-                @change="onChange"
-                @remove="onChange">
-              </picture-input>
-            </div>
+            <PictureInput
+              v-model="photoInput"
+              v-bind="{
+                width:300,
+                height:300,
+                size:50,
+                text: 'Ảnh đại diện'
+              }"
+            />
           </v-flex>
           <v-flex style="width: 25rem">
             <v-text-field label="Tên" v-model="nameInput"></v-text-field>
@@ -66,7 +55,7 @@
 
 <script>
   import moment from 'moment';
-  import PictureInput from 'vue-picture-input'
+  import PictureInput from '../shared/PictureInput'
   import ErrorDialog from "../shared/ErrorDialog";
   import SuccessDialog from "../shared/SuccessDialog";
 
@@ -157,23 +146,12 @@
             this.addressInput = this.account.address;
             this.birthdateInput = this.account.birthdate;
             this.phoneInput = this.account.phone;
-            if (this.account.photo) {
-              this.photoInput = this.account.photo;
-              this.base64toFile(this.account.photo)
-                .then(value => {
-                  this.photoPrefill = value;
-                  resolve();
-                })
-            } else {
-              resolve();
-            }
+            this.photoInput = this.account.photo;
+            resolve();
           } else {
             reject();
           }
         })
-      },
-      onChange(image) {
-        this.photoInput = image;
       },
       onCreateClick() {
         this.loading.createBtn = true;

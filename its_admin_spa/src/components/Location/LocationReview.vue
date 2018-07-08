@@ -1,37 +1,43 @@
 <template>
-  <v-container>
-    <v-layout row>
-      <v-flex xs2 class="green lighten-4">
-        <v-layout column class="green lighten-3">
-          <v-flex class="amber lighten-5" d-flex justify-center>
-            <v-avatar size="60">
-              <img src="https://picsum.photos/200/200"/>
-            </v-avatar>
-          </v-flex>
-          <v-flex class="amber lighten-3" d-flex justify-center>
-            Justin
-          </v-flex>
-        </v-layout>
-      </v-flex>
-      <v-flex xs12 class="blue lighten-1">
-        <v-layout column>
-          <v-flex class="blue lighten-4">
-            <StarRating :star-size="25" v-model="rating" read-only></StarRating>
-          </v-flex>
-          <v-flex class="blue lighten-2">
+  <v-layout row pt-3 elevation-2 class="white">
+    <v-flex xs2>
+      <v-layout column>
+        <v-flex d-flex justify-center>
+          <v-avatar size="60">
+            <img :src="user.photo"/>
+          </v-avatar>
+        </v-flex>
+        <v-flex d-flex class="text-xs-center">
+          {{user.name}}
+        </v-flex>
+      </v-layout>
+    </v-flex>
+    <v-flex :class="{xs12: !editMode, xs10: editMode}">
+      <v-layout column>
+        <v-flex mb-1>
+          <StarRating :star-size="25" v-model="rating" read-only></StarRating>
+        </v-flex>
+        <v-divider/>
+        <v-flex my-1>
             <span class="subheading">
-              Some title
+              {{title}}
             </span>
-          </v-flex>
-          <v-flex class="blue">
-            <p class="body-1">
-              dk;akd;laskdl;akdl;asdk;lka
-            </p>
-          </v-flex>
-        </v-layout>
-      </v-flex>
-    </v-layout>
-  </v-container>
+        </v-flex>
+        <v-flex>
+          <p class="body-1">
+            {{description}}
+          </p>
+        </v-flex>
+      </v-layout>
+    </v-flex>
+    <v-flex v-if="editMode" class="xs2" style="text-align: center">
+      <v-btn icon v-on:click="onDelete">
+        <v-icon color="red">
+          delete
+        </v-icon>
+      </v-btn>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
@@ -42,11 +48,19 @@
     components: {
       StarRating
     },
-    props:[
+    props: [
+      'id',
       'rating',
       'title',
-      'description '
+      'description',
+      'user',
+      'editMode'
     ],
+    methods: {
+      onDelete() {
+        this.$emit('delete', this.id);
+      }
+    }
   }
 </script>
 
