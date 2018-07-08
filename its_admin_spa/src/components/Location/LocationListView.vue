@@ -33,11 +33,11 @@
             <td>{{ props.item.phone }}</td>
             <td>{{ props.item.email }}</td>
             <td>
-              <v-chip outline disabled label color="green"
-                      v-if="props.item.isVerified">
+              <v-chip outline disabled label color="red"
+                      v-if="!props.item.isVerified">
                 Chưa xác thực
               </v-chip>
-              <v-chip outline disabled label color="red"
+              <v-chip outline disabled label color="green"
                       v-else>
                 Đã xác thực
               </v-chip>
