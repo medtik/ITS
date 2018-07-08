@@ -42,8 +42,6 @@
                       v-if="props.item.ban">
                 Khóa
               </v-chip>
-              <!--<v-label>-->
-              <!--</v-label>-->
             </td>
             <td class="justify-center layout px-0">
               <router-link :to="{name:'AccountEdit', query:{id:props.item.id}}">
@@ -82,7 +80,7 @@
     components: {ErrorDialog,SuccessDialog},
     data() {
       return {
-        //TABLE
+        //TABLE START
         loading: true,
         items: [],
         headers: [
@@ -97,7 +95,8 @@
         pagination: {},
         total: undefined,
         searchText: '',
-        //TABLE
+        //TABLE END
+        //DIALOG START
         error: {
           dialog: false,
           title: '',
@@ -108,6 +107,7 @@
           title: '',
           message: ''
         }
+        //DIALOG END
       }
     },
     watch: {

@@ -6,6 +6,8 @@ import AccountCreateEditView from '../components/Account/AccountCreateEditView'
 import QuestionListView from '../components/Question/QuestionListView'
 import QuestionCreateEditView from '../components/Question/QuestionCreateEditView'
 import TagListView from '../components/Tag/TagListView'
+import LocationListView from '../components/Location/LocationListView'
+import LocationCreateEditView from '../components/Location/LocationCreateEditView'
 
 Vue.use(Router);
 
@@ -35,18 +37,36 @@ export default new Router({
       path: '/question/list',
       name: 'QuestionList',
       component: QuestionListView
-    },{
+    },
+    {
       path: '/question/create',
       name: 'QuestionCreate',
       component: QuestionCreateEditView
-    },{
+    },
+    {
       path: '/question/edit',
       name: 'QuestionEdit',
       component: QuestionCreateEditView
-    },{
+    },
+    {
       path: '/tag/list',
       name: 'TagList',
       component: TagListView
+    },
+    {
+      path: '/location/list',
+      name: 'LocationList',
+      component: LocationListView
+    },
+    {
+      path: '/location/create',
+      name: 'LocationCreate',
+      component: LocationCreateEditView
+    },
+    {
+      path: '/location/edit',
+      name: 'LocationEdit',
+      component: LocationCreateEditView
     }
   ]
 })

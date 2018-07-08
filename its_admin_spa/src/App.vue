@@ -91,7 +91,24 @@
                 to: {name: 'TagList'}
               }
             ]
-          }
+          },
+          {
+            text: 'Địa điểm',
+            icon: 'fas fa-map-marked-alt',
+            items: [
+              {
+                text: 'Danh sách',
+                icon: 'fas fa-bars',
+                to: {name: 'LocationList'}
+              },
+              {
+                text: 'Tạo mới',
+                icon: 'fas fa-plus',
+                to: {name: 'LocationCreate'}
+              }
+            ]
+          },
+
         ]
       }
     },
