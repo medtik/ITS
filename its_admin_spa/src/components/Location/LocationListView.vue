@@ -52,16 +52,6 @@
                 Đóng cửa
               </v-chip>
             </td>
-            <td>
-              <v-chip outline disabled label color="green"
-                      v-if="!props.item.isDeleted">
-                Hoạt động
-              </v-chip>
-              <v-chip outline disabled label color="red"
-                      v-else>
-                Đã xóa
-              </v-chip>
-            </td>
             <td>{{ props.item.area }}</td>
 
             <td class="justify-center layout px-0">
@@ -131,7 +121,6 @@ photo
           {text: 'Email', value: 'email'},
           {text: 'Xác thực', value: 'isVerified'},
           {text: 'Đóng cửa', value: 'isClosed'},
-          {text: 'Xóa', value: 'isDeleted'},
           {text: 'Khu vực', value: 'area'},
           {text: 'Hành động', value: 'id', sortable: false},
         ],

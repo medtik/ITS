@@ -33,7 +33,7 @@
                           single-line
                         ></v-text-field>
                         <v-btn icon flat color="green"
-                        v-on:click="onAddQuestionClick">
+                               v-on:click="onAddQuestionClick">
                           <v-icon>fas fa-plus</v-icon>
                         </v-btn>
                       </v-layout>
@@ -47,20 +47,16 @@
                               <span class="subheading">{{answer.text}}</span>
                             </v-flex>
                             <v-flex mt-2>
-                              <v-btn icon color="success" v-on:click="onAddTagClick">
-                                <v-icon small>fas fa-plus</v-icon>
-                              </v-btn>
-                              <v-chip close
-                                      v-for="tag in answer.tags"
-                                      :key="tag.id">
-                                {{tag.name}}
-                              </v-chip>
+                              <TagManageSection
+                                v-model="answer.tags"
+                                v-on:addTag="onAddTagClick"
+                              />
                             </v-flex>
                           </v-layout>
                         </v-flex>
                         <v-flex xs1 style="text-align: end;">
                           <v-btn icon flat color="success"
-                          v-on:click="editAnswerDialog = true">
+                                 v-on:click="editAnswerDialog = true">
                             <v-icon>edit</v-icon>
                           </v-btn>
                           <v-btn icon flat color="red">
@@ -108,7 +104,7 @@
             <v-text-field label="Tên" v-model="editedAnswer.name"></v-text-field>
           </v-flex>
           <v-flex>
-            <v-btn color="green" dark v-on:click="onSaveEditAnswer" >Lưu thay đổi</v-btn>
+            <v-btn color="green" dark v-on:click="onSaveEditAnswer">Lưu thay đổi</v-btn>
             <v-btn color="secondary" dark v-on:click="editAnswerDialog = false">Hủy</v-btn>
           </v-flex>
         </v-layout>
@@ -123,11 +119,18 @@
 <script>
   import ErrorDialog from "../shared/ErrorDialog";
   import SuccessDialog from "../shared/SuccessDialog";
-  import TagChooseDialog from "./TagChooseDialog";
+  import TagChooseDialog from "../shared/TagChooseDialog";
+  import TagManageSection from "../shared/TagManageSection";
+
 
   export default {
     name: "QuestionCreateEditView",
-    components: {ErrorDialog, SuccessDialog, TagChooseDialog},
+    components: {
+      ErrorDialog,
+      SuccessDialog,
+      TagChooseDialog,
+      TagManageSection
+    },
     data() {
       return {
         loading: {
@@ -158,11 +161,10 @@
           dialog: false
         },
         editAnswerDialog: false,
-        editedAnswer:{},
+        editedAnswer: {},
       }
     },
-    computed:{
-    },
+    computed: {},
     created() {
       if (this.$route.name === 'QuestionEdit') {
         if (this.$route.query) {
@@ -219,7 +221,7 @@
           dialog: true
         }
       },
-      onAddQuestionClick(){
+      onAddQuestionClick() {
         this.question.answers.push({
           text: this.answerTextInput
         })
@@ -263,7 +265,7 @@
           this.loading.updateBtn = false;
         })
       },
-      onSaveEditAnswer(){
+      onSaveEditAnswer() {
         this.editAnswerDialog = false;
       },
       onExitClick() {

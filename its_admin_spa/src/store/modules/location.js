@@ -53,12 +53,14 @@ export default {
           locations,
           total
         }
-      },true);
+      }, true);
     },
     getById(context, payload) {
       return mockShell(() => {
-        return _locations.find(q => q.id == payload.id);
-      },true)
+        return {
+          location: _locations.find(q => q.id == payload.id)
+        };
+      }, true)
     },
     create(context, payload) {
       return mockShell(() => {
@@ -69,8 +71,8 @@ export default {
       return mockShell(() => {
       })
     },
-    delete(context,payload){
-      return mockShell(()=>{
+    delete(context, payload) {
+      return mockShell(() => {
 
       })
     }
