@@ -8,7 +8,7 @@
           </v-avatar>
         </v-flex>
         <v-flex d-flex class="text-xs-center">
-          {{user.name}}
+          <span>{{user.name}}</span>
         </v-flex>
       </v-layout>
     </v-flex>

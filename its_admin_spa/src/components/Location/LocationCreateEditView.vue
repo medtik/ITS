@@ -182,7 +182,7 @@
   import PictureInput from '../shared/PictureInput'
   import ErrorDialog from "../shared/ErrorDialog";
   import SuccessDialog from "../shared/SuccessDialog";
-  import LocationReview from "./LocationReview";
+  import LocationReview from "../shared/LocationReview";
   import TagManageSection from "../shared/TagManageSection";
 
   export default {

@@ -5,10 +5,10 @@
         <span class="title">Quản lí Yêu cầu</span>
         <v-divider class="my-3"></v-divider>
         <v-layout row wrap>
-          <v-flex ma-1 sm12 md8 lg5
+          <v-flex pa-1 sm12 md8 lg6
                   v-for="request in requests"
                   :key="request.id">
-            <RequestClaimOwner v-bind="request"/>
+            <RequestReportReview v-bind="request"/>
           </v-flex>
         </v-layout>
       </v-flex>
@@ -21,9 +21,10 @@
 <script>
   import RequestChangeLocationInfo from "./RequestChangeLocationInfo";
   import RequestClaimOwner from "./RequestClaimOwner";
+  import RequestReportReview from "./RequestReportReview";
   import ErrorDialog from "../shared/ErrorDialog";
   import SuccessDialog from "../shared/SuccessDialog";
-  import _requests from '../../store/modules/mockdata/ClaimOwnerRequests'
+  import _requests from '../../store/modules/mockdata/ReportReviewRequest'
 
   export default {
     name: "RequestListView",
@@ -31,7 +32,8 @@
       ErrorDialog,
       SuccessDialog,
       RequestChangeLocationInfo,
-      RequestClaimOwner
+      RequestClaimOwner,
+      RequestReportReview
     },
     data() {
       return {

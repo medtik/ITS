@@ -5,7 +5,7 @@
               style="align-items: center; grid-area: user">
       <v-flex>
         <v-avatar>
-          <img :src="user.photoUrl">
+          <img :src="user.photo">
         </v-avatar>
       </v-flex>
       <v-flex>
