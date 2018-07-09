@@ -10,7 +10,7 @@ function mockShell(bodyFunc) {
       } else {
         //error
         reject({
-          message: 'Sai mật khẩu'
+          message: 'Có lỗi xẩy ra'
         })
       }
 

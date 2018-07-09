@@ -59,125 +59,9 @@
           <v-flex my-3>
             <span class="subheading">Thời gian hoạt động</span>
             <v-flex pl-3 mt-2>
-              <v-layout row style="align-items: baseline">
-                <v-flex xs2>
-                  <v-label>Chủ nhật</v-label>
-                </v-flex>
-                <v-flex>
-                  <v-text-field
-                    label="Mở cửa"
-                    v-model="day1.from"
-                    placeholder="Giờ:phút"/>
-                </v-flex>
-                <v-flex>
-                  <v-text-field
-                    label="Đóng cửa"
-                    v-model="day1.to"
-                    placeholder="Giờ:phút"/>
-                </v-flex>
-              </v-layout>
-              <v-layout row style="align-items: baseline">
-                <v-flex xs2>
-                  <v-label>Thứ 2</v-label>
-                </v-flex>
-                <v-flex>
-                  <v-text-field
-                    label="Mở cửa"
-                    v-model="day2.from"
-                    placeholder="Giờ:phút"/>
-                </v-flex>
-                <v-flex>
-                  <v-text-field
-                    label="Đóng cửa"
-                    v-model="day2.to"
-                    placeholder="Giờ:phút"/>
-                </v-flex>
-              </v-layout>
-              <v-layout row style="align-items: baseline">
-                <v-flex xs2>
-                  <v-label>Thứ 3</v-label>
-                </v-flex>
-                <v-flex>
-                  <v-text-field
-                    label="Mở cửa"
-                    v-model="day3.from"
-                    placeholder="Giờ:phút"/>
-                </v-flex>
-                <v-flex>
-                  <v-text-field
-                    label="Đóng cửa"
-                    v-model="day3.to"
-                    placeholder="Giờ:phút"/>
-                </v-flex>
-              </v-layout>
-              <v-layout row style="align-items: baseline">
-                <v-flex xs2>
-                  <v-label>Thứ 4</v-label>
-                </v-flex>
-                <v-flex>
-                  <v-text-field
-                    label="Mở cửa"
-                    v-model="day4.from"
-                    placeholder="Giờ:phút"/>
-                </v-flex>
-                <v-flex>
-                  <v-text-field
-                    label="Đóng cửa"
-                    v-model="day4.to"
-                    placeholder="Giờ:phút"/>
-                </v-flex>
-              </v-layout>
-              <v-layout row style="align-items: baseline">
-                <v-flex xs2>
-                  <v-label>Thứ 5</v-label>
-                </v-flex>
-                <v-flex>
-                  <v-text-field
-                    label="Mở cửa"
-                    v-model="day4.from"
-                    placeholder="Giờ:phút"/>
-                </v-flex>
-                <v-flex>
-                  <v-text-field
-                    label="Đóng cửa"
-                    v-model="day4.from"
-                    placeholder="Giờ:phút"/>
-                </v-flex>
-              </v-layout>
-              <v-layout row style="align-items: baseline">
-                <v-flex xs2>
-                  <v-label>Thứ 6</v-label>
-                </v-flex>
-                <v-flex>
-                  <v-text-field
-                    label="Mở cửa"
-                    v-model="day6.from"
-                    placeholder="Giờ:phút"/>
-                </v-flex>
-                <v-flex>
-                  <v-text-field
-                    label="Đóng cửa"
-                    v-model="day6.from"
-                    placeholder="Giờ:phút"/>
-                </v-flex>
-              </v-layout>
-              <v-layout row style="align-items: baseline">
-                <v-flex xs2>
-                  <v-label>Thứ 7</v-label>
-                </v-flex>
-                <v-flex>
-                  <v-text-field
-                    label="Mở cửa"
-                    v-model="day7.from"
-                    placeholder="Giờ:phút"/>
-                </v-flex>
-                <v-flex>
-                  <v-text-field
-                    label="Đóng cửa"
-                    v-model="day7.from"
-                    placeholder="Giờ:phút"/>
-                </v-flex>
-              </v-layout>
+              <LocationBusinessHoursInput
+                v-model="businessHoursInput"
+              />
             </v-flex>
           </v-flex>
           <v-flex my-3>
@@ -294,6 +178,7 @@
 <script>
   import moment from 'moment';
   import _ from 'lodash';
+  import LocationBusinessHoursInput from "../shared/LocationBusinessHoursInput";
   import PictureInput from '../shared/PictureInput'
   import ErrorDialog from "../shared/ErrorDialog";
   import SuccessDialog from "../shared/SuccessDialog";
@@ -307,7 +192,8 @@
       ErrorDialog,
       SuccessDialog,
       PictureInput,
-      TagManageSection
+      TagManageSection,
+      LocationBusinessHoursInput
     },
     data() {
       return {
@@ -333,33 +219,35 @@
         tagsInput: [],
         reviewsInput: [],
         //BusinessHours inputs
-        day1: {
-          from: undefined,
-          to: undefined
-        },
-        day2: {
-          from: undefined,
-          to: undefined
-        },
-        day3: {
-          from: undefined,
-          to: undefined
-        },
-        day4: {
-          from: undefined,
-          to: undefined
-        },
-        day5: {
-          from: undefined,
-          to: undefined
-        },
-        day6: {
-          from: undefined,
-          to: undefined
-        },
-        day7: {
-          from: undefined,
-          to: undefined
+        businessHoursInput:{
+          day1: {
+            from: undefined,
+            to: undefined
+          },
+          day2: {
+            from: undefined,
+            to: undefined
+          },
+          day3: {
+            from: undefined,
+            to: undefined
+          },
+          day4: {
+            from: undefined,
+            to: undefined
+          },
+          day5: {
+            from: undefined,
+            to: undefined
+          },
+          day6: {
+            from: undefined,
+            to: undefined
+          },
+          day7: {
+            from: undefined,
+            to: undefined
+          },
         },
         primaryPhotoInput: undefined,
         secondaryPhotoInput: undefined,
@@ -428,13 +316,13 @@
           this.emailInput = location.email;
           this.areaInput = 'Hà nội';
           this.tagsInput = location.tags;
-          this.day1 = _.extend({}, location.businessHours[0]);
-          this.day2 = _.extend({}, location.businessHours[1]);
-          this.day3 = _.extend({}, location.businessHours[2]);
-          this.day4 = _.extend({}, location.businessHours[3]);
-          this.day5 = _.extend({}, location.businessHours[4]);
-          this.day6 = _.extend({}, location.businessHours[5]);
-          this.day7 = _.extend({}, location.businessHours[6]);
+          this.businessHoursInput.day1 = _.extend({}, location.businessHours[0]);
+          this.businessHoursInput.day2 = _.extend({}, location.businessHours[1]);
+          this.businessHoursInput.day3 = _.extend({}, location.businessHours[2]);
+          this.businessHoursInput.day4 = _.extend({}, location.businessHours[3]);
+          this.businessHoursInput.day5 = _.extend({}, location.businessHours[4]);
+          this.businessHoursInput.day6 = _.extend({}, location.businessHours[5]);
+          this.businessHoursInput.day7 = _.extend({}, location.businessHours[6]);
           this.isVerifiedInput = location.isVerified;
           this.isCloseInput = location.isClose;
           this.primaryPhotoInput = location.primaryPhoto.url;
