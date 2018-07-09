@@ -9,10 +9,16 @@
         </v-avatar>
       </v-flex>
       <v-flex>
-        <v-label>{{user.name}}</v-label>
+        <span class="body-1">{{user.name}}</span>
       </v-flex>
       <v-flex>
         <v-chip v-if="isOwner" label outline color="primary">Chủ địa điểm này</v-chip>
+      </v-flex>
+      <v-flex>
+        <v-label class="caption">{{user.phone}}</v-label>
+      </v-flex>
+      <v-flex>
+        <v-label class="caption">{{user.email}}</v-label>
       </v-flex>
     </v-layout>
     <v-layout style="grid-area: summary" column>
@@ -77,7 +83,7 @@
       'user',
       'title',
       'status',
-      'isOwner'
+      'isOwner',
     ],
     data(){
       return {
@@ -91,7 +97,7 @@
   .request-layout {
     display: grid;
     grid-template-columns: 25% 40% 35%;
-    grid-template-rows: 4rem 4rem auto;
+    grid-template-rows: 6rem 4rem auto;
     grid-template-areas: "user summary summary" "user status action" "detail detail detail";
     grid-row-gap: 0.5rem;
   }

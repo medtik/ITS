@@ -14,6 +14,18 @@
             hide-details>
           </v-text-field>
           <v-spacer></v-spacer>
+          <v-layout column>
+            <v-flex mb-1>
+              <v-label>Lọc yêu cầu</v-label>
+            </v-flex>
+            <v-flex ml-3  >
+              <v-checkbox label="Thay đổi thông tin địa điểm" v-model="filter.changeLocationInfo"/>
+              <v-checkbox label="Làm chủ địa điểm" v-model="filter.claimOwner"/>
+              <v-checkbox label="Báo cáo đánh giá" v-model="filter.reportReview"/>
+              <v-checkbox label="Đã xử lí" v-model="filter.done"/>
+            </v-flex>
+
+          </v-layout>
         </v-card-title>
         <v-layout row wrap>
           <v-flex pa-1 sm12 md8 lg6
@@ -49,6 +61,12 @@
     data() {
       return {
         requests: _requests,
+        filter: {
+          changeLocationInfo: true,
+          claimOwner: true,
+          reportReview: true,
+          done: false
+        },
         loading: true,
         searchText: '',
         //DIALOG START
@@ -65,8 +83,8 @@
         //DIALOG END;
       }
     },
-    methods:{
-      onSearchEnter(){
+    methods: {
+      onSearchEnter() {
 
       }
     }
