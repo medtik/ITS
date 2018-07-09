@@ -9,6 +9,7 @@
           label="Mở cửa"
           v-model="day1.from"
           @input="onInputChange"
+          :readonly="readonly"
           placeholder="Giờ:phút"/>
       </v-flex>
       <v-flex>
@@ -16,6 +17,7 @@
           label="Đóng cửa"
           v-model="day1.to"
           @input="onInputChange"
+          :readonly="readonly"
           placeholder="Giờ:phút"/>
       </v-flex>
     </v-layout>
@@ -28,6 +30,7 @@
           label="Mở cửa"
           v-model="day2.from"
           @input="onInputChange"
+          :readonly="readonly"
           placeholder="Giờ:phút"/>
       </v-flex>
       <v-flex>
@@ -35,6 +38,7 @@
           label="Đóng cửa"
           v-model="day2.to"
           @input="onInputChange"
+          :readonly="readonly"
           placeholder="Giờ:phút"/>
       </v-flex>
     </v-layout>
@@ -47,6 +51,7 @@
           label="Mở cửa"
           v-model="day3.from"
           @input="onInputChange"
+          :readonly="readonly"
           placeholder="Giờ:phút"/>
       </v-flex>
       <v-flex>
@@ -54,6 +59,7 @@
           label="Đóng cửa"
           v-model="day3.to"
           @input="onInputChange"
+          :readonly="readonly"
           placeholder="Giờ:phút"/>
       </v-flex>
     </v-layout>
@@ -66,6 +72,7 @@
           label="Mở cửa"
           v-model="day4.from"
           @input="onInputChange"
+          :readonly="readonly"
           placeholder="Giờ:phút"/>
       </v-flex>
       <v-flex>
@@ -73,6 +80,7 @@
           label="Đóng cửa"
           v-model="day4.to"
           @input="onInputChange"
+          :readonly="readonly"
           placeholder="Giờ:phút"/>
       </v-flex>
     </v-layout>
@@ -85,6 +93,7 @@
           label="Mở cửa"
           v-model="day5.from"
           @input="onInputChange"
+          :readonly="readonly"
           placeholder="Giờ:phút"/>
       </v-flex>
       <v-flex>
@@ -92,6 +101,7 @@
           label="Đóng cửa"
           v-model="day5.from"
           @input="onInputChange"
+          :readonly="readonly"
           placeholder="Giờ:phút"/>
       </v-flex>
     </v-layout>
@@ -104,6 +114,7 @@
           label="Mở cửa"
           v-model="day6.from"
           @input="onInputChange"
+          :readonly="readonly"
           placeholder="Giờ:phút"/>
       </v-flex>
       <v-flex>
@@ -111,6 +122,7 @@
           label="Đóng cửa"
           v-model="day6.from"
           @input="onInputChange"
+          :readonly="readonly"
           placeholder="Giờ:phút"/>
       </v-flex>
     </v-layout>
@@ -123,6 +135,7 @@
           label="Mở cửa"
           v-model="day7.from"
           @input="onInputChange"
+          :readonly="readonly"
           placeholder="Giờ:phút"/>
       </v-flex>
       <v-flex>
@@ -130,6 +143,7 @@
           label="Đóng cửa"
           v-model="day7.from"
           @input="onInputChange"
+          :readonly="readonly"
           placeholder="Giờ:phút"/>
       </v-flex>
     </v-layout>
@@ -142,7 +156,8 @@
   export default {
     name: "LocationBusinessHoursInput",
     props: [
-      'value'
+      'value',
+      'readonly'
     ],
     data() {
       return {

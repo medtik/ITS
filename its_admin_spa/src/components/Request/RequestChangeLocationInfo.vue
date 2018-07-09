@@ -1,34 +1,43 @@
 <template>
-  <Request :user="user" :location="location" :status="status">
+  <Request :user="user"
+           :isOwner="isOwner"
+           :title="title"
+           :status="status">
     <template slot="detail">
       <v-text-field
         label="Tên"
         v-model="nameInput"
+        readonly
       />
       <v-text-field
         label="Địa chỉ"
         v-model="addressInput"
+        readonly
       />
-      <v-text-field
+      <v-textarea
         label="Mô tả"
         v-model="descriptionInput"
+        readonly
       />
       <v-text-field
         label="Website"
         v-model="websiteInput"
+        readonly
       />
       <v-text-field
         label="Điện thoại"
         v-model="phoneInput"
+        readonly
       />
       <v-text-field
         label="Email"
         v-model="emailInput"
+        readonly
       />
       <!--Business hours-->
-      <LocationBusinessHoursInput v-model="businessHoursInput"/>
+      <LocationBusinessHoursInput v-model="businessHoursInput" readonly/>
       <!--Tags-->
-      <TagManageSection v-model="tagsInput"/>
+      <TagManageSection v-model="tagsInput" readonly/>
     </template>
   </Request>
 </template>
@@ -41,6 +50,7 @@
   export default {
     name: "RequestChangeLocationInfo",
     props: [
+      'isOwner',
       'user',
       'location',
       'status',
@@ -55,6 +65,7 @@
     ],
     data() {
       return {
+        title:'',
         nameInput: undefined,
         addressInput: undefined,
         descriptionInput: undefined,
@@ -66,6 +77,7 @@
       }
     },
     created(){
+      this.title = `Yêu cầu thay đổi thông tin địa điểm ${this.location.name}`;
       this.setInputs();
     },
     components: {

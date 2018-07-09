@@ -2,10 +2,13 @@
   <v-container fluid pa-1>
     <v-layout row>
       <v-flex>
-        <v-btn icon color="success" v-on:click="onAddTagClick">
+        <v-btn icon
+               v-if="readonly != ''"
+               color="success"
+               v-on:click="onAddTagClick">
           <v-icon small>fas fa-plus</v-icon>
         </v-btn>
-        <v-chip close
+        <v-chip :close="readonly != ''"
                 v-for="tag in tags"
                 @input="onRemove(tag)"
                 :key="tag.id">
@@ -22,7 +25,8 @@
   export default {
     name: "ManageTagSection",
     props: [
-      'value'
+      'value',
+      'readonly'
     ],
     computed: {
       tags() {

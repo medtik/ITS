@@ -1,5 +1,6 @@
 <template>
   <v-layout class="request-layout" elevation-2 pa-2>
+    <!--TODO find a way to separate each request more clearly-->
     <v-layout d-flex column
               style="align-items: center; grid-area: user">
       <v-flex>
@@ -10,10 +11,13 @@
       <v-flex>
         <v-label>{{user.name}}</v-label>
       </v-flex>
+      <v-flex>
+        <v-chip v-if="isOwner" label outline color="primary">Chủ địa điểm này</v-chip>
+      </v-flex>
     </v-layout>
     <v-layout style="grid-area: summary" column>
       <span class="subheading">
-        Yêu cầu thay đổi thông tin địa điểm {{location.name}}
+        {{title}}
       </span>
       <v-flex d-flex style="align-items: center">
         <v-divider/>
@@ -51,11 +55,11 @@
         </v-btn>
       </v-flex>
     </v-layout>
-    <v-layout style="grid-area: detail">
+    <v-layout style="grid-area: detail" mt-2>
       <v-card flat style="width: 100%">
         <v-card-title style="padding: 0">
           <v-btn block flat v-on:click="openDetail = !openDetail">
-            <v-label>Chi tiết thêm</v-label>
+            <v-label>Thông tin chi tiết</v-label>
           </v-btn>
         </v-card-title>
         <v-card-text v-show="openDetail">
@@ -71,8 +75,9 @@
     name: "Request",
     props: [
       'user',
-      'location',
-      'status'
+      'title',
+      'status',
+      'isOwner'
     ],
     data(){
       return {
