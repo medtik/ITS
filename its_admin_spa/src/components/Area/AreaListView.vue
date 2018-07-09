@@ -4,6 +4,54 @@
       <v-flex xs12>
         <span class="title">Quản lí Khu vực</span>
         <v-divider class="my-3"></v-divider>
+        <!--Content start-->
+        <v-card-title>
+          <v-text-field
+            v-model="searchText"
+            v-on:keyup.enter="onSearchEnter"
+            append-icon="search"
+            label="Tìm"
+            single-line
+            hide-details>
+          </v-text-field>
+          <v-spacer></v-spacer>
+          <v-btn color="primary"
+                 :to="{name:'AreaCreate'}">
+            Tạo mới
+          </v-btn>
+        </v-card-title>
+        <v-data-table
+          :items="items"
+          :total-items="total"
+          :pagination.sync="pagination"
+          :headers="headers"
+          :loading="loading">
+          <template slot="items" slot-scope="props">
+            <td>{{ props.item.name }}</td>
+            <td>{{ props.item.locationCount }}</td>
+            <td>{{ props.item.planCount }}</td>
+            <td>{{ props.item.questions.length }}</td>
+            <td class="justify-center layout px-0">
+              <router-link :to="{name:'AreaEdit', query:{id:props.item.id}}">
+                <v-icon
+                  small
+                  class="mr-2"
+                  color="green">
+                  edit
+                </v-icon>
+              </router-link>
+              <a>
+                <v-icon
+                  small
+                  color="red"
+                  @click="onDeleteClick(props.item)">
+                  delete
+                </v-icon>
+              </a>
+            </td>
+          </template>
+        </v-data-table>
+        <!--Content end-->
       </v-flex>
     </v-layout>
     <ErrorDialog v-bind="error" v-on:close="error.dialog = false"/>
@@ -30,7 +78,20 @@ question
     components: {ErrorDialog, SuccessDialog},
     data() {
       return {
+        //TABLE START
         loading: true,
+        items: [],
+        headers: [
+          {text: 'Tên', value: 'name'},
+          {text: 'Số địa điểm', value: 'locationCount'},
+          {text: 'Số chuyến đi', value: 'planCount'},
+          {text: 'Số câu hỏi', value: 'questionCount'},
+          {text: 'Hành động', value: 'id', sortable: false},
+        ],
+        pagination: {},
+        total: undefined,
+        searchText: '',
+        //TABLE END
         //DIALOG START
         error: {
           dialog: false,
@@ -44,7 +105,63 @@ question
         }
         //DIALOG END;
       }
-    }
+    },
+    watch: {
+      pagination: {
+        //Do not use arrow funcs
+        handler: function () {
+          this.loadData();
+        },
+        deep: true
+      }
+    },
+    mounted() {
+      this.loadData();
+    },
+    methods: {
+      loadData() {
+        this.loading = true;
+        this.$store.dispatch('area/getAll', {
+          search: this.searchText,
+          pagination: this.pagination
+        })
+          .then(data => {
+            this.items = data.areas;
+            this.total = data.total;
+            this.loading = false;
+          })
+          .catch(error => {
+            this.error = {
+              dialog: true,
+              title: 'Chú ý',
+              message: error.message
+            };
+            // console.error('loadData', error);
+          })
+      },
+      onSearchEnter() {
+        this.pagination.page = 1;
+        this.loadData();
+      },
+      onDeleteClick(item) {
+        this.loading = true;
+        this.$store.dispatch('area/delete', {...item})
+          .then(area => {
+            this.success = {
+              dialog: true,
+              message: `Xóa thành công khu vực ${area.name}`
+            };
+            this.loading = false;
+          })
+          .catch(reason => {
+            this.error = {
+              dialog: true,
+              ...reason
+            }
+          })
+      }
+    },
+
   }
 </script>
 

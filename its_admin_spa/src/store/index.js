@@ -5,6 +5,8 @@ import AccountModule from "./modules/account"
 import QuestionModule from "./modules/question"
 import TagModule from "./modules/tag"
 import LocationModule from "./modules/location"
+import AreaModule from "./modules/area"
+
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
@@ -14,6 +16,7 @@ const store = new Vuex.Store({
     question: QuestionModule,
     tag: TagModule,
     location: LocationModule,
+    area: AreaModule
   }
 });
 
