@@ -4,6 +4,17 @@
       <v-flex xs12>
         <span class="title">Quản lí Yêu cầu</span>
         <v-divider class="my-3"></v-divider>
+        <v-card-title>
+          <v-text-field
+            v-model="searchText"
+            v-on:keyup.enter="onSearchEnter"
+            append-icon="search"
+            label="Tìm"
+            single-line
+            hide-details>
+          </v-text-field>
+          <v-spacer></v-spacer>
+        </v-card-title>
         <v-layout row wrap>
           <v-flex pa-1 sm12 md8 lg6
                   v-for="request in requests"
@@ -39,6 +50,7 @@
       return {
         requests: _requests,
         loading: true,
+        searchText: '',
         //DIALOG START
         error: {
           dialog: false,
@@ -51,6 +63,11 @@
           message: ''
         }
         //DIALOG END;
+      }
+    },
+    methods:{
+      onSearchEnter(){
+
       }
     }
   }
