@@ -1,28 +1,37 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <v-app></v-app>
+    <v-bottom-nav
+      :value="true"
+      fixed
+      shift
+      color="transparent"
+    >
+      <v-btn v-for="nav in navigation"
+             color="teal"
+             flat
+             :value="nav.text">
+        <span>{{nav.text}}</span>
+        <v-icon>{{nav.icon}}</v-icon>
+      </v-btn>
+    </v-bottom-nav>
+    <v-content>
+      <router-view/>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
-export default {
-  name: 'app',
-  components: {
-    HelloWorld
+  export default {
+    data() {
+      return {
+        navigation: [
+          {text: 'Recent', icon: 'history', to: undefined},
+          {text: 'Favorites', icon: 'favorite', to: undefined},
+          {text: 'Nearby', icon: 'place', to: undefined},
+        ]
+      }
+    },
+    name: 'App'
   }
-}
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
