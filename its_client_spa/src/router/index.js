@@ -1,15 +1,33 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import LandingView from '../components/LandingView'
+import MyPlanListView from '../components/plan/MyPlanListView'
+import GroupListView from '../components/group/GroupListView'
+import PersonalView from '../components/personal/PersonalView'
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      name: 'Home',
+      component: LandingView
+    },
+    {
+      path: '/plan/list',
+      name: 'MyPlanList',
+      component: MyPlanListView
+    },
+    {
+      path: '/group/list',
+      name: 'GroupList',
+      component: GroupListView
+    },
+    {
+      path: '/personal',
+      name: 'Personal',
+      component: PersonalView
     }
   ]
 })
