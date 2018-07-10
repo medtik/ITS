@@ -6,7 +6,7 @@
         <v-divider class="my-3"></v-divider>
         <v-card-title>
           <v-text-field
-            v-model="searchText"
+            v-model="searchInput"
             v-on:keyup.enter="onSearchEnter"
             append-icon="search"
             label="Tìm"
@@ -18,7 +18,7 @@
             <v-flex mb-1>
               <v-label>Lọc yêu cầu</v-label>
             </v-flex>
-            <v-flex ml-3  >
+            <v-flex ml-3>
               <v-checkbox label="Thay đổi thông tin địa điểm" v-model="filter.changeLocationInfo"/>
               <v-checkbox label="Làm chủ địa điểm" v-model="filter.claimOwner"/>
               <v-checkbox label="Báo cáo đánh giá" v-model="filter.reportReview"/>
@@ -28,10 +28,21 @@
           </v-layout>
         </v-card-title>
         <v-layout row wrap>
+          <v-progress-linear indeterminate v-if="this.loading"/>
           <v-flex pa-1 sm12 md8 lg6
                   v-for="request in requests"
                   :key="request.id">
-            <RequestReportReview v-bind="request"/>
+            <RequestReportReview v-if="request.type == 'reportReview'" v-bind="request"/>
+            <RequestChangeLocationInfo v-if="request.type == 'locationChangeRequest'" v-bind="request"/>
+            <RequestClaimOwner v-if="request.type == 'claimOwner'" v-bind="request"/>
+          </v-flex>
+        </v-layout>
+        <v-layout v-if="total">
+          <v-flex text-xs-center>
+            <v-pagination
+              v-bind="paginationModel"
+              @input="paginationUpdate"
+            />
           </v-flex>
         </v-layout>
       </v-flex>
@@ -47,7 +58,6 @@
   import RequestReportReview from "./RequestReportReview";
   import ErrorDialog from "../shared/ErrorDialog";
   import SuccessDialog from "../shared/SuccessDialog";
-  import _requests from '../../store/modules/mockdata/ReportReviewRequest'
 
   export default {
     name: "RequestListView",
@@ -60,15 +70,20 @@
     },
     data() {
       return {
-        requests: _requests,
+        requests: undefined,
         filter: {
-          changeLocationInfo: true,
+          locationChangeRequest: true,
           claimOwner: true,
           reportReview: true,
           done: false
         },
         loading: true,
-        searchText: '',
+        searchInput: '',
+        pagination: {
+          page: 1,
+          rowsPerPage: 6
+        },
+        total: undefined,
         //DIALOG START
         error: {
           dialog: false,
@@ -83,9 +98,43 @@
         //DIALOG END;
       }
     },
+    computed: {
+      paginationModel() {
+        const length = Math.ceil(this.total / this.pagination.rowsPerPage);
+        return {
+          value: this.pagination.page,
+          length: length ? length : 0
+        }
+      }
+    },
+    created() {
+      this.loadData();
+    },
     methods: {
+      loadData() {
+        this.loading = true;
+        this.$store.dispatch('request/getAll', {
+          search: this.searchInput,
+          pagination: this.pagination,
+          filter: this.filter
+        }).then(value => {
+          this.requests = value.requests;
+          this.total = value.total;
+          this.loading = false
+        }).catch(reason => {
+          this.error = {
+            dialog: true,
+            ...reason
+          }
+        })
+      },
       onSearchEnter() {
-
+        this.pagination.page = 1;
+        this.loadData();
+      },
+      paginationUpdate(page) {
+        this.pagination.page = page;
+        this.loadData();
       }
     }
   }

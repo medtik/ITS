@@ -84,7 +84,7 @@ tag
         ],
         pagination: {},
         total: undefined,
-        searchText: '',
+        searchInput: '',
         //TABLE
         error: {
           dialog: false,
@@ -114,7 +114,7 @@ tag
       loadData() {
         this.loading = true;
         this.$store.dispatch('question/getAll', {
-          search: this.searchText,
+          search: this.searchInput,
           pagination: this.pagination
         })
           .then(data => {

@@ -126,7 +126,7 @@ photo
         ],
         pagination: {},
         total: undefined,
-        searchText: '',
+        searchInput: '',
         //TABLE
         //DIALOG START
         error: {
@@ -158,7 +158,7 @@ photo
       loadData() {
         this.loading = true;
         this.$store.dispatch('location/getAll', {
-          search: this.searchText,
+          search: this.searchInput,
           pagination: this.pagination
         })
           .then(data => {

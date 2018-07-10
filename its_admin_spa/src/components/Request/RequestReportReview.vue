@@ -21,19 +21,12 @@
     },
     props: [
       'isOwner',
+      'title',
       'user',
       'location',
       'status',
       'review'
-    ],
-    data() {
-      return {
-        title: ''
-      }
-    },
-    created(){
-      this.title = `Báo cáo đánh giá`;
-    }
+    ]
   }
 </script>
 

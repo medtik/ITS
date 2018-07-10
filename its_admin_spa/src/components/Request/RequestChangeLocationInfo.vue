@@ -52,6 +52,7 @@
     props: [
       'isOwner',
       'user',
+      'title',
       'location',
       'status',
       'name',
@@ -65,7 +66,6 @@
     ],
     data() {
       return {
-        title:'',
         nameInput: undefined,
         addressInput: undefined,
         descriptionInput: undefined,
@@ -77,7 +77,6 @@
       }
     },
     created(){
-      this.title = `Yêu cầu thay đổi thông tin địa điểm ${this.location.name}`;
       this.setInputs();
     },
     components: {

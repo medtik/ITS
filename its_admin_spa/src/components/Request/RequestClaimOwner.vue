@@ -18,17 +18,10 @@
     props: [
       'user',
       'location',
+      'title',
       'status',
       'description'
     ],
-    created() {
-      this.title = `Yêu cầu làm chủ địa điểm ${this.location.name}`
-    },
-    data() {
-      return {
-        title: ''
-      }
-    },
 
   }
 </script>

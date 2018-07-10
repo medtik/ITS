@@ -90,7 +90,7 @@ question
         ],
         pagination: {},
         total: undefined,
-        searchText: '',
+        searchInput: '',
         //TABLE END
         //DIALOG START
         error: {
@@ -122,7 +122,7 @@ question
       loadData() {
         this.loading = true;
         this.$store.dispatch('area/getAll', {
-          search: this.searchText,
+          search: this.searchInput,
           pagination: this.pagination
         })
           .then(data => {
