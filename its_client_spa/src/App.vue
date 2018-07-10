@@ -1,16 +1,14 @@
 <template>
   <v-app id="v-app">
-    <v-content>
-      <router-view/>
-    </v-content>
+    <router-view/>
     <v-bottom-nav
       :value="true"
       fixed
       shift
-      color="transparent"
-    >
+      color="light-blue darken-1">
+
       <v-btn v-for="nav in navigation"
-             color="teal"
+             dark
              flat
              exact
              :to="nav.to"
@@ -29,9 +27,9 @@
       return {
         navigation: [
           {text: 'Trang chính', icon: 'history', to: {name: 'Home'}},
-          {text: 'Chuyến đi', icon: 'favorite', to: {name: 'MyPlanList'}},
-          {text: 'Nhóm', icon: 'place', to: {name: 'GroupList'}},
-          {text: 'Cá nhân', icon: 'place', to: {name: 'Personal'}},
+          {text: 'Chuyến đi', icon: 'map', to: {name: 'MyPlanList'}},
+          {text: 'Nhóm', icon: 'group', to: {name: 'GroupList'}},
+          {text: 'Cá nhân', icon: 'person', to: {name: 'Personal'}},
         ]
       }
     },
