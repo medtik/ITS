@@ -81,8 +81,8 @@
             <v-flex pl-3>
               <TagManageSection
                 v-model="tagsInput"
-                v-bind="tagChooseDialog"
                 v-on:addTag="tagChooseDialog.dialog = true"
+                v-on:close="tagChooseDialog.dialog = false"
               />
             </v-flex>
           </v-flex>
@@ -170,6 +170,7 @@
         </v-layout>
       </v-flex>
     </v-layout>
+    <TagChooseDialog v-bind="tagChooseDialog" v-on:close="tagChooseDialog.dialog = false"/>
     <ErrorDialog v-bind="error" v-on:close="error.dialog = false"/>
     <SuccessDialog v-bind="success" v-on:close="success.dialog = false"/>
   </v-container>
@@ -184,6 +185,7 @@
   import SuccessDialog from "../shared/SuccessDialog";
   import LocationReview from "../shared/LocationReview";
   import TagManageSection from "../shared/TagManageSection";
+  import TagChooseDialog from "../shared/TagChooseDialog";
 
   export default {
     name: "LocationCreateEditView",
@@ -193,6 +195,7 @@
       SuccessDialog,
       PictureInput,
       TagManageSection,
+      TagChooseDialog,
       LocationBusinessHoursInput
     },
     data() {

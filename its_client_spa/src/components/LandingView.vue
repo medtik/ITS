@@ -39,7 +39,8 @@
                     <div class="headline text-xs-center">Tìm kiếm thông minh</div>
                   </v-card-title>
                   <v-card-text text-xs-justify>
-                    Tìm kiếm các địa điểm và chuyến đi phù hợp nhất với bạn bằng cách trả lời các câu hỏi được thiết kế sẵn.
+                    Tìm kiếm các địa điểm và chuyến đi phù hợp nhất với bạn bằng cách trả lời các câu hỏi được thiết kế
+                    sẵn.
                   </v-card-text>
                   <v-card-actions>
                     <v-layout row justify-center>
@@ -59,7 +60,7 @@
     </section>
 
     <section>
-      <v-parallax src="static/place_holder.jpg" height="300">
+      <v-parallax src="static/place_holder.jpg" height="150">
         <v-layout column align-center justify-center>
           <div class="headline white--text mb-3 text-xs-center">
             Tìm kiếm thông thường
@@ -71,17 +72,24 @@
     <section>
       <v-container grid-list-xl>
         <v-layout column my-5>
-          <v-text-field v-model="searchInput"
-                        label="Tìm địa điểm, khu vực"
-                        large
-                        append-icon="search"/>
+          <v-flex>
+            <v-text-field v-model="searchInput"
+                          label="Tìm địa điểm, khu vực"
+                          large
+                          append-icon="search"/>
+          </v-flex>
           <v-flex d-flex justify-start pa-0 mt-5>
             <div class="title">Các khu vực nổi bật</div>
           </v-flex>
           <v-flex style="height: 30vh">
             <v-layout row style="overflow-y: auto">
-
+              <v-flex xs12 v-for="n in 6">
+                <AreaCard/>
+              </v-flex>
             </v-layout>
+          </v-flex>
+          <v-flex style="height: 25vh">
+            <!--Holder-->
           </v-flex>
         </v-layout>
       </v-container>
@@ -90,8 +98,13 @@
 </template>
 
 <script>
+  import AreaCard from "./shared/AreaCard"
+
   export default {
     name: "LandingView",
+    components: {
+      AreaCard
+    },
     data() {
       return {
         searchInput: undefined
