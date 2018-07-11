@@ -29,6 +29,7 @@
           {text: 'Trang chính', icon: 'history', to: {name: 'Home'}},
           {text: 'Chuyến đi', icon: 'map', to: {name: 'MyPlanList'}},
           {text: 'Nhóm', icon: 'group', to: {name: 'GroupList'}},
+          {text: 'Thông báo', icon: 'notifications', to: {name: 'Notification'}},
           {text: 'Cá nhân', icon: 'person', to: {name: 'Personal'}},
         ]
       }

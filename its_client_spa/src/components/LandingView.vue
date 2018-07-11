@@ -30,7 +30,7 @@
         <v-flex xs12>
           <v-container grid-list-xl>
             <v-layout row wrap align-center justify-center>
-              <v-flex xs12 md6>
+              <v-flex xs12 sm8 md6>
                 <v-card class="elevation-0 transparent">
                   <v-card-text class="text-xs-center">
                     <v-icon x-large class="blue--text text--lighten-2">search</v-icon>
@@ -39,7 +39,7 @@
                     <div class="headline text-xs-center">Tìm kiếm thông minh</div>
                   </v-card-title>
                   <v-card-text text-xs-justify>
-                    Tìm kiếm các địa điểm và chuyến đi bằng cách trả lời các câu hỏi được thiết kế sẵn.
+                    Tìm kiếm các địa điểm và chuyến đi phù hợp nhất với bạn bằng cách trả lời các câu hỏi được thiết kế sẵn.
                   </v-card-text>
                   <v-card-actions>
                     <v-layout row justify-center>
@@ -79,7 +79,9 @@
             <div class="title">Các khu vực nổi bật</div>
           </v-flex>
           <v-flex style="height: 30vh">
-            <!--Height holder-->
+            <v-layout row style="overflow-y: auto">
+
+            </v-layout>
           </v-flex>
         </v-layout>
       </v-container>
