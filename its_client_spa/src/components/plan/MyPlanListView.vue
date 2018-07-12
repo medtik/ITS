@@ -1,13 +1,30 @@
 <template>
-  <v-container>
-    <span class="headline">Các kế hoạch của bạn</span>
-  </v-container>
+  <v-content>
+    <ParallaxHeader src="static/pexels-photo-490411.jpeg" text="Các chuyến đi của bạn"/>
+    <section>
+      <v-layout column>
+        <v-flex my-4 mx-2 v-for="n in 4" :key="n">
+          <PlanFullWidth/>
+        </v-flex>
+      </v-layout>
+    </section>
+    <v-flex style="height: 30vh">
+      <!--Holder-->
+    </v-flex>
+  </v-content>
 </template>
 
 <script>
-    export default {
-        name: "MyPlanListView"
+  import ParallaxHeader from "../shared/ParallaxHeader"
+  import PlanFullWidth from "../shared/PlanFullWidth"
+
+  export default {
+    name: "MyPlanListView",
+    components: {
+      ParallaxHeader,
+      PlanFullWidth
     }
+  }
 </script>
 
 <style scoped>

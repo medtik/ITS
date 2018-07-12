@@ -26,7 +26,7 @@
     data() {
       return {
         navigation: [
-          {text: 'Trang chính', icon: 'history', to: {name: 'Home'}},
+          {text: 'Trang chính', icon: 'home', to: {name: 'Home'}},
           {text: 'Chuyến đi', icon: 'map', to: {name: 'MyPlanList'}},
           {text: 'Nhóm', icon: 'group', to: {name: 'GroupList'}},
           {text: 'Thông báo', icon: 'notifications', to: {name: 'Notification'}},

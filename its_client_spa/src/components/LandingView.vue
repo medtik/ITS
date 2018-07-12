@@ -1,19 +1,6 @@
 <template>
   <v-content>
-    <section>
-      <v-parallax src="static/pexels-photo-490411.jpeg"
-                  height="600">
-        <v-layout
-          column
-          align-center
-          justify-center
-          text-xs-center
-          class="white--text"
-        >
-          <h1 class="display-2 mb-3">Hệ thống hướng dẫn du lịch thông minh</h1>
-        </v-layout>
-      </v-parallax>
-    </section>
+    <ParallaxHeader src="static/pexels-photo-490411.jpeg" text="Hệ thống hướng dẫn du lịch thông minh"/>
 
     <section>
       <v-layout
@@ -78,17 +65,23 @@
                           large
                           append-icon="search"/>
           </v-flex>
-          <v-flex d-flex justify-start pa-0 mt-5>
+          <v-flex justify-start mt-5>
             <div class="title">Các khu vực nổi bật</div>
-          </v-flex>
-          <v-flex style="height: 30vh">
-            <v-layout row style="overflow-y: auto">
-              <v-flex xs12 v-for="n in 6">
+            <v-layout style="overflow-y: auto;">
+              <v-flex v-for="n in 9" :key="n">
                 <AreaCard/>
               </v-flex>
             </v-layout>
           </v-flex>
-          <v-flex style="height: 25vh">
+          <v-flex justify-start mt-5>
+            <div class="title">Các chuyến đi nổi bật</div>
+            <v-layout style="overflow-y: auto;">
+              <v-flex v-for="n in 9" :key="n">
+                <PlanCard/>
+              </v-flex>
+            </v-layout>
+          </v-flex>
+          <v-flex style="height: 30vh">
             <!--Holder-->
           </v-flex>
         </v-layout>
@@ -99,11 +92,15 @@
 
 <script>
   import AreaCard from "./shared/AreaCard"
+  import PlanCard from "./shared/PlanCard"
+  import ParallaxHeader from "./shared/ParallaxHeader"
 
   export default {
     name: "LandingView",
     components: {
-      AreaCard
+      AreaCard,
+      PlanCard,
+      ParallaxHeader
     },
     data() {
       return {
