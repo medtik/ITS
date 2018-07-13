@@ -1,6 +1,9 @@
 <template>
   <v-content>
-    <ParallaxHeader src="static/pexels-photo-490411.jpeg" text="Hệ thống hướng dẫn du lịch thông minh"/>
+    <ParallaxHeader
+      src="static/pexels-photo-490411.jpeg"
+      text="Hệ thống hướng dẫn du lịch thông minh"
+    />
 
     <section>
       <v-layout

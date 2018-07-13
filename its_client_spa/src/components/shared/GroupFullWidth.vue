@@ -11,9 +11,8 @@
         <v-flex xs12 lg6 px-2 my-1>
           <v-layout row wrap>
             <v-flex class="text-lg-center title" xs12 mb-2>Thành viên</v-flex>
-            <v-flex xs6 lg4 v-for="account in accounts">
-              <AccountCard v-bind="account"
-                           :key="account.id"/>
+            <v-flex xs6 lg4 v-for="account in accounts" :key="account.id">
+              <AccountCard v-bind="account"/>
             </v-flex>
           </v-layout>
         </v-flex>

@@ -6,6 +6,7 @@
     />
     <v-layout column>
       <v-flex v-for="n in 3"
+              :key="n"
               elevation-2
               mt-2>
         <GroupFullWidth/>
