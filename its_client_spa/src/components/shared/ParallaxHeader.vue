@@ -1,7 +1,7 @@
 <template>
   <section>
     <v-parallax :src="src"
-                height="600">
+                :height="height ? height : 600">
       <v-layout
         column
         align-center
@@ -20,7 +20,8 @@
     name: "ParallaxHeader",
     props: [
       'src',
-      'text'
+      'text',
+      'height'
     ]
   }
 </script>

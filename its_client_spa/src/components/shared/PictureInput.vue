@@ -13,6 +13,7 @@
         :custom-strings="{
                   change: 'Đổi hình',
                   remove: 'Xóa',
+                  tap: text,
                   drag: text
                 }"
         :zIndex="0"

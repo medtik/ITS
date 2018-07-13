@@ -1,18 +1,6 @@
 <template>
   <v-content>
-    <v-parallax src="https://picsum.photos/1000/1000"
-                height="390">
-      <v-layout
-        column
-        align-end
-        justify-end
-        class="white--text"
-      >
-        <span class="subheading">
-          <v-icon>picture</v-icon>Xem thêm ({{location.photos.length}})
-        </span>
-      </v-layout>
-    </v-parallax>
+    <ParallaxHeader src="https://picsum.photos/1000/1000" height="390"/>
     <v-layout column>
       <v-flex mx-2 my-2>
         <!--Header-->
@@ -39,6 +27,23 @@
             Đang mở cửa
           </span>
         </div>
+      </v-flex>
+      <v-flex ma-2>
+        <v-flex d-flex align-baseline>
+          <div class="title">Hình ảnh</div>
+          <v-btn color="success">
+            <v-icon small>add_a_photo</v-icon>&nbsp &nbsp
+            Thêm ảnh
+          </v-btn>
+        </v-flex>
+        <v-flex my-2>
+          <v-carousel>
+            <v-carousel-item
+              v-for="(photo,i) in location.photos"
+              :key="i"
+              :src="photo.url"/>
+          </v-carousel>
+        </v-flex>
       </v-flex>
       <v-flex my-2 mx-2>
         <div class="title">Thông tin liên lạc</div>
@@ -70,19 +75,23 @@
         </v-layout>
       </v-flex>
       <v-flex my-2 mx-2>
-        <div class="title">Đánh giá</div>
+        <v-flex d-flex align-baseline>
+          <v-flex class="title">Đánh giá</v-flex>
+          <v-btn color="success">
+            <v-icon small>create</v-icon>&nbsp &nbsp Đánh giá
+          </v-btn>
+        </v-flex>
         <v-layout column my-2>
           <v-flex v-for="review in location.reviews"
                   :key="review.id"
                   elevation-2>
-          <LocationReview v-bind="review"/>
+            <LocationReview v-bind="review"/>
           </v-flex>
         </v-layout>
       </v-flex>
       <v-flex my-2 mx-2>
+        <v-flex class="title">Địa điểm lân cận</v-flex>
         <v-layout column>
-            <v-btn flat>Viết đánh giá</v-btn>
-            <v-btn flat>Đăng hình ảnh</v-btn>
         </v-layout>
       </v-flex>
       <v-flex style="height: 25vh">
@@ -96,12 +105,14 @@
   import StarRating from "vue-star-rating";
   import LocationReview from "./LocationReview";
   import Locations from "./Locations";
+  import ParallaxHeader from "../shared/ParallaxHeader";
 
   export default {
     name: "LocationDetailView",
     components: {
       StarRating,
-      LocationReview
+      LocationReview,
+      ParallaxHeader
     },
     data() {
       return {
