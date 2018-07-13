@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import LandingView from '../components/LandingView'
 import MyPlanListView from '../components/plan/MyPlanListView'
 import GroupListView from '../components/group/GroupListView'
-import PersonalView from '../components/personal/PersonalView'
+import PersonalView from '../components/account/PersonalView'
 import NotificationView from '../components/notification/NotificationView'
 
 Vue.use(Router);

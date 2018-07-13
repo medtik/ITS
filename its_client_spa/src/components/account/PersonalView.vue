@@ -5,27 +5,27 @@
       text="Thông tin cá nhân"
     />
     <v-layout my-3 mx-2 column>
+      <!--Separate edit view-->
       <v-flex>
-        <PictureInput
-          v-model="input.phone"
-          width="300"
-          height="300"
-          size="50"
-          text="Ảnh đại diện"
-        />
+
       </v-flex>
       <v-flex>
         <v-layout column>
           <v-text-field label="Tên"
+                        :readonly="!editMode"
                         v-model="input.name"/>
           <v-text-field label="Email"
+                        :readonly="!editMode"
                         v-model="input.email"/>
           <v-text-field label="Điện thoại"
+                        :readonly="!editMode"
                         v-model="input.phone"/>
           <v-text-field label="Địa chỉ"
+                        :readonly="!editMode"
                         v-model="input.address"/>
           <v-text-field label="Ngày sinh"
                         type="date"
+                        :readonly="!editMode"
                         v-model="input.birthdate"/>
         </v-layout>
       </v-flex>
@@ -33,6 +33,7 @@
         <v-layout row style="justify-content: space-around">
           <v-flex xs4>
             <v-btn color="success">Cập nhật</v-btn>
+            d
           </v-flex>
           <v-flex xs4>
             <v-btn color="secondary">Đăng xuất</v-btn>
