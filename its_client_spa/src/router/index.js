@@ -5,6 +5,7 @@ import MyPlanListView from '../components/plan/MyPlanListView'
 import GroupListView from '../components/group/GroupListView'
 import PersonalView from '../components/account/PersonalView'
 import NotificationView from '../components/notification/NotificationView'
+import LocationDetailView from '../components/location/LocationDetailView'
 
 Vue.use(Router);
 
@@ -34,6 +35,11 @@ export default new Router({
       path: '/notification',
       name: 'Notification',
       component: NotificationView
+    },
+    {
+      path: '/location/detail',
+      name: 'LocationDetail',
+      component: LocationDetailView
     }
   ]
 })

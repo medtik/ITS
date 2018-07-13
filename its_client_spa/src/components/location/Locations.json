@@ -1,0 +1,125 @@
+[
+  {
+    "id": 1,
+    "name": "Macejkovic, Hilpert and Wiza",
+    "address": "79754 Independence Avenue",
+    "description": "Aenean auctor gravida sem. Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio. Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl. Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.",
+    "long": -58.7005845,
+    "lat": -34.6091049,
+    "website": "wiley.com",
+    "phone": "395-740-6854",
+    "email": "ldall0@jiathis.com",
+    "isVerified": false,
+    "isClosed": false,
+    "isDeleted": false,
+    "primaryPhoto": {
+      "id": 1,
+      "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAIzSURBVDjLpVO7a1NRGP/dm9ubpGlMioGiLdFBHCyFtksHZ6tiQZAMEbqZwTGgkw7B3cmugoOL/0ATujadlIZchCwGWlERF5XbNOc+zsPvnNvUQmMWAx8f5+b8Ht/jWEop/M/POXvodDpvOOebcRw7lEHZRBRFOr+rVCoPxxJ4nlcgwOtisVhJp6cREghSwngjh7OzRezstKp0Ok/Q7XbvaHCpVJrP5XI4OPwGrS6lglSSiBQEkYVhOL4Eutwql8vmwFiAmMAfvX0ikKdxa/2uKWMsga7RdV34vp8oC4Ebi8tGXZ2o60b/04FmFgTSl/RAtHWv+4GyMOr6v0v37k92kPRKmcuaYHFp1aiPXKgJPbBHzIkDbZlIxEn9dgRf/UT6+wGezRxCvXqsxNMN/xzBKVj8bZwm2vq0gha7jedf1oCpLHBxgZTsqUe96gzFpiHQ1kbbqC2b8ckkz81lca1gwc24oPEAEcWx0Fd/2Zbztuo9+GEc6CmkUqmk7rMuIglOFfIhfWccKiTwkIPx2CmggCAILmgH79vtNgaDAfL5PDLZNG2gZYhiAvKQSjsmhwE1m+ngBAzJTEx7E2bsWq221u/3N5rN5v7e3i7SroWrVxZQLs9DDEmdaQIYIAJyEQmwIMBRNEAcxclbqNfr25S2G43Geq/Xe0mjXdJLJS6/AM9RbwIaJyP700TCpdlY3z4CCxmsSc955clnZSnznnDz967KOrC+Dp2wc104yh6mZJzlfwCf3q+o0qkR9wAAAABJRU5ErkJggg==",
+      "name": "Ante.tiff"
+    },
+    "photos": [
+      {
+        "id": 1,
+        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAJuSURBVDjLjZDLa1x1GIafc8uZqUlMMmmsLV7SC2hLCoJQ6tou3Lj0T+jGtQjusnLlP1Bw01UJgrqUoAiC2aixDUQl2oC9TjuZSWbOOTPn/L6La5MRfOHbvTy8zxe5O8fT3Hv9opt/784ZN0vcqN18F2P9hesPv/5X2d1P3Hj71VF4ctu92nEvttyPNj10b/vwh7N/Hu+mTImrzaYLb8PkMcgAwoA4n8PELhzvTgWYgtUPicIh+AQd70Mdo3JS9z8WODr8mdD9BqsLrDoi61zDBP7nAiPOz5HNv4nXT7HsFOaGip0E1Nuvzbv5rpudcSNx9TryCBn9hvR38EmBViPa569OVzC1T9KVj85lL70PPgEt81D+RfXHOu3ld/DWU5J8AC5oYBrAP05X3gMZgg5BC9L2CqE8IIl38fEILUdk0QoapiioAFbiUoA3WP0cmjEixsyLF/HWMzTvk8wuoNOeaGJouYce/oI1Xbx+QDJ/Hm2cuv87XpVEzQAvH3F6Keboq2VXpVaxXVPWUw1OlHVI2qvE2SKedXAfIMHJFy9hrS5N7znt618Qp7PABA/DfHJ0963ed59+FqsYURwj1R4yvIcMfyWdvYI0Tih7NAfP0EaJ82UIAxg/Ipo8obVwiabxC7EGNsa9bbK5y6Rzl8mWrlEd3CfJl9BTZ2m98S6Wv0z14A7uExxB5JDR/gZN7RupBNuq+3c/iE9fIckSwrig6O9RHfa+LX/8csHF12Zmom5n7qdXoCBOHSkfU3T/JtS+Fd2/01k14aap3VBlzYQdU9805dbVDwf7APufL66K+E0NfkOFNRXfUWPThFv/APJzrlrFns7aAAAAAElFTkSuQmCC",
+        "name": "Imperdiet.tiff"
+      },
+      {
+        "id": 2,
+        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAMFSURBVDjLXZNbaFxVFIa/c84kPZM4M0lNE2svw1g1KG1NEKt9kAYLZbRKlBrQvhYbURG0L1V8MQYUES/QIhrQJwXvtAbxJQVHYiC9DYWCTpVOgkwzzSSTuZ199jln7+1DQDr5YL2t9a/FWuu3jDG0kZsaBI6j1AEcPUQYggrz6OA3hPycZ97+69Z0q00gN/U6Sk3S3RvHjQM2GAWtBoR1qBQFOnyLsY8+bBfITXVizBnc7iydLtSXwauBpUD6oANwNkGiB2oVqCz8ShSM8uK3gQ2AUu8T784CsHxdIVYP4ntdZN+0GJ2wEM0uajcOUswrlAI3mUW23l2f4NzpPVjqMvE+h+qCQspdmHAFFZxEh48RSNDyHJ54Dyu8nUD+w8A9DsWLCh3ujaH8Y8R7HbybIL1DmCAiCq/Q1ZuhsQK2BbHUfrzVo0j5KFIeonxths07HJauHrOJ/Cx2J9RuQiTm8Jof46YylK99R31phNXSSD1anCulk5lIy08xYo5qCdwEeF7WxvcyYCD0wG8FKHGYtRsQeqcvDJ9Ind/7vFjp67jTvfsp1lIdj+O1AmQLrBgQbrOJxPqWZQtEvROvFae1tExqm5JS/mCL4h+J9JPp5NZhqgk39vfg9v2YaP1CtnFsRGOR8p8gGgLZUviNA4z/1D+7fWz8oU3/xpLyspPo60HVz9I3fBypzUnj6BKL8wCLMbzmKURVEMhveOVsAORmZ2c3+754Ol+eZ9fuZ8G/xPxXZ3jkhTcIZfBEfmd6bHihWAH6Y4x//Qkb8H1/kkahq78nTqLXQ9Wvg9Go5nkyIyeswi+T78xvGXh436tzDXtj8czMzJAvmuO31X63e3YOob0rGC148MggOijhugUG9jx3XySD11h/9naEEB90rF1QW+/aR1eigolWwHK4+GMB0Gi/wJZ70ygZvpyb2H1/m5mmp6cPCyE+27F0KvHA0S+Tjl3ERFXgVsfaOPFBylfzFH6e+D62ofuo7/svab/5xaWpI8Jog9H6/9Aax2gNWiu0xhhzx3/je6YQnMUxcAAAAABJRU5ErkJggg==",
+        "name": "OrciEget.jpeg"
+      }
+    ],
+    "businessHours": [
+      {
+        "day": 1,
+        "from": "4:17",
+        "to": "0:44"
+      },
+      {
+        "day": 2,
+        "from": "23:13",
+        "to": "1:48"
+      },
+      {
+        "day": 3,
+        "from": "23:53",
+        "to": "7:42"
+      },
+      {
+        "day": 4,
+        "from": "19:15",
+        "to": "19:47"
+      },
+      {
+        "day": 5,
+        "from": "1:04",
+        "to": "8:39"
+      },
+      {
+        "day": 6,
+        "from": "9:56",
+        "to": "8:23"
+      },
+      {
+        "day": 7,
+        "from": "17:01",
+        "to": "7:27"
+      }
+    ],
+    "area": "Zapala",
+    "reviews": [
+      {
+        "id": 1,
+        "title": "id consequat in consequat",
+        "rating": 0,
+        "description": "Aliquam erat volutpat. In congue. Etiam justo. Etiam pretium iaculis justo. In hac habitasse platea dictumst.",
+        "user": {
+          "photo": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAIUSURBVDjLpZO/T1NhFIafQss1aaSpUmgbCxpriE3q6Ayjk5oYpf6ILk5d9S9wwsRRDVFXN22ijg6YaBxMiUPjUBqCLe2l9goxcpHC/c5x6C20KRtneofzPnnfk+8LqCpHmSGOOMGuePLB3o8iqihgDKCgIoiCkY42Ao9uTgb6AADJ6AiKogIKqCiioD0QEVhpbg8mMKqo+gYBVUXVT+ODRBQRxewdUsGYTkRUEfGNXS39kD0jgwA10llUEBFU8A2yb+wCPe8QgCcgRhF/qbPc1XKQREE8HQSIJxjR/Z7a01n9St0k3mEAzwNjhN12m83qEqHtFeLjJ1ld+8Wx1CzD1ihu5R2nT8XY+eeQz68+LJVKzw4AxrC3C8vf3pMeV27cu4PrupxdW+PTl8/sMELu+hVGQkFs26ZYtB5Xq9VYoPuUH7xc0cDmdwK/i+Ru51h49YZ6pUgiESebzWLbNo7jYNvrHE9cIH/3EoVC4U9PAmXj5w/OxcMAnLl4i+XSV+bm5ohGo2xtbdFqtXj6fIHRyWuASyQSsXpuIPw1Eep2BYCljy9ADPPz84TDHajruqgIu5XXMHuZer2+E+j9jZlM5nw6nX47MzMTT6VSEgwGTzSbTcrlMpZlMTU1xcTEBJ7nbdRqtaHFxcX1PsD09PRwIpHIhsPhQjKZjFmWNQwMOY5zH6iPjY0VgFC73TaNRqPluu7V/620dUeTJTHnAAAAAElFTkSuQmCC",
+          "username": "bstonehewer0"
+        }
+      },
+      {
+        "id": 2,
+        "title": "morbi sem mauris laoreet ut rhoncus",
+        "rating": 5,
+        "description": "Morbi non quam nec dui luctus rutrum. Nulla tellus. In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat. Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem. Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.",
+        "user": {
+          "photo": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAJgSURBVDjLY/j//z8DJZgsTV+9fAu+uHo8+GzvXECWAV+c3R//mTn9/ydLu4eka3ZyY/ts63T3k4Xt+4/GlqS74JONY+9Hc5tdH4wsmAmGgWv9xQKX2nMPnapOF4D4zxotum4sjfh/e2Pr/wtz3f5fnKodx/A7O3P97/TU37+Sk9ajG+Bcc/bJnI0X/hfM3/t/YlfJ/ef7yv9/uLTl///PT/+/v7Tm/8Eun08Mv9NSf//buun/z9jYvz8iIs0Qms/YO1ae/GBfdvTNtMm5y99dqv338/Gm/88PdP//dnnd/z8Pjvw/PzfjH8PPxIT1P2Nifv8Ij7j0PSjk3jdf/5Mr4poWOZUfe2hXdsT+yXYVj3eXa/79/Xbk/7e7Of/fnsr9f31x8v/j05P+Ruf1tqI4Gehftv6UybvP+CZ9+mDr/OpVnPGjd5cr///9fvz/1zvx/78/iv7/6VrV//szHV6c7XUxQAlEoH8lHKtOHbMvP7bUtuQQ5/F8pbLnp8uhmuP+f38Y9f/jler/d6Y6fbrZY2YCT4mudRcKgP59DvTvG6B/S0GC25olg6/tKP7599uh/9/vJ///8Sj2/wegS25Pdf52o8dCASUpO1WfeTB5zcX/QP++BAnMyZRNvrqt6v/F7RP+PzkZ+v/r/ej/by9U/L81xfHljV4LJYy84FBxvMCu9PADm6L94Lhe1en8//+nB/9vzAr5v69K6v/RGZ7/DzaZPL3UYa5DVGZqTtX+/fP4lP8/T078f7LV8f+qFJnPOyv19InOjaG2gt/b4zV+7+3w/L2n1+ng5nJdJXypFQA6mcPFnqo5OgAAAABJRU5ErkJggg==",
+          "username": "wboon1"
+        }
+      },
+      {
+        "id": 3,
+        "title": "quis lectus suspendisse",
+        "rating": 4,
+        "description": "Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh. Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros. Vestibulum ac est lacinia nisi venenatis tristique.",
+        "user": {
+          "photo": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAJSSURBVDjLnZPPaxNBFMe/s0mTVJuWtI21JFhB60UUKmJB8aJo8WBBRREEb179Azx7EepBvVjBmygeKpaCYIV6EhHxJBTspRRj1Cpq22R/zMzO+J1JA8VLpcMub3ZmPu9935u3wlqLrYyxhycuKq0ng/85fHXmUvXy1LljG+Bxwk8qA4MlsZkCwnulVPullM+k0mNKqQLh5zvLOzJLtdrapgoIlwhPVcuVgPAs4emhStXD3D4kbsw+8hKMNTCpQWr40qpUQ8kUiVIIdQ22cwE9xSIaYYjP9WUEyVFo1YlsbuU0Roc7N8S00MbSSctqWqUtFlff4fXSBKwROLPrLnJiAA/mviPbxlZDzehYhwykB42HJa3VBzDSfcuv//hdQm+XQdTQLQeGhTx1sIjp938wfrgH+Y7ACeFjMV+L8ebTGs4f6cfTt8CF0T5MzHxBoUPARIqpaO0j5bOC+RoP33+1DCGA2zNfUe3rwL7BPCq9OWzPBdhdzqMZp4h41jSpoJloxM4BPV453odsIODW3PU2khSsKWvU5QQhJtQgHPriBrDNFEEjskgk8+F758U3n28YGw+4SCkdfVwKsVAPCaVwbRPRQawsTCIRrEQSMWG30YoMRtbr306Bxb2Xdfxc015B97YMJq8NQ3FuEwtx8ua8PTtSQu1XAsnFhAoS1aq8m0t/E63bUL4/Wtc71J/H3ONFZFfp2UkqFjKQrENBCag8D2laHUAZ6yHXXPTjG82pa/8BYs/1DzaOKNnnxE3p5k5eyj6mJei/qcBX9J8htvo7t8dfFzerp+lA/ogAAAAASUVORK5CYII=",
+          "username": "tplampeyn2"
+        }
+      }
+    ],
+    "tags": [
+      {
+        "id": 1,
+        "name": "in lacus curabitur",
+        "category": "posuere nonummy integer"
+      },
+      {
+        "id": 2,
+        "name": "lacus at",
+        "category": "pellentesque volutpat dui maecenas"
+      },
+      {
+        "id": 3,
+        "name": "mauris laoreet",
+        "category": "fermentum donec ut"
+      },
+      {
+        "id": 4,
+        "name": "a pede posuere",
+        "category": "consectetuer adipiscing elit proin risus"
+      }
+    ]
+  }
+]

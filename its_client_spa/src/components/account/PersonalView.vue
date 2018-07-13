@@ -33,7 +33,6 @@
         <v-layout row style="justify-content: space-around">
           <v-flex xs4>
             <v-btn color="success">Cập nhật</v-btn>
-            d
           </v-flex>
           <v-flex xs4>
             <v-btn color="secondary">Đăng xuất</v-btn>
