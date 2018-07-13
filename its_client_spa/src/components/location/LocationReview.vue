@@ -1,6 +1,6 @@
 <template>
   <v-layout row pt-3 elevation-2 class="white">
-    <v-flex xs2>
+    <v-flex xs3>
       <v-layout column>
         <v-flex d-flex justify-center>
           <v-avatar size="60">
@@ -12,7 +12,7 @@
         </v-flex>
       </v-layout>
     </v-flex>
-    <v-flex :class="{xs12: !editMode, xs10: editMode}">
+    <v-flex :class="{xs9: !editMode, xs8: editMode}">
       <v-layout column>
         <v-flex mb-1>
           <StarRating :star-size="25" v-model="rating" read-only></StarRating>

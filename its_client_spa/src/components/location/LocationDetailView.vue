@@ -1,5 +1,18 @@
 <template>
   <v-content>
+    <v-parallax src="https://picsum.photos/1000/1000"
+                height="390">
+      <v-layout
+        column
+        align-end
+        justify-end
+        class="white--text"
+      >
+        <span class="subheading">
+          <v-icon>picture</v-icon>Xem thêm ({{location.photos.length}})
+        </span>
+      </v-layout>
+    </v-parallax>
     <v-layout column>
       <v-flex mx-2 my-2>
         <!--Header-->
@@ -26,14 +39,6 @@
             Đang mở cửa
           </span>
         </div>
-      </v-flex>
-      <v-flex my-2>
-        <v-carousel>
-          <v-carousel-item
-            v-for="(photo,i) in location.photos"
-            :key="i"
-            :src="photo.url"/>
-        </v-carousel>
       </v-flex>
       <v-flex my-2 mx-2>
         <div class="title">Thông tin liên lạc</div>
@@ -72,6 +77,12 @@
                   elevation-2>
           <LocationReview v-bind="review"/>
           </v-flex>
+        </v-layout>
+      </v-flex>
+      <v-flex my-2 mx-2>
+        <v-layout column>
+            <v-btn flat>Viết đánh giá</v-btn>
+            <v-btn flat>Đăng hình ảnh</v-btn>
         </v-layout>
       </v-flex>
       <v-flex style="height: 25vh">

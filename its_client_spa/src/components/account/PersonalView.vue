@@ -7,7 +7,13 @@
     <v-layout my-3 mx-2 column>
       <!--Separate edit view-->
       <v-flex>
-
+      <PictureInput
+        v-model="input.photo"
+        width="300"
+        height="300"
+        size="50"
+        text="Ảnh đại diện"
+      />
       </v-flex>
       <v-flex>
         <v-layout column>
