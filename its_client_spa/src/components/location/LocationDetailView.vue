@@ -31,10 +31,13 @@
       <v-flex my-4 mx-2>
         <v-flex d-flex align-baseline>
           <div class="title">Hình ảnh</div>
-          <v-btn color="success">
+          <v-btn color="success"
+                 flat
+                 :loading="loading.addImgBtn"
+                 @click="onAddPhotoClick">
             <v-icon small>add_a_photo</v-icon>
             &nbsp &nbsp
-            Thêm ảnh
+            Xem thêm
           </v-btn>
         </v-flex>
         <v-flex my-2>
@@ -77,8 +80,8 @@
       </v-flex>
       <v-flex my-2 mx-2>
         <v-flex d-flex align-baseline>
-          <v-flex class="title">Đánh giá</v-flex>
-          <v-btn color="success">
+          <v-flex class="title">Bình luận</v-flex>
+          <v-btn color="success" :to="{name:'ReviewWriting', params:{id: location.id}}">
             <v-icon>rate_review</v-icon>
             &nbsp &nbsp Đánh giá
           </v-btn>
@@ -136,6 +139,9 @@
         <!--Holder-->
       </v-flex>
     </v-layout>
+    <ChooseImageDialog v-bind="chooseImageDialog"
+                       @close="chooseImageDialog.dialog = false"
+                       @confirm="onAddImageConfirm"/>
   </v-content>
 </template>
 
@@ -144,18 +150,26 @@
   import LocationReview from "./LocationReview";
   import Locations from "./Locations";
   import ParallaxHeader from "../shared/ParallaxHeader";
+  import ChooseImageDialog from "../shared/ChooseImageDialog";
+
 
   export default {
     name: "LocationDetailView",
     components: {
       StarRating,
       LocationReview,
-      ParallaxHeader
+      ParallaxHeader,
+      ChooseImageDialog
     },
     data() {
       return {
+        loading: {
+          addImgBtn: false
+        },
         locationId: undefined,
-        location: Locations[0]
+        location: Locations[0],
+        chooseImageDialog: {},
+        error: {}
       }
     },
     computed: {
@@ -180,6 +194,37 @@
       } = this.$route.params;
 
       this.locationId = id;
+    },
+    methods: {
+      onAddPhotoClick() {
+        this.chooseImageDialog = {
+          dialog: true,
+          text: 'Thêm ảnh cho địa điểm'
+        }
+      },
+      onAddImageConfirm(photo) {
+        this.loading.addImgBtn = true;
+        this.chooseImageDialog = {
+          dialog: false
+        };
+
+        if (photo) {
+          this.$store.dispatch('location/addImage', {photo, id: this.location.id})
+            .then(location => {
+              // this.location = location;
+              this.loading.addImgBtn = false;
+            })
+            .catch(reason => {
+              this.error = {
+                dialog: true,
+                ...reason
+              }
+            })
+
+        } else {
+          this.loading.addImgBtn = false;
+        }
+      }
     }
   }
 </script>

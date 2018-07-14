@@ -6,6 +6,7 @@ import GroupListView from '../components/group/GroupListView'
 import PersonalView from '../components/account/PersonalView'
 import NotificationView from '../components/notification/NotificationView'
 import LocationDetailView from '../components/location/LocationDetailView'
+import ReviewWritingView from '../components/location/ReviewWritingView'
 
 Vue.use(Router);
 
@@ -40,6 +41,11 @@ export default new Router({
       path: '/location/detail',
       name: 'LocationDetail',
       component: LocationDetailView
+    },
+    {
+      path: '/location/review',
+      name: 'ReviewWriting',
+      component: ReviewWritingView
     }
   ]
 })
