@@ -31,14 +31,15 @@
       <v-flex my-4 mx-2>
         <v-flex d-flex align-baseline>
           <div class="title">Hình ảnh</div>
-          <v-btn color="success"
-                 flat
-                 :loading="loading.addImgBtn"
-                 @click="onAddPhotoClick">
-            <v-icon small>add_a_photo</v-icon>
-            &nbsp &nbsp
-            Xem thêm
-          </v-btn>
+          <v-flex xs5 md2>
+            <v-btn color="success"
+                   :loading="loading.addImgBtn"
+                   @click="onAddPhotoClick">
+              <v-icon>add_a_photo</v-icon>
+              &nbsp &nbsp
+              Xem thêm
+            </v-btn>
+          </v-flex>
         </v-flex>
         <v-flex my-2>
           <v-carousel>
@@ -81,10 +82,12 @@
       <v-flex my-2 mx-2>
         <v-flex d-flex align-baseline>
           <v-flex class="title">Bình luận</v-flex>
-          <v-btn color="success" :to="{name:'ReviewWriting', params:{id: location.id}}">
-            <v-icon>rate_review</v-icon>
-            &nbsp &nbsp Đánh giá
-          </v-btn>
+          <v-flex xs5 md2>
+            <v-btn color="success" :to="{name:'ReviewWriting', params:{id: location.id}}">
+              <v-icon>rate_review</v-icon>
+              &nbsp &nbsp Đánh giá
+            </v-btn>
+          </v-flex>
         </v-flex>
         <v-layout column my-2>
           <v-flex v-for="review in location.reviews"
@@ -124,14 +127,21 @@
       <v-flex my-2 mx-2>
         <v-flex class="title">Khác</v-flex>
         <v-layout column my-2>
-          <v-btn block flat>
-            <v-icon>edit_location</v-icon>
-            &nbsp &nbsp Cập nhật thông tin
-          </v-btn>
-          <v-btn block flat>
-            <v-icon>person_pin_circle</v-icon>
-            &nbsp &nbsp Tôi sở hữu địa điểm này
-          </v-btn>
+          <v-divider></v-divider>
+          <v-flex>
+            <v-btn block flat>
+              <v-icon>edit_location</v-icon>
+              &nbsp &nbsp Cập nhật thông tin
+            </v-btn>
+          </v-flex>
+          <v-divider></v-divider>
+          <v-flex>
+            <v-btn block flat>
+              <v-icon>person_pin_circle</v-icon>
+              &nbsp &nbsp Tôi sở hữu địa điểm này
+            </v-btn>
+          </v-flex>
+          <v-divider></v-divider>
         </v-layout>
       </v-flex>
 
