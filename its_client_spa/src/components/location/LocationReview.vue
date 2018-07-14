@@ -15,7 +15,17 @@
     <v-flex :class="{xs9: !editMode, xs8: editMode}">
       <v-layout column>
         <v-flex mb-1>
-          <StarRating :star-size="25" v-model="rating" read-only></StarRating>
+          <v-layout style="align-items: baseline; justify-content: space-between">
+            <StarRating :star-size="25"
+                        v-model="rating"
+                        read-only
+                        :show-rating="false"
+            />
+            <v-btn icon flat color="error"
+                   @click="onReport">
+              <v-icon>flag</v-icon>
+            </v-btn>
+          </v-layout>
         </v-flex>
         <v-divider/>
         <v-flex my-1>
@@ -57,6 +67,9 @@
       'editMode'
     ],
     methods: {
+      onReport() {
+        this.$emit('report', this.id);
+      },
       onDelete() {
         this.$emit('delete', this.id);
       }

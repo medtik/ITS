@@ -28,11 +28,12 @@
           </span>
         </div>
       </v-flex>
-      <v-flex ma-2>
+      <v-flex my-4 mx-2>
         <v-flex d-flex align-baseline>
           <div class="title">Hình ảnh</div>
           <v-btn color="success">
-            <v-icon small>add_a_photo</v-icon>&nbsp &nbsp
+            <v-icon small>add_a_photo</v-icon>
+            &nbsp &nbsp
             Thêm ảnh
           </v-btn>
         </v-flex>
@@ -78,7 +79,8 @@
         <v-flex d-flex align-baseline>
           <v-flex class="title">Đánh giá</v-flex>
           <v-btn color="success">
-            <v-icon small>create</v-icon>&nbsp &nbsp Đánh giá
+            <v-icon>rate_review</v-icon>
+            &nbsp &nbsp Đánh giá
           </v-btn>
         </v-flex>
         <v-layout column my-2>
@@ -91,9 +93,45 @@
       </v-flex>
       <v-flex my-2 mx-2>
         <v-flex class="title">Địa điểm lân cận</v-flex>
-        <v-layout column>
+        <v-layout column my-2>
+          <v-divider></v-divider>
+          <v-flex>
+            <v-btn block flat>
+              <v-icon>restaurant</v-icon>
+              &nbsp &nbsp Nhà hàng
+            </v-btn>
+          </v-flex>
+          <v-divider></v-divider>
+          <v-flex>
+            <v-btn block flat>
+              <v-icon>hotel</v-icon>
+              &nbsp &nbsp Khách sạn
+            </v-btn>
+          </v-flex>
+          <v-divider></v-divider>
+          <v-flex>
+            <v-btn block flat>
+              <v-icon>local_activity</v-icon>
+              &nbsp &nbsp Vui chơi
+            </v-btn>
+          </v-flex>
+          <v-divider></v-divider>
         </v-layout>
       </v-flex>
+      <v-flex my-2 mx-2>
+        <v-flex class="title">Khác</v-flex>
+        <v-layout column my-2>
+          <v-btn block flat>
+            <v-icon>edit_location</v-icon>
+            &nbsp &nbsp Cập nhật thông tin
+          </v-btn>
+          <v-btn block flat>
+            <v-icon>person_pin_circle</v-icon>
+            &nbsp &nbsp Tôi sở hữu địa điểm này
+          </v-btn>
+        </v-layout>
+      </v-flex>
+
       <v-flex style="height: 25vh">
         <!--Holder-->
       </v-flex>
