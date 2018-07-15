@@ -35,6 +35,7 @@
                   <v-card-actions>
                     <v-layout row justify-center>
                       <v-btn class="blue lighten-2 mt-2"
+                             :to="{name:'SmartSearch'}"
                              dark
                              large>
                         Bắt đầu

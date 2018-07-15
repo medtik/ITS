@@ -9,6 +9,7 @@ import LocationDetailView from '../components/location/LocationDetailView'
 import ReviewWritingView from '../components/location/ReviewWritingView'
 import SigninView from '../components/account/SigninView'
 import SignupView from '../components/account/SignupView'
+import SmartSearchView from '../components/suggestion/SmartSearchView'
 
 Vue.use(Router);
 
@@ -58,6 +59,11 @@ export default new Router({
       path: '/location/review',
       name: 'ReviewWriting',
       component: ReviewWritingView
+    },
+    {
+      path: '/suggestion',
+      name: 'SmartSearch',
+      component: SmartSearchView
     },
 
   ]

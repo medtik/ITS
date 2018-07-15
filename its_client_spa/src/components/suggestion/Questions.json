@@ -1,0 +1,3193 @@
+[
+  {
+    "id": 1,
+    "text": "justo maecenas rhoncus aliquam",
+    "category": "nhóm ac",
+    "answers": [
+      {
+        "text": "justo lacinia",
+        "category": "ac diam cras pellentesque volutpat",
+        "tags": [
+          {
+            "id": 1,
+            "name": "luctus et",
+            "category": "dictumst aliquam",
+            "areaCount": 68,
+            "answerCount": 74
+          },
+          {
+            "id": 2,
+            "name": "sit amet",
+            "category": "donec vitae nisi",
+            "areaCount": 66,
+            "answerCount": 37
+          },
+          {
+            "id": 3,
+            "name": "posuere cubilia",
+            "category": "mauris morbi",
+            "areaCount": 9,
+            "answerCount": 84
+          },
+          {
+            "id": 4,
+            "name": "sed sagittis nam",
+            "category": "primis in faucibus orci",
+            "areaCount": 56,
+            "answerCount": 100
+          },
+          {
+            "id": 5,
+            "name": "eget",
+            "category": "nulla sed",
+            "areaCount": 78,
+            "answerCount": 68
+          },
+          {
+            "id": 6,
+            "name": "turpis",
+            "category": "aenean fermentum donec ut",
+            "areaCount": 86,
+            "answerCount": 19
+          },
+          {
+            "id": 7,
+            "name": "ante vestibulum",
+            "category": "amet sem fusce",
+            "areaCount": 97,
+            "answerCount": 74
+          },
+          {
+            "id": 8,
+            "name": "a",
+            "category": "duis ac",
+            "areaCount": 29,
+            "answerCount": 40
+          }
+        ]
+      },
+      {
+        "text": "nisi eu orci mauris",
+        "category": "ut suscipit a",
+        "tags": [
+          {
+            "id": 1,
+            "name": "sit",
+            "category": "blandit nam nulla integer",
+            "areaCount": 19,
+            "answerCount": 85
+          },
+          {
+            "id": 2,
+            "name": "lacinia sapien",
+            "category": "lacinia sapien",
+            "areaCount": 47,
+            "answerCount": 75
+          },
+          {
+            "id": 3,
+            "name": "in quis justo maecenas",
+            "category": "morbi non",
+            "areaCount": 64,
+            "answerCount": 21
+          },
+          {
+            "id": 4,
+            "name": "velit id pretium",
+            "category": "a pede posuere nonummy",
+            "areaCount": 97,
+            "answerCount": 27
+          }
+        ]
+      },
+      {
+        "text": "potenti cras",
+        "category": "justo sollicitudin ut suscipit a",
+        "tags": [
+          {
+            "id": 1,
+            "name": "integer",
+            "category": "a pede",
+            "areaCount": 34,
+            "answerCount": 54
+          },
+          {
+            "id": 2,
+            "name": "nulla elit",
+            "category": "in hac habitasse",
+            "areaCount": 40,
+            "answerCount": 23
+          },
+          {
+            "id": 3,
+            "name": "cras in purus",
+            "category": "at nunc commodo",
+            "areaCount": 65,
+            "answerCount": 99
+          },
+          {
+            "id": 4,
+            "name": "nulla elit ac",
+            "category": "a pede",
+            "areaCount": 44,
+            "answerCount": 60
+          },
+          {
+            "id": 5,
+            "name": "nibh in lectus",
+            "category": "quis turpis eget elit",
+            "areaCount": 25,
+            "answerCount": 87
+          },
+          {
+            "id": 6,
+            "name": "sed nisl",
+            "category": "posuere cubilia curae",
+            "areaCount": 21,
+            "answerCount": 19
+          },
+          {
+            "id": 7,
+            "name": "adipiscing lorem vitae mattis",
+            "category": "tempus sit amet",
+            "areaCount": 78,
+            "answerCount": 78
+          },
+          {
+            "id": 8,
+            "name": "vulputate",
+            "category": "viverra pede ac diam",
+            "areaCount": 99,
+            "answerCount": 6
+          },
+          {
+            "id": 9,
+            "name": "nulla suspendisse potenti",
+            "category": "proin at",
+            "areaCount": 19,
+            "answerCount": 61
+          },
+          {
+            "id": 10,
+            "name": "eget eros elementum pellentesque",
+            "category": "nibh in hac",
+            "areaCount": 26,
+            "answerCount": 8
+          },
+          {
+            "id": 11,
+            "name": "rhoncus aliquam",
+            "category": "tristique est et tempus semper",
+            "areaCount": 41,
+            "answerCount": 63
+          },
+          {
+            "id": 12,
+            "name": "sit amet",
+            "category": "mauris non ligula pellentesque ultrices",
+            "areaCount": 77,
+            "answerCount": 35
+          },
+          {
+            "id": 13,
+            "name": "nulla nisl",
+            "category": "suscipit nulla elit ac",
+            "areaCount": 24,
+            "answerCount": 28
+          },
+          {
+            "id": 14,
+            "name": "magna",
+            "category": "nec nisi vulputate nonummy maecenas",
+            "areaCount": 71,
+            "answerCount": 48
+          }
+        ]
+      },
+      {
+        "text": "vitae",
+        "category": "blandit mi in porttitor pede",
+        "tags": [
+          {
+            "id": 1,
+            "name": "felis sed interdum",
+            "category": "justo pellentesque viverra",
+            "areaCount": 10,
+            "answerCount": 31
+          },
+          {
+            "id": 2,
+            "name": "sit amet eros suspendisse",
+            "category": "lorem integer tincidunt ante vel",
+            "areaCount": 87,
+            "answerCount": 5
+          },
+          {
+            "id": 3,
+            "name": "justo aliquam quis turpis",
+            "category": "in hac habitasse platea dictumst",
+            "areaCount": 11,
+            "answerCount": 96
+          },
+          {
+            "id": 4,
+            "name": "purus sit",
+            "category": "luctus rutrum nulla",
+            "areaCount": 44,
+            "answerCount": 5
+          },
+          {
+            "id": 5,
+            "name": "ac",
+            "category": "proin leo odio porttitor id",
+            "areaCount": 48,
+            "answerCount": 1
+          },
+          {
+            "id": 6,
+            "name": "elementum nullam varius",
+            "category": "vel nisl duis ac nibh",
+            "areaCount": 11,
+            "answerCount": 33
+          },
+          {
+            "id": 7,
+            "name": "eros vestibulum ac est",
+            "category": "eu mi nulla",
+            "areaCount": 31,
+            "answerCount": 85
+          }
+        ]
+      },
+      {
+        "text": "luctus rutrum nulla",
+        "category": "purus eu magna vulputate luctus",
+        "tags": [
+          {
+            "id": 1,
+            "name": "orci pede",
+            "category": "nulla sed vel",
+            "areaCount": 77,
+            "answerCount": 32
+          },
+          {
+            "id": 2,
+            "name": "integer ac neque",
+            "category": "sapien cum",
+            "areaCount": 40,
+            "answerCount": 20
+          },
+          {
+            "id": 3,
+            "name": "justo sit",
+            "category": "venenatis turpis enim blandit",
+            "areaCount": 22,
+            "answerCount": 31
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "text": "dis parturient montes nascetur ridiculus",
+    "category": "nhóm 1",
+    "answers": [
+      {
+        "text": "amet",
+        "category": "orci luctus et ultrices posuere",
+        "tags": [
+          {
+            "id": 1,
+            "name": "pulvinar sed nisl nunc",
+            "category": "platea dictumst aliquam augue",
+            "areaCount": 27,
+            "answerCount": 35
+          },
+          {
+            "id": 2,
+            "name": "maecenas ut massa quis",
+            "category": "pede venenatis non sodales",
+            "areaCount": 38,
+            "answerCount": 78
+          },
+          {
+            "id": 3,
+            "name": "pede lobortis ligula",
+            "category": "ante ipsum primis in faucibus",
+            "areaCount": 74,
+            "answerCount": 5
+          },
+          {
+            "id": 4,
+            "name": "tincidunt lacus",
+            "category": "mi integer ac neque",
+            "areaCount": 67,
+            "answerCount": 65
+          },
+          {
+            "id": 5,
+            "name": "dapibus nulla suscipit",
+            "category": "ac enim in tempor turpis",
+            "areaCount": 17,
+            "answerCount": 97
+          },
+          {
+            "id": 6,
+            "name": "suspendisse potenti",
+            "category": "diam in magna bibendum imperdiet",
+            "areaCount": 45,
+            "answerCount": 6
+          },
+          {
+            "id": 7,
+            "name": "ultricies eu nibh",
+            "category": "integer pede justo lacinia",
+            "areaCount": 77,
+            "answerCount": 40
+          },
+          {
+            "id": 8,
+            "name": "eget eleifend luctus ultricies",
+            "category": "sollicitudin mi sit amet",
+            "areaCount": 22,
+            "answerCount": 97
+          },
+          {
+            "id": 9,
+            "name": "orci pede venenatis",
+            "category": "et ultrices posuere cubilia",
+            "areaCount": 45,
+            "answerCount": 26
+          },
+          {
+            "id": 10,
+            "name": "at ipsum ac",
+            "category": "ipsum primis in faucibus orci",
+            "areaCount": 23,
+            "answerCount": 63
+          },
+          {
+            "id": 11,
+            "name": "eget rutrum at lorem",
+            "category": "erat vestibulum sed magna",
+            "areaCount": 8,
+            "answerCount": 27
+          },
+          {
+            "id": 12,
+            "name": "amet eros suspendisse",
+            "category": "massa donec dapibus duis at",
+            "areaCount": 88,
+            "answerCount": 100
+          },
+          {
+            "id": 13,
+            "name": "risus semper porta",
+            "category": "bibendum imperdiet nullam orci pede",
+            "areaCount": 21,
+            "answerCount": 43
+          }
+        ]
+      },
+      {
+        "text": "lobortis sapien sapien non",
+        "category": "aenean fermentum donec",
+        "tags": [
+          {
+            "id": 1,
+            "name": "consectetuer",
+            "category": "porta volutpat",
+            "areaCount": 61,
+            "answerCount": 96
+          },
+          {
+            "id": 2,
+            "name": "aliquam augue",
+            "category": "libero ut massa volutpat convallis",
+            "areaCount": 80,
+            "answerCount": 94
+          },
+          {
+            "id": 3,
+            "name": "ullamcorper augue a",
+            "category": "tempus semper",
+            "areaCount": 78,
+            "answerCount": 78
+          },
+          {
+            "id": 4,
+            "name": "id consequat in",
+            "category": "libero ut massa",
+            "areaCount": 99,
+            "answerCount": 95
+          },
+          {
+            "id": 5,
+            "name": "sit",
+            "category": "leo rhoncus sed",
+            "areaCount": 100,
+            "answerCount": 65
+          },
+          {
+            "id": 6,
+            "name": "ut ultrices vel augue",
+            "category": "amet justo",
+            "areaCount": 61,
+            "answerCount": 99
+          },
+          {
+            "id": 7,
+            "name": "nunc nisl",
+            "category": "euismod scelerisque",
+            "areaCount": 38,
+            "answerCount": 9
+          },
+          {
+            "id": 8,
+            "name": "orci eget",
+            "category": "accumsan tellus nisi",
+            "areaCount": 94,
+            "answerCount": 71
+          },
+          {
+            "id": 9,
+            "name": "mauris ullamcorper purus sit",
+            "category": "convallis tortor",
+            "areaCount": 93,
+            "answerCount": 51
+          },
+          {
+            "id": 10,
+            "name": "id",
+            "category": "nunc vestibulum ante ipsum primis",
+            "areaCount": 79,
+            "answerCount": 47
+          },
+          {
+            "id": 11,
+            "name": "nulla pede",
+            "category": "at velit vivamus vel nulla",
+            "areaCount": 67,
+            "answerCount": 81
+          }
+        ]
+      },
+      {
+        "text": "integer pede",
+        "category": "odio in hac habitasse platea",
+        "tags": [
+          {
+            "id": 1,
+            "name": "eget rutrum at",
+            "category": "ligula nec sem duis aliquam",
+            "areaCount": 51,
+            "answerCount": 93
+          },
+          {
+            "id": 2,
+            "name": "posuere felis",
+            "category": "cubilia curae",
+            "areaCount": 69,
+            "answerCount": 14
+          },
+          {
+            "id": 3,
+            "name": "tellus",
+            "category": "in quam fringilla rhoncus",
+            "areaCount": 42,
+            "answerCount": 60
+          },
+          {
+            "id": 4,
+            "name": "accumsan tortor quis",
+            "category": "elementum in hac",
+            "areaCount": 88,
+            "answerCount": 21
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "text": "et commodo vulputate justo in",
+    "category": "nhóm 3",
+    "answers": [
+      {
+        "text": "vestibulum",
+        "category": "vestibulum aliquet ultrices erat",
+        "tags": [
+          {
+            "id": 1,
+            "name": "lacinia",
+            "category": "lorem ipsum",
+            "areaCount": 34,
+            "answerCount": 75
+          },
+          {
+            "id": 2,
+            "name": "at nulla",
+            "category": "tempus semper est quam",
+            "areaCount": 23,
+            "answerCount": 57
+          },
+          {
+            "id": 3,
+            "name": "arcu",
+            "category": "sem praesent id massa id",
+            "areaCount": 88,
+            "answerCount": 72
+          },
+          {
+            "id": 4,
+            "name": "cras in",
+            "category": "venenatis non sodales",
+            "areaCount": 68,
+            "answerCount": 40
+          }
+        ]
+      },
+      {
+        "text": "diam",
+        "category": "sapien cursus vestibulum",
+        "tags": [
+          {
+            "id": 1,
+            "name": "pellentesque",
+            "category": "tellus nulla ut erat",
+            "areaCount": 20,
+            "answerCount": 58
+          },
+          {
+            "id": 2,
+            "name": "mauris eget massa tempor",
+            "category": "mauris morbi",
+            "areaCount": 24,
+            "answerCount": 83
+          },
+          {
+            "id": 3,
+            "name": "dictumst aliquam augue quam",
+            "category": "sapien dignissim vestibulum vestibulum",
+            "areaCount": 70,
+            "answerCount": 87
+          },
+          {
+            "id": 4,
+            "name": "quis lectus",
+            "category": "dui nec nisi",
+            "areaCount": 40,
+            "answerCount": 55
+          },
+          {
+            "id": 5,
+            "name": "platea dictumst morbi vestibulum",
+            "category": "eu magna vulputate",
+            "areaCount": 55,
+            "answerCount": 28
+          },
+          {
+            "id": 6,
+            "name": "interdum",
+            "category": "morbi odio odio",
+            "areaCount": 27,
+            "answerCount": 98
+          },
+          {
+            "id": 7,
+            "name": "sed augue aliquam",
+            "category": "ligula in lacus",
+            "areaCount": 99,
+            "answerCount": 72
+          },
+          {
+            "id": 8,
+            "name": "ut at dolor quis",
+            "category": "lobortis est phasellus sit",
+            "areaCount": 22,
+            "answerCount": 49
+          },
+          {
+            "id": 9,
+            "name": "proin",
+            "category": "mauris ullamcorper purus sit amet",
+            "areaCount": 37,
+            "answerCount": 13
+          },
+          {
+            "id": 10,
+            "name": "est congue elementum",
+            "category": "mauris vulputate elementum nullam varius",
+            "areaCount": 35,
+            "answerCount": 79
+          },
+          {
+            "id": 11,
+            "name": "non quam nec",
+            "category": "pede malesuada in",
+            "areaCount": 52,
+            "answerCount": 62
+          },
+          {
+            "id": 12,
+            "name": "platea dictumst aliquam augue",
+            "category": "elementum eu interdum",
+            "areaCount": 92,
+            "answerCount": 42
+          },
+          {
+            "id": 13,
+            "name": "tincidunt lacus",
+            "category": "blandit ultrices enim",
+            "areaCount": 67,
+            "answerCount": 21
+          },
+          {
+            "id": 14,
+            "name": "aliquet at",
+            "category": "donec vitae nisi",
+            "areaCount": 7,
+            "answerCount": 44
+          },
+          {
+            "id": 15,
+            "name": "tortor risus dapibus",
+            "category": "sit amet",
+            "areaCount": 82,
+            "answerCount": 9
+          },
+          {
+            "id": 16,
+            "name": "leo rhoncus sed",
+            "category": "libero nullam sit amet",
+            "areaCount": 12,
+            "answerCount": 83
+          }
+        ]
+      },
+      {
+        "text": "dolor morbi vel lectus",
+        "category": "amet lobortis",
+        "tags": [
+          {
+            "id": 1,
+            "name": "praesent",
+            "category": "quis odio consequat varius",
+            "areaCount": 28,
+            "answerCount": 99
+          }
+        ]
+      },
+      {
+        "text": "massa tempor convallis",
+        "category": "volutpat convallis morbi",
+        "tags": [
+          {
+            "id": 1,
+            "name": "morbi ut odio",
+            "category": "magna vulputate",
+            "areaCount": 36,
+            "answerCount": 31
+          },
+          {
+            "id": 2,
+            "name": "eu",
+            "category": "quis lectus suspendisse potenti in",
+            "areaCount": 61,
+            "answerCount": 31
+          },
+          {
+            "id": 3,
+            "name": "libero convallis eget eleifend",
+            "category": "tempus vivamus in",
+            "areaCount": 7,
+            "answerCount": 81
+          },
+          {
+            "id": 4,
+            "name": "nisi nam",
+            "category": "aliquam convallis nunc proin at",
+            "areaCount": 38,
+            "answerCount": 72
+          },
+          {
+            "id": 5,
+            "name": "luctus ultricies eu nibh",
+            "category": "nullam molestie nibh in",
+            "areaCount": 80,
+            "answerCount": 100
+          },
+          {
+            "id": 6,
+            "name": "nulla nunc purus phasellus",
+            "category": "in purus eu magna",
+            "areaCount": 47,
+            "answerCount": 18
+          },
+          {
+            "id": 7,
+            "name": "nibh in",
+            "category": "nibh in hac habitasse",
+            "areaCount": 70,
+            "answerCount": 1
+          }
+        ]
+      },
+      {
+        "text": "nibh fusce lacus purus",
+        "category": "nibh in quis justo",
+        "tags": [
+          {
+            "id": 1,
+            "name": "at diam nam",
+            "category": "interdum mauris",
+            "areaCount": 64,
+            "answerCount": 33
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "text": "lobortis convallis",
+    "category": "nhóm ac",
+    "answers": [
+      {
+        "text": "ante",
+        "category": "turpis eget",
+        "tags": [
+          {
+            "id": 1,
+            "name": "consequat lectus in",
+            "category": "hac habitasse",
+            "areaCount": 74,
+            "answerCount": 16
+          },
+          {
+            "id": 2,
+            "name": "porttitor",
+            "category": "nunc proin at turpis",
+            "areaCount": 55,
+            "answerCount": 4
+          },
+          {
+            "id": 3,
+            "name": "eleifend donec ut dolor",
+            "category": "platea dictumst morbi vestibulum velit",
+            "areaCount": 24,
+            "answerCount": 11
+          },
+          {
+            "id": 4,
+            "name": "ipsum aliquam non mauris",
+            "category": "feugiat non pretium quis",
+            "areaCount": 47,
+            "answerCount": 81
+          },
+          {
+            "id": 5,
+            "name": "ipsum primis in faucibus",
+            "category": "sit amet",
+            "areaCount": 59,
+            "answerCount": 24
+          },
+          {
+            "id": 6,
+            "name": "dis",
+            "category": "in quam",
+            "areaCount": 19,
+            "answerCount": 35
+          },
+          {
+            "id": 7,
+            "name": "amet lobortis sapien",
+            "category": "sed vestibulum sit",
+            "areaCount": 9,
+            "answerCount": 74
+          },
+          {
+            "id": 8,
+            "name": "in eleifend",
+            "category": "venenatis tristique fusce",
+            "areaCount": 23,
+            "answerCount": 26
+          },
+          {
+            "id": 9,
+            "name": "duis ac",
+            "category": "nascetur ridiculus mus vivamus vestibulum",
+            "areaCount": 80,
+            "answerCount": 74
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "text": "accumsan felis",
+    "category": "nhóm ABC",
+    "answers": [
+      {
+        "text": "faucibus orci luctus et",
+        "category": "duis faucibus accumsan odio",
+        "tags": [
+          {
+            "id": 1,
+            "name": "nec",
+            "category": "a ipsum integer",
+            "areaCount": 98,
+            "answerCount": 51
+          },
+          {
+            "id": 2,
+            "name": "dui",
+            "category": "risus semper porta volutpat",
+            "areaCount": 37,
+            "answerCount": 6
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "text": "pellentesque ultrices phasellus id sapien",
+    "category": "nhóm ac",
+    "answers": [
+      {
+        "text": "adipiscing",
+        "category": "neque libero convallis eget eleifend",
+        "tags": [
+          {
+            "id": 1,
+            "name": "hac habitasse platea dictumst",
+            "category": "morbi ut",
+            "areaCount": 73,
+            "answerCount": 77
+          },
+          {
+            "id": 2,
+            "name": "eget congue eget",
+            "category": "eget eros elementum",
+            "areaCount": 96,
+            "answerCount": 61
+          },
+          {
+            "id": 3,
+            "name": "in hac habitasse platea",
+            "category": "augue luctus tincidunt nulla mollis",
+            "areaCount": 8,
+            "answerCount": 39
+          },
+          {
+            "id": 4,
+            "name": "vestibulum sit amet",
+            "category": "sit amet consectetuer",
+            "areaCount": 70,
+            "answerCount": 33
+          },
+          {
+            "id": 5,
+            "name": "lorem",
+            "category": "eros elementum pellentesque",
+            "areaCount": 18,
+            "answerCount": 7
+          },
+          {
+            "id": 6,
+            "name": "ac est lacinia nisi",
+            "category": "diam vitae quam suspendisse",
+            "areaCount": 26,
+            "answerCount": 57
+          },
+          {
+            "id": 7,
+            "name": "luctus nec",
+            "category": "lacus at",
+            "areaCount": 31,
+            "answerCount": 91
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "text": "nam congue risus semper",
+    "category": "nhóm 1",
+    "answers": [
+      {
+        "text": "consequat in consequat ut",
+        "category": "bibendum morbi non quam nec",
+        "tags": [
+          {
+            "id": 1,
+            "name": "augue quam sollicitudin vitae",
+            "category": "porta volutpat erat",
+            "areaCount": 71,
+            "answerCount": 75
+          },
+          {
+            "id": 2,
+            "name": "vel nisl",
+            "category": "proin risus praesent lectus vestibulum",
+            "areaCount": 28,
+            "answerCount": 66
+          },
+          {
+            "id": 3,
+            "name": "iaculis diam erat",
+            "category": "ante ipsum",
+            "areaCount": 12,
+            "answerCount": 73
+          },
+          {
+            "id": 4,
+            "name": "ipsum primis in",
+            "category": "luctus et ultrices posuere",
+            "areaCount": 17,
+            "answerCount": 92
+          },
+          {
+            "id": 5,
+            "name": "phasellus sit",
+            "category": "vestibulum ante ipsum primis in",
+            "areaCount": 10,
+            "answerCount": 41
+          },
+          {
+            "id": 6,
+            "name": "tincidunt",
+            "category": "pede justo lacinia eget tincidunt",
+            "areaCount": 74,
+            "answerCount": 97
+          },
+          {
+            "id": 7,
+            "name": "leo",
+            "category": "id justo",
+            "areaCount": 47,
+            "answerCount": 64
+          }
+        ]
+      },
+      {
+        "text": "est phasellus sit",
+        "category": "tellus semper interdum mauris ullamcorper",
+        "tags": [
+          {
+            "id": 1,
+            "name": "ipsum primis in faucibus",
+            "category": "a pede posuere nonummy integer",
+            "areaCount": 61,
+            "answerCount": 61
+          },
+          {
+            "id": 2,
+            "name": "eget rutrum at lorem",
+            "category": "orci luctus",
+            "areaCount": 32,
+            "answerCount": 10
+          },
+          {
+            "id": 3,
+            "name": "sapien",
+            "category": "pede venenatis non sodales sed",
+            "areaCount": 78,
+            "answerCount": 81
+          },
+          {
+            "id": 4,
+            "name": "quis augue luctus",
+            "category": "integer a nibh in",
+            "areaCount": 89,
+            "answerCount": 18
+          },
+          {
+            "id": 5,
+            "name": "lobortis sapien sapien",
+            "category": "sed magna at",
+            "areaCount": 26,
+            "answerCount": 59
+          }
+        ]
+      },
+      {
+        "text": "malesuada in",
+        "category": "donec ut mauris eget",
+        "tags": [
+          {
+            "id": 1,
+            "name": "quis orci nullam",
+            "category": "nulla suscipit ligula",
+            "areaCount": 42,
+            "answerCount": 83
+          },
+          {
+            "id": 2,
+            "name": "semper",
+            "category": "sed augue aliquam erat volutpat",
+            "areaCount": 16,
+            "answerCount": 30
+          },
+          {
+            "id": 3,
+            "name": "praesent id",
+            "category": "ultrices vel augue vestibulum ante",
+            "areaCount": 35,
+            "answerCount": 13
+          },
+          {
+            "id": 4,
+            "name": "sociis natoque",
+            "category": "vivamus in felis eu",
+            "areaCount": 30,
+            "answerCount": 8
+          },
+          {
+            "id": 5,
+            "name": "orci eget",
+            "category": "consequat lectus in est",
+            "areaCount": 30,
+            "answerCount": 17
+          },
+          {
+            "id": 6,
+            "name": "convallis nulla neque",
+            "category": "curae mauris viverra diam",
+            "areaCount": 94,
+            "answerCount": 91
+          },
+          {
+            "id": 7,
+            "name": "et ultrices posuere cubilia",
+            "category": "morbi porttitor lorem id",
+            "areaCount": 42,
+            "answerCount": 94
+          },
+          {
+            "id": 8,
+            "name": "non velit",
+            "category": "eu interdum",
+            "areaCount": 63,
+            "answerCount": 75
+          },
+          {
+            "id": 9,
+            "name": "rutrum neque aenean",
+            "category": "arcu adipiscing molestie hendrerit",
+            "areaCount": 85,
+            "answerCount": 34
+          },
+          {
+            "id": 10,
+            "name": "et magnis",
+            "category": "vel augue vestibulum",
+            "areaCount": 73,
+            "answerCount": 13
+          }
+        ]
+      },
+      {
+        "text": "vel sem",
+        "category": "vitae nisi nam ultrices",
+        "tags": [
+          {
+            "id": 1,
+            "name": "varius nulla",
+            "category": "erat vestibulum",
+            "areaCount": 75,
+            "answerCount": 53
+          },
+          {
+            "id": 2,
+            "name": "duis aliquam convallis nunc",
+            "category": "mauris ullamcorper",
+            "areaCount": 83,
+            "answerCount": 79
+          },
+          {
+            "id": 3,
+            "name": "in lacus curabitur",
+            "category": "mattis egestas metus aenean",
+            "areaCount": 78,
+            "answerCount": 10
+          },
+          {
+            "id": 4,
+            "name": "nulla pede",
+            "category": "cum sociis",
+            "areaCount": 73,
+            "answerCount": 47
+          },
+          {
+            "id": 5,
+            "name": "primis",
+            "category": "iaculis diam erat",
+            "areaCount": 45,
+            "answerCount": 12
+          },
+          {
+            "id": 6,
+            "name": "et magnis dis parturient",
+            "category": "ipsum integer",
+            "areaCount": 8,
+            "answerCount": 30
+          },
+          {
+            "id": 7,
+            "name": "nunc purus",
+            "category": "eleifend donec ut",
+            "areaCount": 3,
+            "answerCount": 74
+          },
+          {
+            "id": 8,
+            "name": "odio in hac",
+            "category": "tellus nulla ut erat",
+            "areaCount": 95,
+            "answerCount": 82
+          },
+          {
+            "id": 9,
+            "name": "amet consectetuer adipiscing elit",
+            "category": "velit id pretium iaculis diam",
+            "areaCount": 72,
+            "answerCount": 19
+          },
+          {
+            "id": 10,
+            "name": "iaculis",
+            "category": "mi pede malesuada",
+            "areaCount": 47,
+            "answerCount": 62
+          },
+          {
+            "id": 11,
+            "name": "dolor sit",
+            "category": "quam sollicitudin vitae consectetuer eget",
+            "areaCount": 79,
+            "answerCount": 10
+          },
+          {
+            "id": 12,
+            "name": "amet turpis elementum ligula",
+            "category": "varius ut blandit non interdum",
+            "areaCount": 56,
+            "answerCount": 31
+          },
+          {
+            "id": 13,
+            "name": "vitae mattis nibh ligula",
+            "category": "sed ante vivamus tortor",
+            "areaCount": 85,
+            "answerCount": 25
+          },
+          {
+            "id": 14,
+            "name": "accumsan felis ut at",
+            "category": "nisl nunc nisl",
+            "areaCount": 35,
+            "answerCount": 69
+          },
+          {
+            "id": 15,
+            "name": "massa id",
+            "category": "ridiculus mus vivamus",
+            "areaCount": 85,
+            "answerCount": 36
+          },
+          {
+            "id": 16,
+            "name": "luctus et ultrices posuere",
+            "category": "vestibulum ante ipsum",
+            "areaCount": 44,
+            "answerCount": 84
+          }
+        ]
+      },
+      {
+        "text": "morbi non lectus aliquam",
+        "category": "neque libero convallis eget",
+        "tags": [
+          {
+            "id": 1,
+            "name": "quisque",
+            "category": "quam sollicitudin vitae consectetuer eget",
+            "areaCount": 71,
+            "answerCount": 29
+          },
+          {
+            "id": 2,
+            "name": "cubilia curae",
+            "category": "cubilia curae duis faucibus",
+            "areaCount": 5,
+            "answerCount": 69
+          },
+          {
+            "id": 3,
+            "name": "mattis pulvinar nulla pede",
+            "category": "consequat metus",
+            "areaCount": 44,
+            "answerCount": 50
+          },
+          {
+            "id": 4,
+            "name": "sed justo",
+            "category": "duis aliquam convallis",
+            "areaCount": 22,
+            "answerCount": 56
+          },
+          {
+            "id": 5,
+            "name": "tortor risus",
+            "category": "vitae quam suspendisse potenti nullam",
+            "areaCount": 36,
+            "answerCount": 51
+          },
+          {
+            "id": 6,
+            "name": "in hac habitasse",
+            "category": "amet turpis elementum ligula",
+            "areaCount": 75,
+            "answerCount": 29
+          },
+          {
+            "id": 7,
+            "name": "ornare consequat",
+            "category": "vestibulum ante ipsum primis",
+            "areaCount": 3,
+            "answerCount": 74
+          },
+          {
+            "id": 8,
+            "name": "ut odio cras mi",
+            "category": "duis faucibus accumsan odio",
+            "areaCount": 48,
+            "answerCount": 96
+          },
+          {
+            "id": 9,
+            "name": "non mattis",
+            "category": "justo in",
+            "areaCount": 34,
+            "answerCount": 32
+          },
+          {
+            "id": 10,
+            "name": "vivamus vel nulla eget",
+            "category": "nunc rhoncus dui vel",
+            "areaCount": 71,
+            "answerCount": 94
+          },
+          {
+            "id": 11,
+            "name": "elit ac nulla",
+            "category": "posuere cubilia curae",
+            "areaCount": 18,
+            "answerCount": 50
+          },
+          {
+            "id": 12,
+            "name": "amet eleifend",
+            "category": "massa quis augue luctus",
+            "areaCount": 27,
+            "answerCount": 11
+          },
+          {
+            "id": 13,
+            "name": "id massa id nisl",
+            "category": "id mauris vulputate elementum nullam",
+            "areaCount": 42,
+            "answerCount": 85
+          },
+          {
+            "id": 14,
+            "name": "odio curabitur convallis duis",
+            "category": "congue risus",
+            "areaCount": 10,
+            "answerCount": 54
+          },
+          {
+            "id": 15,
+            "name": "et ultrices posuere cubilia",
+            "category": "laoreet ut rhoncus aliquet pulvinar",
+            "areaCount": 48,
+            "answerCount": 67
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "text": "fermentum donec ut mauris",
+    "category": "nhóm 3",
+    "answers": [
+      {
+        "text": "rhoncus aliquet pulvinar",
+        "category": "ante ipsum primis in faucibus",
+        "tags": [
+          {
+            "id": 1,
+            "name": "montes nascetur ridiculus",
+            "category": "viverra dapibus",
+            "areaCount": 52,
+            "answerCount": 93
+          },
+          {
+            "id": 2,
+            "name": "viverra diam vitae quam",
+            "category": "quam nec dui luctus rutrum",
+            "areaCount": 88,
+            "answerCount": 61
+          },
+          {
+            "id": 3,
+            "name": "interdum in ante vestibulum",
+            "category": "est risus auctor sed tristique",
+            "areaCount": 88,
+            "answerCount": 20
+          },
+          {
+            "id": 4,
+            "name": "erat fermentum",
+            "category": "commodo vulputate justo in",
+            "areaCount": 55,
+            "answerCount": 64
+          },
+          {
+            "id": 5,
+            "name": "quisque ut erat",
+            "category": "pharetra magna ac consequat metus",
+            "areaCount": 42,
+            "answerCount": 52
+          },
+          {
+            "id": 6,
+            "name": "lorem ipsum dolor",
+            "category": "penatibus et magnis",
+            "areaCount": 71,
+            "answerCount": 94
+          },
+          {
+            "id": 7,
+            "name": "donec ut mauris",
+            "category": "magnis dis parturient",
+            "areaCount": 89,
+            "answerCount": 94
+          },
+          {
+            "id": 8,
+            "name": "mauris enim leo rhoncus",
+            "category": "neque aenean",
+            "areaCount": 97,
+            "answerCount": 72
+          },
+          {
+            "id": 9,
+            "name": "tincidunt",
+            "category": "diam cras pellentesque volutpat",
+            "areaCount": 43,
+            "answerCount": 90
+          },
+          {
+            "id": 10,
+            "name": "neque aenean auctor gravida",
+            "category": "mi pede malesuada in imperdiet",
+            "areaCount": 1,
+            "answerCount": 13
+          },
+          {
+            "id": 11,
+            "name": "neque sapien placerat ante",
+            "category": "sapien non",
+            "areaCount": 9,
+            "answerCount": 44
+          },
+          {
+            "id": 12,
+            "name": "elit",
+            "category": "at turpis a pede posuere",
+            "areaCount": 84,
+            "answerCount": 74
+          }
+        ]
+      },
+      {
+        "text": "nunc donec quis orci",
+        "category": "vestibulum velit",
+        "tags": []
+      },
+      {
+        "text": "ac enim in tempor",
+        "category": "eget massa tempor",
+        "tags": [
+          {
+            "id": 1,
+            "name": "sapien cursus",
+            "category": "tincidunt eu felis",
+            "areaCount": 9,
+            "answerCount": 57
+          },
+          {
+            "id": 2,
+            "name": "tempor convallis",
+            "category": "vel nulla eget eros",
+            "areaCount": 97,
+            "answerCount": 24
+          },
+          {
+            "id": 3,
+            "name": "tempus vel pede morbi",
+            "category": "at dolor quis",
+            "areaCount": 13,
+            "answerCount": 74
+          },
+          {
+            "id": 4,
+            "name": "vestibulum ante",
+            "category": "ut dolor",
+            "areaCount": 3,
+            "answerCount": 67
+          },
+          {
+            "id": 5,
+            "name": "velit",
+            "category": "massa id nisl",
+            "areaCount": 94,
+            "answerCount": 62
+          },
+          {
+            "id": 6,
+            "name": "dapibus",
+            "category": "suspendisse potenti in eleifend",
+            "areaCount": 61,
+            "answerCount": 100
+          },
+          {
+            "id": 7,
+            "name": "ac",
+            "category": "rhoncus dui vel sem",
+            "areaCount": 42,
+            "answerCount": 57
+          },
+          {
+            "id": 8,
+            "name": "maecenas",
+            "category": "eget congue eget semper rutrum",
+            "areaCount": 94,
+            "answerCount": 96
+          },
+          {
+            "id": 9,
+            "name": "ante vestibulum ante",
+            "category": "turpis nec euismod",
+            "areaCount": 63,
+            "answerCount": 9
+          },
+          {
+            "id": 10,
+            "name": "semper rutrum nulla",
+            "category": "augue quam sollicitudin vitae consectetuer",
+            "areaCount": 98,
+            "answerCount": 10
+          },
+          {
+            "id": 11,
+            "name": "volutpat",
+            "category": "nullam molestie nibh in lectus",
+            "areaCount": 69,
+            "answerCount": 83
+          },
+          {
+            "id": 12,
+            "name": "sem duis",
+            "category": "aliquam erat",
+            "areaCount": 78,
+            "answerCount": 84
+          },
+          {
+            "id": 13,
+            "name": "rhoncus",
+            "category": "dictumst etiam faucibus cursus",
+            "areaCount": 15,
+            "answerCount": 41
+          },
+          {
+            "id": 14,
+            "name": "in felis eu sapien",
+            "category": "vestibulum ante ipsum",
+            "areaCount": 37,
+            "answerCount": 34
+          }
+        ]
+      },
+      {
+        "text": "nunc proin at turpis",
+        "category": "pellentesque viverra",
+        "tags": [
+          {
+            "id": 1,
+            "name": "nunc nisl duis",
+            "category": "congue elementum",
+            "areaCount": 54,
+            "answerCount": 44
+          },
+          {
+            "id": 2,
+            "name": "nisl nunc rhoncus",
+            "category": "in sapien iaculis congue vivamus",
+            "areaCount": 44,
+            "answerCount": 40
+          },
+          {
+            "id": 3,
+            "name": "luctus",
+            "category": "vel nulla eget eros elementum",
+            "areaCount": 19,
+            "answerCount": 14
+          }
+        ]
+      },
+      {
+        "text": "justo etiam",
+        "category": "quisque porta",
+        "tags": [
+          {
+            "id": 1,
+            "name": "quam suspendisse potenti",
+            "category": "nulla suscipit ligula in lacus",
+            "areaCount": 23,
+            "answerCount": 6
+          },
+          {
+            "id": 2,
+            "name": "proin at turpis",
+            "category": "amet turpis",
+            "areaCount": 75,
+            "answerCount": 7
+          },
+          {
+            "id": 3,
+            "name": "iaculis diam erat",
+            "category": "eget eleifend luctus ultricies eu",
+            "areaCount": 61,
+            "answerCount": 77
+          },
+          {
+            "id": 4,
+            "name": "luctus et",
+            "category": "etiam pretium iaculis justo in",
+            "areaCount": 11,
+            "answerCount": 56
+          },
+          {
+            "id": 5,
+            "name": "morbi non lectus",
+            "category": "mi sit amet lobortis",
+            "areaCount": 42,
+            "answerCount": 72
+          },
+          {
+            "id": 6,
+            "name": "vel nisl",
+            "category": "primis in faucibus orci",
+            "areaCount": 48,
+            "answerCount": 45
+          },
+          {
+            "id": 7,
+            "name": "id ligula suspendisse",
+            "category": "tempor turpis nec euismod scelerisque",
+            "areaCount": 19,
+            "answerCount": 27
+          },
+          {
+            "id": 8,
+            "name": "vivamus vel",
+            "category": "volutpat sapien arcu sed augue",
+            "areaCount": 58,
+            "answerCount": 54
+          },
+          {
+            "id": 9,
+            "name": "lectus suspendisse potenti in",
+            "category": "in congue etiam",
+            "areaCount": 66,
+            "answerCount": 90
+          },
+          {
+            "id": 10,
+            "name": "sem sed sagittis",
+            "category": "morbi non lectus",
+            "areaCount": 34,
+            "answerCount": 92
+          },
+          {
+            "id": 11,
+            "name": "vestibulum proin",
+            "category": "venenatis lacinia",
+            "areaCount": 49,
+            "answerCount": 78
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "text": "proin at turpis a",
+    "category": "nhóm ac",
+    "answers": [
+      {
+        "text": "mauris viverra diam vitae",
+        "category": "orci luctus et",
+        "tags": [
+          {
+            "id": 1,
+            "name": "cras mi pede malesuada",
+            "category": "sit amet lobortis sapien",
+            "areaCount": 41,
+            "answerCount": 53
+          },
+          {
+            "id": 2,
+            "name": "ante nulla justo aliquam",
+            "category": "tortor duis mattis egestas",
+            "areaCount": 72,
+            "answerCount": 15
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "text": "eget tempus vel",
+    "category": "nhóm 3",
+    "answers": [
+      {
+        "text": "ultrices posuere",
+        "category": "eu pede",
+        "tags": [
+          {
+            "id": 1,
+            "name": "mattis",
+            "category": "blandit non interdum in",
+            "areaCount": 18,
+            "answerCount": 7
+          },
+          {
+            "id": 2,
+            "name": "duis consequat dui nec",
+            "category": "libero quis orci",
+            "areaCount": 45,
+            "answerCount": 43
+          },
+          {
+            "id": 3,
+            "name": "elit",
+            "category": "ligula suspendisse ornare consequat lectus",
+            "areaCount": 18,
+            "answerCount": 14
+          },
+          {
+            "id": 4,
+            "name": "justo",
+            "category": "at lorem integer",
+            "areaCount": 47,
+            "answerCount": 60
+          },
+          {
+            "id": 5,
+            "name": "tellus in sagittis dui",
+            "category": "rhoncus aliquet",
+            "areaCount": 68,
+            "answerCount": 42
+          },
+          {
+            "id": 6,
+            "name": "lacinia nisi venenatis tristique",
+            "category": "nulla suspendisse potenti",
+            "areaCount": 18,
+            "answerCount": 25
+          },
+          {
+            "id": 7,
+            "name": "nulla",
+            "category": "iaculis diam erat fermentum justo",
+            "areaCount": 2,
+            "answerCount": 66
+          },
+          {
+            "id": 8,
+            "name": "in purus eu",
+            "category": "nulla pede",
+            "areaCount": 65,
+            "answerCount": 68
+          },
+          {
+            "id": 9,
+            "name": "non",
+            "category": "et ultrices posuere cubilia curae",
+            "areaCount": 94,
+            "answerCount": 44
+          },
+          {
+            "id": 10,
+            "name": "donec",
+            "category": "ante ipsum primis in faucibus",
+            "areaCount": 25,
+            "answerCount": 74
+          }
+        ]
+      },
+      {
+        "text": "cras pellentesque volutpat",
+        "category": "integer a nibh in",
+        "tags": [
+          {
+            "id": 1,
+            "name": "ac diam cras pellentesque",
+            "category": "nunc commodo placerat",
+            "areaCount": 7,
+            "answerCount": 93
+          },
+          {
+            "id": 2,
+            "name": "posuere cubilia",
+            "category": "est congue elementum in hac",
+            "areaCount": 55,
+            "answerCount": 47
+          },
+          {
+            "id": 3,
+            "name": "consequat metus sapien",
+            "category": "erat tortor sollicitudin mi",
+            "areaCount": 73,
+            "answerCount": 62
+          },
+          {
+            "id": 4,
+            "name": "vel nisl duis",
+            "category": "dictumst morbi vestibulum velit",
+            "areaCount": 86,
+            "answerCount": 68
+          },
+          {
+            "id": 5,
+            "name": "lacinia aenean sit",
+            "category": "convallis eget eleifend luctus ultricies",
+            "areaCount": 64,
+            "answerCount": 23
+          },
+          {
+            "id": 6,
+            "name": "orci nullam molestie",
+            "category": "nisi nam ultrices libero non",
+            "areaCount": 99,
+            "answerCount": 9
+          }
+        ]
+      },
+      {
+        "text": "varius integer ac",
+        "category": "rhoncus aliquet pulvinar sed nisl",
+        "tags": [
+          {
+            "id": 1,
+            "name": "consectetuer",
+            "category": "ac lobortis vel dapibus at",
+            "areaCount": 77,
+            "answerCount": 70
+          },
+          {
+            "id": 2,
+            "name": "turpis sed ante vivamus",
+            "category": "lorem integer tincidunt ante vel",
+            "areaCount": 14,
+            "answerCount": 14
+          }
+        ]
+      },
+      {
+        "text": "magna vulputate",
+        "category": "cras in purus eu",
+        "tags": [
+          {
+            "id": 1,
+            "name": "lacus purus aliquet",
+            "category": "pellentesque ultrices",
+            "areaCount": 60,
+            "answerCount": 10
+          },
+          {
+            "id": 2,
+            "name": "curae donec pharetra magna",
+            "category": "proin interdum mauris",
+            "areaCount": 94,
+            "answerCount": 67
+          },
+          {
+            "id": 3,
+            "name": "habitasse platea dictumst",
+            "category": "molestie lorem",
+            "areaCount": 38,
+            "answerCount": 91
+          },
+          {
+            "id": 4,
+            "name": "et commodo vulputate justo",
+            "category": "orci mauris lacinia sapien quis",
+            "areaCount": 8,
+            "answerCount": 56
+          },
+          {
+            "id": 5,
+            "name": "ultrices posuere cubilia curae",
+            "category": "est risus",
+            "areaCount": 42,
+            "answerCount": 27
+          },
+          {
+            "id": 6,
+            "name": "scelerisque quam turpis",
+            "category": "lacus at velit",
+            "areaCount": 65,
+            "answerCount": 3
+          },
+          {
+            "id": 7,
+            "name": "dapibus duis",
+            "category": "tortor duis mattis",
+            "areaCount": 31,
+            "answerCount": 24
+          },
+          {
+            "id": 8,
+            "name": "integer",
+            "category": "nisl aenean lectus",
+            "areaCount": 67,
+            "answerCount": 70
+          },
+          {
+            "id": 9,
+            "name": "sapien cum sociis natoque",
+            "category": "a odio",
+            "areaCount": 40,
+            "answerCount": 2
+          },
+          {
+            "id": 10,
+            "name": "nunc",
+            "category": "justo in blandit ultrices",
+            "areaCount": 99,
+            "answerCount": 95
+          },
+          {
+            "id": 11,
+            "name": "pretium iaculis justo in",
+            "category": "magna ac consequat metus",
+            "areaCount": 16,
+            "answerCount": 83
+          }
+        ]
+      },
+      {
+        "text": "donec",
+        "category": "ipsum dolor sit amet consectetuer",
+        "tags": [
+          {
+            "id": 1,
+            "name": "dignissim vestibulum vestibulum ante",
+            "category": "congue etiam justo etiam pretium",
+            "areaCount": 20,
+            "answerCount": 94
+          },
+          {
+            "id": 2,
+            "name": "in sagittis dui",
+            "category": "volutpat dui maecenas",
+            "areaCount": 28,
+            "answerCount": 55
+          },
+          {
+            "id": 3,
+            "name": "ante vivamus tortor",
+            "category": "arcu sed augue aliquam",
+            "areaCount": 8,
+            "answerCount": 22
+          },
+          {
+            "id": 4,
+            "name": "mauris",
+            "category": "pellentesque viverra pede ac",
+            "areaCount": 53,
+            "answerCount": 68
+          },
+          {
+            "id": 5,
+            "name": "sagittis dui vel nisl",
+            "category": "turpis donec posuere metus",
+            "areaCount": 1,
+            "answerCount": 32
+          },
+          {
+            "id": 6,
+            "name": "sit",
+            "category": "amet turpis elementum",
+            "areaCount": 90,
+            "answerCount": 100
+          },
+          {
+            "id": 7,
+            "name": "nam nulla integer",
+            "category": "odio cras mi pede malesuada",
+            "areaCount": 64,
+            "answerCount": 23
+          },
+          {
+            "id": 8,
+            "name": "diam",
+            "category": "lobortis vel",
+            "areaCount": 72,
+            "answerCount": 38
+          },
+          {
+            "id": 9,
+            "name": "turpis sed",
+            "category": "gravida nisi",
+            "areaCount": 39,
+            "answerCount": 6
+          },
+          {
+            "id": 10,
+            "name": "curabitur gravida nisi at",
+            "category": "dolor sit amet",
+            "areaCount": 54,
+            "answerCount": 54
+          },
+          {
+            "id": 11,
+            "name": "at velit",
+            "category": "vestibulum sed magna at",
+            "areaCount": 31,
+            "answerCount": 74
+          },
+          {
+            "id": 12,
+            "name": "rutrum nulla",
+            "category": "vehicula condimentum curabitur in libero",
+            "areaCount": 85,
+            "answerCount": 90
+          },
+          {
+            "id": 13,
+            "name": "nisl",
+            "category": "amet nulla quisque arcu",
+            "areaCount": 12,
+            "answerCount": 68
+          },
+          {
+            "id": 14,
+            "name": "convallis tortor risus",
+            "category": "sem sed sagittis nam",
+            "areaCount": 66,
+            "answerCount": 35
+          },
+          {
+            "id": 15,
+            "name": "arcu",
+            "category": "ante ipsum primis",
+            "areaCount": 11,
+            "answerCount": 21
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "text": "justo morbi ut odio cras",
+    "category": "nhóm 1",
+    "answers": [
+      {
+        "text": "odio cras mi pede",
+        "category": "ultrices enim lorem",
+        "tags": [
+          {
+            "id": 1,
+            "name": "viverra pede ac",
+            "category": "consequat morbi",
+            "areaCount": 97,
+            "answerCount": 87
+          },
+          {
+            "id": 2,
+            "name": "sollicitudin mi sit",
+            "category": "odio in hac",
+            "areaCount": 78,
+            "answerCount": 68
+          },
+          {
+            "id": 3,
+            "name": "lobortis est",
+            "category": "dignissim vestibulum",
+            "areaCount": 60,
+            "answerCount": 95
+          },
+          {
+            "id": 4,
+            "name": "massa id nisl",
+            "category": "nec condimentum neque sapien placerat",
+            "areaCount": 38,
+            "answerCount": 14
+          },
+          {
+            "id": 5,
+            "name": "faucibus accumsan odio curabitur",
+            "category": "quisque erat",
+            "areaCount": 78,
+            "answerCount": 63
+          },
+          {
+            "id": 6,
+            "name": "nisl ut volutpat sapien",
+            "category": "est donec odio",
+            "areaCount": 13,
+            "answerCount": 98
+          },
+          {
+            "id": 7,
+            "name": "lectus pellentesque",
+            "category": "velit eu est congue elementum",
+            "areaCount": 95,
+            "answerCount": 22
+          }
+        ]
+      },
+      {
+        "text": "quam nec",
+        "category": "eu sapien cursus vestibulum",
+        "tags": [
+          {
+            "id": 1,
+            "name": "sodales",
+            "category": "amet eleifend",
+            "areaCount": 29,
+            "answerCount": 70
+          },
+          {
+            "id": 2,
+            "name": "elit",
+            "category": "dictumst maecenas ut massa",
+            "areaCount": 51,
+            "answerCount": 64
+          },
+          {
+            "id": 3,
+            "name": "quam pharetra",
+            "category": "mattis pulvinar nulla pede",
+            "areaCount": 15,
+            "answerCount": 17
+          },
+          {
+            "id": 4,
+            "name": "rutrum rutrum",
+            "category": "nulla facilisi cras non velit",
+            "areaCount": 11,
+            "answerCount": 22
+          },
+          {
+            "id": 5,
+            "name": "rutrum ac lobortis",
+            "category": "pretium iaculis diam",
+            "areaCount": 11,
+            "answerCount": 76
+          },
+          {
+            "id": 6,
+            "name": "sapien quis",
+            "category": "ligula sit",
+            "areaCount": 15,
+            "answerCount": 27
+          },
+          {
+            "id": 7,
+            "name": "proin risus praesent",
+            "category": "duis at velit",
+            "areaCount": 26,
+            "answerCount": 23
+          },
+          {
+            "id": 8,
+            "name": "ante",
+            "category": "tortor duis",
+            "areaCount": 4,
+            "answerCount": 90
+          },
+          {
+            "id": 9,
+            "name": "lobortis ligula",
+            "category": "mattis pulvinar nulla",
+            "areaCount": 14,
+            "answerCount": 2
+          },
+          {
+            "id": 10,
+            "name": "primis",
+            "category": "aliquet massa id lobortis convallis",
+            "areaCount": 15,
+            "answerCount": 100
+          },
+          {
+            "id": 11,
+            "name": "semper interdum mauris",
+            "category": "turpis nec euismod scelerisque",
+            "areaCount": 60,
+            "answerCount": 12
+          }
+        ]
+      },
+      {
+        "text": "dapibus nulla suscipit",
+        "category": "nascetur ridiculus mus etiam vel",
+        "tags": [
+          {
+            "id": 1,
+            "name": "adipiscing elit",
+            "category": "sed interdum venenatis turpis enim",
+            "areaCount": 94,
+            "answerCount": 65
+          },
+          {
+            "id": 2,
+            "name": "et ultrices posuere",
+            "category": "amet consectetuer adipiscing elit",
+            "areaCount": 50,
+            "answerCount": 59
+          },
+          {
+            "id": 3,
+            "name": "mi in porttitor",
+            "category": "sit amet consectetuer adipiscing elit",
+            "areaCount": 59,
+            "answerCount": 30
+          },
+          {
+            "id": 4,
+            "name": "praesent id massa id",
+            "category": "quam suspendisse potenti nullam porttitor",
+            "areaCount": 10,
+            "answerCount": 2
+          },
+          {
+            "id": 5,
+            "name": "vestibulum ante ipsum primis",
+            "category": "id sapien in sapien iaculis",
+            "areaCount": 79,
+            "answerCount": 16
+          },
+          {
+            "id": 6,
+            "name": "habitasse platea dictumst",
+            "category": "odio porttitor id consequat",
+            "areaCount": 5,
+            "answerCount": 34
+          },
+          {
+            "id": 7,
+            "name": "ultrices",
+            "category": "ac diam",
+            "areaCount": 80,
+            "answerCount": 97
+          }
+        ]
+      },
+      {
+        "text": "velit vivamus vel nulla",
+        "category": "sollicitudin mi sit",
+        "tags": [
+          {
+            "id": 1,
+            "name": "sit amet",
+            "category": "risus praesent lectus vestibulum",
+            "areaCount": 17,
+            "answerCount": 25
+          },
+          {
+            "id": 2,
+            "name": "nec euismod scelerisque quam",
+            "category": "nisl ut",
+            "areaCount": 3,
+            "answerCount": 10
+          },
+          {
+            "id": 3,
+            "name": "vitae ipsum aliquam",
+            "category": "maecenas leo odio condimentum",
+            "areaCount": 80,
+            "answerCount": 95
+          },
+          {
+            "id": 4,
+            "name": "diam",
+            "category": "a nibh in quis",
+            "areaCount": 79,
+            "answerCount": 66
+          },
+          {
+            "id": 5,
+            "name": "ridiculus mus etiam",
+            "category": "donec vitae nisi nam",
+            "areaCount": 28,
+            "answerCount": 72
+          },
+          {
+            "id": 6,
+            "name": "dapibus nulla",
+            "category": "lectus aliquam sit amet diam",
+            "areaCount": 13,
+            "answerCount": 29
+          },
+          {
+            "id": 7,
+            "name": "lectus aliquam sit amet",
+            "category": "justo aliquam quis turpis",
+            "areaCount": 11,
+            "answerCount": 27
+          },
+          {
+            "id": 8,
+            "name": "et ultrices posuere",
+            "category": "nulla neque libero convallis eget",
+            "areaCount": 26,
+            "answerCount": 34
+          },
+          {
+            "id": 9,
+            "name": "quam",
+            "category": "orci luctus et ultrices",
+            "areaCount": 10,
+            "answerCount": 11
+          },
+          {
+            "id": 10,
+            "name": "vel enim sit amet",
+            "category": "nisi nam ultrices",
+            "areaCount": 44,
+            "answerCount": 77
+          },
+          {
+            "id": 11,
+            "name": "vestibulum proin eu",
+            "category": "luctus et",
+            "areaCount": 52,
+            "answerCount": 6
+          },
+          {
+            "id": 12,
+            "name": "venenatis tristique fusce",
+            "category": "suspendisse accumsan",
+            "areaCount": 7,
+            "answerCount": 72
+          }
+        ]
+      },
+      {
+        "text": "odio elementum eu",
+        "category": "habitasse platea dictumst morbi vestibulum",
+        "tags": []
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "text": "non sodales sed tincidunt",
+    "category": "nhóm ABC",
+    "answers": [
+      {
+        "text": "et magnis dis",
+        "category": "sed nisl nunc rhoncus dui",
+        "tags": [
+          {
+            "id": 1,
+            "name": "odio odio",
+            "category": "condimentum id luctus",
+            "areaCount": 33,
+            "answerCount": 95
+          },
+          {
+            "id": 2,
+            "name": "in hac habitasse",
+            "category": "vulputate vitae",
+            "areaCount": 78,
+            "answerCount": 85
+          },
+          {
+            "id": 3,
+            "name": "erat eros viverra",
+            "category": "vestibulum vestibulum ante ipsum",
+            "areaCount": 31,
+            "answerCount": 34
+          },
+          {
+            "id": 4,
+            "name": "amet cursus",
+            "category": "varius nulla facilisi cras non",
+            "areaCount": 50,
+            "answerCount": 49
+          },
+          {
+            "id": 5,
+            "name": "posuere cubilia curae",
+            "category": "viverra diam vitae",
+            "areaCount": 80,
+            "answerCount": 63
+          },
+          {
+            "id": 6,
+            "name": "ante vivamus tortor",
+            "category": "vel est",
+            "areaCount": 57,
+            "answerCount": 35
+          },
+          {
+            "id": 7,
+            "name": "orci",
+            "category": "vivamus metus arcu",
+            "areaCount": 14,
+            "answerCount": 69
+          },
+          {
+            "id": 8,
+            "name": "congue vivamus",
+            "category": "purus aliquet",
+            "areaCount": 99,
+            "answerCount": 17
+          },
+          {
+            "id": 9,
+            "name": "volutpat sapien",
+            "category": "nec sem duis aliquam",
+            "areaCount": 27,
+            "answerCount": 69
+          },
+          {
+            "id": 10,
+            "name": "in",
+            "category": "volutpat sapien arcu",
+            "areaCount": 62,
+            "answerCount": 88
+          }
+        ]
+      },
+      {
+        "text": "est quam",
+        "category": "ante ipsum",
+        "tags": [
+          {
+            "id": 1,
+            "name": "nisi vulputate nonummy",
+            "category": "nibh in",
+            "areaCount": 48,
+            "answerCount": 61
+          },
+          {
+            "id": 2,
+            "name": "parturient montes",
+            "category": "interdum mauris non",
+            "areaCount": 37,
+            "answerCount": 81
+          },
+          {
+            "id": 3,
+            "name": "sociis natoque penatibus et",
+            "category": "vel sem sed sagittis",
+            "areaCount": 96,
+            "answerCount": 30
+          },
+          {
+            "id": 4,
+            "name": "nunc rhoncus dui vel",
+            "category": "sit amet eros",
+            "areaCount": 5,
+            "answerCount": 57
+          },
+          {
+            "id": 5,
+            "name": "ac lobortis",
+            "category": "enim lorem ipsum dolor",
+            "areaCount": 12,
+            "answerCount": 41
+          },
+          {
+            "id": 6,
+            "name": "nulla quisque arcu",
+            "category": "condimentum id luctus nec molestie",
+            "areaCount": 73,
+            "answerCount": 60
+          },
+          {
+            "id": 7,
+            "name": "mauris sit",
+            "category": "maecenas leo",
+            "areaCount": 74,
+            "answerCount": 8
+          },
+          {
+            "id": 8,
+            "name": "pellentesque",
+            "category": "id turpis integer",
+            "areaCount": 46,
+            "answerCount": 25
+          },
+          {
+            "id": 9,
+            "name": "eu nibh quisque id",
+            "category": "amet turpis",
+            "areaCount": 99,
+            "answerCount": 18
+          },
+          {
+            "id": 10,
+            "name": "ut dolor",
+            "category": "ornare imperdiet sapien urna",
+            "areaCount": 24,
+            "answerCount": 60
+          },
+          {
+            "id": 11,
+            "name": "bibendum imperdiet nullam orci",
+            "category": "lectus suspendisse potenti in",
+            "areaCount": 88,
+            "answerCount": 96
+          },
+          {
+            "id": 12,
+            "name": "curae nulla dapibus",
+            "category": "et magnis dis",
+            "areaCount": 91,
+            "answerCount": 71
+          },
+          {
+            "id": 13,
+            "name": "semper est",
+            "category": "leo odio condimentum id",
+            "areaCount": 48,
+            "answerCount": 78
+          },
+          {
+            "id": 14,
+            "name": "vestibulum ante ipsum",
+            "category": "integer ac neque duis bibendum",
+            "areaCount": 42,
+            "answerCount": 48
+          }
+        ]
+      },
+      {
+        "text": "suspendisse potenti cras in",
+        "category": "dictumst morbi vestibulum velit",
+        "tags": [
+          {
+            "id": 1,
+            "name": "eu nibh quisque",
+            "category": "nunc rhoncus dui vel",
+            "areaCount": 40,
+            "answerCount": 95
+          },
+          {
+            "id": 2,
+            "name": "penatibus",
+            "category": "curae donec pharetra magna vestibulum",
+            "areaCount": 91,
+            "answerCount": 4
+          },
+          {
+            "id": 3,
+            "name": "posuere",
+            "category": "eget semper rutrum nulla nunc",
+            "areaCount": 54,
+            "answerCount": 18
+          },
+          {
+            "id": 4,
+            "name": "vel nulla eget",
+            "category": "interdum mauris ullamcorper purus sit",
+            "areaCount": 68,
+            "answerCount": 67
+          },
+          {
+            "id": 5,
+            "name": "phasellus",
+            "category": "pretium quis",
+            "areaCount": 92,
+            "answerCount": 81
+          },
+          {
+            "id": 6,
+            "name": "pellentesque",
+            "category": "nulla suscipit",
+            "areaCount": 25,
+            "answerCount": 46
+          },
+          {
+            "id": 7,
+            "name": "pharetra magna",
+            "category": "mi in porttitor pede justo",
+            "areaCount": 39,
+            "answerCount": 21
+          },
+          {
+            "id": 8,
+            "name": "ut",
+            "category": "non mi integer ac neque",
+            "areaCount": 78,
+            "answerCount": 47
+          },
+          {
+            "id": 9,
+            "name": "ipsum aliquam",
+            "category": "porta volutpat quam pede lobortis",
+            "areaCount": 48,
+            "answerCount": 58
+          }
+        ]
+      },
+      {
+        "text": "habitasse",
+        "category": "neque vestibulum eget vulputate",
+        "tags": [
+          {
+            "id": 1,
+            "name": "nulla",
+            "category": "justo eu",
+            "areaCount": 34,
+            "answerCount": 83
+          },
+          {
+            "id": 2,
+            "name": "consequat dui nec nisi",
+            "category": "arcu adipiscing molestie hendrerit",
+            "areaCount": 64,
+            "answerCount": 96
+          },
+          {
+            "id": 3,
+            "name": "id nulla ultrices",
+            "category": "sapien cum sociis natoque penatibus",
+            "areaCount": 54,
+            "answerCount": 19
+          },
+          {
+            "id": 4,
+            "name": "lorem vitae mattis nibh",
+            "category": "et magnis dis parturient montes",
+            "areaCount": 5,
+            "answerCount": 32
+          },
+          {
+            "id": 5,
+            "name": "eget tincidunt eget",
+            "category": "tellus in",
+            "areaCount": 92,
+            "answerCount": 8
+          }
+        ]
+      },
+      {
+        "text": "tortor sollicitudin",
+        "category": "montes nascetur ridiculus mus etiam",
+        "tags": [
+          {
+            "id": 1,
+            "name": "orci",
+            "category": "adipiscing lorem vitae",
+            "areaCount": 20,
+            "answerCount": 84
+          },
+          {
+            "id": 2,
+            "name": "est risus",
+            "category": "ut volutpat sapien arcu",
+            "areaCount": 21,
+            "answerCount": 70
+          },
+          {
+            "id": 3,
+            "name": "quis orci nullam molestie",
+            "category": "ultrices libero non mattis",
+            "areaCount": 59,
+            "answerCount": 36
+          },
+          {
+            "id": 4,
+            "name": "ac nibh",
+            "category": "quis odio",
+            "areaCount": 41,
+            "answerCount": 53
+          },
+          {
+            "id": 5,
+            "name": "sociis natoque penatibus et",
+            "category": "fusce congue diam id ornare",
+            "areaCount": 71,
+            "answerCount": 97
+          },
+          {
+            "id": 6,
+            "name": "nascetur ridiculus",
+            "category": "id pretium iaculis diam erat",
+            "areaCount": 74,
+            "answerCount": 83
+          },
+          {
+            "id": 7,
+            "name": "ipsum primis in faucibus",
+            "category": "id lobortis convallis tortor risus",
+            "areaCount": 22,
+            "answerCount": 60
+          },
+          {
+            "id": 8,
+            "name": "eros vestibulum ac",
+            "category": "varius integer ac",
+            "areaCount": 85,
+            "answerCount": 11
+          },
+          {
+            "id": 9,
+            "name": "morbi non",
+            "category": "venenatis lacinia aenean",
+            "areaCount": 89,
+            "answerCount": 35
+          },
+          {
+            "id": 10,
+            "name": "tellus",
+            "category": "libero non mattis",
+            "areaCount": 55,
+            "answerCount": 65
+          },
+          {
+            "id": 11,
+            "name": "nulla tempus vivamus",
+            "category": "eu orci mauris lacinia",
+            "areaCount": 99,
+            "answerCount": 2
+          },
+          {
+            "id": 12,
+            "name": "ac neque duis bibendum",
+            "category": "id luctus",
+            "areaCount": 52,
+            "answerCount": 66
+          },
+          {
+            "id": 13,
+            "name": "integer ac leo pellentesque",
+            "category": "pretium quis",
+            "areaCount": 24,
+            "answerCount": 80
+          },
+          {
+            "id": 14,
+            "name": "sed magna at nunc",
+            "category": "tincidunt ante vel ipsum praesent",
+            "areaCount": 1,
+            "answerCount": 83
+          },
+          {
+            "id": 15,
+            "name": "turpis a pede posuere",
+            "category": "eu nibh quisque id justo",
+            "areaCount": 21,
+            "answerCount": 9
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "text": "cras pellentesque",
+    "category": "nhóm ac",
+    "answers": [
+      {
+        "text": "adipiscing elit proin",
+        "category": "arcu adipiscing",
+        "tags": [
+          {
+            "id": 1,
+            "name": "non quam nec dui",
+            "category": "vulputate ut",
+            "areaCount": 85,
+            "answerCount": 76
+          },
+          {
+            "id": 2,
+            "name": "blandit lacinia erat",
+            "category": "sapien ut nunc vestibulum",
+            "areaCount": 39,
+            "answerCount": 68
+          },
+          {
+            "id": 3,
+            "name": "vestibulum",
+            "category": "interdum mauris ullamcorper purus sit",
+            "areaCount": 71,
+            "answerCount": 72
+          },
+          {
+            "id": 4,
+            "name": "vestibulum ac est lacinia",
+            "category": "odio curabitur convallis duis",
+            "areaCount": 9,
+            "answerCount": 63
+          }
+        ]
+      },
+      {
+        "text": "elementum pellentesque",
+        "category": "elementum eu interdum",
+        "tags": [
+          {
+            "id": 1,
+            "name": "posuere cubilia curae",
+            "category": "id consequat in consequat",
+            "areaCount": 38,
+            "answerCount": 38
+          },
+          {
+            "id": 2,
+            "name": "non mi integer ac",
+            "category": "eros vestibulum ac est lacinia",
+            "areaCount": 95,
+            "answerCount": 41
+          },
+          {
+            "id": 3,
+            "name": "eget",
+            "category": "curabitur in libero ut",
+            "areaCount": 100,
+            "answerCount": 35
+          },
+          {
+            "id": 4,
+            "name": "at vulputate vitae nisl",
+            "category": "fusce congue",
+            "areaCount": 21,
+            "answerCount": 21
+          },
+          {
+            "id": 5,
+            "name": "tincidunt eu",
+            "category": "in faucibus orci",
+            "areaCount": 20,
+            "answerCount": 70
+          },
+          {
+            "id": 6,
+            "name": "fringilla rhoncus mauris enim",
+            "category": "ultrices posuere",
+            "areaCount": 4,
+            "answerCount": 24
+          },
+          {
+            "id": 7,
+            "name": "sodales",
+            "category": "montes nascetur ridiculus mus etiam",
+            "areaCount": 19,
+            "answerCount": 32
+          },
+          {
+            "id": 8,
+            "name": "elementum ligula vehicula consequat",
+            "category": "tellus semper",
+            "areaCount": 71,
+            "answerCount": 2
+          },
+          {
+            "id": 9,
+            "name": "metus",
+            "category": "a pede",
+            "areaCount": 85,
+            "answerCount": 21
+          },
+          {
+            "id": 10,
+            "name": "et commodo vulputate",
+            "category": "lorem quisque",
+            "areaCount": 52,
+            "answerCount": 11
+          },
+          {
+            "id": 11,
+            "name": "diam cras pellentesque volutpat",
+            "category": "ut volutpat sapien",
+            "areaCount": 99,
+            "answerCount": 56
+          }
+        ]
+      },
+      {
+        "text": "id sapien",
+        "category": "donec vitae nisi",
+        "tags": [
+          {
+            "id": 1,
+            "name": "orci luctus et ultrices",
+            "category": "vulputate vitae nisl aenean lectus",
+            "areaCount": 87,
+            "answerCount": 65
+          },
+          {
+            "id": 2,
+            "name": "hac habitasse platea",
+            "category": "lorem ipsum dolor sit",
+            "areaCount": 23,
+            "answerCount": 48
+          },
+          {
+            "id": 3,
+            "name": "nibh in",
+            "category": "pretium nisl ut volutpat",
+            "areaCount": 83,
+            "answerCount": 59
+          },
+          {
+            "id": 4,
+            "name": "ut",
+            "category": "sapien dignissim",
+            "areaCount": 45,
+            "answerCount": 68
+          },
+          {
+            "id": 5,
+            "name": "fusce congue diam",
+            "category": "vitae ipsum aliquam non",
+            "areaCount": 52,
+            "answerCount": 94
+          },
+          {
+            "id": 6,
+            "name": "iaculis diam",
+            "category": "donec vitae nisi nam",
+            "areaCount": 98,
+            "answerCount": 67
+          },
+          {
+            "id": 7,
+            "name": "nulla",
+            "category": "augue vestibulum",
+            "areaCount": 99,
+            "answerCount": 4
+          },
+          {
+            "id": 8,
+            "name": "aliquam augue quam",
+            "category": "ut at dolor quis",
+            "areaCount": 16,
+            "answerCount": 37
+          },
+          {
+            "id": 9,
+            "name": "neque",
+            "category": "tincidunt nulla mollis molestie lorem",
+            "areaCount": 76,
+            "answerCount": 24
+          },
+          {
+            "id": 10,
+            "name": "est quam pharetra",
+            "category": "libero nam",
+            "areaCount": 12,
+            "answerCount": 71
+          },
+          {
+            "id": 11,
+            "name": "libero non mattis pulvinar",
+            "category": "viverra pede ac",
+            "areaCount": 8,
+            "answerCount": 31
+          },
+          {
+            "id": 12,
+            "name": "nulla facilisi",
+            "category": "augue a suscipit",
+            "areaCount": 88,
+            "answerCount": 95
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "text": "vestibulum ante",
+    "category": "nhóm ac",
+    "answers": [
+      {
+        "text": "at",
+        "category": "eget vulputate",
+        "tags": [
+          {
+            "id": 1,
+            "name": "duis bibendum felis sed",
+            "category": "semper est",
+            "areaCount": 10,
+            "answerCount": 4
+          },
+          {
+            "id": 2,
+            "name": "non",
+            "category": "volutpat erat quisque erat",
+            "areaCount": 90,
+            "answerCount": 34
+          },
+          {
+            "id": 3,
+            "name": "maecenas rhoncus",
+            "category": "volutpat quam pede lobortis",
+            "areaCount": 12,
+            "answerCount": 22
+          },
+          {
+            "id": 4,
+            "name": "pharetra magna",
+            "category": "ipsum dolor sit amet",
+            "areaCount": 55,
+            "answerCount": 24
+          },
+          {
+            "id": 5,
+            "name": "sed",
+            "category": "ultrices posuere cubilia curae",
+            "areaCount": 15,
+            "answerCount": 66
+          },
+          {
+            "id": 6,
+            "name": "sapien arcu sed augue",
+            "category": "sollicitudin ut suscipit",
+            "areaCount": 16,
+            "answerCount": 4
+          },
+          {
+            "id": 7,
+            "name": "morbi vestibulum velit id",
+            "category": "ante vel ipsum praesent blandit",
+            "areaCount": 62,
+            "answerCount": 54
+          },
+          {
+            "id": 8,
+            "name": "in sapien",
+            "category": "volutpat in congue etiam justo",
+            "areaCount": 75,
+            "answerCount": 1
+          },
+          {
+            "id": 9,
+            "name": "in libero",
+            "category": "a suscipit",
+            "areaCount": 79,
+            "answerCount": 9
+          },
+          {
+            "id": 10,
+            "name": "sapien placerat",
+            "category": "nullam molestie nibh in",
+            "areaCount": 67,
+            "answerCount": 33
+          },
+          {
+            "id": 11,
+            "name": "donec posuere metus vitae",
+            "category": "penatibus et magnis",
+            "areaCount": 1,
+            "answerCount": 7
+          },
+          {
+            "id": 12,
+            "name": "sed justo pellentesque",
+            "category": "libero quis",
+            "areaCount": 89,
+            "answerCount": 59
+          },
+          {
+            "id": 13,
+            "name": "consectetuer adipiscing",
+            "category": "purus phasellus",
+            "areaCount": 52,
+            "answerCount": 32
+          },
+          {
+            "id": 14,
+            "name": "elit proin interdum mauris",
+            "category": "sit amet sapien",
+            "areaCount": 8,
+            "answerCount": 38
+          },
+          {
+            "id": 15,
+            "name": "elementum ligula",
+            "category": "eget tincidunt eget tempus vel",
+            "areaCount": 21,
+            "answerCount": 38
+          },
+          {
+            "id": 16,
+            "name": "tortor risus dapibus augue",
+            "category": "sem praesent",
+            "areaCount": 28,
+            "answerCount": 11
+          }
+        ]
+      },
+      {
+        "text": "metus aenean fermentum",
+        "category": "purus aliquet at feugiat non",
+        "tags": [
+          {
+            "id": 1,
+            "name": "pede justo eu massa",
+            "category": "enim in tempor turpis nec",
+            "areaCount": 60,
+            "answerCount": 53
+          },
+          {
+            "id": 2,
+            "name": "felis",
+            "category": "magna at nunc commodo",
+            "areaCount": 76,
+            "answerCount": 70
+          },
+          {
+            "id": 3,
+            "name": "praesent id",
+            "category": "quis orci eget orci vehicula",
+            "areaCount": 66,
+            "answerCount": 54
+          },
+          {
+            "id": 4,
+            "name": "sapien quis libero",
+            "category": "dignissim vestibulum vestibulum ante ipsum",
+            "areaCount": 11,
+            "answerCount": 48
+          },
+          {
+            "id": 5,
+            "name": "at vulputate vitae",
+            "category": "eleifend pede",
+            "areaCount": 93,
+            "answerCount": 79
+          },
+          {
+            "id": 6,
+            "name": "vestibulum eget vulputate",
+            "category": "congue diam id ornare imperdiet",
+            "areaCount": 18,
+            "answerCount": 64
+          },
+          {
+            "id": 7,
+            "name": "eget orci",
+            "category": "a pede posuere",
+            "areaCount": 75,
+            "answerCount": 50
+          },
+          {
+            "id": 8,
+            "name": "aliquam quis",
+            "category": "hac habitasse",
+            "areaCount": 39,
+            "answerCount": 32
+          },
+          {
+            "id": 9,
+            "name": "hac habitasse platea dictumst",
+            "category": "a libero nam dui",
+            "areaCount": 1,
+            "answerCount": 16
+          },
+          {
+            "id": 10,
+            "name": "molestie nibh",
+            "category": "lorem id",
+            "areaCount": 58,
+            "answerCount": 77
+          },
+          {
+            "id": 11,
+            "name": "quam pede lobortis ligula",
+            "category": "vel augue",
+            "areaCount": 8,
+            "answerCount": 36
+          },
+          {
+            "id": 12,
+            "name": "faucibus accumsan odio",
+            "category": "in blandit ultrices",
+            "areaCount": 11,
+            "answerCount": 5
+          }
+        ]
+      },
+      {
+        "text": "posuere nonummy",
+        "category": "ridiculus mus etiam vel augue",
+        "tags": [
+          {
+            "id": 1,
+            "name": "augue",
+            "category": "quisque arcu libero rutrum",
+            "areaCount": 17,
+            "answerCount": 79
+          },
+          {
+            "id": 2,
+            "name": "nulla suspendisse",
+            "category": "laoreet ut rhoncus aliquet",
+            "areaCount": 48,
+            "answerCount": 75
+          },
+          {
+            "id": 3,
+            "name": "quam sollicitudin vitae consectetuer",
+            "category": "lobortis ligula sit amet",
+            "areaCount": 96,
+            "answerCount": 86
+          },
+          {
+            "id": 4,
+            "name": "nibh",
+            "category": "justo aliquam quis",
+            "areaCount": 76,
+            "answerCount": 26
+          },
+          {
+            "id": 5,
+            "name": "in faucibus",
+            "category": "proin risus praesent",
+            "areaCount": 83,
+            "answerCount": 73
+          },
+          {
+            "id": 6,
+            "name": "curae donec",
+            "category": "nec euismod scelerisque quam turpis",
+            "areaCount": 5,
+            "answerCount": 97
+          }
+        ]
+      }
+    ]
+  }
+]
