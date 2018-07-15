@@ -7,18 +7,15 @@ import store from './store'
 import Vuetify from 'vuetify'
 import * as VueGoogleMaps from 'vue2-google-maps'
 import 'vuetify/dist/vuetify.min.css'
+import '@fortawesome/fontawesome-free/css/all.css'
 
-Vue.use(Vuetify);
+Vue.use(Vuetify,{
+  iconfont: 'fa'
+});
 Vue.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyAxQfGcJgUa5iZSfXirufK8Lbb8i5qDnwQ',
-    libraries: 'places', // This is required if you use the Autocomplete plugin
-    // OR: libraries: 'places,drawing'
-    // OR: libraries: 'places,drawing,visualization'
-    // (as you require)
-
-    //// If you want to set the version, you can do so:
-    // v: '3.26',
+    libraries: 'places',
   }
 });
 

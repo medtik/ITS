@@ -2,6 +2,7 @@
   <v-app id="v-app">
     <router-view/>
     <v-bottom-nav
+      v-show="showAppBar"
       :value="true"
       fixed
       shift
@@ -23,6 +24,7 @@
 
 <script>
   export default {
+    name: 'App',
     data() {
       return {
         navigation: [
@@ -34,6 +36,16 @@
         ]
       }
     },
-    name: 'App'
+    computed: {
+      showAppBar() {
+        switch (this.$route.name) {
+          case 'Signup':
+          case 'Signin':
+            return false;
+          default:
+            return true;
+        }
+      }
+    }
   }
 </script>
