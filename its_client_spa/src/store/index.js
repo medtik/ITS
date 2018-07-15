@@ -5,10 +5,12 @@ Vue.use(Vuex);
 
 
 import LocationModule from "./modules/location";
+import AccountModule from "./modules/account";
 
 const store = new Vuex.Store({
   modules:{
-    location: LocationModule
+    account: AccountModule,
+    location: LocationModule,
   }
 });
 

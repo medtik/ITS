@@ -7,13 +7,13 @@
     <v-layout my-3 mx-2 column>
       <!--Separate edit view-->
       <v-flex>
-      <PictureInput
-        v-model="input.photo"
-        width="300"
-        height="300"
-        size="50"
-        text="Ảnh đại diện"
-      />
+        <PictureInput
+          v-model="input.photo"
+          width="300"
+          height="300"
+          size="50"
+          text="Ảnh đại diện"
+        />
       </v-flex>
       <v-flex>
         <v-layout column>
@@ -55,6 +55,7 @@
 <script>
   import PictureInput from "../shared/PictureInput";
   import ParallaxHeader from "../shared/ParallaxHeader";
+  import {mapGetters} from 'vuex'
 
   export default {
     name: "PersonalView",
@@ -64,24 +65,39 @@
     },
     data() {
       return {
-        editMode: false,
+        editMode: true,
+        loading: {
+          page: true
+        },
         input: {
           photo: undefined,
+          name: undefined,
           email: undefined,
           phone: undefined,
           address: undefined,
           birthdate: undefined
-        },
-        user: {
-          photo: "https://picsum.photos/400/400",
-          email: "https://picsum.photos/400/400",
-          phone: "https://picsum.photos/400/400",
-          address: "https://picsum.photos/400/400",
-          birthdate: "https://picsum.photos/400/400"
         }
       }
+    },
+    computed: {
+      ...mapGetters({
+        currentAccount: 'account/currentAccount'
+      })
+    },
+    mounted() {
+      this.setInputs(this.currentAccount);
+      this.loading.page = false
+    },
+    methods: {
+      setInputs(account) {
+        this.input.photo = account.photo;
+        this.input.name = account.name;
+        this.input.email = account.email;
+        this.input.phone = account.phone;
+        this.input.address = account.address;
+        this.input.birthdate = account.birthdate;
+      }
     }
-
   }
 </script>
 
