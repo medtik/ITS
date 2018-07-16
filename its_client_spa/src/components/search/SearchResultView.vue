@@ -8,7 +8,7 @@
               :key="item.id"
               my-2>
         <v-divider/>
-        <SearchResult v-bind="item"/>
+        <SearchResultItem v-bind="item"/>
         <v-divider/>
       </v-flex>
     </v-layout>
@@ -16,12 +16,12 @@
 </template>
 
 <script>
-  import SearchResult from "./LocationSearchItem";
+  import SearchResultItem from "./LocationSearchItem";
 
   export default {
     name: "SmartSearchResultView",
     components: {
-      SearchResult
+      SearchResultItem
     },
     data() {
       return {
