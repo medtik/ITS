@@ -26,10 +26,33 @@
     data() {
       return {
         items: [
-          {id: 1, text: 'abvc'},
-          {id: 2, text: 'abvcd'},
-          {id: 3, text: 'abv1c'},
-          {id: 4, text: 'abccvc'},
+          {
+            id: 1,
+            text: 'abvc',
+            primaryPhoto: 'https://picsum.photos/600/600',
+            rating: 4.4,
+            ratingCount: 12,
+            address: '263/11 gì đó gì đó',
+            reason: 'Vì bạn chọn "Đi phượt"'
+          },
+          {
+            id: 2,
+            text: 'abdsavc',
+            primaryPhoto: 'https://picsum.photos/600/600',
+            rating: 3.5,
+            ratingCount: 6,
+            address: '263/11 gì đó gì đó',
+            reason: 'Vì bạn chọn "Đi phượt"'
+          },
+          {
+            id: 3,
+            text: 'abzvc',
+            primaryPhoto: 'https://picsum.photos/600/600',
+            rating: 4.0,
+            ratingCount: 7,
+            address: '263/11 gì đó gì đó',
+            reason: 'Vì bạn chọn "Đi phượt"'
+          },
         ]
       }
     }
