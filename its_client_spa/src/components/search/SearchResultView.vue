@@ -1,7 +1,7 @@
 <template>
   <v-content>
     <v-layout column>
-      <v-flex class="headline font-weight-black">
+      <v-flex class="headline font-weight-black light-blue white--text text-xs-center" pa-2>
         Kết quả tìm kiếm
       </v-flex>
       <v-flex v-for="item in items"
