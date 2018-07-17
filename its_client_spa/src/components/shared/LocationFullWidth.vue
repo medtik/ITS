@@ -11,6 +11,7 @@
       <v-flex pa-2>
         <v-layout column>
           <v-flex class="title">
+            <v-icon>{{locationIcon}}</v-icon>
             {{text}}
           </v-flex>
           <v-flex>
@@ -65,7 +66,12 @@
       'address',
       'reason',
       'primaryPhoto'
-    ]
+    ],
+    computed: {
+      locationIcon() {
+        return 'restaurant';
+      }
+    }
   }
 </script>
 

@@ -13,11 +13,9 @@
         <v-flex class="body-1">
           <v-icon small>thumb_up</v-icon>&nbsp; <span>{{voteCount}} lượt thích</span>
         </v-flex>
-
         <v-flex>
-          <v-divider/>
             <span class="body-1 ">
-            Bởi vì
+            {{reason}}
           </span>
         </v-flex>
       </v-layout>
