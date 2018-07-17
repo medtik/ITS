@@ -5,7 +5,7 @@
       <v-flex mx-2 my-2>
         <!--Header-->
         <div class="headline font-weight-thin">{{location.name}}</div>
-        <StarRating v-model="location.reviews[1].rating"
+        <StarRating v-model="location.rating"
                     read-only
                     :star-size="20"
                     :increment="0.1"

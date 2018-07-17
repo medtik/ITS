@@ -5,14 +5,14 @@
     <v-layout row>
       <v-flex style="flex-grow: 0">
         <v-avatar tile size="140">
-          <img :src="primaryPhoto"/>
+          <img :src="primaryPhoto.url"/>
         </v-avatar>
       </v-flex>
       <v-flex pa-2>
         <v-layout column>
           <v-flex class="title">
             <v-icon>{{locationIcon}}</v-icon>
-            {{text}}
+            {{name}}
           </v-flex>
           <v-flex>
             <v-layout row>
@@ -31,7 +31,7 @@
             class="caption font-weight-light"
             style="flex-grow: 0;">
             <v-icon small color="">comment</v-icon>
-            <span>{{ratingCount}} bình luận</span>
+            <span>{{reviews.length}} bình luận</span>
           </v-flex>
           <v-flex
             mb-1
@@ -39,8 +39,9 @@
             <v-icon small>place</v-icon>
             <span>{{address}}</span>
           </v-flex>
-          <v-divider></v-divider>
-          <v-flex class="body-1 font-weight-light">
+          <v-divider v-if="reason"></v-divider>
+          <v-flex class="body-1 font-weight-light"
+                  v-if="reason">
             {{reason}}
           </v-flex>
         </v-layout>
@@ -60,9 +61,9 @@
     props: [
       'id',
       'type',
-      'text',
+      'name',
       'rating',
-      'ratingCount',
+      'reviews',
       'address',
       'reason',
       'primaryPhoto'
