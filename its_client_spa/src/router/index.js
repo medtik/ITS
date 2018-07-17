@@ -62,12 +62,12 @@ export default new Router({
       component: ReviewWritingView
     },
     {
-      path: '/search',
+      path: '/smartsearch',
       name: 'SmartSearch',
       component: SmartSearchView
     },
     {
-      path: '/search/result',
+      path: '/smartsearch/result',
       name: 'SmartSearchResult',
       component: SmartSearchResultView
     }

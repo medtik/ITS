@@ -1,8 +1,7 @@
 <template>
   <router-link v-bind="routerLink">
-
     <v-card>
-      <v-card-media style="width: 300px; height: 300px">
+      <v-card-media style="width: 250px; height: 250px">
         <img :src='photo'/>
       </v-card-media>
       <v-card-text>
