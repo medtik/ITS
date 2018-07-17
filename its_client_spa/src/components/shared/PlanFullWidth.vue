@@ -11,7 +11,7 @@
     <v-flex v-if="mode == 'public'">
       <v-layout column>
         <v-flex class="body-1">
-          <v-icon small>thumb_up</v-icon>&nbsp; <span>{{voteCount}} lượt thích</span>
+          <v-icon small>thumb_up</v-icon>&nbsp; <span>{{voteCount}} lượt bình chọn</span>
         </v-flex>
         <v-flex>
             <span class="body-1 ">
