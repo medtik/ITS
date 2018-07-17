@@ -1,5 +1,5 @@
 <template>
-  <router-link v-bind="routerLink">
+  <router-link v-bind="routerLink" tag="span" class="fakeLink">
     <v-card>
       <v-card-media style="width: 250px; height: 250px">
         <img :src='photo'/>
@@ -61,10 +61,3 @@
     }
   }
 </script>
-
-<style scoped>
-  a {
-    text-decoration: none;
-
-  }
-</style>

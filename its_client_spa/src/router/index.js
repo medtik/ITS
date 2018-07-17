@@ -11,6 +11,7 @@ import SigninView from '../components/account/SigninView'
 import SignupView from '../components/account/SignupView'
 import SmartSearchView from '../components/search/SmartSearchView'
 import SmartSearchResultView from '../components/search/SearchResultView'
+import PlanDetailView from '../components/plan/PlanDetailView'
 
 Vue.use(Router);
 
@@ -35,6 +36,11 @@ export default new Router({
       path: '/plan/list',
       name: 'MyPlanList',
       component: MyPlanListView
+    },
+    {
+      path: '/plan/detail',
+      name: 'PlanDetail',
+      component: PlanDetailView
     },
     {
       path: '/group/list',

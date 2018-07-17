@@ -10,7 +10,9 @@
       <v-layout row wrap px-1>
         <v-flex xs12 lg6 px-2 my-1>
           <v-layout row wrap>
-            <v-flex class="text-lg-center title" xs12 mb-2>Thành viên</v-flex>
+            <v-flex class="text-lg-center title" xs12 mb-2>
+              <v-icon>fas fa-user-friends</v-icon> Thành viên
+            </v-flex>
             <v-flex xs6 lg4 v-for="account in accounts" :key="account.id">
               <AccountCard v-bind="account"/>
             </v-flex>
@@ -18,7 +20,9 @@
         </v-flex>
         <v-flex xs12 lg6 px-2 my-1>
           <v-layout column>
-            <v-flex class="text-lg-center title" xs12 mb-2>Kế hoạch</v-flex>
+            <v-flex class="text-lg-center title" xs12 my-2>
+              <v-icon>fas fa-suitcase</v-icon> Kế hoạch
+            </v-flex>
             <v-flex xs12 lg6>
               <PlanFullWidth v-for="plan in plans"
                              v-bind="plan"

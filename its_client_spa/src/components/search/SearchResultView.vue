@@ -30,7 +30,7 @@
       </v-layout>
 
       <v-flex pt-5 pb-2 class="title text-xs-center">
-        <v-icon >fas fa-suitcase</v-icon>
+        <v-icon>fas fa-suitcase</v-icon>
         &nbsp Chuyến đi
       </v-flex>
       <v-flex v-for="n in 2"

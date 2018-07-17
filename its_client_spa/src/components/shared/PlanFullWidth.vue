@@ -1,7 +1,11 @@
 <template>
   <v-layout column>
     <v-flex mb-2>
-      <span class="title">{{title}}</span>
+      <router-link :to="{name:'PlanDetail',params:{id: this.id}}"
+                   tag="span"
+                   class="title font-weight-medium fakeLink">
+        {{title}}
+      </router-link>
     </v-flex>
     <v-flex v-if="mode == 'private'">
       <v-label>
@@ -40,10 +44,12 @@
     },
     props: [
       'voteCount',
-      'reason'
+      'reason',
+      'duration'
     ],
     data() {
       return {
+        id: 1,
         title: 'Plan abc',
         startDate: '20/7/2018',
         endDate: '25/7/2018'
@@ -57,7 +63,3 @@
     }
   }
 </script>
-
-<style scoped>
-
-</style>

@@ -21,7 +21,7 @@
 
 <script>
   import ParallaxHeader from "../shared/ParallaxHeader"
-  import GroupFullWidth from "../shared/GroupFullWidth"
+  import GroupFullWidth from "./GroupFullWidth"
 
   export default {
     name: "GroupListView",

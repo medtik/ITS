@@ -49,3 +49,9 @@
     }
   }
 </script>
+
+<style global>
+  .fakeLink:hover {
+    cursor: pointer;
+  }
+</style>
