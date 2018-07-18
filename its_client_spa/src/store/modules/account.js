@@ -21,6 +21,20 @@ export default {
       return state.current;
     }
   },
+  mutations: {
+    setToken(state, payload) {
+
+      if (payload) {
+        state.token = {
+          ...payload
+        };
+        localStorage.setItem('token', JSON.stringify(payload));
+      }else{
+        state.token = undefined;
+        localStorage.removeItem('token');
+      }
+    }
+  },
   actions: {
     updateAccountInfo(context, payload) {
       console.debug('updateAccountInfo', payload);
@@ -37,11 +51,33 @@ export default {
           .set('Content-type', 'text/plan')
           .send(`grant_type=password&username=${email}&password=${password}`)
           .then((response) => {
-            const body = response.body;
-            resolve(body)
+            const {
+              access_token,
+              token_type,
+              expires_in,
+            } = response.body;
+            const issued = response.body['.issued'];
+            const expires = response.body['.expires'];
+
+            context.commit('setToken', {
+              access_token,
+              token_type,
+              expires_in,
+              issued,
+              expires
+            });
+            resolve(response.body);
           })
           .catch(reason => {
-            reject(reason);
+            const {
+              error,
+              error_description
+            } = reason.response.body;
+            if (error === 'invalid_grant') {
+              reject({
+                message: "Email hoặc mật khẩu không hợp lệ"
+              });
+            }
           })
       });
     },
@@ -79,8 +115,7 @@ export default {
       });
     },
     signout(context, payload) {
-      console.debug('signout', payload);
-      return Promise.resolve();
+      context.commit('setToken', undefined);
     }
   }
 }

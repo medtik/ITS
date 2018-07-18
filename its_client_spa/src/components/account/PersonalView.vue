@@ -40,7 +40,7 @@
           <v-flex xs4>
             <v-btn color="success">Cập nhật</v-btn>
           </v-flex>
-          <v-flex xs4>
+          <v-flex xs4 @click="signout">
             <v-btn color="secondary">Đăng xuất</v-btn>
           </v-flex>
         </v-layout>
@@ -55,7 +55,7 @@
 <script>
   import PictureInput from "../shared/PictureInput";
   import ParallaxHeader from "../shared/ParallaxHeader";
-  import {mapGetters} from 'vuex'
+  import {mapGetters, mapActions} from 'vuex'
 
   export default {
     name: "PersonalView",
@@ -96,6 +96,12 @@
         this.input.phone = account.phone;
         this.input.address = account.address;
         this.input.birthdate = account.birthdate;
+      },
+      signout() {
+        this.$store.dispatch('account/signout');
+        this.$router.push({
+          name: 'Home'
+        });
       }
     }
   }

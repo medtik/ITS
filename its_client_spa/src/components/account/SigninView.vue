@@ -107,7 +107,7 @@
           .catch(reason => {
             this.signinAlert = {
               show: true,
-              message: "Tài khoản không hợp lệ"
+              ...reason
             };
             this.loading.signinBtn = false;
           })
