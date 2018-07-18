@@ -1,13 +1,21 @@
 <template>
-  <v-layout column pa-1>
-    <v-flex class="subheading font-weight-medium">
-      {{title}}
+  <v-layout row>
+    <!--HANDLE-->
+    <v-flex xs4 d-flex align-center justify-center class="text-xs-center">
+      <v-icon>menu</v-icon>
     </v-flex>
-    <v-divider></v-divider>
-    <v-flex class="body-1" px-2>
-      {{text}}
-    </v-flex>
+    <!--CONTENT-->
+    <v-layout column pa-1>
+      <v-flex class="subheading font-weight-medium">
+        {{title}}
+      </v-flex>
+      <v-divider></v-divider>
+      <v-flex class="body-1" px-2>
+        {{text}}
+      </v-flex>
+    </v-layout>
   </v-layout>
+
 </template>
 
 <script>

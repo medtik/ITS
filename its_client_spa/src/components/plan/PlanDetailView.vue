@@ -10,7 +10,23 @@
     <v-layout column>
       <!--<editor-fold desc="Actions">-->
       <v-flex>
-
+        <v-layout row reverse>
+          <v-flex xs2>
+            <v-btn icon color="success" flat>
+              <v-icon>add_location</v-icon>
+            </v-btn>
+          </v-flex>
+          <v-flex xs2>
+            <v-btn icon color="success" flat>
+              <v-icon>note_add</v-icon>
+            </v-btn>
+          </v-flex>
+          <v-flex xs2>
+            <v-btn icon color="success" flat>
+              <v-icon>publish</v-icon>
+            </v-btn>
+          </v-flex>
+        </v-layout>
       </v-flex>
       <!--</editor-fold>-->
       <!--<editor-fold desc="Unscheduled">-->
@@ -18,12 +34,14 @@
         <v-flex class="title" my-2>
           Chưa lên lịch
         </v-flex>
-        <v-flex elevation-2 my-1
-                v-for="item in plan.unScheduledItems"
-                :key="item.id">
-          <LocationFullWidth v-if="item.location" v-bind="item.location"/>
-          <NoteFullWidth v-else v-bind="item"/>
-        </v-flex>
+        <draggable v-model="plan.unScheduledItems">
+          <v-flex elevation-2 my-1
+                  v-for="item in plan.unScheduledItems"
+                  :key="item.id">
+            <LocationFullWidth v-if="item.location" v-bind="item.location"/>
+            <NoteFullWidth v-else v-bind="item"/>
+          </v-flex>
+        </draggable>
       </v-flex>
       <!--</editor-fold>-->
       <!--<editor-fold desc="Days">-->
@@ -52,13 +70,14 @@
   import _locations from "../location/Locations";
   import LocationFullWidth from "../shared/LocationFullWidth";
   import NoteFullWidth from "./NoteFullWidth";
-
+  import draggable from 'vuedraggable'
 
   export default {
     name: "PlanDetailView",
     components: {
       LocationFullWidth,
-      NoteFullWidth
+      NoteFullWidth,
+      draggable
     },
     data() {
       return {
@@ -70,16 +89,26 @@
               id: '4f36ed66-f87c-4b9d-b338-147e20f56c4a',
               title: 'title',
               text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non eros ut dui mollis aliquam. Donec vel nibh tempus, aliquet dolor vitae, mattis massa',
-              index: 1,
               done: false,
-
+            },
+            {
+              id: 'ed71c0e4-e311-43d2-95e2-ce186542db3f',
+              title: 'title 2',
+              text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non eros ut dui mollis aliquam. Donec vel nibh tempus, aliquet dolor vitae, mattis massa',
+              done: false,
+            },
+            {
+              id: 'be8c4ace-1edc-480e-862f-2aef1c1cc4a7',
+              location: _locations[0],
+              comment: '',
+              done: true
             },
           ],
           days: [
             [
               {
                 id: '3e1e96c4-e78b-4224-8721-020ad869f0c7',
-                location: _locations[0],
+                location: _locations[2],
                 comment: '',
                 done: true
               },
