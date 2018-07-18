@@ -35,7 +35,7 @@ export default {
       return new Promise((resolve, reject) => {
         superagent.post(config.root + '/token')
           .set('Content-type', 'text/plan')
-          .send(`grant_type=password&username${email}&password=${password}`)
+          .send(`grant_type=password&username=${email}&password=${password}`)
           .then((response) => {
             const body = response.body;
             resolve(body)

@@ -12,6 +12,7 @@ import SignupView from '../components/account/SignupView'
 import SmartSearchView from '../components/search/SmartSearchView'
 import SmartSearchResultView from '../components/search/SearchResultView'
 import PlanDetailView from '../components/plan/PlanDetailView'
+import LocationOnMapView from '../components/location/LocationOnMapView'
 
 Vue.use(Router);
 
@@ -76,6 +77,11 @@ export default new Router({
       path: '/smartsearch/result',
       name: 'SmartSearchResult',
       component: SmartSearchResultView
+    },
+    {
+      path: '/location/map',
+      name: 'LocationMap',
+      component: LocationOnMapView
     }
   ]
 })

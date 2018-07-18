@@ -37,7 +37,7 @@
                    @click="onAddPhotoClick">
               <v-icon>add_a_photo</v-icon>
               &nbsp &nbsp
-              Xem thêm
+              Thêm ảnh
             </v-btn>
           </v-flex>
         </v-flex>
