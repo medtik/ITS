@@ -1,6 +1,10 @@
+import superagent from "superagent"
+import config from "../../superagentConfig"
+
 export default {
   namespaced: true,
   state: {
+    token: undefined,
     current: {
       "id": 1,
       "name": "Stephanus Culbert",
@@ -12,26 +16,70 @@ export default {
       "ban": true
     }
   },
-  getters:{
-    currentAccount(state, getters, rootState){
+  getters: {
+    currentAccount(state, getters, rootState) {
       return state.current;
     }
   },
   actions: {
-    updateAccountInfo(context,payload){
-      console.debug('updateAccountInfo',payload);
+    updateAccountInfo(context, payload) {
+      console.debug('updateAccountInfo', payload);
       return Promise.resolve();
     },
-    signin(context,payload){
-      console.debug('signin',payload);
-      return Promise.resolve();
+    signin(context, payload) {
+      const {
+        email,
+        password
+      } = payload;
+
+      return new Promise((resolve, reject) => {
+        superagent.post(config.root + '/token')
+          .set('Content-type', 'text/plan')
+          .send(`grant_type=password&username${email}&password=${password}`)
+          .then((response) => {
+            const body = response.body;
+            resolve(body)
+          })
+          .catch(reason => {
+            reject(reason);
+          })
+      });
     },
-    signup(context,payload){
-      console.debug('signup',payload);
-      return Promise.resolve();
+    signup(context, payload) {
+
+      const {
+        email,
+        password,
+        rePassword,
+        name,
+        address,
+        phone,
+        birthdate
+      } = payload;
+
+      return new Promise((resolve, reject) => {
+        superagent.post(config.root + '/api/account')
+          .use(config.prefix)
+          .send({
+            emailAddress: email,
+            password: password,
+            rePassword: rePassword,
+            fullName: name,
+            address: address,
+            phoneNumber: phone,
+            birthdate: birthdate,
+          })
+          .then((response) => {
+            const body = response.body;
+            resolve(body)
+          })
+          .catch(reason => {
+            reject(reason);
+          })
+      });
     },
-    signout(context,payload){
-      console.debug('signout',payload);
+    signout(context, payload) {
+      console.debug('signout', payload);
       return Promise.resolve();
     }
   }

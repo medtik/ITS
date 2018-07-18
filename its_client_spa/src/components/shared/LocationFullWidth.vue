@@ -3,12 +3,26 @@
                tag="div"
                :to="{name:'LocationDetail', params:{id: this.id}}">
     <v-layout row>
+      <!--<editor-fold desc="Handle">-->
+      <v-flex xs4
+              sm2
+              d-flex
+              align-center
+              justify-center
+              v-if="$slots.handle"
+              class="text-xs-center">
+        <slot name="handle"></slot>
+      </v-flex>
+      <!--</editor-fold>-->
+      <!--<editor-fold desc="Photo">-->
       <v-flex style="flex-grow: 0">
         <v-avatar tile size="140">
           <img :src="primaryPhoto.url"/>
         </v-avatar>
       </v-flex>
-      <v-flex pa-2>
+      <!--</editor-fold>-->
+      <!--<editor-fold desc="Content">-->
+      <v-flex pa-2 style="flex-grow: 0">
         <v-layout column>
           <v-flex class="title">
             <v-icon>{{locationIcon}}</v-icon>
@@ -46,6 +60,7 @@
           </v-flex>
         </v-layout>
       </v-flex>
+      <!--</editor-fold>-->
     </v-layout>
   </router-link>
 </template>

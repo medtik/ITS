@@ -6,16 +6,18 @@
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "dev-lan": "set HOST=192.168.2.2&& set PORT=80&& webpack-dev-server --inline --progress --config build/webpack.dev.conf.js ",
+    "dev-lan": "set HOST=172.16.3.161&& set PORT=80&& webpack-dev-server --inline --progress --config build/webpack.dev.conf.js ",
     "start": "npm run dev",
     "build": "node build/build.js"
   },
   "dependencies": {
     "lodash": "^4.17.10",
     "moment": "^2.22.2",
+    "superagent": "^3.8.3",
+    "superagent-jsonapify": "^1.4.5",
+    "superagent-prefix": "0.0.2",
     "vue": "^2.5.2",
     "vue-picture-input": "^2.1.6",
-    "vue-resource": "^1.5.1",
     "vue-router": "^3.0.1",
     "vue-star-rating": "^1.6.0",
     "vue2-google-maps": "^0.9.7",

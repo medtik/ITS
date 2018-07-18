@@ -1,8 +1,14 @@
 <template>
   <v-layout row>
     <!--HANDLE-->
-    <v-flex xs4 d-flex align-center justify-center class="text-xs-center">
-      <v-icon>menu</v-icon>
+    <v-flex xs4
+            sm2
+            d-flex
+            align-center
+            justify-center
+            v-if="$slots.handle"
+            class="text-xs-center">
+      <slot name="handle"></slot>
     </v-flex>
     <!--CONTENT-->
     <v-layout column pa-1>

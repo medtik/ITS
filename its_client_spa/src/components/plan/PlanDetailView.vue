@@ -34,12 +34,19 @@
         <v-flex class="title" my-2>
           Chưa lên lịch
         </v-flex>
-        <draggable v-model="plan.unScheduledItems">
+        <draggable v-model="plan.unScheduledItems" :options="{handle:'.handle-bar',group:'items'}">
           <v-flex elevation-2 my-1
                   v-for="item in plan.unScheduledItems"
                   :key="item.id">
-            <LocationFullWidth v-if="item.location" v-bind="item.location"/>
-            <NoteFullWidth v-else v-bind="item"/>
+            <LocationFullWidth v-if="item.location" v-bind="item.location">
+              <v-icon slot="handle" class="handle-bar">reorder</v-icon>
+            </LocationFullWidth>
+            <NoteFullWidth v-else v-bind="item">
+              <v-icon slot="handle" class="handle-bar">reorder</v-icon>
+            </NoteFullWidth>
+          </v-flex>
+          <v-flex v-if="plan.unScheduledItems <= 0" style="height: 50px">
+            <!--Spacer-->
           </v-flex>
         </draggable>
       </v-flex>
@@ -49,12 +56,22 @@
         <v-flex class="title" my-2>
           Ngày {{index + 1}}
         </v-flex>
-        <v-flex elevation-2 my-1
-                v-for="item in day"
-                :key="item.id">
-          <LocationFullWidth v-if="item.location" v-bind="item.location"/>
-          <NoteFullWidth v-else v-bind="item"/>
-        </v-flex>
+        <draggable v-model="plan.days[index]" :options="{handle:'.handle-bar',group:'items'}">
+          <v-flex elevation-2 my-1
+                  v-for="item in day"
+                  :key="item.id">
+            <LocationFullWidth v-if="item.location" v-bind="item.location">
+              <v-icon slot="handle" class="handle-bar">reorder</v-icon>
+            </LocationFullWidth>
+            <NoteFullWidth v-else v-bind="item">
+              <v-icon slot="handle" class="handle-bar">reorder</v-icon>
+            </NoteFullWidth>
+          </v-flex>
+          <v-flex v-if="plan.days[index].length <= 0" style="height: 50px">
+            <!--Spacer-->
+          </v-flex>
+        </draggable>
+
       </v-flex>
       <!--</editor-fold>-->
       <!--<editor-fold desc="Holder">-->

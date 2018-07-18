@@ -22,15 +22,25 @@
               />
               <v-text-field
                 label="Password"
-                v-model="emailInput"
+                type="password"
+                v-model="passwordInput"
               />
             </v-flex>
             <v-flex>
               <v-layout wrap row>
+                <v-flex xs12>
+                  <v-alert
+                    v-model="signinAlert.show"
+                    dismissible
+                    type="error"
+                  >
+                    {{signinAlert.message}}
+                  </v-alert>
+                </v-flex>
                 <v-flex>
                   <v-layout>
                     <v-flex xs6 d-flex class="justify-center">
-                      <v-btn color="primary" @click="signin" :loading="loading.login">
+                      <v-btn color="primary" @click="signin" :loading="loading.signinBtn">
                         Đăng nhập
                       </v-btn>
                     </v-flex>
@@ -73,19 +83,37 @@
     data() {
       return {
         loading: {
-          login: false
+          signinBtn: false
         },
         emailInput: undefined,
         passwordInput: undefined,
-        error: {}
+        error: {},
+        signinAlert: {}
       }
     },
     methods: {
       signin() {
+        this.loading.signinBtn = true;
         this.$store.dispatch('account/signin', {
           email: this.emailInput,
-          password: this.password
+          password: this.passwordInput
         })
+          .then(value => {
+            this.$router.push({
+              name: 'Home'
+            });
+            this.loading.signinBtn = false;
+          })
+          .catch(reason => {
+            this.signinAlert = {
+              show: true,
+              message: "Tài khoản không hợp lệ"
+            };
+            this.loading.signinBtn = false;
+          })
+      },
+      signinGoogle() {
+        this.$store.dispatch('account/signinGoogle')
           .then(value => {
             this.$router.push({
               name: 'Home'
@@ -95,11 +123,16 @@
             this.error = {...reason};
           })
       },
-      signinGoogle() {
-
-      },
       signinFacebook() {
-
+        this.$store.dispatch('account/signinFacebook')
+          .then(value => {
+            this.$router.push({
+              name: 'Home'
+            })
+          })
+          .catch(reason => {
+            this.error = {...reason};
+          })
       }
     }
   }
