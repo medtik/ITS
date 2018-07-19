@@ -105,7 +105,6 @@
             });
           })
           .catch(reason => {
-            console.error(reason);
             this.signinAlert = {
               show: true,
               ...reason

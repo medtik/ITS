@@ -36,10 +36,10 @@ export default {
       } = payload;
 
       let formattedToken;
-      if(token.issued && token.expires){
+      if (token.issued && token.expires) {
         //Formatted
         formattedToken = token;
-      }else{
+      } else {
         formattedToken = {
           access_token: token.access_token,
           token_type: token.token_type,
@@ -50,10 +50,13 @@ export default {
       }
       state.token = formattedToken;
       localStorage.setItem('token', JSON.stringify(formattedToken));
+      axiosInstance.defaults.headers.common['Authorization'] =
+        context.getters.authorizeHeader;
     },
-    nullToken(state, {}) {
+    nullToken(state) {
       state.token = undefined;
       localStorage.removeItem('token');
+      axiosInstance.defaults.headers.common['Authorization'] = undefined;
     },
   },
   actions: {
@@ -77,8 +80,15 @@ export default {
             resolve(response.data);
           })
           .catch(reason => {
-            reject(reason.body)
-          })
+            let message = 'Có lỗi xẩy ra';
+            if (reason.response.status === 400) {
+              message = 'Sai tên đăng nhập hoặc mật khẩu'
+            }
+            reject({
+              ...reason.response,
+              message
+            });
+          });
       });
     }
   }

@@ -93,7 +93,7 @@
         this.input.birthdate = account.birthdate;
       },
       signout() {
-        this.$store.dispatch('account/signout');
+        this.$store.commit('authenticate/nullToken');
         this.$router.push({
           name: 'Home'
         });

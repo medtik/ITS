@@ -126,12 +126,20 @@
             this.loading.signupBtn = false;
           })
           .catch(reason => {
-            if (reason && reason.status !== 400) {
-              this.errorDialog = {
-                dialog: true,
-                message: 'Có lỗi xẩy ra'
-              };
-              console.error('signup',reason);
+            if (reason) {
+              switch (reason.status) {
+                case 400:
+                  this.errorMessages = {
+                    ...reason.error
+                  };
+                  break;
+                default:
+                  this.errorDialog = {
+                    dialog: true,
+                    message: 'Có lỗi xẩy ra'
+                  };
+                  break;
+              }
               this.loading.signupBtn = false;
             }
           })
@@ -140,6 +148,13 @@
         this.$router.push({
           name: 'Home'
         })
+      },
+      clearErrorMessages() {
+        for (let key in this.errorMessages) {
+          if (this.errorMessages.hasOwnProperty(key)) {
+            this.errorMessages[key] = undefined;
+          }
+        }
       }
     }
   }
