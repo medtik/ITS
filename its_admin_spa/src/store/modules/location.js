@@ -1,5 +1,5 @@
 import _locations from "./mockdata/locations";
-import _ from 'lodash'
+import axiosInstance from "../../axiosInstance";
 
 function mockShell(bodyFunc, noFail) {
   return new Promise((resolve, reject) => {
@@ -23,37 +23,15 @@ export default {
   namespaced: true,
   actions: {
     getAll(context, payload) {
-      return mockShell(() => {
-        let total = _locations.length;
-        let locations = _locations.filter(_location => {
-          return (
-            (_location.name && _location.name.indexOf(payload.search) >= 0)
-          )
-        });
-        if (payload.pagination.sortBy) {
-          locations = locations.sort((a, b) => {
-            const sortA = a[payload.pagination.sortBy];
-            const sortB = b[payload.pagination.sortBy];
+      const {
+        pagination,
+        search,
 
-            if (payload.pagination.descending) {
-              if (sortA < sortB) return 1;
-              if (sortA > sortB) return -1;
-              return 0
-            } else {
-              if (sortA < sortB) return -1;
-              if (sortA > sortB) return 1;
-              return 0
-            }
-          })
-        }
-        if (payload.pagination.rowsPerPage > 0) {
-          locations = locations.slice((payload.pagination.page - 1) * payload.pagination.rowsPerPage, payload.pagination.page * payload.pagination.rowsPerPage)
-        }
-        return {
-          locations,
-          total
-        }
-      }, true);
+      } = payload;
+
+      return new Promise((resolve, reject) => {
+        axiosInstance.get('api/Location')
+      });
     },
     getById(context, payload) {
       return mockShell(() => {
@@ -63,9 +41,7 @@ export default {
       }, true)
     },
     create(context, payload) {
-      return mockShell(() => {
 
-      })
     },
     update(context, payload) {
       return mockShell(() => {

@@ -10,12 +10,13 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "lodash": "^4.17.10",
     "moment": "^2.22.2",
     "passport": "^0.4.0",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1",
     "vue-picture-input": "^2.1.6",
+    "vue-router": "^3.0.1",
     "vue-star-rating": "^1.6.0",
     "vuetify": "^1.0.0",
     "vuex": "^3.0.1"
