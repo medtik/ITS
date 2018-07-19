@@ -63,24 +63,29 @@
     methods: {
       signIn() {
         this.loading.signinBtn = true;
-        this.$store.dispatch('authenticate/signInEmail', {
+        this.$store.dispatch('authenticate/fetchToken', {
           email: this.emailInput,
           password: this.passwordInput
         })
           .then(value => {
+            this.$store.commit('authenticate/setToken', {token: value});
             this.$router.push({
               name: 'AccountList'
             });
-            this.loading.signinBtn = false;
           })
           .catch(reason => {
-            this.error = {
-              show: true,
-              message: reason.message
-            };
+            if(reason.status === 400){
+              this.error = {
+                show: true,
+                message: reason.message
+              };
+            }else{
+              console.error(reason);
+            }
+
             this.loading.signinBtn = false;
           })
-      }
+      },
     }
   }
 </script>

@@ -51,7 +51,7 @@ export default {
       state.token = formattedToken;
       localStorage.setItem('token', JSON.stringify(formattedToken));
       axiosInstance.defaults.headers.common['Authorization'] =
-        context.getters.authorizeHeader;
+        `${state.token.token_type} ${state.token.access_token}`;
     },
     nullToken(state) {
       state.token = undefined;

@@ -26,11 +26,36 @@ export default {
       const {
         pagination,
         search,
-
       } = payload;
 
       return new Promise((resolve, reject) => {
-        axiosInstance.get('api/Location')
+        axiosInstance.get('api/Location', {
+          params: {
+            pageIndex: pagination.page,
+            pageSize: pagination.rowsPerPage,
+            sortBy: pagination.sortBy,
+            search
+          }
+        })
+          .then(value => {
+            console.debug('getAll 1', value, );
+            console.debug('getAll header', value.headers['Paging-Header']);
+
+            const data = value.data;
+            const pagingHeader = value.data.headers['Paging-Header'];
+            const total = JSON.parse(pagingHeader);
+
+            console.debug('getAll 2', value.response);
+            resolve({
+              locations: data,
+              total
+            })
+          })
+          .catch(reason => {
+            reject({
+              ...reason.response
+            })
+          })
       });
     },
     getById(context, payload) {

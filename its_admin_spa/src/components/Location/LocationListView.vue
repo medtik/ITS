@@ -7,7 +7,7 @@
         <!--Content start-->
         <v-card-title>
           <v-text-field
-            v-model="searchText"
+            v-model="searchInput"
             v-on:keyup.enter="onSearchEnter"
             append-icon="search"
             label="Tìm"
