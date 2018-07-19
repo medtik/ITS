@@ -94,17 +94,18 @@
     methods: {
       signin() {
         this.loading.signinBtn = true;
-        this.$store.dispatch('account/signin', {
+        this.$store.dispatch('authenticate/fetchToken', {
           email: this.emailInput,
           password: this.passwordInput
         })
           .then(value => {
+            this.$store.commit('authenticate/setToken', {token: value});
             this.$router.push({
               name: 'Home'
             });
-            this.loading.signinBtn = false;
           })
           .catch(reason => {
+            console.error(reason);
             this.signinAlert = {
               show: true,
               ...reason

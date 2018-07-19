@@ -46,6 +46,12 @@
             return true;
         }
       }
+    },
+    mounted() {
+      const localToken = this.$store.getters['authenticate/getlocalToken'];
+      if (localToken) {
+        this.$store.commit('authenticate/setToken', {token: localToken})
+      }
     }
   }
 </script>

@@ -6,7 +6,6 @@ import router from './router'
 import store from './store'
 import Vuetify from 'vuetify'
 import * as VueGoogleMaps from 'vue2-google-maps'
-import "./superagentConfig"
 import 'vuetify/dist/vuetify.min.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 

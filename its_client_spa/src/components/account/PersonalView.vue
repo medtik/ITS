@@ -36,14 +36,9 @@
         </v-layout>
       </v-flex>
       <v-flex>
-        <v-layout row style="justify-content: space-around">
-          <v-flex xs4>
-            <v-btn color="success">Cập nhật</v-btn>
-          </v-flex>
-          <v-flex xs4 @click="signout">
-            <v-btn color="secondary">Đăng xuất</v-btn>
-          </v-flex>
-        </v-layout>
+        <v-btn color="success">Cập nhật</v-btn>
+        <v-btn color="success">Đổi mật khẩu</v-btn>
+        <v-btn color="secondary" @click="signout">Đăng xuất</v-btn>
       </v-flex>
       <v-flex style="height: 30vh">
         <!--Holder-->
