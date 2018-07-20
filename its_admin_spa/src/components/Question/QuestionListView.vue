@@ -144,6 +144,10 @@ tag
           .then(value => {
             this.pagination.page = 1;
             this.loadData();
+            this.success = {
+              dialog: true,
+              message: 'Xóa thành công'
+            }
           })
           .catch(reason => {
             this.error = {

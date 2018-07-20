@@ -96,7 +96,6 @@ export default {
       } = payload;
 
       return new Promise((resolve, reject) => {
-        console.debug('payload');
         axiosInstance.post('api/Question', {
           content: text,
           categories: category,
@@ -126,9 +125,25 @@ export default {
       })
     },
     delete(context, payload) {
-      return mockShell(() => {
-        _.remove(_question, q => q.id == payload.id)
+      return new Promise((resolve, reject) => {
+        axiosInstance.delete('api/Question', {
+          params:{
+            questionId: payload.id
+          }
+        })
+          .then(value => {
+            resolve();
+          })
+          .catch(reason => {
+            let error = [];
+
+            reject({
+              ...reason.response,
+              error
+            })
+          })
       })
+
     }
 
   }
