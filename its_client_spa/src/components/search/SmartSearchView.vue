@@ -22,7 +22,9 @@
             @change="onAreaSelect"
             v-model="selectedArea"
             :items="areas"
-            :loading="loading.areaSelect"
+            item-text="name"
+            item-value="id"
+            :loading="loading.areaSelect || areasLoading"
           />
           <v-progress-linear
             v-if="loading.questions"
@@ -78,7 +80,7 @@
 
 <script>
   import ParallaxHeader from "../shared/ParallaxHeader";
-
+  import {mapState} from "vuex"
   export default {
     name: "SmartSearchView",
     components: {
@@ -88,31 +90,42 @@
       return {
         loading: {
           finishBtn: false,
-          areaSelect: true,
+          areaSelect: false,
           questions: false
         },
         questions: [],
-        areas: [],
         selectedArea: undefined,
         selectedAnswers: [],
         error: {}
       }
     },
+    computed:{
+      ...mapState('area',{
+        areas: state => state.areas,
+        areasLoading: state=>state.areasLoading
+      })
+    },
     mounted() {
-      this.$store.dispatch('search/fetchAreas')
-        .then((value) => {
-          const {
-            areas
-          } = value;
-          this.areas = areas;
-          this.loading.areaSelect = false;
-        })
-        .catch((reason) => {
-          this.error = {
-            ...reason
-          };
-          this.loading.areaSelect = false;
-        })
+      if(!this.areas || this.areas.length <= 0){
+        this.$store.dispatch('area/getAll')
+          .catch(reason =>{
+            console.debug('mounted', reason)
+          })
+      }
+      // this.$store.dispatch('search/fetchAreas')
+      //   .then((value) => {
+      //     const {
+      //       areas
+      //     } = value;
+      //     this.areas = areas;
+      //     this.loading.areaSelect = false;
+      //   })
+      //   .catch((reason) => {
+      //     this.error = {
+      //       ...reason
+      //     };
+      //     this.loading.areaSelect = false;
+      //   })
     },
     methods: {
       onAreaSelect() {
