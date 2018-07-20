@@ -1,4 +1,5 @@
 import _question from "./mockdata/Questions";
+import axiosInstance from "../../axiosInstance"
 import _ from 'lodash'
 
 function mockShell(bodyFunc, noFail) {
@@ -23,65 +24,92 @@ export default {
   namespaced: true,
   actions: {
     getAll(context, payload) {
-      return mockShell(() => {
-        let total = _question.length;
-        let questions = _question.filter(_question => {
-          return (
-            (_question.text && _question.text.indexOf(payload.search) >= 0) ||
-            (_question.category && _question.category.indexOf(payload.search) >= 0)
-          )
-        });
+      const {
+        pagination,
+        search,
+      } = payload;
 
-        if (payload.pagination.sortBy) {
-          questions = questions.sort((a, b) => {
-            const sortA = a[payload.pagination.sortBy];
-            const sortB = b[payload.pagination.sortBy];
+      return new Promise((resolve, reject) => {
+        axiosInstance.get('api/Question', {
+          params: {
+            pageIndex: pagination.page,
+            pageSize: pagination.rowsPerPage,
+            sortBy: pagination.sortBy,
+            searchValue: search
+          }
+        })
+          .then(value => {
+            const data = value.data.currentList;
+            const paging = value.data.meta;
 
-            if (payload.pagination.descending) {
-              if (sortA < sortB) return 1;
-              if (sortA > sortB) return -1;
-              return 0
-            } else {
-              if (sortA < sortB) return -1;
-              if (sortA > sortB) return 1;
-              return 0
-            }
+            resolve({
+              questons: data.map(q => {
+
+              }),
+              total: paging.totalElement,
+            })
           })
-        }
+          .catch(reason => {
+            let error = [];
 
-        if (payload.pagination.rowsPerPage > 0) {
-          questions = questions.slice((payload.pagination.page - 1) * payload.pagination.rowsPerPage, payload.pagination.page * payload.pagination.rowsPerPage)
-        }
-
-        return {
-          questions,
-          total
-        }
-      },true);
+            reject({
+              ...reason.response,
+              error
+            })
+          });
+      })
     },
     getById(context, payload) {
       return mockShell(() => {
         return _question.find(q => q.id == payload.id);
-      },true)
-    },
-    getCategories(context, payload) {
-      return mockShell(() => {
-        const searchString = payload.search ? payload.search : '';
-        return _question
-          .filter(q => q.category && q.category.indexOf(searchString) >= 0)
-          .map(q => q.category)
       }, true)
     },
+    getCategories(context, payload) {
+      return new Promise((resolve, reject) => {
+        axiosInstance.get('api/Question/categories')
+          .then(value => {
+            resolve({
+              categories: value.data
+            })
+          })
+          .catch(reason => {
+            let error = [];
+
+            reject({
+              ...reason.response,
+              error
+            })
+          })
+      });
+    },
     create(context, payload) {
-      return mockShell(() => {
-        const question = {
-          id: _question.length + 1,
-          text: payload.text,
-          category: payload.category
-        };
-        _question.push(question);
-        return question;
-      })
+      const {
+        text,
+        category,
+        answers
+      } = payload;
+
+      return new Promise((resolve, reject) => {
+        console.debug('payload');
+        axiosInstance.post('api/Question', {
+          content: text,
+          categories: category,
+          answers: answers.map(value => value.text)
+        })
+          .then(value => {
+            resolve()
+          })
+          .catch(reason => {
+            let error = [];
+
+            reject({
+              ...reason.response,
+              error
+            })
+          })
+      });
+
+
     },
     update(context, payload) {
       return mockShell(() => {
@@ -91,9 +119,9 @@ export default {
         return question;
       })
     },
-    delete(context,payload){
-      return mockShell(()=>{
-        _.remove(_question,q => q.id == payload.id)
+    delete(context, payload) {
+      return mockShell(() => {
+        _.remove(_question, q => q.id == payload.id)
       })
     }
 

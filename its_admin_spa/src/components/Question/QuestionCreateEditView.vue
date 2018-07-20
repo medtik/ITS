@@ -8,9 +8,9 @@
         <v-layout column v-else>
           <!--Basic input-->
           <v-flex style="width: 25rem">
-            <v-text-field label="Nội dung câu hỏi" v-model="questionTextInput"></v-text-field>
+            <v-text-field label="Nội dung câu hỏi" v-model="textInput"></v-text-field>
             <v-combobox
-              v-model="questionCategoryInput"
+              v-model="categoryInput"
               :items="categories"
               label="Thể loại"
               :loading="loading.categories"
@@ -33,13 +33,13 @@
                           single-line
                         ></v-text-field>
                         <v-btn icon flat color="green"
-                               v-on:click="onAddQuestionClick">
+                               v-on:click="onAddAnswerClick">
                           <v-icon>fas fa-plus</v-icon>
                         </v-btn>
                       </v-layout>
                     </v-flex>
                     <v-divider></v-divider>
-                    <v-flex px-2 v-for="(answer,index) in question.answers" :key="answer.id">
+                    <v-flex px-2 v-for="(answer,index) in answersInput" :key="index">
                       <v-layout row py-2>
                         <v-flex xs11>
                           <v-layout column>
@@ -142,9 +142,10 @@
         mode: 'create',
         questionId: undefined,
         question: undefined,
-        questionTextInput: undefined,
-        questionCategoryInput: undefined,
+        textInput: undefined,
+        categoryInput: undefined,
         answerTextInput: undefined,
+        answersInput: [],
         categories: [],
         //boiler plane
         error: {
@@ -207,13 +208,14 @@
           search: this.categoryInput
         })
           .then(value => {
-            this.categories = value;
+            this.categories = value.categories;
             this.loading.categories = false;
           })
       },
       fillInputs() {
         this.textInput = this.question.text;
         this.categoryInput = this.question.category;
+        this.answersInput = this.question.answers;
         return Promise.resolve();
       },
       onAddTagClick() {
@@ -221,8 +223,8 @@
           dialog: true
         }
       },
-      onAddQuestionClick() {
-        this.question.answers.push({
+      onAddAnswerClick() {
+        this.answersInput.push({
           text: this.answerTextInput
         })
       },
@@ -230,11 +232,12 @@
         this.loading.createBtn = true;
         this.$store.dispatch('question/create', {
           text: this.textInput,
-          category: this.categoryInput
+          category: this.categoryInput,
+          answers: this.answersInput
         }).then(question => {
           this.success = {
             dialog: true,
-            message: `Tạo mới thành công câu hỏi ${question.text}`
+            message: `Tạo mới thành công câu hỏi`
           };
           this.loading.createBtn = false;
         }).catch(reason => {

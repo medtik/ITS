@@ -3,6 +3,7 @@
     :clickable="true"
     @click="onClick"
     :position="position"
+    :icon="icon"
     >
   </GmapMarker>
 </template>

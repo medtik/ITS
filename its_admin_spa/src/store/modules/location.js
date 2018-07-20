@@ -34,26 +34,21 @@ export default {
             pageIndex: pagination.page,
             pageSize: pagination.rowsPerPage,
             sortBy: pagination.sortBy,
-            search
+            searchValue: search
           }
         })
           .then(value => {
-            console.debug('getAll 1', value, );
-            console.debug('getAll header', value.headers['Paging-Header']);
-
-            const data = value.data;
-            const pagingHeader = value.data.headers['Paging-Header'];
-            const total = JSON.parse(pagingHeader);
-
-            console.debug('getAll 2', value.response);
             resolve({
-              locations: data,
-              total
+              locations: value.data.currentList,
+              total: value.data.meta.totalElement,
             })
           })
           .catch(reason => {
+            let error = [];
+
             reject({
-              ...reason.response
+              ...reason.response,
+              error
             })
           })
       });
