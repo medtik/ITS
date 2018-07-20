@@ -1,8 +1,10 @@
 <template>
   <GmapMarker
-    :position="postition"
-    :icon="icon"
-  />
+    :clickable="true"
+    @click="onClick"
+    :position="position"
+    >
+  </GmapMarker>
 </template>
 
 <script>
@@ -10,16 +12,19 @@
 
   export default {
     name: "GMarker",
+
     props: [
+      'id',
       'lat',
       'lng',
       'type',
+      'info',
       'iconWidth',
       'iconHeight',
     ],
     computed: {
       google: gmapApi,
-      postition() {
+      position() {
         return this.google && new this.google.maps.LatLng(this.lat, this.lng);
       },
       icon() {
@@ -43,12 +48,18 @@
           default:
             return;
         }
+        //TODO: Problem here
         return {
           size: this.google && new this.google.maps.Size(this.iconWidth, this.iconHeight),
           url
         }
-      }
+      },
     },
+    methods:{
+      onClick(){
+        this.$emit('click')
+      }
+    }
   }
 </script>
 

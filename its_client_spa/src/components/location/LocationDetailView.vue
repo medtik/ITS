@@ -102,23 +102,9 @@
         <v-layout column my-2>
           <v-divider></v-divider>
           <v-flex>
-            <v-btn block flat>
-              <v-icon>restaurant</v-icon>
-              &nbsp &nbsp Nhà hàng
-            </v-btn>
-          </v-flex>
-          <v-divider></v-divider>
-          <v-flex>
-            <v-btn block flat>
-              <v-icon>hotel</v-icon>
-              &nbsp &nbsp Khách sạn
-            </v-btn>
-          </v-flex>
-          <v-divider></v-divider>
-          <v-flex>
-            <v-btn block flat>
-              <v-icon>local_activity</v-icon>
-              &nbsp &nbsp Vui chơi
+            <v-btn block flat :to="{name: 'LocationMap', params:{id:this.id}}">
+              <v-icon>navigation</v-icon>
+              &nbsp &nbsp Xem trên bản đồ
             </v-btn>
           </v-flex>
           <v-divider></v-divider>

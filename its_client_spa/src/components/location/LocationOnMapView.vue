@@ -47,14 +47,24 @@
     >
       <GMarker v-for="(marker, index) in toggledMarkers" :key="index"
                v-bind="marker"
+               @click="toggleInfoWindow(marker)"
                iconWidth="40"
                iconHeight="40"
       ></GMarker>
-      <GMarker :key="-1"
+      <GMarker :key="current.id"
                v-bind="current"
+               @click="toggleInfoWindow(current)"
                iconWidth="40"
                iconHeight="40"
       ></GMarker>
+      <GmapInfoWindow
+        :options="infoWindow.options"
+        :position="infoWindow.pos"
+        :opened="infoWindow.open"
+        @closeclick="infoWindow.open = false"
+      >
+        <LocationCard/>
+      </GmapInfoWindow>
     </GmapMap>
   </v-content>
 
@@ -64,28 +74,55 @@
   import {gmapApi} from 'vue2-google-maps'
   import GMarker from "./GMarker";
   import DirectionsRenderer from './DirectionsRenderer.js'
+  import LocationCard from "../shared/LocationCard";
+
 
   export default {
     name: "LocationOnMapView",
     components: {
       GMarker,
-      DirectionsRenderer
+      DirectionsRenderer,
+      LocationCard
     },
     data() {
       return {
-        current: {lat: 10.8290990, lng: 106.6720520, type: 'current'},
+        current: {id: -1, lat: 10.8290990, lng: 106.6720520, type: 'current', location: {}},
         toggle: {
-          activity: false,
+          activity: true,
           restaurant: true,
           hotel: true,
         },
+        infoWindow: {
+          pos: undefined,
+          open: false,
+          markerId: undefined,
+          location: undefined,
+          options: {
+            pixelOffset: {
+              width: 0,
+              height: -35
+            }
+          }
+        },
         markers: [
-          {lat: 10.8292360, lng: 106.6714590, type: 'activity'},
-          {lat: 10.8298360, lng: 106.6733590, type: 'restaurant'},
-          {lat: 10.8290990, lng: 106.6737590, type: 'activity'},
-          {lat: 10.8270360, lng: 106.6711930, type: 'hotel'},
-          {lat: 10.8294360, lng: 106.6713130, type: 'hotel'},
-          {lat: 10.8282360, lng: 106.6719130, type: 'hotel'},
+          {
+            id: 1,
+            lat: 10.8292360,
+            lng: 106.6714590,
+            type: 'activity',
+            location: {name: 'activity abc', rating: 3.2, id: 1}
+          },
+          {
+            id: 2,
+            lat: 10.8298360,
+            lng: 106.6733590,
+            type: 'restaurant',
+            location: {name: 'restaurant abc', rating: 3.2, id: 1}
+          },
+          {id: 2, lat: 10.8290990, lng: 106.6737590, type: 'activity'},
+          // {id: 3, lat: 10.8270360, lng: 106.6711930, type: 'hotel'},
+          // {id: 4, lat: 10.8294360, lng: 106.6713130, type: 'hotel'},
+          // {id: 5, lat: 10.8282360, lng: 106.6719130, type: 'hotel'},
         ],
         mapStyles: [
           {
@@ -108,17 +145,17 @@
       },
       toggledMarkers() {
         let toggledMarkers = [];
-        if(this.toggle.restaurant){
+        if (this.toggle.restaurant) {
           toggledMarkers.push(
             ...this.markers.filter(value => value.type === 'restaurant')
           )
         }
-        if(this.toggle.activity){
+        if (this.toggle.activity) {
           toggledMarkers.push(
             ...this.markers.filter(value => value.type === 'activity')
           )
         }
-        if(this.toggle.hotel){
+        if (this.toggle.hotel) {
           toggledMarkers.push(
             ...this.markers.filter(value => value.type === 'hotel')
           )
@@ -165,6 +202,22 @@
             renderer.setMap(map);
           });
         })
+      },
+      toggleInfoWindow(marker) {
+        console.debug(marker.id, marker.type);
+        this.infoWindow.pos = {
+          lat: marker.lat,
+          lng: marker.lng
+        };
+        this.infoWindow.location = marker.location;
+
+        if (this.infoWindow.markerId === marker.id) {
+          this.infoWindow.open = !this.infoWindow.open;
+        }
+        else {
+          this.infoWindow.open = true;
+          this.infoWindow.markerId = marker.id;
+        }
       }
     }
   }
