@@ -41,11 +41,17 @@ export default {
           .then(value => {
             const data = value.data.currentList;
             const paging = value.data.meta;
-
+            const questions = [];
+            for (let question of data) {
+              questions.push({
+                id: question.id,
+                text: question.content,
+                category: question.categories,
+                answerCount: question.answerCount,
+              })
+            }
             resolve({
-              questons: data.map(q => {
-
-              }),
+              questions,
               total: paging.totalElement,
             })
           })

@@ -28,7 +28,7 @@
           <template slot="items" slot-scope="props">
             <td>{{ props.item.text }}</td>
             <td>{{ props.item.category }}</td>
-            <td>{{ props.item.answers.length }}</td>
+            <td>{{ props.item.answerCount }}</td>
             <td class="justify-center layout px-0">
               <router-link :to="{name:'QuestionEdit', query:{id:props.item.id}}">
                 <v-icon
