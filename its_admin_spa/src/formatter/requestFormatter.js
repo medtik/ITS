@@ -1,16 +1,15 @@
+export default {
+  getAllResponse() {
+  },
+  orderBy() {
 
-
-
-function getAllResponse(){
-//
-}
-
-function getAllResquest(pagination, search){
-  const result = {
-    pageIndex: pagination.page,
-    pageSize: pagination.rowsPerPage,
-    searchValue: search
-  };
-
+  },
+  getAllResquest(pagination, search) {
+    const result = {
+      pageIndex: pagination.page,
+      pageSize: pagination.rowsPerPage,
+      searchValue: search
+    };
+  }
 
 }

@@ -1,69 +1,106 @@
-import _tags from './mockdata/Tags'
-
-function mockShell(bodyFunc) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (Math.random() > 0.1) {
-        //Success
-        let result = bodyFunc();
-        resolve(result);
-      } else {
-        //error
-        reject({
-          message: 'Có lỗi xẩy ra'
-        })
-      }
-
-    }, 1500 + (Math.random() * 1000))
-  })
-}
+import axiosInstance from "../../axiosInstance";
 
 export default {
   namespaced: true,
+  state: {
+    //Listing page
+    tagTableItems: [],
+    tagTableItemsTotal: undefined,
+    tagTableLoading: true,
+    tagTableSearchValue: undefined,
+    tagTablePagination: {},
+    error: {
+      notified: false,
+      message: undefined
+    },
+    success: {
+      notified: false,
+      message: undefined
+    }
+  },
+  getters: {
+    orderBy(state, getters) {
+      const {
+        sortBy,
+        descending,
+      } = state.tagTablePagination;
+
+      const sortByStr = sortBy;
+      const descStr = descending ? 'desc' : 'asc';
+      return `${sortByStr}_${descStr}`;
+    },
+    requestGetAll(state, getters) {
+      const {
+        page,
+        rowsPerPage
+      } = state.tagTablePagination;
+
+      return {
+        searchValue: state.tagTableSearchValue,
+        orderBy: getters.orderBy,
+        pageIndex: page,
+        pageSize: rowsPerPage,
+      }
+    }
+  },
+  mutations: {
+    setPagination(state, payload) {
+      state.tagTablePagination = payload.pagination
+    },
+    setSearchValue(state, payload) {
+      state.tagTableSearchValue = payload.search;
+    },
+    setTagTableData(state, payload) {
+      const {
+        meta,
+        currentList
+      } = payload;
+
+      state.tagTableItemsTotal = meta.totalElement;
+      state.tagTableItems = currentList;
+    },
+    setTagTableLoading(state, payload) {
+      state.tagTableLoading = payload.loading;
+    },
+    setError(state, payload) {
+      state.error = {
+        notified: false,
+        message: 'Có lỗi sẩy ra'
+      }
+    },
+    setSuccess(state, payload) {
+
+    }
+  },
   actions: {
-    /***
-     *
-     * @param context
-     * @param payload {pagination}
-     */
+    search(context, payload) {
+      const data = {
+        ...context.state.tagTablePagination
+      };
+      data.page = 1;
+      context.commit('setSearchValue', {...payload});
+      context.commit('setPagination', {pagination: data});
+      context.dispatch('getAll');
+    },
     getAll(context, payload) {
-      return mockShell(() => {
-        if(!payload) return {tags: _tags};
-
-        let total = _tags.length;
-        let tags = _tags.filter(tag => {
-          return (
-            (tag.name && tag.name.indexOf(payload.search) >= 0) ||
-            (tag.category && tag.category.indexOf(payload.search) >= 0)
-          )
-        });
-
-        if (payload.pagination.sortBy) {
-          tags = tags.sort((a, b) => {
-            const sortA = a[payload.pagination.sortBy];
-            const sortB = b[payload.pagination.sortBy];
-
-            if (payload.pagination.descending) {
-              if (sortA < sortB) return 1;
-              if (sortA > sortB) return -1;
-              return 0
-            } else {
-              if (sortA < sortB) return -1;
-              if (sortA > sortB) return 1;
-              return 0
-            }
-          })
-        }
-
-        if (payload.pagination.rowsPerPage > 0) {
-          tags = tags.slice((payload.pagination.page - 1) * payload.pagination.rowsPerPage, payload.pagination.page * payload.pagination.rowsPerPage)
-        }
-
-        return {
-          tags,
-          total
-        }
-      },true);
+      context.commit('setTagTableLoading', {
+        loading: true
+      });
+      axiosInstance.get('api/tag', {
+        params: context.getters.requestGetAll
+      })
+        .then(value => {
+          context.commit('setTagTableData', value.data);
+          context.commit('setTagTableLoading', {
+            loading: false
+          });
+        })
+        .catch(reason => {
+          context.commit('setError', reason.response);
+          context.commit('setTagTableLoading', {
+            loading: false
+          });
+        })
     },
     /***
      * @param context

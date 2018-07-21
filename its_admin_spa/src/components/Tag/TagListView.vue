@@ -7,7 +7,7 @@
         <!--Content start-->
         <v-card-title>
           <v-text-field
-            v-model="searchText"
+            v-model="searchInput"
             v-on:keyup.enter="onSearchEnter"
             append-icon="search"
             label="Tìm"
@@ -27,7 +27,7 @@
           :loading="loading">
           <template slot="items" slot-scope="props">
             <td>{{ props.item.name }}</td>
-            <td>{{ props.item.category }}</td>
+            <td>{{ props.item.categories}}</td>
             <td>{{ props.item.locationCount}}</td>
             <td class="justify-center layout px-0">
               <a>
@@ -68,6 +68,8 @@
   import ErrorDialog from "../shared/ErrorDialog";
   import SuccessDialog from "../shared/SuccessDialog";
   import TagCreateEditDialog from "./TagCreateEditDialog";
+  import {mapState} from "vuex";
+
 
   export default {
     name: "TagListView",
@@ -75,18 +77,13 @@
     data() {
       return {
         //TABLE
-        loading: true,
-        items: [],
         headers: [
           {text: 'Tên', value: 'name'},
-          {text: 'Thể loại', value: 'category'},
+          {text: 'Thể loại', value: 'categories'},
           {text: 'Số địa điểm', value: 'locationCount'},
           {text: 'Hành động', value: 'id', sortable: false},
         ],
-        pagination: {},
-        total: undefined,
-        searchInput: '',
-        //TABLE
+        searchInput: undefined,
         error: {
           dialog: false,
           title: '',
@@ -103,41 +100,28 @@
         }
       }
     },
-    watch: {
+    computed: {
+      ...mapState('tag', {
+        items: state => state.tagTableItems,
+        total: state => state.tagTableItemsTotal,
+        loading: state => state.tagTableLoading
+      }),
       pagination: {
-        //Do not use arrow funcs
-        handler: function () {
-          this.loadData();
+        get: function () {
+          return this.$store.state['tag/tagTablePagination'];
         },
-        deep: true
-      }
+        set: function (newValue) {
+          this.$store.commit('tag/setPagination', {pagination: newValue});
+          this.$store.dispatch('tag/getAll');
+        }
+      },
     },
     mounted() {
-      this.loadData();
+      this.$store.dispatch('tag/getAll');
     },
     methods: {
-      loadData() {
-        this.loading = true;
-        this.$store.dispatch('tag/getAll', {
-          search: this.searchInput,
-          pagination: this.pagination
-        })
-          .then(data => {
-            this.items = data.tags;
-            this.total = data.total;
-            this.loading = false;
-          })
-          .catch(error => {
-            this.error = {
-              dialog: true,
-              title: 'Chú ý',
-              message: error.message
-            };
-          })
-      },
       onSearchEnter() {
-        this.pagination.page = 1;
-        this.loadData();
+        this.$store.dispatch('tag/search', {search: this.searchInput});
       },
       onCreateClick() {
         this.createEditDialog = {

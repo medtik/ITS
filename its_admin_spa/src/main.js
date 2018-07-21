@@ -22,13 +22,17 @@ const vn = {
   noDataText: 'Không có dữ liệu'
 };
 
-
 Vue.use(Vuetify,{
   lang: {
     locales: { vn },
     current: 'vn'
   }
 });
+
+const localToken = store.getters['authenticate/getlocalToken'];
+if (localToken) {
+  store.commit('authenticate/setToken', {token: localToken})
+}
 
 Vue.config.productionTip = false;
 

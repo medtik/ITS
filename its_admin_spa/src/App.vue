@@ -141,12 +141,6 @@
     created() {
       this.navigateAble = this.$route.name !== "Signin"
     },
-    mounted(){
-      const localToken = this.$store.getters['authenticate/getlocalToken'];
-      if (localToken) {
-        this.$store.commit('authenticate/setToken', {token: localToken})
-      }
-    },
     watch: {
       $route(to, from) {
         this.navigateAble = this.$route.name !== "Signin"
