@@ -1,4 +1,6 @@
 import _areas from "./mockdata/Areas";
+import axiosInstance from "../../axiosInstance";
+
 import _ from 'lodash'
 
 function mockShell(bodyFunc, noFail) {
@@ -21,7 +23,27 @@ function mockShell(bodyFunc, noFail) {
 
 export default {
   namespaced: true,
+  state: {
+    areas: undefined,
+    loading: true,
+  },
+  mutations: {
+    setAreas(state, payload) {
+      state.areas = payload.areas;
+    },
+    setLoading(state, payload) {
+      state.loading = payload.loading;
+    }
+  },
   actions: {
+    getAllNoParam(context) {
+      context.commit('setLoading', {loading: true});
+      axiosInstance.get('api/area')
+        .then(value => {
+          context.commit('setAreas', value.data);
+          context.commit('setLoading', {loading: false});
+        })
+    },
     getAll(context, payload) {
       return mockShell(() => {
         let total = _areas.length;
@@ -56,12 +78,12 @@ export default {
           areas,
           total
         }
-      },true);
+      }, true);
     },
     getById(context, payload) {
       return mockShell(() => {
         return _areas.find(item => item.id == payload.id);
-      },true)
+      }, true)
     },
     create(context, payload) {
       return mockShell(() => {
@@ -73,8 +95,8 @@ export default {
 
       })
     },
-    delete(context,payload){
-      return mockShell(()=>{
+    delete(context, payload) {
+      return mockShell(() => {
         return payload;
       })
     }

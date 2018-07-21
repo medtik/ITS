@@ -1,110 +1,33 @@
 import axiosInstance from "../../axiosInstance";
+import formatter from "../../formatter";
 import _ from "lodash";
 
 export default {
   namespaced: true,
-  state: {
-    loading: {
-      table: true,
-      createBtn: false
-    },
-    //Listing page
-    tagTableItems: [],
-    tagTableItemsTotal: undefined,
-    tagTableSearchValue: undefined,
-    tagTablePagination: {},
-    error: {
-      notified: false,
-      message: undefined
-    },
-    success: {
-      notified: false,
-      message: undefined
-    },
-  },
-  getters: {
-    orderBy(state, getters) {
+  actions: {
+    getAll(context, payload) {
+      console.debug('getAll', payload);
       const {
-        sortBy,
-        descending,
-      } = state.tagTablePagination;
-
-      const sortByStr = sortBy;
-      const descStr = descending ? 'desc' : 'asc';
-      return `${sortByStr}_${descStr}`;
-    },
-    requestGetAll(state, getters) {
-      const {
-        page,
-        rowsPerPage
-      } = state.tagTablePagination;
-
-      return {
-        searchValue: state.tagTableSearchValue,
-        orderBy: getters.orderBy,
-        pageIndex: page,
-        pageSize: rowsPerPage,
-      }
-    }
-  },
-  mutations: {
-    setPagination(state, payload) {
-      state.tagTablePagination = payload.pagination
-    },
-    setSearchValue(state, payload) {
-      state.tagTableSearchValue = payload.search;
-    },
-    setTagTableData(state, payload) {
-      const {
-        meta,
-        currentList
+        pagination,
+        search
       } = payload;
 
-      state.tagTableItemsTotal = meta.totalElement;
-      state.tagTableItems = currentList;
-    },
-    setLoading(state, payload) {
-      state.loading = _.assign(state.loading, payload);
-    },
-    setError(state, payload) {
-      state.error = {
-        notified: false,
-        message: 'Có lỗi sẩy ra'
-      }
-    },
-    setSuccess(state, payload) {
-
-    }
-  },
-  actions: {
-    search(context, payload) {
-      const data = {
-        ...context.state.tagTablePagination
-      };
-      data.page = 1;
-      context.commit('setSearchValue', {...payload});
-      context.commit('setPagination', {pagination: data});
-      context.dispatch('getAll');
-    },
-    getAll(context, payload) {
-      context.commit('setLoading', {
-        table: true
+      const reqData = formatter.getAllRequest({
+        search,
+        pagination,
       });
-      axiosInstance.get('api/tag', {
-        params: context.getters.requestGetAll
+
+      return new Promise((resolve, reject) => {
+        axiosInstance.get('api/tag', {
+          params: reqData
+        }).then(value => {
+          const returnObj = formatter.getAllResponse(value.data);
+          resolve(returnObj);
+        }).catch(reason => {
+          reject(reason.response);
+        })
       })
-        .then(value => {
-          context.commit('setTagTableData', value.data);
-          context.commit('setLoading', {
-            table: false
-          });
-        })
-        .catch(reason => {
-          context.commit('setError', reason.response);
-          context.commit('setLoading', {
-            table: false
-          });
-        })
+
     },
     /***
      * @param context
@@ -114,25 +37,27 @@ export default {
 
     },
     create(context, payload) {
-      axiosInstance.post('api/tag', {
-        name: payload.tag.name,
-        categories: payload.tag.categories,
+      return new Promise((resolve, reject) => {
+        axiosInstance.post('api/tag', {
+          name: payload.tag.name,
+          categories: payload.tag.categories,
+        })
+          .then(value => resolve(value.data))
+          .catch(reason => reject(reason.response))
       })
-        .then(value => context.dispatch("getAll"))
     },
     update(context, payload) {
 
     },
     delete(context, payload) {
-      context.commit('setLoading', {
-        table: true
+      return new Promise((resolve, reject) => {
+        axiosInstance.delete('api/tag', {
+          params: {
+            tagId: payload.id,
+          }
+        }).then(value => resolve(value.data))
+          .catch(reason => reject(reason.response))
       });
-      axiosInstance.delete('api/tag', {
-        params: {
-          tagId: payload.id,
-        }
-      })
-        .then(value => context.dispatch("getAll"))
     }
   }
 };

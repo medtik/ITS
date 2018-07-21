@@ -43,7 +43,10 @@
                 v-model="input.emailInput"
               />
               <v-select
-                :items="['Hà nội','Tp.Hồ chí minh']"
+                :items="areas"
+                item-name="name"
+                item-id="id"
+                :loadng="areasLoading"
                 v-model="input.areaInput"
                 label="Khu vực"
               />
@@ -64,7 +67,7 @@
               />
             </v-flex>
           </v-flex>
-          <v-flex my-3>
+          <v-flex my-3 v-if="mode == 'edit'">
             <span class="subheading">Đánh giá</span>
             <v-flex pl-3>
               <LocationReview
@@ -186,6 +189,8 @@
   import LocationReview from "../shared/LocationReview";
   import TagManageSection from "../shared/TagManageSection";
   import TagChooseDialog from "../shared/TagChooseDialog";
+  import {mapState} from "vuex";
+
 
   export default {
     name: "LocationCreateEditView",
@@ -208,7 +213,7 @@
         },
         location: {},
         //Basic Inputs
-        input :{
+        input: {
           nameInput: undefined,
           addressInput: undefined,
           descriptionInput: undefined,
@@ -223,7 +228,7 @@
           tagsInput: [],
           reviewsInput: [],
           //BusinessHours inputs
-          businessHoursInput:{
+          businessHoursInput: {
             day1: {
               from: undefined,
               to: undefined
@@ -273,6 +278,12 @@
         }
       }
     },
+    computed: {
+      ...mapState('area', {
+        areas: state => state.areas,
+        areasLoading: state => state.loading
+      })
+    },
     created() {
       const {
         name,
@@ -308,6 +319,11 @@
         }
       }
     },
+    mounted(){
+      if(!this.areas){
+        this.$store.dispatch('area/getAllNoParam')
+      }
+    },
     methods: {
       setInput(location) {
         return new Promise((resolve, reject) => {
@@ -338,7 +354,7 @@
         })
       },
       secondaryConfirm(val) {
-        if(!this.input.secondaryPhotos){
+        if (!this.input.secondaryPhotos) {
           this.input.secondaryPhotos = [];
         }
         this.input.secondaryPhotos.push({
@@ -354,7 +370,7 @@
 
       },
       onCreateClick() {
-
+        this.$store.dispatch('location/create', {input: this.input})
       },
       onExitClick() {
         this.$router.back();

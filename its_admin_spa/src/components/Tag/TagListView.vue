@@ -24,7 +24,7 @@
           :total-items="total"
           :pagination.sync="pagination"
           :headers="headers"
-          :loading="tableLoading">
+          :loading="loading">
           <template slot="items" slot-scope="props">
             <td>{{ props.item.name }}</td>
             <td>{{ props.item.categories}}</td>
@@ -68,8 +68,6 @@
   import ErrorDialog from "../shared/ErrorDialog";
   import SuccessDialog from "../shared/SuccessDialog";
   import TagCreateEditDialog from "./TagCreateEditDialog";
-  import {mapState} from "vuex";
-
 
   export default {
     name: "TagListView",
@@ -77,13 +75,18 @@
     data() {
       return {
         //TABLE
+        loading: true,
+        items: [],
         headers: [
           {text: 'Tên', value: 'name'},
           {text: 'Thể loại', value: 'categories'},
           {text: 'Số địa điểm', value: 'locationCount'},
           {text: 'Hành động', value: 'id', sortable: false},
         ],
-        searchInput: undefined,
+        pagination: {},
+        total: undefined,
+        searchInput: '',
+        //TABLE
         error: {
           dialog: false,
           title: '',
@@ -100,26 +103,38 @@
         }
       }
     },
-    computed: {
-      ...mapState('tag', {
-        items: state => state.tagTableItems,
-        total: state => state.tagTableItemsTotal,
-        tableLoading: state => state.loading.table,
-        createBtnLoading: state => state.loading.createBtn,
-      }),
+    watch: {
       pagination: {
-        get: function () {
-          return this.$store.state['tag/tagTablePagination'];
+        //Do not use arrow funcs
+        handler: function () {
+          this.loadData();
         },
-        set: function (newValue) {
-          this.$store.commit('tag/setPagination', {pagination: newValue});
-          this.$store.dispatch('tag/getAll');
-        }
-      },
+        deep: true
+      }
     },
     methods: {
+      loadData() {
+        this.loading = true;
+        this.$store.dispatch('tag/getAll', {
+          search: this.searchInput,
+          pagination: this.pagination
+        })
+          .then(data => {
+            this.items = data.list;
+            this.total = data.total;
+            this.loading = false;
+          })
+          .catch(error => {
+            this.error = {
+              dialog: true,
+              title: 'Chú ý',
+              message: error.message
+            };
+          })
+      },
       onSearchEnter() {
-        this.$store.dispatch('tag/search', {search: this.searchInput});
+        this.pagination.page = 1;
+        this.loadData();
       },
       onCreateClick() {
         this.createEditDialog = {
@@ -133,11 +148,30 @@
         }
       },
       onDeleteClick(item) {
-        this.$store.dispatch('tag/delete', {id: item.id});
-
+        this.$store.dispatch('tag/delete', {id: item.id})
+          .then(value => {
+            this.loadData();
+          })
+          .catch(reason => {
+            console.debug('onDialogConfirmCreate-catch', reason);
+            this.error = {
+              dialog: true,
+              message: 'Có lỗi xẩy ra'
+            }
+          })
       },
       onDialogConfirmCreate(item) {
-        this.$store.dispatch('tag/create', {tag: item});
+        this.$store.dispatch('tag/create', {tag: item})
+          .then(value => {
+            this.loadData();
+          })
+          .catch(reason => {
+            console.debug('onDialogConfirmCreate-catch', reason);
+            this.error = {
+              dialog: true,
+              message: 'Có lỗi xẩy ra'
+            }
+          });
         this.createEditDialog = {
           dialog: false
         }
