@@ -20,7 +20,7 @@
           <v-select
             label="Chọn khu vực"
             @change="onAreaSelect"
-            v-model="selectedArea"
+            v-model="selectedAreaId"
             :items="areas"
             item-text="name"
             item-value="id"
@@ -36,14 +36,14 @@
               :key="question.id"
             >
               <v-layout column>
-                <v-flex class="title font-weight-bold" mb-2>{{question.text}}</v-flex>
-                <v-flex v-for="answer in question.answers"
+                <v-flex class="title font-weight-bold" mb-2>{{question.content}}</v-flex>
+                <v-flex v-for="answer in question.answer"
                         :key="answer.id"
                         mx-3>
                   <v-checkbox
                     class="my-0"
                     v-model="selectedAnswers"
-                    :label="answer.text"
+                    :label="answer.content"
                     :value="answer.id"
                   />
                 </v-flex>

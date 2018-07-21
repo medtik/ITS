@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 import LocationModule from "./modules/location";
 import AccountModule from "./modules/account";
-import SearchModule from "./modules/search";
+import SmartSearchModule from "./modules/smartSearch";
 import AuthenticateModule from "./modules/authenticate";
 import AreaModule from "./modules/area";
 
@@ -14,7 +14,7 @@ const store = new Vuex.Store({
     account: AccountModule,
     authenticate: AuthenticateModule,
     location: LocationModule,
-    search: SearchModule,
+    smartSearch: SmartSearchModule,
     area: AreaModule,
   },
 });
