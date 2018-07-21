@@ -88,7 +88,7 @@
           this.loading.createBtn = false;
           this.$emit('create', _.extend({}, {
             name: this.nameInput,
-            category: this.categoryInput
+            categories: this.categoryInput
           }));
           this.resetInput();
         }, 1200)
@@ -101,7 +101,7 @@
           this.$emit('edit', _.extend({}, {
             id: this.item.id,
             name: this.nameInput,
-            category: this.categoryInput
+            categories: this.categoryInput
           }));
           this.resetInput();
         }, 1200)

@@ -24,7 +24,7 @@
           :total-items="total"
           :pagination.sync="pagination"
           :headers="headers"
-          :loading="loading">
+          :loading="tableLoading">
           <template slot="items" slot-scope="props">
             <td>{{ props.item.name }}</td>
             <td>{{ props.item.categories}}</td>
@@ -43,7 +43,7 @@
                 <v-icon
                   small
                   color="red"
-                  v-on:click="onDeleteClick(item)">
+                  v-on:click="onDeleteClick(props.item)">
                   delete
                 </v-icon>
               </a>
@@ -104,7 +104,8 @@
       ...mapState('tag', {
         items: state => state.tagTableItems,
         total: state => state.tagTableItemsTotal,
-        loading: state => state.tagTableLoading
+        tableLoading: state => state.loading.table,
+        createBtnLoading: state => state.loading.createBtn,
       }),
       pagination: {
         get: function () {
@@ -115,9 +116,6 @@
           this.$store.dispatch('tag/getAll');
         }
       },
-    },
-    mounted() {
-      this.$store.dispatch('tag/getAll');
     },
     methods: {
       onSearchEnter() {
@@ -135,12 +133,11 @@
         }
       },
       onDeleteClick(item) {
-        this.loading = true;
-        setTimeout(() => {
-          this.loading = false;
-        }, 1200)
+        this.$store.dispatch('tag/delete', {id: item.id});
+
       },
       onDialogConfirmCreate(item) {
+        this.$store.dispatch('tag/create', {tag: item});
         this.createEditDialog = {
           dialog: false
         }

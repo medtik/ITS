@@ -1,12 +1,16 @@
 import axiosInstance from "../../axiosInstance";
+import _ from "lodash";
 
 export default {
   namespaced: true,
   state: {
+    loading: {
+      table: true,
+      createBtn: false
+    },
     //Listing page
     tagTableItems: [],
     tagTableItemsTotal: undefined,
-    tagTableLoading: true,
     tagTableSearchValue: undefined,
     tagTablePagination: {},
     error: {
@@ -16,7 +20,7 @@ export default {
     success: {
       notified: false,
       message: undefined
-    }
+    },
   },
   getters: {
     orderBy(state, getters) {
@@ -59,8 +63,8 @@ export default {
       state.tagTableItemsTotal = meta.totalElement;
       state.tagTableItems = currentList;
     },
-    setTagTableLoading(state, payload) {
-      state.tagTableLoading = payload.loading;
+    setLoading(state, payload) {
+      state.loading = _.assign(state.loading, payload);
     },
     setError(state, payload) {
       state.error = {
@@ -83,22 +87,22 @@ export default {
       context.dispatch('getAll');
     },
     getAll(context, payload) {
-      context.commit('setTagTableLoading', {
-        loading: true
+      context.commit('setLoading', {
+        table: true
       });
       axiosInstance.get('api/tag', {
         params: context.getters.requestGetAll
       })
         .then(value => {
           context.commit('setTagTableData', value.data);
-          context.commit('setTagTableLoading', {
-            loading: false
+          context.commit('setLoading', {
+            table: false
           });
         })
         .catch(reason => {
           context.commit('setError', reason.response);
-          context.commit('setTagTableLoading', {
-            loading: false
+          context.commit('setLoading', {
+            table: false
           });
         })
     },
@@ -110,13 +114,25 @@ export default {
 
     },
     create(context, payload) {
-
+      axiosInstance.post('api/tag', {
+        name: payload.tag.name,
+        categories: payload.tag.categories,
+      })
+        .then(value => context.dispatch("getAll"))
     },
     update(context, payload) {
 
     },
     delete(context, payload) {
-
+      context.commit('setLoading', {
+        table: true
+      });
+      axiosInstance.delete('api/tag', {
+        params: {
+          tagId: payload.id,
+        }
+      })
+        .then(value => context.dispatch("getAll"))
     }
   }
 };
