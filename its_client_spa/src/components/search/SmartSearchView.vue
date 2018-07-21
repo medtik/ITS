@@ -60,6 +60,7 @@
               <v-flex style="flex-grow: 0">
                 <v-btn color="success"
                        @click="onSubmit"
+                       :disabled="!questions"
                        :loading="loading.finishBtn">
                   <v-icon>check</v-icon>
                   &nbsp;&nbsp;
@@ -150,7 +151,7 @@
       },
       onSubmit() {
         this.loading.finishBtn = true;
-        this.$store.dispatch('search/fetchSuggestion', {
+        this.$store.dispatch('smartSearch/getSuggestion', {
           answers: this.selectedAnswers
         })
           .then(value => {

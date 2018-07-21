@@ -31,5 +31,12 @@ export default {
         context.commit('setLoading', {loading: false});
       });
     },
+    getSuggestion(context, payload) {
+      const {
+        answers
+      } = payload;
+      console.debug('getSuggestion', answers);
+
+    }
   }
 }
