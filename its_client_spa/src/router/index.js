@@ -13,6 +13,7 @@ import SmartSearchView from '../components/search/SmartSearchView'
 import SmartSearchResultView from '../components/search/SearchResultView'
 import PlanDetailView from '../components/plan/PlanDetailView'
 import LocationOnMapView from '../components/location/LocationOnMapView'
+import AreaDetailView from '../components/area/AreaDetailView'
 
 Vue.use(Router);
 
@@ -82,6 +83,11 @@ export default new Router({
       path: '/location/map',
       name: 'LocationMap',
       component: LocationOnMapView
+    },
+    {
+      path: '/area/detail',
+      name: 'AreaDetail',
+      component: AreaDetailView
     }
   ]
 })

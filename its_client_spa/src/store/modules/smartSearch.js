@@ -4,6 +4,7 @@ import axiosInstance from "../../axiosInstance";
 export default {
   namespaced: true,
   state: {
+    selectedAreaID: undefined,
     loading: undefined,
     questions: undefined,
   },

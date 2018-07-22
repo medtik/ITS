@@ -92,10 +92,8 @@
         loading: {
           finishBtn: false,
           areaSelect: false,
-          questions: false
         },
-        questions: [],
-        selectedArea: undefined,
+        selectedAreaId: undefined,
         selectedAnswers: [],
         error: {}
       }
@@ -104,6 +102,10 @@
       ...mapState('area',{
         areas: state => state.areas,
         areasLoading: state=>state.areasLoading
+      }),
+      ...mapState('smartSearch',{
+        questions: state => state.questions,
+        questionsLoading: state=>state.questionsLoading
       })
     },
     mounted() {
@@ -117,8 +119,8 @@
     methods: {
       onAreaSelect() {
         this.loading.questions = true;
-        this.$store.dispatch('search/fetchQuestions', {
-          areaId: this.selectedArea
+        this.$store.dispatch('smartSearch/getQuestionsByArea', {
+          areaId: this.selectedAreaId
         })
           .then(value => {
             const {
