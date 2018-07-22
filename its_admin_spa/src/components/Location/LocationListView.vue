@@ -33,23 +33,15 @@
             <td>{{ props.item.phone }}</td>
             <td>{{ props.item.email }}</td>
             <td>
-              <v-chip outline disabled label color="red"
-                      v-if="!props.item.isVerified">
-                Chưa xác thực
-              </v-chip>
-              <v-chip outline disabled label color="green"
-                      v-else>
-                Đã xác thực
+              <v-chip outline disabled label
+                      :color="props.item.isVerified == 'Đã xác nhận' ? 'green' : 'red'">
+                {{props.item.isVerified}}
               </v-chip>
             </td>
             <td>
-              <v-chip outline disabled label color="green"
-                      v-if="!props.item.isClosed">
-                Hoạt động
-              </v-chip>
-              <v-chip outline disabled label color="red"
-                      v-else>
-                Đóng cửa
+              <v-chip outline disabled label
+                      :color="props.item.isClosed == 'Đã đóng cửa' ? 'red' : 'green'">
+                {{props.item.isClosed}}
               </v-chip>
             </td>
             <td>{{ props.item.area }}</td>
@@ -182,7 +174,7 @@ photo
       onDeleteClick(item) {
         this.$store.dispatch('location/delete', {
           id: item.id
-        })  .then(value => this.loadData());
+        }).then(value => this.loadData());
       }
     }
   }

@@ -44,7 +44,7 @@
               />
               <v-select
                 :items="areas"
-                :loadng="areasLoading"
+                :loading="loading.areas"
                 v-model="input.areaInput"
                 label="Khu vực"
                 item-text="name"
@@ -213,9 +213,11 @@
         mode: 'create',
         loading: {
           page: false,
+          areas: true,
           createBtn: false,
           updateBtn: false
         },
+        areas: undefined,
         location: {},
         //Basic Inputs
         input: {
@@ -283,12 +285,6 @@
         }
       }
     },
-    computed: {
-      ...mapState('area', {
-        areas: state => state.areas,
-        areasLoading: state => state.loading
-      })
-    },
     created() {
       const {
         name,
@@ -327,6 +323,10 @@
     mounted() {
       if (!this.areas) {
         this.$store.dispatch('area/getAllNoParam')
+          .then(value => {
+            this.loading.areas = false;
+            this.areas = value.list;
+          });
       }
     },
     methods: {

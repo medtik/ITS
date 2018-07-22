@@ -1,6 +1,6 @@
 import _areas from "./mockdata/Areas";
 import axiosInstance from "../../axiosInstance";
-
+import formatter from "../../formatter";
 import _ from 'lodash'
 
 function mockShell(bodyFunc, noFail) {
@@ -23,62 +23,24 @@ function mockShell(bodyFunc, noFail) {
 
 export default {
   namespaced: true,
-  state: {
-    areas: undefined,
-    loading: true,
-  },
-  mutations: {
-    setAreas(state, payload) {
-      state.areas = payload.areas;
-    },
-    setLoading(state, payload) {
-      state.loading = payload.loading;
-    }
-  },
   actions: {
     getAllNoParam(context) {
-      context.commit('setLoading', {loading: true});
-      axiosInstance.get('api/area')
-        .then(value => {
-          context.commit('setAreas', {areas: value.data});
-          context.commit('setLoading', {loading: false});
-        })
+      return new Promise((resolve) => {
+        axiosInstance.get('api/area')
+          .then(value => {
+            resolve({list: value.data});
+          })
+      })
     },
     getAll(context, payload) {
-      return mockShell(() => {
-        let total = _areas.length;
-        let areas = _areas.filter(_area => {
-          return (
-            (_area.name && _area.name.indexOf(payload.search) >= 0)
-          )
-        });
+      return new Promise((resolve, reject) => {
+        axiosInstance.get('api/area', {
+          params: formatter.getAllRequest(payload)
+        }).then(value => {
+          resolve(formatter.getAllResponse(value.data));
+        }).reject(reject)
+      });
 
-        if (payload.pagination.sortBy) {
-          areas = areas.sort((a, b) => {
-            const sortA = a[payload.pagination.sortBy];
-            const sortB = b[payload.pagination.sortBy];
-
-            if (payload.pagination.descending) {
-              if (sortA < sortB) return 1;
-              if (sortA > sortB) return -1;
-              return 0
-            } else {
-              if (sortA < sortB) return -1;
-              if (sortA > sortB) return 1;
-              return 0
-            }
-          })
-        }
-
-        if (payload.pagination.rowsPerPage > 0) {
-          areas = areas.slice((payload.pagination.page - 1) * payload.pagination.rowsPerPage, payload.pagination.page * payload.pagination.rowsPerPage)
-        }
-
-        return {
-          areas,
-          total
-        }
-      }, true);
     },
     getById(context, payload) {
       return mockShell(() => {
