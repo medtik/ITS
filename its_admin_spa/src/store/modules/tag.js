@@ -20,8 +20,7 @@ export default {
         axiosInstance.get('api/tag', {
           params: reqData
         }).then(value => {
-          const returnObj = formatter.getAllResponse(value.data);
-          resolve(returnObj);
+          resolve(formatter.getAllResponse(value.data));
         }).catch(reason => {
           reject(reason.response);
         })

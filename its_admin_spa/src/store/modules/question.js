@@ -1,5 +1,7 @@
 import _question from "./mockdata/Questions";
 import axiosInstance from "../../axiosInstance"
+import formatter from "../../formatter";
+
 import _ from 'lodash'
 
 function mockShell(bodyFunc, noFail) {
@@ -24,36 +26,12 @@ export default {
   namespaced: true,
   actions: {
     getAll(context, payload) {
-      const {
-        pagination,
-        search,
-      } = payload;
-
       return new Promise((resolve, reject) => {
         axiosInstance.get('api/Question', {
-          params: {
-            pageIndex: pagination.page,
-            pageSize: pagination.rowsPerPage,
-            sortBy: pagination.sortBy,
-            searchValue: search
-          }
+          params: formatter.getAllRequest(payload)
         })
           .then(value => {
-            const data = value.data.currentList;
-            const paging = value.data.meta;
-            const questions = [];
-            for (let question of data) {
-              questions.push({
-                id: question.id,
-                text: question.content,
-                category: question.categories,
-                answerCount: question.answerCount,
-              })
-            }
-            resolve({
-              questions,
-              total: paging.totalElement,
-            })
+            resolve(formatter.getAllResponse(value.data));
           })
           .catch(reason => {
             let error = [];

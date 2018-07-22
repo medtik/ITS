@@ -6,7 +6,7 @@
         <v-divider class="my-3"></v-divider>
         <v-card-title>
           <v-text-field
-            v-model="searchText"
+            v-model="searchInput"
             v-on:keyup.enter="onSearchEnter"
             append-icon="search"
             label="Tìm"
@@ -26,8 +26,8 @@
           :headers="headers"
           :loading="loading">
           <template slot="items" slot-scope="props">
-            <td>{{ props.item.text }}</td>
-            <td>{{ props.item.category }}</td>
+            <td>{{ props.item.content }}</td>
+            <td>{{ props.item.categories }}</td>
             <td>{{ props.item.answerCount }}</td>
             <td class="justify-center layout px-0">
               <router-link :to="{name:'QuestionEdit', query:{id:props.item.id}}">
@@ -77,9 +77,9 @@ tag
         loading: true,
         items: [],
         headers: [
-          {text: 'Nội dung', value: 'text'},
-          {text: 'Thể loại', value: 'category'},
-          {text: 'Số câu trả lời', value: 'answers.length'},
+          {text: 'Nội dung', value: 'content'},
+          {text: 'Thể loại', value: 'categories'},
+          {text: 'Số câu trả lời', value: 'answerCount'},
           {text: 'Hành động', value: 'id', sortable: false},
         ],
         pagination: {},
@@ -107,9 +107,6 @@ tag
         deep: true
       }
     },
-    mounted() {
-      this.loadData();
-    },
     methods:{
       loadData() {
         this.loading = true;
@@ -118,18 +115,17 @@ tag
           pagination: this.pagination
         })
           .then(data => {
-            this.items = data.questions;
+            console.debug('loadData',data);
+            this.items = data.list;
             this.total = data.total;
             this.loading = false;
           })
           .catch(error => {
             this.error = {
               dialog: true,
-              title: 'Chú ý',
               message: error.message
             };
             this.loading = false;
-            // console.error('loadData', error);
           })
       },
       onSearchEnter(){
