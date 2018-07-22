@@ -4,34 +4,58 @@
     src="https://picsum.photos/1200/900/?blur"
     :text="area.name"
   />
-  <v-layout column>
+  <v-layout column mx-2>
     <v-flex>
       <v-toolbar flat light>
         <v-toolbar-items style="width: 100%"
                          class="d-flex justify-center">
-          <v-btn flat color="light-blue">
-            <v-icon large>
-              star
-            </v-icon>
-          </v-btn>
-          <v-btn flat color="light-blue">
+          <v-btn flat color="light-blue" @click="$vuetify.goTo('#hotel',{offset:-50})">
             <v-icon large>
               hotel
             </v-icon>
           </v-btn>
-          <v-btn flat color="light-blue">
+          <v-btn flat color="light-blue" @click="$vuetify.goTo('#restaurant',{offset:-50})">
             <v-icon large>
               restaurant
             </v-icon>
           </v-btn>
-          <v-btn flat color="light-blue">
+          <v-btn flat color="light-blue" @click="$vuetify.goTo('#activity',{offset:-50})">
             <v-icon large>
               local_activity
             </v-icon>
           </v-btn>
-
         </v-toolbar-items>
       </v-toolbar>
+    </v-flex>
+    <v-flex my-4 id="hotel">
+      <div class="title" >
+        Nơi ở
+      </div>
+      <v-layout style="overflow-y: auto;">
+        <v-flex v-for="n in 5" :key="n" mx-2 mt-2>
+          <LocationCard/>
+        </v-flex>
+      </v-layout>
+    </v-flex>
+    <v-flex my-4 id="restaurant">
+      <div class="title">
+        Khách sạn
+      </div>
+      <v-layout style="overflow-y: auto;">
+        <v-flex v-for="n in 5" :key="n" mx-2 mt-2>
+          <LocationCard/>
+        </v-flex>
+      </v-layout>
+    </v-flex>
+    <v-flex my-4 id="activity">
+      <div class="title">
+        Giải trí
+      </div>
+      <v-layout style="overflow-y: auto;">
+        <v-flex v-for="n in 5" :key="n" mx-2 mt-2>
+          <LocationCard/>
+        </v-flex>
+      </v-layout>
     </v-flex>
     <v-flex style="height: 15vh">
       <!--Holder-->
@@ -42,9 +66,14 @@
 
 <script>
   import ParallaxHeader from "../shared/ParallaxHeader";
+  import LocationCard from "../shared/LocationCard";
 
   export default {
     name: "AreaDetail",
+    components: {
+      ParallaxHeader,
+      LocationCard
+    },
     data(){
       return {
         area:{
@@ -52,9 +81,7 @@
         }
       }
     },
-    components: {
-      ParallaxHeader
-    }
+
   }
 </script>
 
