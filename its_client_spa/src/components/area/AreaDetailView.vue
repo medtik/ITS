@@ -27,6 +27,26 @@
         </v-toolbar-items>
       </v-toolbar>
     </v-flex>
+    <v-flex my-4>
+      <div class="title" >
+        Địa điểm nổi bật
+      </div>
+      <v-layout style="overflow-y: auto;">
+        <v-flex v-for="n in 5" :key="n" mx-2 mt-2>
+          <LocationCard/>
+        </v-flex>
+      </v-layout>
+    </v-flex>
+    <v-flex my-4 >
+      <div class="title" >
+        Chuyến đi nổi bật
+      </div>
+      <v-layout style="overflow-y: auto;">
+        <v-flex v-for="n in 5" :key="n" mx-2 mt-2>
+          <PlanCard/>
+        </v-flex>
+      </v-layout>
+    </v-flex>
     <v-flex my-4 id="hotel">
       <div class="title" >
         Nơi ở
@@ -66,13 +86,15 @@
 
 <script>
   import ParallaxHeader from "../shared/ParallaxHeader";
+  import PlanCard from "../shared/PlanCard";
   import LocationCard from "../shared/LocationCard";
 
   export default {
     name: "AreaDetail",
     components: {
       ParallaxHeader,
-      LocationCard
+      LocationCard,
+      PlanCard
     },
     data(){
       return {
