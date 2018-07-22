@@ -35,7 +35,7 @@
       <router-view :key="$route.fullPath"/>
     </v-content>
     <v-footer app>
-      <span>&copy; 2017</span>
+      <span>ITS &copy; 2018</span>
     </v-footer>
   </v-app>
 </template>

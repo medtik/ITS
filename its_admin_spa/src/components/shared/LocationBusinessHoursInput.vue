@@ -99,7 +99,7 @@
       <v-flex>
         <v-text-field
           label="Đóng cửa"
-          v-model="day5.from"
+          v-model="day5.to"
           @input="onInputChange"
           :readonly="readonly"
           placeholder="Giờ:phút"/>
@@ -120,7 +120,7 @@
       <v-flex>
         <v-text-field
           label="Đóng cửa"
-          v-model="day6.from"
+          v-model="day6.to"
           @input="onInputChange"
           :readonly="readonly"
           placeholder="Giờ:phút"/>
@@ -141,7 +141,7 @@
       <v-flex>
         <v-text-field
           label="Đóng cửa"
-          v-model="day7.from"
+          v-model="day7.to"
           @input="onInputChange"
           :readonly="readonly"
           placeholder="Giờ:phút"/>

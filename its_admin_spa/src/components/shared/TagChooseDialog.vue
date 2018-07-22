@@ -14,6 +14,7 @@
             <v-spacer></v-spacer>
             <v-text-field
               v-model="searchInput"
+              v-on:keyup.enter="onSearchEnter"
               append-icon="search"
               label="Tìm"
               single-line
@@ -26,6 +27,7 @@
             :pagination.sync="pagination"
             :headers="headers"
             :search="searchInput"
+            :total="total"
             item-key="id"
             :loading="loading.table">
             <template slot="items" slot-scope="props">
@@ -62,7 +64,8 @@
   export default {
     name: "AddTagDialog",
     props: [
-      'dialog'
+      'dialog',
+      'value'
     ],
     data() {
       return {
@@ -75,10 +78,11 @@
           // createBtn: false
         },
         items: [],
+        total: undefined,
         headers: [
           {text: 'Chọn', value: 'selected', sortable: false},
           {text: 'Tên', value: 'name'},
-          {text: 'Thể loại', value: 'category'},
+          {text: 'Thể loại', value: 'categories'},
           // {text: 'Hành động', value: 'id', sortable: false}
         ],
         pagination: {
@@ -90,20 +94,34 @@
     created() {
       this.loadData();
     },
+    watch: {
+      value(val,oldVal) {
+        this.selected = val;
+      }
+    },
     methods: {
       loadData() {
         this.loading.table = true;
-        this.$store.dispatch('tag/getAll')
+        this.$store.dispatch('tag/getAll', {
+          pagination: this.pagination,
+          search: this.searchInput
+        })
           .then(value => {
-            this.items = value.tags;
+            this.items = value.list;
+            this.total = value.total;
             this.loading.table = false
           })
           .catch(reason => {
             //TODO Error handling
           })
       },
+      onSearchEnter() {
+        this.pagination.page = 1;
+        this.loadData()
+      },
       onSaveClick() {
-
+        this.$emit('input', this.selected);
+        this.$emit('save', this.selected);
       },
       onCancelClick() {
         this.$emit('close');

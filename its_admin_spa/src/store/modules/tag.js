@@ -6,7 +6,6 @@ export default {
   namespaced: true,
   actions: {
     getAll(context, payload) {
-      console.debug('getAll', payload);
       const {
         pagination,
         search

@@ -40,7 +40,7 @@ export default {
       context.commit('setLoading', {loading: true});
       axiosInstance.get('api/area')
         .then(value => {
-          context.commit('setAreas', value.data);
+          context.commit('setAreas', {areas: value.data});
           context.commit('setLoading', {loading: false});
         })
     },

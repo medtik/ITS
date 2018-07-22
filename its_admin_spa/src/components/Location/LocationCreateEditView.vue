@@ -44,11 +44,11 @@
               />
               <v-select
                 :items="areas"
-                item-name="name"
-                item-id="id"
                 :loadng="areasLoading"
                 v-model="input.areaInput"
                 label="Khu vực"
+                item-text="name"
+                item-value="id"
               />
             </v-flex>
           </v-flex>
@@ -87,6 +87,11 @@
                 v-on:addTag="tagChooseDialog.dialog = true"
                 v-on:close="tagChooseDialog.dialog = false"
               />
+              <TagChooseDialog
+                v-bind="tagChooseDialog"
+                v-model="input.tagsInput"
+                v-on:save="tagChooseDialog.dialog = false"
+                v-on:close="tagChooseDialog.dialog = false"/>
             </v-flex>
           </v-flex>
           <v-flex my-3>
@@ -111,7 +116,7 @@
                           mb-4
                           wrap
                           row>
-                  <v-flex v-for="photo in input.secondaryPhotos"
+                  <v-flex v-for="(photo,index) in input.secondaryPhotos"
                           ma-2
                           style="flex-grow: 0.05"
                           :key="photo.id">
@@ -120,7 +125,8 @@
                         <img :src="photo.url" width="200" height="200"/>
                       </v-card-media>
                       <v-card-actions>
-                        <v-btn color="red" flat block>
+                        <v-btn color="red" flat block
+                               @click="removeSecondaryPhoto(index)">
                           <v-icon color="red"
                                   class="white--text">
                             delete
@@ -173,7 +179,6 @@
         </v-layout>
       </v-flex>
     </v-layout>
-    <TagChooseDialog v-bind="tagChooseDialog" v-on:close="tagChooseDialog.dialog = false"/>
     <ErrorDialog v-bind="error" v-on:close="error.dialog = false"/>
     <SuccessDialog v-bind="success" v-on:close="success.dialog = false"/>
   </v-container>
@@ -319,8 +324,8 @@
         }
       }
     },
-    mounted(){
-      if(!this.areas){
+    mounted() {
+      if (!this.areas) {
         this.$store.dispatch('area/getAllNoParam')
       }
     },
@@ -335,7 +340,7 @@
           this.input.websiteInput = location.website;
           this.input.phoneInput = location.phone;
           this.input.emailInput = location.email;
-          this.input.areaInput = 'Hà nội';
+          this.input.areaInput = location.area;
           this.input.tagsInput = location.tags;
           this.input.businessHoursInput.day1 = _.extend({}, location.businessHours[0]);
           this.input.businessHoursInput.day2 = _.extend({}, location.businessHours[1]);
@@ -349,7 +354,6 @@
           this.input.primaryPhotoInput = location.primaryPhoto.url;
           this.input.secondaryPhotos = location.photos;
           this.input.reviewsInput = location.reviews;
-          this.input.nameInput = location.name;
           resolve();
         })
       },
@@ -362,6 +366,9 @@
         });
         this.input.secondaryPhotoInput = undefined;
       },
+      removeSecondaryPhoto(index) {
+        this.input.secondaryPhotos.splice(index, 1);
+      },
       onReviewRemove(reviewId) {
         this.input.reviewsInput = this.input.reviewsInput
           .filter(review => review.id != reviewId)
@@ -370,7 +377,7 @@
 
       },
       onCreateClick() {
-        this.$store.dispatch('location/create', {input: this.input})
+        this.$store.dispatch('location/create', {...this.input})
       },
       onExitClick() {
         this.$router.back();
