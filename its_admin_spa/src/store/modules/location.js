@@ -1,5 +1,7 @@
 import _locations from "./mockdata/locations";
 import axiosInstance from "../../axiosInstance";
+import formatter from "../../formatter";
+
 import _ from "lodash";
 
 
@@ -26,19 +28,9 @@ export default {
   namespaced: true,
   actions: {
     getAll(context, payload) {
-      const {
-        pagination,
-        search,
-      } = payload;
-
       return new Promise((resolve, reject) => {
         axiosInstance.get('api/Location', {
-          params: {
-            pageIndex: pagination.page,
-            pageSize: pagination.rowsPerPage,
-            sortBy: pagination.sortBy,
-            searchValue: search
-          }
+          params: formatter.getAllRequest(payload)
         })
           .then(value => {
 

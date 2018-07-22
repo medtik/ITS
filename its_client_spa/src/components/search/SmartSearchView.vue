@@ -113,20 +113,6 @@
             console.debug('mounted', reason)
           })
       }
-      // this.$store.dispatch('search/fetchAreas')
-      //   .then((value) => {
-      //     const {
-      //       areas
-      //     } = value;
-      //     this.areas = areas;
-      //     this.loading.areaSelect = false;
-      //   })
-      //   .catch((reason) => {
-      //     this.error = {
-      //       ...reason
-      //     };
-      //     this.loading.areaSelect = false;
-      //   })
     },
     methods: {
       onAreaSelect() {

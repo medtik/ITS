@@ -378,6 +378,12 @@
       },
       onCreateClick() {
         this.$store.dispatch('location/create', {...this.input})
+          .then(value => {
+            this.success = {
+              dialog: true,
+              message: "Tạo mới địa điểm thành công"
+            }
+          })
       },
       onExitClick() {
         this.$router.back();
