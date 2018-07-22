@@ -68,7 +68,7 @@
                   small
                   color="red"
                   @click="onDeleteClick(props.item)">
-                  fas fa-ban
+                  delete
                 </v-icon>
               </a>
             </td>
@@ -179,8 +179,10 @@ photo
         this.pagination.page = 1;
         this.loadData();
       },
-      onDeleteClick(item){
-
+      onDeleteClick(item) {
+        this.$store.dispatch('location/delete', {
+          id: item.id
+        })  .then(value => this.loadData());
       }
     }
   }

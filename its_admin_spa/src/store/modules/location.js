@@ -150,10 +150,15 @@ export default {
       })
     },
     delete(context, payload) {
-      return mockShell(() => {
-
+      return new Promise((resolve, reject) => {
+        axiosInstance.delete('api/location', {
+          params: {
+            locationId: payload.id
+          }
+        })
+          .then(resolve)
+          .catch(reject)
       })
     }
-
   }
 }
