@@ -1,32 +1,32 @@
 <template>
   <v-content>
     <v-toolbar flat color="light-blue" dark>
-      <v-layout justify-center>
-        <v-toolbar-title>
-          {{plan.title}}
-        </v-toolbar-title>
-      </v-layout>
+      <v-toolbar-title>
+        {{plan.title}}
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-items>
+        <v-btn flat :to="{name:'Search'}">
+          <v-icon large>add_location</v-icon>
+          Thêm địa điểm
+        </v-btn>
+        <v-btn flat>
+          <v-icon large>note_add</v-icon>
+          Thêm ghi chú
+        </v-btn>
+        <v-btn flat>
+          <v-icon large>publish</v-icon>
+          Đăng
+        </v-btn>
+      </v-toolbar-items>
     </v-toolbar>
     <v-layout column>
-      <!--<editor-fold desc="Actions">-->
-      <v-flex>
-        <v-layout row reverse>
-          <v-btn icon color="success" flat large :to="{name:'Search'}">
-            <v-icon large>add_location</v-icon>
-          </v-btn>
-          <v-btn icon color="success" flat large>
-            <v-icon large>note_add</v-icon>
-          </v-btn>
-          <v-btn icon color="success" flat large>
-            <v-icon large>publish</v-icon>
-          </v-btn>
-        </v-layout>
-      </v-flex>
-      <!--</editor-fold>-->
-      <!--<editor-fold desc="Unscheduled">-->
-      <v-flex>
-        <v-flex class="title" my-2>
-          Chưa lên lịch
+      <!--UNSCHEDULED-->
+      <v-flex >
+        <v-flex my-3>
+          <v-layout row>
+            <v-flex class="title">Chưa lên lịch</v-flex>
+          </v-layout>
         </v-flex>
         <draggable v-model="plan.unScheduledItems" :options="{handle:'.handle-bar'}">
           <v-flex elevation-2 my-1
@@ -44,8 +44,7 @@
           </v-flex>
         </draggable>
       </v-flex>
-      <!--</editor-fold>-->
-      <!--<editor-fold desc="Days">-->
+      <!--DAYS-->
       <v-flex v-for="(day,index) in plan.days" v-if="day" :key="index">
         <v-flex class="title" my-2>
           Ngày {{index + 1}}
@@ -67,12 +66,10 @@
         </draggable>
 
       </v-flex>
-      <!--</editor-fold>-->
-      <!--<editor-fold desc="Holder">-->
+      <!--Holder-->
       <v-flex style="height: 15vh">
         <!--Holder-->
       </v-flex>
-      <!--</editor-fold>-->
     </v-layout>
   </v-content>
 </template>
