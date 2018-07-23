@@ -1,33 +1,38 @@
 <template>
-  <router-link id="outer-link"
-               tag="div"
-               :to="{name:'LocationDetail', params:{id: this.id}}">
-    <v-layout row>
-      <!--<editor-fold desc="Handle">-->
-      <v-flex xs4
-              sm2
-              d-flex
-              align-center
-              justify-center
-              v-if="$slots.handle"
-              class="text-xs-center">
-        <slot name="handle"></slot>
-      </v-flex>
-      <!--</editor-fold>-->
-      <!--<editor-fold desc="Photo">-->
-      <v-flex style="flex-grow: 0">
+
+  <v-layout row>
+    <!--HANDLE-->
+    <v-flex xs3
+            sm1
+            d-flex
+            align-center
+            justify-center
+            v-if="$slots.handle"
+            class="text-xs-center">
+      <slot name="handle"></slot>
+    </v-flex>
+    <!--PHOTO-->
+    <v-flex style="flex-grow: 0">
+      <router-link class="fakeLink"
+                   tag="div"
+                   :to="{name:'LocationDetail', params:{id: this.id}}">
         <v-avatar tile size="140">
           <img :src="primaryPhoto.url"/>
         </v-avatar>
-      </v-flex>
-      <!--</editor-fold>-->
-      <!--<editor-fold desc="Content">-->
-      <v-flex pa-2 style="flex-grow: 0">
-        <v-layout column>
-          <v-flex class="title">
-            <v-icon>{{locationIcon}}</v-icon>
-            {{name}}
-          </v-flex>
+      </router-link>
+    </v-flex>
+    <!--FIELD-->
+    <v-flex pa-2 style="flex-grow: 0">
+      <router-link class="fakeLink"
+                   tag="div"
+                   :to="{name:'LocationDetail', params:{id: this.id}}">
+        <v-layout column justify-around>
+          <v-layout row>
+            <v-flex class="title">
+              <v-icon>{{locationIcon}}</v-icon>
+              {{name}}
+            </v-flex>
+          </v-layout>
           <v-flex>
             <v-layout row>
               <StarRating
@@ -59,10 +64,9 @@
             {{reason}}
           </v-flex>
         </v-layout>
-      </v-flex>
-      <!--</editor-fold>-->
-    </v-layout>
-  </router-link>
+      </router-link>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
@@ -92,7 +96,4 @@
 </script>
 
 <style scoped>
-  #outer-link:hover {
-    cursor: pointer;
-  }
 </style>

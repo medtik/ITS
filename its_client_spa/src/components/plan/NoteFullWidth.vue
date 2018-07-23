@@ -1,8 +1,8 @@
 <template>
   <v-layout row>
     <!--HANDLE-->
-    <v-flex xs4
-            sm2
+    <v-flex xs3
+            sm1
             d-flex
             align-center
             justify-center

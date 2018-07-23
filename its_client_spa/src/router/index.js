@@ -6,7 +6,6 @@ import GroupListView from '../components/group/GroupListView'
 import PersonalView from '../components/account/PersonalView'
 import NotificationView from '../components/notification/NotificationView'
 import LocationDetailView from '../components/location/LocationDetailView'
-import ReviewWritingView from '../components/location/ReviewWritingView'
 import SigninView from '../components/account/SigninView'
 import SignupView from '../components/account/SignupView'
 import SmartSearchView from '../components/search/SmartSearchView'
@@ -15,6 +14,9 @@ import PlanDetailView from '../components/plan/PlanDetailView'
 import LocationOnMapView from '../components/location/LocationOnMapView'
 import AreaDetailView from '../components/area/AreaDetailView'
 import SearchView from "../components/search/SearchView";
+import WriteReviewView from "../components/location/WriteReviewView";
+import ReportReviewView from "../components/location/ReportReviewView";
+import PlanCreateView from "../components/plan/PlanCreateView";
 
 
 Vue.use(Router);
@@ -47,6 +49,11 @@ export default new Router({
       component: PlanDetailView
     },
     {
+      path: '/plan/create',
+      name: 'PlanCreate',
+      component: PlanCreateView
+    },
+    {
       path: '/group/list',
       name: 'GroupList',
       component: GroupListView
@@ -65,11 +72,6 @@ export default new Router({
       path: '/location/detail',
       name: 'LocationDetail',
       component: LocationDetailView
-    },
-    {
-      path: '/location/review',
-      name: 'ReviewWriting',
-      component: ReviewWritingView
     },
     {
       path: '/smartsearch',
@@ -92,9 +94,39 @@ export default new Router({
       component: LocationOnMapView
     },
     {
+      path: '/review/write',
+      name: 'ReviewWrite',
+      component: WriteReviewView
+    },
+    {
+      path: '/review/report',
+      name: 'ReviewReportReview',
+      component: ReportReviewView
+    },
+    {
       path: '/area/detail',
       name: 'AreaDetail',
       component: AreaDetailView
-    }
+    },
+    {
+      path: '/location/changeRequest',
+      name: 'LocationChangeRequest',
+      component: LandingView
+    },
+    {
+      path: '/location/claimOwner',
+      name: 'LocationClaimOwnerRequest',
+      component: LandingView
+    },
+    {
+      path: '/location/changeRequest',
+      name: 'GroupDetail',
+      component: LandingView
+    },
+    {
+      path: '/location/changeRequest',
+      name: 'PlanInvite',
+      component: LandingView
+    },
   ]
 })

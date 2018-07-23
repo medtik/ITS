@@ -29,18 +29,16 @@
         </div>
       </v-flex>
       <v-flex my-4 mx-2>
-        <v-flex d-flex align-baseline>
-          <div class="title">Hình ảnh</div>
-          <v-flex xs5 md2>
-            <v-btn color="success"
-                   :loading="loading.addImgBtn"
-                   @click="onAddPhotoClick">
-              <v-icon>add_a_photo</v-icon>
-              &nbsp &nbsp
-              Thêm ảnh
-            </v-btn>
-          </v-flex>
-        </v-flex>
+        <v-layout align-baseline>
+          <v-flex class="title">Hình ảnh</v-flex>
+          <v-btn color="success"
+                 :loading="loading.addImgBtn"
+                 @click="onAddPhotoClick">
+            <v-icon>add_a_photo</v-icon>
+            &nbsp &nbsp
+            Thêm ảnh
+          </v-btn>
+        </v-layout>
         <v-flex my-2>
           <v-carousel>
             <v-carousel-item
@@ -80,15 +78,13 @@
         </v-layout>
       </v-flex>
       <v-flex my-2 mx-2>
-        <v-flex d-flex align-baseline>
+        <v-layout align-baseline>
           <v-flex class="title">Bình luận</v-flex>
-          <v-flex xs5 md2>
-            <v-btn color="success" :to="{name:'ReviewWriting', params:{id: location.id}}">
-              <v-icon>rate_review</v-icon>
-              &nbsp &nbsp Đánh giá
-            </v-btn>
-          </v-flex>
-        </v-flex>
+          <v-btn color="success" :to="{name:'ReviewWrite', params:{id: location.id}}">
+            <v-icon>rate_review</v-icon>
+            &nbsp &nbsp Đánh giá
+          </v-btn>
+        </v-layout>
         <v-layout column my-2>
           <v-flex v-for="review in location.reviews"
                   :key="review.id"

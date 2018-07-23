@@ -48,7 +48,7 @@
 </template>
 
 <script>
-  import PictureInput from "../shared/PictureInput";
+  import PictureInput from "../input/PictureInput";
   import ParallaxHeader from "../shared/ParallaxHeader";
   import {mapGetters, mapActions} from 'vuex'
 

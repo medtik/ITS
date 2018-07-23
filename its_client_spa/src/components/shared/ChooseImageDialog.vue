@@ -26,7 +26,7 @@
 </template>
 
 <script>
-  import PictureInput from "./PictureInput";
+  import PictureInput from "../input/PictureInput";
 
   export default {
     name: "ChooseImageDialog",

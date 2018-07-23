@@ -1,5 +1,5 @@
 <template>
-  <v-layout row pt-3 elevation-2 class="white">
+  <v-layout row pt-3 elevation-1 class="white">
     <v-flex xs3>
       <v-layout column>
         <v-flex d-flex justify-center>

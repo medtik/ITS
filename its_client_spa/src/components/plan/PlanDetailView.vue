@@ -11,21 +11,15 @@
       <!--<editor-fold desc="Actions">-->
       <v-flex>
         <v-layout row reverse>
-          <v-flex xs2>
-            <v-btn icon color="success" flat>
-              <v-icon>add_location</v-icon>
-            </v-btn>
-          </v-flex>
-          <v-flex xs2>
-            <v-btn icon color="success" flat>
-              <v-icon>note_add</v-icon>
-            </v-btn>
-          </v-flex>
-          <v-flex xs2>
-            <v-btn icon color="success" flat>
-              <v-icon>publish</v-icon>
-            </v-btn>
-          </v-flex>
+          <v-btn icon color="success" flat large :to="{name:'Search'}">
+            <v-icon large>add_location</v-icon>
+          </v-btn>
+          <v-btn icon color="success" flat large>
+            <v-icon large>note_add</v-icon>
+          </v-btn>
+          <v-btn icon color="success" flat large>
+            <v-icon large>publish</v-icon>
+          </v-btn>
         </v-layout>
       </v-flex>
       <!--</editor-fold>-->
@@ -34,7 +28,7 @@
         <v-flex class="title" my-2>
           Chưa lên lịch
         </v-flex>
-        <draggable v-model="plan.unScheduledItems" :options="{handle:'.handle-bar',group:'items'}">
+        <draggable v-model="plan.unScheduledItems" :options="{handle:'.handle-bar'}">
           <v-flex elevation-2 my-1
                   v-for="item in plan.unScheduledItems"
                   :key="item.id">
@@ -56,7 +50,7 @@
         <v-flex class="title" my-2>
           Ngày {{index + 1}}
         </v-flex>
-        <draggable v-model="plan.days[index]" :options="{handle:'.handle-bar',group:'items'}">
+        <draggable v-model="plan.days[index]" :options="{handle:'.handle-bar'}">
           <v-flex elevation-2 my-1
                   v-for="item in day"
                   :key="item.id">

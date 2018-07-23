@@ -3,7 +3,7 @@
     <v-layout column>
       <v-flex>
         <!--SEARCH-->
-        <v-jumbotron gradient="to top, #FFFEFF, #D7FFFE" height="200px">
+        <v-jumbotron gradient="-225deg, #FFFEFF 0%, #D7FFFE 100%" height="200px">
           <v-container fill-height>
             <v-layout>
               <v-flex text-xs-center>
@@ -32,18 +32,11 @@
           <v-flex v-for="location in result.locations" :key="location.id" mb-2 elevation-1 class="white">
             <LocationFullWidth v-bind="location"/>
           </v-flex>
-          <v-flex v-for="location in result.locations" :key="location.id" mb-2 elevation-1 class="white">
-            <LocationFullWidth v-bind="location"/>
-          </v-flex>
-          <v-flex v-for="location in result.locations" :key="location.id" mb-2 elevation-1 class="white">
-            <LocationFullWidth v-bind="location"/>
-          </v-flex>
         </v-layout>
       </v-flex>
     </v-layout>
   </v-content>
 </template>
-
 <script>
   import AreaInput from "../input/AreaInput";
   import LocationFullWidth from "../shared/LocationFullWidth";
@@ -72,5 +65,4 @@
 </script>
 
 <style scoped>
-
 </style>

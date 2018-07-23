@@ -34,14 +34,26 @@
             <td>{{ props.item.email }}</td>
             <td>
               <v-chip outline disabled label
-                      :color="props.item.isVerified == 'Đã xác nhận' ? 'green' : 'red'">
-                {{props.item.isVerified}}
+                      v-if="props.item.isVerified"
+                      color="green">
+                Đã xác nhận
+              </v-chip>
+              <v-chip outline disabled label
+                      v-else
+                      color="red">
+                Chưa xác nhận
               </v-chip>
             </td>
             <td>
               <v-chip outline disabled label
-                      :color="props.item.isClosed == 'Đã đóng cửa' ? 'red' : 'green'">
-                {{props.item.isClosed}}
+                      v-if="props.item.isClosed"
+                      color="red">
+                Đóng cửa
+              </v-chip>
+              <v-chip outline disabled label
+                      v-else
+                      color="green">
+                Còn hoạt động
               </v-chip>
             </td>
             <td>{{ props.item.area }}</td>
