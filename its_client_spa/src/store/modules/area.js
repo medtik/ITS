@@ -9,20 +9,30 @@ export default {
   mutations: {
     setAreas(state, payload) {
       state.areas = payload.areas;
-      state.areasLoading = false;
+    },
+    setLoading(state, payload) {
+      state.areasLoading = payload.loading;
     }
   },
   actions: {
     getAll(context, payload) {
+      context.commit('setLoading', {loading: true});
       return new Promise((resolve, reject) => {
-        axiosInstance.get('/api/Area')
+        axiosInstance.get('/api/Area',{
+          params: {
+            pageIndex: 1,
+            pageSize: -1,
+          }
+        })
           .then(value => {
             context.commit('setAreas', {
-              areas: value.data
+              areas: value.data.currentList
             });
+            context.commit('setLoading', {loading: false});
             resolve();
           })
           .catch(reason => {
+            context.commit('setLoading', {loading: false});
             reject(reason.response);
           })
       })

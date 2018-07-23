@@ -17,14 +17,9 @@
           </v-layout>
         </v-card-title>
         <v-card-text id="card-content">
-          <v-select
-            label="Chọn khu vực"
-            @change="onAreaSelect"
+          <AreaSelect
             v-model="selectedAreaId"
-            :items="areas"
-            item-text="name"
-            item-value="id"
-            :loading="loading.areaSelect || areasLoading"
+            @change="onAreaSelect"
           />
           <v-progress-linear
             v-if="loading.questions"
@@ -81,11 +76,15 @@
 
 <script>
   import ParallaxHeader from "../shared/ParallaxHeader";
+  import AreaSelect from "../input/AreaInput";
+
   import {mapState} from "vuex"
+
   export default {
     name: "SmartSearchView",
     components: {
-      ParallaxHeader
+      ParallaxHeader,
+      AreaSelect
     },
     data() {
       return {
@@ -98,23 +97,11 @@
         error: {}
       }
     },
-    computed:{
-      ...mapState('area',{
-        areas: state => state.areas,
-        areasLoading: state=>state.areasLoading
-      }),
-      ...mapState('smartSearch',{
+    computed: {
+      ...mapState('smartSearch', {
         questions: state => state.questions,
-        questionsLoading: state=>state.questionsLoading
+        questionsLoading: state => state.questionsLoading
       })
-    },
-    mounted() {
-      if(!this.areas || this.areas.length <= 0){
-        this.$store.dispatch('area/getAll')
-          .catch(reason =>{
-            console.debug('mounted', reason)
-          })
-      }
     },
     methods: {
       onAreaSelect() {
