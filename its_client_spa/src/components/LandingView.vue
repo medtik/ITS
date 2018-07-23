@@ -53,9 +53,15 @@
     <section>
       <v-parallax src="static/place_holder.jpg" height="150">
         <v-layout column align-center justify-center>
-          <div class="headline white--text mb-3 text-xs-center">
+          <v-flex xs2 class="headline font-weight-black white--text text-xs-center">
             Tìm kiếm thông thường
-          </div>
+          </v-flex>
+          <v-flex xs2>
+            <v-btn color="light-blue lighten-2" dark depressed
+                   :to="{name:'Search'}">
+              <v-icon>search</v-icon>
+            </v-btn>
+          </v-flex>
         </v-layout>
       </v-parallax>
     </section>
@@ -63,11 +69,8 @@
     <section>
       <v-container grid-list-xl>
         <v-layout column my-5>
-          <v-flex>
-            <v-text-field v-model="searchInput"
-                          label="Tìm địa điểm, khu vực"
-                          large
-                          append-icon="search"/>
+          <v-flex class="text-xs-center display-1 font-weight-black">
+            Tiêu điểm
           </v-flex>
           <v-flex justify-start mt-5>
             <div class="title">Các khu vực nổi bật</div>
@@ -105,11 +108,6 @@
       AreaCard,
       PlanCard,
       ParallaxHeader
-    },
-    data() {
-      return {
-        searchInput: undefined
-      }
     }
   }
 </script>

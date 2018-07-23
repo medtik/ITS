@@ -14,6 +14,8 @@ import SmartSearchResultView from '../components/search/SearchResultView'
 import PlanDetailView from '../components/plan/PlanDetailView'
 import LocationOnMapView from '../components/location/LocationOnMapView'
 import AreaDetailView from '../components/area/AreaDetailView'
+import SearchView from "../components/search/SearchView";
+
 
 Vue.use(Router);
 
@@ -78,6 +80,11 @@ export default new Router({
       path: '/smartsearch/result',
       name: 'SmartSearchResult',
       component: SmartSearchResultView
+    },
+    {
+      path: '/search',
+      name: 'Search',
+      component: SearchView
     },
     {
       path: '/location/map',

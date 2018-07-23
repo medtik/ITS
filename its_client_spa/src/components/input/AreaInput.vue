@@ -6,6 +6,7 @@
             item-text="name"
             item-value="id"
             :loading="loading"
+            :dark="dark"
   >
 
   </v-select>
@@ -15,6 +16,9 @@
   import storeBoundSelectMixin from "./StoreBoundSelectMixin";
   export default {
     name: "AreaInput",
+    props:[
+      'dark'
+    ],
     mixins: [
       storeBoundSelectMixin({
         alias: 'area',
