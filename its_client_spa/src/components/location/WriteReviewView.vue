@@ -15,19 +15,21 @@
           <vue-star-rating
             :star-size="35"
             :show-rating="false"
+            v-model="ratingInput"
           />
           <v-text-field
             label="Tiêu đề"
+            v-model="titleInput"
           />
           <v-text-field
             label="Mô tả"
+            v-model="descriptionInput"
           />
           <v-flex>
-            <MultiPhotoInput/>
+            <MultiPhotoInput v-model="photosInput"/>
           </v-flex>
         </v-layout>
       </v-flex>
-
       <v-flex>
         <v-btn color="success" @click="onUpload" :loading="uploadBtnLoading">
           Đăng
@@ -46,22 +48,28 @@
 
   export default {
     name: "WriteReviewView",
-    components:{
+    components: {
       VueStarRating,
       MultiPhotoInput
     },
     data() {
       return {
         uploadBtnLoading: false,
-        locationName: 'Địa điểm ABC'
+        locationName: 'Địa điểm ABC',
+        ratingInput: undefined,
+        titleInput: '',
+        descriptionInput: '',
+        photosInput: []
       }
     },
-    methods:{
-      onUpload(){
+    methods: {
+      onUpload() {
         this.uploadBtnLoading = true;
-        setTimeout(()=>{this.$router.back();},2000)
+        setTimeout(() => {
+          this.$router.back();
+        }, 2000)
       },
-      onCancel(){
+      onCancel() {
         this.$router.back();
       }
     }
