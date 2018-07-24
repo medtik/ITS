@@ -32,12 +32,17 @@ export default {
         context.commit('setLoading', {loading: false});
       });
     },
+    nullQuestions(context,payload){
+      context.commit('setQuestions', {questions: null});
+      context.commit('setLoading', {loading: true});
+    },
     getSuggestion(context, payload) {
       const {
         answers
       } = payload;
-      console.debug('getSuggestion', answers);
-
+      return new Promise(resolve => {
+        setTimeout(()=>{resolve()},1500)
+      })
     }
   }
 }

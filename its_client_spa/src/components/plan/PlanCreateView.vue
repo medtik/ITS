@@ -2,7 +2,7 @@
   <v-content>
     <v-toolbar class="light-blue" flat dark>
       <v-toolbar-title>
-        Tạo chuyến đi
+        {{title}}
       </v-toolbar-title>
     </v-toolbar>
     <v-layout column mx-3>
@@ -41,6 +41,21 @@
       return {
         createBtnLoading: false
       }
+    },
+    computed: {
+      title() {
+        const {
+          name
+        } = this.$router
+        if (name === 'PlanCreate') {
+          return "Tạo chuyến đi";
+        } else {
+          return "Chỉnh sửa chuyến đi";
+        }
+      }
+    },
+    created() {
+
     },
     methods: {
       onCreate() {

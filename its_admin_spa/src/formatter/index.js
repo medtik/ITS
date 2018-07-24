@@ -12,7 +12,6 @@ export default {
     }
     const descStr = pagination.descending ? 'desc' : 'asc';
     const orderBy = `${sortByStr}_${descStr}`;
-    console.debug(search);
     return {
       orderBy,
       pageIndex: pagination.page,

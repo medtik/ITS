@@ -1,6 +1,17 @@
 import axios from "axios";
 import axiosInstance from "../../axiosInstance";
 import moment from "moment";
+import MockAdapter from "axios-mock-adapter";
+
+const mock = new MockAdapter(axios, {delayResponse: 1500});
+
+mock.onPost('/token').reply(200, {
+  access_token: 'access_token',
+  token_type: 'bearer',
+  expires_in: '86399',
+  '.issued': 'Tue, 17 Jul 2018 08:42:56 GMT',
+  '.expires': 'Wed, 17 Jul 2019 08:42:56 GMT'
+});
 
 export default {
   namespaced: true,

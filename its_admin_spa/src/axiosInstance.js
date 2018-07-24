@@ -6,4 +6,9 @@ const instance = axios.create({
   timeout: 10000,
 });
 
+import setMock from "./axiosMock";
+
+//Xóa dòng này
+setMock(instance);
+
 export default instance;

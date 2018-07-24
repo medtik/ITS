@@ -29,8 +29,8 @@
           <template slot="items" slot-scope="props">
             <td>{{ props.item.name }}</td>
             <td>{{ props.item.locationCount }}</td>
-            <td>{{ props.item.planCount }}</td>
-            <td>{{ props.item.questions.length }}</td>
+            <td>{{ props.item.planCount ? props.item.planCount : 0 }}</td>
+            <td>{{ props.item.questionCount ? props.item.questionCount  : 0}}</td>
             <td class="justify-center layout px-0">
               <router-link :to="{name:'AreaEdit', query:{id:props.item.id}}">
                 <v-icon
@@ -115,9 +115,6 @@ question
         deep: true
       }
     },
-    mounted() {
-      this.loadData();
-    },
     methods: {
       loadData() {
         this.loading = true;
@@ -126,11 +123,13 @@ question
           pagination: this.pagination
         })
           .then(data => {
-            this.items = data.areas;
+            console.debug('area-loadData',data);
+            this.items = data.list;
             this.total = data.total;
             this.loading = false;
           })
           .catch(error => {
+            console.error(error);
             this.error = {
               dialog: true,
               title: 'Chú ý',

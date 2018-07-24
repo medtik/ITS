@@ -5,8 +5,16 @@
         <v-card id="content">
           <v-layout column>
             <v-flex>
-              <v-card-title class="title">
-                ITS
+              <v-card-title class="light-blue white--text">
+                <v-layout column>
+                  <div class="display-2 font-weight-black font-italic text-xs-center">
+                    ITS
+                  </div>
+                  <v-divider class="my-3"/>
+                  <div class="title font-weight-medium text-xs-center">
+                    Hệ thống hướng dẫn du lịch thông minh
+                  </div>
+                </v-layout>
               </v-card-title>
             </v-flex>
             <v-flex px-3 mb-1>
@@ -52,7 +60,7 @@
         loading: {
           signinBtn: false
         },
-        emailInput: 'admin@tlp.com',
+        emailInput: 'tlp@tlp.com',
         passwordInput: '',
         error: {
           show: false,

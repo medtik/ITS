@@ -17,6 +17,7 @@ import SearchView from "../components/search/SearchView";
 import WriteReviewView from "../components/location/WriteReviewView";
 import ReportReviewView from "../components/location/ReportReviewView";
 import PlanCreateView from "../components/plan/PlanCreateView";
+import LocationChangeRequestView from "../components/location/LocationChangeRequestView";
 
 
 Vue.use(Router);
@@ -51,6 +52,11 @@ export default new Router({
     {
       path: '/plan/create',
       name: 'PlanCreate',
+      component: PlanCreateView
+    },
+    {
+      path: '/plan/edit',
+      name: 'PlanEdit',
       component: PlanCreateView
     },
     {
@@ -111,7 +117,7 @@ export default new Router({
     {
       path: '/location/changeRequest',
       name: 'LocationChangeRequest',
-      component: LandingView
+      component: LocationChangeRequestView
     },
     {
       path: '/location/claimOwner',
