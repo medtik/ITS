@@ -103,6 +103,9 @@
         questionsLoading: state => state.questionsLoading
       })
     },
+    beforeDestroy(){
+      this.$store.dispatch('smartSearch/nullQuestions');
+    },
     methods: {
       onAreaSelect() {
         this.loading.questions = true;
@@ -122,7 +125,6 @@
             };
             this.loading.questions = false;
           })
-
       },
       onSubmit() {
         this.loading.finishBtn = true;

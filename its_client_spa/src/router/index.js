@@ -54,6 +54,11 @@ export default new Router({
       component: PlanCreateView
     },
     {
+      path: '/plan/edit',
+      name: 'PlanEdit',
+      component: PlanCreateView
+    },
+    {
       path: '/group/list',
       name: 'GroupList',
       component: GroupListView

@@ -5,16 +5,23 @@
         {{plan.title}}
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-toolbar-items>
+      <v-toolbar-title>
+        {{plan.from}} - {{plan.to}}
+      </v-toolbar-title>
+      <v-toolbar-items slot="extension">
+        <v-btn flat :to="{name:'PlanEdit'}">
+          <v-icon large>edit</v-icon>
+          Chỉnh sửa
+        </v-btn>
         <v-btn flat :to="{name:'Search'}">
           <v-icon large>add_location</v-icon>
           Thêm địa điểm
         </v-btn>
-        <v-btn flat>
+        <v-btn flat @click="dialog.addNote = true">
           <v-icon large>note_add</v-icon>
           Thêm ghi chú
         </v-btn>
-        <v-btn flat>
+        <v-btn flat @click="dialog.publishPlan = true">
           <v-icon large>publish</v-icon>
           Đăng
         </v-btn>
@@ -22,7 +29,7 @@
     </v-toolbar>
     <v-layout column>
       <!--UNSCHEDULED-->
-      <v-flex >
+      <v-flex>
         <v-flex my-3>
           <v-layout row>
             <v-flex class="title">Chưa lên lịch</v-flex>
@@ -66,10 +73,65 @@
         </draggable>
 
       </v-flex>
-      <!--Holder-->
       <v-flex style="height: 15vh">
         <!--Holder-->
       </v-flex>
+      <!--DIALOGS-->
+      <v-dialog v-model="dialog.addNote" max-width="550">
+        <!--ADD NOTE-->
+        <v-card>
+          <v-card-title class="light-blue title white--text">
+            Thêm ghi chú
+          </v-card-title>
+          <v-card-text>
+            <v-layout column>
+              <v-flex>
+                <v-text-field label="Tiêu đề"/>
+                <v-text-field label="Nội dung"/>
+              </v-flex>
+              <v-divider/>
+              <v-flex>
+                <v-btn color="success"
+                       :loading="loading.createNoteBtn"
+                       @click="onAddNote">
+                  Tạo
+                </v-btn>
+                <v-btn color="secondary"
+                       @click="dialog.addNote = false">
+                  Hủy
+                </v-btn>
+              </v-flex>
+            </v-layout>
+          </v-card-text>
+        </v-card>
+      </v-dialog>
+      <v-dialog v-model="dialog.publishPlan" max-width="400">
+        <!--PUBLISH-->
+        <v-card>
+          <v-card-title class="light-blue title white--text">
+            Đăng chuyến đi
+          </v-card-title>
+          <v-card-text>
+            <v-layout column>
+              <v-flex my-3 class="body-2">
+                Chuyến đi của bạn sẽ được đăng lên hệ thống để mọi người có thể cũng trải nhiệm chuyến đi của bạn
+              </v-flex>
+              <v-divider></v-divider>
+              <v-flex>
+                <v-btn color="success"
+                       :loading="loading.publishBtn"
+                       @click="onPublish">
+                  Xác nhận
+                </v-btn>
+                <v-btn color="secondary"
+                       @click="dialog.publishPlan = false">
+                  Hủy
+                </v-btn>
+              </v-flex>
+            </v-layout>
+          </v-card-text>
+        </v-card>
+      </v-dialog>
     </v-layout>
   </v-content>
 </template>
@@ -91,6 +153,8 @@
       return {
         plan: {
           title: 'Plan ABC',
+          from: '22/6/2018',
+          to: '25/6/2018',
           locations: _locations,
           unScheduledItems: [
             {
@@ -135,7 +199,30 @@
             }]
           ],
         },
-
+        loading: {
+          createNoteBtn: false,
+          publishBtn: false,
+        },
+        dialog: {
+          addNote: false,
+          publishPlan: false,
+        },
+      }
+    },
+    methods: {
+      onAddNote() {
+        this.loading.createNoteBtn = true;
+        setTimeout(() => {
+          this.dialog.addNote = false;
+          this.loading.createNoteBtn = false;
+        }, 1500)
+      },
+      onPublish() {
+        this.loading.publishBtn = true;
+        setTimeout(() => {
+          this.dialog.publishPlan = false;
+          this.loading.publishBtn = false;
+        }, 1500)
       }
     }
   }
