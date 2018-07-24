@@ -111,16 +111,16 @@
         <v-layout column my-2>
           <v-divider></v-divider>
           <v-flex>
-            <v-btn block flat>
+            <v-btn block flat :to="{name:'LocationChangeRequest'}">
               <v-icon>edit_location</v-icon>
-              &nbsp &nbsp Cập nhật thông tin
+              &nbsp; &nbsp; Cập nhật thông tin
             </v-btn>
           </v-flex>
           <v-divider></v-divider>
           <v-flex>
             <v-btn block flat>
               <v-icon>person_pin_circle</v-icon>
-              &nbsp &nbsp Tôi sở hữu địa điểm này
+              &nbsp; &nbsp; Tôi sở hữu địa điểm này
             </v-btn>
           </v-flex>
           <v-divider></v-divider>

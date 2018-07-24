@@ -34,11 +34,11 @@ export default {
     },
     getAll(context, payload) {
       return new Promise((resolve, reject) => {
-        axiosInstance.get('api/area', {
-          params: formatter.getAllRequest(payload)
-        }).then(value => {
-          resolve(formatter.getAllResponse(value.data));
-        }).reject(reject)
+        axiosInstance.get('api/area', {params: formatter.getAllRequest(payload)})
+          .then(value => {
+            const response = formatter.getAllResponse(value.data);
+            resolve(response);
+          }).catch(reject)
       });
 
     },
