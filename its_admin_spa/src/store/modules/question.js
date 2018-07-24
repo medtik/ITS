@@ -104,7 +104,7 @@ export default {
     },
     delete(context, payload) {
       return new Promise((resolve, reject) => {
-        axiosInstance.delete('api/Question', {
+          axiosInstance.delete('api/Question', {
           params:{
             questionId: payload.id
           }
