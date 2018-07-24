@@ -9,6 +9,8 @@ import SmartSearchModule from "./modules/smartSearch";
 import AuthenticateModule from "./modules/authenticate";
 import AreaModule from "./modules/area";
 import SearchModule from "./modules/search";
+import TagModule from "./modules/tag"
+
 
 const store = new Vuex.Store({
   modules:{
@@ -17,7 +19,8 @@ const store = new Vuex.Store({
     location: LocationModule,
     smartSearch: SmartSearchModule,
     area: AreaModule,
-    search: SearchModule
+    search: SearchModule,
+    tag: TagModule,
   },
 });
 
