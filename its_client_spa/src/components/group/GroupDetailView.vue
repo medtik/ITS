@@ -5,31 +5,36 @@
         {{title}}
       </v-toolbar-title>
     </v-toolbar>
-    <v-layout column
-              class="white"
-              style="width: 100%">
-      <v-flex>
+    <v-layout column>
+      <v-flex class="grey lighten-4">
         <v-layout row wrap px-1 my-2>
-          <v-flex xs12 px-2 my-1>
+          <v-flex xs12 px-2 my-1 class="white">
             <!--USERS-->
             <v-layout column>
               <v-flex class="text-md-center title" ma-3>
                 <v-icon>fas fa-user-friends</v-icon>
                 Thành viên
               </v-flex>
+              <v-flex class="text-md-center title">
+                <v-btn icon flat color="primary" large>
+                  <v-icon>fas fa-user-plus</v-icon>
+                </v-btn>
+              </v-flex>
               <v-layout row wrap my-2>
-                <v-flex xs6 lg4 v-for="account in accounts" :key="account.id">
+                <v-flex xs3 lg2 pa-1
+                        v-for="account in accounts"
+                        :key="account.id">
                   <AccountCard v-bind="account"/>
                 </v-flex>
               </v-layout>
             </v-layout>
           </v-flex>
-          <v-flex xs12 px-2 my-3>
+          <v-flex xs12 px-2 my-1 class="white">
             <!--GROUPS-->
             <v-layout column>
               <v-flex class="text-md-center title" xs12 my-2>
                 <v-icon>fas fa-suitcase</v-icon>
-                Kế hoạch
+                Chuyến đi
               </v-flex>
               <v-flex xs12 lg6 my-3
                       v-for="plan in plans"
