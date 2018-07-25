@@ -20,6 +20,7 @@ import PlanCreateView from "../components/plan/PlanCreateView";
 import LocationChangeRequestView from "../components/location/LocationChangeRequestView";
 import GroupDetailView from "../components/group/GroupDetailView";
 import GroupCreateView from "../components/group/GroupCreateView";
+import GroupInviteView from "../components/group/GroupInviteView";
 
 
 Vue.use(Router);
@@ -137,9 +138,9 @@ export default new Router({
       component: GroupDetailView
     },
     {
-      path: '/location/changeRequest',
-      name: 'PlanInvite',
-      component: LandingView
+      path: '/group/invite',
+      name: 'GroupInvite',
+      component: GroupInviteView
     },
   ]
 })

@@ -7,12 +7,16 @@
           {{title}}
         </router-link>
         <div>
-          <v-btn icon flat color="success" large>
+          <v-btn icon flat large
+                 color="success"
+                 @click="$emit('save')">
             <v-icon>
               fas fa-heart
             </v-icon>
           </v-btn>
-          <v-btn icon flat color="red" large>
+          <v-btn icon flat large
+                 color="red"
+                 @click="$emit('delete')">
             <v-icon>
               fas fa-trash
             </v-icon>

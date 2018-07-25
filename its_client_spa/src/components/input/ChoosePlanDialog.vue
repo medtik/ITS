@@ -8,8 +8,8 @@
             <v-subheader>
               Nhóm {{n}}
             </v-subheader>
-            <v-list-tile v-for="(n,index) in 3" :key="n"
-                         @click="selectedIndex = index">
+            <v-list-tile v-for="(i,index) in 3" :key="n*i"
+                         @click="selectedIndex = n*(i+4)">
               <v-list-tile-avatar>
                 <img src="https://picsum.photos/200"/>
               </v-list-tile-avatar>
@@ -20,7 +20,7 @@
               </v-list-tile-content>
               <v-list-tile-action>
                 <v-icon
-                  v-if="selectedIndex === index"
+                  v-if="selectedIndex === n*(i+4)"
                   color="green">
                   check
                 </v-icon>
@@ -54,6 +54,11 @@
       'value',
       'destinations'
     ],
+    data() {
+      return {
+        selectedIndex: undefined
+      }
+    },
     methods: {
       onSelect() {
         this.$emit('input', this.selected);

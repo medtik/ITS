@@ -1,8 +1,16 @@
 <template>
   <router-link :to="routerLink" tag="div" class="fakeLink">
     <v-layout column pa-2 class="white">
-      <v-flex class="title" py-2>
-        Nhóm ABC
+      <v-flex py-2>
+        <v-layout class="title" align-center justify-space-between>
+          Nhóm ABC
+          <v-btn color="red" flat icon
+                 @click.stop="">
+            <v-icon>
+              fas fa-trash
+            </v-icon>
+          </v-btn>
+        </v-layout>
       </v-flex>
       <v-divider></v-divider>
       <v-layout row wrap>

@@ -11,23 +11,23 @@
       <v-toolbar-items slot="extension">
         <v-btn flat @click="dialog.choosePlanDestination = true">
           <v-icon large>fas fa-heart</v-icon>
-          &nbsp; Lưu
+          <span v-if="!isSmallScreen">&nbsp; Lưu</span>
         </v-btn>
         <v-btn flat :to="{name:'PlanEdit'}">
           <v-icon large>edit</v-icon>
-          Chỉnh sửa
+          <span v-if="!isSmallScreen">Chỉnh sửa</span>
         </v-btn>
         <v-btn flat :to="{name:'Search'}">
           <v-icon large>add_location</v-icon>
-          Thêm địa điểm
+          <span v-if="!isSmallScreen">Thêm địa điểm</span>
         </v-btn>
         <v-btn flat @click="dialog.addNote = true">
           <v-icon large>note_add</v-icon>
-          Thêm ghi chú
+          <span v-if="!isSmallScreen">Thêm ghi chú</span>
         </v-btn>
         <v-btn flat @click="dialog.publishPlan = true">
           <v-icon large>publish</v-icon>
-          Đăng
+          <span v-if="!isSmallScreen">Đăng</span>
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
@@ -43,7 +43,7 @@
           <v-flex elevation-2 my-1
                   v-for="item in plan.unScheduledItems"
                   :key="item.id"
-          class="white">
+                  class="white">
             <LocationFullWidth v-if="item.location" v-bind="item.location">
               <v-icon slot="handle" class="handle-bar">reorder</v-icon>
             </LocationFullWidth>
@@ -221,6 +221,11 @@
           publishPlan: false,
           choosePlanDestination: false,
         },
+      }
+    },
+    computed: {
+      isSmallScreen() {
+        return this.$vuetify.breakpoint.name === 'xs'
       }
     },
     methods: {

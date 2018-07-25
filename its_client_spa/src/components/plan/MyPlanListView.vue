@@ -16,24 +16,38 @@
                 py-2
                 elevation-1
                 class="white">
-          <PlanFullWidth/>
+          <PlanFullWidth @save="dialog.choosePlanDestination = true"/>
         </v-flex>
       </v-layout>
     <v-flex style="height: 30vh">
       <!--Holder-->
     </v-flex>
+    <ChoosePlanDestinationDialog :dialog="dialog.choosePlanDestination"
+                                 @select="dialog.choosePlanDestination = false"
+                                 @close="dialog.choosePlanDestination = false"
+    />
   </v-content>
 </template>
 
 <script>
-  import ParallaxHeader from "../shared/ParallaxHeader"
-  import PlanFullWidth from "../shared/PlanFullWidth"
+  import ParallaxHeader from "../shared/ParallaxHeader";
+  import PlanFullWidth from "../shared/PlanFullWidth";
+  import  ChoosePlanDestinationDialog from "../input/ChoosePlanDestinationDialog";
+
 
   export default {
     name: "MyPlanListView",
     components: {
       ParallaxHeader,
-      PlanFullWidth
+      PlanFullWidth,
+      ChoosePlanDestinationDialog
+    },
+    data(){
+      return {
+        dialog:{
+          choosePlanDestination: false,
+        }
+      }
     }
   }
 </script>
