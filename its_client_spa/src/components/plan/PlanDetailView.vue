@@ -9,6 +9,10 @@
         {{plan.from}} - {{plan.to}}
       </v-toolbar-title>
       <v-toolbar-items slot="extension">
+        <v-btn flat @click="dialog.choosePlanDestination = true">
+          <v-icon large>fas fa-heart</v-icon>
+          &nbsp; Lưu
+        </v-btn>
         <v-btn flat :to="{name:'PlanEdit'}">
           <v-icon large>edit</v-icon>
           Chỉnh sửa
@@ -133,6 +137,10 @@
         </v-card>
       </v-dialog>
     </v-layout>
+    <!--DIALOG-->
+    <ChoosePlanDestinationDialog :dialog="dialog.choosePlanDestination"
+                                 @select="dialog.choosePlanDestination = false"
+                                 @close="dialog.choosePlanDestination = false"/>
   </v-content>
 </template>
 
@@ -140,6 +148,7 @@
   import _locations from "../location/Locations";
   import LocationFullWidth from "../shared/LocationFullWidth";
   import NoteFullWidth from "./NoteFullWidth";
+  import ChoosePlanDestinationDialog from "../input/ChoosePlanDestinationDialog";
   import draggable from 'vuedraggable'
 
   export default {
@@ -147,6 +156,7 @@
     components: {
       LocationFullWidth,
       NoteFullWidth,
+      ChoosePlanDestinationDialog,
       draggable
     },
     data() {
@@ -206,6 +216,7 @@
         dialog: {
           addNote: false,
           publishPlan: false,
+          choosePlanDestination: false,
         },
       }
     },
