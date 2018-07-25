@@ -18,6 +18,7 @@ import WriteReviewView from "../components/location/WriteReviewView";
 import ReportReviewView from "../components/location/ReportReviewView";
 import PlanCreateView from "../components/plan/PlanCreateView";
 import LocationChangeRequestView from "../components/location/LocationChangeRequestView";
+import GroupDetailView from "../components/group/GroupDetailView";
 import GroupCreateView from "../components/group/GroupCreateView";
 
 
@@ -131,9 +132,9 @@ export default new Router({
       component: LandingView
     },
     {
-      path: '/location/changeRequest',
+      path: '/group/detail',
       name: 'GroupDetail',
-      component: LandingView
+      component: GroupDetailView
     },
     {
       path: '/location/changeRequest',

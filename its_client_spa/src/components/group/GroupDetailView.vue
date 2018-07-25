@@ -1,39 +1,48 @@
 <template>
-  <v-layout column
-            class="white"
-            style="width: 100%">
-    <v-flex class="text-xs-center" my-2>
-      <span class="headline">{{title}}</span>
-      <v-divider/>
-    </v-flex>
-    <v-flex>
-      <v-layout row wrap px-1>
-        <v-flex xs12 lg6 px-2 my-1>
-          <v-layout row wrap>
-            <v-flex class="text-lg-center title" xs12 mb-2>
-              <v-icon>fas fa-user-friends</v-icon> Thành viên
-            </v-flex>
-            <v-flex xs6 lg4 v-for="account in accounts" :key="account.id">
-              <AccountCard v-bind="account"/>
-            </v-flex>
-          </v-layout>
-        </v-flex>
-        <v-flex xs12 lg6 px-2 my-1>
-          <v-layout column>
-            <v-flex class="text-lg-center title" xs12 my-2>
-              <v-icon>fas fa-suitcase</v-icon> Kế hoạch
-            </v-flex>
-            <v-flex xs12 lg6>
-              <PlanFullWidth v-for="plan in plans"
-                             v-bind="plan"
-                             :key="plan.id"/>
-            </v-flex>
-          </v-layout>
+  <v-content>
+    <v-toolbar dark flat color="light-blue">
+      <v-toolbar-title>
+        {{title}}
+      </v-toolbar-title>
+    </v-toolbar>
+    <v-layout column
+              class="white"
+              style="width: 100%">
+      <v-flex>
+        <v-layout row wrap px-1 my-2>
+          <v-flex xs12 px-2 my-1>
+            <!--USERS-->
+            <v-layout column>
+              <v-flex class="text-md-center title" ma-3>
+                <v-icon>fas fa-user-friends</v-icon>
+                Thành viên
+              </v-flex>
+              <v-layout row wrap my-2>
+                <v-flex xs6 lg4 v-for="account in accounts" :key="account.id">
+                  <AccountCard v-bind="account"/>
+                </v-flex>
+              </v-layout>
+            </v-layout>
+          </v-flex>
+          <v-flex xs12 px-2 my-3>
+            <!--GROUPS-->
+            <v-layout column>
+              <v-flex class="text-md-center title" xs12 my-2>
+                <v-icon>fas fa-suitcase</v-icon>
+                Kế hoạch
+              </v-flex>
+              <v-flex xs12 lg6 my-3
+                      v-for="plan in plans"
+                      :key="plan.id">
+                <PlanFullWidth v-bind="plan"/>
+              </v-flex>
+            </v-layout>
 
-        </v-flex>
-      </v-layout>
-    </v-flex>
-  </v-layout>
+          </v-flex>
+        </v-layout>
+      </v-flex>
+    </v-layout>
+  </v-content>
 </template>
 
 <script>
