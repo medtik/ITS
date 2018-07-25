@@ -5,6 +5,11 @@
       text="Các nhóm của bạn"
     />
     <v-layout column>
+      <v-flex>
+        <v-btn color="success" :to="{name:'GroupCreate'}">
+          <v-icon>group_add</v-icon>&nbsp; Tạo nhóm
+        </v-btn>
+      </v-flex>
       <v-flex v-for="n in 3"
               :key="n"
               elevation-2

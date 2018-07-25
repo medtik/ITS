@@ -18,6 +18,7 @@ import WriteReviewView from "../components/location/WriteReviewView";
 import ReportReviewView from "../components/location/ReportReviewView";
 import PlanCreateView from "../components/plan/PlanCreateView";
 import LocationChangeRequestView from "../components/location/LocationChangeRequestView";
+import GroupCreateView from "../components/group/GroupCreateView";
 
 
 Vue.use(Router);
@@ -63,6 +64,11 @@ export default new Router({
       path: '/group/list',
       name: 'GroupList',
       component: GroupListView
+    },
+    {
+      path: '/group/create',
+      name: 'GroupCreate',
+      component: GroupCreateView
     },
     {
       path: '/personal',
