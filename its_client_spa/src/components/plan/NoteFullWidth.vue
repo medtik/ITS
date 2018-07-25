@@ -12,11 +12,11 @@
     </v-flex>
     <!--CONTENT-->
     <v-layout column pa-1>
-      <v-flex class="subheading font-weight-medium">
+      <v-flex class="title font-weight-medium" my-2>
         {{title}}
       </v-flex>
       <v-divider></v-divider>
-      <v-flex class="body-1" px-2>
+      <v-flex class="body-1" pa-1>
         {{text}}
       </v-flex>
     </v-layout>

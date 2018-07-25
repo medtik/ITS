@@ -1,6 +1,6 @@
 <template>
   <v-content>
-    <v-toolbar color="light-blue" dark>
+    <v-toolbar color="light-blue" dark fixed>
       <v-toolbar-title>
         Địa điểm ABC
       </v-toolbar-title>

@@ -31,18 +31,19 @@
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
-    <v-layout column>
+    <v-layout column class="white">
       <!--UNSCHEDULED-->
-      <v-flex>
+      <v-flex class="grey lighten-4">
         <v-flex my-3>
           <v-layout row>
             <v-flex class="title">Chưa lên lịch</v-flex>
           </v-layout>
         </v-flex>
-        <draggable v-model="plan.unScheduledItems" :options="{handle:'.handle-bar'}">
+        <draggable v-model="plan.unScheduledItems" :options="{handle:'.handle-bar', group:'items'}">
           <v-flex elevation-2 my-1
                   v-for="item in plan.unScheduledItems"
-                  :key="item.id">
+                  :key="item.id"
+          class="white">
             <LocationFullWidth v-if="item.location" v-bind="item.location">
               <v-icon slot="handle" class="handle-bar">reorder</v-icon>
             </LocationFullWidth>
@@ -56,14 +57,16 @@
         </draggable>
       </v-flex>
       <!--DAYS-->
-      <v-flex v-for="(day,index) in plan.days" v-if="day" :key="index">
+      <v-flex v-for="(day,index) in plan.days" v-if="day" :key="index" class="grey lighten-4">
         <v-flex class="title" my-2>
           Ngày {{index + 1}}
         </v-flex>
-        <draggable v-model="plan.days[index]" :options="{handle:'.handle-bar'}">
+        <draggable v-model="plan.days[index]" :options="{handle:'.handle-bar', group:'items'}">
           <v-flex elevation-2 my-1
                   v-for="item in day"
-                  :key="item.id">
+                  :key="item.id"
+                  class="white"
+          >
             <LocationFullWidth v-if="item.location" v-bind="item.location">
               <v-icon slot="handle" class="handle-bar">reorder</v-icon>
             </LocationFullWidth>
@@ -81,7 +84,7 @@
         <!--Holder-->
       </v-flex>
       <!--DIALOGS-->
-      <v-dialog v-model="dialog.addNote" max-width="550">
+      <v-dialog v-model="dialog.addNote" max-width="450">
         <!--ADD NOTE-->
         <v-card>
           <v-card-title class="light-blue title white--text">
@@ -91,7 +94,7 @@
             <v-layout column>
               <v-flex>
                 <v-text-field label="Tiêu đề"/>
-                <v-text-field label="Nội dung"/>
+                <v-textarea label="Nội dung"/>
               </v-flex>
               <v-divider/>
               <v-flex>
