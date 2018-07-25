@@ -26,7 +26,7 @@ export default (axiosInstance) => {
       }];
     })
 
-    .onGet('/api/Question/categories')
+    .onGet('api/Question/categories')
     .reply((config) => {
       return [200, {
         currentList: [
@@ -86,13 +86,110 @@ export default (axiosInstance) => {
       }];
     })
 
-
-
-    .onPost('api/Question')
+    .onDelete('api/tag')
     .reply((config) => {
       return [200, {
       }];
     })
+
+
+    .onPost('api/tag')
+    .reply((config) => {
+      return [200, {
+      }];
+    })
+
+
+    .onGet('api/Location')
+    .reply((config) => {
+      return [200, {
+        meta: {
+          pageIndex	:1,
+          pageSize	:5,
+          totalElement:12,
+          totalPage	:3,
+          orderBy	:"name_asc",
+          searchValue:	null
+        },
+        currentList: [
+          {
+            id	:13,
+            name:	string,
+            address	:string,
+            website:	string,
+            phoneNumber	:string,
+            emailAddress:	string,
+            isVerified:	true,
+            isClosed:	true,
+            areaName:	"Hà Nội"
+          },
+          {
+            id:	26,
+            name	:string,
+            address	:string,
+            website:	string,
+            phoneNumber:	string,
+            emailAddress:	"string@gmail.co",
+            isVerified:	true,
+            isClosed:	true,
+            areaName:	"Hà Nội"
+          },
+          {
+            id:	27,
+            name:	string,
+            address	:string,
+            website:	string,
+            phoneNumber:	string,
+            emailAddress:	string,
+            isVerified:	true,
+            isClosed:	true,
+            areaName:	'Hà Nội'
+          },
+          {
+            id	:9,
+            name:	ten,
+            address	: 'diachi',
+            website:	'web.com',
+            phoneNumber	: '0123456789',
+            emailAddress	: "email.com",
+          isVerified	:true,
+          isClosed	:false,
+          areaName:	'Đà Nẵng',
+          },
+          {
+            id	:25,
+            name	: string,
+            address:	string,
+            website	:12,
+            phoneNumber:	12,
+            emailAddress	:12,
+            isVerified:	false,
+            isClosed	:false,
+            areaName	:'Hồ Chí Minh'
+          }
+        ]
+      }];
+    })
+
+
+    .onDelete('api/location')
+    .reply((config) => {
+      return [200, {
+      }];
+    })
+
+
+    .onPost('api/location')
+    .reply((config) => {
+      return [200, {
+      }];
+    })
+
+
+
+
+
+
 
 
 
