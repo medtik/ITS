@@ -1,10 +1,9 @@
 <template>
-  <v-layout column pa-2>
+  <v-layout column pa-2 class="white">
     <v-flex class="title" py-2>
       Nhóm ABC
     </v-flex>
     <v-divider></v-divider>
-
     <v-layout row wrap>
       <v-flex xs12 sm5 py-2 class="text-xs-center">
         <!--USERS-->

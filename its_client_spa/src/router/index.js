@@ -112,7 +112,7 @@ export default new Router({
     },
     {
       path: '/review/report',
-      name: 'ReviewReportReview',
+      name: 'ReviewReport',
       component: ReportReviewView
     },
     {

@@ -89,7 +89,7 @@
           <v-flex v-for="review in location.reviews"
                   :key="review.id"
                   elevation-2>
-            <LocationReview v-bind="review"/>
+            <LocationReview v-bind="review" @report="$router.push({name: 'ReviewReport'})"/>
           </v-flex>
         </v-layout>
       </v-flex>
