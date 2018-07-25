@@ -31,7 +31,7 @@
             </v-list>
             <v-list subheader avatar>
               <v-subheader>
-                Nhóm của bạn
+                Nhóm
               </v-subheader>
               <v-list-tile v-for="(n,index) in 3" :key="n"
                            @click="selectedIndex = index">

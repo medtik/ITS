@@ -1,18 +1,31 @@
 <template>
   <v-layout column>
-    <v-flex mb-2>
-      <router-link :to="{name:'PlanDetail',params:{id: this.id}}"
-                   tag="span"
-                   class="title font-weight-medium fakeLink">
-        {{title}}
-      </router-link>
+    <v-flex ma-2>
+      <v-layout style="justify-content: space-between; align-items: baseline">
+        <router-link :to="{name:'PlanDetail',params:{id: this.id}}"
+                     tag="span" class="fakeLink title font-weight-medium">
+          {{title}}
+        </router-link>
+        <div>
+          <v-btn icon flat color="success" large>
+            <v-icon>
+              fas fa-heart
+            </v-icon>
+          </v-btn>
+          <v-btn icon flat color="red" large>
+            <v-icon>
+              fas fa-trash
+            </v-icon>
+          </v-btn>
+        </div>
+      </v-layout>
     </v-flex>
-    <v-flex v-if="mode == 'private'">
+    <v-flex v-if="mode == 'private'" ma-2>
       <v-label>
         {{startDate}} - {{endDate}}
       </v-label>
     </v-flex>
-    <v-flex v-if="mode == 'public'">
+    <v-flex v-if="mode == 'public'" ma-2>
       <v-layout column>
         <v-flex class="body-1">
           <v-icon small>thumb_up</v-icon>&nbsp; <span>{{voteCount}} lượt bình chọn</span>
@@ -24,6 +37,7 @@
         </v-flex>
       </v-layout>
     </v-flex>
+    <v-divider></v-divider>
     <v-flex mt-2>
       <v-layout style="overflow-y: auto;">
         <v-flex v-for="n in 9" :key="n" mx-2>
