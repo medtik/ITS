@@ -50,7 +50,7 @@ export default {
     },
     getCategories(context, payload) {
       return new Promise((resolve, reject) => {
-        axiosInstance.get('api/Question/categories')
+          axiosInstance.get('api/Question/categories')
           .then(value => {
             resolve({
               categories: value.data

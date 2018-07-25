@@ -8,7 +8,6 @@ const instance = axios.create({
 
 import setMock from "./axiosMock";
 
-//Xóa dòng này
-setMock(instance);
-
+// // Xóa dòng này
+// setMock(instance);
 export default instance;
