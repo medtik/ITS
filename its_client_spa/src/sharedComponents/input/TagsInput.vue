@@ -26,7 +26,7 @@
 
 <script>
   import _ from 'lodash';
-  import TagChooseDialog from "../input/TagChooseDialog";
+  import TagChooseDialog from "./TagChooseDialog";
 
   export default {
     name: "ManageTagSection",

@@ -55,7 +55,7 @@
 
 <script>
   import LocationBusinessHoursInput from "../../sharedComponents/input/LocationBusinessHoursInput";
-  import TagManageSection from "../../sharedComponents/block/TagManageSection";
+  import TagManageSection from "../../sharedComponents/input/TagsInput";
 
   export default {
     name: "LocationChangeRequestView",

@@ -7,7 +7,6 @@ import NotificationFullWidth from "./NotificationFullWidth";
 import PlanCard from "./PlanCard";
 import PlanFullWidth from "./PlanFullWidth";
 import SuccessDialog from "./SuccessDialog";
-import TagManageSection from "./TagManageSection";
 
 
 export default {
@@ -19,6 +18,5 @@ export default {
   LocationFullWidth,
   NotificationFullWidth,
   PlanCard,
-  PlanFullWidth,
-  TagManageSection
+  PlanFullWidth
 }
