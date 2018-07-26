@@ -59,9 +59,18 @@
             <span>{{address}}</span>
           </v-flex>
           <v-divider v-if="reason"></v-divider>
-          <v-flex class="body-1 font-weight-light"
-                  v-if="reason">
-            {{reason}}
+          <v-flex v-if="reason" class="body-1 font-weight-light">
+            Bởi vì bạn chọn "Sang trong", "Phong cách Ý"
+            <br/>
+            <v-chip>
+              Ẩm thực ý
+            </v-chip>
+            <v-chip>
+              5 sao
+            </v-chip>
+            <v-chip>
+              Giá cao
+            </v-chip>
           </v-flex>
         </v-layout>
       </router-link>

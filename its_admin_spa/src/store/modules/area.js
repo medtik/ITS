@@ -25,11 +25,16 @@ export default {
   namespaced: true,
   actions: {
     getAllNoParam(context) {
-      return new Promise((resolve) => {
-        axiosInstance.get('api/area')
+      return new Promise((resolve, reject) => {
+        axiosInstance.get('api/area', {
+          params: {
+            pageSize: -1
+          }
+        })
           .then(value => {
-            resolve({list: value.data});
-          })
+            const response = formatter.getAllResponse(value.data);
+            resolve(response);
+          }).catch(reject)
       })
     },
     getAll(context, payload) {
