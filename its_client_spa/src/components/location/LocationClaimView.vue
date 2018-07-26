@@ -2,12 +2,12 @@
   <v-content>
     <v-toolbar dark flat color="light-blue">
       <v-toolbar-title>
-        Báo cáo bình luận
+        Gửi yêu sở hữu địa điểm
       </v-toolbar-title>
     </v-toolbar>
     <v-layout column mx-2>
       <v-flex my-2>
-        <v-textarea label="Mô tả thêm"/>
+        <v-textarea label="Thông tin thêm"/>
       </v-flex>
       <v-flex my-2>
         <v-btn color="success"
@@ -22,11 +22,11 @@
     </v-layout>
   </v-content>
 </template>
-<!--TODO show review detail on top-->
+
 <script>
-  export default {
-    name: "ReportReviewView"
-  }
+    export default {
+        name: "ClaimLocationView"
+    }
 </script>
 
 <style scoped>

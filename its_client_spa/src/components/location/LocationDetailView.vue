@@ -118,7 +118,7 @@
           </v-flex>
           <v-divider></v-divider>
           <v-flex>
-            <v-btn block flat>
+            <v-btn block flat :to="{name:'LocationClaimRequest'}">
               <v-icon>person_pin_circle</v-icon>
               &nbsp; &nbsp; Tôi sở hữu địa điểm này
             </v-btn>

@@ -21,6 +21,7 @@ import LocationChangeRequestView from "../components/location/LocationChangeRequ
 import GroupDetailView from "../components/group/GroupDetailView";
 import GroupCreateView from "../components/group/GroupCreateView";
 import GroupInviteView from "../components/group/GroupInviteView";
+import LocationClaimView from "../components/location/LocationClaimView";
 
 
 Vue.use(Router);
@@ -129,8 +130,8 @@ export default new Router({
     },
     {
       path: '/location/claimOwner',
-      name: 'LocationClaimOwnerRequest',
-      component: LandingView
+      name: 'LocationClaimRequest',
+      component: LocationClaimView
     },
     {
       path: '/group/detail',
@@ -141,6 +142,6 @@ export default new Router({
       path: '/group/invite',
       name: 'GroupInvite',
       component: GroupInviteView
-    },
+    }
   ]
 })
