@@ -38,8 +38,8 @@
   </v-content>
 </template>
 <script>
-  import AreaInput from "../input/AreaInput";
-  import LocationFullWidth from "../shared/LocationFullWidth";
+  import AreaInput from "../../sharedComponents/input/AreaInput";
+  import LocationFullWidth from "../../sharedComponents/block/LocationFullWidth";
   import _location from "../location/Locations";
 
 

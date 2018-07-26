@@ -75,8 +75,8 @@
 
 
 <script>
-  import ParallaxHeader from "../shared/ParallaxHeader";
-  import AreaSelect from "../input/AreaInput";
+  import ParallaxHeader from "../../sharedComponents/layout/ParallaxHeader";
+  import AreaSelect from "../../sharedComponents/input/AreaInput";
 
   import {mapState} from "vuex"
 

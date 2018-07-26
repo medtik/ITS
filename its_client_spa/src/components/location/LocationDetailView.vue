@@ -141,8 +141,8 @@
   import StarRating from "vue-star-rating";
   import LocationReview from "./LocationReview";
   import Locations from "./Locations";
-  import ParallaxHeader from "../shared/ParallaxHeader";
-  import ChooseImageDialog from "../shared/ChooseImageDialog";
+  import ParallaxHeader from "../../sharedComponents/layout/ParallaxHeader";
+  import ChooseImageDialog from "../../sharedComponents/input/ChooseImageDialog";
 
 
   export default {

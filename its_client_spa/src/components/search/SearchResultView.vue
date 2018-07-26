@@ -55,8 +55,8 @@
 </template>
 
 <script>
-  import LocationFullWidth from "../shared/LocationFullWidth";
-  import PlanFullWidth from "../shared/PlanFullWidth";
+  import LocationFullWidth from "../../sharedComponents/block/LocationFullWidth";
+  import PlanFullWidth from "../../sharedComponents/block/PlanFullWidth";
   import _locations from "../location/Locations";
 
   export default {

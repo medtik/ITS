@@ -91,10 +91,10 @@
 </template>
 
 <script>
-  import PlanFullWidth from "../shared/PlanFullWidth";
-  import AccountCard from "../shared/AccountCard";
-  import ChoosePlanDestinationDialog from "../input/ChoosePlanDestinationDialog";
-  import ChoosePlanDialog from "../input/ChoosePlanDialog";
+  import PlanFullWidth from "../../sharedComponents/block/PlanFullWidth";
+  import AccountCard from "../../sharedComponents/block/AccountCard";
+  import ChoosePlanDestinationDialog from "../../sharedComponents/input/ChoosePlanDestinationDialog";
+  import ChoosePlanDialog from "../../sharedComponents/input/ChoosePlanDialog";
 
   export default {
     name: "GroupFullWidth",

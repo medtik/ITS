@@ -149,9 +149,9 @@
 
 <script>
   import _locations from "../location/Locations";
-  import LocationFullWidth from "../shared/LocationFullWidth";
+  import LocationFullWidth from "../../sharedComponents/block/LocationFullWidth";
   import NoteFullWidth from "./NoteFullWidth";
-  import ChoosePlanDestinationDialog from "../input/ChoosePlanDestinationDialog";
+  import ChoosePlanDestinationDialog from "../../sharedComponents/input/ChoosePlanDestinationDialog";
   import draggable from 'vuedraggable'
 
   export default {
