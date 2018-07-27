@@ -23,12 +23,12 @@
                 v-model="input.descriptionInput"
               />
               <v-text-field
-                label="Kinh độ"
-                v-model="input.longInput"
-              />
-              <v-text-field
                 label="Vĩ độ"
                 v-model="input.latInput"
+              />
+              <v-text-field
+                label="Kinh độ"
+                v-model="input.longInput"
               />
               <v-text-field
                 label="Web"
