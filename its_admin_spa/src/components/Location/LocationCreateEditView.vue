@@ -56,7 +56,7 @@
             <span class="subheading">Tình trạng</span>
             <v-flex pl-3>
               <v-switch label="Đã xác nhận" color="green" v-model="input.isVerifiedInput"></v-switch>
-              <v-switch label="Đóng cửa" color="red" v-model="input.isCloseInput"></v-switch>
+              <v-switch label="Ngừng kinh doanh" color="red" v-model="input.isCloseInput"></v-switch>
             </v-flex>
           </v-flex>
           <v-flex my-3>
