@@ -44,7 +44,7 @@
 
 <script>
   import VueStarRating from "vue-star-rating";
-  import MultiPhotoInput from "../../sharedComponents/input/MultiPhotoInput";
+  import MultiPhotoInput from "../../common/components/input/MultiPhotoInput";
 
   export default {
     name: "WriteReviewView",

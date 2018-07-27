@@ -98,9 +98,9 @@
 </template>
 
 <script>
-  import AreaCard from "../sharedComponents/block/AreaCard"
-  import PlanCard from "../sharedComponents/block/PlanCard"
-  import ParallaxHeader from "../sharedComponents/layout/ParallaxHeader"
+  import AreaCard from "../common/components/block/AreaCard"
+  import PlanCard from "../common/components/block/PlanCard"
+  import ParallaxHeader from "../common/components/layout/ParallaxHeader"
 
   export default {
     name: "LandingView",

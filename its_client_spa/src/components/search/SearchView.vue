@@ -15,6 +15,10 @@
                   <v-flex xs10 sm6 md4>
                     <AreaInput
                       v-model="areaIdInput"
+                      alias="area"
+                      itemsPath="areas"
+                      loadingPath="areasLoading"
+                      getItemPath="getAll"
                     ></AreaInput>
                   </v-flex>
                 </v-layout>
@@ -38,8 +42,8 @@
   </v-content>
 </template>
 <script>
-  import AreaInput from "../../sharedComponents/input/AreaInput";
-  import LocationFullWidth from "../../sharedComponents/block/LocationFullWidth";
+  import AreaInput from "../../common/components/input/AreaInput";
+  import LocationFullWidth from "../../common/components/block/LocationFullWidth";
   import _location from "../location/Locations";
 
 

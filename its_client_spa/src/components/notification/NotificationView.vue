@@ -35,8 +35,8 @@
 </template>
 
 <script>
-  import ParallaxHeader from "../../sharedComponents/layout/ParallaxHeader"
-  import NotificationFullWidth from "../../sharedComponents/block/NotificationFullWidth"
+  import ParallaxHeader from "../../common/components/layout/ParallaxHeader"
+  import NotificationFullWidth from "../../common/components/block/NotificationFullWidth"
 
   export default {
     name: "NotificationView",

@@ -54,8 +54,8 @@
 </template>
 
 <script>
-  import LocationBusinessHoursInput from "../../sharedComponents/input/LocationBusinessHoursInput";
-  import TagManageSection from "../../sharedComponents/input/TagsInput";
+  import LocationBusinessHoursInput from "../../common/components/input/LocationBusinessHoursInput";
+  import TagManageSection from "../../common/components/input/TagsInput";
 
   export default {
     name: "LocationChangeRequestView",

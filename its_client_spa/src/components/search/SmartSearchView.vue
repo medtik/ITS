@@ -20,6 +20,10 @@
           <AreaSelect
             v-model="selectedAreaId"
             @change="onAreaSelect"
+            alias="area"
+            itemsPath="areas"
+            loadingPath="areasLoading"
+            getItemPath="getAll"
           />
           <v-progress-linear
             v-if="loading.questions"
@@ -75,8 +79,8 @@
 
 
 <script>
-  import ParallaxHeader from "../../sharedComponents/layout/ParallaxHeader";
-  import AreaSelect from "../../sharedComponents/input/AreaInput";
+  import ParallaxHeader from "../../common/components/layout/ParallaxHeader";
+  import AreaSelect from "../../common/components/input/AreaInput";
 
   import {mapState} from "vuex"
 

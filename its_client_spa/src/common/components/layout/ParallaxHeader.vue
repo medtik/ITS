@@ -30,7 +30,7 @@
 
 <style scoped>
   #content-holder {
-    background-image: url("../../../static/pexels-photo-239520.jpeg");
+    background-image: url("../../../../static/pexels-photo-239520.jpeg");
     background-size: cover;
     background-position: center center;
   }

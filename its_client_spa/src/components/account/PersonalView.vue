@@ -48,8 +48,8 @@
 </template>
 
 <script>
-  import PictureInput from "../../sharedComponents/input/PictureInput";
-  import ParallaxHeader from "../../sharedComponents/layout/ParallaxHeader";
+  import PictureInput from "../../common/components/input/PictureInput";
+  import ParallaxHeader from "../../common/components/layout/ParallaxHeader";
   import {mapGetters, mapActions} from 'vuex'
 
   export default {

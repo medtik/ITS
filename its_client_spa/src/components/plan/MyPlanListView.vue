@@ -30,9 +30,9 @@
 </template>
 
 <script>
-  import ParallaxHeader from "../../sharedComponents/layout/ParallaxHeader";
-  import PlanFullWidth from "../../sharedComponents/block/PlanFullWidth";
-  import  ChoosePlanDestinationDialog from "../../sharedComponents/input/ChoosePlanDestinationDialog";
+  import ParallaxHeader from "../../common/components/layout/ParallaxHeader";
+  import PlanFullWidth from "../../common/components/block/PlanFullWidth";
+  import  ChoosePlanDestinationDialog from "../../common/components/input/ChoosePlanDestinationDialog";
 
 
   export default {

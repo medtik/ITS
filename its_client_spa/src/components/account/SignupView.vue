@@ -76,8 +76,8 @@
 </template>
 
 <script>
-  import SuccessDialog from "../../sharedComponents/block/SuccessDialog"
-  import ErrorDialog from "../../sharedComponents/block/ErrorDialog"
+  import SuccessDialog from "../../common/components/block/SuccessDialog"
+  import ErrorDialog from "../../common/components/block/ErrorDialog"
 
   export default {
     name: "SignupView",
