@@ -6,22 +6,13 @@ export default {
   namespaced: true,
   actions: {
     getAll(context, payload) {
-      const {
-        pagination,
-        search
-      } = payload;
-
-      const reqData = formatter.getAllRequest({
-        search,
-        pagination,
-      });
-
       return new Promise((resolve, reject) => {
         axiosInstance.get('api/tag', {
-          params: reqData
-        }).then(value => {
-          resolve(formatter.getAllResponse(value.data));
-        }).catch(reason => {
+          params: formatter.getAllRequest(payload)
+        })
+          .then(value => {
+            resolve(formatter.getAllResponse(value.data));
+          }).catch(reason => {
           reject(reason.response);
         })
       })

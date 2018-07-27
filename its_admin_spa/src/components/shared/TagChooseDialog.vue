@@ -24,10 +24,9 @@
           <v-data-table
             v-model="selected"
             :items="items"
+            :total-items="total"
             :pagination.sync="pagination"
             :headers="headers"
-            :search="searchInput"
-            :total="total"
             item-key="id"
             :loading="loading.table">
             <template slot="items" slot-scope="props">
@@ -40,7 +39,7 @@
                   ></v-checkbox>
                 </td>
                 <td>{{props.item.name}}</td>
-                <td>{{props.item.category}}</td>
+                <td>{{props.item.categories}}</td>
               </tr>
             </template>
           </v-data-table>
@@ -85,18 +84,20 @@
           {text: 'Thể loại', value: 'categories'},
           // {text: 'Hành động', value: 'id', sortable: false}
         ],
-        pagination: {
-          sortBy: 'id'
-        },
+        pagination: {},
         selected: [],
       }
-    },
-    created() {
-      this.loadData();
     },
     watch: {
       value(val,oldVal) {
         this.selected = val;
+      },
+      pagination: {
+        //Do not use arrow funcs
+        handler: function () {
+          this.loadData();
+        },
+        deep: true
       }
     },
     methods: {
