@@ -25,7 +25,7 @@
 </template>
 
 <script>
-  import ParallaxHeader from "../../common/components/layout/ParallaxHeader"
+  import ParallaxHeader from "../../common/layout/ParallaxHeader"
   import GroupFullWidth from "./GroupFullWidth"
 
   export default {

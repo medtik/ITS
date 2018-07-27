@@ -1,4 +1,4 @@
-import axiosInstance from "../../axiosInstance";
+import axiosInstance from "../../common/util/axiosInstance";
 import formatter from "../../formatter";
 
 export default {

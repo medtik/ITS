@@ -1,5 +1,5 @@
 import axios from "axios";
-import axiosInstance from "../../axiosInstance";
+import axiosInstance from "../util/axiosInstance";
 import moment from "moment";
 
 export default {

@@ -42,8 +42,8 @@
   </v-content>
 </template>
 <script>
-  import AreaInput from "../../common/components/input/AreaInput";
-  import LocationFullWidth from "../../common/components/block/LocationFullWidth";
+  import AreaInput from "../../common/input/AreaInput";
+  import LocationFullWidth from "../../common/block/LocationFullWidth";
   import _location from "../location/Locations";
 
 

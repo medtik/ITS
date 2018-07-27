@@ -13,7 +13,7 @@
 </template>
 
 <script>
-  import storeBoundSelectMixin from "./StoreBoundSelectMixin";
+  import storeBoundSelectMixin from "./StoreBoundSelectMixin.js";
   export default {
     name: "AreaInput",
     props:[
