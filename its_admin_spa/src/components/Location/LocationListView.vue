@@ -48,7 +48,7 @@
               <v-chip outline disabled label
                       v-if="props.item.isClosed"
                       color="red">
-                Đóng cửa
+                Ngừng kinh doanh
               </v-chip>
               <v-chip outline disabled label
                       v-else
