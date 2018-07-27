@@ -185,16 +185,14 @@
 </template>
 
 <script>
-  import moment from 'moment';
   import _ from 'lodash';
-  import LocationBusinessHoursInput from "../shared/LocationBusinessHoursInput";
+  import LocationBusinessHoursInput from "@bit/tlp.its.src.common/input/LocationBusinessHoursInput";
   import PictureInput from '../shared/PictureInput'
   import ErrorDialog from "../shared/ErrorDialog";
   import SuccessDialog from "../shared/SuccessDialog";
   import LocationReview from "../shared/LocationReview";
   import TagManageSection from "../shared/TagManageSection";
   import TagChooseDialog from "../shared/TagChooseDialog";
-  import {mapState} from "vuex";
 
 
   export default {

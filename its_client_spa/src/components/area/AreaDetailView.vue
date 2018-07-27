@@ -85,9 +85,9 @@
 </template>
 
 <script>
-  import ParallaxHeader from "../../common/components/layout/ParallaxHeader";
-  import PlanCard from "../../common/components/block/PlanCard";
-  import LocationCard from "../../common/components/block/LocationCard";
+  import ParallaxHeader from "../../common/layout/ParallaxHeader";
+  import PlanCard from "../../common/card/PlanCard";
+  import LocationCard from "../../common/card/LocationCard";
 
   export default {
     name: "AreaDetail",

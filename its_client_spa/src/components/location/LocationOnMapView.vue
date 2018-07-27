@@ -74,7 +74,7 @@
   import {gmapApi} from 'vue2-google-maps'
   import GMarker from "./GMarker";
   import DirectionsRenderer from './DirectionsRenderer.js'
-  import LocationCard from "../../common/components/block/LocationCard";
+  import LocationCard from "../../common/card/LocationCard";
 
 
   export default {

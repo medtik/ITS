@@ -53,7 +53,7 @@
 </template>
 
 <script>
-  import LocationCard from "./LocationCard"
+  import {LocationCard} from "../card"
 
   export default {
     name: "PlanFullWidth",

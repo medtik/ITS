@@ -40,7 +40,7 @@
 </template>
 
 <script>
-  import PictureInput from "./PictureInput";
+  import {PictureInput} from "../input";
 
   export default {
     name: "MultiPhotoInput",
