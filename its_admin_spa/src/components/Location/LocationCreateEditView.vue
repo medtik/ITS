@@ -186,7 +186,7 @@
 
 <script>
   import _ from 'lodash';
-  import LocationBusinessHoursInput from "@bit/tlp.its.src.common/input/LocationBusinessHoursInput";
+  import LocationBusinessHoursInput from "../shared/LocationBusinessHoursInput";
   import PictureInput from '../shared/PictureInput'
   import ErrorDialog from "../shared/ErrorDialog";
   import SuccessDialog from "../shared/SuccessDialog";
