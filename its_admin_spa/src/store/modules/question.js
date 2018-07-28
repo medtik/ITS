@@ -48,7 +48,7 @@ export default {
     },
     getCategories(context, payload) {
       return new Promise((resolve, reject) => {
-          axiosInstance.get('api/Question/categories')
+        axiosInstance.get('api/Question/categories')
           .then(value => {
             resolve({
               categories: value.data
@@ -69,13 +69,18 @@ export default {
         text,
         category,
         answers
-      } = payload;
+      } = _.cloneDeep(payload);
 
       return new Promise((resolve, reject) => {
         axiosInstance.post('api/Question', {
           content: text,
           categories: category,
-          answers: answers.map(value => value.text)
+          answers: _.map(answers, answer => {
+            answer.tags = _.map(answer.tags, (tag) => {
+              return tag.id
+            });
+            return answer;
+          })
         })
           .then(value => {
             resolve()
@@ -97,8 +102,8 @@ export default {
     },
     delete(context, payload) {
       return new Promise((resolve, reject) => {
-          axiosInstance.delete('api/Question', {
-          params:{
+        axiosInstance.delete('api/Question', {
+          params: {
             questionId: payload.id
           }
         })

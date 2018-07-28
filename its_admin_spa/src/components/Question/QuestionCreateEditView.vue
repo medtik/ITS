@@ -25,7 +25,7 @@
                     <v-toolbar-title>Câu trả lời</v-toolbar-title>
                   </v-toolbar>
                   <v-layout column>
-                    <v-flex px-2>
+                    <v-flex pa-2>
                       <v-layout row style="align-items: center">
                         <v-text-field
                           label="Câu trả lời"
@@ -68,13 +68,12 @@
                     </v-flex>
                   </v-layout>
                 </v-card>
-
               </v-flex>
             </v-layout>
           </v-flex>
           <!--Actions-->
           <v-flex mt-2>
-            <v-btn color="primary"
+            <v-btn color="success"
                    v-if="mode == 'create'"
                    :loading="loading.createBtn"
                    @click="onCreateClick">
