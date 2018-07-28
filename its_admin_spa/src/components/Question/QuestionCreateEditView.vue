@@ -30,6 +30,7 @@
                         <v-text-field
                           label="Câu trả lời"
                           v-model="answerTextInput"
+                          :rules="[rules.required]"
                           single-line
                         ></v-text-field>
                         <v-btn icon flat color="green"
@@ -122,9 +123,11 @@
 
   import {TagsInput} from "../../common/input";
 
+  import {FormRuleMixin} from "../../common/mixin";
 
   export default {
     name: "QuestionCreateEditView",
+    mixins:[FormRuleMixin],
     components: {
       ErrorDialog,
       SuccessDialog,
@@ -149,13 +152,9 @@
         //boiler plane
         error: {
           dialog: false,
-          title: '',
-          message: ''
         },
         success: {
           dialog: false,
-          title: '',
-          message: ''
         },
         editAnswerDialog: false,
         editedAnswer: {},
@@ -215,9 +214,12 @@
         return Promise.resolve();
       },
       onAddAnswerClick() {
-        this.answersInput.push({
-          text: this.answerTextInput
-        })
+        if (this.answerTextInput) {
+          this.answersInput.push({
+            text: this.answerTextInput
+          });
+          this.answerTextInput = '';
+        }
       },
       onCreateClick() {
         this.loading.createBtn = true;

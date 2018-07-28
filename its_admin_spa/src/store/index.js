@@ -1,6 +1,6 @@
 import Vuex from "vuex"
 import Vue from 'vue'
-import AuthenticateModule from "./modules/authenticate"
+import {AuthenticateModule} from "../common/store"
 import AccountModule from "./modules/account"
 import QuestionModule from "./modules/question"
 import TagModule from "./modules/tag"

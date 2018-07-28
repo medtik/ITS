@@ -1,8 +1,6 @@
 import _question from "./mockdata/Questions";
-import axiosInstance from "../../axiosInstance"
+import {axiosInstance} from "../../common/util";
 import formatter from "../../formatter";
-
-import _ from 'lodash'
 
 function mockShell(bodyFunc, noFail) {
   return new Promise((resolve, reject) => {
@@ -95,12 +93,7 @@ export default {
 
     },
     update(context, payload) {
-      return mockShell(() => {
-        const question = _question.find(q => q.id == payload.id);
-        question.text = payload.text;
-        question.category = payload.category;
-        return question;
-      })
+
     },
     delete(context, payload) {
       return new Promise((resolve, reject) => {

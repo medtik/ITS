@@ -1,5 +1,5 @@
 import ParallaxHeader from "./ParallaxHeader"
 
-export default {
+export {
   ParallaxHeader
 }

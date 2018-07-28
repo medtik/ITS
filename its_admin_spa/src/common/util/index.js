@@ -1,5 +1,5 @@
 import axiosInstance from "./axiosInstance"
 
-export default {
+export {
   axiosInstance
 }

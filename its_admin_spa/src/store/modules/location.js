@@ -1,5 +1,6 @@
 import _locations from "./mockdata/locations";
-import axiosInstance from "../../axiosInstance";
+import {axiosInstance} from "../../common/util";
+
 import formatter from "../../formatter";
 
 import _ from "lodash";

@@ -13,14 +13,15 @@
 </template>
 
 <script>
-  import storeBoundSelectMixin from "./StoreBoundSelectMixin.js";
+  import {StoreBoundSelectMixin} from "../mixin";
+
   export default {
     name: "AreaInput",
     props:[
       'dark'
     ],
     mixins: [
-      storeBoundSelectMixin({
+      StoreBoundSelectMixin({
         alias: 'area',
         itemsPath: 'areas',
         loadingPath: 'areasLoading',
