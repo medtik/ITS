@@ -37,18 +37,27 @@
       <!--Business hours-->
       <LocationBusinessHoursInput v-model="input.businessHoursInput" readonly/>
       <!--Tags-->
-      <TagManageSection v-model="input.tagsInput" readonly/>
+      <TagsInput v-model="input.tagsInput" readonly/>
     </template>
   </Request>
 </template>
 
 <script>
   import Request from './Request'
-  import LocationBusinessHoursInput from '../shared/LocationBusinessHoursInput'
-  import TagManageSection from '../shared/TagManageSection'
+
+  import {
+    LocationBusinessHoursInput,
+    TagsInput
+  } from "../../common/input";
+
 
   export default {
     name: "RequestChangeLocationInfo",
+    components: {
+      Request,
+      LocationBusinessHoursInput,
+      TagsInput
+    },
     props: [
       'isOwner',
       'user',
@@ -80,11 +89,6 @@
     },
     created(){
       this.setInputs();
-    },
-    components: {
-      Request,
-      LocationBusinessHoursInput,
-      TagManageSection
     },
     methods:{
       setInputs(){

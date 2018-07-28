@@ -11,7 +11,8 @@
 
 <script>
   import Request from "./Request";
-  import LocationReview from "../shared/LocationReview";
+  import {LocationReview} from "../../common/block";
+
 
   export default {
     name: "RequestReportReview",

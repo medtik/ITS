@@ -4,8 +4,8 @@
       <v-flex>
         <v-btn icon
                v-if="readonly != ''"
-               color="success"
-               v-on:click="onAddTagClick">
+               @click="dialog = true"
+               color="success">
           <v-icon small>fas fa-plus</v-icon>
         </v-btn>
         <v-chip :close="readonly != ''"
@@ -16,18 +16,32 @@
         </v-chip>
       </v-flex>
     </v-layout>
+    <TagChooseDialog :dialog="dialog"
+                     :value="value"
+                     @input="onAddTagConfirm"
+                     @save="dialog = false"
+                     @close="dialog = false"/>
   </v-container>
 </template>
 
 <script>
   import _ from 'lodash';
+  import {TagChooseDialog} from "../input";
 
   export default {
     name: "ManageTagSection",
+    components: {
+      TagChooseDialog
+    },
     props: [
       'value',
-      'readonly'
+      'readonly',
     ],
+    data() {
+      return {
+        dialog: false
+      }
+    },
     computed: {
       tags() {
         return this.value;
@@ -39,8 +53,9 @@
         const tags = _.remove(this.tags, (val) => val.id !== tag.id);
         this.$emit('input', tags);
       },
-      onAddTagClick() {
-        this.$emit('addTag');
+
+      onAddTagConfirm(tags) {
+        this.$emit('input', tags)
       }
     }
   }

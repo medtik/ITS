@@ -142,7 +142,7 @@
       this.navigateAble = this.$route.name !== "Signin"
     },
     watch: {
-      $route(to, from) {
+      $route() {
         this.navigateAble = this.$route.name !== "Signin"
       }
     },

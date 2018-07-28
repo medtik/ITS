@@ -1,6 +1,6 @@
 <template>
-  <v-layout row pt-3 elevation-2 class="white">
-    <v-flex xs2>
+  <v-layout row pt-3 elevation-1 class="white">
+    <v-flex xs3>
       <v-layout column>
         <v-flex d-flex justify-center>
           <v-avatar size="60">
@@ -12,18 +12,28 @@
         </v-flex>
       </v-layout>
     </v-flex>
-    <v-flex :class="{xs12: !editMode, xs10: editMode}">
+    <v-flex :class="{xs9: !editMode, xs8: editMode}">
       <v-layout column>
         <v-flex mb-1>
-          <StarRating :star-size="25" v-model="rating" read-only></StarRating>
+          <v-layout style="align-items: baseline; justify-content: space-between">
+            <StarRating :star-size="25"
+                        v-model="rating"
+                        read-only
+                        :show-rating="false"
+            />
+            <v-btn icon flat color="error"
+                   @click="onReport">
+              <v-icon>flag</v-icon>
+            </v-btn>
+          </v-layout>
         </v-flex>
         <v-divider/>
         <v-flex my-1>
-            <span class="subheading">
+            <span class="title font-weight-medium">
               {{title}}
             </span>
         </v-flex>
-        <v-flex>
+        <v-flex pa-1>
           <p class="body-1">
             {{description}}
           </p>
@@ -57,6 +67,9 @@
       'editMode'
     ],
     methods: {
+      onReport() {
+        this.$emit('report', this.id);
+      },
       onDelete() {
         this.$emit('delete', this.id);
       }

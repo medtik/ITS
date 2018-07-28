@@ -56,8 +56,12 @@
   import RequestChangeLocationInfo from "./RequestChangeLocationInfo";
   import RequestClaimOwner from "./RequestClaimOwner";
   import RequestReportReview from "./RequestReportReview";
-  import ErrorDialog from "../shared/ErrorDialog";
-  import SuccessDialog from "../shared/SuccessDialog";
+
+  import {
+    SuccessDialog,
+    ErrorDialog
+  } from "../../common/block";
+
 
   export default {
     name: "RequestListView",

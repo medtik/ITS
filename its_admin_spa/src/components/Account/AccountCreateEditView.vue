@@ -55,9 +55,12 @@
 
 <script>
   import moment from 'moment';
-  import PictureInput from '../shared/PictureInput'
-  import ErrorDialog from "../shared/ErrorDialog";
-  import SuccessDialog from "../shared/SuccessDialog";
+  import {PictureInput} from '../../common/input';
+  import {
+    ErrorDialog,
+    SuccessDialog
+  } from "../../common/block";
+
 
   export default {
     name: "AccountCreateEditView",

@@ -47,9 +47,8 @@
                               <span class="subheading">{{answer.text}}</span>
                             </v-flex>
                             <v-flex mt-2>
-                              <TagManageSection
+                              <TagsInput
                                 v-model="answer.tags"
-                                v-on:addTag="onAddTagClick"
                               />
                             </v-flex>
                           </v-layout>
@@ -112,15 +111,16 @@
     </v-dialog>
     <ErrorDialog v-bind="error" v-on:close="error.dialog = false"/>
     <SuccessDialog v-bind="success" v-on:close="success.dialog = false"/>
-    <TagChooseDialog v-bind="tagChoose" v-on:close="tagChoose.dialog = false"/>
   </v-container>
 </template>
 
 <script>
-  import ErrorDialog from "../shared/ErrorDialog";
-  import SuccessDialog from "../shared/SuccessDialog";
-  import TagChooseDialog from "../shared/TagChooseDialog";
-  import TagManageSection from "../shared/TagManageSection";
+  import {
+    SuccessDialog,
+    ErrorDialog
+  } from "../../common/block";
+
+  import {TagsInput} from "../../common/input";
 
 
   export default {
@@ -128,8 +128,7 @@
     components: {
       ErrorDialog,
       SuccessDialog,
-      TagChooseDialog,
-      TagManageSection
+      TagsInput
     },
     data() {
       return {
@@ -157,9 +156,6 @@
           dialog: false,
           title: '',
           message: ''
-        },
-        tagChoose: {
-          dialog: false
         },
         editAnswerDialog: false,
         editedAnswer: {},
@@ -217,11 +213,6 @@
         this.categoryInput = this.question.category;
         this.answersInput = this.question.answers;
         return Promise.resolve();
-      },
-      onAddTagClick() {
-        this.tagChoose = {
-          dialog: true
-        }
       },
       onAddAnswerClick() {
         this.answersInput.push({

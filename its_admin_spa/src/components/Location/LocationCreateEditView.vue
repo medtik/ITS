@@ -82,16 +82,9 @@
           <v-flex my-3>
             <span class="subheading">Thẻ</span>
             <v-flex pl-3>
-              <TagManageSection
+              <TagsInput
                 v-model="input.tagsInput"
-                v-on:addTag="tagChooseDialog.dialog = true"
-                v-on:close="tagChooseDialog.dialog = false"
               />
-              <TagChooseDialog
-                v-bind="tagChooseDialog"
-                v-model="input.tagsInput"
-                v-on:save="tagChooseDialog.dialog = false"
-                v-on:close="tagChooseDialog.dialog = false"/>
             </v-flex>
           </v-flex>
           <v-flex my-3>
@@ -186,13 +179,17 @@
 
 <script>
   import _ from 'lodash';
-  import LocationBusinessHoursInput from "../shared/LocationBusinessHoursInput";
-  import PictureInput from '../shared/PictureInput'
-  import ErrorDialog from "../shared/ErrorDialog";
-  import SuccessDialog from "../shared/SuccessDialog";
-  import LocationReview from "../shared/LocationReview";
-  import TagManageSection from "../shared/TagManageSection";
-  import TagChooseDialog from "../shared/TagChooseDialog";
+  import {
+    ErrorDialog,
+    SuccessDialog,
+    LocationReview,
+  } from "../../common/block";
+
+  import {
+    PictureInput,
+    TagsInput,
+    LocationBusinessHoursInput
+  } from "../../common/input";
 
 
   export default {
@@ -202,8 +199,7 @@
       ErrorDialog,
       SuccessDialog,
       PictureInput,
-      TagManageSection,
-      TagChooseDialog,
+      TagsInput,
       LocationBusinessHoursInput
     },
     data() {
@@ -277,9 +273,6 @@
           dialog: false,
           title: '',
           message: ''
-        },
-        tagChooseDialog: {
-          dialog: false
         }
       }
     },

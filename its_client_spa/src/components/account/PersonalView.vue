@@ -50,7 +50,7 @@
 <script>
   import PictureInput from "../../common/input/PictureInput";
   import ParallaxHeader from "../../common/layout/ParallaxHeader";
-  import {mapGetters, mapActions} from 'vuex'
+  import {mapGetters} from 'vuex'
 
   export default {
     name: "PersonalView",

@@ -1,5 +1,5 @@
 <template>
-  <v-layout>
+  <v-layout justify-center>
     <div :style="{width: `${width}px`}">
       <vue-picture-input
         :prefill="photoPrefill"
@@ -13,6 +13,7 @@
         :custom-strings="{
                   change: 'Đổi hình',
                   remove: 'Xóa',
+                  tap: text,
                   drag: text
                 }"
         :zIndex="0"

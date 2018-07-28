@@ -139,7 +139,7 @@
 
 <script>
   import StarRating from "vue-star-rating";
-  import LocationReview from "./LocationReview";
+  import LocationReview from "../../common/block/LocationReview";
   import Locations from "./Locations";
   import ParallaxHeader from "../../common/layout/ParallaxHeader";
   import ChooseImageDialog from "../../common/input/ChooseImageDialog";

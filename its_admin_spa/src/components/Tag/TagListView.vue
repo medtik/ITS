@@ -65,9 +65,9 @@
 </template>
 
 <script>
-  import ErrorDialog from "../shared/ErrorDialog";
-  import SuccessDialog from "../shared/SuccessDialog";
   import TagCreateEditDialog from "./TagCreateEditDialog";
+  import {ErrorDialog, SuccessDialog} from "../../common/block";
+
 
   export default {
     name: "TagListView",

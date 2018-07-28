@@ -83,31 +83,12 @@
     </v-layout>
   </v-container>
 </template>
-<!--
-TODO
-BASIC
-name
-address
-description
-long
-lat
-website
-phone
-email
-isVerified
-isClosed
-isDeleted
 
-ADVANCE
-business hours
-area
-review
-tag
-photo
--->
 <script>
-  import ErrorDialog from "../shared/ErrorDialog";
-  import SuccessDialog from "../shared/SuccessDialog";
+  import {
+    ErrorDialog,
+    SuccessDialog
+  } from "../../common/block";
 
   export default {
     name: "LocationListView",

@@ -55,18 +55,9 @@
     <SuccessDialog v-bind="success" v-on:close="success.dialog = false"/>
   </v-container>
 </template>
-<!--
-TODO
-text
-category
-
-ADVANCE
-answer
-tag
--->
 <script>
-  import ErrorDialog from "../shared/ErrorDialog";
-  import SuccessDialog from "../shared/SuccessDialog";
+  import {ErrorDialog, SuccessDialog} from "../../common/block";
+
 
   export default {
     name: "QuestionListView",
@@ -107,7 +98,7 @@ tag
         deep: true
       }
     },
-    methods:{
+    methods: {
       loadData() {
         this.loading = true;
         this.$store.dispatch('question/getAll', {
@@ -115,7 +106,7 @@ tag
           pagination: this.pagination
         })
           .then(data => {
-            console.debug('loadData',data);
+            console.debug('loadData', data);
             this.items = data.list;
             this.total = data.total;
             this.loading = false;
@@ -128,14 +119,14 @@ tag
             this.loading = false;
           })
       },
-      onSearchEnter(){
+      onSearchEnter() {
         this.pagination.page = 1;
         this.loadData();
       },
-      onRemove(question){
+      onRemove(question) {
         this.loading = true;
         this.$store.dispatch('question/delete', {
-          id:question.id
+          id: question.id
         })
           .then(value => {
             this.pagination.page = 1;

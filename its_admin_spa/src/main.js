@@ -22,6 +22,7 @@ const vn = {
   noDataText: 'Không có dữ liệu'
 };
 
+// noinspection JSUnresolvedFunction
 Vue.use(Vuetify,{
   lang: {
     locales: { vn },
