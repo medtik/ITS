@@ -24,12 +24,10 @@
           <v-data-table
             v-model="selected"
             :items="items"
-            :pagination.sync="pagination"
             :headers="headers"
             :search="searchInput"
-            :total="total"
             item-key="id"
-            :loading="loading.table">
+            :loading="loadingTable">
             <template slot="items" slot-scope="props">
               <tr :active="props.selected" @click="props.selected = !props.selected">
                 <td>
@@ -59,8 +57,11 @@
     </v-card>
   </v-dialog>
 </template>
+<!--REQUIRE tag dialog store module to work-->
 <!--TODO sort by selected-->
 <script>
+  import {mapState} from "vuex";
+
   export default {
     name: "AddTagDialog",
     props: [
@@ -73,17 +74,12 @@
         categoryInput: '',
         searchInput: '',
         loading: {
-          table: true,
           saveBtn: false,
-          // createBtn: false
         },
-        items: [],
-        total: undefined,
         headers: [
           {text: 'Chọn', value: 'selected', sortable: false},
           {text: 'Tên', value: 'name'},
           {text: 'Thể loại', value: 'categories'},
-          // {text: 'Hành động', value: 'id', sortable: false}
         ],
         pagination: {
           sortBy: 'id'
@@ -91,33 +87,29 @@
         selected: [],
       }
     },
-    created() {
-      this.loadData();
+    computed: {
+      ...mapState('tagDialog', {
+        items: state => state.items,
+        loadingTable: state => state.loading
+      })
     },
     watch: {
-      value(val,oldVal) {
+      value(val) {
         this.selected = val;
+      },
+      dialog(val) {
+        if (val && !this.items) {
+          this.loadData();
+        }
       }
     },
     methods: {
       loadData() {
         this.loading.table = true;
-        this.$store.dispatch('tag/getAll', {
-          pagination: this.pagination,
-          search: this.searchInput
-        })
-          .then(value => {
-            this.items = value.list;
-            this.total = value.total;
-            this.loading.table = false
-          })
-          .catch(reason => {
-            //TODO Error handling
-          })
+        this.$store.dispatch('tagDialog/getAll')
       },
       onSearchEnter() {
-        this.pagination.page = 1;
-        this.loadData()
+
       },
       onSaveClick() {
         this.$emit('input', this.selected);

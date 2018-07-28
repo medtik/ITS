@@ -1,6 +1,9 @@
 import Vuex from "vuex"
 import Vue from 'vue'
-import {AuthenticateModule} from "../common/store"
+import {
+  AuthenticateModule,
+  TagDialogModule
+} from "../common/store"
 import AccountModule from "./modules/account"
 import QuestionModule from "./modules/question"
 import TagModule from "./modules/tag"
@@ -11,14 +14,15 @@ import RequestModule from "./modules/request"
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
-  modules:{
+  modules: {
     authenticate: AuthenticateModule,
     account: AccountModule,
     question: QuestionModule,
     tag: TagModule,
     location: LocationModule,
     area: AreaModule,
-    request: RequestModule
+    request: RequestModule,
+    tagDialog: TagDialogModule
   }
 });
 
