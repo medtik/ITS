@@ -72,12 +72,15 @@
 </template>
 
 <script>
-  import ErrorDialog from "../shared/ErrorDialog";
-  import SuccessDialog from "../shared/SuccessDialog";
+  import {
+    ErrorDialog,
+    SuccessDialog
+  } from "../../common/block";
+
 
   export default {
     name: "AccountListView",
-    components: {ErrorDialog,SuccessDialog},
+    components: {ErrorDialog, SuccessDialog},
     data() {
       return {
         //TABLE START
