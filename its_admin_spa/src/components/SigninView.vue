@@ -97,18 +97,3 @@
     }
   }
 </script>
-
-<style scoped>
-  #button-container {
-    display: flex;
-    flex-direction: column;
-  }
-
-  #googleBtn {
-    background-color: #FF4031;
-  }
-
-  #facebookBtn {
-    background-color: #3B5998;
-  }
-</style>

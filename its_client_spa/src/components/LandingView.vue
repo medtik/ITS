@@ -88,7 +88,7 @@
               </v-flex>
             </v-layout>
           </v-flex>
-          <v-flex style="height: 30vh">
+          <v-flex style="height: 15vh">
             <!--Holder-->
           </v-flex>
         </v-layout>
@@ -108,6 +108,9 @@
       AreaCard,
       PlanCard,
       ParallaxHeader
+    },
+    mounted() {
+      this.$store.dispatch('area/getFeatured')
     }
   }
 </script>
