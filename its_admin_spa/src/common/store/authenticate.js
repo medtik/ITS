@@ -67,28 +67,24 @@ export default {
       } = payload;
 
       return new Promise((resolve, reject) => {
-        axios({
-          method: 'post',
-          url: '/token',
-          baseURL: 'http://itssolution.azurewebsites.net',
-          headers: {
-            'Content-type': 'text/plan'
-          },
-          data: `grant_type=password&username=${email}&password=${password}`
-        })
-          .then((response) => {
-            resolve(response.data);
-          })
-          .catch(reason => {
-            let message = 'Có lỗi xẩy ra';
-            if (reason.response.status === 400) {
-              message = 'Sai tên đăng nhập hoặc mật khẩu'
+        const xhttp = new XMLHttpRequest();
+        xhttp.open('POST', 'http://itssolution.azurewebsites.net/token', true);
+        xhttp.send(`grant_type=password&username=${email}&password=${password}`);
+        xhttp.onreadystatechange = function () {
+          if (this.readyState == 4) {
+            if (this.status == 200) {
+              resolve(this.responseText);
+            } else {
+              let message = 'Có lỗi xẩy ra';
+              if (this.status === 400) {
+                message = 'Sai tên đăng nhập hoặc mật khẩu'
+              }
+              reject({
+                message
+              });
             }
-            reject({
-              ...reason.response,
-              message
-            });
-          });
+          }
+        };
       });
     }
   }

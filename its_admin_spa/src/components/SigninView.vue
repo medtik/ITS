@@ -82,15 +82,10 @@
             });
           })
           .catch(reason => {
-            if(reason.status === 400){
-              this.error = {
-                show: true,
-                message: reason.message
-              };
-            }else{
-              console.error(reason);
-            }
-
+            this.error = {
+              show: true,
+              message: reason.message
+            };
             this.loading.signinBtn = false;
           })
       },

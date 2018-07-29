@@ -28,7 +28,9 @@
           :loading="loading">
           <template slot="items" slot-scope="props">
             <td>{{ props.item.name }}</td>
-            <td>{{ props.item.address }}</td>
+            <td>
+              <div>{{ props.item.address }}</div>
+            </td>
             <td>{{ props.item.website }}</td>
             <td>{{ props.item.phone }}</td>
             <td>{{ props.item.email }}</td>
@@ -99,8 +101,8 @@
         loading: true,
         items: [],
         headers: [
-          {text: 'Tên', value: 'name'},
-          {text: 'Địa chỉ', value: 'address'},
+          {text: 'Tên', value: 'name', class:'md-column'},
+          {text: 'Địa chỉ', value: 'address', class: 'lg-column'},
           {text: 'Web', value: 'website'},
           {text: 'Điện thoại', value: 'phone'},
           {text: 'Email', value: 'email'},
@@ -136,9 +138,6 @@
         deep: true
       }
     },
-    mounted() {
-      this.loadData();
-    },
     methods: {
       loadData() {
         this.loading = true;
@@ -173,6 +172,12 @@
   }
 </script>
 
-<style scoped>
+<style>
+  .md-column {
+    min-width: 15rem;
+  }
 
+  .lg-column {
+    min-width: 25rem;
+  }
 </style>
