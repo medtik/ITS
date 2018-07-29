@@ -32,17 +32,25 @@ export default {
         context.commit('setLoading', {loading: false});
       });
     },
-    nullQuestions(context,payload){
+    nullQuestions(context, payload) {
       context.commit('setQuestions', {questions: null});
       context.commit('setLoading', {loading: true});
     },
     getSuggestion(context, payload) {
       const {
         answers
-      } = payload;
-      return new Promise(resolve => {
-        setTimeout(()=>{resolve()},1500)
-      })
+      } = _.cloneDeep(payload);
+
+      return new Promise((resolve, reject) => {
+        axiosInstance.get('api/test', {params: answers})
+          .then(value => {
+            resolve(value.data);
+          })
+          .catch(reason => {
+            reject(reason.response);
+          })
+      });
+
     }
   }
 }

@@ -12,7 +12,6 @@ export default function mixin({alias, itemsPath, loadingPath, getItemPath}) {
       })
     },
     mounted() {
-      console.debug('items', this.items, typeof this.items);
       if (this.loading) {
         this.$store.dispatch(`${alias}/${getItemPath}`)
       }
