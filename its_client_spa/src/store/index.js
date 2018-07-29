@@ -9,6 +9,7 @@ import SmartSearchModule from "./modules/smartSearch";
 import AreaModule from "./modules/area";
 import SearchModule from "./modules/search";
 import TagModule from "./modules/tag"
+import PlanModule from "./modules/plan"
 import {
   AuthenticateModule,
   TagDialogModule
@@ -24,7 +25,8 @@ const store = new Vuex.Store({
     area: AreaModule,
     search: SearchModule,
     tag: TagModule,
-    tagDialog: TagDialogModule
+    tagDialog: TagDialogModule,
+    plan: PlanModule
   },
 });
 

@@ -74,19 +74,25 @@
           </v-flex>
           <v-flex justify-start mt-5>
             <div class="title">Các khu vực nổi bật</div>
-            <v-layout style="overflow-y: auto;">
-              <v-flex v-for="n in 9" :key="n">
-                <AreaCard/>
-              </v-flex>
-            </v-layout>
+            <div style="overflow-y: auto;">
+              <v-layout row my-1>
+                <v-flex v-for="n in 5"
+                        :key="n">
+                  <AreaCard/>
+                </v-flex>
+              </v-layout>
+            </div>
           </v-flex>
           <v-flex justify-start mt-5>
             <div class="title">Các chuyến đi nổi bật</div>
-            <v-layout style="overflow-y: auto;">
-              <v-flex v-for="n in 9" :key="n">
-                <PlanCard/>
-              </v-flex>
-            </v-layout>
+            <div style="overflow-x: auto;">
+              <v-layout row my-1>
+                <v-flex v-for="plan in featuredPlans"
+                        :key="plan.id">
+                  <PlanCard v-bind="plan"/>
+                </v-flex>
+              </v-layout>
+            </div>
           </v-flex>
           <v-flex style="height: 15vh">
             <!--Holder-->
@@ -100,6 +106,8 @@
 <script>
   import AreaCard from "../common/card/AreaCard"
   import PlanCard from "../common/card/PlanCard"
+  import {mapGetters} from "vuex";
+
   import ParallaxHeader from "../common/layout/ParallaxHeader"
 
   export default {
@@ -109,8 +117,15 @@
       PlanCard,
       ParallaxHeader
     },
+    computed: {
+      ...mapGetters('plan', {
+        featuredPlans: 'featuredPlans',
+        featuredPlansLoading: 'featuredPlansLoading'
+      })
+    },
     mounted() {
-      this.$store.dispatch('area/getFeatured')
+      // this.$store.dispatch('area/getFeatured');
+      this.$store.dispatch('plan/getFeatured');
     }
   }
 </script>

@@ -17,8 +17,8 @@ export default {
     areasLoading(state) {
       return state.loading.areas;
     },
-    featuredArea() {
-      return state.featuredArea
+    featuredArea(state) {
+      return state.featuredArea;
     }
   },
   mutations: {
