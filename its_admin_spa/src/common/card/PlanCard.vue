@@ -1,7 +1,7 @@
 <template>
-  <router-link :to="{name:'PlanDetail', params:{id: this.id}}" tag="span" class="fakeLink">
-    <v-card>
-      <v-card-media style="width: 300px; height: 300px">
+  <router-link :to="detailLink" tag="div" class="fakeLink">
+    <v-card style="width: 300px;">
+      <v-card-media>
         <img :src='photo'/>
       </v-card-media>
       <v-card-text>
@@ -12,7 +12,7 @@
           <v-flex>
             <v-layout column>
               <v-flex style="text-align: start" pt-1 pb-0>
-                <span class="title">{{title}}</span>
+                <span class="title">{{name}}</span>
               </v-flex>
               <v-flex pt-1 pb-1>
                 <span class="subheading">{{voteCount}} lượt bình chọn</span>
@@ -31,12 +31,22 @@
 <script>
   export default {
     name: "PlanCard",
-    data() {
-      return {
-        title: 'Chuyến đi ABC',
-        photo: 'https://picsum.photos/400/600',
-        dayCount: 6,
-        voteCount: 68
+    props: [
+      'id',
+      'name',
+      'photo',
+      'time',
+      'voter'
+    ],
+    computed: {
+      detailLink() {
+        return {name: 'PlanDetail', params: {id: this.id}};
+      },
+      dayCount() {
+        return this.time;
+      },
+      voteCount() {
+        return this.voter;
       }
     }
   }
