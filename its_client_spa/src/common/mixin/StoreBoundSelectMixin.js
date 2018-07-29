@@ -1,4 +1,4 @@
-import {mapState} from "vuex";
+import {mapGetters} from "vuex";
 
 export default function mixin({alias, itemsPath, loadingPath, getItemPath}) {
   return {
@@ -6,9 +6,9 @@ export default function mixin({alias, itemsPath, loadingPath, getItemPath}) {
       'value'
     ],
     computed: {
-      ...mapState(alias, {
-        items: state => state[itemsPath],
-        loading: state => state[loadingPath],
+      ...mapGetters(alias, {
+        items: itemsPath,
+        loading: loadingPath
       })
     },
     mounted() {

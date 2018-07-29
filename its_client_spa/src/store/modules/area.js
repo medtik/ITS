@@ -4,21 +4,36 @@ export default {
   namespaced: true,
   state: {
     areas: [],
-    areasLoading: true
+    featuredArea: [],
+    loading: {
+      areas: true,
+      featuredArea: false
+    },
+  },
+  getters: {
+    areas(state) {
+      return state.areas;
+    },
+    areasLoading(state) {
+      return state.loading.areas;
+    },
+    featuredArea() {
+      return state.featuredArea
+    }
   },
   mutations: {
     setAreas(state, payload) {
       state.areas = payload.areas;
     },
     setLoading(state, payload) {
-      state.areasLoading = payload.loading;
+      state.loading = _.assign(state.loading, payload.loading);
     }
   },
   actions: {
-    getAll(context, payload) {
-      context.commit('setLoading', {loading: true});
+    getAll(context) {
+      context.commit('setLoading', {loading: {areas: true}});
       return new Promise((resolve, reject) => {
-        axiosInstance.get('/api/Area',{
+        axiosInstance.get('/api/Area', {
           params: {
             pageIndex: 1,
             pageSize: -1,
@@ -28,15 +43,19 @@ export default {
             context.commit('setAreas', {
               areas: value.data.currentList
             });
-            context.commit('setLoading', {loading: false});
+            context.commit('setLoading', {loading: {areas: false}});
             resolve();
           })
           .catch(reason => {
-            context.commit('setLoading', {loading: false});
+            context.commit('setLoading', {loading: {areas: false}});
             reject(reason.response);
           })
       })
 
+    },
+
+    getFeatured() {
+      axiosInstance.get('api/GetFeaturedArea');
     }
   }
 }
