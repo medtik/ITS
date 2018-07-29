@@ -4,10 +4,10 @@ export default {
   namespaced: true,
   state: {
     areas: [],
-    featuredArea: [],
+    featuredAreas: [],
     loading: {
       areas: true,
-      featuredArea: false
+      featuredAreas: false
     },
   },
   getters: {
@@ -17,13 +17,19 @@ export default {
     areasLoading(state) {
       return state.loading.areas;
     },
-    featuredArea(state) {
-      return state.featuredArea;
+    featuredAreas(state) {
+      return state.featuredAreas;
+    },
+    featuredAreasLoading(state) {
+      return state.loading.featuredAreas;
     }
   },
   mutations: {
     setAreas(state, payload) {
       state.areas = payload.areas;
+    },
+    setFeaturedAreas(state, payload) {
+      state.featuredAreas = payload.areas;
     },
     setLoading(state, payload) {
       state.loading = _.assign(state.loading, payload.loading);
@@ -54,8 +60,17 @@ export default {
 
     },
 
-    getFeatured() {
-      axiosInstance.get('api/GetFeaturedArea');
+    getFeatured(context) {
+      context.commit('setLoading', {loading: {featuredAreas: true}});
+      axiosInstance.get('api/GetFeaturedArea')
+        .then(value => {
+          context.commit('setLoading', {loading: {featuredAreas: false}});
+          context.commit('setFeaturedAreas', {areas: value.data})
+        })
+        .catch(reason => {
+          context.commit('setLoading', {loading: {featuredAreas: false}});
+          console.debug('area - getFeatured', reason);
+        })
     }
   }
 }

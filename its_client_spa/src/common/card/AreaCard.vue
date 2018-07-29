@@ -31,6 +31,13 @@
 <script>
   export default {
     name: "AreaCard",
+    props: [
+      'id',
+      'name',
+      'locationCount',
+      'planCount',
+      'photo'
+    ],
     data() {
       return {
         id: '1',

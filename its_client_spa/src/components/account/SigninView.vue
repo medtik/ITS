@@ -21,7 +21,7 @@
                 v-model="emailInput"
               />
               <v-text-field
-                label="Password"
+                label="Mật khẩu"
                 type="password"
                 v-model="passwordInput"
               />

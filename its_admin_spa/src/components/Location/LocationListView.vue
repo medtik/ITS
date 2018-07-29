@@ -171,13 +171,3 @@
     }
   }
 </script>
-
-<style>
-  .md-column {
-    min-width: 15rem;
-  }
-
-  .lg-column {
-    min-width: 25rem;
-  }
-</style>

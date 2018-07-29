@@ -150,12 +150,20 @@
   }
 </script>
 
-<style scoped>
+<style>
   #v-app {
     background: url("assets/budapest-hungary-magyarorszag-tajkepek-fotos-fenykepesz-fotograf-budapesta-stock-foto-kirandulas-travel-nature-photography-affarit-andras-ferencz-marosvasarhely-kolozsvar-1.jpg") center bottom;
   }
 
   #content {
     background-color: whitesmoke;
+  }
+
+  .md-column {
+    min-width: 15rem;
+  }
+
+  .lg-column {
+    min-width: 25rem;
   }
 </style>

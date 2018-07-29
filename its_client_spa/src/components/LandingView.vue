@@ -76,9 +76,9 @@
             <div class="title">Các khu vực nổi bật</div>
             <div style="overflow-y: auto;">
               <v-layout row my-1>
-                <v-flex v-for="n in 5"
-                        :key="n">
-                  <AreaCard/>
+                <v-flex v-for="area in featuredAreas"
+                        :key="area.id">
+                  <AreaCard v-bind="area"/>
                 </v-flex>
               </v-layout>
             </div>
@@ -121,10 +121,14 @@
       ...mapGetters('plan', {
         featuredPlans: 'featuredPlans',
         featuredPlansLoading: 'featuredPlansLoading'
+      }),
+      ...mapGetters('area', {
+        featuredAreas: 'featuredAreas',
+        featuredAreasLoading: 'featuredAreasLoading'
       })
     },
     mounted() {
-      // this.$store.dispatch('area/getFeatured');
+      this.$store.dispatch('area/getFeatured');
       this.$store.dispatch('plan/getFeatured');
     }
   }
