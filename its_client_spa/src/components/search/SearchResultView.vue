@@ -19,7 +19,7 @@
           <LocationFullWidth v-bind="location"/>
         </v-flex>
         <v-flex>
-          <v-btn block flat color="secondary" >
+          <v-btn block flat color="secondary">
             Xem thêm
             &nbsp;
             <v-icon small>fas fa-angle-down</v-icon>
@@ -57,7 +57,7 @@
 <script>
   import LocationFullWidth from "../../common/block/LocationFullWidth";
   import PlanFullWidth from "../../common/block/PlanFullWidth";
-  import _locations from "../location/Locations";
+  import {mapGetters} from "vuex";
 
   export default {
     name: "SmartSearchResultView",
@@ -65,10 +65,10 @@
       LocationFullWidth,
       PlanFullWidth
     },
-    data() {
-      return {
-        locations: _locations
-      }
+    computed: {
+      ...mapGetters('smartSearch', {
+        locations: 'searchResult'
+      })
     }
   }
 </script>

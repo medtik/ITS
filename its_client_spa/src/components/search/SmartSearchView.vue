@@ -26,7 +26,7 @@
             getItemPath="getAll"
           />
           <v-progress-linear
-            v-if="loading.questions"
+            v-if="questionsLoading"
             indeterminate/>
           <v-layout column
                     v-if="questions">
@@ -82,7 +82,7 @@
   import ParallaxHeader from "../../common/layout/ParallaxHeader";
   import AreaSelect from "../../common/input/AreaInput";
 
-  import {mapState} from "vuex"
+  import {mapGetters} from "vuex"
 
   export default {
     name: "SmartSearchView",
@@ -102,12 +102,12 @@
       }
     },
     computed: {
-      ...mapState('smartSearch', {
-        questions: state => state.questions,
-        questionsLoading: state => state.questionsLoading
+      ...mapGetters('smartSearch', {
+        questions: 'questions',
+        questionsLoading: 'questionsLoading'
       })
     },
-    beforeDestroy(){
+    beforeDestroy() {
       this.$store.dispatch('smartSearch/nullQuestions');
     },
     methods: {
@@ -116,19 +116,14 @@
         this.$store.dispatch('smartSearch/getQuestionsByArea', {
           areaId: this.selectedAreaId
         })
-          .then(value => {
-            const {
-              questions
-            } = value;
-            this.questions = questions;
-            this.loading.questions = false;
-          })
           .catch(reason => {
             this.error = {
-              ...reason
+              dialog: true,
+              message: 'Có Lỗi xẩy ra',
             };
-            this.loading.questions = false;
+            console.error('onAreaSelect', reason);
           })
+
       },
       onSubmit() {
         this.loading.finishBtn = true;

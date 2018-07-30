@@ -39,16 +39,12 @@ export default {
             switch (key) {
               case 'startDate':
               case 'endDate':
-                console.debug('setMyPlans - dates', value, key);
                 return moment(value).format('YYYY-MM-DD');
               default:
-                console.debug('setMyPlans - default', value, key);
                 return value;
             }
           })
       });
-
-      console.debug('setMyPlans - formattedPlans', formattedPlans);
       state.myPlans = formattedPlans;
     },
     setLoading(state, payload) {

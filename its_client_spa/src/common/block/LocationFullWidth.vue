@@ -15,9 +15,9 @@
     <v-flex style="flex-grow: 0">
       <router-link class="fakeLink"
                    tag="div"
-                   :to="{name:'LocationDetail', params:{id: this.id}}">
+                   :to="link">
         <v-avatar tile size="140">
-          <img :src="primaryPhoto.url"/>
+          <img :src="primaryPhoto"/>
         </v-avatar>
       </router-link>
     </v-flex>
@@ -25,12 +25,12 @@
     <v-flex pa-2 style="flex-grow: 0">
       <router-link class="fakeLink"
                    tag="div"
-                   :to="{name:'LocationDetail', params:{id: this.id}}">
+                   :to="link">
         <v-layout column justify-around>
           <v-layout row>
             <v-flex class="title">
-              <v-icon>{{locationIcon}}</v-icon>
-              {{name}}
+              <!--<v-icon>{{locationIcon}}</v-icon>-->
+              {{location}}
             </v-flex>
           </v-layout>
           <v-flex>
@@ -50,7 +50,7 @@
             class="caption font-weight-light"
             style="flex-grow: 0;">
             <v-icon small color="">comment</v-icon>
-            <span>{{reviews.length}} bình luận</span>
+            <span>{{reviewCount}} bình luận</span>
           </v-flex>
           <v-flex
             mb-1
@@ -58,18 +58,10 @@
             <v-icon small>place</v-icon>
             <span>{{address}}</span>
           </v-flex>
-          <v-divider v-if="reason"></v-divider>
-          <v-flex v-if="reason" class="body-1 font-weight-light">
-            Bởi vì bạn chọn "Sang trong", "Phong cách Ý"
-            <br/>
-            <v-chip>
-              Ẩm thực ý
-            </v-chip>
-            <v-chip>
-              5 sao
-            </v-chip>
-            <v-chip>
-              Giá cao
+          <v-divider v-if="reasons"></v-divider>
+          <v-flex v-if="reasons" class="body-1 font-weight-light">
+            <v-chip v-for="(reason, index) in reasons" :key="`r${index}`">
+              {{reason}}
             </v-chip>
           </v-flex>
         </v-layout>
@@ -89,16 +81,24 @@
     props: [
       'id',
       'type',
-      'name',
+      'location',
       'rating',
-      'reviews',
+      'reviewCount',
       'address',
-      'reason',
+      'reasons',
       'primaryPhoto'
     ],
     computed: {
       locationIcon() {
         return 'restaurant';
+      },
+      link() {
+        return {
+          name: 'LocationDetail',
+          params: {
+            id: this.id
+          }
+        }
       }
     }
   }
