@@ -1,12 +1,15 @@
 import {axiosInstance} from "../../common/util";
 import _ from "lodash";
+import moment from "moment";
 
 
 export default {
   namespaced: true,
   state: {
     featuredPlans: [],
+    myPlans: [],
     loading: {
+      myPlans: true,
       featuredPlans: true
     }
   },
@@ -16,11 +19,37 @@ export default {
     },
     featuredPlansLoading(state) {
       return state.loading.featuredPlans;
-    }
+    },
+    myPlans(state) {
+      return state.myPlans;
+    },
+    myPlansLoading(state) {
+      return state.loading.myPlans;
+    },
   },
   mutations: {
     setFeaturedPlans(state, payload) {
       state.featuredPlans = payload.plans;
+    },
+    setMyPlans(state, payload) {
+      const plans = _.cloneDeep(payload.plans);
+      const formattedPlans = _.map(plans, plan => {
+         return _.mapValues(plan,
+          (value, key) => {
+            switch (key) {
+              case 'startDate':
+              case 'endDate':
+                console.debug('setMyPlans - dates', value, key);
+                return moment(value).format('YYYY-MM-DD');
+              default:
+                console.debug('setMyPlans - default', value, key);
+                return value;
+            }
+          })
+      });
+
+      console.debug('setMyPlans - formattedPlans', formattedPlans);
+      state.myPlans = formattedPlans;
     },
     setLoading(state, payload) {
       state.loading = _.assign(state.loading, payload.loading);
@@ -41,7 +70,28 @@ export default {
         })
     },
     fetchMyPlans(context) {
-      axiosInstance.get('api/myPlans')
+      context.commit('setLoading', {
+        loading: {myPlans: true}
+      });
+      return new Promise((resolve, reject) => {
+        axiosInstance.get('api/myPlans')
+          .then(value => {
+            context.commit('setMyPlans', {
+              plans: value.data
+            });
+            context.commit('setLoading', {
+              loading: {myPlans: false}
+            });
+            resolve(value.data);
+          })
+          .catch(reason => {
+            context.commit('setLoading', {
+              loading: {myPlans: false}
+            });
+            reject(reason.response);
+          })
+      });
+
     }
   }
 }

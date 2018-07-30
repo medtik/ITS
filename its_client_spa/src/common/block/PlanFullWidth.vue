@@ -4,7 +4,7 @@
       <v-layout style="justify-content: space-between; align-items: baseline">
         <router-link :to="{name:'PlanDetail',params:{id: this.id}}"
                      tag="span" class="fakeLink title font-weight-medium">
-          {{title}}
+          {{name}}
         </router-link>
         <div>
           <v-btn icon flat large
@@ -61,18 +61,14 @@
       LocationCard
     },
     props: [
+      'id',
+      'name',
+      'startDate',
+      'endDate',
       'voteCount',
       'reason',
       'duration'
     ],
-    data() {
-      return {
-        id: 1,
-        title: 'Plan abc',
-        startDate: '20/7/2018',
-        endDate: '25/7/2018'
-      }
-    },
     computed: {
       mode() {
         if (this.voteCount) return 'public';
