@@ -1,28 +1,81 @@
 import axiosInstance from "../../common/util/axiosInstance";
+import moment from "moment";
+
+import _ from "lodash";
 
 export default {
   namespaced: true,
   state: {
     current: {
-      "id": 1,
-      "name": "Stephanus Culbert",
-      "address": "0571 Cody Alley",
-      "phone": "952-133-2547",
-      "email": "sculbert0@deliciousdays.com",
-      "birthdate": "1951-04-21",
-      "photo": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAHwSURBVDjLpZM9a1RBFIafM/fevfcmC7uQjWEjUZKAYBHEVEb/gIWFjVVSWEj6gI0/wt8gprPQykIsTP5BQLAIhBVBzRf52Gw22bk7c8YiZslugggZppuZ55z3nfdICIHrrBhg+ePaa1WZPyk0s+6KWwM1khiyhDcvns4uxQAaZOHJo4nRLMtEJPpnxY6Cd10+fNl4DpwBTqymaZrJ8uoBHfZoyTqTYzvkSRMXlP2jnG8bFYbCXWJGePlsEq8iPQmFA2MijEBhtpis7ZCWftC0LZx3xGnK1ESd741hqqUaqgMeAChgjGDDLqXkgMPTJtZ3KJzDhTZpmtK2OSO5IRB6xvQDRAhOsb5Lx1lOu5ZCHV4B6RLUExvh4s+ZntHhDJAxSqs9TCDBqsc6j0iJdqtMuTROFBkIcllCCGcSytFNfm1tU8k2GRo2pOI43h9ie6tOvTJFbORyDsJFQHKD8fw+P9dWqJZ/I96TdEa5Nb1AOavjVfti0dfB+t4iXhWvyh27y9zEbRRobG7z6fgVeqSoKvB5oIMQEODx7FLvIJo55KS9R7b5ldrDReajpC+Z5z7GAHJFXn1exedVbG36ijwOmJgl0kS7lXtjD0DkLyqc70uPnSuIIwk9QCmWd+9XGnOFDzP/M5xxBInhLYBcd5z/AAZv2pOvFcS/AAAAAElFTkSuQmCC",
-      "ban": true
+      name: undefined,
+      address: undefined,
+      phoneNumber: undefined,
+      emailAddress: undefined,
+      birthdate: undefined,
+      photo: undefined
+    },
+    loading: {
+      currentUser: true
     }
   },
   getters: {
-    currentAccount(state, getters, rootState) {
+    currentAccount(state) {
       return state.current;
+    }
+  },
+  mutations: {
+    setCurrentUser(state, payload) {
+      const {
+        name,
+        address,
+        phoneNumber,
+        emailAddress,
+        birthdate,
+        photo
+      } = _.cloneDeep(payload.user);
+      const birthdateFormatted = moment(birthdate).format('YYYY-MM-DD');
+
+      state.current = {
+        name,
+        address,
+        phoneNumber,
+        emailAddress,
+        birthdate: birthdateFormatted,
+        photo
+      };
+    },
+    setLoading(state, payload) {
+      state.loading = _.assign(state.loading, payload.loading);
     }
   },
   actions: {
     updateAccountInfo(context, payload) {
       console.debug('updateAccountInfo', payload);
       return Promise.resolve();
+    },
+    fetchCurrentInfo(context) {
+      context.commit('setLoading', {
+        loading: {currentUser: true}
+      });
+      return new Promise((resolve, reject) => {
+        axiosInstance.get('api/CurrentUser')
+          .then(value => {
+            context.commit('setCurrentUser', {
+              user: value.data
+            });
+            context.commit('setLoading', {
+              loading: {currentUser: false}
+            });
+            resolve();
+          })
+          .catch(reason => {
+            console.debug(reason.response);
+            context.commit('setLoading', {
+              loading: {currentUser: false}
+            });
+            reject(reason.response)
+          })
+      });
     },
     signup(context, payload) {
       const {
@@ -53,7 +106,7 @@ export default {
             } = reason.response;
 
             let error = {};
-            if(status === 400){
+            if (status === 400) {
               error = {
                 email: data.modelState['register.EmailAddress'] &&
                   data.modelState['register.EmailAddress'][0],

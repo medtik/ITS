@@ -22,10 +22,10 @@
                         v-model="input.name"/>
           <v-text-field label="Email"
                         :readonly="!editMode"
-                        v-model="input.email"/>
+                        v-model="input.emailAddress"/>
           <v-text-field label="Điện thoại"
                         :readonly="!editMode"
-                        v-model="input.phone"/>
+                        v-model="input.phoneNumber"/>
           <v-text-field label="Địa chỉ"
                         :readonly="!editMode"
                         v-model="input.address"/>
@@ -37,7 +37,7 @@
       </v-flex>
       <v-flex>
         <v-btn color="success">Cập nhật</v-btn>
-        <v-btn color="success">Đổi mật khẩu</v-btn>
+        <v-btn color="secondary">Đổi mật khẩu</v-btn>
         <v-btn color="secondary" @click="signout">Đăng xuất</v-btn>
       </v-flex>
       <v-flex style="height: 30vh">
@@ -67,8 +67,8 @@
         input: {
           photo: undefined,
           name: undefined,
-          email: undefined,
-          phone: undefined,
+          emailAddress: undefined,
+          phoneNumber: undefined,
           address: undefined,
           birthdate: undefined
         }
@@ -80,15 +80,18 @@
       })
     },
     mounted() {
-      this.setInputs(this.currentAccount);
+      this.$store.dispatch('account/fetchCurrentInfo')
+        .then(() => {
+          this.setInputs(this.currentAccount);
+        });
       this.loading.page = false
     },
     methods: {
       setInputs(account) {
         this.input.photo = account.photo;
         this.input.name = account.name;
-        this.input.email = account.email;
-        this.input.phone = account.phone;
+        this.input.emailAddress = account.emailAddress;
+        this.input.phoneNumber = account.phoneNumber;
         this.input.address = account.address;
         this.input.birthdate = account.birthdate;
       },
