@@ -43,9 +43,16 @@
     </v-flex>
     <v-divider></v-divider>
     <v-flex mt-2>
-      <v-layout style="overflow-y: auto;">
-        <v-flex v-for="n in 9" :key="n" mx-2>
-          <LocationCard/>
+      <v-layout style="overflow-y: auto;" v-if="isHaveLocations">
+        <v-flex v-for="location in locations"
+                :key="location.id"
+                mx-2>
+          <LocationCard v-bind="location"/>
+        </v-flex>
+      </v-layout>
+      <v-layout v-else>
+        <v-flex class="subheading text-xs-center">
+          Chưa có địa điểm nào
         </v-flex>
       </v-layout>
     </v-flex>
@@ -67,12 +74,16 @@
       'endDate',
       'voteCount',
       'reason',
-      'duration'
+      'duration',
+      'locations'
     ],
     computed: {
       mode() {
         if (this.voteCount) return 'public';
         else return 'private'
+      },
+      isHaveLocations() {
+        return this.locations && this.locations.length > 0;
       }
     }
   }
