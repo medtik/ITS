@@ -10,11 +10,11 @@
           <v-icon>group_add</v-icon>&nbsp; Tạo nhóm
         </v-btn>
       </v-flex>
-      <v-flex v-for="n in 3"
-              :key="n"
+      <v-flex v-for="group in groups"
+              :key="group.id"
               elevation-2
               mt-2>
-        <GroupFullWidth/>
+        <GroupFullWidth v-bind="group"/>
       </v-flex>
       <v-flex style="height: 25vh">
         <!--Holder-->
@@ -27,6 +27,7 @@
 <script>
   import ParallaxHeader from "../../common/layout/ParallaxHeader"
   import GroupFullWidth from "./GroupFullWidth"
+  import {mapGetters} from "vuex";
 
   export default {
     name: "GroupListView",
@@ -34,7 +35,15 @@
       ParallaxHeader,
       GroupFullWidth
     },
-
+    computed: {
+      ...mapGetters('group', {
+        groups: 'myGroup',
+        myGroupsLoading: 'myGroupsLoading'
+      })
+    },
+    mounted() {
+      this.$store.dispatch('group/fetchMyGroups')
+    },
   }
 </script>
 

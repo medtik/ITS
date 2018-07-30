@@ -72,7 +72,8 @@ export default {
         xhttp.onreadystatechange = function () {
           if (this.readyState == 4) {
             if (this.status == 200) {
-              resolve(this.responseText);
+              const responseObj = JSON.parse(this.responseText);
+              resolve(responseObj);
             } else {
               let message = 'Có lỗi xẩy ra';
               if (this.status === 400) {

@@ -10,7 +10,8 @@
         <v-spacer></v-spacer>
       </v-card-title>
       <v-card-text class="text-xs-center text-md-left">
-        <span class="body-2">{{message}}</span>
+        <span class="body-2" v-if="message">{{message}}</span>
+        <span class="body-2" v-else>Có lỗi xẩy ra</span>
       </v-card-text>
       <v-card-actions>
         <v-btn

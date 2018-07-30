@@ -3,7 +3,7 @@
     <v-layout column pa-2 class="white">
       <v-flex py-2>
         <v-layout class="title" align-center justify-space-between>
-          Nhóm ABC
+          {{title}}
           <v-btn color="red" flat icon
                  @click.stop="">
             <v-icon>
@@ -22,7 +22,7 @@
             </v-icon>
           </v-flex>
           <v-flex class="subheading font-weight-medium">
-            8 thành viên
+            {{memberCount}} thành viên
           </v-flex>
         </v-flex>
         <v-flex d-flex justify-center>
@@ -36,7 +36,7 @@
             </v-icon>
           </v-flex>
           <v-flex class="subheading font-weight-medium">
-            3 chuyến đi
+            {{planCount}} chuyến đi
           </v-flex>
         </v-flex>
       </v-layout>
@@ -47,13 +47,23 @@
 <script>
   export default {
     name: "GroupFullWidth",
+    props:[
+      'id',
+      'title',
+      'memberCount',
+      'planCount'
+    ],
     computed: {
       routerLink() {
         return {
-          name: "GroupDetail"
+          name: "GroupDetail",
+          params:{
+            'id': this.id
+          }
         }
       }
-    }
+    },
+
   };
 </script>
 

@@ -11,7 +11,7 @@
                  color="success"
                  @click="$emit('save')">
             <v-icon>
-              fas fa-heart
+              fas fa-download
             </v-icon>
           </v-btn>
           <v-btn icon flat large
