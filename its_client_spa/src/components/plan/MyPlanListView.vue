@@ -42,6 +42,9 @@
       PlanFullWidth,
       ChoosePlanDestinationDialog
     },
+    mounted(){
+      this.$store.dispatch('plan/fetchMyPlans')
+    },
     data(){
       return {
         dialog:{

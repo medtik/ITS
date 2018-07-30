@@ -79,6 +79,8 @@ export default {
             answer.tags = _.map(answer.tags, (tag) => {
               return tag.id
             });
+            answer.answer = answer.text;
+            answer.text = undefined;
             return answer;
           })
         })

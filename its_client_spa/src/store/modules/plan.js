@@ -40,8 +40,8 @@ export default {
           })
         })
     },
-    getMyPlans(context) {
-
+    fetchMyPlans(context) {
+      axiosInstance.get('api/myPlans')
     }
   }
 }
