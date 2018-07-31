@@ -7,6 +7,7 @@ import MultiPhotoInput from "./MultiPhotoInput.vue";
 import PictureInput from "./PictureInput.vue";
 import TagChooseDialog from "./TagChooseDialog.vue";
 import TagsInput from "./TagsInput.vue";
+import TagCategoryInput from "./TagCategoryInput.vue";
 
 export {
   AreaInput,
@@ -17,5 +18,6 @@ export {
   MultiPhotoInput,
   PictureInput,
   TagChooseDialog,
-  TagsInput
+  TagsInput,
+  TagCategoryInput
 }

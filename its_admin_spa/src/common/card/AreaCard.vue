@@ -38,15 +38,6 @@
       'planCount',
       'photo'
     ],
-    data() {
-      return {
-        id: '1',
-        name: 'Thành phố Hồ Chí Minh',
-        photo: 'https://picsum.photos/400/400',
-        locationCount: 22,
-        planCount: 67
-      }
-    },
     computed: {
       routerLink() {
         return {

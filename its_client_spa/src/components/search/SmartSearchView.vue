@@ -59,7 +59,7 @@
               <v-flex style="flex-grow: 0">
                 <v-btn color="success"
                        @click="onSubmit"
-                       :disabled="!questions"
+                       :disabled="!questions || !isHaveAnswer"
                        :loading="loading.finishBtn">
                   <v-icon>check</v-icon>
                   &nbsp;&nbsp;
@@ -105,7 +105,10 @@
       ...mapGetters('smartSearch', {
         questions: 'questions',
         questionsLoading: 'questionsLoading'
-      })
+      }),
+      isHaveAnswer(){
+        return this.selectedAnswers && this.selectedAnswers.length > 0;
+      }
     },
     beforeDestroy() {
       this.$store.dispatch('smartSearch/nullQuestions');

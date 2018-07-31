@@ -4,14 +4,14 @@
       <v-layout style="justify-content: space-between; align-items: baseline">
         <router-link :to="{name:'PlanDetail',params:{id: this.id}}"
                      tag="span" class="fakeLink title font-weight-medium">
-          {{title}}
+          {{name}}
         </router-link>
         <div>
           <v-btn icon flat large
                  color="success"
                  @click="$emit('save')">
             <v-icon>
-              fas fa-heart
+              fas fa-download
             </v-icon>
           </v-btn>
           <v-btn icon flat large
@@ -43,9 +43,16 @@
     </v-flex>
     <v-divider></v-divider>
     <v-flex mt-2>
-      <v-layout style="overflow-y: auto;">
-        <v-flex v-for="n in 9" :key="n" mx-2>
-          <LocationCard/>
+      <v-layout style="overflow-y: auto;" v-if="isHaveLocations">
+        <v-flex v-for="location in locations"
+                :key="location.id"
+                mx-2>
+          <LocationCard v-bind="location"/>
+        </v-flex>
+      </v-layout>
+      <v-layout v-else>
+        <v-flex class="subheading text-xs-center">
+          Chưa có địa điểm nào
         </v-flex>
       </v-layout>
     </v-flex>
@@ -61,22 +68,22 @@
       LocationCard
     },
     props: [
+      'id',
+      'name',
+      'startDate',
+      'endDate',
       'voteCount',
       'reason',
-      'duration'
+      'duration',
+      'locations'
     ],
-    data() {
-      return {
-        id: 1,
-        title: 'Plan abc',
-        startDate: '20/7/2018',
-        endDate: '25/7/2018'
-      }
-    },
     computed: {
       mode() {
         if (this.voteCount) return 'public';
         else return 'private'
+      },
+      isHaveLocations() {
+        return this.locations && this.locations.length > 0;
       }
     }
   }

@@ -12,10 +12,7 @@
           />
         </v-flex>
         <v-flex px-3>
-          <v-text-field
-            label="Thể loại"
-            v-model="categoryInput"
-          />
+          <TagCategoryInput v-model="categoryInput"/>
         </v-flex>
         <v-flex mt-2>
           <v-btn dark color="primary"
@@ -41,10 +38,14 @@
 </template>
 
 <script>
+  import {TagCategoryInput} from "../../common/input"
   import _ from "lodash";
 
   export default {
     name: "TagCreateEditDialog",
+    components:{
+      TagCategoryInput
+    },
     props: [
       'dialog',
       'item'
