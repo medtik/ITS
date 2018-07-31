@@ -19,6 +19,7 @@ export default {
   },
   actions: {
     getAll(context, payload) {
+      context.commit('setLoading', {loading: true});
       return new Promise((resolve, reject) => {
         axiosInstance.get('api/tag', {
           params: {
@@ -28,9 +29,10 @@ export default {
           .then(value => {
             const data = formatter.getAllResponse(value.data);
             context.commit('setItemsResult', data);
-            context.commit('setLoading', {loading: false})
+            context.commit('setLoading', {loading: false});
           })
           .catch(reason => {
+            context.commit('setLoading', {loading: false});
             reject(reason.response);
           })
       })

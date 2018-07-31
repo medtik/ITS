@@ -105,4 +105,11 @@
 </script>
 
 <style scoped>
+  .grid-layout {
+    display: grid;
+    grid-template-columns: 25% 40% 35%;
+    grid-template-rows: 6rem 4rem auto;
+    grid-template-areas: "user summary summary" "user status action" "detail detail detail";
+    grid-row-gap: 0.5rem;
+  }
 </style>

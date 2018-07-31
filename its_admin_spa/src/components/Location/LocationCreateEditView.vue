@@ -84,6 +84,8 @@
             <v-flex pl-3>
               <TagsInput
                 v-model="input.tagsInput"
+                :admin="true"
+                @create="createEditTag.dialog = true"
               />
             </v-flex>
           </v-flex>
@@ -172,12 +174,14 @@
         </v-layout>
       </v-flex>
     </v-layout>
+    <TagCreateEditDialog v-bind="createEditTag" v-on:close="createEditTag.dialog = false" @create="onCreateTag"/>
     <ErrorDialog v-bind="error" v-on:close="error.dialog = false"/>
     <SuccessDialog v-bind="success" v-on:close="success.dialog = false"/>
   </v-container>
 </template>
 
 <script>
+  import TagCreateEditDialog from "../Tag/TagCreateEditDialog"
   import _ from 'lodash';
   import {
     ErrorDialog,
@@ -200,7 +204,8 @@
       SuccessDialog,
       PictureInput,
       TagsInput,
-      LocationBusinessHoursInput
+      LocationBusinessHoursInput,
+      TagCreateEditDialog
     },
     data() {
       return {
@@ -264,6 +269,9 @@
           secondaryPhotos: undefined,
         },
         //Dialog
+        createEditTag:{
+          dialog: false,
+        },
         error: {
           dialog: false,
           title: '',
@@ -356,6 +364,20 @@
           url: val
         });
         this.input.secondaryPhotoInput = undefined;
+      },
+      onCreateTag(item){
+        this.$store.dispatch('tag/create', {tag: item})
+          .then(value => {
+            this.$store.dispatch('tagDialog/getAll');
+          })
+          .catch(reason => {
+            console.debug('onDialogConfirmCreate-catch', reason);
+            this.error = {
+              dialog: true,
+              message: 'Có lỗi xẩy ra'
+            }
+          });
+        this.createEditTag.dialog = true;
       },
       removeSecondaryPhoto(index) {
         this.input.secondaryPhotos.splice(index, 1);

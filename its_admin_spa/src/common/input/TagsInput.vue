@@ -18,9 +18,12 @@
     </v-layout>
     <TagChooseDialog :dialog="dialog"
                      :value="value"
+                     :admin="admin"
+                     @create="$emit('create')"
                      @input="onAddTagConfirm"
                      @save="dialog = false"
-                     @close="dialog = false"/>
+                     @close="dialog = false">
+    </TagChooseDialog>
   </v-container>
 </template>
 
@@ -36,6 +39,7 @@
     props: [
       'value',
       'readonly',
+      'admin'
     ],
     data() {
       return {

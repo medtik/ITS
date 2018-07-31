@@ -1,11 +1,11 @@
 <template>
-  <v-autocomplete label="Thể loại"
-                  @change="onSelect"
-                  v-model="selectedCategory"
-                  :items="items"
-                  :loading="loading"
+  <v-combobox label="Thể loại"
+              @change="onSelect"
+              v-model="selectedCategory"
+              :items="items"
+              :loading="loading"
   >
-  </v-autocomplete>
+  </v-combobox>
 </template>
 
 <script>
@@ -23,11 +23,11 @@
     ],
     data() {
       return {
-        selectedCategory: undefined
+        categoryInput: undefined
       }
     },
     mounted() {
-      this.selectedCategory = this.value;
+      this.categoryInput = this.value;
     }
   }
 </script>

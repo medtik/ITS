@@ -7,6 +7,10 @@
         <v-flex>
           <v-card-title class="headline green white--text">
             <span>Chọn thẻ</span>
+            <v-spacer></v-spacer>
+            <v-btn v-if="admin" color="primary" @click="$emit('create')">
+              Tạo mới
+            </v-btn>
           </v-card-title>
         </v-flex>
         <v-flex xs12 pa-3>
@@ -66,7 +70,8 @@
     name: "AddTagDialog",
     props: [
       'dialog',
-      'value'
+      'value',
+      'admin'
     ],
     data() {
       return {
