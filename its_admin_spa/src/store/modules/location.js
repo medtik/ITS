@@ -83,8 +83,6 @@ export default {
               to: value.to,
             }
           });
-
-        console.log('create', payload.secondaryPhotos, payload);
         payload.secondaryPhotos = _.map(payload.secondaryPhotos,
           (value, key, collection) => {
             console.debug('payload.secondaryPhotos', value, key);
