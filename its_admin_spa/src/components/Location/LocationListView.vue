@@ -1,4 +1,4 @@
-<template>
+  <template>
   <v-container id="content" fluid>
     <v-layout row pa-3 style="background-color: white" elevation-4>
       <v-flex xs12>

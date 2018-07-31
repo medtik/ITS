@@ -19,7 +19,6 @@ function mockShell(bodyFunc, noFail) {
           message: 'Có lỗi xẩy ra !'
         })
       }
-
     }, 1500 + (Math.random() * 1000))
   })
 }
@@ -83,10 +82,12 @@ export default {
               to: value.to,
             }
           });
-        payload.secondaryPhotos = _.map(payload.secondaryPhotos,
-          (value, key, collection) => {
-            console.debug('payload.secondaryPhotos', value, key);
-            return value.url;
+
+        console.log('create', payload.secondaryPhotos, payload);
+            payload.secondaryPhotos = _.map(payload.secondaryPhotos,
+              (value, key, collection) => {
+                console.debug('payload.secondaryPhotos', value, key);
+                return value.url;
           });
 
         payload.tagsInput = _.map(payload.tagsInput,

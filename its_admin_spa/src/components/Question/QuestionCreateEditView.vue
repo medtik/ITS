@@ -6,7 +6,7 @@
         <v-divider class="my-3"></v-divider>
         <v-progress-linear v-if="loading.page" color="primary" indeterminate></v-progress-linear>
         <v-layout column v-else>
-          <!--Basic input-->
+
           <v-flex style="width: 25rem">
             <v-text-field label="Nội dung câu hỏi" v-model="textInput"></v-text-field>
             <v-combobox
