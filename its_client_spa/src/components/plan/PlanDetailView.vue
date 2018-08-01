@@ -192,7 +192,7 @@
     mounted() {
       const {
         id
-      } = this.$route.params;
+      } = this.$route.query;
       this.planId = id;
       this.$store.dispatch('plan/fetchPlanById', {
         id

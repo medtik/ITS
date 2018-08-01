@@ -9,14 +9,17 @@
       <v-flex my-3>
         <v-text-field
           label="Tên"
+          v-model="input.name"
         />
         <v-text-field
           label="Ngày bắt đầu"
           type="date"
+          v-model="input.startDate"
         />
         <v-text-field
           label="Ngày kết thúc"
           type="date"
+          v-model="input.endDate"
         />
       </v-flex>
       <v-flex>
@@ -39,7 +42,12 @@
     name: "PlanCreateView",
     data() {
       return {
-        createBtnLoading: false
+        createBtnLoading: false,
+        input:{
+          name: undefined,
+          startDate: undefined,
+          endDate: undefined,
+        }
       }
     },
     computed: {
@@ -61,7 +69,7 @@
       onCreate() {
         this.createBtnLoading = true;
         setTimeout(() => {
-            this.$router.push({name: "PlanDetail"})
+            this.$router.push({name: "PlanDetail",query: {id: undefined}})
           }
           , 2000);
       },

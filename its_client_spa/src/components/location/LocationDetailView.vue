@@ -162,7 +162,7 @@
     created() {
       const {
         id
-      } = this.$route.params;
+      } = this.$route.query;
 
       this.locationId = id;
     },

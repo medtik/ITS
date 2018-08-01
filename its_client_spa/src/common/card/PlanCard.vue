@@ -40,7 +40,7 @@
     ],
     computed: {
       detailLink() {
-        return {name: 'PlanDetail', params: {id: this.id}};
+        return {name: 'PlanDetail', query: {id: this.id}};
       },
       dayCount() {
         return this.time;
