@@ -3,7 +3,7 @@
     <v-layout column pa-2 class="white">
       <v-flex py-2>
         <v-layout class="title" align-center justify-space-between>
-          {{title}}
+          {{name}}
           <v-btn color="red" flat icon
                  @click.stop="">
             <v-icon>
@@ -49,7 +49,7 @@
     name: "GroupFullWidth",
     props:[
       'id',
-      'title',
+      'name',
       'memberCount',
       'planCount'
     ],

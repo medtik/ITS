@@ -4,6 +4,7 @@
       <BusinessHoursInput v-for="(input, index) in businessHours"
                           :key="`B_${index}`"
                           @input="onInputChange"
+                          @delete="onRemove(index)"
                           v-model="businessHours[index]"/>
       <v-btn color icon color="success" @click="onAddBusinessHoursClick">
         <v-icon small>fas fa-plus</v-icon>
@@ -13,7 +14,7 @@
 </template>
 
 <script>
-  import _ from "lodash";
+  import _ from "lodash"
   import BusinessHoursInput from "./BusinessHoursInput";
 
   export default {
@@ -42,6 +43,11 @@
       onAddBusinessHoursClick(){
         this.businessHours.push({});
         this.onInputChange();
+      },
+      onRemove(val){
+        this.businessHours = _.remove(this.businessHours, (value, index)=>{
+          return index == val;
+        });
       }
     }
   }

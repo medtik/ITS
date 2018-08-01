@@ -17,14 +17,6 @@
           <v-icon large>edit</v-icon>
           <span v-if="!isSmallScreen">Chỉnh sửa</span>
         </v-btn>
-        <v-btn flat :to="{name:'Search'}">
-          <v-icon large>add_location</v-icon>
-          <span v-if="!isSmallScreen">Thêm địa điểm</span>
-        </v-btn>
-        <v-btn flat @click="dialog.addNote = true">
-          <v-icon large>note_add</v-icon>
-          <span v-if="!isSmallScreen">Thêm ghi chú</span>
-        </v-btn>
         <v-btn flat @click="dialog.publishPlan = true">
           <v-icon large>publish</v-icon>
           <span v-if="!isSmallScreen">Đăng</span>
@@ -32,6 +24,16 @@
       </v-toolbar-items>
     </v-toolbar>
     <v-layout column class="white">
+      <v-flex class="grey lighten-4">
+        <v-btn flat :to="{name:'Search'}">
+          <v-icon >add_location</v-icon>
+          <span v-if="!isSmallScreen">Thêm địa điểm</span>
+        </v-btn>
+        <v-btn flat @click="dialog.addNote = true">
+          <v-icon >note_add</v-icon>
+          <span v-if="!isSmallScreen">Thêm ghi chú</span>
+        </v-btn>
+      </v-flex>
       <!--UNSCHEDULED-->
       <v-flex class="grey lighten-4">
         <v-flex my-3>

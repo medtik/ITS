@@ -37,7 +37,7 @@
     },
     computed: {
       ...mapGetters('group', {
-        groups: 'myGroup',
+        groups: 'myGroups',
         myGroupsLoading: 'myGroupsLoading'
       })
     },

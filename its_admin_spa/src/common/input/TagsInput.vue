@@ -45,7 +45,7 @@
       'value',
       'readonly',
       'admin',
-      'error'
+      'error',
     ],
     data() {
       return {
