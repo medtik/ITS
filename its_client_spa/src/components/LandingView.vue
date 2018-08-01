@@ -77,7 +77,8 @@
             <div style="overflow-y: auto;">
               <v-layout row my-1>
                 <v-flex v-for="area in featuredAreas"
-                        :key="area.id">
+                        :key="area.id"
+                        shrink>
                   <AreaCard v-bind="area"/>
                 </v-flex>
               </v-layout>
@@ -88,7 +89,8 @@
             <div style="overflow-x: auto;">
               <v-layout row my-1>
                 <v-flex v-for="plan in featuredPlans"
-                        :key="plan.id">
+                        :key="plan.id"
+                        shrink>
                   <PlanCard v-bind="plan"/>
                 </v-flex>
               </v-layout>
