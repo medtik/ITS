@@ -39,7 +39,8 @@
     props: [
       'value',
       'readonly',
-      'admin'
+      'admin',
+      'rules'
     ],
     data() {
       return {

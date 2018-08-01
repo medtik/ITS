@@ -91,65 +91,24 @@
           </v-flex>
           <v-flex my-3>
             <span class="subheading">Hình ảnh</span>
-            <v-flex pl-3 mt-3>
+            <v-layout column pl-3 mt-3>
               <v-label class="subheading">Ảnh bìa</v-label>
-              <PictureInput
-                v-model="input.primaryPhotoInput"
-                v-bind="{
+              <v-flex>
+                <PictureInput
+                  v-model="input.primaryPhotoInput"
+                  v-bind="{
                 width:300,
                 height:300,
                 size:50,
-                text: 'Ảnh bìa'
+                text: 'Ảnh bìa',
+                center: false
               }"
-              />
-            </v-flex>
-
+                />
+              </v-flex>
+            </v-layout>
             <v-flex pl-3 mt-3>
               <v-label class="subheading">Ảnh thêm</v-label>
-              <v-flex pl-3>
-                <v-layout v-if="input.secondaryPhotos"
-                          mb-4
-                          wrap
-                          row>
-                  <v-flex v-for="(photo,index) in input.secondaryPhotos"
-                          ma-2
-                          style="flex-grow: 0.05"
-                          :key="photo.id">
-                    <v-card>
-                      <v-card-media>
-                        <img :src="photo.url" width="200" height="200"/>
-                      </v-card-media>
-                      <v-card-actions>
-                        <v-btn color="red" flat block
-                               @click="removeSecondaryPhoto(index)">
-                          <v-icon color="red"
-                                  class="white--text">
-                            delete
-                          </v-icon>
-                        </v-btn>
-                      </v-card-actions>
-                    </v-card>
-                  </v-flex>
-                </v-layout>
-                <PictureInput
-                  v-model="input.secondaryPhotoInput"
-                  v-bind="{
-                width:200,
-                height:200,
-                size:40,
-                text: 'Ảnh thêm'
-              }">
-                  <v-btn
-                    color="success"
-                    slot="extraAction"
-                    slot-scope="props"
-                    v-if="props.value"
-                    @click="secondaryConfirm(props.value)"
-                    block>
-                    <v-icon class="white--text">fas fa-file-upload</v-icon>
-                  </v-btn>
-                </PictureInput>
-              </v-flex>
+              <MultiPhotoInput v-model="input.secondaryPhotos"/>
             </v-flex>
           </v-flex>
           <v-divider/>
@@ -192,9 +151,9 @@
   import {
     PictureInput,
     TagsInput,
-    LocationBusinessHoursInput
+    LocationBusinessHoursInput,
+    MultiPhotoInput
   } from "../../common/input";
-
 
   export default {
     name: "LocationCreateEditView",
@@ -205,7 +164,8 @@
       PictureInput,
       TagsInput,
       LocationBusinessHoursInput,
-      TagCreateEditDialog
+      TagCreateEditDialog,
+      MultiPhotoInput
     },
     data() {
       return {
@@ -269,7 +229,7 @@
           secondaryPhotos: undefined,
         },
         //Dialog
-        createEditTag:{
+        createEditTag: {
           dialog: false,
         },
         error: {
@@ -365,7 +325,7 @@
         });
         this.input.secondaryPhotoInput = undefined;
       },
-      onCreateTag(item){
+      onCreateTag(item) {
         this.$store.dispatch('tag/create', {tag: item})
           .then(value => {
             this.$store.dispatch('tagDialog/getAll');

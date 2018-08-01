@@ -106,7 +106,6 @@
           pagination: this.pagination
         })
           .then(data => {
-            console.debug('loadData', data);
             this.items = data.list;
             this.total = data.total;
             this.loading = false;

@@ -15,8 +15,8 @@ export {
   ChooseImageDialog,
   ChoosePlanDestinationDialog,
   LocationBusinessHoursInput,
-  MultiPhotoInput,
   PictureInput,
+  MultiPhotoInput,
   TagChooseDialog,
   TagsInput,
   TagCategoryInput

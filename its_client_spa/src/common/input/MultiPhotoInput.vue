@@ -17,12 +17,13 @@
               wrap
               row>
       <v-flex v-for="(photo,index) in photos"
-              ma-2
+              pa-2
+              xs4
               style="flex-grow: 0.05"
               :key="index">
         <v-card>
           <v-card-media>
-            <img :src="photo" width="200" height="200"/>
+            <img :src="photo" height="200"/>
           </v-card-media>
           <v-card-actions>
             <v-btn color="red" flat block
@@ -40,7 +41,7 @@
 </template>
 
 <script>
-  import {PictureInput} from "../input";
+  import PictureInput from "./PictureInput";
 
   export default {
     name: "MultiPhotoInput",

@@ -6,71 +6,78 @@
         <v-divider class="my-3"></v-divider>
         <v-progress-linear v-if="loading.page" color="primary" indeterminate></v-progress-linear>
         <v-layout column v-else>
-          <!--Basic input-->
-          <v-flex style="width: 25rem">
-            <v-text-field label="Nội dung câu hỏi" v-model="textInput"></v-text-field>
-            <v-combobox
-              v-model="categoryInput"
-              :items="categories"
-              label="Thể loại"
-              :loading="loading.categories"
-            ></v-combobox>
-          </v-flex>
-          <!--Answer-->
-          <v-flex my-3>
-            <v-layout row>
-              <v-flex xs12>
-                <v-card elevation-5>
-                  <v-toolbar flat dark color="blue darken-1">
-                    <v-toolbar-title>Câu trả lời</v-toolbar-title>
-                  </v-toolbar>
-                  <v-layout column>
-                    <v-flex pa-2>
-                      <v-layout row style="align-items: center">
-                        <v-text-field
-                          label="Câu trả lời"
-                          v-model="answerTextInput"
-                          :rules="[rules.required]"
-                          single-line
-                        ></v-text-field>
-                        <v-btn icon flat color="green"
-                               v-on:click="onAddAnswerClick">
-                          <v-icon>fas fa-plus</v-icon>
-                        </v-btn>
-                      </v-layout>
-                    </v-flex>
-                    <v-divider></v-divider>
-                    <v-flex px-2 v-for="(answer,index) in answersInput" :key="index">
-                      <v-layout row py-2>
-                        <v-flex xs11>
-                          <v-layout column>
-                            <v-flex ml-2>
-                              <span class="subheading">{{answer.text}}</span>
-                            </v-flex>
-                            <v-flex mt-2>
-                              <TagsInput
-                                v-model="answer.tags"
-                              />
-                            </v-flex>
-                          </v-layout>
-                        </v-flex>
-                        <v-flex xs1 style="text-align: end;">
-                          <v-btn icon flat color="success"
-                                 v-on:click="editAnswerDialog = true">
-                            <v-icon>edit</v-icon>
+          <!--FORM-->
+          <v-form v-model="formValid">
+            <!--Basic input-->
+            <v-flex style="width: 25rem">
+              <v-text-field label="Nội dung câu hỏi"
+                            v-model="textInput"
+                            :rules="[rules.questionContent]"
+              ></v-text-field>
+              <v-combobox
+                v-model="categoryInput"
+                :items="categories"
+                label="Thể loại"
+                :loading="loading.categories"
+              ></v-combobox>
+            </v-flex>
+            <!--Answer-->
+            <v-flex my-3>
+              <v-layout row>
+                <v-flex xs12>
+                  <v-card elevation-5>
+                    <v-toolbar flat dark color="blue darken-1">
+                      <v-toolbar-title>Câu trả lời</v-toolbar-title>
+                    </v-toolbar>
+                    <v-layout column>
+                      <v-flex pa-2>
+                        <v-layout row style="align-items: center">
+                          <v-text-field
+                            label="Câu trả lời"
+                            v-model="answerTextInput"
+                            :rules="[rules.answerContent]"
+                          ></v-text-field>
+                          <v-btn icon flat color="green"
+                                 v-on:click="onAddAnswerClick">
+                            <v-icon>fas fa-plus</v-icon>
                           </v-btn>
-                          <v-btn icon flat color="red">
-                            <v-icon>delete</v-icon>
-                          </v-btn>
-                        </v-flex>
-                      </v-layout>
-                      <v-divider v-if="(index + 1) < question.answers.length"></v-divider>
-                    </v-flex>
-                  </v-layout>
-                </v-card>
-              </v-flex>
-            </v-layout>
-          </v-flex>
+                        </v-layout>
+                      </v-flex>
+                      <v-divider></v-divider>
+                      <v-flex px-2 v-for="(answer,index) in answersInput" :key="index">
+                        <v-layout row py-2>
+                          <v-flex xs11>
+                            <v-layout column>
+                              <v-flex ml-2>
+                                <span class="subheading">{{answer.text}}</span>
+                              </v-flex>
+                              <v-flex mt-2>
+                                <TagsInput
+                                  v-model="answer.tags"
+                                  :rules=[rules.answerTag]
+                                />
+                              </v-flex>
+                            </v-layout>
+                          </v-flex>
+                          <v-flex xs1 style="text-align: end;">
+                            <v-btn icon flat color="success"
+                                   v-on:click="editAnswerDialog = true">
+                              <v-icon>edit</v-icon>
+                            </v-btn>
+                            <v-btn icon flat color="red">
+                              <v-icon>delete</v-icon>
+                            </v-btn>
+                          </v-flex>
+                        </v-layout>
+                        <v-divider v-if="(index + 1) < question.answers.length"></v-divider>
+                      </v-flex>
+                    </v-layout>
+                  </v-card>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+          </v-form>
+
           <!--Actions-->
           <v-flex mt-2>
             <v-btn color="success"
@@ -121,12 +128,11 @@
   } from "../../common/block";
 
   import {TagsInput} from "../../common/input";
-
   import {FormRuleMixin} from "../../common/mixin";
 
   export default {
     name: "QuestionCreateEditView",
-    mixins:[FormRuleMixin],
+    mixins: [FormRuleMixin],
     components: {
       ErrorDialog,
       SuccessDialog,
@@ -148,6 +154,7 @@
         answerTextInput: undefined,
         answersInput: [],
         categories: [],
+        formValid: false,
         //boiler plane
         error: {
           dialog: false,
@@ -226,7 +233,7 @@
           text: this.textInput,
           category: this.categoryInput,
           answers: this.answersInput
-        }).then(question => {
+        }).then( () => {
           this.success = {
             dialog: true,
             message: `Tạo mới thành công câu hỏi`
