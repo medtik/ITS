@@ -22,14 +22,20 @@
                 label="Mô tả"
                 v-model="input.descriptionInput"
               />
-              <v-text-field
-                label="Vĩ độ"
-                v-model="input.latInput"
-              />
-              <v-text-field
-                label="Kinh độ"
-                v-model="input.longInput"
-              />
+              <v-layout row wrap>
+                <v-flex xs12 md6>
+                  <v-text-field
+                    label="Vĩ độ"
+                    v-model="input.latInput"
+                  />
+                </v-flex>
+                <v-flex xs12 md6>
+                  <v-text-field
+                    label="Kinh độ"
+                    v-model="input.longInput"
+                  />
+                </v-flex>
+              </v-layout>
               <v-text-field
                 label="Web"
                 v-model="input.websiteInput"
@@ -194,36 +200,7 @@
           tagsInput: [],
           reviewsInput: [],
           //BusinessHours inputs
-          businessHoursInput: {
-            day1: {
-              from: undefined,
-              to: undefined
-            },
-            day2: {
-              from: undefined,
-              to: undefined
-            },
-            day3: {
-              from: undefined,
-              to: undefined
-            },
-            day4: {
-              from: undefined,
-              to: undefined
-            },
-            day5: {
-              from: undefined,
-              to: undefined
-            },
-            day6: {
-              from: undefined,
-              to: undefined
-            },
-            day7: {
-              from: undefined,
-              to: undefined
-            },
-          },
+          businessHoursInput: [],
           primaryPhotoInput: undefined,
           secondaryPhotoInput: undefined,
           secondaryPhotos: undefined,
@@ -301,13 +278,7 @@
           this.input.emailInput = location.email;
           this.input.areaInput = location.area;
           this.input.tagsInput = location.tags;
-          this.input.businessHoursInput.day1 = _.extend({}, location.businessHours[0]);
-          this.input.businessHoursInput.day2 = _.extend({}, location.businessHours[1]);
-          this.input.businessHoursInput.day3 = _.extend({}, location.businessHours[2]);
-          this.input.businessHoursInput.day4 = _.extend({}, location.businessHours[3]);
-          this.input.businessHoursInput.day5 = _.extend({}, location.businessHours[4]);
-          this.input.businessHoursInput.day6 = _.extend({}, location.businessHours[5]);
-          this.input.businessHoursInput.day7 = _.extend({}, location.businessHours[6]);
+          this.input.businessHoursInput.days = location.businessHours;
           this.input.isVerifiedInput = location.isVerified;
           this.input.isCloseInput = location.isClose;
           this.input.primaryPhotoInput = location.primaryPhoto.url;

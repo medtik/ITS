@@ -54,7 +54,8 @@
                               <v-flex mt-2>
                                 <TagsInput
                                   v-model="answer.tags"
-                                  :rules=[rules.answerTag]
+                                  :admin="true"
+                                  @create="createEditDialog.dialog = true"
                                 />
                               </v-flex>
                             </v-layout>
@@ -116,6 +117,9 @@
         </v-layout>
       </v-card>
     </v-dialog>
+    <TagCreateEditDialog v-bind="createEditDialog"
+                         v-on:close="createEditDialog.dialog = false"
+                         v-on:create="onDialogConfirmCreate"/>
     <ErrorDialog v-bind="error" v-on:close="error.dialog = false"/>
     <SuccessDialog v-bind="success" v-on:close="success.dialog = false"/>
   </v-container>
@@ -129,6 +133,7 @@
 
   import {TagsInput} from "../../common/input";
   import {FormRuleMixin} from "../../common/mixin";
+  import TagCreateEditDialog from "../Tag/TagCreateEditDialog" ;
 
   export default {
     name: "QuestionCreateEditView",
@@ -136,7 +141,8 @@
     components: {
       ErrorDialog,
       SuccessDialog,
-      TagsInput
+      TagsInput,
+      TagCreateEditDialog
     },
     data() {
       return {
@@ -156,6 +162,10 @@
         categories: [],
         formValid: false,
         //boiler plane
+        tagInputErrorMessage: "",
+        createEditDialog:{
+          dialog: false,
+        },
         error: {
           dialog: false,
         },
@@ -266,6 +276,22 @@
           };
           this.loading.updateBtn = false;
         })
+      },
+      onDialogConfirmCreate(item) {
+        this.$store.dispatch('tag/create', {tag: item})
+          .then(() => {
+            this.$store.dispatch('tagDialog/getAll');
+          })
+          .catch(reason => {
+            console.debug('onDialogConfirmCreate-catch', reason);
+            this.error = {
+              dialog: true,
+              message: 'Có lỗi xẩy ra'
+            }
+          });
+        this.createEditDialog = {
+          dialog: false
+        }
       },
       onSaveEditAnswer() {
         this.editAnswerDialog = false;

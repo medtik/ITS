@@ -162,7 +162,7 @@
       },
       onDialogConfirmCreate(item) {
         this.$store.dispatch('tag/create', {tag: item})
-          .then(value => {
+          .then(() => {
             this.loadData();
           })
           .catch(reason => {

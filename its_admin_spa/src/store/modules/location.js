@@ -75,14 +75,14 @@ export default {
     },
     create(context, payload) {
       return new Promise((resolve, reject) => {
-        payload.businessHoursInput = _.map(payload.businessHoursInput,
-          (value, key, collection) => {
-            return {
-              day: key,
-              from: value.from,
-              to: value.to,
-            }
-          });
+        // payload.businessHoursInput = _.map(payload.businessHoursInput,
+        //   (value, key, collection) => {
+        //     return {
+        //       day: key,
+        //       from: value.from,
+        //       to: value.to,
+        //     }
+        //   });
         payload.secondaryPhotos = _.map(payload.secondaryPhotos,
           (value, key, collection) => {
             console.debug('payload.secondaryPhotos', value, key);

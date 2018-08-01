@@ -113,9 +113,6 @@
         this.loading.table = true;
         this.$store.dispatch('tagDialog/getAll')
       },
-      onSearchEnter() {
-
-      },
       onSaveClick() {
         this.$emit('input', this.selected);
         this.$emit('save', this.selected);
