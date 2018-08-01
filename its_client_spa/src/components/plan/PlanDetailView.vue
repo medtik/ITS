@@ -6,7 +6,7 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-title>
-        {{plan.startDate}} - {{plan.endDate}}
+        {{formattedStartDate}} - {{formattedEndDate}}
       </v-toolbar-title>
       <v-toolbar-items slot="extension">
         <v-btn flat @click="dialog.choosePlanDestination = true">
@@ -166,6 +166,8 @@
   import NoteFullWidth from "./NoteFullWidth";
   import ChoosePlanDestinationDialog from "../../common/input/ChoosePlanDestinationDialog";
   import draggable from 'vuedraggable'
+  import moment from "moment";
+
 
   export default {
     name: "PlanDetailView",
@@ -211,6 +213,12 @@
       },
       days() {
         return []
+      },
+      formattedStartDate(){
+        return moment(this.plan.startDate).format('DD/MM/YYYY');
+      },
+      formattedEndDate(){
+        return moment(this.plan.endDate).format('DD/MM/YYYY');
       }
     },
     methods: {

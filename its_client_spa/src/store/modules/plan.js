@@ -13,6 +13,7 @@ export default {
       featuredPlans: true,
       detailedPlan: true,
       create: false,
+      delete: false
     }
   },
   getters: {
@@ -34,7 +35,7 @@ export default {
     myPlansLoading(state) {
       return state.loading.myPlans;
     },
-    createLoading(state){
+    createLoading(state) {
       return state.loading.create;
     }
   },
@@ -43,29 +44,10 @@ export default {
       state.featuredPlans = payload.plans;
     },
     setDetailedPlan(state, payload) {
-      let {
-        plan
-      } = _.cloneDeep(payload);
-      plan.startDate = moment(plan.startDate).format('DD/MM/YYYY');
-      plan.endDate = moment(plan.endDate).format('DD/MM/YYYY');
-
-      state.detailedPlan = plan;
-    },
+      state.detailedPlan = _.cloneDeep(payload.plan);
+},
     setMyPlans(state, payload) {
-      const plans = _.cloneDeep(payload.plans);
-      const formattedPlans = _.map(plans, plan => {
-        return _.mapValues(plan,
-          (value, key) => {
-            switch (key) {
-              case 'startDate':
-              case 'endDate':
-                return moment(value).format('YYYY-MM-DD');
-              default:
-                return value;
-            }
-          })
-      });
-      state.myPlans = formattedPlans;
+      state.myPlans = _.cloneDeep(payload.plans);
     },
     setLoading(state, payload) {
       state.loading = _.assign(state.loading, payload.loading);
@@ -161,6 +143,35 @@ export default {
               loading: {create: false}
             });
             console.error('plan/create', reason.response);
+            reject(reason.response);
+          })
+      });
+    },
+    delete(context, payload) {
+      const {
+        id
+      } = payload;
+
+      context.commit('setLoading', {
+        loading: {delete: true}
+      });
+
+      return new Promise((resolve, reject) => {
+        axiosInstance.delete('api/plan', {
+          params: {
+            planId: id
+          }
+        })
+          .then((value) => {
+            context.commit('setLoading', {
+              loading: {delete: false}
+            });
+            resolve(value.data)
+          })
+          .catch(reason => {
+            context.commit('setLoading', {
+              loading: {delete: false}
+            });
             reject(reason.response);
           })
       })
