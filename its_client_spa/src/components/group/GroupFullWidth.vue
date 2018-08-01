@@ -5,7 +5,7 @@
         <v-layout class="title" align-center justify-space-between>
           {{name}}
           <v-btn color="red" flat icon
-                 @click.stop="">
+                 @click.stop="$emit('delete',id)">
             <v-icon>
               fas fa-trash
             </v-icon>

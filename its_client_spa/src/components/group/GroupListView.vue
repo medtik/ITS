@@ -14,7 +14,8 @@
               :key="group.id"
               elevation-2
               mt-2>
-        <GroupFullWidth v-bind="group"/>
+        <GroupFullWidth v-bind="group"
+                        @delete="deleteGroup"/>
       </v-flex>
       <v-flex style="height: 25vh">
         <!--Holder-->
@@ -44,6 +45,14 @@
     mounted() {
       this.$store.dispatch('group/fetchMyGroups')
     },
+    methods: {
+      deleteGroup(id) {
+        this.$store.dispatch('group/delete', {id})
+          .then(() => {
+            this.$store.dispatch('group/fetchMyGroups')
+          })
+      }
+    }
   }
 </script>
 
