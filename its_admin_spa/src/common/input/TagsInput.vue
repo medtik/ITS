@@ -1,6 +1,6 @@
 <template>
   <v-container fluid pa-1>
-    <v-layout row>
+    <v-layout column>
       <v-flex>
         <v-btn icon
                v-if="readonly != ''"
@@ -14,6 +14,11 @@
                 :key="tag.id">
           {{tag.name}}
         </v-chip>
+      </v-flex>
+      <v-flex v-if="error">
+        <v-alert type="error" dismissible>
+          {{error}}
+        </v-alert>
       </v-flex>
     </v-layout>
     <TagChooseDialog :dialog="dialog"
@@ -39,7 +44,8 @@
     props: [
       'value',
       'readonly',
-      'admin'
+      'admin',
+      'error'
     ],
     data() {
       return {

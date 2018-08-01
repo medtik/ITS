@@ -23,7 +23,7 @@
     ],
     data() {
       return {
-        selectedCategory: undefined
+        selectedCategory: ''
       }
     },
     mounted() {

@@ -19,6 +19,7 @@ function mockShell(bodyFunc, noFail) {
           message: 'Có lỗi xẩy ra !'
         })
       }
+
     }, 1500 + (Math.random() * 1000))
   })
 }
@@ -74,20 +75,18 @@ export default {
     },
     create(context, payload) {
       return new Promise((resolve, reject) => {
-        payload.businessHoursInput = _.map(payload.businessHoursInput,
+        // payload.businessHoursInput = _.map(payload.businessHoursInput,
+        //   (value, key, collection) => {
+        //     return {
+        //       day: key,
+        //       from: value.from,
+        //       to: value.to,
+        //     }
+        //   });
+        payload.secondaryPhotos = _.map(payload.secondaryPhotos,
           (value, key, collection) => {
-            return {
-              day: key,
-              from: value.from,
-              to: value.to,
-            }
-          });
-
-        console.log('create', payload.secondaryPhotos, payload);
-            payload.secondaryPhotos = _.map(payload.secondaryPhotos,
-              (value, key, collection) => {
-                console.debug('payload.secondaryPhotos', value, key);
-                return value.url;
+            console.debug('payload.secondaryPhotos', value, key);
+            return value.url;
           });
 
         payload.tagsInput = _.map(payload.tagsInput,

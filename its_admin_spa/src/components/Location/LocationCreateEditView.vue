@@ -22,14 +22,20 @@
                 label="Mô tả"
                 v-model="input.descriptionInput"
               />
-              <v-text-field
-                label="Vĩ độ"
-                v-model="input.latInput"
-              />
-              <v-text-field
-                label="Kinh độ"
-                v-model="input.longInput"
-              />
+              <v-layout row wrap>
+                <v-flex xs12 md6>
+                  <v-text-field
+                    label="Vĩ độ"
+                    v-model="input.latInput"
+                  />
+                </v-flex>
+                <v-flex xs12 md6>
+                  <v-text-field
+                    label="Kinh độ"
+                    v-model="input.longInput"
+                  />
+                </v-flex>
+              </v-layout>
               <v-text-field
                 label="Web"
                 v-model="input.websiteInput"
@@ -91,65 +97,24 @@
           </v-flex>
           <v-flex my-3>
             <span class="subheading">Hình ảnh</span>
-            <v-flex pl-3 mt-3>
+            <v-layout column pl-3 mt-3>
               <v-label class="subheading">Ảnh bìa</v-label>
-              <PictureInput
-                v-model="input.primaryPhotoInput"
-                v-bind="{
+              <v-flex>
+                <PictureInput
+                  v-model="input.primaryPhotoInput"
+                  v-bind="{
                 width:300,
                 height:300,
                 size:50,
-                text: 'Ảnh bìa'
+                text: 'Ảnh bìa',
+                center: false
               }"
-              />
-            </v-flex>
-
+                />
+              </v-flex>
+            </v-layout>
             <v-flex pl-3 mt-3>
               <v-label class="subheading">Ảnh thêm</v-label>
-              <v-flex pl-3>
-                <v-layout v-if="input.secondaryPhotos"
-                          mb-4
-                          wrap
-                          row>
-                  <v-flex v-for="(photo,index) in input.secondaryPhotos"
-                          ma-2
-                          style="flex-grow: 0.05"
-                          :key="photo.id">
-                    <v-card>
-                      <v-card-media>
-                        <img :src="photo.url" width="200" height="200"/>
-                      </v-card-media>
-                      <v-card-actions>
-                        <v-btn color="red" flat block
-                               @click="removeSecondaryPhoto(index)">
-                          <v-icon color="red"
-                                  class="white--text">
-                            delete
-                          </v-icon>
-                        </v-btn>
-                      </v-card-actions>
-                    </v-card>
-                  </v-flex>
-                </v-layout>
-                <PictureInput
-                  v-model="input.secondaryPhotoInput"
-                  v-bind="{
-                width:200,
-                height:200,
-                size:40,
-                text: 'Ảnh thêm'
-              }">
-                  <v-btn
-                    color="success"
-                    slot="extraAction"
-                    slot-scope="props"
-                    v-if="props.value"
-                    @click="secondaryConfirm(props.value)"
-                    block>
-                    <v-icon class="white--text">fas fa-file-upload</v-icon>
-                  </v-btn>
-                </PictureInput>
-              </v-flex>
+              <MultiPhotoInput v-model="input.secondaryPhotos"/>
             </v-flex>
           </v-flex>
           <v-divider/>
@@ -192,9 +157,9 @@
   import {
     PictureInput,
     TagsInput,
-    LocationBusinessHoursInput
+    LocationBusinessHoursInput,
+    MultiPhotoInput
   } from "../../common/input";
-
 
   export default {
     name: "LocationCreateEditView",
@@ -205,7 +170,8 @@
       PictureInput,
       TagsInput,
       LocationBusinessHoursInput,
-      TagCreateEditDialog
+      TagCreateEditDialog,
+      MultiPhotoInput
     },
     data() {
       return {
@@ -234,42 +200,13 @@
           tagsInput: [],
           reviewsInput: [],
           //BusinessHours inputs
-          businessHoursInput: {
-            day1: {
-              from: undefined,
-              to: undefined
-            },
-            day2: {
-              from: undefined,
-              to: undefined
-            },
-            day3: {
-              from: undefined,
-              to: undefined
-            },
-            day4: {
-              from: undefined,
-              to: undefined
-            },
-            day5: {
-              from: undefined,
-              to: undefined
-            },
-            day6: {
-              from: undefined,
-              to: undefined
-            },
-            day7: {
-              from: undefined,
-              to: undefined
-            },
-          },
+          businessHoursInput: [],
           primaryPhotoInput: undefined,
           secondaryPhotoInput: undefined,
           secondaryPhotos: undefined,
         },
         //Dialog
-        createEditTag:{
+        createEditTag: {
           dialog: false,
         },
         error: {
@@ -341,13 +278,7 @@
           this.input.emailInput = location.email;
           this.input.areaInput = location.area;
           this.input.tagsInput = location.tags;
-          this.input.businessHoursInput.day1 = _.extend({}, location.businessHours[0]);
-          this.input.businessHoursInput.day2 = _.extend({}, location.businessHours[1]);
-          this.input.businessHoursInput.day3 = _.extend({}, location.businessHours[2]);
-          this.input.businessHoursInput.day4 = _.extend({}, location.businessHours[3]);
-          this.input.businessHoursInput.day5 = _.extend({}, location.businessHours[4]);
-          this.input.businessHoursInput.day6 = _.extend({}, location.businessHours[5]);
-          this.input.businessHoursInput.day7 = _.extend({}, location.businessHours[6]);
+          this.input.businessHoursInput.days = location.businessHours;
           this.input.isVerifiedInput = location.isVerified;
           this.input.isCloseInput = location.isClose;
           this.input.primaryPhotoInput = location.primaryPhoto.url;
@@ -365,7 +296,7 @@
         });
         this.input.secondaryPhotoInput = undefined;
       },
-      onCreateTag(item){
+      onCreateTag(item) {
         this.$store.dispatch('tag/create', {tag: item})
           .then(value => {
             this.$store.dispatch('tagDialog/getAll');

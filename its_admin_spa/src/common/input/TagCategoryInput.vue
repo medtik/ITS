@@ -23,11 +23,11 @@
     ],
     data() {
       return {
-        categoryInput: undefined
+        selectedCategory: ''
       }
     },
     mounted() {
-      this.categoryInput = this.value;
+      this.selectedCategory = this.value;
     }
   }
 </script>

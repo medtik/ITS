@@ -1,5 +1,5 @@
 <template>
-  <v-layout justify-center>
+  <v-layout :justify-center="center">
     <div :style="{width: `${width}px`}">
       <vue-picture-input
         :prefill="photoPrefill"
@@ -34,13 +34,21 @@
   export default {
     name: "PictureInput",
     components: {VuePictureInput},
-    props: [
-      'value',
-      'width',
-      'height',
-      'size',
-      'text',
-    ],
+    props: {
+      value: null,
+      width:null,
+      height: null,
+      text: null,
+      size: {
+        type: Number,
+        default: 50
+      },
+      center: {
+        type: Boolean,
+        default: true
+      }
+
+    },
     data() {
       return {
         photoPrefill: undefined
