@@ -24,7 +24,7 @@
       </v-flex>
       <v-flex>
         <v-btn color="success"
-               :loading="createBtnLoading"
+               :loading="createLoading"
                @click="onCreate">
           Tạo
         </v-btn>
@@ -38,12 +38,14 @@
 </template>
 
 <script>
+  import {mapGetters} from "vuex";
+
   export default {
     name: "PlanCreateView",
     data() {
       return {
         createBtnLoading: false,
-        input:{
+        input: {
           name: undefined,
           startDate: undefined,
           endDate: undefined,
@@ -54,24 +56,31 @@
       title() {
         const {
           name
-        } = this.$router
+        } = this.$route;
         if (name === 'PlanCreate') {
           return "Tạo chuyến đi";
         } else {
           return "Chỉnh sửa chuyến đi";
         }
-      }
-    },
-    created() {
-
+      },
+      ...mapGetters('plan/create', {
+        createLoading: 'createLoading',
+      })
     },
     methods: {
       onCreate() {
-        this.createBtnLoading = true;
-        setTimeout(() => {
-            this.$router.push({name: "PlanDetail",query: {id: undefined}})
-          }
-          , 2000);
+        this.$store.dispatch('plan/create', {
+          ...this.input
+        })
+          .then(value => {
+            // this.$router.push({
+            //   name: "PlanDetail",
+            //   query: {
+            //     id: value
+            //   }
+            // })
+            this.$router.back();
+          })
       },
       onCancel() {
         this.$router.back();

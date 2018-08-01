@@ -2,7 +2,7 @@
   <v-layout column>
     <v-flex ma-2>
       <v-layout style="justify-content: space-between; align-items: baseline">
-        <router-link :to="{name:'PlanDetail',params:{id: this.id}}"
+        <router-link :to="{name:'PlanDetail',query:{id: this.id}}"
                      tag="span" class="fakeLink title font-weight-medium">
           {{name}}
         </router-link>

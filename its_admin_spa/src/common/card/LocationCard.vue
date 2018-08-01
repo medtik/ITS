@@ -46,7 +46,7 @@
         return {
           to: {
             name: 'LocationDetail',
-            params: {
+            query: {
               id: this.id
             }
           }

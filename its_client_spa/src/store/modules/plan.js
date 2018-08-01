@@ -11,28 +11,32 @@ export default {
     loading: {
       myPlans: true,
       featuredPlans: true,
-      detailedPlan: true
+      detailedPlan: true,
+      create: false,
     }
   },
   getters: {
     featuredPlans(state) {
       return state.featuredPlans
     },
-    featuredPlansLoading(state) {
-      return state.loading.featuredPlans;
-    },
     detailedPlan(state) {
       return state.detailedPlan;
-    },
-    detailedPlanLoading(state) {
-      return state.loading.detailedPlan;
     },
     myPlans(state) {
       return state.myPlans;
     },
+    featuredPlansLoading(state) {
+      return state.loading.featuredPlans;
+    },
+    detailedPlanLoading(state) {
+      return state.loading.detailedPlan;
+    },
     myPlansLoading(state) {
       return state.loading.myPlans;
     },
+    createLoading(state){
+      return state.loading.create;
+    }
   },
   mutations: {
     setFeaturedPlans(state, payload) {
@@ -86,8 +90,8 @@ export default {
         id
       } = payload;
 
-      context.commit('setLoading',{
-        loading:{
+      context.commit('setLoading', {
+        loading: {
           detailedPlan: true
         }
       });
@@ -96,16 +100,16 @@ export default {
       })
         .then((value) => {
           context.commit('setDetailedPlan', {plan: value.data});
-          context.commit('setLoading',{
-            loading:{
+          context.commit('setLoading', {
+            loading: {
               detailedPlan: false
             }
           });
         })
         .catch(reason => {
           console.error('fetchPlanById', reason.response);
-          context.commit('setLoading',{
-            loading:{
+          context.commit('setLoading', {
+            loading: {
               detailedPlan: false
             }
           });
@@ -133,7 +137,33 @@ export default {
             reject(reason.response);
           })
       });
+    },
+    create(context, payload) {
+      const {
+        name,
+        startDate,
+        endDate
+      } = payload;
 
+      context.commit('setLoading', {
+        loading: {create: true}
+      });
+      return new Promise((resolve, reject) => {
+        axiosInstance.post('api/plan', {name, startDate, endDate})
+          .then(value => {
+            context.commit('setLoading', {
+              loading: {create: false}
+            });
+            resolve(value.data);
+          })
+          .catch(reason => {
+            context.commit('setLoading', {
+              loading: {create: false}
+            });
+            console.error('plan/create', reason.response);
+            reject(reason.response);
+          })
+      })
     }
   }
 }
