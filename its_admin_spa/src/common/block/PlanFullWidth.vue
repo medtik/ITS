@@ -16,7 +16,7 @@
           </v-btn>
           <v-btn icon flat large
                  color="red"
-                 @click="$emit('delete')">
+                 @click="$emit('delete',id)">
             <v-icon>
               fas fa-trash
             </v-icon>
@@ -26,7 +26,7 @@
     </v-flex>
     <v-flex v-if="mode == 'private'" ma-2>
       <v-label>
-        {{startDate}} - {{endDate}}
+        {{formattedStartDate}} - {{formattedEndDate}}
       </v-label>
     </v-flex>
     <v-flex v-if="mode == 'public'" ma-2>
@@ -61,6 +61,7 @@
 
 <script>
   import {LocationCard} from "../card"
+  import moment from "moment";
 
   export default {
     name: "PlanFullWidth",
@@ -84,6 +85,12 @@
       },
       isHaveLocations() {
         return this.locations && this.locations.length > 0;
+      },
+      formattedStartDate(){
+        return moment(this.startDate).format('DD/MM/YYYY');
+      },
+      formattedEndDate(){
+        return moment(this.endDate).format('DD/MM/YYYY');
       }
     }
   }

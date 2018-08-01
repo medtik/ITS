@@ -7,9 +7,10 @@
     </v-toolbar>
     <v-layout column my-3>
       <v-flex mx-3>
-        <v-text-field label="Tên nhóm"/>
+        <v-text-field label="Tên nhóm" v-model="input.name"/>
         <v-btn color="success"
-               @click="$router.back()">
+               :loading="loading"
+               @click="createGroup">
           Tạo
         </v-btn>
         <v-btn color="secondary"
@@ -22,8 +23,32 @@
 </template>
 <!--TODO thêm chuyến đi-->
 <script>
+  import {mapGetters} from "vuex";
+
   export default {
-    name: "CreateGroupView"
+    name: "CreateGroupView",
+    data(){
+      return {
+        input:{
+          name
+        }
+      }
+    },
+    computed:{
+      ...mapGetters('group', {
+        loading: 'createLoading'
+      })
+    },
+    methods:{
+      createGroup(){
+        this.$store.dispatch('group/create',{
+          ...this.input
+        })
+          .then(value => {
+            this.$router.back();
+          })
+      }
+    }
   }
 </script>
 
