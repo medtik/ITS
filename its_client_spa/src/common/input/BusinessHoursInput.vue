@@ -25,11 +25,18 @@
         :readonly="readonly"
         placeholder="Giờ:phút"/>
     </v-flex>
-    <v-flex>
+    <v-flex style="flex-grow: 0">
       <v-checkbox label="Cả ngày" v-model='allDayCheck' @input="emitInput">
 
       </v-checkbox>
     </v-flex>
+    <v-layout style="flex-grow: 0" align-center>
+      <v-btn color="red" icon flat @click="$emit('delete')">
+        <v-icon small>
+          fas fa-trash
+        </v-icon>
+      </v-btn>
+    </v-layout>
   </v-layout>
 </template>
 <!--TODO ADD FORM VALIDATION-->
