@@ -2,15 +2,16 @@ import {axiosInstance} from "../../common/util";
 import _ from "lodash";
 import moment from "moment";
 
-
 export default {
   namespaced: true,
   state: {
     featuredPlans: [],
+    detailedPlan: {},
     myPlans: [],
     loading: {
       myPlans: true,
-      featuredPlans: true
+      featuredPlans: true,
+      detailedPlan: true
     }
   },
   getters: {
@@ -19,6 +20,12 @@ export default {
     },
     featuredPlansLoading(state) {
       return state.loading.featuredPlans;
+    },
+    detailedPlan(state) {
+      return state.detailedPlan;
+    },
+    detailedPlanLoading(state) {
+      return state.loading.detailedPlan;
     },
     myPlans(state) {
       return state.myPlans;
@@ -31,10 +38,19 @@ export default {
     setFeaturedPlans(state, payload) {
       state.featuredPlans = payload.plans;
     },
+    setDetailedPlan(state, payload) {
+      let {
+        plan
+      } = _.cloneDeep(payload);
+      plan.startDate = moment(plan.startDate).format('DD/MM/YYYY');
+      plan.endDate = moment(plan.endDate).format('DD/MM/YYYY');
+
+      state.detailedPlan = plan;
+    },
     setMyPlans(state, payload) {
       const plans = _.cloneDeep(payload.plans);
       const formattedPlans = _.map(plans, plan => {
-         return _.mapValues(plan,
+        return _.mapValues(plan,
           (value, key) => {
             switch (key) {
               case 'startDate':
@@ -63,6 +79,36 @@ export default {
           context.commit('setLoading', {
             loading: {featuredPlans: false}
           })
+        })
+    },
+    fetchPlanById(context, payload) {
+      const {
+        id
+      } = payload;
+
+      context.commit('setLoading',{
+        loading:{
+          detailedPlan: true
+        }
+      });
+      axiosInstance.get('api/Plan/Details', {
+        params: {id}
+      })
+        .then((value) => {
+          context.commit('setDetailedPlan', {plan: value.data});
+          context.commit('setLoading',{
+            loading:{
+              detailedPlan: false
+            }
+          });
+        })
+        .catch(reason => {
+          console.error('fetchPlanById', reason.response);
+          context.commit('setLoading',{
+            loading:{
+              detailedPlan: false
+            }
+          });
         })
     },
     fetchMyPlans(context) {
