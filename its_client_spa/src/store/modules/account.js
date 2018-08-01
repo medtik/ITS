@@ -90,10 +90,10 @@ export default {
 
       return new Promise((resolve, reject) => {
         axiosInstance.post('/api/account', {
-          email: email,
+          emailAddress: email,
           password: password,
           rePassword: rePassword,
-          name: name,
+          fullName: name,
           address: address,
           phone: phone,
           birthdate: birthdate,
