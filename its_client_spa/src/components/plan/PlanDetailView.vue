@@ -34,43 +34,18 @@
           <span v-if="!isSmallScreen">Thêm ghi chú</span>
         </v-btn>
       </v-flex>
-      <!--UNSCHEDULED-->
-      <v-flex class="grey lighten-4"
-              v-if="unScheduledItems && unScheduledItems.length > 0">
-        <v-flex my-3>
-          <v-layout row>
-            <v-flex class="title">Chưa lên lịch</v-flex>
-          </v-layout>
-        </v-flex>
-        <draggable v-model="unScheduledItems"
-                   :options="{handle:'.handle-bar', group:'items'}">
-          <v-flex elevation-2 my-1
-                  v-for="item in unScheduledItems"
-                  :key="item.id"
-                  class="white">
-            <LocationFullWidth v-if="item.location" v-bind="item.location">
-              <v-icon slot="handle" class="handle-bar">reorder</v-icon>
-            </LocationFullWidth>
-            <NoteFullWidth v-else v-bind="item.note">
-              <v-icon slot="handle" class="handle-bar">reorder</v-icon>
-            </NoteFullWidth>
-          </v-flex>
-          <v-flex v-if="unScheduledItems <= 0" style="height: 50px">
-            <!--Spacer-->
-          </v-flex>
-        </draggable>
-      </v-flex>
       <!--DAYS-->
       <v-flex v-for="(day,index) in days"
-              :key="index"
+              :key="day.planDayText"
               class="grey lighten-4">
         <v-flex class="title" my-2>
-          Ngày {{index}}
+          {{day.planDayText}}
         </v-flex>
-        <draggable v-model="days[index]"
-                   :options="{handle:'.handle-bar', group:'items'}">
+        <draggable v-model="day.items"
+                   :move="onDraggableMove"
+                   :options="{handle:'.handle-bar', group:day.planDayText}">
           <v-flex elevation-2 my-1
-                  v-for="item in day"
+                  v-for="item in day.items"
                   :key="item.id"
                   class="white"
           >
@@ -87,10 +62,10 @@
         </draggable>
 
       </v-flex>
-      <v-layout v-if="!unScheduledItems && !days"
+      <v-layout v-if="!days"
                 class="title font-weight-bold"
                 justify-center align-center pa-5>
-        Chuyến đi của bạn chưa có địa điểm nào
+        Chuyến đi của bạn đang trống
       </v-layout>
       <v-flex style="height: 15vh">
         <!--Holder-->
@@ -192,6 +167,7 @@
           publishPlan: false,
           choosePlanDestination: false,
         },
+        items: [],
       }
     },
     mounted() {
@@ -209,101 +185,9 @@
       },
       ...mapGetters('plan', {
         plan: 'detailedPlan',
+        days: 'detailedPlanDays',
         pageLoading: 'detailedPlanLoading'
       }),
-      unScheduledItems() {
-        const unscheduledPredicate = (item) => {
-          return item.planDay == 0;
-        };
-
-        // const locations = _.filter(this.plan.locations, unscheduledPredicate);
-        const locations = _(this.plan.locations)
-          .filter(unscheduledPredicate)
-          .map(item => {
-            return {
-              location: {
-                id: item.locationId,
-                address: item.address,
-                primaryPhoto: item.photo,
-                location: item.title,
-                reviewCount: item.reviewCount,
-                rating: item.rating
-              },
-              id: item.planLocationId,
-              planDay: item.planDay,
-              index: item.index,
-              type: 'location',
-            }
-          })
-          .value();
-        const items = _(this.plan.notes)
-          .filter(unscheduledPredicate)
-          .map(item => {
-            return {
-              note: {
-                name: item.name,
-                description: item.description
-              },
-              id: item.id,
-              planDay: item.planDay,
-              index: item.index,
-              type: 'note',
-            }
-          })
-          .concat(locations)
-          .orderBy(['index'], ['asc'])
-          .value();
-
-        return items;
-      },
-      days() {
-        const scheduledPredicate = (item) => {
-          return item.planDay != 0;
-        };
-
-        const locations = _(this.plan.locations)
-          .filter(scheduledPredicate)
-          .map(item => {
-            return {
-              location: {
-                id: item.locationId,
-                address: item.address,
-                primaryPhoto: item.photo,
-                location: item.title,
-                reviewCount: item.reviewCount,
-                rating: item.rating
-              },
-              id: item.planLocationId,
-              planDay: item.planDay,
-              index: item.index,
-              type: 'location',
-            }
-          })
-          .value();
-
-        const items = _(this.plan.notes)
-          .filter(scheduledPredicate)
-          .map(item => {
-            return {
-              note: {
-                name: item.name,
-                description: item.description
-              },
-              id: item.id,
-              planDay: item.planDay,
-              index: item.index,
-              type: 'note',
-            }
-          })
-          .concat(locations)
-          .orderBy(['index'], ['asc'])
-          .groupBy(item => {
-            return item.planDay
-          })
-          .value();
-
-        return items
-      },
       formattedStartDate() {
         return moment(this.plan.startDate).format('DD/MM/YYYY');
       },
@@ -312,6 +196,11 @@
       }
     },
     methods: {
+      onDraggableMove(event) {
+        // this.$store.commit('plan/setDetailedPlanIndex',{
+        //   context: event.draggedContext
+        // })
+      },
       onAddNote() {
         this.loading.createNoteBtn = true;
         setTimeout(() => {

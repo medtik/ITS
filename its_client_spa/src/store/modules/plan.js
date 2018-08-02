@@ -6,7 +6,10 @@ export default {
   namespaced: true,
   state: {
     featuredPlans: [],
-    detailedPlan: {},
+    detailedPlan: {
+      locations: undefined,
+      notes: undefined
+    },
     myPlans: [],
     loading: {
       myPlans: true,
@@ -22,6 +25,64 @@ export default {
     },
     detailedPlan(state) {
       return state.detailedPlan;
+    },
+    detailedPlanDays(state, getters) {
+      const getDayText = (planDay) => {
+        switch (planDay) {
+          case "0":
+          case 0:
+            return "Chưa lên lịch";
+          default:
+            return `Ngày ${planDay}`
+        }
+      };
+      const locations = _(getters.detailedPlan.locations)
+        .map(item => {
+          return {
+            location: {
+              id: item.locationId,
+              address: item.address,
+              primaryPhoto: item.photo,
+              location: item.title,
+              reviewCount: item.reviewCount,
+              rating: item.rating
+            },
+            id: item.planLocationId,
+            planDay: item.planDay,
+            index: item.index,
+            type: 'location',
+          }
+        })
+        .value();
+
+      const items = _(getters.detailedPlan.notes)
+        .map(item => {
+          return {
+            note: {
+              name: item.name,
+              description: item.description
+            },
+            id: item.id,
+            planDay: item.planDay,
+            index: item.index,
+            type: 'note',
+          }
+        })
+        .concat(locations)
+        .orderBy(['index'], ['asc'])
+        .groupBy(item => {
+          return item.planDay
+        })
+        .map((value, key) => {
+          return {
+            planDayText: getDayText(key),
+            items: value
+          }
+        })
+        .values()
+        .value();
+
+      return items
     },
     myPlans(state) {
       return state.myPlans;
@@ -45,9 +106,53 @@ export default {
     },
     setDetailedPlan(state, payload) {
       state.detailedPlan = _.cloneDeep(payload.plan);
-},
+    },
     setMyPlans(state, payload) {
       state.myPlans = _.cloneDeep(payload.plans);
+    },
+    setDetailedPlanIndex(state, payload) {
+//       {…}
+// ​
+//       id: 7
+//       ​
+//       index: 2
+//       ​
+//       location: Object { id: 30, address: "263/90 Tô Ký, Trung Mỹ Tây, Quận 12, Hồ Chí Minh, Việt Nam", location: "Moda House Coffee", … }
+//       ​
+//       planDay: 0
+//       ​
+//       type: "location"
+//       ​
+//           <prototype>: Object { … }
+//             1 0
+
+      let {
+        element,
+        futureIndex,
+        index
+      } = payload.context;
+      if(index == futureIndex){
+        return;
+      }
+      index++;
+      futureIndex++;
+
+      if (element.type == "location") {
+        const foundElement = _.find(state.detailedPlan.locations, (location) => {
+          return element.id == location.planLocationId;
+        });
+        // state.detailedPlan.locations = _.
+      } else {
+        const  foundElement = _.find(state.detailedPlan.notes, (note) => {
+          return element.id == note.id;
+        });
+      }
+
+
+      console.debug('setDetailedPlanIndex', element,
+        JSON.parse(JSON.stringify(foundElement)),
+        futureIndex + 1,
+        index + 1);
     },
     setLoading(state, payload) {
       state.loading = _.assign(state.loading, payload.loading);
