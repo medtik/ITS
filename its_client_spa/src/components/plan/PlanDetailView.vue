@@ -34,36 +34,9 @@
           <span v-if="!isSmallScreen">Thêm ghi chú</span>
         </v-btn>
       </v-flex>
-      <!--UNSCHEDULED-->
-      <v-flex class="grey lighten-4"
-              v-if="unScheduledItems && unScheduledItems.length > 0">
-        <v-flex my-3>
-          <v-layout row>
-            <v-flex class="title">Chưa lên lịch</v-flex>
-          </v-layout>
-        </v-flex>
-        <draggable v-model="unScheduledItems"
-                   :move="onDraggableMove"
-                   :options="{handle:'.handle-bar', group:'items'}">
-          <v-flex elevation-2 my-1
-                  v-for="item in unScheduledItems"
-                  :key="item.id"
-                  class="white">
-            <LocationFullWidth v-if="item.location" v-bind="item.location">
-              <v-icon slot="handle" class="handle-bar">reorder</v-icon>
-            </LocationFullWidth>
-            <NoteFullWidth v-else v-bind="item.note">
-              <v-icon slot="handle" class="handle-bar">reorder</v-icon>
-            </NoteFullWidth>
-          </v-flex>
-          <v-flex v-if="unScheduledItems <= 0" style="height: 50px">
-            <!--Spacer-->
-          </v-flex>
-        </draggable>
-      </v-flex>
       <!--DAYS-->
       <v-flex v-for="(day,index) in days"
-              :key="index"
+              :key="day.planDayText"
               class="grey lighten-4">
         <v-flex class="title" my-2>
           {{day.planDayText}}
@@ -71,7 +44,7 @@
         <draggable v-model="days[index]"
                    :options="{handle:'.handle-bar', group:'items'}">
           <v-flex elevation-2 my-1
-                  v-for="item in day"
+                  v-for="item in day.items"
                   :key="item.id"
                   class="white"
           >
@@ -213,17 +186,14 @@
         plan: 'detailedPlan',
         pageLoading: 'detailedPlanLoading'
       }),
-      unScheduledItems() {
-        return []
-      },
-      GroupedScheduledItems(){
-        return []
-      },
       days() {
         const getDayText = (planDay) => {
           switch (planDay) {
-            case 0: return "Chưa lên lịch";
-            default: return `Ngày ${planDay}`
+            case "0":
+            case 0:
+              return "Chưa lên lịch";
+            default:
+              return `Ngày ${planDay}`
           }
         };
         const locations = _(this.plan.locations)
@@ -263,7 +233,12 @@
           .groupBy(item => {
             return item.planDay
           })
-          .map()
+          .map((value, key) => {
+            return {
+              planDayText: getDayText(key),
+              items: value
+            }
+          })
           .value();
 
         return items
@@ -276,7 +251,7 @@
       }
     },
     methods: {
-      onDraggableMove(){
+      onDraggableMove() {
         console.log('moved');
       },
       onAddNote() {
