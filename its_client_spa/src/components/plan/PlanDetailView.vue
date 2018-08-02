@@ -41,8 +41,9 @@
         <v-flex class="title" my-2>
           {{day.planDayText}}
         </v-flex>
-        <draggable v-model="days[index]"
-                   :options="{handle:'.handle-bar', group:'items'}">
+        <draggable v-model="day.items"
+                   :move="onDraggableMove"
+                   :options="{handle:'.handle-bar', group:day.planDayText}">
           <v-flex elevation-2 my-1
                   v-for="item in day.items"
                   :key="item.id"
@@ -184,65 +185,9 @@
       },
       ...mapGetters('plan', {
         plan: 'detailedPlan',
+        days: 'detailedPlanDays',
         pageLoading: 'detailedPlanLoading'
       }),
-      days() {
-        const getDayText = (planDay) => {
-          switch (planDay) {
-            case "0":
-            case 0:
-              return "Chưa lên lịch";
-            default:
-              return `Ngày ${planDay}`
-          }
-        };
-        const locations = _(this.plan.locations)
-          .map(item => {
-            return {
-              location: {
-                id: item.locationId,
-                address: item.address,
-                primaryPhoto: item.photo,
-                location: item.title,
-                reviewCount: item.reviewCount,
-                rating: item.rating
-              },
-              id: item.planLocationId,
-              planDay: item.planDay,
-              index: item.index,
-              type: 'location',
-            }
-          })
-          .value();
-
-        const items = _(this.plan.notes)
-          .map(item => {
-            return {
-              note: {
-                name: item.name,
-                description: item.description
-              },
-              id: item.id,
-              planDay: item.planDay,
-              index: item.index,
-              type: 'note',
-            }
-          })
-          .concat(locations)
-          .orderBy(['index'], ['asc'])
-          .groupBy(item => {
-            return item.planDay
-          })
-          .map((value, key) => {
-            return {
-              planDayText: getDayText(key),
-              items: value
-            }
-          })
-          .value();
-
-        return items
-      },
       formattedStartDate() {
         return moment(this.plan.startDate).format('DD/MM/YYYY');
       },
@@ -251,8 +196,10 @@
       }
     },
     methods: {
-      onDraggableMove() {
-        console.log('moved');
+      onDraggableMove(event) {
+        // this.$store.commit('plan/setDetailedPlanIndex',{
+        //   context: event.draggedContext
+        // })
       },
       onAddNote() {
         this.loading.createNoteBtn = true;

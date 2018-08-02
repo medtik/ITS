@@ -227,8 +227,7 @@
         }
       },
       validate() {
-        return this.$refs[this.refs.question].validate() &&
-          this.$refs[this.refs.answerText].validate() && false;
+        return this.$refs[this.refs.question].validate();
       },
       validateNoTagsAnswer() {
         //tags,text
