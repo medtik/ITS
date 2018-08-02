@@ -11,7 +11,8 @@
       </v-toolbar-title>
       <v-toolbar-items slot="extension" style="width: 100%">
         <v-layout class="justify-space-around">
-          <v-btn flat @click="dialog.choosePlanDestination = true">
+          <v-btn flat @click="dialog.choosePlanDestination = true"
+                 :loading="addPlanToGroupLoading">
             <v-icon large>fas fa-heart</v-icon>
             <span v-if="!isSmallScreen">&nbsp; Lưu</span>
           </v-btn>
@@ -133,8 +134,12 @@
     </v-layout>
     <!--DIALOG-->
     <ChoosePlanDestinationDialog :dialog="dialog.choosePlanDestination"
-                                 @select="dialog.choosePlanDestination = false"
+                                 @select="onAddToGroupSelected"
                                  @close="dialog.choosePlanDestination = false"/>
+    <SuccessDialog
+      v-bind="success"
+      @close="success.dialog = false"
+    ></SuccessDialog>
   </v-content>
 </template>
 
@@ -142,9 +147,11 @@
   import {mapGetters} from "vuex";
   import LocationFullWidth from "../../common/block/LocationFullWidth";
   import NoteFullWidth from "./NoteFullWidth";
-  import ChoosePlanDestinationDialog from "../../common/input/ChoosePlanDestinationDialog";
+  import {ChoosePlanDestinationDialog} from "../../common/input";
   import draggable from 'vuedraggable'
   import moment from "moment";
+  import {SuccessDialog} from "../../common/block";
+
   import _ from "lodash";
 
 
@@ -162,6 +169,10 @@
         loading: {
           createNoteBtn: false,
           publishBtn: false,
+        },
+        success: {
+          dialog: false,
+          message: ''
         },
         dialog: {
           addNote: false,
@@ -186,7 +197,8 @@
       },
       ...mapGetters('plan', {
         plan: 'detailedPlan',
-        pageLoading: 'detailedPlanLoading'
+        pageLoading: 'detailedPlanLoading',
+        addPlanToGroupLoading: 'addPlanToGroupLoading'
       }),
       formattedStartDate() {
         return moment(this.plan.startDate).format('DD/MM/YYYY');
@@ -196,6 +208,22 @@
       }
     },
     methods: {
+      onAddToGroupSelected(payload) {
+        const {
+          group
+        } = payload;
+        this.dialog.choosePlanDestination = false;
+        this.$store.dispatch('group/addPlanToGroup', {
+          planId: this.planId,
+          groupId: group.id
+        })
+          .then((value) => {
+            this.success = {
+              dialog: true,
+              message: `Thêm chuyến đi hiện tại vào nhóm ${group.name} thành công.`
+            }
+          })
+      },
       onAddNote() {
         this.loading.createNoteBtn = true;
         setTimeout(() => {
