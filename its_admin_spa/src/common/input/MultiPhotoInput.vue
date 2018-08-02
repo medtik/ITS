@@ -66,9 +66,6 @@
       }
     },
     methods: {
-      onInput() {
-        this.$emit('input', this.photos);
-      },
       addImageClick() {
         if (!this.photos) {
           this.photos = [];
@@ -76,11 +73,13 @@
         if (this.photoInput) {
           this.photos.push(this.photoInput);
           this.photoInput = undefined;
+          this.$emit('input', this.photos);
         }
 
       },
       removeSecondaryPhoto(index) {
         this.photos.splice(index, 1);
+        this.$emit('input', this.photos);
       }
     }
   }

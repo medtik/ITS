@@ -86,8 +86,10 @@ export default {
         payload.secondaryPhotos = _.map(payload.secondaryPhotos,
           (value, key, collection) => {
             console.debug('payload.secondaryPhotos', value, key);
-            return value.url;
+            return value;
           });
+
+        console.debug("createlocation", payload);
 
         payload.tagsInput = _.map(payload.tagsInput,
           (value, key, collection) => {
@@ -130,6 +132,8 @@ export default {
               return key;
           }
         });
+
+        console.debug("createlocation/formatted", formatted);
 
         axiosInstance.post('api/location', formatted)
           .then(resolve)
