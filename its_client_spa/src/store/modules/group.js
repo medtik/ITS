@@ -17,16 +17,28 @@ export default {
     myGroups(state) {
       return state.myGroups;
     },
+    detailedGroup(state){
+      return state.detailedGroup;
+    },
     myGroupsLoading(state) {
       return state.loading.myGroups;
     },
-    createLoading(state){
+    createLoading(state) {
       return state.loading.create;
+    },
+    deleteLoading(state) {
+      return state.loading.delete;
+    },
+    detailedGroupLoading(state) {
+      return state.loading.detailedGroup;
     }
   },
   mutations: {
     setMyGroup(state, payload) {
       state.myGroups = payload.groups;
+    },
+    setDetailedGroup(state, payload) {
+      state.detailedGroup = payload.group;
     },
     setLoading(state, payload) {
       state.loading = _.assign(state.loading, payload.loading);
@@ -63,6 +75,25 @@ export default {
         loading: {detailedGroup: true}
       });
 
+      axiosInstance.get('api/group/Details', {
+        params: {
+          id
+        }
+      })
+        .then(value => {
+          context.commit('setDetailedGroup', {
+            group: value.data
+          });
+          context.commit('setLoading', {
+            loading: {detailedGroup: false}
+          });
+        })
+        .catch(reason => {
+          context.commit('setLoading', {
+            loading: {detailedGroup: false}
+          });
+          console.error('group/fetchById', reason.response);
+        })
 
     },
     create(context, payload) {
@@ -101,7 +132,7 @@ export default {
       });
       return new Promise((resolve, reject) => {
         axiosInstance.delete('api/group', {
-          params:{
+          params: {
             id
           }
         })

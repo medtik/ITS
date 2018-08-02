@@ -57,7 +57,7 @@
       routerLink() {
         return {
           name: "GroupDetail",
-          params:{
+          query:{
             'id': this.id
           }
         }
