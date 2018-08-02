@@ -11,7 +11,6 @@
     </v-layout>
     <v-layout slot="title">
       <v-flex class="title" pl-1>
-        <!--<v-icon>{{locationIcon}}</v-icon>-->
         {{location}}
       </v-flex>
     </v-layout>
@@ -46,10 +45,23 @@
         </v-chip>
       </v-flex>
     </v-layout>
+    <v-layout slot="action" column align-end>
+      <v-btn icon flat color="red">
+        <v-icon>
+          fas fa-trash
+        </v-icon>
+      </v-btn>
+    </v-layout>
   </ListItemLayout>
 </template>
-<!--Plan detail actions-->
-<!--chuyển ngày, lên xuống, xóa-->
+<!--PLAN DETAIL-->
+<!--delete, check-->
+
+<!--PLAN EDIT-->
+<!--up, down, change date-->
+
+<!--SEARCH RESULT-->
+<!--save to plan-->
 <script>
   import StarRating from "vue-star-rating";
   import {ListItemLayout} from "../../common/layout";

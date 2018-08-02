@@ -11,7 +11,6 @@
     </v-layout>
     <v-layout slot="title">
       <v-flex class="title" pl-1>
-        <!--<v-icon>{{locationIcon}}</v-icon>-->
         {{location}}
       </v-flex>
     </v-layout>
@@ -46,10 +45,38 @@
         </v-chip>
       </v-flex>
     </v-layout>
+    <v-layout slot="action" column align-end>
+      <!--PLAN DETAIL-->
+      <!--delete, check-->
+      <template v-if="isOwn">
+        <v-btn icon flat color="success" v-if="isCheck">
+          <v-icon>
+            fas fa-check-circle
+          </v-icon>
+        </v-btn>
+        <v-btn icon flat>
+          <v-icon>
+            fas fa-circle
+          </v-icon>
+        </v-btn>
+        <v-btn icon flat color="red">
+          <v-icon>
+            fas fa-trash
+          </v-icon>
+        </v-btn>
+      </template>
+
+
+      <!--PLAN EDIT-->
+      <!--up, down, change date-->
+
+      <!--SEARCH RESULT-->
+      <!--save to plan-->
+
+    </v-layout>
   </ListItemLayout>
 </template>
-<!--Plan detail actions-->
-<!--chuyển ngày, lên xuống, xóa-->
+
 <script>
   import StarRating from "vue-star-rating";
   import {ListItemLayout} from "../../common/layout";
@@ -68,7 +95,11 @@
       'reviewCount',
       'address',
       'reasons',
-      'primaryPhoto'
+      'primaryPhoto',
+      'isOwn',
+      'isPublic',
+      'isOwnEdit',
+      'isCheck'
     ],
     computed: {
       isSmallScreen() {

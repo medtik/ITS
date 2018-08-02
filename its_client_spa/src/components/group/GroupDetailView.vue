@@ -114,56 +114,7 @@
           choosePlanDestination: false,
           choosePlan: false
         },
-        title: 'Nhóm ABC',
         groupId: undefined,
-        accounts: [
-          {
-            id: 1,
-            photo: "http://lorempixel.com/100/100/people/",
-            name: "Nguyễn văn A",
-            phone: "0909152644",
-            email: "tlphong@tlp.com"
-          },
-          {
-            id: 2,
-            photo: "http://lorempixel.com/100/100/people/",
-            name: "Nguyễn văn C",
-            phone: "0909152644",
-            email: "tlphong@tlp.com"
-          },
-          {
-            id: 3,
-            photo: "http://lorempixel.com/100/100/people/",
-            name: "Nguyễn văn A",
-            phone: "0909152644",
-            email: "tlphong@tlp.com"
-          },
-          {
-            id: 4,
-            photo: "http://lorempixel.com/100/100/people/",
-            name: "Nguyễn văn B",
-            phone: "0909152644",
-            email: "tlphong@tlp.com"
-          },
-          {
-            id: 5,
-            photo: "http://lorempixel.com/100/100/people/",
-            name: "Nguyễn văn A",
-            phone: "0909152644",
-            email: "tlphong@tlp.com"
-          },
-          {
-            id: 6,
-            photo: "http://lorempixel.com/100/100/people/",
-            name: "Nguyễn văn D",
-            phone: "0909152644",
-            email: "tlphong@tlp.com"
-          }
-        ],
-        plans: [
-          {id: 1, title: "Plan ABC", startDate: "20/4/2018", endDate: "27/4/2018"},
-          {id: 2, title: "Plan ABC", startDate: "20/4/2018", endDate: "27/4/2018"}
-        ]
       }
     },
     computed: {
