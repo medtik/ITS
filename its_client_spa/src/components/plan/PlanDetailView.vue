@@ -42,7 +42,8 @@
             <v-flex class="title">Chưa lên lịch</v-flex>
           </v-layout>
         </v-flex>
-        <draggable v-model="unScheduledItems" :options="{handle:'.handle-bar', group:'items'}">
+        <draggable v-model="unScheduledItems"
+                   :options="{handle:'.handle-bar', group:'items'}">
           <v-flex elevation-2 my-1
                   v-for="item in unScheduledItems"
                   :key="item.id"
@@ -50,11 +51,11 @@
             <LocationFullWidth v-if="item.location" v-bind="item.location">
               <v-icon slot="handle" class="handle-bar">reorder</v-icon>
             </LocationFullWidth>
-            <NoteFullWidth v-else v-bind="item">
+            <NoteFullWidth v-else v-bind="item.note">
               <v-icon slot="handle" class="handle-bar">reorder</v-icon>
             </NoteFullWidth>
           </v-flex>
-          <v-flex v-if="plan.unScheduledItems <= 0" style="height: 50px">
+          <v-flex v-if="unScheduledItems <= 0" style="height: 50px">
             <!--Spacer-->
           </v-flex>
         </draggable>
@@ -87,7 +88,9 @@
         </draggable>
 
       </v-flex>
-      <v-layout class="title font-weight-bold" justify-center align-center pa-5>
+      <v-layout v-if="!unScheduledItems && !days"
+                class="title font-weight-bold"
+                justify-center align-center pa-5>
         Chuyến đi của bạn chưa có địa điểm nào
       </v-layout>
       <v-flex style="height: 15vh">
@@ -167,6 +170,7 @@
   import ChoosePlanDestinationDialog from "../../common/input/ChoosePlanDestinationDialog";
   import draggable from 'vuedraggable'
   import moment from "moment";
+  import _ from "lodash";
 
 
   export default {
@@ -209,15 +213,56 @@
         pageLoading: 'detailedPlanLoading'
       }),
       unScheduledItems() {
-        return []
+        const unscheduledPredicate = (item) => {
+          return item.planDay == 0;
+        };
+
+        // const locations = _.filter(this.plan.locations, unscheduledPredicate);
+        const locations = _(this.plan.locations)
+          .filter(unscheduledPredicate)
+          .map(item => {
+            return {
+              location:{
+                id: item.id,
+                address: item.address,
+                primaryPhoto: item.photo,
+                location: item.title,
+                reviewCount: item.reviewCount,
+                rating: item.rating
+              },
+              planDay: item.planDay,
+              index: item.index,
+              type: 'location',
+            }
+          })
+          .value();
+        const items = _(this.plan.notes)
+          .filter(unscheduledPredicate)
+          .map(item => {
+            return {
+              note:{
+                id: item.id,
+                name: item.name,
+                description: item.description
+              },
+              planDay: item.planDay,
+              index: item.index,
+              type: 'note',
+            }
+          })
+          .concat(locations)
+          .orderBy(['index'],['asc'])
+          .value();
+
+        return items;
       },
       days() {
         return []
       },
-      formattedStartDate(){
+      formattedStartDate() {
         return moment(this.plan.startDate).format('DD/MM/YYYY');
       },
-      formattedEndDate(){
+      formattedEndDate() {
         return moment(this.plan.endDate).format('DD/MM/YYYY');
       }
     },
