@@ -62,11 +62,10 @@
       </v-flex>
       <!--DAYS-->
       <v-flex v-for="(day,index) in days"
-              v-if="day"
               :key="index"
               class="grey lighten-4">
         <v-flex class="title" my-2>
-          Ngày {{index + 1}}
+          Ngày {{index}}
         </v-flex>
         <draggable v-model="days[index]"
                    :options="{handle:'.handle-bar', group:'items'}">
@@ -78,7 +77,7 @@
             <LocationFullWidth v-if="item.location" v-bind="item.location">
               <v-icon slot="handle" class="handle-bar">reorder</v-icon>
             </LocationFullWidth>
-            <NoteFullWidth v-else v-bind="item">
+            <NoteFullWidth v-else v-bind="item.note">
               <v-icon slot="handle" class="handle-bar">reorder</v-icon>
             </NoteFullWidth>
           </v-flex>
@@ -222,14 +221,15 @@
           .filter(unscheduledPredicate)
           .map(item => {
             return {
-              location:{
-                id: item.id,
+              location: {
+                id: item.locationId,
                 address: item.address,
                 primaryPhoto: item.photo,
                 location: item.title,
                 reviewCount: item.reviewCount,
                 rating: item.rating
               },
+              id: item.planLocationId,
               planDay: item.planDay,
               index: item.index,
               type: 'location',
@@ -240,24 +240,69 @@
           .filter(unscheduledPredicate)
           .map(item => {
             return {
-              note:{
-                id: item.id,
+              note: {
                 name: item.name,
                 description: item.description
               },
+              id: item.id,
               planDay: item.planDay,
               index: item.index,
               type: 'note',
             }
           })
           .concat(locations)
-          .orderBy(['index'],['asc'])
+          .orderBy(['index'], ['asc'])
           .value();
 
         return items;
       },
       days() {
-        return []
+        const scheduledPredicate = (item) => {
+          return item.planDay != 0;
+        };
+
+        const locations = _(this.plan.locations)
+          .filter(scheduledPredicate)
+          .map(item => {
+            return {
+              location: {
+                id: item.locationId,
+                address: item.address,
+                primaryPhoto: item.photo,
+                location: item.title,
+                reviewCount: item.reviewCount,
+                rating: item.rating
+              },
+              id: item.planLocationId,
+              planDay: item.planDay,
+              index: item.index,
+              type: 'location',
+            }
+          })
+          .value();
+
+        const items = _(this.plan.notes)
+          .filter(scheduledPredicate)
+          .map(item => {
+            return {
+              note: {
+                name: item.name,
+                description: item.description
+              },
+              id: item.id,
+              planDay: item.planDay,
+              index: item.index,
+              type: 'note',
+            }
+          })
+          .concat(locations)
+          .orderBy(['index'], ['asc'])
+          .groupBy(item => {
+            return item.planDay
+          })
+          .value();
+
+        return items
       },
       formattedStartDate() {
         return moment(this.plan.startDate).format('DD/MM/YYYY');

@@ -50,7 +50,7 @@ export default {
         })
           .then(value => {
             context.commit('setDetailedLocation',{
-              location: value.data.locationDetail
+              location: value.data
             });
             context.commit('setLoading', {
               loading: {detailedLocation: false}

@@ -13,21 +13,22 @@
                       :increment="0.1"
                       :show-rating="false"/>
           <span class="subheading">{{location.ratingCount}} đánh giá</span>
-          <div>
-            <v-chip v-for="tag in summaryTag" :key="tag.id">{{tag.name}}</v-chip>
+          <div v-if="summaryTag">
+            <v-chip v-for="(tag, index) in summaryTag" :key="`t${index}`">{{tag}}</v-chip>
           </div>
           <div v-if="todayHours">
             <span>Hôm nay: Mở từ {{todayHours.from}} đến {{todayHours.to}} | </span>
+
             <span class="subheading font-weight-bold"
-                  v-if="todayHours.status == 'close'"
-                  style="color: red">
-            Đang đóng cửa
-          </span>
-            <span class="subheading font-weight-bold"
-                  v-if="todayHours.status == 'open'"
+                  v-if="todayHours.isOpen"
                   style="color: green">
-            Đang mở cửa
-          </span>
+                Đang mở cửa
+            </span>
+            <span class="subheading font-weight-bold"
+                  v-else
+                  style="color: red">
+              Đang đóng cửa
+            </span>
           </div>
         </v-flex>
         <v-flex my-4 mx-2>
@@ -182,21 +183,22 @@
         pageLoading: 'detailedLocationLoading'
       }),
       summaryTag() {
-        return [
-          {id: 1, name: "Ẩm thực pháp"},
-          {id: 2, name: "Có thực đơn chay"},
-          {id: 3, name: "Sang trọng"}
-        ]
+        return this.location.tags;
+        // return [
+        //   {id: 1, name: "Ẩm thực pháp"},
+        //   {id: 2, name: "Có thực đơn chay"},
+        //   {id: 3, name: "Sang trọng"}
+        // ]
       },
       todayHours() {
-        if(!location.businessHours){
-          return;
-        }
+        // if(!location.businessHours){
+        //   return;
+        // }
 
         return {
           from: "8:30 sáng",
           to: "6:30 chiều",
-          status: 'close'
+          isOpen: true
         }
       }
     },
