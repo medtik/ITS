@@ -18,6 +18,7 @@
               elevation-1
               class="white">
         <PlanFullWidth @save="dialog.choosePlanDestination = true"
+                       @delete="deletePlan"
                        v-bind="plan"/>
       </v-flex>
     </v-layout>
@@ -60,6 +61,16 @@
     },
     mounted() {
       this.$store.dispatch('plan/fetchMyPlans')
+    },
+    methods: {
+      deletePlan(id) {
+        this.$store.dispatch('plan/delete', {
+          id
+        })
+          .then(() => {
+            this.$store.dispatch('plan/fetchMyPlans')
+          })
+      }
     }
   }
 </script>

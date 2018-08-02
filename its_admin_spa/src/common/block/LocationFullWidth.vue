@@ -108,7 +108,7 @@
       link() {
         return {
           name: 'LocationDetail',
-          params: {
+          query: {
             id: this.id
           }
         }

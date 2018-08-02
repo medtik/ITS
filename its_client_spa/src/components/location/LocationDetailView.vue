@@ -16,7 +16,7 @@
           <div>
             <v-chip v-for="tag in summaryTag" :key="tag.id">{{tag.name}}</v-chip>
           </div>
-          <div v-if="location.businessHours">
+          <div v-if="todayHours">
             <span>Hôm nay: Mở từ {{todayHours.from}} đến {{todayHours.to}} | </span>
             <span class="subheading font-weight-bold"
                   v-if="todayHours.status == 'close'"
@@ -162,7 +162,7 @@
     created() {
       const {
         id
-      } = this.$route.params;
+      } = this.$route.query;
 
       this.locationId = id;
     },
@@ -189,6 +189,10 @@
         ]
       },
       todayHours() {
+        if(!location.businessHours){
+          return;
+        }
+
         return {
           from: "8:30 sáng",
           to: "6:30 chiều",

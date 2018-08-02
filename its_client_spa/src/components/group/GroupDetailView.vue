@@ -2,7 +2,7 @@
   <v-content>
     <v-toolbar dark flat color="light-blue" dense>
       <v-toolbar-title>
-        {{title}}
+        {{group.name}}
       </v-toolbar-title>
       <v-tabs
         fixed-tabs
@@ -41,7 +41,7 @@
             </v-flex>
             <v-layout row wrap my-2>
               <v-flex xs6 sm4 lg2 pa-1
-                      v-for="account in accounts"
+                      v-for="account in group.users"
                       :key="account.id">
                 <AccountCard v-bind="account"/>
               </v-flex>
@@ -65,7 +65,7 @@
           <v-layout column>
             <v-flex xs12 lg6 my-2 pa-2
                     class="white"
-                    v-for="plan in plans"
+                    v-for="plan in group.plans"
                     :key="plan.id">
               <PlanFullWidth v-bind="plan"
                              @save="dialog.choosePlanDestination = true"/>
@@ -74,9 +74,11 @@
         </v-flex>
       </v-tab-item>
     </v-tabs-items>
-    <v-flex style="height: 15vh">
 
+    <v-flex style="height: 15vh">
+      <!--Holder-->
     </v-flex>
+
     <ChoosePlanDestinationDialog :dialog="dialog.choosePlanDestination"
                                  @select="dialog.choosePlanDestination = false"
                                  @close="dialog.choosePlanDestination = false"
@@ -95,6 +97,7 @@
   import AccountCard from "../../common/card/AccountCard";
   import ChoosePlanDestinationDialog from "../../common/input/ChoosePlanDestinationDialog";
   import ChoosePlanDialog from "../../common/input/ChoosePlanDialog";
+  import {mapGetters} from "vuex";
 
   export default {
     name: "GroupFullWidth",
@@ -112,6 +115,7 @@
           choosePlan: false
         },
         title: 'Nhóm ABC',
+        groupId: undefined,
         accounts: [
           {
             id: 1,
@@ -161,7 +165,23 @@
           {id: 2, title: "Plan ABC", startDate: "20/4/2018", endDate: "27/4/2018"}
         ]
       }
-    }
+    },
+    computed: {
+      ...mapGetters('group',{
+        group: 'detailedGroup',
+        pageLoading: 'detailedGroupLoading'
+      })
+    },
+    created(){
+      const {
+        id
+      } = this.$route.query;
+
+      this.groupId = id;
+    },
+    mounted(){
+      this.$store.dispatch('group/fetchById',{id: this.groupId})
+    },
   }
 </script>
 

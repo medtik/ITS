@@ -2,8 +2,8 @@
   <v-card>
     <v-card-media>
       <v-flex class="v-center-flex" mt-2>
-        <v-avatar>
-          <img :src="photo"/>
+        <v-avatar size="80">
+          <img :src="avatar"/>
         </v-avatar>
       </v-flex>
       <v-icon small
@@ -19,10 +19,10 @@
           <span class=subheading>{{name}}</span>
         </v-flex>
         <v-flex style="text-align: center">
-          <v-label>{{phone}}</v-label>
+          <v-label>{{phoneNumber}}</v-label>
         </v-flex>
         <v-flex style="text-align: center">
-          <v-label>{{email}}</v-label>
+          <v-label>{{emailAddress}}</v-label>
         </v-flex>
       </v-layout>
     </v-card-text>
@@ -33,10 +33,10 @@
   export default {
     name: "AccountCard",
     props: [
-      'photo',
+      'avatar',
       'name',
-      'phone',
-      'email',
+      'phoneNumber',
+      'emailAddress',
     ]
   }
 </script>

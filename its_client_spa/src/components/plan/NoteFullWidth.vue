@@ -13,11 +13,11 @@
     <!--CONTENT-->
     <v-layout column pa-1>
       <v-flex class="title font-weight-medium" my-2>
-        {{title}}
+        {{name}}
       </v-flex>
       <v-divider></v-divider>
       <v-flex class="body-1" pa-1>
-        {{text}}
+        {{description}}
       </v-flex>
     </v-layout>
   </v-layout>
@@ -28,8 +28,8 @@
   export default {
     name: "NoteFullWidth",
     props: [
-      'title',
-      'text'
+      'name',
+      'description'
     ]
   }
 </script>
