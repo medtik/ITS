@@ -1,26 +1,18 @@
 <template>
-  <v-layout row pa-1>
-    <!--HANDLE-->
-    <v-flex xs3
-            sm1
-            d-flex
-            align-center
-            justify-center
-            v-if="$slots.handle"
-            class="text-xs-center">
-      <slot name="handle"></slot>
-    </v-flex>
+  <v-layout row pa-1 style="max-height: 200px; height: 100px">
     <!--PHOTO-->
-    <v-flex style="flex-grow: 0">
-      <router-link class="fakeLink"
-                   tag="div"
-                   :to="link">
-        <v-avatar tile size="140">
-          <img :src="primaryPhoto"/>
-        </v-avatar>
-      </router-link>
+    <v-flex xs4 lg2 style="width: 100px">
+       <router-link class="fakeLink"
+                    tag="div"
+                    :to="link">
+         <v-flex>
+           <img :src="primaryPhoto" style="max-width: 100%; max-height: 100%"/>
+         </v-flex>
+       </router-link>
     </v-flex>
-
+    <v-flex shrink>
+      <v-divider vertical></v-divider>
+    </v-flex>
     <!--FIELDS-->
     <v-flex row layout wrap px-1>
       <!--SHORT-TOP FIELD-->
@@ -49,7 +41,6 @@
           <span>{{reviewCount}} bình luận</span>
         </v-flex>
       </v-layout>
-
       <!--LONG-BOT FIELD-->
       <v-flex column layout xs12>
         <v-flex
@@ -68,21 +59,10 @@
 
       </v-flex>
     </v-flex>
-
-    <!--<v-flex pa-2 style="flex-grow: 0">-->
-      <!--<router-link class="fakeLink"-->
-                   <!--tag="div"-->
-                   <!--:to="link">-->
-        <!--<v-layout column justify-around>-->
-
-
-
-        <!--</v-layout>-->
-      <!--</router-link>-->
-    <!--</v-flex>-->
   </v-layout>
 </template>
-
+<!--Plan detail actions-->
+<!--chuyển ngày, lên xuống, xóa-->
 <script>
   import StarRating from "vue-star-rating";
 
@@ -102,6 +82,16 @@
       'primaryPhoto'
     ],
     computed: {
+      imageSize() {
+        if (this.isSmallScreen) {
+          return 100
+        } else {
+          return 150
+        }
+      },
+      isSmallScreen() {
+        return this.$vuetify.breakpoint.name === 'xs'
+      },
       locationIcon() {
         return 'restaurant';
       },
