@@ -45,8 +45,8 @@
         this.onInputChange();
       },
       onRemove(val){
-        this.businessHours = _.remove(this.businessHours, (value, index)=>{
-          return index == val;
+        this.businessHours = _.filter(this.businessHours, (value, index)=>{
+          return index != val;
         });
       }
     }
