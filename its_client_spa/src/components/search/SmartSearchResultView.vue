@@ -16,7 +16,7 @@
                 elevation-2
                 mb-2
                 class="white">
-          <LocationFullWidth v-bind="location"/>
+          <LocationFullWidth v-bind="location" :isSearchResult="true"/>
         </v-flex>
         <v-flex>
           <v-btn block flat color="secondary">
