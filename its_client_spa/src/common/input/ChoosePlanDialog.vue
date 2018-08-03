@@ -47,6 +47,8 @@
 </template>
 
 <script>
+  import {mapGetters} from "vuex"
+
   export default {
     name: "ChoosePlanDialog",
     props: [
@@ -57,6 +59,17 @@
     data() {
       return {
         selectedIndex: undefined
+      }
+    },
+    computed: {
+      ...mapGetters('plan', {
+        groupedPlans: 'myVisiblePlanGrouped',
+        loading: 'myVisiblePlansLoading'
+      })
+    },
+    mounted(){
+      if(!this.groupedPlans || !this.groupedPlans.length > 0){
+        this.$store.dispatch('plan/fetchVisiblePlans');
       }
     },
     methods: {

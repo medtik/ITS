@@ -36,7 +36,7 @@
         <v-flex class="title text-xs-center white" pb-2 pt-4>
           {{day.planDayText}}
           <v-flex>
-            <v-btn flat :to="{name:'Search'}">
+            <v-btn flat @click="onAddLocation(day)">
               <v-icon>add_location</v-icon>
               <span v-if="!isSmallScreen">Thêm địa điểm</span>
             </v-btn>
@@ -152,7 +152,6 @@
   import draggable from 'vuedraggable'
   import moment from "moment";
   import {SuccessDialog} from "../../common/block";
-
   import _ from "lodash";
 
 
@@ -180,6 +179,7 @@
           addNote: false,
           publishPlan: false,
           choosePlanDestination: false,
+          chooseSearchMethod: false
         },
         items: [],
       }
@@ -241,11 +241,11 @@
           this.dialog.publishPlan = false;
           this.loading.publishBtn = false;
         }, 1500)
+      },
+      onAddLocation(day){
+        console.debug('PlanDetailView-onAddLocation', day);
+
       }
     }
   }
 </script>
-
-<style scoped>
-
-</style>

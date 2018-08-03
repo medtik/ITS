@@ -1,6 +1,11 @@
 Thêm type cho location
-    thêm field này vào 1 số request
     vd: restaurant, bus stop, hotel
+    thêm field này vào 1 số request
+      api/group/detail
+      api/details (location detail)
+      GET POST api/location
+      api/plan/details
+      api/MyPlans
 
 Thêm areaId cho plan
     từ giờ 1 plan sẽ gắn liền với 1 khu vực
@@ -11,7 +16,7 @@ Thêm areaId cho plan
         api/MyPlans
         POST api/Plan
 
-GET api/location
+GET tìm location
     phân trang
     filter theo khu vực
     filter theo category
@@ -24,8 +29,6 @@ GET api/location
       address
       primaryPhoto
 
-GET api/location/categories
-
 GET các plan của mình và các plan của nhóm của minh (bao gồm cả nhóm mình làm chủ và là thành viên)
   fields
     planId
@@ -35,7 +38,13 @@ GET các plan của mình và các plan của nhóm của minh (bao gồm cả n
     groupName
     isOwnGroup (có phải là chủ group hay không)
 
+---
+PUT cập nhật index, plan date của LocationPlan và Note
 
+GET api/details (location detail)
+    trả thiếu business hours
+
+GET api/location/categories
 
 GET nearby location
   field
@@ -43,13 +52,7 @@ GET nearby location
     lat
     distance(km)(bán kính)
 
-GET Area detail
-  tên
-  ảnh chính
-  số đếm của mỗi loại địa điểm
-    [
-      {type: "restaurant", count: 24},
-      {type: "hotel", count: 26},
-    ]
+
+
 
 

@@ -116,7 +116,7 @@
         this.dialog.choosePlan = true
       },
       onPlanSelect(plan) {
-
+        console.debug('SearchView-planSelected', plan);
       }
     }
 

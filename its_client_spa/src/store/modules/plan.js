@@ -11,8 +11,10 @@ export default {
       notes: undefined
     },
     myPlans: [],
+    myVisiblePlans: [],
     loading: {
       myPlans: true,
+      myVisiblePlans: false,
       featuredPlans: true,
       detailedPlan: true,
       create: false,
@@ -28,6 +30,17 @@ export default {
     },
     myPlans(state) {
       return state.myPlans;
+    },
+    myVisiblePlans(state) {
+      return state.myVisiblePlans;
+    },
+    myVisiblePlanGrouped(state) {
+      return _.groupBy(state.myVisiblePlans, (plan) => {
+        return plan.groupName;
+      });
+    },
+    myVisiblePlansLoading(state) {
+      return state.loading.myVisiblePlans;
     },
     featuredPlansLoading(state) {
       return state.loading.featuredPlans;
@@ -45,6 +58,9 @@ export default {
   mutations: {
     setFeaturedPlans(state, payload) {
       state.featuredPlans = payload.plans;
+    },
+    setMyVisiblePlans(state, payload) {
+      state.myVisiblePlans = payload.plans
     },
     setDetailedPlan(state, payload) {
       const detailedPlan = _.cloneDeep(payload.plan);
@@ -117,20 +133,6 @@ export default {
     setMyPlans(state, payload) {
       state.myPlans = _.cloneDeep(payload.plans);
     },
-    moveItemUp(state, payload) {
-      const {
-        item
-      } = payload;
-
-    },
-    moveItemDown(state, payload) {
-      const {
-        item
-      } = payload;
-    },
-    setDayItems(state, payload) {
-
-    },
     setLoading(state, payload) {
       state.loading = _.assign(state.loading, payload.loading);
     }
@@ -202,7 +204,41 @@ export default {
           })
       });
     },
-    addLocationToPlan(context, payload){
+    fetchVisiblePlans(context) {
+      //get /api/User/MyVisiblePlan
+      context.commit('setLoading', {
+        loading: {myVisiblePlans: true}
+      });
+      axiosInstance.get('api/User/MyVisiblePlan')
+        .then(value => {
+          context.commit('setLoading', {
+            loading: {myVisiblePlans: true}
+          });
+          context.commit('setMyVisiblePlans', {plans: value.data});
+        })
+        .catch(reason => {
+          console.error('plan/fetchVisiblePlans', reason.response)
+        })
+    },
+    addLocationToPlan(context, payload) {
+      const {
+        locationId,
+        planId
+      } = payload;
+
+    },
+    moveItemUp(state, payload) {
+      const {
+        item
+      } = payload;
+
+    },
+    moveItemDown(state, payload) {
+      const {
+        item
+      } = payload;
+    },
+    setDayItems(state, payload) {
 
     },
     create(context, payload) {
