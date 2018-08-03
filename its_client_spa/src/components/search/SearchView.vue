@@ -3,7 +3,7 @@
     <v-layout column>
       <v-flex>
         <!--SEARCH-->
-        <v-jumbotron gradient="-225deg, #FFFEFF 0%, #D7FFFE 100%" height="200px">
+        <v-jumbotron gradient="-225deg, #FFFEFF 0%, #D7FFFE 100%" height="230px">
           <v-container fill-height>
             <v-layout>
               <v-flex text-xs-center>
@@ -22,48 +22,103 @@
                     ></AreaInput>
                   </v-flex>
                 </v-layout>
+                <v-btn color="primary"
+                       :loading="searchLoading"
+                       @click="onSearchClick">
+                  <v-icon>
+                    fas fa-search
+                  </v-icon>
+                  Tìm
+                </v-btn>
               </v-flex>
             </v-layout>
           </v-container>
         </v-jumbotron>
       </v-flex>
-      <v-flex  v-if="result.show" class="grey lighten-4">
-        <!--RESULT-->
+      <!--RESULT-->
+      <v-flex v-if="isShowResult" class="grey lighten-4">
         <v-layout column>
           <v-flex py-4 class="display-2 font-weight-medium text-xs-center white">
             Kết quả
           </v-flex>
-          <v-flex v-for="location in result.locations" :key="location.id" mb-2 elevation-1 class="white">
-            <LocationFullWidth v-bind="location"/>
+          <v-flex v-for="location in locations"
+                  :key="location.id" mb-2 elevation-1 class="white">
+            <LocationFullWidth v-bind="location"
+                               :isSearchResult="true"
+                               @save="onSave"/>
           </v-flex>
         </v-layout>
       </v-flex>
     </v-layout>
+    <ChoosePlanDialog
+      :dialog="dialog.choosePlan"
+      @select="onPlanSelect"
+      @close="dialog.choosePlan = false"/>
   </v-content>
 </template>
 <script>
-  import AreaInput from "../../common/input/AreaInput";
-  import LocationFullWidth from "../../common/block/LocationFullWidth";
-  import _location from "../location/Locations";
-
+  import {
+    AreaInput,
+    ChoosePlanDialog
+  } from "../../common/input";
+  import {
+    LocationFullWidth,
+  } from "../../common/block";
+  import {mapGetters} from "vuex";
+  import _ from "lodash";
 
   export default {
     name: "SearchView",
     components: {
       AreaInput,
+      ChoosePlanDialog,
       LocationFullWidth
     },
     data() {
       return {
         searchInput: '',
         areaIdInput: '',
+
+        selectedLocation: '',
+        selectedPlan: '',
+        requestMessage: '',
+
         result: {
           show: true,
           loading: false,
-          locations: _location
+        },
+        dialog: {
+          choosePlan: false,
         }
       }
     },
+    computed: {
+      ...mapGetters('search', {
+        area: 'searchResultArea',
+        locations: 'searchResultLocations',
+        searchLoading: 'searchResultLoading'
+      }),
+      isShowResult() {
+        return this.locations && this.locations.length > 0;
+      }
+    },
+    methods: {
+      onSearchClick() {
+        this.$store.dispatch('search/fetchSearchResult', {
+          search: this.searchInput,
+          areaId: this.areaId
+        })
+      },
+      onSave(locationId) {
+        this.selectedLocation = _.find(this.locations, (location) => {
+          return location.id == locationId;
+        });
+        this.dialog.choosePlan = true
+      },
+      onPlanSelect(plan) {
+
+      }
+    }
 
   }
 </script>

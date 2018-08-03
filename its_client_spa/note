@@ -1,5 +1,7 @@
 Thêm type cho location
+    thêm field này vào 1 số request
     vd: restaurant, bus stop, hotel
+
 Thêm areaId cho plan
     từ giờ 1 plan sẽ gắn liền với 1 khu vực
     thêm field này vào 1 số request
@@ -7,13 +9,47 @@ Thêm areaId cho plan
         api/plan/details
         api/featuredTrip
         api/MyPlans
-        api/PostPlan
+        POST api/Plan
 
-GET api/location thêm tính năng để dùng lại cho client
+GET api/location
+    phân trang
     filter theo khu vực
-    filter theo type
+    filter theo category
+    fields
+      id
+      type
+      name
+      rating
+      reviewCount
+      address
+      primaryPhoto
+
+GET api/location/categories
+
+GET các plan của mình và các plan của nhóm của minh (bao gồm cả nhóm mình làm chủ và là thành viên)
+  fields
+    planId
+    planName
+
+    groupId nếu có
+    groupName
+    isOwnGroup (có phải là chủ group hay không)
 
 
 
+GET nearby location
+  field
+    long
+    lat
+    distance(km)(bán kính)
+
+GET Area detail
+  tên
+  ảnh chính
+  số đếm của mỗi loại địa điểm
+    [
+      {type: "restaurant", count: 24},
+      {type: "hotel", count: 26},
+    ]
 
 

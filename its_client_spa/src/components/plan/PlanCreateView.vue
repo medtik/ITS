@@ -11,6 +11,9 @@
           label="Tên"
           v-model="input.name"
         />
+        <AreaInput v-model="input.areaId">
+
+        </AreaInput>
         <v-text-field
           label="Ngày bắt đầu"
           type="date"
@@ -21,6 +24,7 @@
           type="date"
           v-model="input.endDate"
         />
+
       </v-flex>
       <v-flex>
         <v-btn color="success"
@@ -39,9 +43,12 @@
 
 <script>
   import {mapGetters} from "vuex";
-
+import {AreaInput} from "../../common/input"
   export default {
     name: "PlanCreateView",
+    components:{
+      AreaInput
+    },
     data() {
       return {
         createBtnLoading: false,
@@ -49,6 +56,7 @@
           name: undefined,
           startDate: undefined,
           endDate: undefined,
+          areaId: undefined,
         }
       }
     },
@@ -73,12 +81,6 @@
           ...this.input
         })
           .then(value => {
-            // this.$router.push({
-            //   name: "PlanDetail",
-            //   query: {
-            //     id: value
-            //   }
-            // })
             this.$router.back();
           })
       },

@@ -202,18 +202,22 @@ export default {
           })
       });
     },
+    addLocationToPlan(context, payload){
+
+    },
     create(context, payload) {
       const {
         name,
         startDate,
-        endDate
+        endDate,
+        areaId
       } = payload;
 
       context.commit('setLoading', {
         loading: {create: true}
       });
       return new Promise((resolve, reject) => {
-        axiosInstance.post('api/plan', {name, startDate, endDate})
+        axiosInstance.post('api/plan', {name, startDate, endDate, areaId})
           .then(value => {
             context.commit('setLoading', {
               loading: {create: false}
