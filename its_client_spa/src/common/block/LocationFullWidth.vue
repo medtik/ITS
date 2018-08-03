@@ -48,19 +48,12 @@
     <v-layout slot="action" column align-end>
       <!--PLAN DETAIL-->
       <!--delete, check-->
-      <template v-if="isOwn">
-        <v-btn icon flat color="success" v-if="isCheck">
-          <v-icon>
-            fas fa-check-circle
-          </v-icon>
-        </v-btn>
-        <v-btn icon flat>
-          <v-icon>
-            fas fa-circle
-          </v-icon>
-        </v-btn>
-        <v-btn icon flat color="red">
-          <v-icon>
+      <template v-if="isOwn" v-model="isCheck">
+        <v-checkbox color="success">
+        </v-checkbox>
+        <v-btn icon flat color="red" small
+              @click="$emit('delete',id)">
+          <v-icon small>
             fas fa-trash
           </v-icon>
         </v-btn>

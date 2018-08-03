@@ -20,10 +20,9 @@
                 style="display: flex;justify-content: center;"
               />
             </v-flex>
-            <v-flex>
+            <v-flex class="text-xs-center">
               <v-label>
-                9159 Lake View St.
-                Clifton, NJ 07011
+                {{address}}
               </v-label>
             </v-flex>
           </v-layout>
@@ -41,6 +40,13 @@
     components: {
       StarRating
     },
+    props:[
+      'id',
+      'photo',
+      'name',
+      'address',
+      'rating'
+    ],
     computed: {
       routerLink() {
         return {

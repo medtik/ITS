@@ -46,22 +46,30 @@
       </v-flex>
     </v-layout>
     <v-layout slot="action" column align-end>
-      <v-btn icon flat color="red">
-        <v-icon>
-          fas fa-trash
-        </v-icon>
-      </v-btn>
+      <!--PLAN DETAIL-->
+      <!--delete, check-->
+      <template v-if="isOwn" v-model="isCheck">
+        <v-checkbox color="success">
+        </v-checkbox>
+        <v-btn icon flat color="red" small
+              @click="$emit('delete',id)">
+          <v-icon small>
+            fas fa-trash
+          </v-icon>
+        </v-btn>
+      </template>
+
+
+      <!--PLAN EDIT-->
+      <!--up, down, change date-->
+
+      <!--SEARCH RESULT-->
+      <!--save to plan-->
+
     </v-layout>
   </ListItemLayout>
 </template>
-<!--PLAN DETAIL-->
-<!--delete, check-->
 
-<!--PLAN EDIT-->
-<!--up, down, change date-->
-
-<!--SEARCH RESULT-->
-<!--save to plan-->
 <script>
   import StarRating from "vue-star-rating";
   import {ListItemLayout} from "../../common/layout";
@@ -80,7 +88,11 @@
       'reviewCount',
       'address',
       'reasons',
-      'primaryPhoto'
+      'primaryPhoto',
+      'isOwn',
+      'isPublic',
+      'isOwnEdit',
+      'isCheck'
     ],
     computed: {
       isSmallScreen() {

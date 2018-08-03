@@ -44,7 +44,6 @@
               <v-icon>note_add</v-icon>
               <span v-if="!isSmallScreen">Thêm ghi chú</span>
             </v-btn>
-            <!--<v-divider></v-divider>-->
           </v-flex>
         </v-flex>
         <v-flex pb-3
@@ -52,7 +51,9 @@
                 :key="item.id"
                 class="white"
         >
-          <LocationFullWidth v-if="item.location" v-bind="item.location">
+          <LocationFullWidth v-if="item.location"
+                             v-bind="item.location"
+                             :isOwn="true">
             <v-icon slot="handle" class="handle-bar">reorder</v-icon>
           </LocationFullWidth>
           <NoteFullWidth v-else v-bind="item.note">
@@ -161,7 +162,8 @@
       LocationFullWidth,
       NoteFullWidth,
       ChoosePlanDestinationDialog,
-      draggable
+      draggable,
+      SuccessDialog
     },
     data() {
       return {
@@ -197,7 +199,9 @@
       },
       ...mapGetters('plan', {
         plan: 'detailedPlan',
-        pageLoading: 'detailedPlanLoading',
+        pageLoading: 'detailedPlanLoading'
+      }),
+      ...mapGetters('group', {
         addPlanToGroupLoading: 'addPlanToGroupLoading'
       }),
       formattedStartDate() {

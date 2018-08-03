@@ -109,19 +109,14 @@ export default {
         loading: {addPlanToGroup: true}
       });
       return new Promise((resolve, reject) => {
-        axiosInstance.put('api/plan', {
-          params: {
-            planId,
-            groupId
-          }
-        })
+        axiosInstance.put(`api/group/AddPlan?planId=${planId}&groupId=${groupId}`)
           .then(value => {
             context.commit('setLoading', {
               loading: {addPlanToGroup: false}
             });
             resolve(value.data);
           })
-          .catch(reason =>{
+          .catch(reason => {
             context.commit('setLoading', {
               loading: {addPlanToGroup: false}
             });
