@@ -11,7 +11,7 @@
     </v-layout>
     <v-layout slot="title">
       <v-flex class="title" pl-1>
-        {{location}}
+        {{locationName}}
       </v-flex>
     </v-layout>
     <v-layout slot="detail" column pl-2>
@@ -48,8 +48,8 @@
     <v-layout slot="action" column align-end>
       <!--PLAN DETAIL-->
       <!--delete, check-->
-      <template v-if="isOwn" v-model="isCheck">
-        <v-checkbox color="success">
+      <template v-if="isOwn" >
+        <v-checkbox color="success" v-model="isCheck">
         </v-checkbox>
         <v-btn icon flat color="red" small
               @click="$emit('delete',id)">
@@ -65,6 +65,14 @@
 
       <!--SEARCH RESULT-->
       <!--save to plan-->
+      <template v-if="isSearchResult">
+        <v-btn icon flat color="success"
+               @click="$emit('save',id)">
+          <v-icon>
+            fas fa-heart
+          </v-icon>
+        </v-btn>
+      </template>
 
     </v-layout>
   </ListItemLayout>
@@ -83,6 +91,7 @@
     props: [
       'id',
       'type',
+      'name',
       'location',
       'rating',
       'reviewCount',
@@ -90,7 +99,7 @@
       'reasons',
       'primaryPhoto',
       'isOwn',
-      'isPublic',
+      'isSearchResult',
       'isOwnEdit',
       'isCheck'
     ],
@@ -100,6 +109,13 @@
       },
       locationIcon() {
         return 'restaurant';
+      },
+      locationName(){
+        if(this.name){
+          return this.name;
+        }else{
+          return this.location;
+        }
       },
       link() {
         return {

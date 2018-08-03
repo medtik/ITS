@@ -29,6 +29,18 @@ GET tìm location
       address
       primaryPhoto
 
+
+---
+
+PUT cập nhật index, plan date của LocationPlan và Note
+
+GET api/details (location detail)
+    trả thiếu business hours
+
+GET api/location/categories
+
+---
+
 GET các plan của mình và các plan của nhóm của minh (bao gồm cả nhóm mình làm chủ và là thành viên)
   fields
     planId
@@ -36,15 +48,8 @@ GET các plan của mình và các plan của nhóm của minh (bao gồm cả n
 
     groupId nếu có
     groupName
-    isOwnGroup (có phải là chủ group hay không)
+    * isOwnGroup (có phải là chủ group hay không)
 
----
-PUT cập nhật index, plan date của LocationPlan và Note
-
-GET api/details (location detail)
-    trả thiếu business hours
-
-GET api/location/categories
 
 GET nearby location
   field

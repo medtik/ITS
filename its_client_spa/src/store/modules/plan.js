@@ -17,6 +17,7 @@ export default {
       myVisiblePlans: false,
       featuredPlans: true,
       detailedPlan: true,
+      addLocationToPlan: false,
       create: false,
       delete: false
     }
@@ -34,10 +35,8 @@ export default {
     myVisiblePlans(state) {
       return state.myVisiblePlans;
     },
-    myVisiblePlanGrouped(state) {
-      return _.groupBy(state.myVisiblePlans, (plan) => {
-        return plan.groupName;
-      });
+    addLocationToPlanLoading(state){
+      return state.loading.addLocationToPlan;
     },
     myVisiblePlansLoading(state) {
       return state.loading.myVisiblePlans;
@@ -223,8 +222,23 @@ export default {
     addLocationToPlan(context, payload) {
       const {
         locationId,
-        planId
+        planId,
+        comment
       } = payload;
+
+     return new Promise((resolve, reject) => {
+       axiosInstance.put('api/Plan/AddLocations', {
+         comment,
+         locationId,
+         planId
+       })
+         .then(value =>{
+           resolve(value.data);
+         })
+         .catch(reason => {
+           reject(reason.response);
+         })
+     })
 
     },
     moveItemUp(state, payload) {

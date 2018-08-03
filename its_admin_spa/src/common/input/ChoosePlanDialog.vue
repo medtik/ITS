@@ -4,27 +4,32 @@
       <v-layout column>
         <v-flex>
           <!--CONTENT-->
-          <v-list subheader avatar v-for="n in 3 " :key="`n${n}`">
-            <v-subheader>
-              Nhóm {{n}}
+          <v-list subheader avatar
+                  v-for="plans in groupedPlans"
+                  :key="`planGroup_${plans[0].group}`">
+
+            <v-subheader v-if="plans[0].group">
+              {{plans[0].group}}
             </v-subheader>
-            <v-list-tile v-for="(i,index) in 3" :key="n*i"
-                         @click="selectedIndex = n*(i+4)">
-              <v-list-tile-avatar>
-                <img src="https://picsum.photos/200"/>
-              </v-list-tile-avatar>
+            <v-subheader v-else>
+              Cá nhân
+            </v-subheader>
+
+            <v-list-tile v-for="(plan) in plans" :key="`plan_${plan.id}`"
+                         @click="selectedPlanId = plan.id">
               <v-list-tile-content>
                 <v-list-tile-title>
-                  Nhóm ABC
+                  <v-flex px-2>
+                    {{plan.name}}
+                  </v-flex>
                 </v-list-tile-title>
               </v-list-tile-content>
               <v-list-tile-action>
                 <v-icon
-                  v-if="selectedIndex === n*(i+4)"
+                  v-if="selectedPlanId === plan.id"
                   color="green">
                   check
                 </v-icon>
-                <v-icon v-else/>
               </v-list-tile-action>
             </v-list-tile>
           </v-list>
@@ -47,6 +52,9 @@
 </template>
 
 <script>
+  import {mapGetters} from "vuex"
+  import _ from "lodash"
+
   export default {
     name: "ChoosePlanDialog",
     props: [
@@ -56,13 +64,30 @@
     ],
     data() {
       return {
-        selectedIndex: undefined
+        selectedPlanId: undefined
+      }
+    },
+    computed: {
+      ...mapGetters('plan', {
+        groupedPlans: 'myVisiblePlans',
+        loading: 'myVisiblePlansLoading'
+      })
+    },
+    mounted(){
+      if(!this.groupedPlans || !this.groupedPlans.length > 0){
+        this.$store.dispatch('plan/fetchVisiblePlans');
       }
     },
     methods: {
       onSelect() {
-        this.$emit('input', this.selected);
-        this.$emit('select', this.selected);
+        const selected = _(this.groupedPlans)
+          .flatten()
+          .find(plan => {
+            return plan.id == this.selectedPlanId;
+          });
+
+        this.$emit('input', selected);
+        this.$emit('select', selected);
       },
       onClose() {
         this.$emit('close');
