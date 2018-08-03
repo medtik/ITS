@@ -1,68 +1,71 @@
 <template>
   <v-content>
-    <v-toolbar v-if="!pageLoading" flat color="light-blue" dark>
-      <v-toolbar-title>
+    <v-toolbar v-if="!pageLoading" flat
+               color="light-blue darken-2" dark>
+      <v-toolbar-title class="headline">
         {{plan.name}}
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-toolbar-title>
+      <v-toolbar-title v-if="!isSmallScreen">
         {{formattedStartDate}} - {{formattedEndDate}}
       </v-toolbar-title>
-      <v-toolbar-items slot="extension">
-        <v-btn flat @click="dialog.choosePlanDestination = true">
-          <v-icon large>fas fa-heart</v-icon>
-          <span v-if="!isSmallScreen">&nbsp; Lưu</span>
-        </v-btn>
-        <v-btn flat :to="{name:'PlanEdit'}">
-          <v-icon large>edit</v-icon>
-          <span v-if="!isSmallScreen">Chỉnh sửa</span>
-        </v-btn>
-        <v-btn flat @click="dialog.publishPlan = true">
-          <v-icon large>publish</v-icon>
-          <span v-if="!isSmallScreen">Đăng</span>
-        </v-btn>
+      <v-toolbar-items slot="extension" style="width: 100%">
+        <v-layout class="justify-space-around">
+          <v-btn flat @click="dialog.choosePlanDestination = true"
+                 :loading="addPlanToGroupLoading">
+            <v-icon large>fas fa-heart</v-icon>
+            <span v-if="!isSmallScreen">&nbsp; Lưu</span>
+          </v-btn>
+          <v-btn flat :to="{name:'PlanEdit'}">
+            <v-icon large>edit</v-icon>
+            <span v-if="!isSmallScreen">Chỉnh sửa</span>
+          </v-btn>
+          <v-btn flat @click="dialog.publishPlan = true">
+            <v-icon large>publish</v-icon>
+            <span v-if="!isSmallScreen">Đăng</span>
+          </v-btn>
+        </v-layout>
       </v-toolbar-items>
     </v-toolbar>
     <v-layout v-if="!pageLoading" column class="white">
-      <v-flex class="grey lighten-4">
-        <v-btn flat :to="{name:'Search'}">
-          <v-icon>add_location</v-icon>
-          <span v-if="!isSmallScreen">Thêm địa điểm</span>
-        </v-btn>
-        <v-btn flat @click="dialog.addNote = true">
-          <v-icon>note_add</v-icon>
-          <span v-if="!isSmallScreen">Thêm ghi chú</span>
-        </v-btn>
-      </v-flex>
       <!--DAYS-->
-      <v-flex v-for="(day,index) in days"
+      <v-flex v-for="(day,index) in plan.days"
               :key="day.planDayText"
-              class="grey lighten-4">
-        <v-flex class="title" my-2>
+              class="light-blue lighten-5">
+        <v-divider></v-divider>
+        <v-flex class="title text-xs-center white" pb-2 pt-4>
           {{day.planDayText}}
+          <v-flex>
+            <v-btn flat :to="{name:'Search'}">
+              <v-icon>add_location</v-icon>
+              <span v-if="!isSmallScreen">Thêm địa điểm</span>
+            </v-btn>
+            <v-btn flat @click="dialog.addNote = true">
+              <v-icon>note_add</v-icon>
+              <span v-if="!isSmallScreen">Thêm ghi chú</span>
+            </v-btn>
+          </v-flex>
         </v-flex>
-        <draggable v-model="day.items"
-                   :move="onDraggableMove"
-                   :options="{handle:'.handle-bar', group:day.planDayText}">
-          <v-flex elevation-2 my-1
-                  v-for="item in day.items"
-                  :key="item.id"
-                  class="white"
-          >
-            <LocationFullWidth v-if="item.location" v-bind="item.location">
-              <v-icon slot="handle" class="handle-bar">reorder</v-icon>
-            </LocationFullWidth>
-            <NoteFullWidth v-else v-bind="item.note">
-              <v-icon slot="handle" class="handle-bar">reorder</v-icon>
-            </NoteFullWidth>
-          </v-flex>
-          <v-flex v-if="days[index].length <= 0" style="height: 50px">
-            <!--Spacer-->
-          </v-flex>
-        </draggable>
+        <v-flex pb-3
+                v-for="item in day.items"
+                :key="item.id"
+                class="white"
+        >
+          <LocationFullWidth v-if="item.location"
+                             v-bind="item.location"
+                             :isOwn="true">
+            <v-icon slot="handle" class="handle-bar">reorder</v-icon>
+          </LocationFullWidth>
+          <NoteFullWidth v-else v-bind="item.note">
+            <v-icon slot="handle" class="handle-bar">reorder</v-icon>
+          </NoteFullWidth>
+        </v-flex>
+        <v-flex v-if="plan.days[index].length <= 0" style="height: 50px">
+          <!--Spacer-->
+        </v-flex>
 
       </v-flex>
-      <v-layout v-if="!days"
+      <v-layout v-if="!plan.days"
                 class="title font-weight-bold"
                 justify-center align-center pa-5>
         Chuyến đi của bạn đang trống
@@ -132,8 +135,12 @@
     </v-layout>
     <!--DIALOG-->
     <ChoosePlanDestinationDialog :dialog="dialog.choosePlanDestination"
-                                 @select="dialog.choosePlanDestination = false"
+                                 @select="onAddToGroupSelected"
                                  @close="dialog.choosePlanDestination = false"/>
+    <SuccessDialog
+      v-bind="success"
+      @close="success.dialog = false"
+    ></SuccessDialog>
   </v-content>
 </template>
 
@@ -141,9 +148,11 @@
   import {mapGetters} from "vuex";
   import LocationFullWidth from "../../common/block/LocationFullWidth";
   import NoteFullWidth from "./NoteFullWidth";
-  import ChoosePlanDestinationDialog from "../../common/input/ChoosePlanDestinationDialog";
+  import {ChoosePlanDestinationDialog} from "../../common/input";
   import draggable from 'vuedraggable'
   import moment from "moment";
+  import {SuccessDialog} from "../../common/block";
+
   import _ from "lodash";
 
 
@@ -153,7 +162,8 @@
       LocationFullWidth,
       NoteFullWidth,
       ChoosePlanDestinationDialog,
-      draggable
+      draggable,
+      SuccessDialog
     },
     data() {
       return {
@@ -161,6 +171,10 @@
         loading: {
           createNoteBtn: false,
           publishBtn: false,
+        },
+        success: {
+          dialog: false,
+          message: ''
         },
         dialog: {
           addNote: false,
@@ -185,8 +199,10 @@
       },
       ...mapGetters('plan', {
         plan: 'detailedPlan',
-        days: 'detailedPlanDays',
         pageLoading: 'detailedPlanLoading'
+      }),
+      ...mapGetters('group', {
+        addPlanToGroupLoading: 'addPlanToGroupLoading'
       }),
       formattedStartDate() {
         return moment(this.plan.startDate).format('DD/MM/YYYY');
@@ -196,10 +212,21 @@
       }
     },
     methods: {
-      onDraggableMove(event) {
-        // this.$store.commit('plan/setDetailedPlanIndex',{
-        //   context: event.draggedContext
-        // })
+      onAddToGroupSelected(payload) {
+        const {
+          group
+        } = payload;
+        this.dialog.choosePlanDestination = false;
+        this.$store.dispatch('group/addPlanToGroup', {
+          planId: this.planId,
+          groupId: group.id
+        })
+          .then((value) => {
+            this.success = {
+              dialog: true,
+              message: `Thêm chuyến đi hiện tại vào nhóm ${group.name} thành công.`
+            }
+          })
       },
       onAddNote() {
         this.loading.createNoteBtn = true;

@@ -9,7 +9,8 @@ import * as VueGoogleMaps from 'vue2-google-maps'
 import 'vuetify/dist/vuetify.min.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 
-Vue.use(Vuetify,{
+
+Vue.use(Vuetify, {
   iconfont: 'fa'
 });
 Vue.use(VueGoogleMaps, {
@@ -24,6 +25,10 @@ if (localToken) {
   store.commit('authenticate/setToken', {token: localToken})
 }
 
+//--Store reliant
+import "./router/guards";
+
+
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
@@ -33,4 +38,4 @@ new Vue({
   store,
   components: {App},
   template: '<App/>'
-})
+});

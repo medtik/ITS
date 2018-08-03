@@ -7,17 +7,18 @@ export default {
     myGroups: [],
     detailedGroup: {},
     loading: {
-      myGroup: true,
+      myGroups: true,
       detailedGroup: true,
       create: false,
-      delete: false
+      delete: false,
+      addPlanToGroup: false
     }
   },
   getters: {
     myGroups(state) {
       return state.myGroups;
     },
-    detailedGroup(state){
+    detailedGroup(state) {
       return state.detailedGroup;
     },
     myGroupsLoading(state) {
@@ -31,6 +32,9 @@ export default {
     },
     detailedGroupLoading(state) {
       return state.loading.detailedGroup;
+    },
+    addPlanToGroupLoading(state) {
+      return state.loading.addPlanToGroup;
     }
   },
   mutations: {
@@ -47,20 +51,20 @@ export default {
   actions: {
     fetchMyGroups(context) {
       context.commit('setLoading', {
-        loading: {myGroup: true}
+        loading: {myGroups: true}
       });
       return new Promise((resolve, reject) => {
         axiosInstance.get('api/GetGroups')
           .then(value => {
             context.commit('setMyGroup', {groups: value.data});
             context.commit('setLoading', {
-              loading: {myGroup: false}
+              loading: {myGroups: false}
             });
             resolve(value.data);
           })
           .catch(reason => {
             context.commit('setLoading', {
-              loading: {myGroup: false}
+              loading: {myGroups: false}
             });
             reject(reason.response);
           })
@@ -94,7 +98,32 @@ export default {
           });
           console.error('group/fetchById', reason.response);
         })
+    },
+    addPlanToGroup(context, payload) {
+      const {
+        planId,
+        groupId
+      } = payload;
 
+      context.commit('setLoading', {
+        loading: {addPlanToGroup: true}
+      });
+      return new Promise((resolve, reject) => {
+        axiosInstance.put(`api/group/AddPlan?planId=${planId}&groupId=${groupId}`)
+          .then(value => {
+            context.commit('setLoading', {
+              loading: {addPlanToGroup: false}
+            });
+            resolve(value.data);
+          })
+          .catch(reason => {
+            context.commit('setLoading', {
+              loading: {addPlanToGroup: false}
+            });
+            console.error('group/addPlanToGroup', reason.response);
+            reject(reason.response);
+          })
+      })
     },
     create(context, payload) {
       const {

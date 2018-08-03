@@ -26,17 +26,46 @@ export default {
     detailedPlan(state) {
       return state.detailedPlan;
     },
-    detailedPlanDays(state, getters) {
+    myPlans(state) {
+      return state.myPlans;
+    },
+    featuredPlansLoading(state) {
+      return state.loading.featuredPlans;
+    },
+    detailedPlanLoading(state) {
+      return state.loading.detailedPlan;
+    },
+    myPlansLoading(state) {
+      return state.loading.myPlans;
+    },
+    createLoading(state) {
+      return state.loading.create;
+    }
+  },
+  mutations: {
+    setFeaturedPlans(state, payload) {
+      state.featuredPlans = payload.plans;
+    },
+    setDetailedPlan(state, payload) {
+      const detailedPlan = _.cloneDeep(payload.plan);
+
       const getDayText = (planDay) => {
         switch (planDay) {
           case "0":
           case 0:
             return "Chưa lên lịch";
           default:
-            return `Ngày ${planDay}`
+            if (detailedPlan.startDay) {
+              return moment(detailedPlan.startDay)
+                .add(planDay - 1, "days")
+                .format('DD/MM/YYYY');
+            } else {
+              return `Ngày ${planDay}`
+            }
+
         }
       };
-      const locations = _(getters.detailedPlan.locations)
+      const locations = _(detailedPlan.locations)
         .map(item => {
           return {
             location: {
@@ -55,7 +84,7 @@ export default {
         })
         .value();
 
-      const items = _(getters.detailedPlan.notes)
+      const items = _(detailedPlan.notes)
         .map(item => {
           return {
             note: {
@@ -82,77 +111,25 @@ export default {
         .values()
         .value();
 
-      return items
-    },
-    myPlans(state) {
-      return state.myPlans;
-    },
-    featuredPlansLoading(state) {
-      return state.loading.featuredPlans;
-    },
-    detailedPlanLoading(state) {
-      return state.loading.detailedPlan;
-    },
-    myPlansLoading(state) {
-      return state.loading.myPlans;
-    },
-    createLoading(state) {
-      return state.loading.create;
-    }
-  },
-  mutations: {
-    setFeaturedPlans(state, payload) {
-      state.featuredPlans = payload.plans;
-    },
-    setDetailedPlan(state, payload) {
-      state.detailedPlan = _.cloneDeep(payload.plan);
+      detailedPlan.days = items;
+      state.detailedPlan = detailedPlan;
     },
     setMyPlans(state, payload) {
       state.myPlans = _.cloneDeep(payload.plans);
     },
-    setDetailedPlanIndex(state, payload) {
-//       {…}
-// ​
-//       id: 7
-//       ​
-//       index: 2
-//       ​
-//       location: Object { id: 30, address: "263/90 Tô Ký, Trung Mỹ Tây, Quận 12, Hồ Chí Minh, Việt Nam", location: "Moda House Coffee", … }
-//       ​
-//       planDay: 0
-//       ​
-//       type: "location"
-//       ​
-//           <prototype>: Object { … }
-//             1 0
+    moveItemUp(state, payload) {
+      const {
+        item
+      } = payload;
 
-      let {
-        element,
-        futureIndex,
-        index
-      } = payload.context;
-      if(index == futureIndex){
-        return;
-      }
-      index++;
-      futureIndex++;
+    },
+    moveItemDown(state, payload) {
+      const {
+        item
+      } = payload;
+    },
+    setDayItems(state, payload) {
 
-      if (element.type == "location") {
-        const foundElement = _.find(state.detailedPlan.locations, (location) => {
-          return element.id == location.planLocationId;
-        });
-        // state.detailedPlan.locations = _.
-      } else {
-        const  foundElement = _.find(state.detailedPlan.notes, (note) => {
-          return element.id == note.id;
-        });
-      }
-
-
-      console.debug('setDetailedPlanIndex', element,
-        JSON.parse(JSON.stringify(foundElement)),
-        futureIndex + 1,
-        index + 1);
     },
     setLoading(state, payload) {
       state.loading = _.assign(state.loading, payload.loading);

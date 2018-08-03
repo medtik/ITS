@@ -14,7 +14,9 @@
                       :show-rating="false"/>
           <span class="subheading">{{location.ratingCount}} đánh giá</span>
           <div v-if="summaryTag">
-            <v-chip v-for="(tag, index) in summaryTag" :key="`t${index}`">{{tag}}</v-chip>
+            <v-chip v-for="(tag, index) in summaryTag"
+                    :key="`t${index}`">{{tag}}
+            </v-chip>
           </div>
           <div v-if="todayHours">
             <span>Hôm nay: Mở từ {{todayHours.from}} đến {{todayHours.to}} | </span>
