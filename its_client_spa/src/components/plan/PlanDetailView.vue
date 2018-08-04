@@ -1,7 +1,9 @@
 <template>
   <v-content>
     <v-toolbar v-if="!pageLoading" flat
+               dense fixed
                color="light-blue darken-2" dark>
+      <!--TOOL BAR TOP ROW-->
       <v-toolbar-title class="headline">
         {{plan.name}}
       </v-toolbar-title>
@@ -21,8 +23,8 @@
           <span v-if="!isSmallScreen">Đăng</span>
         </v-btn>
       </v-toolbar-items>
+      <!--TABS-->
       <v-toolbar-items slot="extension" v-if="plan.days.length > 1">
-        <!--TABS-->
         <v-tabs show-arrows color="light-blue darken-2"
                 next-icon="fas fa-angle-right"
                 prev-icon="fas fa-angle-left"
@@ -31,21 +33,25 @@
           <v-tab
             v-for="(day) in plan.days"
             :key="'tab_' + day.key"
+            @click="$vuetify.goTo('#tab_item_'+day.key,{offset:-150})"
           >
             {{day.planDayText}}
           </v-tab>
         </v-tabs>
       </v-toolbar-items>
     </v-toolbar>
-
+    <v-flex style="height: 10vh">
+      <!--Holder-->
+    </v-flex>
     <v-layout v-if="!pageLoading" column class="white">
       <!--DAYS-->
       <v-flex v-for="(day,index) in plan.days"
               :key="day.key"
+              mt-5
               class="light-blue lighten-5">
         <v-divider></v-divider>
         <v-flex class="title text-xs-center white" pb-2 pt-4>
-          <span :id="'item_'+day.key">{{day.planDayText}}</span>
+          <span :id="'tab_item_'+day.key">{{day.planDayText}}</span>
           <v-flex>
             <v-btn flat @click="onAddLocation(day)">
               <v-icon>add_location</v-icon>
