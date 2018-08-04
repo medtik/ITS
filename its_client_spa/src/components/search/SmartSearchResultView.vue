@@ -8,15 +8,17 @@
       </v-toolbar>
       <v-layout column class="grey lighten-4" py-3>
         <!--<v-flex py-3 class="title text-xs-center white">-->
-          <!--<v-icon>place</v-icon>-->
-          <!--Địa điểm-->
+        <!--<v-icon>place</v-icon>-->
+        <!--Địa điểm-->
         <!--</v-flex>-->
         <v-flex v-for="location in locations"
                 :key="location.id"
                 elevation-2
                 mb-2
                 class="white">
-          <LocationFullWidth v-bind="location" :isSearchResult="true"/>
+          <LocationFullWidth v-bind="location"
+                             :isSearchResult="true"
+                             @save="onSave"/>
         </v-flex>
         <v-flex>
           <v-btn block flat color="secondary">
@@ -30,24 +32,59 @@
         <!--Holder-->
       </v-flex>
     </v-layout>
+    <ChoosePlanDialog
+      :dialog="dialog.choosePlan"
+      @select="onPlanSelect"
+      @close="dialog.choosePlan = false"/>
   </v-content>
 </template>
 
 <script>
   import LocationFullWidth from "../../common/block/LocationFullWidth";
   import PlanFullWidth from "../../common/block/PlanFullWidth";
+  import {ChoosePlanDialog} from "../../common/input";
+
   import {mapGetters} from "vuex";
 
   export default {
     name: "SmartSearchResultView",
     components: {
       LocationFullWidth,
-      PlanFullWidth
+      PlanFullWidth,
+      ChoosePlanDialog
+    },
+    data() {
+      return {
+
+        selectedLocation: '',
+        selectedPlan: '',
+        requestMessage: '',
+
+        dialog: {
+          choosePlan: false,
+        }
+      }
     },
     computed: {
       ...mapGetters('smartSearch', {
         locations: 'searchResult'
       })
+    },
+    methods: {
+      onSave(locationId) {
+        this.selectedLocation = _.find(this.locations, (location) => {
+          return location.id == locationId;
+        });
+        this.dialog.choosePlan = true
+      },
+      onPlanSelect(plan) {
+        this.dialog.choosePlan = false;
+
+        this.$store.dispatch('plan/addLocationToPlan', {
+          locationId: this.selectedLocation.id,
+          planId: plan.id
+        })
+      }
     }
   }
 </script>
