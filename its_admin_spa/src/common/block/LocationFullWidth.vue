@@ -10,6 +10,9 @@
       </v-flex>
     </v-layout>
     <v-layout slot="title">
+      <v-icon v-if="locationIcon">
+        {{locationIcon}}
+      </v-icon>
       <v-flex class="title" pl-1>
         {{locationName}}
       </v-flex>
@@ -115,7 +118,10 @@
         return this.$vuetify.breakpoint.name === 'xs'
       },
       locationIcon() {
-        return 'restaurant';
+        switch (this.type) {
+          case 'Ăn uống':
+            return 'restaurant';
+        }
       },
       locationName(){
         if(this.name){

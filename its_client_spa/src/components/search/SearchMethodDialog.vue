@@ -7,13 +7,14 @@
             <v-select
               value="smart"
               :items="items"
+              v-model="selectedValue"
               item-text="text"
               item-value="value"
             ></v-select>
           </v-flex>
           <v-divider></v-divider>
           <v-layout row>
-            <v-btn color="primary">
+            <v-btn color="primary" @click="onSelect">
               <v-icon small>
                 fas fa-search
               </v-icon>
@@ -38,6 +39,7 @@
     ],
     data() {
       return {
+        selectedValue: 'smart',
         items: [
           {text: 'Tìm thông minh', value: 'smart'},
           {text: 'Tìm thường', value: 'normal'}
@@ -45,8 +47,8 @@
       }
     },
     methods: {
-      onSelect(value) {
-        this.$emit('select', value);
+      onSelect() {
+        this.$emit('select', this.selectedValue);
       }
     }
   }

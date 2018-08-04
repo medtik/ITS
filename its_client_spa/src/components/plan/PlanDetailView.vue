@@ -292,9 +292,13 @@
       },
       onSearchMethodChoose(searchMethod) {
         if (searchMethod == 'smart') {
-          this.$router.push("SmartSearch");
+          this.$router.push({
+            name: "SmartSearch"
+          });
         } else if (searchMethod == 'normal') {
-          this.$router.push("Search");
+          this.$router.push({
+            name: "Search"
+          });
         }
       }
     }

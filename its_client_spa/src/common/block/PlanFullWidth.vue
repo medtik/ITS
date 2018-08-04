@@ -45,8 +45,8 @@
     <v-flex mt-2>
       <div style="overflow-x: auto;" v-if="isHaveLocations">
         <v-layout row my-1>
-          <v-flex v-for="location in locations"
-                  :key="location.id"
+          <v-flex v-for="(location,index) in locations"
+                  :key="`${id}_${location.id}_${index}`"
                   xs6 mx-2>
             <LocationCard v-bind="location"/>
           </v-flex>
