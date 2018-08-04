@@ -43,13 +43,15 @@
     </v-flex>
     <v-divider></v-divider>
     <v-flex mt-2>
-      <v-layout style="overflow-y: auto;" v-if="isHaveLocations">
-        <v-flex v-for="location in locations"
-                :key="location.id"
-                mx-2>
-          <LocationCard v-bind="location"/>
-        </v-flex>
-      </v-layout>
+      <div style="overflow-x: auto;" v-if="isHaveLocations">
+        <v-layout row my-1>
+          <v-flex v-for="location in locations"
+                  :key="location.id"
+                  xs6 mx-2>
+            <LocationCard v-bind="location"/>
+          </v-flex>
+        </v-layout>
+      </div>
       <v-layout v-else>
         <v-flex class="subheading text-xs-center">
           Chưa có địa điểm nào
@@ -86,10 +88,10 @@
       isHaveLocations() {
         return this.locations && this.locations.length > 0;
       },
-      formattedStartDate(){
+      formattedStartDate() {
         return moment(this.startDate).format('DD/MM/YYYY');
       },
-      formattedEndDate(){
+      formattedEndDate() {
         return moment(this.endDate).format('DD/MM/YYYY');
       }
     }

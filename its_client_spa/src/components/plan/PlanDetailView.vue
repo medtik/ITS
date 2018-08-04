@@ -1,5 +1,8 @@
 <template>
   <v-content>
+    <v-container class="text-xs-center" v-if="pageLoading">
+      <v-progress-circular indeterminate size="40" color="primary"></v-progress-circular>
+    </v-container>
     <v-toolbar v-if="!pageLoading" flat
                dense fixed
                color="light-blue darken-2" dark>
@@ -48,7 +51,7 @@
       <v-flex v-for="(day,index) in plan.days"
               :key="day.key"
               mt-5
-              class="light-blue lighten-5">
+              class="grey lighten-5">
         <v-divider></v-divider>
         <v-flex class="title text-xs-center white" pb-2 pt-4>
           <span :id="'tab_item_'+day.key">{{day.planDayText}}</span>
@@ -63,22 +66,23 @@
             </v-btn>
           </v-flex>
         </v-flex>
-        <v-flex pb-3
+        <!--ITEMS-->
+        <v-flex py-2 mb-1
                 v-for="item in day.items"
                 :key="item.id"
-                class="white"
-        >
+                class="white">
           <LocationFullWidth v-if="item.location"
                              v-bind="item.location"
-                             :isOwn="true">
-            <v-icon slot="handle" class="handle-bar">reorder</v-icon>
+                             :isOwn="true"
+                             @delete="onLocationDelete(item)">
+
           </LocationFullWidth>
-          <NoteFullWidth v-else v-bind="item.note">
-            <v-icon slot="handle" class="handle-bar">reorder</v-icon>
+          <NoteFullWidth v-else v-bind="item.note"
+                         @delete="onNoteDelete(item)">
           </NoteFullWidth>
         </v-flex>
+        <!--SPACER-->
         <v-flex v-if="plan.days[index].length <= 0" style="height: 50px">
-          <!--Spacer-->
         </v-flex>
 
       </v-flex>
@@ -147,9 +151,7 @@
         </v-card>
       </v-dialog>
     </v-layout>
-    <v-layout v-if="pageLoading" column pa-5 justify-center align-center>
-      <v-progress-circular indeterminate size="40" color="primary"></v-progress-circular>
-    </v-layout>
+
     <!--DIALOG-->
     <ChoosePlanDestinationDialog :dialog="dialog.choosePlanDestination"
                                  @select="onAddToGroupSelected"
@@ -280,11 +282,19 @@
           }
         });
       },
+      onLocationDelete(item) {
+        this.$store.dispatch('plan/removeLocationFromPlan', {
+          itemId: item.id
+        });
+      },
+      onNoteDelete(item) {
+        this.$store.dispatch('plan/removeNoteFromPlan');
+      },
       onSearchMethodChoose(searchMethod) {
         if (searchMethod == 'smart') {
-
+          this.$router.push("SmartSearch");
         } else if (searchMethod == 'normal') {
-
+          this.$router.push("Search");
         }
       }
     }

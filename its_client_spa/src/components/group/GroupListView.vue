@@ -4,7 +4,12 @@
       src="static/pexels-photo-490411.jpeg"
       text="Các nhóm của bạn"
     />
-    <v-layout column class="grey lighten-4">
+    <v-container class="text-xs-center" v-if="myGroupsLoading">
+      <v-progress-circular indeterminate size="40" color="primary"></v-progress-circular>
+    </v-container>
+    <v-layout
+      v-else
+      column class="grey lighten-4">
       <v-flex>
         <v-btn color="success" :to="{name:'GroupCreate'}">
           <v-icon>group_add</v-icon>&nbsp; Tạo nhóm

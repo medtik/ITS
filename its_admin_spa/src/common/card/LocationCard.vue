@@ -1,8 +1,8 @@
 <template>
   <router-link v-bind="routerLink" tag="span" class="fakeLink">
-    <v-card>
+    <v-card style="width: 300px; height: 100%">
       <v-layout column align-center>
-        <v-card-media style="width: 250px; height: 250px">
+        <v-card-media style="height: 200px">
           <img :src='photo'/>
         </v-card-media>
         <v-card-text>
@@ -57,14 +57,6 @@
             }
           }
         }
-      }
-    },
-    data() {
-      return {
-        id: 1,
-        name: 'Địa điểm abc',
-        rating: 4,
-        photo: 'https://picsum.photos/400/400',
       }
     }
   }

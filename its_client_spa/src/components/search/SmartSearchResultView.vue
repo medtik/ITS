@@ -36,12 +36,20 @@
       :dialog="dialog.choosePlan"
       @select="onPlanSelect"
       @close="dialog.choosePlan = false"/>
+    <SuccessDialog
+      v-bind="success"
+      @close="success.dialog = false"
+    ></SuccessDialog>
   </v-content>
 </template>
 
 <script>
-  import LocationFullWidth from "../../common/block/LocationFullWidth";
-  import PlanFullWidth from "../../common/block/PlanFullWidth";
+  import {
+    LocationFullWidth,
+    PlanFullWidth,
+    SuccessDialog
+  } from "../../common/block";
+
   import {ChoosePlanDialog} from "../../common/input";
 
   import {mapGetters} from "vuex";
@@ -51,7 +59,8 @@
     components: {
       LocationFullWidth,
       PlanFullWidth,
-      ChoosePlanDialog
+      ChoosePlanDialog,
+      SuccessDialog
     },
     data() {
       return {
@@ -62,6 +71,10 @@
 
         dialog: {
           choosePlan: false,
+        },
+        success: {
+          dialog: false,
+          message: true,
         }
       }
     },
@@ -84,6 +97,12 @@
           locationId: this.selectedLocation.id,
           planId: plan.id
         })
+          .then(value => {
+            this.success = {
+              dialog: true,
+              message: 'Thêm vào chuyến đi thành công'
+            }
+          })
       }
     }
   }
