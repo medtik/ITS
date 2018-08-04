@@ -1,23 +1,29 @@
 <template>
-  <v-dialog v-model="dialog">
+  <v-dialog v-model="dialog" max-width="450" persistent>
     <v-card>
       <v-card-text>
         <v-layout column>
           <v-flex class="text-xs-center">
             <v-select
+              value="smart"
+              :items="items"
               item-text="text"
               item-value="value"
             ></v-select>
           </v-flex>
           <v-divider></v-divider>
-          <v-flex class="grey lighten-4 text-xs-center">
+          <v-layout row>
             <v-btn color="primary">
-              <v-icon>
+              <v-icon small>
                 fas fa-search
               </v-icon>
-              Tìm
+              Tiếp tục
             </v-btn>
-          </v-flex>
+            <v-btn color="secondary"
+                   @click="$emit('close')">
+              Hủy
+            </v-btn>
+          </v-layout>
         </v-layout>
       </v-card-text>
     </v-card>
@@ -38,8 +44,8 @@
         ]
       }
     },
-    methods:{
-      onSelect(value){
+    methods: {
+      onSelect(value) {
         this.$emit('select', value);
       }
     }

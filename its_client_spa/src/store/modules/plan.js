@@ -35,7 +35,7 @@ export default {
     myVisiblePlans(state) {
       return state.myVisiblePlans;
     },
-    addLocationToPlanLoading(state){
+    addLocationToPlanLoading(state) {
       return state.loading.addLocationToPlan;
     },
     myVisiblePlansLoading(state) {
@@ -63,6 +63,9 @@ export default {
     },
     setDetailedPlan(state, payload) {
       const detailedPlan = _.cloneDeep(payload.plan);
+      const startDate = moment(detailedPlan.startDay);
+      const endDate = moment(detailedPlan.endDate);
+      const diffDays = endDate.diff(startDate, 'days');
 
       const getDayText = (planDay) => {
         switch (planDay) {
@@ -77,56 +80,75 @@ export default {
             } else {
               return `Ngày ${planDay}`
             }
-
         }
       };
-      const locations = _(detailedPlan.locations)
-        .map(item => {
-          return {
-            location: {
-              id: item.locationId,
-              address: item.address,
-              primaryPhoto: item.photo,
-              location: item.title,
-              reviewCount: item.reviewCount,
-              rating: item.rating
-            },
-            id: item.planLocationId,
-            planDay: item.planDay,
-            index: item.index,
-            type: 'location',
-          }
-        })
-        .value();
 
-      const items = _(detailedPlan.notes)
+      const getDaysObj = (day) => {
+        return {
+          planDayText: getDayText(day),
+          plabDay: _.toNumber(day),
+          key: `day_${day}`,
+        }
+      };
+
+      let items = _.concat(detailedPlan.locations, detailedPlan.notes);
+      items = _(items)
         .map(item => {
-          return {
-            note: {
-              name: item.name,
-              description: item.description
-            },
-            id: item.id,
-            planDay: item.planDay,
-            index: item.index,
-            type: 'note',
+          if (item.locationId) {
+            //  Location
+            return {
+              location: {
+                id: item.locationId,
+                address: item.address,
+                primaryPhoto: item.photo,
+                location: item.title,
+                reviewCount: item.reviewCount,
+                rating: item.rating
+              },
+              id: item.planLocationId,
+              planDay: item.planDay,
+              index: item.index,
+              type: 'location',
+            }
+          } else {
+            // Note
+            return {
+              note: {
+                name: item.name,
+                description: item.description
+              },
+              id: item.id,
+              planDay: item.planDay,
+              index: item.index,
+              type: 'note',
+            }
           }
         })
-        .concat(locations)
         .orderBy(['index'], ['asc'])
         .groupBy(item => {
           return item.planDay
         })
         .map((value, key) => {
           return {
-            planDayText: getDayText(key),
+            ...getDaysObj(key),
             items: value
           }
         })
         .values()
         .value();
 
-      detailedPlan.days = items;
+
+      const planDays = [];
+      for (let i = 0; i < diffDays + 3; i++) {
+        if (items[i]) {
+          planDays.push(items[i]);
+        } else {
+          planDays.push(getDaysObj(i));
+        }
+      }
+
+
+      detailedPlan.days = planDays;
       state.detailedPlan = detailedPlan;
     },
     setMyPlans(state, payload) {
@@ -226,19 +248,19 @@ export default {
         comment
       } = payload;
 
-     return new Promise((resolve, reject) => {
-       axiosInstance.put('api/Plan/AddLocations', {
-         comment,
-         locationId,
-         planId
-       })
-         .then(value =>{
-           resolve(value.data);
-         })
-         .catch(reason => {
-           reject(reason.response);
-         })
-     })
+      return new Promise((resolve, reject) => {
+        axiosInstance.put('api/Plan/AddLocations', {
+          comment,
+          locationId,
+          planId
+        })
+          .then(value => {
+            resolve(value.data);
+          })
+          .catch(reason => {
+            reject(reason.response);
+          })
+      })
 
     },
     moveItemUp(state, payload) {
