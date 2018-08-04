@@ -11,10 +11,13 @@ export default {
       notes: undefined
     },
     myPlans: [],
+    myVisiblePlans: [],
     loading: {
       myPlans: true,
+      myVisiblePlans: false,
       featuredPlans: true,
       detailedPlan: true,
+      addLocationToPlan: false,
       create: false,
       delete: false
     }
@@ -28,6 +31,15 @@ export default {
     },
     myPlans(state) {
       return state.myPlans;
+    },
+    myVisiblePlans(state) {
+      return state.myVisiblePlans;
+    },
+    addLocationToPlanLoading(state) {
+      return state.loading.addLocationToPlan;
+    },
+    myVisiblePlansLoading(state) {
+      return state.loading.myVisiblePlans;
     },
     featuredPlansLoading(state) {
       return state.loading.featuredPlans;
@@ -46,8 +58,14 @@ export default {
     setFeaturedPlans(state, payload) {
       state.featuredPlans = payload.plans;
     },
+    setMyVisiblePlans(state, payload) {
+      state.myVisiblePlans = payload.plans
+    },
     setDetailedPlan(state, payload) {
       const detailedPlan = _.cloneDeep(payload.plan);
+      const startDate = moment(detailedPlan.startDay);
+      const endDate = moment(detailedPlan.endDate);
+      const diffDays = endDate.diff(startDate, 'days');
 
       const getDayText = (planDay) => {
         switch (planDay) {
@@ -62,74 +80,79 @@ export default {
             } else {
               return `Ngày ${planDay}`
             }
-
         }
       };
-      const locations = _(detailedPlan.locations)
-        .map(item => {
-          return {
-            location: {
-              id: item.locationId,
-              address: item.address,
-              primaryPhoto: item.photo,
-              location: item.title,
-              reviewCount: item.reviewCount,
-              rating: item.rating
-            },
-            id: item.planLocationId,
-            planDay: item.planDay,
-            index: item.index,
-            type: 'location',
-          }
-        })
-        .value();
 
-      const items = _(detailedPlan.notes)
+      const getDaysObj = (day) => {
+        return {
+          planDayText: getDayText(day),
+          plabDay: _.toNumber(day),
+          key: `day_${day}`,
+        }
+      };
+
+      let items = _.concat(detailedPlan.locations, detailedPlan.notes);
+      items = _(items)
         .map(item => {
-          return {
-            note: {
-              name: item.name,
-              description: item.description
-            },
-            id: item.id,
-            planDay: item.planDay,
-            index: item.index,
-            type: 'note',
+          if (item.locationId) {
+            //  Location
+            return {
+              location: {
+                id: item.locationId,
+                address: item.address,
+                primaryPhoto: item.photo,
+                location: item.title,
+                reviewCount: item.reviewCount,
+                rating: item.rating
+              },
+              id: item.planLocationId,
+              planDay: item.planDay,
+              index: item.index,
+              type: 'location',
+            }
+          } else {
+            // Note
+            return {
+              note: {
+                name: item.name,
+                description: item.description
+              },
+              id: item.id,
+              planDay: item.planDay,
+              index: item.index,
+              type: 'note',
+            }
           }
         })
-        .concat(locations)
         .orderBy(['index'], ['asc'])
         .groupBy(item => {
           return item.planDay
         })
         .map((value, key) => {
           return {
-            planDayText: getDayText(key),
+            ...getDaysObj(key),
             items: value
           }
         })
         .values()
         .value();
 
-      detailedPlan.days = items;
+
+      const planDays = [];
+      for (let i = 0; i < diffDays + 3; i++) {
+        if (items[i]) {
+          planDays.push(items[i]);
+        } else {
+          planDays.push(getDaysObj(i));
+        }
+      }
+
+
+      detailedPlan.days = planDays;
       state.detailedPlan = detailedPlan;
     },
     setMyPlans(state, payload) {
       state.myPlans = _.cloneDeep(payload.plans);
-    },
-    moveItemUp(state, payload) {
-      const {
-        item
-      } = payload;
-
-    },
-    moveItemDown(state, payload) {
-      const {
-        item
-      } = payload;
-    },
-    setDayItems(state, payload) {
-
     },
     setLoading(state, payload) {
       state.loading = _.assign(state.loading, payload.loading);
@@ -202,7 +225,56 @@ export default {
           })
       });
     },
-    addLocationToPlan(context, payload){
+    fetchVisiblePlans(context) {
+      //get /api/User/MyVisiblePlan
+      context.commit('setLoading', {
+        loading: {myVisiblePlans: true}
+      });
+      axiosInstance.get('api/User/MyVisiblePlan')
+        .then(value => {
+          context.commit('setLoading', {
+            loading: {myVisiblePlans: true}
+          });
+          context.commit('setMyVisiblePlans', {plans: value.data});
+        })
+        .catch(reason => {
+          console.error('plan/fetchVisiblePlans', reason.response)
+        })
+    },
+    addLocationToPlan(context, payload) {
+      const {
+        locationId,
+        planId,
+        comment
+      } = payload;
+
+      return new Promise((resolve, reject) => {
+        axiosInstance.put('api/Plan/AddLocations', {
+          comment,
+          locationId,
+          planId
+        })
+          .then(value => {
+            resolve(value.data);
+          })
+          .catch(reason => {
+            reject(reason.response);
+          })
+      })
+
+    },
+    moveItemUp(state, payload) {
+      const {
+        item
+      } = payload;
+
+    },
+    moveItemDown(state, payload) {
+      const {
+        item
+      } = payload;
+    },
+    setDayItems(state, payload) {
 
     },
     create(context, payload) {

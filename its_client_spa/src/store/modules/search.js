@@ -7,8 +7,12 @@ export default {
       search: false,
     },
     searchResult: {
-      area: undefined,
       locations: undefined
+    },
+    searchContext: {
+      plan: undefined,
+      planDay: undefined,
+      area: undefined,
     }
   },
   getters: {
@@ -18,16 +22,19 @@ export default {
     searchResultLocations(state) {
       return state.searchResult.locations
     },
-    searchResultLoading(state){
+    searchResultLoading(state) {
       return state.loading.search;
     }
   },
   mutations: {
-    setSearchResultLocations(state, payload){
+    setSearchResultLocations(state, payload) {
       state.searchResult.locations = payload.locations;
     },
-    setSearchResultArea(state, payload){
+    setSearchResultArea(state, payload) {
       state.searchResult.area = payload.area;
+    },
+    setSearchContext(state,payload){
+      state.searchContext = _.assign(state.searchContext, payload.context);
     },
     setLoading(state, payload) {
       state.loading = _.assign(state.loading, payload.loading);
@@ -52,7 +59,7 @@ export default {
             areaId
           }
         }).then(value => {
-          context.commit('setSearchResultLocations',{
+          context.commit('setSearchResultLocations', {
             locations: value.data.currentList
           });
           context.commit('setLoading', {

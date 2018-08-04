@@ -116,7 +116,12 @@
         this.dialog.choosePlan = true
       },
       onPlanSelect(plan) {
+        this.dialog.choosePlan = false;
 
+        this.$store.dispatch('plan/addLocationToPlan',{
+          locationId: this.selectedLocation.id,
+          planId: plan.id
+        })
       }
     }
 

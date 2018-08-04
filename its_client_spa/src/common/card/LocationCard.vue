@@ -58,14 +58,6 @@
           }
         }
       }
-    },
-    data() {
-      return {
-        id: 1,
-        name: 'Địa điểm abc',
-        rating: 4,
-        photo: 'https://picsum.photos/400/400',
-      }
     }
   }
 </script>

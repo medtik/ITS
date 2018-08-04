@@ -1,42 +1,59 @@
 <template>
   <v-content>
     <v-toolbar v-if="!pageLoading" flat
+               dense fixed
                color="light-blue darken-2" dark>
+      <!--TOOL BAR TOP ROW-->
       <v-toolbar-title class="headline">
         {{plan.name}}
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-toolbar-title v-if="!isSmallScreen">
-        {{formattedStartDate}} - {{formattedEndDate}}
-      </v-toolbar-title>
-      <v-toolbar-items slot="extension" style="width: 100%">
-        <v-layout class="justify-space-around">
-          <v-btn flat @click="dialog.choosePlanDestination = true"
-                 :loading="addPlanToGroupLoading">
-            <v-icon large>fas fa-heart</v-icon>
-            <span v-if="!isSmallScreen">&nbsp; Lưu</span>
-          </v-btn>
-          <v-btn flat :to="{name:'PlanEdit'}">
-            <v-icon large>edit</v-icon>
-            <span v-if="!isSmallScreen">Chỉnh sửa</span>
-          </v-btn>
-          <v-btn flat @click="dialog.publishPlan = true">
-            <v-icon large>publish</v-icon>
-            <span v-if="!isSmallScreen">Đăng</span>
-          </v-btn>
-        </v-layout>
+      <v-toolbar-items>
+        <v-btn flat @click="dialog.choosePlanDestination = true"
+               :loading="addPlanToGroupLoading">
+          <v-icon large>fas fa-heart</v-icon>
+          <span v-if="!isSmallScreen">&nbsp; Lưu</span>
+        </v-btn>
+        <v-btn flat :to="{name:'PlanEdit'}">
+          <v-icon large>edit</v-icon>
+          <span v-if="!isSmallScreen">Chỉnh sửa</span>
+        </v-btn>
+        <v-btn flat @click="dialog.publishPlan = true">
+          <v-icon large>publish</v-icon>
+          <span v-if="!isSmallScreen">Đăng</span>
+        </v-btn>
+      </v-toolbar-items>
+      <!--TABS-->
+      <v-toolbar-items slot="extension" v-if="plan.days.length > 1">
+        <v-tabs show-arrows color="light-blue darken-2"
+                next-icon="fas fa-angle-right"
+                prev-icon="fas fa-angle-left"
+                grow>
+          <v-tabs-slider color="light-blue accent"></v-tabs-slider>
+          <v-tab
+            v-for="(day) in plan.days"
+            :key="'tab_' + day.key"
+            @click="$vuetify.goTo('#tab_item_'+day.key,{offset:-150})"
+          >
+            {{day.planDayText}}
+          </v-tab>
+        </v-tabs>
       </v-toolbar-items>
     </v-toolbar>
+    <v-flex style="height: 10vh">
+      <!--Holder-->
+    </v-flex>
     <v-layout v-if="!pageLoading" column class="white">
       <!--DAYS-->
       <v-flex v-for="(day,index) in plan.days"
-              :key="day.planDayText"
+              :key="day.key"
+              mt-5
               class="light-blue lighten-5">
         <v-divider></v-divider>
         <v-flex class="title text-xs-center white" pb-2 pt-4>
-          {{day.planDayText}}
+          <span :id="'tab_item_'+day.key">{{day.planDayText}}</span>
           <v-flex>
-            <v-btn flat :to="{name:'Search'}">
+            <v-btn flat @click="onAddLocation(day)">
               <v-icon>add_location</v-icon>
               <span v-if="!isSmallScreen">Thêm địa điểm</span>
             </v-btn>
@@ -137,6 +154,11 @@
     <ChoosePlanDestinationDialog :dialog="dialog.choosePlanDestination"
                                  @select="onAddToGroupSelected"
                                  @close="dialog.choosePlanDestination = false"/>
+    <SearchMethodDialog
+      :dialog="dialog.chooseSearchMethod"
+      @select="onSearchMethodChoose"
+      @close="dialog.chooseSearchMethod = false"
+    ></SearchMethodDialog>
     <SuccessDialog
       v-bind="success"
       @close="success.dialog = false"
@@ -146,14 +168,18 @@
 
 <script>
   import {mapGetters} from "vuex";
-  import LocationFullWidth from "../../common/block/LocationFullWidth";
+  import _ from "lodash";
+
   import NoteFullWidth from "./NoteFullWidth";
+  import SearchMethodDialog from "../search/SearchMethodDialog";
+
   import {ChoosePlanDestinationDialog} from "../../common/input";
   import draggable from 'vuedraggable'
   import moment from "moment";
-  import {SuccessDialog} from "../../common/block";
-
-  import _ from "lodash";
+  import {
+    SuccessDialog,
+    LocationFullWidth
+  } from "../../common/block";
 
 
   export default {
@@ -163,7 +189,8 @@
       NoteFullWidth,
       ChoosePlanDestinationDialog,
       draggable,
-      SuccessDialog
+      SuccessDialog,
+      SearchMethodDialog
     },
     data() {
       return {
@@ -171,6 +198,7 @@
         loading: {
           createNoteBtn: false,
           publishBtn: false,
+          searchMethod: false
         },
         success: {
           dialog: false,
@@ -180,6 +208,7 @@
           addNote: false,
           publishPlan: false,
           choosePlanDestination: false,
+          chooseSearchMethod: false
         },
         items: [],
       }
@@ -241,11 +270,23 @@
           this.dialog.publishPlan = false;
           this.loading.publishBtn = false;
         }, 1500)
+      },
+      onAddLocation(day) {
+        this.dialog.chooseSearchMethod = true;
+        this.$store.commit('search/setSearchContext', {
+          context: {
+            plan: this.plan,
+            day: day
+          }
+        });
+      },
+      onSearchMethodChoose(searchMethod) {
+        if (searchMethod == 'smart') {
+
+        } else if (searchMethod == 'normal') {
+
+        }
       }
     }
   }
 </script>
-
-<style scoped>
-
-</style>
