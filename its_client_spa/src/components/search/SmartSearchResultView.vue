@@ -15,6 +15,7 @@
                 :key="location.id"
                 elevation-2
                 mb-2
+                py-2
                 class="white">
           <LocationFullWidth v-bind="location"
                              :isSearchResult="true"

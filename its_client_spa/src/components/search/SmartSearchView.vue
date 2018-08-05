@@ -10,7 +10,7 @@
             <div class="display-2 font-weight-black font-italic text-xs-center">
               ITS
             </div>
-            <v-divider class="my-2"/>
+            <v-divider class="my-2"></v-divider>
             <div class="title font-weight-medium text-xs-center">
               Tìm kiếm thông minh
             </div>
@@ -27,7 +27,8 @@
           />
           <v-progress-linear
             v-if="questionsLoading"
-            indeterminate/>
+            indeterminate>
+          </v-progress-linear>
           <v-layout column
                     v-if="questions">
             <v-flex
@@ -53,7 +54,7 @@
         <v-card-actions>
           <v-layout column>
             <v-flex my-2>
-              <v-divider/>
+              <v-divider></v-divider>
             </v-flex>
             <v-layout justify-center>
               <v-flex style="flex-grow: 0">
