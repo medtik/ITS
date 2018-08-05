@@ -4,18 +4,18 @@
       src="static/pexels-photo-490411.jpeg"
       text="Các nhóm của bạn"
     />
-    <v-container class="text-xs-center" v-if="myGroupsLoading">
-      <v-progress-circular indeterminate size="40" color="primary"></v-progress-circular>
-    </v-container>
-    <v-layout
-      v-else
-      column class="grey lighten-4">
+
+    <v-layout column class="grey lighten-4">
       <v-flex>
         <v-btn color="success" :to="{name:'GroupCreate'}">
           <v-icon>group_add</v-icon>&nbsp; Tạo nhóm
         </v-btn>
       </v-flex>
-      <v-flex v-for="group in groups"
+      <v-container class="text-xs-center" v-if="myGroupsLoading">
+        <v-progress-circular indeterminate size="40" color="primary"></v-progress-circular>
+      </v-container>
+      <v-flex v-else
+        v-for="group in groups"
               :key="group.id"
               elevation-2
               mt-2>

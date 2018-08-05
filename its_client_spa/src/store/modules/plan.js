@@ -19,6 +19,7 @@ export default {
       featuredPlans: true,
       detailedPlan: true,
       addLocationToPlan: false,
+
       create: false,
       delete: false
     }
@@ -64,6 +65,18 @@ export default {
     },
     setMyVisiblePlans(state, payload) {
       state.myVisiblePlans = payload.plans
+    },
+    deletePlan(state, payload) {
+      if (state.myPlans && state.myPlans.length > 0) {
+        state.myPlans = _.filter(state.myPlans, plan => {
+          return plan.id != payload.id;
+        })
+      }
+      if (state.myVisiblePlans && state.myVisiblePlans.length > 0) {
+        state.myVisiblePlans = _.filter(state.myVisiblePlans, plan => {
+          return plan.id != payload.id;
+        })
+      }
     },
     setDetailedPlan(state, payload) {
       const detailedPlan = _.cloneDeep(payload.plan);
@@ -326,7 +339,7 @@ export default {
           })
       })
     },
-    addNoteToPlan(context, payload){
+    addNoteToPlan(context, payload) {
       //post /api/Plan/AddNote
       const {
         title,
@@ -337,7 +350,7 @@ export default {
 
       return new Promise((resolve, reject) => {
         axiosInstance.post('api/Plan/AddNote', {
-          planNote:{
+          planNote: {
             title,
             content,
             planDay,
@@ -345,13 +358,13 @@ export default {
           }
         }).then(value => {
           resolve(value.data)
-        }).catch(reason =>{
+        }).catch(reason => {
           reject(reason.response);
         })
       })
 
     },
-    removeNoteFromPlan(context,payload){
+    removeNoteFromPlan(context, payload) {
       // delete /api/Plan/DeleteNote
       const {
         id
@@ -359,12 +372,12 @@ export default {
 
       return new Promise((resolve, reject) => {
         axiosInstance.post('api/Plan/DeleteNote', {
-          params:{
+          params: {
             noteId: id
           }
         }).then(value => {
           resolve(value.data)
-        }).catch(reason =>{
+        }).catch(reason => {
           reject(reason.response);
         })
       })
@@ -427,6 +440,9 @@ export default {
           }
         })
           .then((value) => {
+            context.commit('deletePlan', {
+              id
+            });
             context.commit('setLoading', {
               loading: {delete: false}
             });
