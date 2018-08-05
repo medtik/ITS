@@ -8,26 +8,14 @@
       </v-toolbar>
       <v-layout column class="grey lighten-4" py-3>
         <!--CONTEXT-->
-        <v-layout
-          v-if="isShowPlanSection"
-          row justify-center my-2>
-          <v-flex shrink class="title" v-if="false">
-            <span>Tất niên(22/6/2017)</span>
-            <v-btn icon flat>
-              <v-icon small>
-                fas fa-edit
-              </v-icon>
-            </v-btn>
-          </v-flex>
-          <v-flex shrink v-if="true">
-            <v-btn color="light-blue accent" @click="dialog.choosePlan = true">
-              <v-icon small>
-                fas fa-plus
-              </v-icon>
-              &nbsp; Thêm vào kế hoạch
-            </v-btn>
+        <v-layout justify-center>
+          <v-flex shrink>
+            <ChoosePlanDaySection
+              v-if="isShowPlanSection"
+            ></ChoosePlanDaySection>
           </v-flex>
         </v-layout>
+
 
         <!--RESULT-->
         <v-flex v-for="location in locations"
@@ -51,10 +39,6 @@
         <!--Holder-->
       </v-flex>
     </v-layout>
-    <ChoosePlanDialog
-      :dialog="dialog.choosePlan"
-      @select="onPlanSelect"
-      @close="dialog.choosePlan = false"/>
     <SuccessDialog
       v-bind="success"
       @close="success.dialog = false"
@@ -68,8 +52,7 @@
     PlanFullWidth,
     SuccessDialog,
   } from "../../common/block";
-
-  import {ChoosePlanDialog} from "../../common/input";
+  import ChoosePlanDaySection from "./ChoosePlanDaySection"
   import {mapGetters} from "vuex";
 
   export default {
@@ -77,17 +60,14 @@
     components: {
       LocationFullWidth,
       PlanFullWidth,
-      ChoosePlanDialog,
-      SuccessDialog
+      SuccessDialog,
+      ChoosePlanDaySection
     },
     data() {
       return {
         selectedLocation: '',
         selectedPlan: '',
         requestMessage: '',
-        dialog: {
-          choosePlan: false,
-        },
         success: {
           dialog: false,
           message: true,
@@ -109,21 +89,6 @@
         });
         this.dialog.choosePlan = true
       },
-
-      onPlanSelect(plan) {
-        this.dialog.choosePlan = false;
-
-        this.$store.dispatch('plan/addLocationToPlan', {
-          locationId: this.selectedLocation.id,
-          planId: plan.id
-        })
-          .then(value => {
-            this.success = {
-              dialog: true,
-              message: 'Thêm vào chuyến đi thành công'
-            }
-          })
-      }
     }
   }
 </script>

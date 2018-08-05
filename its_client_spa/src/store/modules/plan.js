@@ -1,4 +1,5 @@
 import {axiosInstance} from "../../common/util";
+import formatter from "../../formatter"
 import _ from "lodash";
 import moment from "moment";
 
@@ -37,6 +38,9 @@ export default {
     myVisiblePlans(state) {
       return state.myVisiblePlans;
     },
+    myVisiblePlansFlattened(state) {
+      return _.flatten(state.myVisiblePlans);
+    },
     addLocationToPlanLoading(state) {
       return state.loading.addLocationToPlan;
     },
@@ -73,9 +77,11 @@ export default {
         })
       }
       if (state.myVisiblePlans && state.myVisiblePlans.length > 0) {
-        state.myVisiblePlans = _.filter(state.myVisiblePlans, plan => {
-          return plan.id != payload.id;
-        })
+        state.myVisiblePlans = _.map(state.myVisiblePlans, group => {
+          return _.filter(group, plan => {
+            return plan.id != payload.id;
+          });
+        });
       }
     },
     setDetailedPlan(state, payload) {
@@ -83,30 +89,6 @@ export default {
       const startDate = moment(detailedPlan.startDay);
       const endDate = moment(detailedPlan.endDate);
       const diffDays = endDate.diff(startDate, 'days');
-
-      const getDayText = (planDay) => {
-        switch (planDay) {
-          case "0":
-          case 0:
-            return "Chưa lên lịch";
-          default:
-            if (detailedPlan.startDay) {
-              return moment(detailedPlan.startDay)
-                .add(planDay - 1, "days")
-                .format('DD/MM/YYYY');
-            } else {
-              return `Ngày ${planDay}`
-            }
-        }
-      };
-
-      const getDaysObj = (day) => {
-        return {
-          planDayText: getDayText(day),
-          planDay: _.toNumber(day),
-          key: `day_${day}`,
-        }
-      };
 
       let items = _.concat(detailedPlan.locations, detailedPlan.notes);
       items = _(items)
@@ -147,7 +129,7 @@ export default {
         })
         .map((value, key) => {
           return {
-            ...getDaysObj(key),
+            ...formatter.getDaysObj(key,detailedPlan.startDay),
             items: value
           }
         })
@@ -160,7 +142,7 @@ export default {
         if (items[i]) {
           planDays.push(items[i]);
         } else {
-          planDays.push(getDaysObj(i));
+          planDays.push(formatter.getDaysObj(i,detailedPlan.startDay));
         }
       }
 
@@ -350,12 +332,10 @@ export default {
 
       return new Promise((resolve, reject) => {
         axiosInstance.post('api/Plan/AddNote', {
-          planNote: {
-            title,
-            content,
-            planDay,
-            planId,
-          }
+          title,
+          content,
+          planDay,
+          planId,
         }).then(value => {
           resolve(value.data)
         }).catch(reason => {

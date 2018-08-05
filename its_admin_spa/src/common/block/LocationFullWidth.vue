@@ -51,11 +51,11 @@
     <v-layout slot="action" column align-end>
       <!--PLAN DETAIL-->
       <!--delete, check-->
-      <template v-if="isOwn" >
+      <template v-if="isOwn">
         <v-checkbox color="success" :value="isCheck">
         </v-checkbox>
         <v-btn icon flat color="red" small
-              @click="$emit('delete',id)">
+               @click="$emit('delete',id)">
           <v-icon small>
             fas fa-trash
           </v-icon>
@@ -65,17 +65,17 @@
       <!--PLAN EDIT-->
       <!--up, down, change date-->
       <!--<template v-if="isOwnEdit">-->
-        <!--<v-btn icon flat color="success"-->
-               <!--@click="$emit('save',id)">-->
-          <!--<v-icon>-->
-            <!--fas fa-heart-->
-          <!--</v-icon>-->
-        <!--</v-btn>-->
+      <!--<v-btn icon flat color="success"-->
+      <!--@click="$emit('save',id)">-->
+      <!--<v-icon>-->
+      <!--fas fa-heart-->
+      <!--</v-icon>-->
+      <!--</v-btn>-->
       <!--</template>-->
 
       <!--SEARCH RESULT-->
       <!--save to plan-->
-      <template v-if="isSearchResult">
+      <template v-if="isCheckable">
         <v-btn icon flat color="success"
                @click="$emit('save',id)">
           <v-icon>
@@ -101,6 +101,7 @@
     props: [
       'id',
       'type',
+      'categories',
       'name',
       'location',
       'rating',
@@ -111,22 +112,28 @@
       'isOwn',
       'isSearchResult',
       'isOwnEdit',
-      'isCheck'
+      'isCheck',
+      'isCheckable'
     ],
     computed: {
       isSmallScreen() {
         return this.$vuetify.breakpoint.name === 'xs'
       },
       locationIcon() {
-        switch (this.type) {
+        let type = this.type;
+        if (!type) {
+          type = this.categories;
+        }
+
+        switch (type) {
           case 'Ăn uống':
             return 'restaurant';
         }
       },
-      locationName(){
-        if(this.name){
+      locationName() {
+        if (this.name) {
           return this.name;
-        }else{
+        } else {
           return this.location;
         }
       },
