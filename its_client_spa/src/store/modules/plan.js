@@ -326,6 +326,9 @@ export default {
           })
       })
     },
+    addNoteToPlan(context, payload){
+
+    },
     removeNoteFromPlan(context,payload){
 
     },

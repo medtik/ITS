@@ -1,12 +1,35 @@
 <template>
   <v-content>
     <v-layout column>
-      <v-toolbar color="light-blue" flat dark dense>
+      <v-toolbar color="light-blue darken-2" flat dark dense>
         <v-toolbar-title class="headline font-weight-black">
           Kết quả tìm kiếm
         </v-toolbar-title>
       </v-toolbar>
       <v-layout column class="grey lighten-4" py-3>
+        <!--CONTEXT-->
+        <v-layout
+          v-if="isShowPlanSection"
+          row justify-center my-2>
+          <v-flex shrink class="title" v-if="false">
+            <span>Tất niên(22/6/2017)</span>
+            <v-btn icon flat>
+              <v-icon small>
+                fas fa-edit
+              </v-icon>
+            </v-btn>
+          </v-flex>
+          <v-flex shrink v-if="true">
+            <v-btn color="light-blue accent" @click="dialog.choosePlan = true">
+              <v-icon small>
+                fas fa-plus
+              </v-icon>
+              &nbsp; Thêm vào kế hoạch
+            </v-btn>
+          </v-flex>
+        </v-layout>
+
+        <!--RESULT-->
         <v-flex v-for="location in locations"
                 :key="location.id"
                 elevation-2
@@ -14,7 +37,6 @@
                 py-2
                 class="white">
           <LocationFullWidth v-bind="location"
-                             :isSearchResult="true"
                              @save="onSave"/>
         </v-flex>
         <v-flex>
@@ -44,11 +66,10 @@
   import {
     LocationFullWidth,
     PlanFullWidth,
-    SuccessDialog
+    SuccessDialog,
   } from "../../common/block";
 
   import {ChoosePlanDialog} from "../../common/input";
-
   import {mapGetters} from "vuex";
 
   export default {
@@ -76,6 +97,9 @@
     computed: {
       ...mapGetters('smartSearch', {
         locations: 'searchResult'
+      }),
+      ...mapGetters('authenticate', {
+        isShowPlanSection: 'isLoggedIn'
       })
     },
     methods: {
@@ -85,6 +109,7 @@
         });
         this.dialog.choosePlan = true
       },
+
       onPlanSelect(plan) {
         this.dialog.choosePlan = false;
 
