@@ -46,11 +46,21 @@
     <v-flex style="height: 10vh">
       <!--Holder-->
     </v-flex>
-    <v-layout v-if="!pageLoading" column class="white">
+
+    <v-layout v-if="!pageLoading" column class="white" mt-5>
+      <v-layout my-3
+                column
+                class="text-xs-center white">
+        <span class="caption">
+          khu vực
+        </span>
+        <span class="headline">
+          {{plan.areaName}}
+        </span>
+      </v-layout>
       <!--DAYS-->
       <v-flex v-for="(day,index) in plan.days"
               :key="day.key"
-              mt-5
               class="grey lighten-5">
         <v-divider></v-divider>
         <v-flex class="title text-xs-center white" pb-2 pt-4>
@@ -60,7 +70,7 @@
               <v-icon>add_location</v-icon>
               <span v-if="!isSmallScreen">Thêm địa điểm</span>
             </v-btn>
-            <v-btn flat @click="dialog.addNote = true">
+            <v-btn flat @click="onAddNote(day)">
               <v-icon>note_add</v-icon>
               <span v-if="!isSmallScreen">Thêm ghi chú</span>
             </v-btn>
@@ -84,7 +94,6 @@
         <!--SPACER-->
         <v-flex v-if="plan.days[index].length <= 0" style="height: 50px">
         </v-flex>
-
       </v-flex>
       <v-layout v-if="!plan.days"
                 class="title font-weight-bold"
@@ -94,35 +103,6 @@
       <v-flex style="height: 15vh">
         <!--Holder-->
       </v-flex>
-      <!--DIALOGS-->
-      <v-dialog v-model="dialog.addNote" max-width="450">
-        <!--ADD NOTE-->
-        <v-card>
-          <v-card-title class="light-blue title white--text">
-            Thêm ghi chú
-          </v-card-title>
-          <v-card-text>
-            <v-layout column>
-              <v-flex>
-                <v-text-field label="Tiêu đề"/>
-                <v-textarea label="Nội dung"/>
-              </v-flex>
-              <v-divider/>
-              <v-flex>
-                <v-btn color="success"
-                       :loading="loading.createNoteBtn"
-                       @click="onAddNote">
-                  Tạo
-                </v-btn>
-                <v-btn color="secondary"
-                       @click="dialog.addNote = false">
-                  Hủy
-                </v-btn>
-              </v-flex>
-            </v-layout>
-          </v-card-text>
-        </v-card>
-      </v-dialog>
       <v-dialog v-model="dialog.publishPlan" max-width="400">
         <!--PUBLISH-->
         <v-card>
@@ -152,6 +132,37 @@
       </v-dialog>
     </v-layout>
 
+    <!--DIALOGS-->
+    <v-dialog v-model="addNoteDialog.dialog" max-width="450" persistent>
+      <!--ADD NOTE-->
+      <v-card>
+        <v-card-title class="light-blue title white--text">
+          Thêm ghi chú
+        </v-card-title>
+        <v-card-text>
+          <v-layout column>
+            <v-flex>
+              <v-form ref="addNoteForm">
+                <v-text-field label="Tiêu đề" v-model="addNoteDialog.titleInput" :rules="[rules.title]"/>
+                <v-textarea label="Nội dung" v-model="addNoteDialog.descriptionInput"/>
+              </v-form>
+            </v-flex>
+            <v-divider/>
+            <v-flex>
+              <v-btn color="success"
+                     :loading="loading.createNoteBtn"
+                     @click="onAddNoteConfirm">
+                Tạo
+              </v-btn>
+              <v-btn color="secondary"
+                     @click="addNoteDialog.dialog = false">
+                Hủy
+              </v-btn>
+            </v-flex>
+          </v-layout>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
     <!--DIALOG-->
     <ChoosePlanDestinationDialog :dialog="dialog.choosePlanDestination"
                                  @select="onAddToGroupSelected"
@@ -170,6 +181,7 @@
 
 <script>
   import {mapGetters} from "vuex";
+  import {FormRuleMixin} from "../../common/mixin"
   import _ from "lodash";
 
   import NoteFullWidth from "./NoteFullWidth";
@@ -186,6 +198,7 @@
 
   export default {
     name: "PlanDetailView",
+    mixins: [FormRuleMixin],
     components: {
       LocationFullWidth,
       NoteFullWidth,
@@ -212,6 +225,12 @@
           choosePlanDestination: false,
           chooseSearchMethod: false
         },
+        addNoteDialog: {
+          dialog: false,
+          day: undefined,
+          titleInput: undefined,
+          descriptionInput: undefined
+        },
         items: [],
       }
     },
@@ -220,9 +239,7 @@
         id
       } = this.$route.query;
       this.planId = id;
-      this.$store.dispatch('plan/fetchPlanById', {
-        id
-      });
+      this.loadData();
     },
     computed: {
       isSmallScreen() {
@@ -243,6 +260,11 @@
       }
     },
     methods: {
+      loadData() {
+        this.$store.dispatch('plan/fetchPlanById', {
+          id: this.planId
+        });
+      },
       onAddToGroupSelected(payload) {
         const {
           group
@@ -259,12 +281,37 @@
             }
           })
       },
-      onAddNote() {
+      onAddNote(day) {
+        this.addNoteDialog = {
+          dialog: true,
+          day: day
+        }
+      },
+      onAddNoteConfirm() {
         this.loading.createNoteBtn = true;
-        setTimeout(() => {
-          this.dialog.addNote = false;
-          this.loading.createNoteBtn = false;
-        }, 1500)
+        if (!this.$refs.addNoteForm.validate()) {
+          return;
+        }
+
+        this.$store.dispatch('plan/addNoteToPlan', {
+          title: this.addNoteDialog.titleInput,
+          content: this.addNoteDialog.descriptionInput,
+          planDay: this.addNoteDialog.day.planDay,
+          planId: this.plan.id
+        })
+          .then(() => {
+            this.loadData();
+          })
+
+
+      },
+      onNoteDelete(noteId) {
+        this.$store.dispatch('plan/removeNoteFromPlan',{
+          id: noteId
+        })
+          .then(() => {
+            this.loadData();
+          })
       },
       onPublish() {
         this.loading.publishBtn = true;
@@ -275,7 +322,7 @@
       },
       onAddLocation(day) {
         this.dialog.chooseSearchMethod = true;
-        this.$store.commit('setSearchContext', {
+        this.$store.commit('searchContext', {
           context: {
             plan: this.plan,
             day: day
@@ -286,9 +333,6 @@
         this.$store.dispatch('plan/removeLocationFromPlan', {
           itemId: item.id
         });
-      },
-      onNoteDelete(item) {
-        this.$store.dispatch('plan/removeNoteFromPlan');
       },
       onSearchMethodChoose(searchMethod) {
         if (searchMethod == 'smart') {

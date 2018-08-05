@@ -71,7 +71,7 @@ import {AreaInput} from "../../common/input"
           return "Chỉnh sửa chuyến đi";
         }
       },
-      ...mapGetters('plan/create', {
+      ...mapGetters('plan', {
         createLoading: 'createLoading',
       })
     },
