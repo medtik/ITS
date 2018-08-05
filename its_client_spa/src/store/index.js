@@ -24,6 +24,7 @@ const store = new Vuex.Store({
       plan: undefined,
       planDay: undefined,
       area: undefined,
+      areaId: undefined
     }
   },
   getters:{

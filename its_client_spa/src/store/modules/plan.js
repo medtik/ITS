@@ -269,14 +269,16 @@ export default {
       const {
         locationId,
         planId,
-        comment
+        comment,
+        planDay
       } = payload;
 
       return new Promise((resolve, reject) => {
         axiosInstance.put('api/Plan/AddLocations', {
           comment,
           locationId,
-          planId
+          planId,
+          planDay
         })
           .then(value => {
             resolve(value.data);

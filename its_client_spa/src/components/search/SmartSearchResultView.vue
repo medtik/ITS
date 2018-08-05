@@ -12,11 +12,14 @@
           <v-flex shrink>
             <ChoosePlanDaySection
               v-if="isShowPlanSection"
+              :confirmable="this.locationsCheck.length > 0"
+              :confirmLoading="loading.confirm"
+              @select="onSelect"
+              @confirm="onConfirm"
+              @selectingMode="onSelectingMode"
             ></ChoosePlanDaySection>
           </v-flex>
         </v-layout>
-
-
         <!--RESULT-->
         <v-flex v-for="location in locations"
                 :key="location.id"
@@ -25,6 +28,7 @@
                 py-2
                 class="white">
           <LocationFullWidth v-bind="location"
+                             :isCheckable="selectingMode"
                              @save="onSave"/>
         </v-flex>
         <v-flex>
@@ -66,8 +70,14 @@
     data() {
       return {
         selectedLocation: '',
-        selectedPlan: '',
+        selectedPlanId: undefined,
+        selectedDay: 0,
         requestMessage: '',
+        selectingMode: false,
+        locationsCheck: [],
+        loading: {
+          confirm: false,
+        },
         success: {
           dialog: false,
           message: true,
@@ -83,12 +93,58 @@
       })
     },
     methods: {
-      onSave(locationId) {
-        this.selectedLocation = _.find(this.locations, (location) => {
-          return location.id == locationId;
-        });
-        this.dialog.choosePlan = true
+      onSelectingMode() {
+        this.selectingMode = true;
       },
+      onSelect({planId, planDay}) {
+        this.selectedPlanId = planId;
+        this.selectedDay = planDay;
+      },
+      onSave({id, check}) {
+        let found = false;
+        let locations = _.map(this.locationsCheck, (location) => {
+          if (location.id == id) {
+            location.check = check;
+            found = true;
+          }
+          return location;
+
+        });
+        if (!found) {
+          locations.push({
+            id,
+            check
+          })
+        }
+        this.locationsCheck = locations;
+      },
+      onConfirm() {
+        this.loading.confirm = true;
+        let addLocationToPlanRequests = _.map(this.locationsCheck, (location) => {
+          return {
+            locationId: location.id,
+            planId: this.selectedPlanId,
+            planDay: this.selectedDay
+          }
+        });
+
+        let responses = [];
+        for (let req of addLocationToPlanRequests) {
+          let res = this.$store.dispatch('plan/addLocationToPlan', req);
+          responses.push(res);
+        }
+        Promise.all(responses)
+          .then(value => {
+            this.loading.confirm = false;
+            this.$router.push({
+              name: 'PlanDetail',
+              query: {
+                id: this.selectedPlanId
+              }
+            })
+          })
+
+      }
     }
   }
 </script>

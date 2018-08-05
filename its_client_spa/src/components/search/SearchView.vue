@@ -104,6 +104,9 @@
     },
     methods: {
       onSearchClick() {
+        this.$store.commit('searchContext',{
+          areaId: this.areaId
+        });
         this.$store.dispatch('search/fetchSearchResult', {
           search: this.searchInput,
           areaId: this.areaId
