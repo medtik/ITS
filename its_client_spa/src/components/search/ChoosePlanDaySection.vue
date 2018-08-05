@@ -1,37 +1,41 @@
 <template>
   <v-layout column justify-center my-2>
-    <v-flex v-if="plans && plans.length > 0">
+    <v-flex v-if="plans && plans.length > 0 && selectingMode">
       <v-select :items="plans"
                 item-text="name"
                 item-value="id"
-                v-model='selectedPlan'
+                v-model='selectedPlanId'
+                @change="onPlanSelect"
                 label="Chuyến đi"
       ></v-select>
-      <v-select v-if="selectedPlan"
+      <v-select v-if="selectedPlanId"
                 :items="days"
-                item-text="text"
+                item-text="planDayText"
                 item-value="planDay"
                 v-model='selectedDay'
+                @change="onDaySelect"
                 label="Ngày"
       ></v-select>
     </v-flex>
     <v-flex class="text-xs-center">
       <v-btn color="success"
              v-if="selectingMode"
+             :disabled="!confirmable"
+             :loading="confirmLoading"
              @click="onConfirm">
         <v-icon small>
           fas fa-check
         </v-icon>
-        &nbsp; Xác nhận chuyến đi
+        &nbsp; Xác nhận
       </v-btn>
-      <v-btn color="light-blue accent"
+      <v-btn v-if="!selectingMode"
+             color="light-blue accent"
              @click="onAddToPlan">
         <v-icon small>
           fas fa-plus
         </v-icon>
         &nbsp; Thêm vào chuyến đi
       </v-btn>
-
     </v-flex>
   </v-layout>
 </template>
@@ -40,6 +44,10 @@
   import {
     mapGetters
   } from "vuex";
+  import moment from "moment";
+
+  import formatter from "../../formatter";
+
   import {ChoosePlanDialog} from "../../common/input";
 
   export default {
@@ -48,13 +56,16 @@
       ChoosePlanDialog
     },
     props: [
-      'context'
+      'context',
+      'confirmable',
+      'confirmLoading'
     ],
 
     data() {
       return {
+        selectedPlanId: undefined,
         selectedPlan: undefined,
-        selectedDay: undefined,
+        selectedDay: 0,
         selectingMode: false,
         dialog: {
           choosePlan: false,
@@ -72,20 +83,43 @@
         plansLoading: 'myVisiblePlansLoading'
       }),
       days() {
+        const planDays = [
+          {planDay: 0, planDayText: "Chưa lên lịch"}
+        ];
+        if (this.selectedPlan) {
+          const startDate = moment(this.selectedPlan.startDay);
+          const endDate = moment(this.selectedPlan.endDate);
+          const diffDays = endDate.diff(startDate, 'days');
 
-        return [
-          {planDay: 0, text: 'Chưa lên lịch'},
-          {planDay: 1, text: '23/6/2018'}
-        ]
+          for (let i = 1; i < diffDays + 2; i++) {
+            planDays.push(formatter.getDaysObj(i, this.selectedPlan.startDay));
+          }
+        }
+        return planDays;
       }
     },
     methods: {
       onAddToPlan() {
         this.selectingMode = true;
-        this.$emit('selectingMode', true);
+        this.$emit('selectingMode');
       },
-      onConfirm(){
-
+      onPlanSelect(planId) {
+        this.selectedPlan = _.find(this.plans, plan => {
+          return plan.id == planId;
+        });
+        this.$emit('select', {
+          planId: this.selectedPlanId,
+          planDay: this.selectedDay
+        })
+      },
+      onDaySelect() {
+        this.$emit('select', {
+          planId: this.selectedPlanId,
+          planDay: this.selectedDay
+        })
+      },
+      onConfirm() {
+        this.$emit('confirm');
       }
     }
   }

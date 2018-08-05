@@ -52,7 +52,7 @@
       <!--PLAN DETAIL-->
       <!--delete, check-->
       <template v-if="isOwn">
-        <v-checkbox color="success" :value="isCheck">
+        <v-checkbox color="success" :v-model="localIsChecked">
         </v-checkbox>
         <v-btn icon flat color="red" small
                @click="$emit('delete',id)">
@@ -76,10 +76,18 @@
       <!--SEARCH RESULT-->
       <!--save to plan-->
       <template v-if="isCheckable">
-        <v-btn icon flat color="success"
-               @click="$emit('save',id)">
+        <v-btn v-if="localIsChecked"
+               icon flat color="success"
+               @click="onCheck">
           <v-icon>
-            fas fa-heart
+            fas fa-plus-circle
+          </v-icon>
+        </v-btn>
+        <v-btn v-if="!localIsChecked"
+               icon flat
+               @click="onCheck">
+          <v-icon>
+            fas fa-plus-circle
           </v-icon>
         </v-btn>
       </template>
@@ -98,6 +106,11 @@
       StarRating,
       ListItemLayout
     },
+    data() {
+      return {
+        'localIsChecked': false
+      }
+    },
     props: [
       'id',
       'type',
@@ -115,6 +128,11 @@
       'isCheck',
       'isCheckable'
     ],
+    watch: {
+      isCheck(val) {
+        this.localIsChecked = val;
+      }
+    },
     computed: {
       isSmallScreen() {
         return this.$vuetify.breakpoint.name === 'xs'
@@ -144,6 +162,15 @@
             id: this.id
           }
         }
+      }
+    },
+    methods: {
+      onCheck() {
+        this.$emit('save', {
+          id: this.id,
+          check: !this.localIsChecked
+        });
+        this.localIsChecked = !this.localIsChecked;
       }
     }
   }
