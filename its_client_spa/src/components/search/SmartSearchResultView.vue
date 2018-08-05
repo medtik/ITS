@@ -7,10 +7,6 @@
         </v-toolbar-title>
       </v-toolbar>
       <v-layout column class="grey lighten-4" py-3>
-        <!--<v-flex py-3 class="title text-xs-center white">-->
-        <!--<v-icon>place</v-icon>-->
-        <!--Địa điểm-->
-        <!--</v-flex>-->
         <v-flex v-for="location in locations"
                 :key="location.id"
                 elevation-2
@@ -65,11 +61,9 @@
     },
     data() {
       return {
-
         selectedLocation: '',
         selectedPlan: '',
         requestMessage: '',
-
         dialog: {
           choosePlan: false,
         },

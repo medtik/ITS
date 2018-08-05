@@ -18,6 +18,23 @@ import {
 
 
 const store = new Vuex.Store({
+  state:{
+    searchContext:{
+      plan: undefined,
+      planDay: undefined,
+      area: undefined,
+    }
+  },
+  getters:{
+    searchContext(state){
+      return state.searchContext;
+    }
+  },
+  mutations:{
+    searchContext(state,payload){
+      state.searchContext = _.assign(state.searchContext, payload.context);
+    }
+  },
   modules: {
     account: AccountModule,
     authenticate: AuthenticateModule,

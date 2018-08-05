@@ -8,11 +8,6 @@ export default {
     },
     searchResult: {
       locations: undefined
-    },
-    searchContext: {
-      plan: undefined,
-      planDay: undefined,
-      area: undefined,
     }
   },
   getters: {
@@ -32,9 +27,6 @@ export default {
     },
     setSearchResultArea(state, payload) {
       state.searchResult.area = payload.area;
-    },
-    setSearchContext(state,payload){
-      state.searchContext = _.assign(state.searchContext, payload.context);
     },
     setLoading(state, payload) {
       state.loading = _.assign(state.loading, payload.loading);
