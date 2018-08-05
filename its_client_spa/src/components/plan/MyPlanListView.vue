@@ -1,12 +1,7 @@
 <template>
   <v-content>
-
     <ParallaxHeader src="static/pexels-photo-490411.jpeg" text="Các chuyến đi của bạn"/>
-    <v-container class="text-xs-center" v-if="myPlansLoading">
-      <v-progress-circular indeterminate size="40" color="primary"></v-progress-circular>
-    </v-container>
-    <v-layout v-else
-              column class="grey lighten-4">
+    <v-layout class="grey lighten-4" column>
       <v-flex>
         <v-btn color="success" :to="{name:'PlanCreate'}">
           <v-icon>
@@ -16,7 +11,11 @@
           Tạo chuyến đi
         </v-btn>
       </v-flex>
-      <v-flex v-for="plan in myPlans"
+      <v-container class="text-xs-center" v-if="myPlansLoading">
+        <v-progress-circular indeterminate size="40" color="primary"></v-progress-circular>
+      </v-container>
+      <v-flex v-else
+              v-for="plan in myPlans"
               :key="plan.id"
               my-2
               py-2

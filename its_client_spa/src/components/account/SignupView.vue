@@ -70,7 +70,7 @@
         </v-card-text>
       </v-card>
     </v-layout>
-    <SuccessDialog v-bind="successDialog" @close="successDialog.dialog = false"/>
+    <SuccessDialog v-bind="successDialog" @close="successConfirm"/>
     <ErrorDialog v-bind="errorDialog" @close="errorDialog.dialog = false"/>
   </v-content>
 </template>
@@ -155,6 +155,11 @@
             this.errorMessages[key] = undefined;
           }
         }
+      },
+      successConfirm(){
+        this.$router.push({
+          name: "Signin"
+        })
       }
     }
   }

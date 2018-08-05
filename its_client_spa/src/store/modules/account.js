@@ -95,7 +95,7 @@ export default {
           rePassword: rePassword,
           fullName: name,
           address: address,
-          phone: phone,
+          phoneNumber: phone,
           birthdate: birthdate,
         })
           .then(value => resolve(value.data))

@@ -11,7 +11,6 @@
           v-model="input.photo"
           width="300"
           height="300"
-          size="50"
           text="Ảnh đại diện"
         />
       </v-flex>

@@ -11,6 +11,7 @@ import SearchModule from "./modules/search";
 import TagModule from "./modules/tag"
 import PlanModule from "./modules/plan"
 import GroupModule from "./modules/group"
+import RequestModule from "./modules/request"
 import {
   AuthenticateModule,
   TagDialogModule
@@ -18,6 +19,23 @@ import {
 
 
 const store = new Vuex.Store({
+  state:{
+    searchContext:{
+      plan: undefined,
+      planDay: undefined,
+      area: undefined,
+    }
+  },
+  getters:{
+    searchContext(state){
+      return state.searchContext;
+    }
+  },
+  mutations:{
+    searchContext(state,payload){
+      state.searchContext = _.assign(state.searchContext, payload.context);
+    }
+  },
   modules: {
     account: AccountModule,
     authenticate: AuthenticateModule,
@@ -28,7 +46,8 @@ const store = new Vuex.Store({
     tag: TagModule,
     tagDialog: TagDialogModule,
     plan: PlanModule,
-    group: GroupModule
+    group: GroupModule,
+    request: RequestModule
   },
 });
 

@@ -90,7 +90,7 @@ export default {
       const getDaysObj = (day) => {
         return {
           planDayText: getDayText(day),
-          plabDay: _.toNumber(day),
+          planDay: _.toNumber(day),
           key: `day_${day}`,
         }
       };
@@ -326,8 +326,48 @@ export default {
           })
       })
     },
-    removeNoteFromPlan(context,payload){
+    addNoteToPlan(context, payload){
+      //post /api/Plan/AddNote
+      const {
+        title,
+        content,
+        planDay,
+        planId,
+      } = payload;
 
+      return new Promise((resolve, reject) => {
+        axiosInstance.post('api/Plan/AddNote', {
+          planNote:{
+            title,
+            content,
+            planDay,
+            planId,
+          }
+        }).then(value => {
+          resolve(value.data)
+        }).catch(reason =>{
+          reject(reason.response);
+        })
+      })
+
+    },
+    removeNoteFromPlan(context,payload){
+      // delete /api/Plan/DeleteNote
+      const {
+        id
+      } = payload;
+
+      return new Promise((resolve, reject) => {
+        axiosInstance.post('api/Plan/DeleteNote', {
+          params:{
+            noteId: id
+          }
+        }).then(value => {
+          resolve(value.data)
+        }).catch(reason =>{
+          reject(reason.response);
+        })
+      })
     },
     moveItemUp(state, payload) {
       const {

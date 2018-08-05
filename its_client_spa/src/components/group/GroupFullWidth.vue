@@ -5,6 +5,7 @@
         <v-layout class="title" align-center justify-space-between>
           {{name}}
           <v-btn color="red" flat icon
+                 v-if="isOwner"
                  @click.stop="$emit('delete',id)">
             <v-icon>
               fas fa-trash
@@ -51,7 +52,8 @@
       'id',
       'name',
       'memberCount',
-      'planCount'
+      'planCount',
+      'isOwner'
     ],
     computed: {
       routerLink() {

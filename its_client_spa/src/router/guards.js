@@ -7,8 +7,11 @@ const requireLoggedInRoute = [
   'MyPlanList',
   'PlanCreate',
   'PlanEdit',
+
   'GroupList',
   'GroupCreate',
+  'GroupDetail',
+
   'Personal',
   'Notification',
   'ReviewWrite',
@@ -19,22 +22,41 @@ const requireLoggedInRoute = [
   'GroupInvite'
 ];
 
-function isAllow(to){
+function getDataRedirect(to) {
+  switch (to.name) {
+    case 'SmartSearchResult': {
+      const searchResult = store.getters['smartSearch/searchResult'];
+      if(!searchResult){
+        return {
+          name: 'SmartSearch'
+        };
+      }
+    }
+  }
+}
+
+function isAuthenticateAllow(to) {
   const isLoggedIn = store.getters['authenticate/isLoggedIn'];
 
-  if(isLoggedIn){
+  if (isLoggedIn) {
     return true;
-  }else {
+  } else {
     return !_.includes(requireLoggedInRoute, to.name);
   }
 }
 
 router.beforeEach((to, from, next) => {
-  if(isAllow(to)){
-    next()
-  }else{
+  if (!isAuthenticateAllow(to)) {
     next({
       name: 'Signin'
-    })
+    });
+    return;
+  }
+
+  let dataRedirect = getDataRedirect(to);
+  if(dataRedirect){
+    next(dataRedirect);
+  }else{
+    next();
   }
 });
