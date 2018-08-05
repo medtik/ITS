@@ -25,10 +25,6 @@ if (localToken) {
   store.commit('authenticate/setToken', {token: localToken})
 }
 
-//--Store reliant
-import "./router/guards";
-
-
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
