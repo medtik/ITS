@@ -1,7 +1,12 @@
 <template>
   <v-content>
+
     <ParallaxHeader src="static/pexels-photo-490411.jpeg" text="Các chuyến đi của bạn"/>
-    <v-layout column class="grey lighten-4">
+    <v-container class="text-xs-center" v-if="myPlansLoading">
+      <v-progress-circular indeterminate size="40" color="primary"></v-progress-circular>
+    </v-container>
+    <v-layout v-else
+              column class="grey lighten-4">
       <v-flex>
         <v-btn color="success" :to="{name:'PlanCreate'}">
           <v-icon>

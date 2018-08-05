@@ -96,11 +96,13 @@
               </v-layout>
             </div>
           </v-flex>
-          <v-flex style="height: 15vh">
-            <!--Holder-->
-          </v-flex>
         </v-layout>
       </v-container>
+    </section>
+    <section>
+      <v-flex style="height: 15vh">
+        <!--Holder-->
+      </v-flex>
     </section>
   </v-content>
 </template>

@@ -1,3 +1,63 @@
+GET các plan của mình và các plan của nhóm của minh (bao gồm cả nhóm mình làm chủ và là thành viên)
+  fields
+    planId
+    planName
+
+    groupId nếu có
+    groupName
+    * isOwnGroup (có phải là chủ group hay không)
+
+GET /api/getGroups
+  thêm field
+    isOwnGroup (có phải là chủ group hay không)
+
+GET api/groups/details
+  thêm field
+    isOwnGroup (có phải là chủ group hay không)
+
+GET nearby location
+  field
+    long
+    lat
+    distance(km)(bán kính)
+
+API tạo plan note
+API remove plan note
+
+
+
+API tạo Location suggestion
+  IN:
+    planId,
+    locationId,
+    comment
+
+API search users
+  IN:
+    search text
+   OUT:
+    danh sách user
+      fields
+        id
+        avatar,
+        name
+
+API mời user vào nhóm
+  IN:
+
+
+thêm LocationId vào location suggestion
+  để khi chủ group đồng ý với suggestion thì tự động thêm location vào plan
+
+---
+
+PUT cập nhật index, plan date của LocationPlan và Note
+
+GET api/details (location detail)
+    trả thiếu business hours
+
+GET api/location/categories
+
 Thêm type cho location
     vd: restaurant, bus stop, hotel
     thêm field này vào 1 số request
@@ -28,36 +88,4 @@ GET tìm location
       reviewCount
       address
       primaryPhoto
-
-
----
-
-PUT cập nhật index, plan date của LocationPlan và Note
-
-GET api/details (location detail)
-    trả thiếu business hours
-
-GET api/location/categories
-
----
-
-GET các plan của mình và các plan của nhóm của minh (bao gồm cả nhóm mình làm chủ và là thành viên)
-  fields
-    planId
-    planName
-
-    groupId nếu có
-    groupName
-    * isOwnGroup (có phải là chủ group hay không)
-
-
-GET nearby location
-  field
-    long
-    lat
-    distance(km)(bán kính)
-
-
-
-
 

@@ -10,6 +10,9 @@
       </v-flex>
     </v-layout>
     <v-layout slot="title">
+      <v-icon v-if="locationIcon">
+        {{locationIcon}}
+      </v-icon>
       <v-flex class="title" pl-1>
         {{locationName}}
       </v-flex>
@@ -49,7 +52,7 @@
       <!--PLAN DETAIL-->
       <!--delete, check-->
       <template v-if="isOwn" >
-        <v-checkbox color="success" v-model="isCheck">
+        <v-checkbox color="success" :value="isCheck">
         </v-checkbox>
         <v-btn icon flat color="red" small
               @click="$emit('delete',id)">
@@ -59,9 +62,16 @@
         </v-btn>
       </template>
 
-
       <!--PLAN EDIT-->
       <!--up, down, change date-->
+      <!--<template v-if="isOwnEdit">-->
+        <!--<v-btn icon flat color="success"-->
+               <!--@click="$emit('save',id)">-->
+          <!--<v-icon>-->
+            <!--fas fa-heart-->
+          <!--</v-icon>-->
+        <!--</v-btn>-->
+      <!--</template>-->
 
       <!--SEARCH RESULT-->
       <!--save to plan-->
@@ -108,7 +118,10 @@
         return this.$vuetify.breakpoint.name === 'xs'
       },
       locationIcon() {
-        return 'restaurant';
+        switch (this.type) {
+          case 'Ăn uống':
+            return 'restaurant';
+        }
       },
       locationName(){
         if(this.name){
