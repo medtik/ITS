@@ -147,6 +147,8 @@
 </template>
 
 <script>
+  import moment from "moment";
+  import _ from "lodash"
   import StarRating from "vue-star-rating";
   import LocationReview from "../../common/block/LocationReview";
   import ParallaxHeader from "../../common/layout/ParallaxHeader";
@@ -193,14 +195,73 @@
         // ]
       },
       todayHours() {
-        // if(!location.businessHours){
-        //   return;
-        // }
+        if (!this.location.businessHours) {
+          return;
+        }
+
+        let todayHour = _(this.location.businessHours)
+          .map(businessHour => {
+            const fromTime = moment(businessHour.from, "HH:mm");
+            const toTime = moment(businessHour.to, "HH:mm");
+            let day;
+            switch (businessHour.day) {
+              case 'day1':
+                day = moment().day(0);
+                break;
+              case 'day2':
+                day =  moment().day(1);
+                break;
+              case 'day3':
+                day =  moment().day(2);
+                break;
+              case 'day4':
+                day =  moment().day(3);
+                break;
+              case 'day5':
+                day =  moment().day(4);
+                break;
+              case 'day6':
+                day =  moment().day(5);
+                break;
+              case 'day7':
+                day =  moment().day(6);
+                break;
+            }
+            let now = moment();
+            let from = moment(day)
+              .set('hour',fromTime.get('hour'))
+              .set('minute',fromTime.get('minute'))
+              .set('second',0);
+
+            let to = moment(day)
+              .set('hour',toTime.get('hour'))
+              .set('minute',toTime.get('minute'))
+              .set('second',0);
+
+
+            let formattedBusinessHour = {
+              from,
+              to,
+              day
+            };
+
+            formattedBusinessHour.isNow = now.isBetween(
+              formattedBusinessHour.from,
+              formattedBusinessHour.to,
+            );
+
+            return formattedBusinessHour;
+          })
+          .filter(formattedBusinessHour =>{
+            const now = moment();
+            return now.isSame(formattedBusinessHour.day,'day');
+          })
+          .head();
 
         return {
-          from: "8:30 sáng",
-          to: "6:30 chiều",
-          isOpen: true
+          from: todayHour.from.format('HH:mm'),
+          to: todayHour.to.format('HH:mm'),
+          isOpen: todayHour.isNow
         }
       }
     },

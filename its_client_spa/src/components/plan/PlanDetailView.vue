@@ -275,7 +275,7 @@
       },
       onAddLocation(day) {
         this.dialog.chooseSearchMethod = true;
-        this.$store.commit('search/setSearchContext', {
+        this.$store.commit('setSearchContext', {
           context: {
             plan: this.plan,
             day: day
