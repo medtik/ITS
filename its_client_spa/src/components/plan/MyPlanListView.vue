@@ -14,7 +14,7 @@
       <v-container class="text-xs-center" v-if="myPlansLoading">
         <v-progress-circular indeterminate size="40" color="primary"></v-progress-circular>
       </v-container>
-      <v-flex v-else
+      <v-flex v-else-if="myPlans.length > 0"
               v-for="plan in myPlans"
               :key="plan.id"
               my-2
@@ -24,6 +24,9 @@
         <PlanFullWidth @save="dialog.choosePlanDestination = true"
                        @delete="deletePlan"
                        v-bind="plan"/>
+      </v-flex>
+      <v-flex v-else class="subheading text-xs-center">
+        <span>Bạn chưa có chuyến đi nào</span>
       </v-flex>
     </v-layout>
     <v-flex style="height: 30vh">
@@ -71,9 +74,6 @@
         this.$store.dispatch('plan/delete', {
           id
         })
-          .then(() => {
-            this.$store.dispatch('plan/fetchMyPlans')
-          })
       }
     }
   }

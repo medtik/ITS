@@ -1,4 +1,5 @@
 import {axiosInstance} from "../../common/util";
+import formatter from "../../formatter"
 import _ from "lodash";
 import moment from "moment";
 
@@ -19,6 +20,7 @@ export default {
       featuredPlans: true,
       detailedPlan: true,
       addLocationToPlan: false,
+
       create: false,
       delete: false
     }
@@ -35,6 +37,9 @@ export default {
     },
     myVisiblePlans(state) {
       return state.myVisiblePlans;
+    },
+    myVisiblePlansFlattened(state) {
+      return _.flatten(state.myVisiblePlans);
     },
     addLocationToPlanLoading(state) {
       return state.loading.addLocationToPlan;
@@ -65,35 +70,25 @@ export default {
     setMyVisiblePlans(state, payload) {
       state.myVisiblePlans = payload.plans
     },
+    deletePlan(state, payload) {
+      if (state.myPlans && state.myPlans.length > 0) {
+        state.myPlans = _.filter(state.myPlans, plan => {
+          return plan.id != payload.id;
+        })
+      }
+      if (state.myVisiblePlans && state.myVisiblePlans.length > 0) {
+        state.myVisiblePlans = _.map(state.myVisiblePlans, group => {
+          return _.filter(group, plan => {
+            return plan.id != payload.id;
+          });
+        });
+      }
+    },
     setDetailedPlan(state, payload) {
       const detailedPlan = _.cloneDeep(payload.plan);
       const startDate = moment(detailedPlan.startDay);
       const endDate = moment(detailedPlan.endDate);
       const diffDays = endDate.diff(startDate, 'days');
-
-      const getDayText = (planDay) => {
-        switch (planDay) {
-          case "0":
-          case 0:
-            return "Chưa lên lịch";
-          default:
-            if (detailedPlan.startDay) {
-              return moment(detailedPlan.startDay)
-                .add(planDay - 1, "days")
-                .format('DD/MM/YYYY');
-            } else {
-              return `Ngày ${planDay}`
-            }
-        }
-      };
-
-      const getDaysObj = (day) => {
-        return {
-          planDayText: getDayText(day),
-          planDay: _.toNumber(day),
-          key: `day_${day}`,
-        }
-      };
 
       let items = _.concat(detailedPlan.locations, detailedPlan.notes);
       items = _(items)
@@ -134,7 +129,7 @@ export default {
         })
         .map((value, key) => {
           return {
-            ...getDaysObj(key),
+            ...formatter.getDaysObj(key,detailedPlan.startDay),
             items: value
           }
         })
@@ -147,7 +142,7 @@ export default {
         if (items[i]) {
           planDays.push(items[i]);
         } else {
-          planDays.push(getDaysObj(i));
+          planDays.push(formatter.getDaysObj(i,detailedPlan.startDay));
         }
       }
 
@@ -326,7 +321,7 @@ export default {
           })
       })
     },
-    addNoteToPlan(context, payload){
+    addNoteToPlan(context, payload) {
       //post /api/Plan/AddNote
       const {
         title,
@@ -337,21 +332,19 @@ export default {
 
       return new Promise((resolve, reject) => {
         axiosInstance.post('api/Plan/AddNote', {
-          planNote:{
-            title,
-            content,
-            planDay,
-            planId,
-          }
+          title,
+          content,
+          planDay,
+          planId,
         }).then(value => {
           resolve(value.data)
-        }).catch(reason =>{
+        }).catch(reason => {
           reject(reason.response);
         })
       })
 
     },
-    removeNoteFromPlan(context,payload){
+    removeNoteFromPlan(context, payload) {
       // delete /api/Plan/DeleteNote
       const {
         id
@@ -359,12 +352,12 @@ export default {
 
       return new Promise((resolve, reject) => {
         axiosInstance.post('api/Plan/DeleteNote', {
-          params:{
+          params: {
             noteId: id
           }
         }).then(value => {
           resolve(value.data)
-        }).catch(reason =>{
+        }).catch(reason => {
           reject(reason.response);
         })
       })
@@ -427,6 +420,9 @@ export default {
           }
         })
           .then((value) => {
+            context.commit('deletePlan', {
+              id
+            });
             context.commit('setLoading', {
               loading: {delete: false}
             });

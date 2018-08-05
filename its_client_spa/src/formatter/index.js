@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export default {
   getAllResponse({meta, currentList}) {
     return {
@@ -18,6 +20,29 @@ export default {
       pageSize: pagination.rowsPerPage,
       searchValue: search
     };
-  }
+  },
 
+  getPlanDayText(startDay,planDay){
+    switch (planDay) {
+      case "0":
+      case 0:
+        return "Chưa lên lịch";
+      default:
+        if (startDay) {
+          return moment(startDay)
+            .add(planDay - 1, "days")
+            .format('DD/MM/YYYY');
+        } else {
+          return `Ngày ${planDay}`
+        }
+    }
+  },
+
+  getDaysObj(planDay,startDay){
+    return {
+      planDayText: this.getPlanDayText(startDay, planDay),
+      planDay: _.toNumber(planDay),
+      key: `day_${planDay}`,
+    }
+  },
 }
