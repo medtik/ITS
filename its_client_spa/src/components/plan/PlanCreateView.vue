@@ -11,7 +11,9 @@
           label="Tên"
           v-model="input.name"
         />
-        <AreaInput v-model="input.areaId">
+        <AreaInput
+          :readonly="lockAreaId"
+          v-model="input.areaId">
 
         </AreaInput>
         <v-text-field
@@ -24,10 +26,16 @@
           type="date"
           v-model="input.endDate"
         />
-
       </v-flex>
       <v-flex>
-        <v-btn color="success"
+        <v-btn v-if="isHavingContext"
+               color="primary"
+               :loading="createLoading"
+               @click="onCreate">
+          Tiếp tục
+        </v-btn>
+        <v-btn v-else
+               color="success"
                :loading="createLoading"
                @click="onCreate">
           Tạo
@@ -43,10 +51,11 @@
 
 <script>
   import {mapGetters} from "vuex";
-import {AreaInput} from "../../common/input"
+  import {AreaInput} from "../../common/input"
+
   export default {
     name: "PlanCreateView",
-    components:{
+    components: {
       AreaInput
     },
     data() {
@@ -57,10 +66,18 @@ import {AreaInput} from "../../common/input"
           startDate: undefined,
           endDate: undefined,
           areaId: undefined,
-        }
+        },
+        lockAreaId: false
       }
     },
     computed: {
+      ...mapGetters({
+        context: 'createPlanContext',
+        previousSearchAreaId: 'previousSearchAreaId'
+      }),
+      isHavingContext() {
+        return !!this.context.returnRoute
+      },
       title() {
         const {
           name
@@ -74,6 +91,12 @@ import {AreaInput} from "../../common/input"
       ...mapGetters('plan', {
         createLoading: 'createLoading',
       })
+    },
+    mounted(){
+      if(this.isHavingContext){
+        this.input.areaId =  this.previousSearchAreaId;
+        this.lockAreaId = true;
+      }
     },
     methods: {
       onCreate() {

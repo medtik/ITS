@@ -70,10 +70,10 @@
               <v-icon>add_location</v-icon>
               <span v-if="!isSmallScreen">Thêm địa điểm</span>
             </v-btn>
-            <v-btn flat @click="onAddNote(day)">
-              <v-icon>note_add</v-icon>
-              <span v-if="!isSmallScreen">Thêm ghi chú</span>
-            </v-btn>
+            <!--<v-btn flat @click="onAddNote(day)">-->
+              <!--<v-icon>note_add</v-icon>-->
+              <!--<span v-if="!isSmallScreen">Thêm ghi chú</span>-->
+            <!--</v-btn>-->
           </v-flex>
         </v-flex>
         <!--ITEMS-->
@@ -87,9 +87,9 @@
                              @delete="onLocationDelete(item)">
 
           </LocationFullWidth>
-          <NoteFullWidth v-else v-bind="item.note"
-                         @delete="onNoteDelete(item)">
-          </NoteFullWidth>
+          <!--<NoteFullWidth v-else v-bind="item.note"-->
+                         <!--@delete="onNoteDelete(item)">-->
+          <!--</NoteFullWidth>-->
         </v-flex>
         <!--SPACER-->
         <v-flex v-if="plan.days[index].length <= 0" style="height: 50px">
@@ -210,6 +210,7 @@
     data() {
       return {
         planId: undefined,
+        selectedPlanDay: undefined,
         loading: {
           createNoteBtn: false,
           publishBtn: false,
@@ -252,6 +253,12 @@
       ...mapGetters('group', {
         addPlanToGroupLoading: 'addPlanToGroupLoading'
       }),
+      nextContext(){
+        return {
+          plan: this.plan,
+
+        }
+      },
       formattedStartDate() {
         return moment(this.plan.startDate).format('DD/MM/YYYY');
       },
@@ -306,7 +313,7 @@
 
       },
       onNoteDelete(noteId) {
-        this.$store.dispatch('plan/removeNoteFromPlan',{
+        this.$store.dispatch('plan/removeNoteFromPlan', {
           id: noteId
         })
           .then(() => {
@@ -320,18 +327,19 @@
           this.loading.publishBtn = false;
         }, 1500)
       },
+      onLocationDelete(item) {
+        this.$store.dispatch('plan/removeLocationFromPlan', {
+          itemId: item.id
+        });
+      },
       onAddLocation(day) {
         this.dialog.chooseSearchMethod = true;
         this.$store.commit('searchContext', {
           context: {
             plan: this.plan,
-            day: day
+            planDay: day.planDay,
+            areaId: this.plan.areaId
           }
-        });
-      },
-      onLocationDelete(item) {
-        this.$store.dispatch('plan/removeLocationFromPlan', {
-          itemId: item.id
         });
       },
       onSearchMethodChoose(searchMethod) {

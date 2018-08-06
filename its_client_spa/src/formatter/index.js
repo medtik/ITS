@@ -22,7 +22,7 @@ export default {
     };
   },
 
-  getPlanDayText(startDay,planDay){
+  getPlanDayText(planDay,startDay){
     switch (planDay) {
       case "0":
       case 0:
@@ -40,7 +40,7 @@ export default {
 
   getDaysObj(planDay,startDay){
     return {
-      planDayText: this.getPlanDayText(startDay, planDay),
+      planDayText: this.getPlanDayText(planDay, startDay),
       planDay: _.toNumber(planDay),
       key: `day_${planDay}`,
     }

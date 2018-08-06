@@ -1,4 +1,4 @@
-import router from "./index";
+import router from "./routes";
 import store from "../store";
 import _ from "lodash";
 
