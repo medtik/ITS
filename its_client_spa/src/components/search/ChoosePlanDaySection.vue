@@ -4,7 +4,9 @@
       <v-select :items="plans"
                 item-text="name"
                 item-value="id"
-                v-model='selectedPlanId'
+                prepend-icon="fas fa-suitcase"
+                :readonly="lockSelect"
+                :value='selectedPlanId'
                 @change="onPlanSelect"
                 label="Chuyến đi"
       ></v-select>
@@ -12,7 +14,9 @@
                 :items="days"
                 item-text="planDayText"
                 item-value="planDay"
-                v-model='selectedDay'
+                :value='selectedDay'
+                prepend-icon="fas fa-calendar"
+                :readonly="lockSelect"
                 @change="onDaySelect"
                 label="Ngày"
       ></v-select>
@@ -58,11 +62,13 @@
     props: [
       'context',
       'confirmable',
-      'confirmLoading'
+      'confirmLoading',
+      'initValue'
     ],
 
     data() {
       return {
+        lockSelect: false,
         selectedPlanId: undefined,
         selectedPlan: undefined,
         selectedDay: 0,
@@ -75,6 +81,18 @@
     mounted() {
       if (!this.plans || this.plans.length < 1) {
         this.$store.dispatch('plan/fetchVisiblePlans');
+      }
+      let context = this.$store.getters['searchContext'];
+      if (context) {
+        this.selectedPlan = context.plan;
+        this.selectedPlanId = context.plan.id;
+        this.selectedDay = context.planDay;
+        this.lockSelect = true;
+
+        this.$emit('select', {
+          planId: context.plan.id,
+          planDay: context.planDay
+        });
       }
     },
     computed: {
@@ -97,7 +115,7 @@
         }
         return planDays;
       },
-      isHavePlan(){
+      isHavePlan() {
         //TODO
       }
     },
@@ -111,15 +129,17 @@
           return plan.id == planId;
         });
         this.$emit('select', {
-          planId: this.selectedPlanId,
+          planId: planId,
           planDay: this.selectedDay
-        })
+        });
+        this.selectedPlanId = planId;
       },
-      onDaySelect() {
+      onDaySelect(planDay) {
         this.$emit('select', {
           planId: this.selectedPlanId,
-          planDay: this.selectedDay
-        })
+          planDay: planDay
+        });
+        this.selectedDay = planDay;
       },
       onConfirm() {
         this.$emit('confirm');

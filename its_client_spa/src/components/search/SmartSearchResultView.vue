@@ -9,9 +9,8 @@
       <v-layout column class="grey lighten-4" py-3>
         <!--CONTEXT-->
         <v-layout justify-center>
-          <v-flex shrink>
+          <v-flex shrink v-if="isShowPlanSection">
             <ChoosePlanDaySection
-              v-if="isShowPlanSection"
               :confirmable="this.locationsCheck.length > 0"
               :confirmLoading="loading.confirm"
               @select="onSelect"
@@ -19,13 +18,19 @@
               @selectingMode="onSelectingMode"
             ></ChoosePlanDaySection>
           </v-flex>
+          <v-flex v-if="!isShowPlanSection"
+                  shrink my-3
+                  class="text-xs-center title">
+            Bạn cần đăng nhập để thêm các địa điểm bên dưới vào chuyến đi
+            <v-btn color="success" :to="{name:'Signin'}">
+              Đăng nhập
+            </v-btn>
+          </v-flex>
         </v-layout>
         <!--RESULT-->
         <v-flex v-for="location in locations"
                 :key="location.id"
-                elevation-2
-                mb-2
-                py-2
+                elevation-2 mb-2 py-2
                 class="white">
           <LocationFullWidth v-bind="location"
                              :isCheckable="selectingMode"
@@ -75,6 +80,10 @@
         requestMessage: '',
         selectingMode: false,
         locationsCheck: [],
+        choosePlanDayValue:{
+          planId: undefined,
+          planDay: undefined,
+        },
         loading: {
           confirm: false,
         },
@@ -90,7 +99,10 @@
       }),
       ...mapGetters('authenticate', {
         isShowPlanSection: 'isLoggedIn'
-      })
+      }),
+      ...mapGetters({
+        context: 'searchContext'
+      }),
     },
     methods: {
       onSelectingMode() {

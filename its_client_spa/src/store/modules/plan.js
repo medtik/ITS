@@ -129,7 +129,7 @@ export default {
         })
         .map((value, key) => {
           return {
-            ...formatter.getDaysObj(key,detailedPlan.startDay),
+            ...formatter.getDaysObj(key, detailedPlan.startDay),
             items: value
           }
         })
@@ -138,11 +138,15 @@ export default {
 
 
       const planDays = [];
-      for (let i = 0; i < diffDays + 3; i++) {
-        if (items[i]) {
-          planDays.push(items[i]);
-        } else {
-          planDays.push(formatter.getDaysObj(i,detailedPlan.startDay));
+      for (let i = 0; i < diffDays + 2; i++) {
+        const matchedItem = _.find(items, item =>{
+          return item.planDay == i
+        });
+
+        if(matchedItem){
+          planDays.push(matchedItem);
+        }else{
+          planDays.push(formatter.getDaysObj(i, detailedPlan.startDay));
         }
       }
 
