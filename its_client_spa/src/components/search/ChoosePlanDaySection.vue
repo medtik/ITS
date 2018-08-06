@@ -23,25 +23,27 @@
         ></v-select>
       </v-flex>
       <v-flex class="text-xs-center">
-        <v-btn color="success"
-               v-if="selectingMode"
-               :disabled="!confirmable"
-               :loading="confirmLoading">
-          <v-icon small>
-            fas fa-check
-          </v-icon>
-          Thêm
-        </v-btn>
-        <v-btn color="light-blue accent"
-               v-if="selectingMode"
-               :disabled="!confirmable"
-               :loading="confirmLoading"
-               @click="onConfirm">
-          <v-icon small>
-            fas fa-check
-          </v-icon>
-          &nbsp; Hoàn tất
-        </v-btn>
+        <v-layout>
+          <v-btn color="success"
+                 v-if="selectingMode"
+                 :disabled="!confirmable"
+                 :loading="confirmLoading">
+            <v-icon small>
+              fas fa-plus
+            </v-icon>
+            &nbsp; Thêm
+          </v-btn>
+          <v-btn color="light-blue accent"
+                 v-if="selectingMode"
+                 :disabled="!confirmable"
+                 :loading="confirmLoading"
+                 @click="onConfirm">
+            <v-icon small>
+              fas fa-check
+            </v-icon>
+            &nbsp; Hoàn tất
+          </v-btn>
+        </v-layout>
         <v-btn v-if="!selectingMode"
                color="light-blue accent"
                @click="onAddToPlan">
@@ -71,10 +73,8 @@
   } from "vuex";
   import moment from "moment";
   import _ from "lodash";
-
+  import Raven from "raven-js";
   import formatter from "../../formatter";
-
-
   import {ChoosePlanDialog} from "../../common/input";
 
   export default {
@@ -83,10 +83,9 @@
       ChoosePlanDialog
     },
     props: [
-      'context',
       'confirmable',
       'confirmLoading',
-      'selectedLocations'
+      'selectedLocations',
     ],
 
     data() {
@@ -95,6 +94,7 @@
           plan: false,
           planDay: false
         },
+        init: false,
         selectedPlanId: undefined,
         selectedPlan: undefined,
         selectedDay: 0,
@@ -108,27 +108,18 @@
       if (!this.plans || this.plans.length < 1) {
         this.$store.dispatch('plan/fetchVisiblePlans')
       }
-      let context = this.$store.getters['searchContext'];
-      if (context.plan && context.planDay) {
-        this.selectedPlan = context.plan;
-        this.selectedPlanId = context.plan.id;
-        this.selectedDay = context.planDay;
 
-        this.lockSelect = {
-          plan: true,
-          planDay: true,
-        };
-        this.onAddToPlan();
-        this.$emit('select', {
-          planId: context.plan.id,
-          planDay: context.planDay
-        });
+      if (this.plans && this.context) {
+        this.initValue();
       }
     },
     computed: {
       ...mapGetters('plan', {
         plans: 'myVisiblePlansFlattened',
         plansLoading: 'myVisiblePlansLoading'
+      }),
+      ...mapGetters({
+        context: 'searchContext'
       }),
       days() {
         const planDays = [
@@ -147,14 +138,66 @@
       },
     },
     watch: {
-      plans(val) {
-        if(!this.selectedPlanId){
-          const lastPlan = _.last(val);
-          this.onPlanSelect(lastPlan.id);
+      plans: function (plans) {
+        if (!this.selectedPlanId) {
+          const lastPlan = _.last(plans);
+          if (lastPlan) {
+            this.onPlanSelect(lastPlan.id);
+          }
+        }
+        if (plans && this.context) {
+          this.initValue();
+        }
+      },
+      context: function (context) {
+        if (this.plans && context) {
+          this.initValue();
         }
       }
+      // context(context){
+      //   if(context.planId){
+      //     this.onAddToPlan();
+      //   }
+      // }
     },
     methods: {
+      initValue() {
+        if(this.init){
+          return;
+        }
+        console.group('innitValue');
+        let context = this.$store.getters['searchContext'];
+        console.debug('outer',context);
+        Raven.captureBreadcrumb({
+          message: "ChoosePlanDaySection",
+          category: "watch-plans",
+          data: {
+            plans: this.plans,
+            context: this.$store.getters['searchContext']
+          }
+        });
+        if (context.plan && context.planDay != undefined) {
+          console.debug('inner-1');
+          this.selectedPlan = context.plan;
+          this.selectedPlanId = context.plan.id;
+          this.selectedDay = context.planDay;
+
+          this.lockSelect = {
+            plan: true,
+            // planDay: true,
+          };
+          console.debug('inner-2');
+          this.selectingMode = true;
+          this.$emit('selectingMode');
+          this.$emit('select', {
+            planId: context.plan.id,
+            planDay: context.planDay
+          });
+          console.debug('inner-3');
+        }
+        console.groupEnd()
+        this.init = true;
+      },
       onAddToPlan() {
         this.selectingMode = true;
         this.$emit('selectingMode');

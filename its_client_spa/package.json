@@ -14,6 +14,7 @@
     "axios": "^0.18.0",
     "lodash": "^4.17.10",
     "moment": "^2.22.2",
+    "raven-js": "^3.26.4",
     "superagent": "^3.8.3",
     "superagent-jsonapify": "^1.4.5",
     "superagent-prefix": "0.0.2",
