@@ -23,7 +23,8 @@ const store = new Vuex.Store({
     searchContext: {
       plan: undefined,
       planDay: undefined,
-      areaId: undefined
+      areaId: undefined,
+      planName: undefined,
     },
     createPlanContext: {
       returnRoute: undefined,

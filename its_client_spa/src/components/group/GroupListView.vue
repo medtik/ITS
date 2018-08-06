@@ -6,7 +6,7 @@
     />
 
     <v-layout column class="grey lighten-4">
-      <v-flex>
+      <v-flex class="text-xs-right">
         <v-btn color="success" :to="{name:'GroupCreate'}">
           <v-icon>group_add</v-icon>&nbsp; Tạo nhóm
         </v-btn>

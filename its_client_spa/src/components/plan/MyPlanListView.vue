@@ -2,7 +2,7 @@
   <v-content>
     <ParallaxHeader src="static/pexels-photo-490411.jpeg" text="Các chuyến đi của bạn"/>
     <v-layout class="grey lighten-4" column>
-      <v-flex>
+      <v-flex class="text-xs-right">
         <v-btn color="success" :to="{name:'PlanCreate'}">
           <v-icon>
             fas fa-plus
@@ -25,11 +25,11 @@
                        @delete="deletePlan"
                        v-bind="plan"/>
       </v-flex>
-      <v-flex v-else class="subheading text-xs-center">
+      <v-flex v-else class="title text-xs-center grey lighten-4" py-4>
         <span>Bạn chưa có chuyến đi nào</span>
       </v-flex>
     </v-layout>
-    <v-flex style="height: 30vh">
+    <v-flex style="height: 30vh" class="grey lighten-4">
       <!--Holder-->
     </v-flex>
     <ChoosePlanDestinationDialog :dialog="dialog.choosePlanDestination"
