@@ -43,7 +43,7 @@ export default {
       const {
         areaId
       } = _.cloneDeep(payload);
-
+      context.commit('previousSearchAreaId', {areaId}, {root: true});
       context.commit('setLoading', {loading: {questions: true}});
 
       return new Promise((resolve, reject) => {

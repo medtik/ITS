@@ -27,7 +27,8 @@ const store = new Vuex.Store({
     },
     createPlanContext: {
       returnRoute: undefined,
-    }
+    },
+    previousSearchAreaId: undefined
   },
   getters: {
     searchContext(state) {
@@ -35,6 +36,9 @@ const store = new Vuex.Store({
     },
     createPlanContext(state){
       return state.createPlanContext;
+    },
+    previousSearchAreaId(state){
+      return state.previousSearchAreaId;
     }
   },
   mutations: {
@@ -44,10 +48,13 @@ const store = new Vuex.Store({
     createPlanContext(state,payload){
       state.createPlanContext = _.assign(state.createPlanContext, payload.context);
     },
-    consumeSearchContext(state,payload){
+    previousSearchAreaId(state,payload){
+      state.previousSearchAreaId = payload.areaId;
+    },
+    consumeSearchContext(state){
       state.searchContext = {};
     },
-    consumeCreatePlanContext(state,payload){
+    consumeCreatePlanContext(state){
       state.createPlanContext = {};
     }
   },

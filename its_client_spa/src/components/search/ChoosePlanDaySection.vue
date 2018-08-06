@@ -130,9 +130,6 @@
         }
         return planDays;
       },
-      isHavePlan() {
-        //TODO
-      }
     },
     methods: {
       onAddToPlan() {
@@ -159,8 +156,17 @@
       onConfirm() {
         this.$emit('confirm');
       },
-      onCreatePlanClick(){
-
+      onCreatePlanClick() {
+        this.$store.commit('createPlanContext', {
+          context: {
+            returnRoute: {
+              name: 'SmartSearchResult'
+            }
+          }
+        });
+        this.$router.push({
+          name: "PlanCreate"
+        })
       }
     }
   }
