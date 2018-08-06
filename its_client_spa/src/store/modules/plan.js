@@ -150,7 +150,6 @@ export default {
         }
       }
 
-
       detailedPlan.days = planDays;
       state.detailedPlan = detailedPlan;
     },

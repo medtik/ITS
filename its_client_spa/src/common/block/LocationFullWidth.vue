@@ -9,10 +9,11 @@
         </router-link>
       </v-flex>
     </v-layout>
-    <v-layout slot="title">
+    <v-layout slot="title" px-1>
       <v-icon v-if="locationIcon">
         {{locationIcon}}
       </v-icon>
+      &nbsp;
       <v-flex class="title" pl-1>
         {{locationName}}
       </v-flex>
@@ -54,7 +55,7 @@
       <template v-if="isOwn">
         <v-checkbox color="success" :v-model="localIsChecked">
         </v-checkbox>
-        <v-btn icon flat color="red" small
+        <v-btn icon flat color="secondary" small
                @click="$emit('delete',id)">
           <v-icon small>
             fas fa-trash
@@ -145,7 +146,9 @@
 
         switch (type) {
           case 'Ăn uống':
-            return 'restaurant';
+            return 'fas fa-utensils';
+          case 'Nơi ở':
+            return 'fas fa-hotel';
         }
       },
       locationName() {

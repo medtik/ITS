@@ -70,10 +70,10 @@
               <v-icon>add_location</v-icon>
               <span v-if="!isSmallScreen">Thêm địa điểm</span>
             </v-btn>
-            <v-btn flat @click="onAddNote(day)">
-              <v-icon>note_add</v-icon>
-              <span v-if="!isSmallScreen">Thêm ghi chú</span>
-            </v-btn>
+            <!--<v-btn flat @click="onAddNote(day)">-->
+              <!--<v-icon>note_add</v-icon>-->
+              <!--<span v-if="!isSmallScreen">Thêm ghi chú</span>-->
+            <!--</v-btn>-->
           </v-flex>
         </v-flex>
         <!--ITEMS-->
@@ -87,9 +87,9 @@
                              @delete="onLocationDelete(item)">
 
           </LocationFullWidth>
-          <NoteFullWidth v-else v-bind="item.note"
-                         @delete="onNoteDelete(item)">
-          </NoteFullWidth>
+          <!--<NoteFullWidth v-else v-bind="item.note"-->
+                         <!--@delete="onNoteDelete(item)">-->
+          <!--</NoteFullWidth>-->
         </v-flex>
         <!--SPACER-->
         <v-flex v-if="plan.days[index].length <= 0" style="height: 50px">
