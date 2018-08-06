@@ -26,12 +26,21 @@
         <v-btn color="success"
                v-if="selectingMode"
                :disabled="!confirmable"
+               :loading="confirmLoading">
+          <v-icon small>
+            fas fa-check
+          </v-icon>
+          Thêm
+        </v-btn>
+        <v-btn color="light-blue accent"
+               v-if="selectingMode"
+               :disabled="!confirmable"
                :loading="confirmLoading"
                @click="onConfirm">
           <v-icon small>
             fas fa-check
           </v-icon>
-          &nbsp; Xác nhận
+          &nbsp; Hoàn tất
         </v-btn>
         <v-btn v-if="!selectingMode"
                color="light-blue accent"
@@ -77,7 +86,7 @@
       'context',
       'confirmable',
       'confirmLoading',
-      'initValue'
+      'selectedLocations'
     ],
 
     data() {
@@ -99,7 +108,6 @@
       if (!this.plans || this.plans.length < 1) {
         this.$store.dispatch('plan/fetchVisiblePlans')
       }
-
       let context = this.$store.getters['searchContext'];
       if (context.plan && context.planDay) {
         this.selectedPlan = context.plan;
