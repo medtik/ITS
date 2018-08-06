@@ -1,6 +1,7 @@
 <template>
   <v-select label="Chọn khu vực"
             @change="onSelect"
+            :readonly="readonly"
             v-model="selectedAreaId"
             :items="items"
             item-text="name"
@@ -17,8 +18,9 @@
 
   export default {
     name: "AreaInput",
-    props:[
-      'dark'
+    props: [
+      'dark',
+      'readonly',
     ],
     mixins: [
       StoreBoundSelectMixin({
@@ -28,6 +30,11 @@
         getItemPath: 'getAll',
       })
     ],
+    watch: {
+      value(val) {
+        this.selectedAreaId = val;
+      }
+    },
     data() {
       return {
         selectedAreaId: undefined

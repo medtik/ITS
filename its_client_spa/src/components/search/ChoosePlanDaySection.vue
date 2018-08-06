@@ -96,6 +96,9 @@
           }
         }
         return planDays;
+      },
+      isHavePlan(){
+        //TODO
       }
     },
     methods: {

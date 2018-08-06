@@ -19,22 +19,36 @@ import {
 
 
 const store = new Vuex.Store({
-  state:{
-    searchContext:{
+  state: {
+    searchContext: {
       plan: undefined,
       planDay: undefined,
-      area: undefined,
       areaId: undefined
+    },
+    createPlanContext: {
+      returnRoute: undefined,
     }
   },
-  getters:{
-    searchContext(state){
+  getters: {
+    searchContext(state) {
       return state.searchContext;
+    },
+    createPlanContext(state){
+      return state.createPlanContext;
     }
   },
-  mutations:{
-    searchContext(state,payload){
+  mutations: {
+    searchContext(state, payload) {
       state.searchContext = _.assign(state.searchContext, payload.context);
+    },
+    createPlanContext(state,payload){
+      state.createPlanContext = _.assign(state.createPlanContext, payload.context);
+    },
+    consumeSearchContext(state,payload){
+      state.searchContext = {};
+    },
+    consumeCreatePlanContext(state,payload){
+      state.createPlanContext = {};
     }
   },
   modules: {

@@ -17,7 +17,9 @@
           </v-layout>
         </v-card-title>
         <v-card-text id="card-content">
+          <!--AREA-->
           <AreaSelect
+            v-if="!lockAreaSelect"
             v-model="selectedAreaId"
             @change="onAreaSelect"
             alias="area"
@@ -25,6 +27,16 @@
             loadingPath="areasLoading"
             getItemPath="getAll"
           />
+          <v-layout v-if="lockAreaSelect"
+                    column align-center mb-5>
+            <span class="caption">
+              Tại
+            </span>
+            <span class="headline font-weight-bold">
+              {{context.plan.areaName}}
+            </span>
+          </v-layout>
+
           <v-progress-linear
             v-if="questionsLoading"
             indeterminate>
@@ -97,6 +109,7 @@
           finishBtn: false,
           areaSelect: false,
         },
+        lockAreaSelect: false,
         selectedAreaId: undefined,
         selectedAnswers: [],
         error: {}
@@ -107,27 +120,39 @@
         questions: 'questions',
         questionsLoading: 'questionsLoading'
       }),
-      isHaveAnswer(){
+      ...mapGetters({
+        context: 'searchContext'
+      }),
+      isHaveAnswer() {
         return this.selectedAnswers && this.selectedAnswers.length > 0;
+      }
+    },
+    mounted() {
+      if (this.context && this.context.areaId) {
+        this.lockAreaSelect = true;
+        this.onAreaSelect(this.context.areaId);
       }
     },
     beforeDestroy() {
       this.$store.dispatch('smartSearch/nullQuestions');
     },
     methods: {
-      onAreaSelect() {
+      onAreaSelect(id) {
+        let areaId = id;
+        if (!areaId) {
+          areaId = this.selectedAreaId
+        }
+
         this.loading.questions = true;
         this.$store.dispatch('smartSearch/getQuestionsByArea', {
-          areaId: this.selectedAreaId
+          areaId
+        }).catch(reason => {
+          this.error = {
+            dialog: true,
+            message: 'Có Lỗi xẩy ra',
+          };
+          console.error('onAreaSelect', reason);
         })
-          .catch(reason => {
-            this.error = {
-              dialog: true,
-              message: 'Có Lỗi xẩy ra',
-            };
-            console.error('onAreaSelect', reason);
-          })
-
       },
       onSubmit() {
         this.loading.finishBtn = true;
