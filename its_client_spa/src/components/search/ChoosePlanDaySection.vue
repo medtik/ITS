@@ -6,7 +6,7 @@
                   item-text="name"
                   item-value="id"
                   prepend-icon="fas fa-suitcase"
-                  :readonly="lockSelect"
+                  :readonly="lockSelect.plan"
                   :value='selectedPlanId'
                   @change="onPlanSelect"
                   label="Chuyến đi"
@@ -17,7 +17,7 @@
                   item-value="planDay"
                   :value='selectedDay'
                   prepend-icon="fas fa-calendar"
-                  :readonly="lockSelect"
+                  :readonly="lockSelect.planDay"
                   @change="onDaySelect"
                   label="Ngày"
         ></v-select>
@@ -82,7 +82,10 @@
 
     data() {
       return {
-        lockSelect: false,
+        lockSelect: {
+          plan: false,
+          planDay: false
+        },
         selectedPlanId: undefined,
         selectedPlan: undefined,
         selectedDay: 0,
@@ -94,15 +97,19 @@
     },
     mounted() {
       if (!this.plans || this.plans.length < 1) {
-        this.$store.dispatch('plan/fetchVisiblePlans');
+        this.$store.dispatch('plan/fetchVisiblePlans')
       }
+
       let context = this.$store.getters['searchContext'];
       if (context.plan && context.planDay) {
         this.selectedPlan = context.plan;
         this.selectedPlanId = context.plan.id;
         this.selectedDay = context.planDay;
 
-        this.lockSelect = true;
+        this.lockSelect = {
+          plan: true,
+          planDay: true,
+        };
         this.onAddToPlan();
         this.$emit('select', {
           planId: context.plan.id,
@@ -120,16 +127,24 @@
           {planDay: 0, planDayText: "Chưa lên lịch"}
         ];
         if (this.selectedPlan) {
-          const startDate = moment(this.selectedPlan.startDay);
+          const startDate = moment(this.selectedPlan.startDate);
           const endDate = moment(this.selectedPlan.endDate);
           const diffDays = endDate.diff(startDate, 'days');
 
           for (let i = 1; i < diffDays + 2; i++) {
-            planDays.push(formatter.getDaysObj(i, this.selectedPlan.startDay));
+            planDays.push(formatter.getDaysObj(i, this.selectedPlan.startDate));
           }
         }
         return planDays;
       },
+    },
+    watch: {
+      plans(val) {
+        if(!this.selectedPlanId){
+          const lastPlan = _.last(val);
+          this.onPlanSelect(lastPlan.id);
+        }
+      }
     },
     methods: {
       onAddToPlan() {
