@@ -24,18 +24,18 @@
       </v-flex>
       <v-flex class="text-xs-center">
         <v-layout>
-          <!--<v-btn color="success"-->
-                 <!--v-if="selectingMode"-->
-                 <!--:disabled="!confirmable"-->
-                 <!--:loading="confirmLoading">-->
-            <!--<v-icon small>-->
-              <!--fas fa-plus-->
-            <!--</v-icon>-->
-            <!--&nbsp; Thêm-->
-          <!--</v-btn>-->
+          <v-btn color="success"
+                 v-if="selectingMode"
+                 @click="$emit('addLocations')"
+                 :disabled="!isConfirmable"
+                 :loading="addLocationConfirmLoading">
+            <v-icon small>
+              fas fa-plus
+            </v-icon>
+            &nbsp; Thêm {{selectedLocationCount}} địa điểm
+          </v-btn>
           <v-btn color="light-blue accent"
                  v-if="selectingMode"
-                 :disabled="!confirmable"
                  :loading="confirmLoading"
                  @click="onConfirm">
             <v-icon small>
@@ -83,9 +83,9 @@
       ChoosePlanDialog
     },
     props: [
-      'confirmable',
       'confirmLoading',
-      'selectedLocations',
+      'addLocationConfirmLoading',
+      'selectedLocationCount',
     ],
     data() {
       return {
@@ -120,6 +120,9 @@
       ...mapGetters({
         context: 'searchContext'
       }),
+      isConfirmable(){
+        return this.selectedLocationCount > 0 && !!this.selectedPlanId
+      },
       days() {
         const planDays = [
           {planDay: 0, planDayText: "Chưa lên lịch"}
@@ -164,9 +167,7 @@
         if(this.init){
           return;
         }
-        console.group('innitValue');
         let context = this.$store.getters['searchContext'];
-        console.debug('outer',context);
         Raven.captureBreadcrumb({
           message: "ChoosePlanDaySection",
           category: "watch-plans",
@@ -176,7 +177,6 @@
           }
         });
         if (context.plan && context.planDay != undefined) {
-          console.debug('inner-1');
           this.selectedPlan = context.plan;
           this.selectedPlanId = context.plan.id;
           this.selectedDay = context.planDay;
@@ -185,16 +185,13 @@
             plan: true,
             // planDay: true,
           };
-          console.debug('inner-2');
           this.selectingMode = true;
           this.$emit('selectingMode');
           this.$emit('select', {
             planId: context.plan.id,
             planDay: context.planDay
           });
-          console.debug('inner-3');
         }
-        console.groupEnd()
         this.init = true;
       },
       onAddToPlan() {

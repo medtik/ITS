@@ -11,9 +11,11 @@
         <v-layout justify-center>
           <v-flex shrink v-if="isShowPlanSection">
             <ChoosePlanDaySection
-              :confirmable="locationsCheck.length > 0"
               :confirmLoading="loading.confirm"
+              :addLocationConfirmLoading="loading.addLocationConfirm"
+              :selectedLocationCount="selectedLocationCount"
               @select="onSelect"
+              @addLocations="onConfirmAddLocations"
               @confirm="onConfirm"
               @selectingMode="onSelectingMode"
             ></ChoosePlanDaySection>
@@ -29,7 +31,7 @@
         </v-layout>
         <!--RESULT-->
         <v-flex v-for="location in locations"
-                :key="location.id"
+                :key="location.id +'_'+ locationsFullWidthSuffix"
                 elevation-2 mb-2 py-2
                 class="white">
           <LocationFullWidth v-bind="location"
@@ -61,7 +63,7 @@
     PlanFullWidth,
     SuccessDialog,
   } from "../../common/block";
-  import ChoosePlanDaySection from "./ChoosePlanDaySection";
+  import ChoosePlanDaySection from "./ChoosePlanDaySection"
   import {mapGetters} from "vuex";
 
   export default {
@@ -80,12 +82,14 @@
         requestMessage: '',
         selectingMode: false,
         locationsCheck: [],
-        choosePlanDayValue:{
+        locationsFullWidthSuffix: '',
+        choosePlanDayValue: {
           planId: undefined,
           planDay: undefined,
         },
         loading: {
           confirm: false,
+          addLocationConfirm: false,
         },
         success: {
           dialog: false,
@@ -103,8 +107,20 @@
       ...mapGetters({
         context: 'searchContext'
       }),
+      selectedLocationCount() {
+        return _.filter(this.locationsCheck, locationCheck => {
+          return locationCheck.isCheck;
+        }).length;
+      }
     },
     methods: {
+      onConfirmAddLocations() {
+        this.loading.addLocationConfirm = true;
+        this.addLocation(true)
+          .then(() => {
+            this.loading.addLocationConfirm = false;
+          });
+      },
       onSelectingMode() {
         this.selectingMode = true;
       },
@@ -116,22 +132,27 @@
         let found = false;
         let locations = _.map(this.locationsCheck, (location) => {
           if (location.id == id) {
-            location.check = check;
+            location.isCheck = check;
             found = true;
           }
           return location;
-
         });
         if (!found) {
           locations.push({
             id,
-            check
+            isCheck: check
           })
         }
         this.locationsCheck = locations;
       },
       onConfirm() {
         this.loading.confirm = true;
+        this.addLocation()
+          .then(() => {
+            this.loading.confirm = false;
+          })
+      },
+      addLocation(noForward) {
         let addLocationToPlanRequests = _.map(this.locationsCheck, (location) => {
           return {
             locationId: location.id,
@@ -139,23 +160,32 @@
             planDay: this.selectedDay
           }
         });
-
+        this.locationsCheck = [];
+        this.resetLocationsFullWidth();
         let responses = [];
         for (let req of addLocationToPlanRequests) {
           let res = this.$store.dispatch('plan/addLocationToPlan', req);
           responses.push(res);
         }
-        Promise.all(responses)
-          .then(value => {
-            this.loading.confirm = false;
-            this.$router.push({
-              name: 'PlanDetail',
-              query: {
-                id: this.selectedPlanId
-              }
-            })
-          })
 
+
+        return new Promise((resolve) => {
+          Promise.all(responses)
+            .then(value => {
+              if (!noForward) {
+                this.$router.push({
+                  name: 'PlanDetail',
+                  query: {
+                    id: this.selectedPlanId
+                  }
+                })
+              }
+              resolve();
+            })
+        });
+      },
+      resetLocationsFullWidth() {
+        this.locationsFullWidthSuffix = _.uniqueId('lfw');
       }
     }
   }
