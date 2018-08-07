@@ -11,7 +11,7 @@
         <v-layout justify-center>
           <v-flex shrink v-if="isShowPlanSection">
             <ChoosePlanDaySection
-              :confirmable="this.locationsCheck.length > 0"
+              :confirmable="locationsCheck.length > 0"
               :confirmLoading="loading.confirm"
               @select="onSelect"
               @confirm="onConfirm"
@@ -61,7 +61,7 @@
     PlanFullWidth,
     SuccessDialog,
   } from "../../common/block";
-  import ChoosePlanDaySection from "./ChoosePlanDaySection"
+  import ChoosePlanDaySection from "./ChoosePlanDaySection";
   import {mapGetters} from "vuex";
 
   export default {

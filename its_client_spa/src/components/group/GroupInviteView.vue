@@ -1,23 +1,27 @@
 <template>
   <v-content>
-    <v-toolbar dark flat color="light-blue">
-      Mời vào {{groupName}}
+    <v-toolbar dark flat color="light-blue darken-2">
+      <span class="title">
+        Mời vào {{groupName}}
+      </span>
     </v-toolbar>
     <v-container fluid>
       <v-layout column>
-        <v-text-field label="Tìm" v-on:keyup.enter="onSearchEnter"/>
+        <v-text-field :loading="usersLoading"
+                      label="Tìm"
+                      v-on:keyup.enter="onSearchEnter"/>
         <v-list>
           <v-list-tile v-for="user in users"
                        :key="user.id"
                        @click="">
             <v-list-tile-avatar>
-              <img :src="user.photo"/>
+              <img :src="user.avatar"/>
             </v-list-tile-avatar>
             <v-list-tile-content>
               {{user.name}}
             </v-list-tile-content>
             <v-list-tile-action>
-              <v-btn flat color="success">
+              <v-btn flat color="success" @click="onInviteUser">
                 <v-icon small>
                   fas fa-user-plus
                 </v-icon>
@@ -25,27 +29,30 @@
             </v-list-tile-action>
           </v-list-tile>
         </v-list>
-
       </v-layout>
     </v-container>
   </v-content>
 </template>
 
 <script>
+  import {mapGetters} from "vuex"
+
   export default {
     name: "GroupInviteView",
     data() {
       return {
-        users: [
-          {id: 1, name: 'Ai đó', photo: 'https://picsum.photos/100'},
-          {id: 2, name: 'Ai đó 2', photo: 'https://picsum.photos/100'}
-        ],
         groupName: '',
         groupId: '',
         nameInput: ''
       }
     },
-    created(){
+    computed: {
+      ...mapGetters('user', {
+        users: 'getUsers',
+        usersLoading: 'getUsersLoading'
+      })
+    },
+    created() {
       const {
         groupId,
         groupName
@@ -54,9 +61,12 @@
       this.groupName = groupName;
       this.groupId = groupId;
     },
-    actions:{
-      onSearchEnter(value){
-        // this.$store.dispatch('user/value')
+    methods: {
+      onSearchEnter() {
+        this.$store.dispatch('user/fetchUsers',{nameInput:this.nameInput});
+      },
+      onInviteUser(userId){
+
       }
     }
   }

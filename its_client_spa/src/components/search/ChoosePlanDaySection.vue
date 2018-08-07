@@ -24,15 +24,15 @@
       </v-flex>
       <v-flex class="text-xs-center">
         <v-layout>
-          <v-btn color="success"
-                 v-if="selectingMode"
-                 :disabled="!confirmable"
-                 :loading="confirmLoading">
-            <v-icon small>
-              fas fa-plus
-            </v-icon>
-            &nbsp; Thêm
-          </v-btn>
+          <!--<v-btn color="success"-->
+                 <!--v-if="selectingMode"-->
+                 <!--:disabled="!confirmable"-->
+                 <!--:loading="confirmLoading">-->
+            <!--<v-icon small>-->
+              <!--fas fa-plus-->
+            <!--</v-icon>-->
+            <!--&nbsp; Thêm-->
+          <!--</v-btn>-->
           <v-btn color="light-blue accent"
                  v-if="selectingMode"
                  :disabled="!confirmable"
@@ -87,7 +87,6 @@
       'confirmLoading',
       'selectedLocations',
     ],
-
     data() {
       return {
         lockSelect: {
@@ -172,7 +171,7 @@
           message: "ChoosePlanDaySection",
           category: "watch-plans",
           data: {
-            plans: this.plans,
+            plansSize: this.plans.length,
             context: this.$store.getters['searchContext']
           }
         });

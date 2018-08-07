@@ -42,7 +42,7 @@ export default {
         nameInput
       } = payload;
 
-      context.setLoading({
+      context.commit('setLoading',{
         loading: {users: true}
       });
       return new Promise((resolve, reject) => {
@@ -51,14 +51,18 @@ export default {
             nameSearchValue: nameInput
           }
         }).then((value) => {
-          context.setLoading({
+          context.commit('setLoading',{
             loading: {users: false}
+          });
+          context.commit('setUser',{
+            users: value.data.currentList
           });
           resolve(value.data);
         }).catch((reason) => {
-          context.setLoading({
+          context.commit('setLoading',{
             loading: {users: false}
           });
+
           Raven.captureException(reason);
           reject(reason.response);
         })
