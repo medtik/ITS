@@ -4,14 +4,6 @@
       <v-icon large>
         far fa-sticky-note
       </v-icon>
-      <!--<v-flex>-->
-        <!--<v-avatar :size="65">-->
-          <!--<img src="https://picsum.photos/200">-->
-        <!--</v-avatar>-->
-      <!--</v-flex>-->
-      <!--<v-flex mt-1 class="subheading">-->
-        <!--Phong-->
-      <!--</v-flex>-->
     </v-layout>
     <v-layout slot="title">
       <v-flex class="title font-weight">
@@ -22,6 +14,14 @@
       <v-flex class="body-1">
         {{description}}
       </v-flex>
+    </v-layout>
+    <v-layout slot="action">
+      <v-btn icon flat color="secondary" small
+             @click="$emit('delete',id)">
+        <v-icon small>
+          fas fa-trash
+        </v-icon>
+      </v-btn>
     </v-layout>
   </ListItemLayout>
 </template>
@@ -39,13 +39,6 @@
       'description'
     ],
     computed: {
-      imageSize() {
-        if (this.isSmallScreen) {
-          return 520
-        } else {
-          return 150
-        }
-      },
       isSmallScreen() {
         return this.$vuetify.breakpoint.name === 'xs'
       },

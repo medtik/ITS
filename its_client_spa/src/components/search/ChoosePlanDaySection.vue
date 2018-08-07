@@ -32,9 +32,10 @@
             <v-icon small>
               fas fa-plus
             </v-icon>
-            &nbsp; Thêm {{selectedLocationCount}} địa điểm
+            <span v-if="selectedLocationCount > 0">&nbsp; Thêm {{selectedLocationCount}} địa điểm</span>
+            <span v-else>&nbsp; Thêm địa điểm</span>
           </v-btn>
-          <v-btn color="light-blue accent"
+          <v-btn color="primary"
                  v-if="selectingMode"
                  :loading="confirmLoading"
                  @click="onConfirm">
