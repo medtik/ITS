@@ -9,10 +9,11 @@
         </router-link>
       </v-flex>
     </v-layout>
-    <v-layout slot="title">
+    <v-layout slot="title" px-1>
       <v-icon v-if="locationIcon">
         {{locationIcon}}
       </v-icon>
+      &nbsp;
       <v-flex class="title" pl-1>
         {{locationName}}
       </v-flex>
@@ -52,9 +53,9 @@
       <!--PLAN DETAIL-->
       <!--delete, check-->
       <template v-if="isOwn">
-        <v-checkbox color="success" :value="isCheck">
+        <v-checkbox color="success" :v-model="localIsChecked">
         </v-checkbox>
-        <v-btn icon flat color="red" small
+        <v-btn icon flat color="secondary" small
                @click="$emit('delete',id)">
           <v-icon small>
             fas fa-trash
@@ -76,10 +77,18 @@
       <!--SEARCH RESULT-->
       <!--save to plan-->
       <template v-if="isCheckable">
-        <v-btn icon flat color="success"
-               @click="$emit('save',id)">
+        <v-btn v-if="localIsChecked"
+               icon flat color="success"
+               @click="onCheck">
           <v-icon>
-            fas fa-heart
+            fas fa-plus-circle
+          </v-icon>
+        </v-btn>
+        <v-btn v-if="!localIsChecked"
+               icon flat
+               @click="onCheck">
+          <v-icon>
+            fas fa-plus-circle
           </v-icon>
         </v-btn>
       </template>
@@ -98,6 +107,11 @@
       StarRating,
       ListItemLayout
     },
+    data() {
+      return {
+        'localIsChecked': false
+      }
+    },
     props: [
       'id',
       'type',
@@ -115,6 +129,11 @@
       'isCheck',
       'isCheckable'
     ],
+    watch: {
+      isCheck(val) {
+        this.localIsChecked = val;
+      }
+    },
     computed: {
       isSmallScreen() {
         return this.$vuetify.breakpoint.name === 'xs'
@@ -127,7 +146,17 @@
 
         switch (type) {
           case 'Ăn uống':
-            return 'restaurant';
+            return 'fas fa-utensils';
+          case 'Nơi ở':
+            return 'fas fa-hotel';
+          case 'Mua sắm':
+            return 'fas fa-shopping-cart';
+          case 'Giải trí':
+            return 'fas fa-gamepad';
+          case 'Địa điểm thăm quan':
+            return 'fas fa-university';
+          case 'Dịch vụ':
+            return 'fas fa-gas-pump'
         }
       },
       locationName() {
@@ -144,6 +173,15 @@
             id: this.id
           }
         }
+      }
+    },
+    methods: {
+      onCheck() {
+        this.$emit('save', {
+          id: this.id,
+          check: !this.localIsChecked
+        });
+        this.localIsChecked = !this.localIsChecked;
       }
     }
   }

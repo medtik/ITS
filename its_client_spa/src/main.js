@@ -5,10 +5,16 @@ import App from './App'
 import router from './router'
 import store from './store'
 import Vuetify from 'vuetify'
+import Raven from 'raven-js';
+import RavenVue from 'raven-js/plugins/vue';
 import * as VueGoogleMaps from 'vue2-google-maps'
 import 'vuetify/dist/vuetify.min.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 
+Raven
+  .config('https://044c78991b114aebbfad9a13b6d85a63@sentry.io/1256786')
+  .addPlugin(RavenVue, Vue)
+  .install();
 
 Vue.use(Vuetify, {
   iconfont: 'fa'

@@ -92,9 +92,9 @@
         createLoading: 'createLoading',
       })
     },
-    mounted(){
-      if(this.isHavingContext){
-        this.input.areaId =  this.previousSearchAreaId;
+    mounted() {
+      if (this.isHavingContext) {
+        this.input.areaId = this.previousSearchAreaId;
         this.lockAreaId = true;
       }
     },
@@ -102,10 +102,14 @@
       onCreate() {
         this.$store.dispatch('plan/create', {
           ...this.input
-        })
-          .then(value => {
+        }).then(() => {
+          if (this.isHavingContext) {
+            this.$router.push(this.context.returnRoute);
+          } else {
             this.$router.back();
-          })
+          }
+
+        })
       },
       onCancel() {
         this.$router.back();

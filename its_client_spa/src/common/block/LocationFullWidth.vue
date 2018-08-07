@@ -149,6 +149,14 @@
             return 'fas fa-utensils';
           case 'Nơi ở':
             return 'fas fa-hotel';
+          case 'Mua sắm':
+            return 'fas fa-shopping-cart';
+          case 'Giải trí':
+            return 'fas fa-gamepad';
+          case 'Địa điểm thăm quan':
+            return 'fas fa-university';
+          case 'Dịch vụ':
+            return 'fas fa-gas-pump'
         }
       },
       locationName() {
