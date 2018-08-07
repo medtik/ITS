@@ -68,7 +68,8 @@ export default {
     },
     getSuggestion(context, payload) {
       const {
-        answers
+        answers,
+        areaId
       } = _.cloneDeep(payload);
 
       context.commit('setLoading', {loading: {searchResult: true}});
@@ -76,7 +77,8 @@ export default {
       return new Promise((resolve, reject) => {
         axiosInstance.get('api/test', {
           params: {
-            list: answers
+            list: answers,
+            areaId
           }
         })
           .then(value => {

@@ -34,11 +34,21 @@
                @click="onCreate">
           Tiếp tục
         </v-btn>
-        <v-btn v-else
+        <v-btn v-else-if="isCreateMode"
                color="success"
                :loading="createLoading"
                @click="onCreate">
           Tạo
+        </v-btn>
+        <v-btn v-else
+               color="success"
+               :loading="editLoading"
+               @click="onEdit">
+          <v-icon>
+            fas fa-check
+          </v-icon>
+          &nbsp;
+          Xác nhận
         </v-btn>
         <v-btn color="secondary"
                @click="onCancel">
@@ -78,11 +88,19 @@
       isHavingContext() {
         return !!this.context.returnRoute
       },
+      isCreateMode(){
+        const {
+          name
+        } = this.$route;
+
+       return name == 'PlanCreate';
+      },
       title() {
         const {
           name
         } = this.$route;
-        if (name === 'PlanCreate') {
+
+        if (name == 'PlanCreate') {
           return "Tạo chuyến đi";
         } else {
           return "Chỉnh sửa chuyến đi";
@@ -90,6 +108,7 @@
       },
       ...mapGetters('plan', {
         createLoading: 'createLoading',
+        editLoading: 'editLoading'
       })
     },
     mounted() {
@@ -102,14 +121,25 @@
       onCreate() {
         this.$store.dispatch('plan/create', {
           ...this.input
-        }).then(() => {
+        }).then((data) => {
           if (this.isHavingContext) {
+            this.$store.commit('searchContext',{
+              context:{
+                areaId: this.input.areaId,
+                planId: data.id
+              }
+            });
             this.$router.push(this.context.returnRoute);
           } else {
             this.$router.back();
           }
 
         })
+      },
+      onEdit(){
+        // this.store.dispatch('plan/edit',{
+        //   ...this.input()
+        // })
       },
       onCancel() {
         this.$router.back();

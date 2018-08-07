@@ -37,7 +37,7 @@
             <v-layout column>
               <v-flex>
                 <v-btn color="success"
-                       :to="{name: 'GroupInvite'}">
+                       :to="inviteLink">
                   <v-icon>fas fa-user-plus</v-icon>
                   &nbsp;
                   Mời thành viên
@@ -126,7 +126,16 @@
       ...mapGetters('group', {
         group: 'detailedGroup',
         pageLoading: 'detailedGroupLoading'
-      })
+      }),
+      inviteLink() {
+        return {
+          name: 'GroupInvite',
+          query: {
+            groupId: this.groupId,
+            groupName: this.group.name
+          }
+        }
+      }
     },
     created() {
       const {

@@ -87,7 +87,6 @@
       'addLocationConfirmLoading',
       'selectedLocationCount',
     ],
-
     data() {
       return {
         lockSelect: {
@@ -173,7 +172,7 @@
           message: "ChoosePlanDaySection",
           category: "watch-plans",
           data: {
-            plans: this.plans,
+            plansSize: this.plans.length,
             context: this.$store.getters['searchContext']
           }
         });

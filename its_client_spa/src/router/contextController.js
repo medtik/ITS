@@ -13,7 +13,11 @@ router.afterEach((to, from) => {
     store.commit('consumeSearchContext');
   }
 
-  if(from.name == 'PlanCreate'){
+  if (from.name == 'PlanCreate') {
     store.commit('consumeCreatePlanContext');
   }
 });
+
+router.afterEach(() => {
+
+})

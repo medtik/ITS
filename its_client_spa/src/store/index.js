@@ -12,6 +12,7 @@ import TagModule from "./modules/tag"
 import PlanModule from "./modules/plan"
 import GroupModule from "./modules/group"
 import RequestModule from "./modules/request"
+import UserModule from "./modules/user"
 import {
   AuthenticateModule,
   TagDialogModule
@@ -28,6 +29,9 @@ const store = new Vuex.Store({
     createPlanContext: {
       returnRoute: undefined,
     },
+    signinContext:{
+      returnRoute: undefined
+    },
     previousSearchAreaId: undefined
   },
   getters: {
@@ -39,6 +43,9 @@ const store = new Vuex.Store({
     },
     previousSearchAreaId(state){
       return state.previousSearchAreaId;
+    },
+    signinContext(state){
+      return state.signinContext;
     }
   },
   mutations: {
@@ -47,6 +54,9 @@ const store = new Vuex.Store({
     },
     createPlanContext(state,payload){
       state.createPlanContext = _.assign(state.createPlanContext, payload.context);
+    },
+    signinContext(state,payload){
+      state.signinContext = _.assign(state.signinContext, payload.context);
     },
     previousSearchAreaId(state,payload){
       state.previousSearchAreaId = payload.areaId;
@@ -69,7 +79,8 @@ const store = new Vuex.Store({
     tagDialog: TagDialogModule,
     plan: PlanModule,
     group: GroupModule,
-    request: RequestModule
+    request: RequestModule,
+    user: UserModule
   },
 });
 

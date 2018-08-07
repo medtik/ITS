@@ -22,6 +22,25 @@
                     ></AreaInput>
                   </v-flex>
                 </v-layout>
+                <v-layout justify-center>
+                  <v-flex shrink v-if="isShowPlanSection">
+                    <ChoosePlanDaySection
+                      :confirmable="this.locationsCheck.length > 0"
+                      :confirmLoading="loading.confirm"
+                      @select="onSelect"
+                      @confirm="onConfirm"
+                      @selectingMode="onSelectingMode"
+                    ></ChoosePlanDaySection>
+                  </v-flex>
+                  <v-flex v-if="!isShowPlanSection"
+                          shrink my-3
+                          class="text-xs-center title">
+                    Bạn cần đăng nhập để thêm các địa điểm bên dưới vào chuyến đi
+                    <v-btn color="success" :to="{name:'Signin'}">
+                      Đăng nhập
+                    </v-btn>
+                  </v-flex>
+                </v-layout>
                 <v-btn color="primary"
                        :loading="searchLoading"
                        @click="onSearchClick">
@@ -64,6 +83,7 @@
   import {
     LocationFullWidth,
   } from "../../common/block";
+  import ChoosePlanDaySection from "./ChoosePlanDaySection";
   import {mapGetters} from "vuex";
   import _ from "lodash";
 
@@ -72,7 +92,8 @@
     components: {
       AreaInput,
       ChoosePlanDialog,
-      LocationFullWidth
+      LocationFullWidth,
+      ChoosePlanDaySection
     },
     data() {
       return {
@@ -97,6 +118,9 @@
         area: 'searchResultArea',
         locations: 'searchResultLocations',
         searchLoading: 'searchResultLoading'
+      }),
+      ...mapGetters('authenticate', {
+        isShowPlanSection: 'isLoggedIn'
       }),
       isShowResult() {
         return this.locations && this.locations.length > 0;

@@ -157,7 +157,8 @@
       onSubmit() {
         this.loading.finishBtn = true;
         this.$store.dispatch('smartSearch/getSuggestion', {
-          answers: this.selectedAnswers
+          answers: this.selectedAnswers ,
+          areaId: this.selectedAreaId || this.context.areaId
         })
           .then(value => {
             this.$router.push({
