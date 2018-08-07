@@ -53,8 +53,6 @@
       <!--PLAN DETAIL-->
       <!--delete, check-->
       <template v-if="isOwn">
-        <v-checkbox color="success" :v-model="localIsChecked">
-        </v-checkbox>
         <v-btn icon flat color="secondary" small
                @click="$emit('delete',id)">
           <v-icon small>

@@ -78,6 +78,7 @@
 </template>
 
 <script>
+  import Raven from "raven-js"
   export default {
     name: "SigninView",
     data() {
@@ -100,11 +101,26 @@
         })
           .then(value => {
             this.$store.commit('authenticate/setToken', {token: value});
-            this.$router.push({
-              name: 'Home'
+            const returnRoute = this.$store.getters['signinContext'].returnRoute;
+            Raven.captureBreadcrumb({
+              message: 'signin',
+              category: 'methods',
+              data:{
+                returnRoute
+              }
             });
+            if(returnRoute){
+              this.$router.push({
+                ...returnRoute
+              });
+            }else{
+              this.$router.push({
+                name: 'Home'
+              });
+            }
           })
           .catch(reason => {
+            Raven.captureException(reason);
             this.signinAlert = {
               show: true,
               ...reason
