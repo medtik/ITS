@@ -410,7 +410,7 @@ export default {
             context.commit('setLoading', {
               loading: {create: false}
             });
-            resolve(value.data);
+            resolve({id: value.data});
           })
           .catch(reason => {
             context.commit('setLoading', {
