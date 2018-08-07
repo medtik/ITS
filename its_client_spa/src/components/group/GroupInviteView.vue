@@ -1,11 +1,11 @@
 <template>
   <v-content>
     <v-toolbar dark flat color="light-blue">
-      Mời vào nhóm ABC
+      Mời vào {{groupName}}
     </v-toolbar>
     <v-container fluid>
       <v-layout column>
-        <v-text-field label="Tìm"/>
+        <v-text-field label="Tìm" v-on:keyup.enter="onSearchEnter"/>
         <v-list>
           <v-list-tile v-for="user in users"
                        :key="user.id"
@@ -39,7 +39,24 @@
         users: [
           {id: 1, name: 'Ai đó', photo: 'https://picsum.photos/100'},
           {id: 2, name: 'Ai đó 2', photo: 'https://picsum.photos/100'}
-        ]
+        ],
+        groupName: '',
+        groupId: '',
+        nameInput: ''
+      }
+    },
+    created(){
+      const {
+        groupId,
+        groupName
+      } = this.$route.query;
+
+      this.groupName = groupName;
+      this.groupId = groupId;
+    },
+    actions:{
+      onSearchEnter(value){
+        // this.$store.dispatch('user/value')
       }
     }
   }

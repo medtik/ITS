@@ -12,6 +12,7 @@ import TagModule from "./modules/tag"
 import PlanModule from "./modules/plan"
 import GroupModule from "./modules/group"
 import RequestModule from "./modules/request"
+import UserModule from "./modules/user"
 import {
   AuthenticateModule,
   TagDialogModule
@@ -69,7 +70,8 @@ const store = new Vuex.Store({
     tagDialog: TagDialogModule,
     plan: PlanModule,
     group: GroupModule,
-    request: RequestModule
+    request: RequestModule,
+    user: UserModule
   },
 });
 
