@@ -1,14 +1,17 @@
 <template>
   <ListItemLayout>
     <v-layout slot="photo" column align-center>
-      <v-flex>
-        <v-avatar :size="65">
-          <img src="https://picsum.photos/200">
-        </v-avatar>
-      </v-flex>
-      <v-flex mt-1 class="subheading">
-        Phong
-      </v-flex>
+      <v-icon large>
+        far fa-sticky-note
+      </v-icon>
+      <!--<v-flex>-->
+        <!--<v-avatar :size="65">-->
+          <!--<img src="https://picsum.photos/200">-->
+        <!--</v-avatar>-->
+      <!--</v-flex>-->
+      <!--<v-flex mt-1 class="subheading">-->
+        <!--Phong-->
+      <!--</v-flex>-->
     </v-layout>
     <v-layout slot="title">
       <v-flex class="title font-weight">

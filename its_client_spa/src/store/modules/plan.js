@@ -20,7 +20,7 @@ export default {
       featuredPlans: true,
       detailedPlan: true,
       addLocationToPlan: false,
-
+      createNoteBtn: false,
       create: false,
       delete: false
     }
@@ -40,6 +40,9 @@ export default {
     },
     myVisiblePlansFlattened(state) {
       return _.flatten(state.myVisiblePlans);
+    },
+    createNoteLoading(state){
+      return state.loading.createNoteBtn;
     },
     addLocationToPlanLoading(state) {
       return state.loading.addLocationToPlan;
@@ -310,7 +313,6 @@ export default {
       context.commit('removeItemFromPlan', {
         itemId
       });
-
       return new Promise((resolve, reject) => {
         axiosInstance.delete('api/Plan/AddLocations', {
           params: {
@@ -335,6 +337,10 @@ export default {
         planId,
       } = payload;
 
+      //loading.createNoteBtn
+      context.commit('setLoading', {
+        loading: {createNoteBtn: true}
+      });
       return new Promise((resolve, reject) => {
         axiosInstance.post('api/Plan/AddNote', {
           title,
@@ -342,8 +348,14 @@ export default {
           planDay,
           planId,
         }).then(value => {
+          context.commit('setLoading', {
+            loading: {createNoteBtn: false}
+          });
           resolve(value.data)
         }).catch(reason => {
+          context.commit('setLoading', {
+            loading: {createNoteBtn: false}
+          });
           reject(reason.response);
         })
       })
