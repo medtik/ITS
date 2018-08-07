@@ -66,6 +66,9 @@ const store = new Vuex.Store({
     },
     consumeCreatePlanContext(state){
       state.createPlanContext = {};
+    },
+    consumeSigninContext(state){
+      state.signinContext = {};
     }
   },
   modules: {

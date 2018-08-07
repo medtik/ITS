@@ -26,7 +26,7 @@ function getDataRedirect(to) {
   switch (to.name) {
     case 'SmartSearchResult': {
       const searchResult = store.getters['smartSearch/searchResult'];
-      if(!searchResult){
+      if (!searchResult) {
         return {
           name: 'SmartSearch'
         };
@@ -47,6 +47,11 @@ function isAuthenticateAllow(to) {
 
 router.beforeEach((to, from, next) => {
   if (!isAuthenticateAllow(to)) {
+    store.commit('signinContext', {
+      context: {
+        returnRoute: to
+      }
+    });
     next({
       name: 'Signin'
     });
@@ -54,9 +59,9 @@ router.beforeEach((to, from, next) => {
   }
 
   let dataRedirect = getDataRedirect(to);
-  if(dataRedirect){
+  if (dataRedirect) {
     next(dataRedirect);
-  }else{
+  } else {
     next();
   }
 });

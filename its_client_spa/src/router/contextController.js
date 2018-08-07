@@ -16,8 +16,10 @@ router.afterEach((to, from) => {
   if (from.name == 'PlanCreate') {
     store.commit('consumeCreatePlanContext');
   }
+
+  if(from.name == 'Signin'){
+    if(to.name != 'Signup'){
+      store.commit('consumeSigninContext');
+    }
+  }
 });
-
-router.afterEach(() => {
-
-})
