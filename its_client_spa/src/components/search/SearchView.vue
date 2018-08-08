@@ -48,6 +48,7 @@
               :selectedLocationCount="selectedLocationCount"
               @select="onSelect"
               @confirm="onConfirm"
+              @addLocations="onConfirmAddLocations"
               @selectingMode="onSelectingMode"
             ></ChoosePlanDaySection>
           </v-flex>
@@ -154,7 +155,7 @@
       }
     },
     mounted(){
-      if(this.context){
+      if(this.context && this.context.areaId){
         this.areaIdInput = this.context.areaId;
         this.lockAreaIdInput = true;
       }
