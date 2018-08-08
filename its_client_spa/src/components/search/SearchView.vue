@@ -14,31 +14,14 @@
                 <v-layout row justify-center>
                   <v-flex xs10 sm6 md4>
                     <AreaInput
-                      v-model="areaIdInput"
+                      @input="onAreaSelect"
+                      :value="areaIdInput"
+                      :readonly="lockAreaIdInput"
                       alias="area"
                       itemsPath="areas"
                       loadingPath="areasLoading"
                       getItemPath="getAll"
                     ></AreaInput>
-                  </v-flex>
-                </v-layout>
-                <v-layout justify-center>
-                  <v-flex shrink v-if="isShowPlanSection">
-                    <ChoosePlanDaySection
-                      :confirmable="this.locationsCheck.length > 0"
-                      :confirmLoading="loading.confirm"
-                      @select="onSelect"
-                      @confirm="onConfirm"
-                      @selectingMode="onSelectingMode"
-                    ></ChoosePlanDaySection>
-                  </v-flex>
-                  <v-flex v-if="!isShowPlanSection"
-                          shrink my-3
-                          class="text-xs-center title">
-                    Bạn cần đăng nhập để thêm các địa điểm bên dưới vào chuyến đi
-                    <v-btn color="success" :to="{name:'Signin'}">
-                      Đăng nhập
-                    </v-btn>
                   </v-flex>
                 </v-layout>
                 <v-btn color="primary"
@@ -56,6 +39,28 @@
       </v-flex>
       <!--RESULT-->
       <v-flex v-if="isShowResult" class="grey lighten-4">
+        <!--Add to plans-->
+        <v-layout justify-center>
+          <v-flex shrink v-if="isShowPlanSection">
+            <ChoosePlanDaySection
+              :confirmable="locationsCheck.length > 0"
+              :confirmLoading="loading.confirm"
+              :selectedLocationCount="selectedLocationCount"
+              @select="onSelect"
+              @confirm="onConfirm"
+              @selectingMode="onSelectingMode"
+            ></ChoosePlanDaySection>
+          </v-flex>
+          <v-flex v-if="!isShowPlanSection"
+                  shrink my-3
+                  class="text-xs-center title">
+            Bạn cần đăng nhập để thêm các địa điểm bên dưới vào chuyến đi
+            <v-btn color="success" @click="onSigninClick">
+              Đăng nhập
+            </v-btn>
+          </v-flex>
+        </v-layout>
+        <!--Locations-->
         <v-layout column>
           <v-flex py-4 class="display-2 font-weight-medium text-xs-center white">
             Kết quả
@@ -63,7 +68,7 @@
           <v-flex v-for="location in locations"
                   :key="location.id" mb-2 elevation-1 class="white">
             <LocationFullWidth v-bind="location"
-                               :isSearchResult="true"
+                               :isCheckable="selectingMode"
                                @save="onSave"/>
           </v-flex>
         </v-layout>
@@ -104,6 +109,20 @@
         selectedPlan: '',
         requestMessage: '',
 
+        locationsCheck: [],
+        locationsFullWidthSuffix:'',
+        selectingMode: false,
+        selectedPlanId: undefined,
+        selectedDay: 0,
+        lockAreaIdInput: false,
+        choosePlanDayValue: {
+          planId: undefined,
+          planDay: undefined,
+        },
+
+        loading: {
+          confirm: false
+        },
         result: {
           show: true,
           loading: false,
@@ -122,13 +141,27 @@
       ...mapGetters('authenticate', {
         isShowPlanSection: 'isLoggedIn'
       }),
+      ...mapGetters({
+        context: 'searchContext'
+      }),
+      selectedLocationCount() {
+        return _.filter(this.locationsCheck, locationCheck => {
+          return locationCheck.isCheck;
+        }).length;
+      },
       isShowResult() {
         return this.locations && this.locations.length > 0;
       }
     },
+    mounted(){
+      if(this.context){
+        this.areaIdInput = this.context.areaId;
+        this.lockAreaIdInput = true;
+      }
+    },
     methods: {
       onSearchClick() {
-        this.$store.commit('searchContext',{
+        this.$store.commit('searchContext', {
           areaId: this.areaId
         });
         this.$store.dispatch('search/fetchSearchResult', {
@@ -136,19 +169,102 @@
           areaId: this.areaId
         })
       },
-      onSave(locationId) {
-        this.selectedLocation = _.find(this.locations, (location) => {
-          return location.id == locationId;
+      onSave({id, check}) {
+        let found = false;
+        let locations = _.map(this.locationsCheck, (location) => {
+          if (location.id == id) {
+            location.isCheck = check;
+            found = true;
+          }
+          return location;
         });
-        this.dialog.choosePlan = true
+        if (!found) {
+          locations.push({
+            id,
+            isCheck: check
+          })
+        }
+        this.locationsCheck = locations;
       },
       onPlanSelect(plan) {
         this.dialog.choosePlan = false;
 
-        this.$store.dispatch('plan/addLocationToPlan',{
+        this.$store.dispatch('plan/addLocationToPlan', {
           locationId: this.selectedLocation.id,
           planId: plan.id
         })
+      },
+      onAreaSelect(areaId){
+        this.areaIdInput = areaId;
+      },
+      onSigninClick() {
+        this.$store.commit('signinContext', {
+          context: {
+            returnRoute: {
+              name: 'Search'
+            }
+          }
+        });
+
+        this.$router.push({
+          name: 'Signin'
+        })
+      },
+      onConfirm() {
+        this.loading.confirm = true;
+        this.addLocation()
+          .then(() => {
+            this.loading.confirm = false;
+          })
+      },
+      onConfirmAddLocations() {
+        this.loading.addLocationConfirm = true;
+        this.addLocation(true)
+          .then(() => {
+            this.loading.addLocationConfirm = false;
+          });
+      },
+      onSelect({planId, planDay}) {
+        this.selectedPlanId = planId;
+        this.selectedDay = planDay;
+      },
+      onSelectingMode() {
+        this.selectingMode = true;
+      },
+      addLocation(noForward) {
+        let addLocationToPlanRequests = _.map(this.locationsCheck, (location) => {
+          return {
+            locationId: location.id,
+            planId: this.selectedPlanId,
+            planDay: this.selectedDay
+          }
+        });
+        this.locationsCheck = [];
+        this.resetLocationsFullWidth();
+        let responses = [];
+        for (let req of addLocationToPlanRequests) {
+          let res = this.$store.dispatch('plan/addLocationToPlan', req);
+          responses.push(res);
+        }
+
+
+        return new Promise((resolve) => {
+          Promise.all(responses)
+            .then(value => {
+              if (!noForward) {
+                this.$router.push({
+                  name: 'PlanDetail',
+                  query: {
+                    id: this.selectedPlanId
+                  }
+                })
+              }
+              resolve();
+            })
+        });
+      },
+      resetLocationsFullWidth() {
+        this.locationsFullWidthSuffix = _.uniqueId('lfw');
       }
     }
 
