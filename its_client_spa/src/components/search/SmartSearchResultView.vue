@@ -24,8 +24,8 @@
                   shrink my-3
                   class="text-xs-center title">
             Bạn cần đăng nhập để thêm các địa điểm bên dưới vào chuyến đi
-            <v-btn color="success" :to="{name:'Signin'}">
-              Đăng nhập
+            <v-btn color="success" @click="onSigninClick">
+                   Đăng nhập
             </v-btn>
           </v-flex>
         </v-layout>
@@ -123,6 +123,18 @@
       },
       onSelectingMode() {
         this.selectingMode = true;
+      },
+      onSigninClick() {
+        this.$store.commit('signinContext', {
+          context: {
+            returnRoute: {
+              name: 'SmartSearchResult'
+            }
+          }
+        });
+        this.$router.push({
+          name: 'Signin'
+        })
       },
       onSelect({planId, planDay}) {
         this.selectedPlanId = planId;
