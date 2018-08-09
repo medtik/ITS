@@ -1,4 +1,6 @@
 import {axiosInstance} from "../../common/util";
+import Raven from "raven-js";
+
 import _ from "lodash";
 
 export default {
@@ -124,6 +126,32 @@ export default {
             reject(reason.response);
           })
       })
+    },
+    sendGroupInvitationRequest(context, payload) {
+      const {
+        userId,
+        groupId,
+        message
+      } = payload;
+
+      const reqData = {
+        "userId": userId,
+        "groupId": groupId,
+        "message": message
+      };
+
+      // put /api/Group/UserInvitation
+      return new Promise((resolve, reject) => {
+        axiosInstance.put("api/Group/UserInvitation", reqData)
+          .then((value) => {
+            resolve(value.data);
+          })
+          .catch(reason => {
+            Raven.captureException(reason);
+            reject(reason.response);
+          })
+      });
+
     },
 
     create(context, payload) {

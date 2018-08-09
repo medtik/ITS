@@ -48,6 +48,7 @@
               :selectedLocationCount="selectedLocationCount"
               @select="onSelect"
               @confirm="onConfirm"
+              @addLocations="onConfirmAddLocations"
               @selectingMode="onSelectingMode"
             ></ChoosePlanDaySection>
           </v-flex>
@@ -154,7 +155,7 @@
       }
     },
     mounted(){
-      if(this.context){
+      if(this.context && this.context.areaId){
         this.areaIdInput = this.context.areaId;
         this.lockAreaIdInput = true;
       }
@@ -212,14 +213,16 @@
       },
       onConfirm() {
         this.loading.confirm = true;
-        this.addLocation()
-          .then(() => {
-            this.loading.confirm = false;
-          })
+        this.$router.push({
+          name: 'PlanDetail',
+          query: {
+            id: this.selectedPlanId
+          }
+        })
       },
       onConfirmAddLocations() {
         this.loading.addLocationConfirm = true;
-        this.addLocation(true)
+        this.addLocation()
           .then(() => {
             this.loading.addLocationConfirm = false;
           });
@@ -231,7 +234,7 @@
       onSelectingMode() {
         this.selectingMode = true;
       },
-      addLocation(noForward) {
+      addLocation() {
         let addLocationToPlanRequests = _.map(this.locationsCheck, (location) => {
           return {
             locationId: location.id,
@@ -251,14 +254,6 @@
         return new Promise((resolve) => {
           Promise.all(responses)
             .then(value => {
-              if (!noForward) {
-                this.$router.push({
-                  name: 'PlanDetail',
-                  query: {
-                    id: this.selectedPlanId
-                  }
-                })
-              }
               resolve();
             })
         });

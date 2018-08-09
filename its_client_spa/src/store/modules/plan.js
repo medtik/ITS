@@ -1,6 +1,8 @@
 import {axiosInstance} from "../../common/util";
 import formatter from "../../formatter"
 import _ from "lodash";
+import Raven from "raven-js";
+
 import moment from "moment";
 
 export default {
@@ -255,12 +257,19 @@ export default {
           })
       });
     },
-    fetchVisiblePlans(context) {
+    fetchVisiblePlans(context,payload) {
       //get /api/User/MyVisiblePlan
+      const {
+        areaId
+      } = payload;
       context.commit('setLoading', {
         loading: {myVisiblePlans: true}
       });
-      axiosInstance.get('api/User/MyVisiblePlan')
+      axiosInstance.get('api/User/MyVisiblePlan',{
+        params:{
+          areaId
+        }
+      })
         .then(value => {
           context.commit('setLoading', {
             loading: {myVisiblePlans: true}
@@ -367,14 +376,19 @@ export default {
         id
       } = payload;
 
+      context.commit('removeItemFromPlan', {
+        itemId: id
+      });
       return new Promise((resolve, reject) => {
-        axiosInstance.post('api/Plan/DeleteNote', {
+        axiosInstance.delete('api/Plan/DeleteNote', {
           params: {
             noteId: id
           }
         }).then(value => {
+
           resolve(value.data)
         }).catch(reason => {
+          Raven.captureException(reason);
           reject(reason.response);
         })
       })

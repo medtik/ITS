@@ -6,77 +6,13 @@ import _ from "lodash";
 export default {
   namespaced: true,
   state: {
-    current: {
-      name: undefined,
-      address: undefined,
-      phoneNumber: undefined,
-      emailAddress: undefined,
-      birthdate: undefined,
-      photo: undefined
-    },
-    loading: {
-      currentUser: true
-    }
-  },
-  getters: {
-    currentAccount(state) {
-      return state.current;
-    }
   },
   mutations: {
-    setCurrentUser(state, payload) {
-      const {
-        name,
-        address,
-        phoneNumber,
-        emailAddress,
-        birthdate,
-        photo
-      } = _.cloneDeep(payload.user);
-      const birthdateFormatted = moment(birthdate).format('YYYY-MM-DD');
-
-      state.current = {
-        name,
-        address,
-        phoneNumber,
-        emailAddress,
-        birthdate: birthdateFormatted,
-        photo
-      };
-    },
     setLoading(state, payload) {
       state.loading = _.assign(state.loading, payload.loading);
     }
   },
   actions: {
-    updateAccountInfo(context, payload) {
-      console.debug('updateAccountInfo', payload);
-      return Promise.resolve();
-    },
-    fetchCurrentInfo(context) {
-      context.commit('setLoading', {
-        loading: {currentUser: true}
-      });
-      return new Promise((resolve, reject) => {
-        axiosInstance.get('api/CurrentUser')
-          .then(value => {
-            context.commit('setCurrentUser', {
-              user: value.data
-            });
-            context.commit('setLoading', {
-              loading: {currentUser: false}
-            });
-            resolve();
-          })
-          .catch(reason => {
-            console.debug(reason.response);
-            context.commit('setLoading', {
-              loading: {currentUser: false}
-            });
-            reject(reason.response)
-          })
-      });
-    },
     signup(context, payload) {
       const {
         email,

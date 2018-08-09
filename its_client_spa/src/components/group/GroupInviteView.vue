@@ -9,6 +9,7 @@
       <v-layout column>
         <v-text-field :loading="usersLoading"
                       label="Tìm"
+                      v-model="nameInput"
                       v-on:keyup.enter="onSearchEnter"/>
         <v-list>
           <v-list-tile v-for="user in users"
@@ -21,7 +22,7 @@
               {{user.name}}
             </v-list-tile-content>
             <v-list-tile-action>
-              <v-btn flat color="success" @click="onInviteUser">
+              <v-btn flat color="success" @click="onInviteUserClick(user.id)">
                 <v-icon small>
                   fas fa-user-plus
                 </v-icon>
@@ -31,25 +32,45 @@
         </v-list>
       </v-layout>
     </v-container>
+    <!--DIALOG-->
+    <MessageInputDialog v-bind="messageInputDialog"
+                        @confirm="onInviteUserConfirm"
+                        v-model="inviteInput.message"
+    ></MessageInputDialog>
   </v-content>
 </template>
 
 <script>
-  import {mapGetters} from "vuex"
+  import {mapGetters, mapState} from "vuex"
+  import _ from "lodash";
+
+  import {MessageInputDialog} from "../../common/input";
 
   export default {
     name: "GroupInviteView",
+    components: {
+      MessageInputDialog
+    },
     data() {
       return {
         groupName: '',
         groupId: '',
-        nameInput: ''
+        nameInput: '',
+        inviteInput: {
+          inviteUserId: undefined,
+          message: undefined
+        },
+        messageInputDialog: {
+          dialog: false
+        }
       }
     },
     computed: {
       ...mapGetters('user', {
-        users: 'getUsers',
-        usersLoading: 'getUsersLoading'
+        usersLoading: 'getSearchUsersLoading'
+      }),
+      ...mapState('user', {
+        users: 'searchUsers'
       })
     },
     created() {
@@ -63,10 +84,31 @@
     },
     methods: {
       onSearchEnter() {
-        this.$store.dispatch('user/fetchUsers',{nameInput:this.nameInput});
+        this.$store.dispatch('user/fetchUsers', {nameInput: this.nameInput});
       },
-      onInviteUser(userId){
+      onInviteUserClick(userId) {
+        this.inviteInput.userId = userId;
+        let invitee = _.find(this.users, (user) => {
+          return user.id == userId;
+        });
 
+        this.messageInputDialog = {
+          dialog: true,
+          title: `Mời ${invitee.name} vào ${this.groupName}`,
+          message: 'Để lại lời nhắn'
+        };
+      },
+      onInviteUserConfirm() {
+        this.messageInputDialog = _.assign(this.messageInputDialog, {
+          dialog: false
+        });
+        this.sendInvitation();
+      },
+      sendInvitation() {
+        this.$store.dispatch('group/sendGroupInvitationRequest', {
+          ...this.inviteInput,
+          groupId: this.groupId
+        })
       }
     }
   }

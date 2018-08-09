@@ -4,14 +4,14 @@
       <v-progress-circular indeterminate size="40" color="primary"></v-progress-circular>
     </v-container>
     <v-container v-else fluid pa-0 px-0>
-      <v-toolbar dark flat color="light-blue" dense>
+      <v-toolbar dark flat color="light-blue darken-2" dense>
         <v-toolbar-title>
           {{group.name}}
         </v-toolbar-title>
         <v-tabs
           fixed-tabs
           slot="extension"
-          color="light-blue"
+          color="light-blue darken-2"
           slider-color="white"
           v-model="tab"
           grow
@@ -79,7 +79,6 @@
         </v-tab-item>
       </v-tabs-items>
     </v-container>
-
     <v-flex style="height: 15vh">
       <!--Holder-->
     </v-flex>
@@ -93,14 +92,16 @@
       @select="dialog.choosePlan = false"
       @close="dialog.choosePlan = false"
     />
-
   </v-content>
 </template>
 
 <script>
-  import PlanFullWidth from "../../common/block/PlanFullWidth";
+  import {PlanFullWidth} from "../../common/block";
   import AccountCard from "../../common/card/AccountCard";
-  import ChoosePlanDestinationDialog from "../../common/input/ChoosePlanDestinationDialog";
+  import {
+    ChoosePlanDestinationDialog,
+    MessageInputDialog
+  } from "../../common/input";
   import ChoosePlanDialog from "../../common/input/ChoosePlanDialog";
   import {mapGetters} from "vuex";
 
@@ -110,14 +111,15 @@
       AccountCard,
       PlanFullWidth,
       ChoosePlanDialog,
-      ChoosePlanDestinationDialog
+      ChoosePlanDestinationDialog,
     },
     data() {
       return {
         tab: undefined,
+
         dialog: {
           choosePlanDestination: false,
-          choosePlan: false
+          choosePlan: false,
         },
         groupId: undefined,
       }

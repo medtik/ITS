@@ -49,7 +49,7 @@
 <script>
   import PictureInput from "../../common/input/PictureInput";
   import ParallaxHeader from "../../common/layout/ParallaxHeader";
-  import {mapGetters} from 'vuex'
+  import {mapState} from 'vuex'
 
   export default {
     name: "PersonalView",
@@ -74,12 +74,12 @@
       }
     },
     computed: {
-      ...mapGetters({
-        currentAccount: 'account/currentAccount'
+      ...mapState('user',{
+        currentAccount: 'current'
       })
     },
     mounted() {
-      this.$store.dispatch('account/fetchCurrentInfo')
+      this.$store.dispatch('user/fetchCurrentInfo')
         .then(() => {
           this.setInputs(this.currentAccount);
         });

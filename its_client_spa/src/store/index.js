@@ -1,5 +1,7 @@
 import Vue from "vue" ;
 import Vuex from "vuex";
+import Raven from "raven-js";
+import _ from "lodash";
 
 Vue.use(Vuex);
 
@@ -29,7 +31,7 @@ const store = new Vuex.Store({
     createPlanContext: {
       returnRoute: undefined,
     },
-    signinContext:{
+    signinContext: {
       returnRoute: undefined
     },
     previousSearchAreaId: undefined
@@ -38,13 +40,13 @@ const store = new Vuex.Store({
     searchContext(state) {
       return state.searchContext;
     },
-    createPlanContext(state){
+    createPlanContext(state) {
       return state.createPlanContext;
     },
-    previousSearchAreaId(state){
+    previousSearchAreaId(state) {
       return state.previousSearchAreaId;
     },
-    signinContext(state){
+    signinContext(state) {
       return state.signinContext;
     }
   },
@@ -52,22 +54,22 @@ const store = new Vuex.Store({
     searchContext(state, payload) {
       state.searchContext = _.assign(state.searchContext, payload.context);
     },
-    createPlanContext(state,payload){
+    createPlanContext(state, payload) {
       state.createPlanContext = _.assign(state.createPlanContext, payload.context);
     },
-    signinContext(state,payload){
+    signinContext(state, payload) {
       state.signinContext = _.assign(state.signinContext, payload.context);
     },
-    previousSearchAreaId(state,payload){
+    previousSearchAreaId(state, payload) {
       state.previousSearchAreaId = payload.areaId;
     },
-    consumeSearchContext(state){
+    consumeSearchContext(state) {
       state.searchContext = {};
     },
-    consumeCreatePlanContext(state){
+    consumeCreatePlanContext(state) {
       state.createPlanContext = {};
     },
-    consumeSigninContext(state){
+    consumeSigninContext(state) {
       state.signinContext = {};
     }
   },
@@ -85,6 +87,14 @@ const store = new Vuex.Store({
     request: RequestModule,
     user: UserModule
   },
+});
+
+store.subscribe((mutation, state) => {
+  Raven.captureBreadcrumb({
+    message: mutation.type,
+    category: 'mutation',
+    payload: _.keys(mutation.payload)
+  })
 });
 
 export default store;
