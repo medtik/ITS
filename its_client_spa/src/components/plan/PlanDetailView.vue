@@ -305,9 +305,9 @@
             this.loadData();
           })
       },
-      onNoteDelete(noteId) {
+      onNoteDelete(note) {
         this.$store.dispatch('plan/removeNoteFromPlan', {
-          id: noteId
+          id: note.id
         }).then(() => {
             this.loadData();
           })

@@ -15,7 +15,7 @@
         {{description}}
       </v-flex>
     </v-layout>
-    <v-layout slot="action">
+    <v-layout slot="action" justify-end>
       <v-btn icon flat color="secondary" small
              @click="$emit('delete',id)">
         <v-icon small>

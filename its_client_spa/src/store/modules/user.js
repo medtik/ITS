@@ -1,32 +1,87 @@
 import {axiosInstance} from "../../common/util"
 import Raven from "raven-js"
+import moment from "moment";
 import _ from "lodash"
 
 export default {
   namespaced: true,
   state: {
-    users: [],
+    searchUsers: [],
+    current: {},
     loading: {
-      users: false,
+      searchUsers: false,
+      currentUser: false,
     }
   },
   getters: {
-    getUsers(state) {
-      return state.users;
-    },
-    getUsersLoading(state) {
-      return state.loading.users;
+    getSearchUsersLoading(state) {
+      return state.loading.searchUsers;
     }
   },
   mutations: {
-    setUser(state, payload) {
-      state.users = payload.users;
+    setSearchUsers(state, payload) {
+      state.searchUsers = _.filter(payload.users, (user) => {
+        if (state.current.id) {
+          return user.id != payload.currentUserId
+        } else {
+          Raven.captureException('setSearchUsers: missing current user');
+          return true;
+        }
+      });
+    },
+    setCurrentUser(state, payload) {
+      const {
+        name,
+        address,
+        phoneNumber,
+        emailAddress,
+        birthdate,
+        photo
+      } = _.cloneDeep(payload.user);
+      const birthdateFormatted = moment(birthdate).format('YYYY-MM-DD');
+
+      state.current = {
+        name,
+        address,
+        phoneNumber,
+        emailAddress,
+        birthdate: birthdateFormatted,
+        photo
+      };
     },
     setLoading(state, payload) {
       state.loading = _.assign(state.loading, payload.loading);
     }
   },
   actions: {
+    updateAccountInfo(context, payload) {
+      console.debug('updateAccountInfo', payload);
+      return Promise.resolve();
+    },
+    fetchCurrentInfo(context) {
+      context.commit('setLoading', {
+        loading: {currentUser: true}
+      });
+      return new Promise((resolve, reject) => {
+        axiosInstance.get('api/CurrentUser')
+          .then(value => {
+            context.commit('setCurrentUser', {
+              user: value.data
+            });
+            context.commit('setLoading', {
+              loading: {currentUser: false}
+            });
+            resolve(value.data);
+          })
+          .catch(reason => {
+            Raven.captureException(reason);
+            context.commit('setLoading', {
+              loading: {currentUser: false}
+            });
+            reject(reason.response)
+          })
+      });
+    },
     fetchUsers(context, payload) {
       // get /api/User
       Raven.captureBreadcrumb(
@@ -42,30 +97,41 @@ export default {
         nameInput
       } = payload;
 
-      context.commit('setLoading',{
-        loading: {users: true}
+      context.commit('setLoading', {
+        loading: {searchUsers: true}
       });
-      return new Promise((resolve, reject) => {
-        axiosInstance.get('api/user', {
-          params: {
-            nameSearchValue: nameInput
-          }
-        }).then((value) => {
-          context.commit('setLoading',{
-            loading: {users: false}
-          });
-          context.commit('setUser',{
-            users: value.data.currentList
-          });
-          resolve(value.data);
-        }).catch((reason) => {
-          context.commit('setLoading',{
-            loading: {users: false}
-          });
 
-          Raven.captureException(reason);
-          reject(reason.response);
-        })
+      const usersPromise = axiosInstance.get('api/user', {
+        params: {
+          nameSearchValue: nameInput
+        }
+      });
+
+      let currentUserPromise;
+      if (context.state.current) {
+        currentUserPromise = context.dispatch('fetchCurrentInfo');
+      }
+
+
+      return new Promise((resolve, reject) => {
+        Promise.all([usersPromise, currentUserPromise])
+          .then(values => {
+            context.commit('setLoading', {
+              loading: {searchUsers: false}
+            });
+            context.commit('setSearchUsers', {
+              users: values[0].data.currentList,
+              currentUserId: values[1].id
+            });
+            resolve(values[0].data);
+          })
+          .catch(reason => {
+            Raven.captureException(reason);
+            context.commit('setLoading', {
+              loading: {searchUsers: false}
+            });
+            reject(reason.response);
+          });
       })
     }
   }

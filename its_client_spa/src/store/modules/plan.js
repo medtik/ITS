@@ -368,7 +368,7 @@ export default {
       } = payload;
 
       return new Promise((resolve, reject) => {
-        axiosInstance.post('api/Plan/DeleteNote', {
+        axiosInstance.delete('api/Plan/DeleteNote', {
           params: {
             noteId: id
           }

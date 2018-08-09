@@ -21,7 +21,7 @@
               {{user.name}}
             </v-list-tile-content>
             <v-list-tile-action>
-              <v-btn flat color="success" @click="onInviteUser">
+              <v-btn flat color="success" @click="onInviteUserClick">
                 <v-icon small>
                   fas fa-user-plus
                 </v-icon>
@@ -31,25 +31,45 @@
         </v-list>
       </v-layout>
     </v-container>
+    <!--DIALOG-->
+    <MessageInputDialog :dialog="dialog.messageInputDialog"
+                        title="Mời bạn"
+                        message="Để lại lời nhắn"
+                        @confirm="onInviteUserConfirm"
+                        v-model="inviteInput.message"
+    ></MessageInputDialog>
   </v-content>
 </template>
 
 <script>
-  import {mapGetters} from "vuex"
+  import {mapGetters, mapState} from "vuex"
+  import {MessageInputDialog} from "../../common/input";
 
   export default {
     name: "GroupInviteView",
+    components: {
+      MessageInputDialog
+    },
     data() {
       return {
         groupName: '',
         groupId: '',
-        nameInput: ''
+        nameInput: '',
+        inviteInput: {
+          inviteUserId: undefined,
+          message: undefined
+        },
+        dialog: {
+          messageInputDialog: false,
+        }
       }
     },
     computed: {
       ...mapGetters('user', {
-        users: 'getUsers',
-        usersLoading: 'getUsersLoading'
+        usersLoading: 'getSearchUsersLoading'
+      }),
+      ...mapState('user', {
+        users: 'searchUsers'
       })
     },
     created() {
@@ -63,10 +83,19 @@
     },
     methods: {
       onSearchEnter() {
-        this.$store.dispatch('user/fetchUsers',{nameInput:this.nameInput});
+        this.$store.dispatch('user/fetchUsers', {nameInput: this.nameInput});
       },
-      onInviteUser(userId){
-
+      onInviteUserClick(userId) {
+        this.inviteInput.userId = userId;
+      },
+      onInviteUserConfirm() {
+        this.sendInvitation();
+      },
+      sendInvitation() {
+        this.$store.dispatch('group/sendGroupInvitationRequest', {
+          ...this.inviteInput,
+          groupId: this.groupId
+        })
       }
     }
   }
