@@ -257,12 +257,19 @@ export default {
           })
       });
     },
-    fetchVisiblePlans(context) {
+    fetchVisiblePlans(context,payload) {
       //get /api/User/MyVisiblePlan
+      const {
+        areaId
+      } = payload;
       context.commit('setLoading', {
         loading: {myVisiblePlans: true}
       });
-      axiosInstance.get('api/User/MyVisiblePlan')
+      axiosInstance.get('api/User/MyVisiblePlan',{
+        params:{
+          areaId
+        }
+      })
         .then(value => {
           context.commit('setLoading', {
             loading: {myVisiblePlans: true}

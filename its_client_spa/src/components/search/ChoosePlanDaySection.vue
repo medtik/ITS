@@ -56,7 +56,9 @@
       </v-flex>
     </template>
     <template v-else>
-      <v-btn color="light-blue accent"
+      <v-progress-linear v-if="plansLoading" :indeterminate="true"></v-progress-linear>
+      <v-btn v-else
+             color="light-blue accent"
              @click="onCreatePlanClick">
         <v-icon small dark>
           fas fa-plus
@@ -106,7 +108,9 @@
     },
     mounted() {
       if (!this.plans || this.plans.length < 1) {
-        this.$store.dispatch('plan/fetchVisiblePlans')
+        this.$store.dispatch('plan/fetchVisiblePlans',{
+          areaId: this.context.areaId
+        })
       }
 
       if (this.plans && this.context) {
@@ -121,7 +125,7 @@
       ...mapGetters({
         context: 'searchContext'
       }),
-      isConfirmable(){
+      isConfirmable() {
         return this.selectedLocationCount > 0 && !!this.selectedPlanId
       },
       days() {
@@ -157,15 +161,10 @@
           this.initValue();
         }
       }
-      // context(context){
-      //   if(context.planId){
-      //     this.onAddToPlan();
-      //   }
-      // }
     },
     methods: {
       initValue() {
-        if(this.init){
+        if (this.init) {
           return;
         }
         let context = this.$store.getters['searchContext'];

@@ -159,12 +159,14 @@
       },
       onConfirm() {
         this.loading.confirm = true;
-        this.addLocation()
-          .then(() => {
-            this.loading.confirm = false;
-          })
+        this.$router.push({
+          name: 'PlanDetail',
+          query: {
+            id: this.selectedPlanId
+          }
+        })
       },
-      addLocation(noForward) {
+      addLocation() {
         let addLocationToPlanRequests = _.map(this.locationsCheck, (location) => {
           return {
             locationId: location.id,
@@ -184,14 +186,6 @@
         return new Promise((resolve) => {
           Promise.all(responses)
             .then(value => {
-              if (!noForward) {
-                this.$router.push({
-                  name: 'PlanDetail',
-                  query: {
-                    id: this.selectedPlanId
-                  }
-                })
-              }
               resolve();
             })
         });
