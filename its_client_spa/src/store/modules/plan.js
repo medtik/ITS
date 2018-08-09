@@ -369,6 +369,9 @@ export default {
         id
       } = payload;
 
+      context.commit('removeItemFromPlan', {
+        itemId: id
+      });
       return new Promise((resolve, reject) => {
         axiosInstance.delete('api/Plan/DeleteNote', {
           params: {

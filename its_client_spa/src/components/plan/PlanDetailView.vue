@@ -308,9 +308,7 @@
       onNoteDelete(note) {
         this.$store.dispatch('plan/removeNoteFromPlan', {
           id: note.id
-        }).then(() => {
-            this.loadData();
-          })
+        })
       },
       onPublish() {
         this.loading.publishBtn = true;
