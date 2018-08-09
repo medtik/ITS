@@ -1,6 +1,8 @@
 import {axiosInstance} from "../../common/util";
 import formatter from "../../formatter"
 import _ from "lodash";
+import Raven from "raven-js";
+
 import moment from "moment";
 
 export default {
@@ -373,8 +375,10 @@ export default {
             noteId: id
           }
         }).then(value => {
+
           resolve(value.data)
         }).catch(reason => {
+          Raven.captureException(reason);
           reject(reason.response);
         })
       })
