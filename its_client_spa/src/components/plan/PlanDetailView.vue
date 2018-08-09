@@ -7,10 +7,24 @@
                dense fixed
                color="light-blue darken-2" dark>
       <!--TOOL BAR TOP ROW-->
-      <v-toolbar-title class="headline">
-        {{plan.name}}
+      <v-toolbar-title class="headline" v-if="!isSmallScreen">
+        <span v-if="groupName">
+          <v-icon>
+            fas fa-users
+          </v-icon>
+          {{groupName}}
+          &nbsp;
+          <v-icon>
+            fas fa-angle-right
+          </v-icon>
+          &nbsp;
+        </span>
+        <span>
+          <v-icon>fas fa-suitcase</v-icon>
+          {{plan.name}}
+        </span>
       </v-toolbar-title>
-      <v-spacer></v-spacer>
+      <v-spacer v-if="!isSmallScreen"></v-spacer>
       <v-toolbar-items>
         <v-btn flat @click="dialog.choosePlanDestination = true"
                :loading="addPlanToGroupLoading">
@@ -211,6 +225,7 @@
       return {
         planId: undefined,
         selectedPlanDay: undefined,
+        groupName: undefined,
         loading: {
           publishBtn: false,
           searchMethod: false
@@ -234,11 +249,15 @@
         items: [],
       }
     },
-    mounted() {
+    created() {
       const {
-        id
+        id,
+        groupName
       } = this.$route.query;
       this.planId = id;
+      this.groupName = groupName;
+    },
+    mounted() {
       this.loadData();
     },
     computed: {

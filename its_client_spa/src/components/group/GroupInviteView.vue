@@ -87,6 +87,7 @@
       },
       onInviteUserClick(userId) {
         this.inviteInput.userId = userId;
+        this.dialog.messageInputDialog = true;
       },
       onInviteUserConfirm() {
         this.sendInvitation();
