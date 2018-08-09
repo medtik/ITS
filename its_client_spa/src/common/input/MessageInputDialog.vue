@@ -1,7 +1,7 @@
 <template>
-  <v-dialog :dialog="isOpen">
+  <v-dialog v-model="isOpen" max-width="550" persistent>
     <v-card>
-      <v-card-title class="light-blue darken-2">
+      <v-card-title class="light-blue darken-2 white--text title">
         {{title}}
       </v-card-title>
       <v-card-text>
@@ -17,10 +17,10 @@
         </v-layout>
       </v-card-text>
       <v-card-actions>
-        <v-btn color="success">
+        <v-btn color="success" @click="onConfirm">
           Xác nhận
         </v-btn>
-        <v-btn color="secondary">
+        <v-btn color="secondary" @click="onCancel">
           Hủy
         </v-btn>
       </v-card-actions>

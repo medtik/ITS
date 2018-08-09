@@ -135,11 +135,9 @@ export default {
       } = payload;
 
       const reqData = {
-        userInvitation: {
-          "inviteUserId": userId,
-          "groupId": groupId,
-          "message": message
-        }
+        "userId": userId,
+        "groupId": groupId,
+        "message": message
       };
 
       // put /api/Group/UserInvitation

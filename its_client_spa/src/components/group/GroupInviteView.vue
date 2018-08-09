@@ -9,6 +9,7 @@
       <v-layout column>
         <v-text-field :loading="usersLoading"
                       label="Tìm"
+                      v-model="nameInput"
                       v-on:keyup.enter="onSearchEnter"/>
         <v-list>
           <v-list-tile v-for="user in users"
@@ -21,7 +22,7 @@
               {{user.name}}
             </v-list-tile-content>
             <v-list-tile-action>
-              <v-btn flat color="success" @click="onInviteUserClick">
+              <v-btn flat color="success" @click="onInviteUserClick(user.id)">
                 <v-icon small>
                   fas fa-user-plus
                 </v-icon>
@@ -32,9 +33,7 @@
       </v-layout>
     </v-container>
     <!--DIALOG-->
-    <MessageInputDialog :dialog="dialog.messageInputDialog"
-                        title="Mời bạn"
-                        message="Để lại lời nhắn"
+    <MessageInputDialog v-bind="messageInputDialog"
                         @confirm="onInviteUserConfirm"
                         v-model="inviteInput.message"
     ></MessageInputDialog>
@@ -43,6 +42,8 @@
 
 <script>
   import {mapGetters, mapState} from "vuex"
+  import _ from "lodash";
+
   import {MessageInputDialog} from "../../common/input";
 
   export default {
@@ -59,8 +60,8 @@
           inviteUserId: undefined,
           message: undefined
         },
-        dialog: {
-          messageInputDialog: false,
+        messageInputDialog: {
+          dialog: false
         }
       }
     },
@@ -87,9 +88,20 @@
       },
       onInviteUserClick(userId) {
         this.inviteInput.userId = userId;
-        this.dialog.messageInputDialog = true;
+        let invitee = _.find(this.users, (user) => {
+          return user.id == userId;
+        });
+
+        this.messageInputDialog = {
+          dialog: true,
+          title: `Mời ${invitee.name} vào ${this.groupName}`,
+          message: 'Để lại lời nhắn'
+        };
       },
       onInviteUserConfirm() {
+        this.messageInputDialog = _.assign(this.messageInputDialog, {
+          dialog: false
+        });
         this.sendInvitation();
       },
       sendInvitation() {
