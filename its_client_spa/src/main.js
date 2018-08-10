@@ -73,7 +73,7 @@ RNMsgChannel.on('json', json => {
       return;
     case 'GroupInvitation':
       router.push({
-        name: 'GroupInvite'
+        name: 'Notification'
       });
       return;
     default:

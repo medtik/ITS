@@ -18,6 +18,8 @@ export default class ITSWeb extends React.Component {
             // uri: 'http://192.168.2.2:80/',
             uri: 'http://172.16.3.180:80/',
             canGoBack: false,
+            websiteReady: false,
+            pendingNotification: undefined
         };
 
         this.onLayout = this.onLayout.bind(this);
@@ -72,7 +74,8 @@ export default class ITSWeb extends React.Component {
 
     handleNotification(notification) {
         const {
-            data
+            data,
+            origin
         } = notification;
 
         Sentry.captureBreadcrumb({
@@ -81,12 +84,22 @@ export default class ITSWeb extends React.Component {
             data: {
                 notification,
                 type: typeof notification,
-                data
+                data,
+                websiteReady: this.state.websiteReady
             }
         });
 
-        this.refs[ref.webview].sendJSON(data);
-        Sentry.captureMessage('handleNotification',{
+        if (origin != 'received') {
+            if (this.state.websiteReady) {
+                this.refs[ref.webview].sendJSON(data);
+            } else {
+                this.setState({
+                    pendingNotification: notification
+                })
+            }
+        }
+
+        Sentry.captureMessage('handleNotification', {
             level: 'info'
         });
     }
@@ -96,6 +109,13 @@ export default class ITSWeb extends React.Component {
             category: 'ITS-mobile',
             message: 'onWebsiteReady'
         });
+        this.setState({
+            websiteReady: true
+        });
+        if(!!this.state.pendingNotification){
+            this.handleNotification(notification);
+        }
+
         notification.registerForPushNotificationsAsync()
             .then(token => {
                 Sentry.captureBreadcrumb({

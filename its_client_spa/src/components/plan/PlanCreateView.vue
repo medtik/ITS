@@ -137,9 +137,7 @@
         })
       },
       onEdit(){
-        // this.store.dispatch('plan/edit',{
-        //   ...this.input()
-        // })
+
       },
       onCancel() {
         this.$router.back();
