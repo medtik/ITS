@@ -6,14 +6,17 @@ import {Notifications} from "expo";
 
 import Sentry from "sentry-expo";
 
-
+const ref = {
+    webview: "REF_WEBVIEW"
+};
 export default class ITSWeb extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            uri: 'http://its8.gear.host/',
-            // uri: 'http://192.168.2.2:80',
+            // uri: 'http://its8.gear.host/',
+            // uri: 'http://192.168.2.2:80/',
+            uri: 'http://172.16.3.180:80/',
             canGoBack: false,
         };
 
@@ -43,7 +46,7 @@ export default class ITSWeb extends React.Component {
     }
 
     registerWebChannel() {
-        this.webview.messagesChannel.on('json', json => {
+        this.refs[ref.webview].messagesChannel.on('json', json => {
             Sentry.captureBreadcrumb({
                 category: 'ITS-mobile',
                 message: 'componentDidMount',
@@ -82,7 +85,7 @@ export default class ITSWeb extends React.Component {
             }
         });
 
-        this.webview.sendJSON(data);
+        this.refs[ref.webview].sendJSON(data);
         Sentry.captureMessage('handleNotification',{
             level: 'info'
         });
@@ -103,7 +106,7 @@ export default class ITSWeb extends React.Component {
                     }
                 });
 
-                this.webview.sendJSON({
+                this.refs[ref.webview].sendJSON({
                     type: 'expToken',
                     payload: {
                         token
@@ -144,7 +147,7 @@ export default class ITSWeb extends React.Component {
             <View style={style.container}
                   onLayout={this.onLayout}>
                 <WebView
-                    ref={ webview => { this.webview = webview; }}
+                    ref={ref.webview}
                     onNavigationStateChange={this.onNavigationStateChange}
                     source={{uri: this.state.uri}}
                     style={style.webView}

@@ -60,7 +60,8 @@
     props: [
       'dialog',
       'value',
-      'destinations'
+      'destinations',
+      'currentGroup'
     ],
     data() {
       return {
@@ -71,12 +72,15 @@
       ...mapGetters('plan', {
         groupedPlans: 'myVisiblePlans',
         loading: 'myVisiblePlansLoading'
+      }),
+      ...mapGetters('authenticate',{
+        isLoggedIn: "isLoggedIn"
       })
     },
     mounted(){
-      if(!this.groupedPlans || !this.groupedPlans.length > 0){
-        this.$store.dispatch('plan/fetchVisiblePlans');
-      }
+        if(this.isLoggedIn){
+          this.$store.dispatch('plan/fetchVisiblePlans');
+        }
     },
     methods: {
       onSelect() {
