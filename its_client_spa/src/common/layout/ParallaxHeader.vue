@@ -10,7 +10,7 @@
         text-xs-center
         class="white--text"
       >
-        <h1 class="display-2 mb-3">{{text}}</h1>
+        <h1 class="display-3 mb-3">{{text}}</h1>
       </v-layout>
       <slot v-else></slot>
     </v-parallax>

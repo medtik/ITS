@@ -172,7 +172,7 @@
   #form {
     width: 100%;
     max-width: 500px;
-    position: relative;
-    top: -15%;
+    /*position: relative;*/
+    /*top: -15%;*/
   }
 </style>
