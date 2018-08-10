@@ -10,6 +10,18 @@
     },
     "android": {
       "package": "com.tlp.its"
+    },
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "sentry-expo/upload-sourcemaps",
+          "config": {
+            "organization": "tlp",
+            "project": "its",
+            "authToken": "92641946ee3b44b9992fb0c4da6e707efed22f6315f9466cb878a7e452c81c2c"
+          }
+        }
+      ]
     }
    }
 }

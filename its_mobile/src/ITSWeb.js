@@ -1,30 +1,33 @@
 import React from "react" ;
-import {View, WebView, StyleSheet, Dimensions, BackHandler} from "react-native" ;
-import firestore from './firestore';
-import notification from './SetupNotification';
+import {View, StyleSheet, Dimensions, BackHandler} from "react-native" ;
+import {WebView} from 'react-native-webview-messaging/WebView';
+import notification from '../config/SetupNotification';
+import {Notifications} from "expo";
 
-const ref = {
-    webview: "WEBVIEW_REF"
-};
+import Sentry from "sentry-expo";
+
+
 export default class ITSWeb extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
             // uri: 'http://its8.gear.host/',
-            uri: 'http://192.168.150.80:80',
-            canGoBack: false
+            uri: 'http://192.168.2.2:80',
+            canGoBack: false,
         };
 
         this.onLayout = this.onLayout.bind(this);
         this.onHardwareBack = this.onHardwareBack.bind(this);
         this.onNavigationStateChange = this.onNavigationStateChange.bind(this);
-        this.onMessage = this.onMessage.bind(this);
     }
 
     componentDidMount() {
         this.onLayout();
+
         BackHandler.addEventListener('hardwareBackPress', this.onHardwareBack);
+        Notifications.addListener(this.handleNotification.bind(this));
+        this.registerWebChannel();
     }
 
     componentWillUnmount() {
@@ -39,6 +42,81 @@ export default class ITSWeb extends React.Component {
         });
     }
 
+    registerWebChannel() {
+        this.webview.messagesChannel.on('json', json => {
+            Sentry.captureBreadcrumb({
+                category: 'ITS-mobile',
+                message: 'componentDidMount',
+                data: {
+                    message: json
+                }
+            });
+
+            const {
+                type,
+                payload
+            } = json;
+
+            switch (type) {
+                case 'ready':
+                    this.onWebsiteReady();
+                    break;
+                default:
+                    Sentry.captureException(new Error('Invalid message'));
+            }
+        });
+    }
+
+    handleNotification(notification) {
+        const {
+            data
+        } = notification;
+
+        Sentry.captureBreadcrumb({
+            category: 'ITS-mobile',
+            message: 'handleNotification',
+            data: {
+                notification,
+                type: typeof notification,
+                data
+            }
+        });
+
+
+        this.webview.sendJSON(data);
+
+        Sentry.captureMessage('handleNotification',{
+            level: 'info'
+        });
+    }
+
+    onWebsiteReady() {
+        Sentry.captureBreadcrumb({
+            category: 'ITS-mobile',
+            message: 'onWebsiteReady'
+        });
+        notification.registerForPushNotificationsAsync()
+            .then(token => {
+                Sentry.captureBreadcrumb({
+                    category: 'ITS-mobile',
+                    message: 'registerForPushNotificationsAsync',
+                    data: {
+                        token
+                    }
+                });
+
+                this.webview.sendJSON({
+                    type: 'expToken',
+                    payload: {
+                        token
+                    }
+                })
+            })
+            .catch(ex => {
+                Sentry.captureException(ex);
+            })
+    }
+
     onHardwareBack() {
         if (this.state.canGoBack) {
             this.refs[ref.webview].goBack();
@@ -50,22 +128,6 @@ export default class ITSWeb extends React.Component {
         this.setState({
             canGoBack: ex.canGoBack
         });
-    }
-
-    onMessage(data) {
-        let obj = JSON.parse(data);
-        if (obj.type === 'uid') {
-            notification.registerForPushNotificationsAsync()
-                .then(value => {
-                    firestore
-                        .collection('user')
-                        .doc(obj.uid)
-                        .update({
-                            token: value
-                        })
-                })
-
-        }
     }
 
     render() {
@@ -84,9 +146,8 @@ export default class ITSWeb extends React.Component {
             <View style={style.container}
                   onLayout={this.onLayout}>
                 <WebView
-                    ref={ref.webview}
+                    ref={ webview => { this.webview = webview; }}
                     onNavigationStateChange={this.onNavigationStateChange}
-                    onMessage={(event) => this.onMessage(event.nativeEvent.data)}
                     source={{uri: this.state.uri}}
                     style={style.webView}
                     userAgent="its8_demo"
