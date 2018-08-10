@@ -58,6 +58,7 @@
             <v-layout column>
               <v-flex>
                 <v-btn color="success"
+                       :loading="addLoading"
                        @click="dialog.choosePlan = true">
                   <v-icon>fas fa-user-plus</v-icon>
                   &nbsp;
@@ -90,7 +91,7 @@
     />
     <ChoosePlanDialog
       :dialog="dialog.choosePlan"
-      @select="dialog.choosePlan = false"
+      @select="onChoosePlanSelect"
       @close="dialog.choosePlan = false"
     />
   </v-content>
@@ -133,8 +134,8 @@
       ...mapState('plan', {
         deleteLoading: (state) => state.loading.delete
       }),
-      ...mapState('grou', {
-        addLoading: (state) => state.loading.addPlan
+      ...mapState('group', {
+        addLoading: (state) => state.loading.addPlanToGroup || state.loading.updateDetailedGroup
       }),
       inviteLink() {
         return {
@@ -154,19 +155,28 @@
       this.groupId = id;
     },
     mounted() {
-      this.$store.dispatch('group/fetchById', {id: this.groupId})
+      this.onLoad();
     },
     methods: {
+      onLoad() {
+        this.$store.dispatch('group/fetchById', {id: this.groupId})
+      },
+      onChoosePlanSelect(plan) {
+        this.$store.commit('setLoading', {
+          loading: {updateDetailedGroup: true}
+        });
+        this.$store.dispatch('group/addPlanToGroup', {
+          planId: plan.id,
+          groupId: this.groupId
+        }).then(()=>{
+          this.$store.updateDetailedGroup();
+        });
+        this.dialog.choosePlan = false;
+      },
       onDeletePlan(id) {
         this.$store.dispatch('plan/delete', {id});
         this.$store.commit('group/deleteGroupPlan', {id});
       },
-      addPlan(id) {
-        this.$store.dispatch('group/addPlanToGroup', {
-          planId: id,
-          groupId: this.groupId
-        });
-      }
     }
   }
 </script>
