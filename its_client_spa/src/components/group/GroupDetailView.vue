@@ -72,6 +72,7 @@
                       v-for="plan in group.plans"
                       :key="plan.id">
                 <PlanFullWidth v-bind="plan"
+                               @delete="onDeletePlan"
                                @save="dialog.choosePlanDestination = true"/>
               </v-flex>
             </v-layout>
@@ -103,7 +104,7 @@
     MessageInputDialog
   } from "../../common/input";
   import ChoosePlanDialog from "../../common/input/ChoosePlanDialog";
-  import {mapGetters} from "vuex";
+  import {mapGetters, mapState} from "vuex";
 
   export default {
     name: "GroupFullWidth",
@@ -129,6 +130,12 @@
         group: 'detailedGroup',
         pageLoading: 'detailedGroupLoading'
       }),
+      ...mapState('plan', {
+        deleteLoading: (state) => state.loading.delete
+      }),
+      ...mapState('grou', {
+        addLoading: (state) => state.loading.addPlan
+      }),
       inviteLink() {
         return {
           name: 'GroupInvite',
@@ -149,6 +156,18 @@
     mounted() {
       this.$store.dispatch('group/fetchById', {id: this.groupId})
     },
+    methods: {
+      onDeletePlan(id) {
+        this.$store.dispatch('plan/delete', {id});
+        this.$store.commit('group/deleteGroupPlan', {id});
+      },
+      addPlan(id) {
+        this.$store.dispatch('group/addPlanToGroup', {
+          planId: id,
+          groupId: this.groupId
+        });
+      }
+    }
   }
 </script>
 

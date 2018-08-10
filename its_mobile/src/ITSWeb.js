@@ -12,8 +12,8 @@ export default class ITSWeb extends React.Component {
         super(props);
 
         this.state = {
-            // uri: 'http://its8.gear.host/',
-            uri: 'http://192.168.2.2:80',
+            uri: 'http://its8.gear.host/',
+            // uri: 'http://192.168.2.2:80',
             canGoBack: false,
         };
 
@@ -82,9 +82,7 @@ export default class ITSWeb extends React.Component {
             }
         });
 
-
         this.webview.sendJSON(data);
-
         Sentry.captureMessage('handleNotification',{
             level: 'info'
         });

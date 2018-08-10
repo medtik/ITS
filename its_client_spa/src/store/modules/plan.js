@@ -75,16 +75,20 @@ export default {
     setMyVisiblePlans(state, payload) {
       state.myVisiblePlans = payload.plans
     },
-    deletePlan(state, payload) {
+    deleteMyPlan(state, payload) {
+      const {
+        id
+      } = payload;
+
       if (state.myPlans && state.myPlans.length > 0) {
         state.myPlans = _.filter(state.myPlans, plan => {
-          return plan.id != payload.id;
+          return plan.id != id
         })
       }
       if (state.myVisiblePlans && state.myVisiblePlans.length > 0) {
         state.myVisiblePlans = _.map(state.myVisiblePlans, group => {
           return _.filter(group, plan => {
-            return plan.id != payload.id;
+            return plan.id != id
           });
         });
       }
@@ -452,15 +456,13 @@ export default {
           }
         })
           .then((value) => {
-            context.commit('deletePlan', {
-              id
-            });
             context.commit('setLoading', {
               loading: {delete: false}
             });
             resolve(value.data)
           })
           .catch(reason => {
+            Raven.captureException(reason);
             context.commit('setLoading', {
               loading: {delete: false}
             });
