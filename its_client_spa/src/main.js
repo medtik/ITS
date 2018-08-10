@@ -7,6 +7,7 @@ import store from './store'
 import Vuetify from 'vuetify'
 import Raven from 'raven-js';
 import RavenVue from 'raven-js/plugins/vue';
+import RNMsgChannel from 'react-native-webview-messaging';
 import * as VueGoogleMaps from 'vue2-google-maps'
 import 'vuetify/dist/vuetify.min.css'
 import '@fortawesome/fontawesome-free/css/all.css'
@@ -30,6 +31,51 @@ const localToken = store.getters['authenticate/getlocalToken'];
 if (localToken) {
   store.commit('authenticate/setToken', {token: localToken})
 }
+
+
+function onBridgeReady(cb) {
+  if (window.postMessage.length !== 1) {
+    setTimeout(function () {
+      onBridgeReady(cb)
+    }, 200);
+  } else {
+    cb();
+  }
+}
+
+onBridgeReady(function () {
+  RNMsgChannel.sendJSON({
+    type: 'ready'
+  });
+});
+
+RNMsgChannel.on('json', json => {
+  Raven.captureBreadcrumb({
+    category: 'ITS-Web-Client',
+    message: 'onJson',
+    data: {json}
+  });
+
+  const {
+    type,
+    payload
+  } = json;
+
+  Raven.captureMessage('onMessageFromMobile',{
+    level:"info"
+  });
+
+  switch (type) {
+    case 'expToken':
+      store.dispatch('user/updateMobileToken', {
+        ...payload
+      });
+      return;
+    default:
+      Raven.captureException(new Error('Invalid message type'));
+      break;
+  }
+});
 
 Vue.config.productionTip = false;
 

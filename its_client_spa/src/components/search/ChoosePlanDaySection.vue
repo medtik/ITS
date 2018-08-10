@@ -9,8 +9,18 @@
                   :readonly="lockSelect.plan"
                   :value='selectedPlanId'
                   @change="onPlanSelect"
-                  label="Chuyến đi"
-        ></v-select>
+                  label="Chuyến đi">
+          <template slot="item" slot-scope="props">
+            <v-layout column>
+              <v-flex class="caption" v-if="props.item.groupName">
+                {{props.item.groupName}}
+              </v-flex>
+              <v-flex>
+                {{props.item.name}}
+              </v-flex>
+            </v-layout>
+          </template>
+        </v-select>
         <v-select v-if="selectedPlanId"
                   :items="days"
                   item-text="planDayText"
@@ -108,7 +118,7 @@
     },
     mounted() {
       if (!this.plans || this.plans.length < 1) {
-        this.$store.dispatch('plan/fetchVisiblePlans',{
+        this.$store.dispatch('plan/fetchVisiblePlans', {
           areaId: this.context.areaId
         })
       }

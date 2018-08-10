@@ -1,4 +1,5 @@
 import axiosInstance from "../../common/util/axiosInstance";
+import {RavenStatic as Raven} from "raven-js";
 
 export default {
   namespaced: true,
@@ -69,7 +70,7 @@ export default {
         })
         .catch(reason => {
           context.commit('setLoading', {loading: {featuredAreas: false}});
-          console.debug('area - getFeatured', reason);
+          Raven.captureException(reason);
         })
     }
   }
