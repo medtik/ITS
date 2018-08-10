@@ -162,14 +162,14 @@
         this.$store.dispatch('group/fetchById', {id: this.groupId})
       },
       onChoosePlanSelect(plan) {
-        this.$store.commit('setLoading', {
+        this.$store.commit('group/setLoading', {
           loading: {updateDetailedGroup: true}
         });
         this.$store.dispatch('group/addPlanToGroup', {
           planId: plan.id,
           groupId: this.groupId
         }).then(()=>{
-          this.$store.updateDetailedGroup();
+          this.$store.dispatch('group/updateDetailedGroup');
         });
         this.dialog.choosePlan = false;
       },

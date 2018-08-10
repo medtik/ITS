@@ -55,8 +55,9 @@ export default {
         id
       } = payload;
 
-      if (state.detailedGroup.plans && state.detailedGroup.plans.id) {
-        const plans = _.filter(state.detailedGroup.plans, plan => {
+      let plans = state.detailedGroup.plans;
+      if (state.detailedGroup.plans && state.detailedGroup.plans.length > 0) {
+        plans = _.filter(plans, plan => {
           return plan.id != id
         });
 
@@ -105,7 +106,10 @@ export default {
       })
         .then(value => {
           context.commit('setDetailedGroup', {
-            group: value.data
+            group: {
+              ...value.data,
+              id
+            }
           });
           context.commit('setLoading', {
             loading: {detailedGroup: false}
@@ -119,7 +123,7 @@ export default {
         })
     },
     updateDetailedGroup(context, payload) {
-      if(!context.state.detailedGroup){
+      if (!context.state.detailedGroup) {
         const error = new Error('Missing detailed group when attempt to update');
         Raven.captureException(error);
         return Promise.reject(error);
@@ -133,7 +137,7 @@ export default {
           params: {
             id: context.state.detailedGroup.id
           }
-        }).then((value)=>{
+        }).then((value) => {
           context.commit('setDetailedGroup', {
             group: value.data
           });

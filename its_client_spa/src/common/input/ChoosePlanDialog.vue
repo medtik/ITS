@@ -6,9 +6,9 @@
           <!--CONTENT-->
           <v-list subheader avatar
                   v-for="plans in groupedPlans"
-                  :key="`planGroup_${plans[0].group}`">
+                  :key="`planGroup_${plans ? plans[0].group : ''}`">
 
-            <v-subheader v-if="plans[0].group">
+            <v-subheader v-if="plans && plans[0].group">
               {{plans[0].group}}
             </v-subheader>
             <v-subheader v-else>
