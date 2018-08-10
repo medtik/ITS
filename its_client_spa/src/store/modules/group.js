@@ -13,7 +13,8 @@ export default {
       detailedGroup: true,
       create: false,
       delete: false,
-      addPlanToGroup: false
+      addPlanToGroup: false,
+      updateDetailedGroup: false,
     }
   },
   getters: {
@@ -114,8 +115,40 @@ export default {
           context.commit('setLoading', {
             loading: {detailedGroup: false}
           });
-          console.error('group/fetchById', reason.response);
+          Raven.captureException(reason);
         })
+    },
+    updateDetailedGroup(context, payload) {
+      if(!context.state.detailedGroup){
+        const error = new Error('Missing detailed group when attempt to update');
+        Raven.captureException(error);
+        return Promise.reject(error);
+      }
+
+      context.commit('setLoading', {
+        loading: {updateDetailedGroup: true}
+      });
+      return new Promise((resolve, reject) => {
+        axiosInstance.get('api/group/Details', {
+          params: {
+            id: context.state.detailedGroup.id
+          }
+        }).then((value)=>{
+          context.commit('setDetailedGroup', {
+            group: value.data
+          });
+          context.commit('setLoading', {
+            loading: {updateDetailedGroup: false}
+          });
+          resolve(value.data);
+        }).catch(reason => {
+          Raven.captureException(reason);
+          context.commit('setLoading', {
+            loading: {updateDetailedGroup: false}
+          });
+          reject(reason.response);
+        })
+      });
     },
     addPlanToGroup(context, payload) {
       const {
