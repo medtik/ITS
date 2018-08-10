@@ -48,7 +48,23 @@ export default {
     },
     setLoading(state, payload) {
       state.loading = _.assign(state.loading, payload.loading);
-    }
+    },
+    deleteGroupPlan(state, payload) {
+      const {
+        id
+      } = payload;
+
+      if (state.detailedGroup.plans && state.detailedGroup.plans.id) {
+        const plans = _.filter(state.detailedGroup.plans, plan => {
+          return plan.id != id
+        });
+
+        state.detailedGroup = {
+          ...state.detailedGroup,
+          plans
+        }
+      }
+    },
   },
   actions: {
     fetchMyGroups(context) {
@@ -122,7 +138,7 @@ export default {
             context.commit('setLoading', {
               loading: {addPlanToGroup: false}
             });
-            console.error('group/addPlanToGroup', reason.response);
+            Raven.captureException(reason);
             reject(reason.response);
           })
       })

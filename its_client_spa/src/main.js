@@ -61,14 +61,19 @@ RNMsgChannel.on('json', json => {
     payload
   } = json;
 
-  Raven.captureMessage('onMessageFromMobile',{
-    level:"info"
+  Raven.captureMessage('onMessageFromMobile', {
+    level: "info"
   });
 
   switch (type) {
     case 'expToken':
       store.dispatch('user/updateMobileToken', {
         ...payload
+      });
+      return;
+    case 'GroupInvitation':
+      router.push({
+        name: 'GroupInvite'
       });
       return;
     default:

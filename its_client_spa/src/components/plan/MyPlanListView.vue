@@ -73,7 +73,8 @@
       deletePlan(id) {
         this.$store.dispatch('plan/delete', {
           id
-        })
+        });
+        this.$store.commit('plan/deleteMyPlan',{id})
       }
     }
   }

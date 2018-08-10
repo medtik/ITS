@@ -8,6 +8,7 @@ export default {
   state: {
     searchUsers: [],
     current: {},
+    mobileToken: undefined,
     loading: {
       searchUsers: false,
       currentUser: false,
@@ -51,6 +52,13 @@ export default {
     },
     setLoading(state, payload) {
       state.loading = _.assign(state.loading, payload.loading);
+    },
+    setMobileToken(state, payload){
+      const {
+        token
+      } = payload;
+
+      state.mobileToken = token;
     }
   },
   actions: {
@@ -59,7 +67,12 @@ export default {
         token
       } = payload;
       // put /api/User/SetMobileToken
-      axiosInstance.put('api/User/SetMobileToken?token=' + token);
+      if(context.rootGetters['authenticate/isLoggedIn']){
+        axiosInstance.put('api/User/SetMobileToken?token=' + token);
+      }
+      context.commit('setMobileToken',{
+        token: token
+      });
     },
     updateAccountInfo(context, payload) {
       console.debug('updateAccountInfo', payload);
