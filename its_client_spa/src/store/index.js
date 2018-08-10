@@ -75,7 +75,7 @@ const store = new Vuex.Store({
   },
   actions:{
     resetUserData(context){
-      context.dispatch('plan/fetchVisiblePlans')
+      context.commit('plan/setMyVisiblePlans',{plans: null});
     },
   },
   modules: {
