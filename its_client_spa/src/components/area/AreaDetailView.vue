@@ -99,7 +99,8 @@
     data(){
       return {
         area:{
-          name: 'Thành phố Hồ Chí Minh'
+          name: 'Thành phố Hồ Chí Minh',
+          photo: ''
         }
       }
     },

@@ -23,6 +23,7 @@
 </template>
 
 <script>
+
   export default {
     name: 'App',
     data() {
@@ -35,6 +36,9 @@
           {text: 'Cá nhân', icon: 'person', to: {name: 'Personal'}},
         ]
       }
+    },
+    mounted(){
+
     },
     computed: {
       showAppBar() {

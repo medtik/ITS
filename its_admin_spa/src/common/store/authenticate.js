@@ -1,4 +1,5 @@
 import axiosInstance from "../util/axiosInstance";
+import RNMsgChannel from 'react-native-webview-messaging';
 import moment from "moment";
 
 export default {

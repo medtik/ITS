@@ -73,6 +73,11 @@ const store = new Vuex.Store({
       state.signinContext = {};
     }
   },
+  actions:{
+    resetUserData(context){
+      context.dispatch('plan/fetchVisiblePlans')
+    },
+  },
   modules: {
     account: AccountModule,
     authenticate: AuthenticateModule,
@@ -85,7 +90,7 @@ const store = new Vuex.Store({
     plan: PlanModule,
     group: GroupModule,
     request: RequestModule,
-    user: UserModule
+    user: UserModule,
   },
 });
 

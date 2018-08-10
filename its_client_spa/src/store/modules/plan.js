@@ -261,7 +261,8 @@ export default {
       //get /api/User/MyVisiblePlan
       const {
         areaId
-      } = payload;
+      } = payload || {};
+
       context.commit('setLoading', {
         loading: {myVisiblePlans: true}
       });

@@ -7,7 +7,8 @@
           {{name}}
         </router-link>
         <div>
-          <v-btn icon flat large
+          <v-btn v-if="isSaveable"
+                 icon flat large
                  color="success"
                  @click="$emit('save')">
             <v-icon>
@@ -78,7 +79,8 @@
       'voteCount',
       'reason',
       'duration',
-      'locations'
+      'locations',
+      'isSaveable'
     ],
     computed: {
       mode() {

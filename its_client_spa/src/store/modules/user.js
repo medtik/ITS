@@ -24,7 +24,7 @@ export default {
         if (state.current.id) {
           return user.id != payload.currentUserId
         } else {
-          Raven.captureException('setSearchUsers: missing current user');
+          Raven.captureException(new Error('setSearchUsers: missing current user'));
           return true;
         }
       });
@@ -54,6 +54,13 @@ export default {
     }
   },
   actions: {
+    updateMobileToken(context, payload) {
+      const {
+        token
+      } = payload;
+      // put /api/User/SetMobileToken
+      axiosInstance.put('api/User/SetMobileToken?token=' + token);
+    },
     updateAccountInfo(context, payload) {
       console.debug('updateAccountInfo', payload);
       return Promise.resolve();
