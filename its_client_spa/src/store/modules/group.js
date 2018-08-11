@@ -67,6 +67,21 @@ export default {
         }
       }
     },
+    deleteUser(state, payload) {
+      const {
+        id
+      } = payload;
+
+      let users = _.filter(state.detailedGroup.users, user => {
+        return user.id != id;
+      });
+
+      const group = {
+        ...state.detailedGroup,
+      };
+      group.users = users;
+      state.detailedGroup = group;
+    }
   },
   actions: {
     fetchMyGroups(context) {
@@ -89,6 +104,20 @@ export default {
             reject(reason.response);
           })
       });
+    },
+    deleteUser(context, payload) {
+      // put /api/Group/RemoveUser
+      const {
+        groupId,
+        userId
+      } = payload;
+
+      axiosInstance.put('api/Group/RemoveUser', {
+        userRemove: {
+          "userId": userId,
+          "groupId": groupId
+        }
+      })
     },
     fetchById(context, payload) {
       const {

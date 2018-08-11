@@ -47,7 +47,17 @@
                 <v-flex xs6 sm4 lg2 pa-1
                         v-for="account in group.users"
                         :key="account.id">
-                  <AccountCard v-bind="account"/>
+                  <AccountCard v-bind="account">
+                    <template slot="actionBtn">
+                      <v-icon small
+                              @click="onDeleteUser(account.id)"
+                              color="red"
+                              class="fakeLink"
+                              style="position: absolute;top:5%; right: 2%">
+                        fas fa-user-minus
+                      </v-icon>
+                    </template>
+                  </AccountCard>
                 </v-flex>
               </v-layout>
             </v-layout>
@@ -168,7 +178,7 @@
         this.$store.dispatch('group/addPlanToGroup', {
           planId: plan.id,
           groupId: this.groupId
-        }).then(()=>{
+        }).then(() => {
           this.$store.dispatch('group/updateDetailedGroup');
         });
         this.dialog.choosePlan = false;
@@ -177,6 +187,13 @@
         this.$store.dispatch('plan/delete', {id});
         this.$store.commit('group/deleteGroupPlan', {id});
       },
+      onDeleteUser(id) {
+        this.$store.dispatch('group/deleteUser', {
+          groupId: this.groupId,
+          userId: id
+        });
+        this.$store.commit('group/deleteUser', {id});
+      }
     }
   }
 </script>

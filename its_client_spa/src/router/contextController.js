@@ -9,7 +9,7 @@ router.afterEach((to, from) => {
     }
   }
 
-  if (from.name != 'SmartSearchResult') {
+  if (from.name == 'SmartSearchResult') {
     if(to.name != 'SmartSearch' && to.name != 'PlanCreate')
     {
       store.commit('consumeSearchContext');

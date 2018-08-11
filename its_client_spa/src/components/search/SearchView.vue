@@ -48,6 +48,7 @@
               :selectedLocationCount="selectedLocationCount"
               @select="onSelect"
               @confirm="onConfirm"
+              @sendRequest="onSendRequest"
               @addLocations="onConfirmAddLocations"
               @selectingMode="onSelectingMode"
             ></ChoosePlanDaySection>
@@ -70,7 +71,18 @@
                   :key="location.id" mb-2 elevation-1 class="white">
             <LocationFullWidth v-bind="location"
                                :isCheckable="selectingMode"
-                               @save="onSave"/>
+                               @save="onSave">
+              <template slot="action">
+                <v-layout column>
+                  <v-checkbox v-model="locationsCheck" :value="location.id">
+
+                  </v-checkbox>
+                </v-layout>
+              </template>
+            </LocationFullWidth>
+          </v-flex>
+          <v-flex style="height: 10vh">
+            <!--HODLER -->
           </v-flex>
         </v-layout>
       </v-flex>
@@ -146,13 +158,11 @@
         context: 'searchContext'
       }),
       selectedLocationCount() {
-        return _.filter(this.locationsCheck, locationCheck => {
-          return locationCheck.isCheck;
-        }).length;
+        return this.locationsCheck.length;
       },
       isShowResult() {
         return this.locations && this.locations.length > 0;
-      }
+      },
     },
     mounted(){
       if(this.context && this.context.areaId){
@@ -227,17 +237,28 @@
             this.loading.addLocationConfirm = false;
           });
       },
-      onSelect({planId, planDay}) {
+      onSelect({planId, planDay, plan}) {
         this.selectedPlanId = planId;
         this.selectedDay = planDay;
+        this.selectedPlan = plan;
       },
       onSelectingMode() {
         this.selectingMode = true;
       },
-      addLocation() {
-        let addLocationToPlanRequests = _.map(this.locationsCheck, (location) => {
+      onSendRequest(){
+        let addLocationToPlanRequests = _.map(this.locationsCheck, (locationId) => {
           return {
-            locationId: location.id,
+            locationId: locationId,
+            planId: this.selectedPlanId
+          }
+        });
+
+
+      },
+      addLocation() {
+        let addLocationToPlanRequests = _.map(this.locationsCheck, (locationId) => {
+          return {
+            locationId: locationId,
             planId: this.selectedPlanId,
             planDay: this.selectedDay
           }
@@ -249,7 +270,6 @@
           let res = this.$store.dispatch('plan/addLocationToPlan', req);
           responses.push(res);
         }
-
 
         return new Promise((resolve) => {
           Promise.all(responses)
