@@ -40,7 +40,7 @@
                     </v-flex>
                   </template>
                   <template v-else-if="item.status == 1">
-                    <v-chip color="green">
+                    <v-chip color="green" class="white--text">
                       {{item.statusText}}
                     </v-chip>
                   </template>
