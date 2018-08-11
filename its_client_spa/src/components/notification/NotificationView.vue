@@ -14,7 +14,7 @@
             Lời mời vào nhóm
           </div>
           <v-list two-line>
-            <v-list-tile v-for="item of notifications">
+            <v-list-tile v-for="item of notifications" :key="item.key">
               <v-list-tile-content>
                 <v-list-tile-title>
                   {{item.title}}&nbsp;<a>{{item.data.groupName}}</a>
