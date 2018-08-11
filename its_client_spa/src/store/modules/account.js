@@ -69,5 +69,11 @@ export default {
           })
       });
     },
+    resetPassword(){
+
+    },
+    changePassword(){
+
+    }
   }
 }

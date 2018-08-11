@@ -1,25 +1,34 @@
 import _ from "lodash"
 import Raven from "raven-js"
+import formatter from "../../formatter"
 import {axiosInstance} from "../../common/util"
 
 export default {
   namespaced: true,
   state: {
-    map: [
-      {key: 0, value: "Đang chờ"},
-      {key: 1, value: "Chấp nhận"},
-      {key: 2, value: "Từ chối"},
-    ],
+    // {id: 3, status: 0, message: null, groupId: 36, groupName: "nhóm phượt 2"}
     groupInvitation: [],
     loading: {
       groupInvitation: true
     }
   },
-  getters :{
-    notifications(state){
-      return state.groupInvitation;
+  getters: {
+    notifications(state) {
+      const groupInvitation = _.map(state.groupInvitation, (invitation) => {
+        return {
+          id: invitation.id,
+          key: "GroupInvitation_"+invitation.id,
+          status: invitation.status,
+          statusText: formatter.getStatusText(invitation.status),
+          title: `Mời vào`,
+          message: invitation.message,
+          type: "GroupInvitation",
+          data: invitation
+        }
+      });
+      return groupInvitation
     },
-    notificationsLoading(state){
+    notificationsLoading(state) {
       return state.loading.groupInvitation;
     }
   },
@@ -30,10 +39,10 @@ export default {
     setLoading(state, payload) {
       state.loading = _.assign(state.loading, payload.loading);
     },
-    acceptGroupInvitation(){
+    acceptGroupInvitation() {
 
     },
-    denyGroupInvitation(){
+    denyGroupInvitation() {
 
     }
   },
@@ -66,16 +75,16 @@ export default {
 
       return new Promise((resolve, reject) => {
         Promise.all([groupInvitationPromise])
-          .then(()=>{
+          .then(() => {
             resolve();
           })
-          .catch((reason)=>{
+          .catch((reason) => {
             Raven.captureException(reason);
             reject(reason);
           })
       })
     },
-    createLocationSuggestion(context, payload){
+    createLocationSuggestion(context, payload) {
       // post /api/Plan/AddSuggestion
       const {
         locationId,
@@ -83,7 +92,7 @@ export default {
         comment
       } = payload;
 
-      axiosInstance.post('api/Plan/AddSuggestion',{
+      axiosInstance.post('api/Plan/AddSuggestion', {
         locationSuggestion: {
           "planId": planId,
           "locationId": locationId,
@@ -91,25 +100,26 @@ export default {
         }
       })
     },
-    acceptLocationSuggestion(context, payload){
+    acceptLocationSuggestion(context, payload) {
 
     },
-    denyLocationSuggestion(context, payload){
-
+    denyLocationSuggestion(context, payload) {
     },
-    acceptGroupInvitation(context, payload){
+    acceptGroupInvitation(context, payload) {
+      // put /api/Group/AcceptGroupInvitation
       const {
         id
       } = payload;
 
+      axiosInstance.put('api/Group/AcceptGroupInvitation?groupInvitationId='+id)
     },
-    denyGroupInvitation(context, payload){
+    denyGroupInvitation(context, payload) {
+      // put /api/Group/DenyGroupInvitation
       const {
         id
       } = payload;
 
-
-      // axiosInstance.put
+      axiosInstance.put('api/Group/DenyGroupInvitation?groupInvitationId='+id)
     }
   }
 }

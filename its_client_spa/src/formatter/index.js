@@ -4,7 +4,7 @@ export default {
   getAllResponse({meta, currentList}) {
     return {
       list: currentList,
-      total: meta.totalElement
+      total: meta.totalElement,
     }
   },
 
@@ -22,7 +22,7 @@ export default {
     };
   },
 
-  getPlanDayText(planDay,startDay){
+  getPlanDayText(planDay, startDay) {
     switch (planDay) {
       case "0":
       case 0:
@@ -38,11 +38,22 @@ export default {
     }
   },
 
-  getDaysObj(planDay,startDay){
+  getDaysObj(planDay, startDay) {
     return {
       planDayText: this.getPlanDayText(planDay, startDay),
       planDay: _.toNumber(planDay),
       key: `day_${planDay}`,
     }
   },
+
+  getStatusText(status) {
+    switch (status) {
+      case 0:
+        return "Đang chờ";
+      case 1:
+        return "Đã chấp nhận";
+      case 2:
+        return "Đã từ chối";
+    }
+  }
 }
