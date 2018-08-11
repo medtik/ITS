@@ -48,7 +48,7 @@
               :selectedLocationCount="selectedLocationCount"
               @select="onSelect"
               @confirm="onConfirm"
-              @sendRequest="onSendRequest"
+              @sendRequest="messageDialog.dialog = true"
               @addLocations="onConfirmAddLocations"
               @selectingMode="onSelectingMode"
             ></ChoosePlanDaySection>
@@ -87,6 +87,10 @@
         </v-layout>
       </v-flex>
     </v-layout>
+    <MessageInputDialog
+      v-bind="messageDialog"
+      @confirm="onSendRequestConfirm"
+    ></MessageInputDialog>
     <ChoosePlanDialog
       :dialog="dialog.choosePlan"
       @select="onPlanSelect"
@@ -96,7 +100,8 @@
 <script>
   import {
     AreaInput,
-    ChoosePlanDialog
+    ChoosePlanDialog,
+    MessageInputDialog
   } from "../../common/input";
   import {
     LocationFullWidth,
@@ -111,7 +116,8 @@
       AreaInput,
       ChoosePlanDialog,
       LocationFullWidth,
-      ChoosePlanDaySection
+      ChoosePlanDaySection,
+      MessageInputDialog
     },
     data() {
       return {
@@ -131,6 +137,12 @@
         choosePlanDayValue: {
           planId: undefined,
           planDay: undefined,
+        },
+        messageDialog: {
+          dialog: false,
+          messageInput: '',
+          title:'Ghi chú',
+          message: "Ghi chú cho yêu cầu thêm địa điểm"
         },
 
         loading: {
@@ -245,7 +257,7 @@
       onSelectingMode() {
         this.selectingMode = true;
       },
-      onSendRequest(){
+      onSendRequestConfirm(){
         let addLocationToPlanRequests = _.map(this.locationsCheck, (locationId) => {
           return {
             locationId: locationId,

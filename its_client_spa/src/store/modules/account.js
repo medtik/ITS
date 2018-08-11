@@ -1,11 +1,15 @@
 import axiosInstance from "../../common/util/axiosInstance";
 import moment from "moment";
+import Raven from "raven-js";
 
 import _ from "lodash";
 
 export default {
   namespaced: true,
   state: {
+    loading: {
+      recoverPassword: false
+    }
   },
   mutations: {
     setLoading(state, payload) {
@@ -69,10 +73,37 @@ export default {
           })
       });
     },
-    resetPassword(){
+    recoverPassword(context, payload) {
+      // post /api/Account/RecoverPassword
+      const {
+        email
+      } = payload;
 
+      context.commit('setLoading', {
+        loading: {recoverPassword: true}
+      });
+      return new Promise((resolve, reject) => {
+        axiosInstance.post('api/Account/RecoverPassword', {
+          userRecover: {
+            "email": email
+          }
+        })
+          .then(() => {
+            context.commit('setLoading', {
+              loading: {recoverPassword: false}
+            });
+            resolve()
+          })
+          .catch((reason) => {
+            context.commit('setLoading', {
+              loading: {recoverPassword: false}
+            });
+            Raven.captureException(reason);
+            reject(reason.response);
+          })
+      });
     },
-    changePassword(){
+    changePassword() {
 
     }
   }

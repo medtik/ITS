@@ -17,6 +17,7 @@
               @select="onSelect"
               @addLocations="onConfirmAddLocations"
               @confirm="onConfirm"
+              @sendRequest="messageDialog.dialog = true"
               @selectingMode="onSelectingMode"
             ></ChoosePlanDaySection>
           </v-flex>
@@ -50,6 +51,10 @@
         <!--Holder-->
       </v-flex>
     </v-layout>
+    <MessageInputDialog
+      v-bind="messageDialog"
+      @confirm="onSendRequestConfirm"
+    ></MessageInputDialog>
     <SuccessDialog
       v-bind="success"
       @close="success.dialog = false"
@@ -63,6 +68,9 @@
     PlanFullWidth,
     SuccessDialog,
   } from "../../common/block";
+  import {
+    MessageInputDialog
+  } from "../../common/input";
   import ChoosePlanDaySection from "./ChoosePlanDaySection"
   import {mapGetters} from "vuex";
 
@@ -72,7 +80,8 @@
       LocationFullWidth,
       PlanFullWidth,
       SuccessDialog,
-      ChoosePlanDaySection
+      ChoosePlanDaySection,
+      MessageInputDialog
     },
     data() {
       return {
@@ -86,6 +95,12 @@
         choosePlanDayValue: {
           planId: undefined,
           planDay: undefined,
+        },
+        messageDialog: {
+          dialog: false,
+          messageInput: '',
+          title:'Ghi chú',
+          message: "Ghi chú cho yêu cầu thêm địa điểm"
         },
         loading: {
           confirm: false,
@@ -165,6 +180,16 @@
             id: this.selectedPlanId
           }
         })
+      },
+      onSendRequestConfirm(){
+        let addLocationToPlanRequests = _.map(this.locationsCheck, (locationId) => {
+          return {
+            locationId: locationId,
+            planId: this.selectedPlanId
+          }
+        });
+
+
       },
       addLocation() {
         let addLocationToPlanRequests = _.map(this.locationsCheck, (location) => {
