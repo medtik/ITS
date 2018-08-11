@@ -4,39 +4,45 @@
       src="static/pexels-photo-490411.jpeg"
       text="Thông báo"
     />
-    <v-layout column class="white">
-      <v-flex>
-        <v-layout row wrap>
-          <v-flex v-for="noti in notifications"
-                  :key="noti.id"
-                  my-2
-                  xs12 lg6 px-2>
-            <NotificationFullWidth v-bind="noti">
-              <template slot="actions">
-                <v-layout row justify-end>
-                  <v-btn color="green" dark small>
-                    <v-icon>check</v-icon>
-                  </v-btn>
-                  <v-btn small>
-                    <v-icon>close</v-icon>
-                  </v-btn>
-                </v-layout>
-              </template>
-            </NotificationFullWidth>
-          </v-flex>
-        </v-layout>
-      </v-flex>
+    <v-container class="text-xs-center" v-if="pageLoading">
+      <v-progress-circular indeterminate size="40" color="primary"></v-progress-circular>
+    </v-container>
+    <v-container v-else pa-0 ma-0 fluid>
+      <v-layout column class="white">
+        <v-flex>
+          <v-layout row wrap>
+            <v-flex v-for="noti in notifications"
+                    :key="noti.id"
+                    my-2
+                    xs12 lg6 px-2>
+              <NotificationFullWidth v-bind="noti">
+                <template slot="actions">
+                  <v-layout row justify-end>
+                    <v-btn color="green" dark small @click="acceptNotification(noti.id)">
+                      <v-icon>check</v-icon>
+                    </v-btn>
+                    <v-btn small @click="denyNotification(noti.id)">
+                      <v-icon>close</v-icon>
+                    </v-btn>
+                  </v-layout>
+                </template>
+              </NotificationFullWidth>
+            </v-flex>
+          </v-layout>
+        </v-flex>
 
-      <v-flex style="height: 25vh">
-        <!--Holder-->
-      </v-flex>
-    </v-layout>
+        <v-flex style="height: 25vh">
+          <!--Holder-->
+        </v-flex>
+      </v-layout>
+    </v-container>
   </v-content>
 </template>
 
 <script>
   import ParallaxHeader from "../../common/layout/ParallaxHeader"
   import NotificationFullWidth from "../../common/block/NotificationFullWidth"
+  import {mapGetters} from "vuex"
 
   export default {
     name: "NotificationView",
@@ -44,36 +50,24 @@
       ParallaxHeader,
       NotificationFullWidth
     },
-    data() {
-      return {
-        notifications: [
-          {
-            id: 1,
-            message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"
-          },
-          {
-            id: 2,
-            message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"
-          },
-          {
-            id: 3,
-            message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"
-          },
-          {
-            id: 4,
-            message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"
-          },
-          {
-            id: 5,
-            message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"
-          },
-          {
-            id: 6,
-            message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"
-          },
-        ]
+    computed: {
+      ...mapGetters('request', {
+        notifications: 'notifications',
+        pageLoading: 'notificationsLoading'
+      })
+    },
+    mounted() {
+      this.$store.dispatch('request/fetchNotifications')
+    },
+    methods: {
+      acceptNotification(id) {
+        this.$store.dispatch('request/acceptGroupInvitation', {id});
+      },
+      denyNotification(id) {
+        this.$store.dispatch('request/denyGroupInvitation', {id});
       }
     }
+
   }
 </script>
 

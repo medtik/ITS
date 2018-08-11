@@ -1,6 +1,7 @@
 <template>
   <v-layout column justify-center my-2>
-    <template v-if="plans && plans.length > 0 ">
+    <v-progress-linear v-if="plansLoading" :indeterminate="true"></v-progress-linear>
+    <template v-else-if="plans && plans.length > 0">
       <v-flex v-if="selectingMode">
         <v-select :items="plans"
                   item-text="name"
@@ -21,7 +22,7 @@
             </v-layout>
           </template>
         </v-select>
-        <v-select v-if="selectedPlanId"
+        <v-select v-if="selectedPlanId && isOwnSelectedPlan"
                   :items="days"
                   item-text="planDayText"
                   item-value="planDay"
@@ -33,7 +34,7 @@
         ></v-select>
       </v-flex>
       <v-flex class="text-xs-center">
-        <v-layout>
+        <v-layout v-if="isOwnSelectedPlan">
           <v-btn color="success"
                  v-if="selectingMode"
                  @click="$emit('addLocations')"
@@ -54,21 +55,30 @@
             </v-icon>
             &nbsp; Hoàn tất
           </v-btn>
+          <v-btn v-if="!selectingMode"
+                 color="light-blue accent"
+                 @click="onAddToPlan">
+            <v-icon small>
+              fas fa-plus
+            </v-icon>
+            &nbsp; Thêm vào chuyến đi
+          </v-btn>
         </v-layout>
-        <v-btn v-if="!selectingMode"
-               color="light-blue accent"
-               @click="onAddToPlan">
-          <v-icon small>
-            fas fa-plus
-          </v-icon>
-          &nbsp; Thêm vào chuyến đi
-        </v-btn>
+        <v-layout v-if="!isOwnSelectedPlan">
+          <v-btn color="primary"
+                 :disabled="!isConfirmable"
+                 :loading="confirmLoading"
+                 @click="onSendRequest">
+            <v-icon small>
+              fas fa-check
+            </v-icon>
+            &nbsp; Gửi yêu cầu thêm địa điểm
+          </v-btn>
+        </v-layout>
       </v-flex>
     </template>
     <template v-else>
-      <v-progress-linear v-if="plansLoading" :indeterminate="true"></v-progress-linear>
-      <v-btn v-else
-             color="light-blue accent"
+      <v-btn color="light-blue accent"
              @click="onCreatePlanClick">
         <v-icon small dark>
           fas fa-plus
@@ -138,17 +148,24 @@
       isConfirmable() {
         return this.selectedLocationCount > 0 && !!this.selectedPlanId
       },
+      isOwnSelectedPlan() {
+        if (this.selectedPlan && this.selectedPlan.groupName != "") {
+          return this.selectedPlan.isGroupOwner;
+        } else {
+          return true;
+        }
+      },
       days() {
         const planDays = [
           {planDay: 0, planDayText: "Chưa lên lịch"}
         ];
         if (this.selectedPlan) {
-          const startDate = moment(this.selectedPlan.startDate);
+          const startDate = moment(this.selectedPlan.startDay);
           const endDate = moment(this.selectedPlan.endDate);
           const diffDays = endDate.diff(startDate, 'days');
 
           for (let i = 1; i < diffDays + 2; i++) {
-            planDays.push(formatter.getDaysObj(i, this.selectedPlan.startDate));
+            planDays.push(formatter.getDaysObj(i, this.selectedPlan.startDay));
           }
         }
         return planDays;
@@ -214,19 +231,24 @@
         });
         this.$emit('select', {
           planId: planId,
-          planDay: this.selectedDay
+          planDay: this.selectedDay,
+          plan: this.selectedPlan
         });
         this.selectedPlanId = planId;
       },
       onDaySelect(planDay) {
         this.$emit('select', {
           planId: this.selectedPlanId,
-          planDay: planDay
+          planDay: planDay,
+          plan: this.selectedPlan
         });
         this.selectedDay = planDay;
       },
       onConfirm() {
         this.$emit('confirm');
+      },
+      onSendRequest() {
+        this.$emit('sendRequest');
       },
       onCreatePlanClick() {
         this.$store.commit('createPlanContext', {

@@ -35,8 +35,8 @@
               <v-subheader>
                 Nhóm
               </v-subheader>
-              <v-list-tile v-if="!myGroupsLoading"
-                           v-for="(group) in myGroups" :key="group.id"
+              <v-list-tile v-for="(group) in myGroups" :key="group.id"
+                           v-if="!myGroupsLoading && (isShowAll || group.isOwner)"
                            @click="selectedGroup = group">
                 <v-list-tile-content>
                   <v-list-tile-title>
@@ -84,7 +84,8 @@
     props: [
       'dialog',
       'destinations',
-      'showPersonal'
+      'showPersonal',
+      'isShowAll'
     ],
     data() {
       return {

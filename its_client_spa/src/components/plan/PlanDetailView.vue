@@ -99,7 +99,13 @@
                              v-bind="item.location"
                              :isOwn="true"
                              @delete="onLocationDelete(item)">
+            <template slot="action">
+              <v-layout>
+                <v-checkbox label="hoàn thành">
 
+                </v-checkbox>
+              </v-layout>
+            </template>
           </LocationFullWidth>
           <NoteFullWidth v-else v-bind="item.note"
                          @delete="onNoteDelete(item)">

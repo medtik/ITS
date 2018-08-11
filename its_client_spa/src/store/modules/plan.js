@@ -277,12 +277,15 @@ export default {
       })
         .then(value => {
           context.commit('setLoading', {
-            loading: {myVisiblePlans: true}
+            loading: {myVisiblePlans: false}
           });
           context.commit('setMyVisiblePlans', {plans: value.data});
         })
         .catch(reason => {
-          console.error('plan/fetchVisiblePlans', reason.response)
+          context.commit('setLoading', {
+            loading: {myVisiblePlans: false}
+          });
+          Raven.captureException(reason);
         })
     },
     addLocationToPlan(context, payload) {

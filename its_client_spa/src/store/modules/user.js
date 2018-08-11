@@ -32,6 +32,7 @@ export default {
     },
     setCurrentUser(state, payload) {
       const {
+        id,
         name,
         address,
         phoneNumber,
@@ -42,6 +43,7 @@ export default {
       const birthdateFormatted = moment(birthdate).format('YYYY-MM-DD');
 
       state.current = {
+        id,
         name,
         address,
         phoneNumber,
