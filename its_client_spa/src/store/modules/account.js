@@ -8,7 +8,8 @@ export default {
   namespaced: true,
   state: {
     loading: {
-      recoverPassword: false
+      recoverPassword: false,
+      changePassword: false
     }
   },
   mutations: {
@@ -103,7 +104,12 @@ export default {
           })
       });
     },
-    changePassword() {
+    changePassword(context, payload) {
+      const {
+        password,
+        rePassword
+      } = payload;
+
 
     }
   }

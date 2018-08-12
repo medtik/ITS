@@ -1,6 +1,8 @@
 <template>
   <v-layout column justify-center my-2>
-    <v-progress-linear v-if="plansLoading" :indeterminate="true"></v-progress-linear>
+    <v-flex v-if="plansLoading" style="width: 200px">
+      <v-progress-linear indeterminate color="primary"></v-progress-linear>
+    </v-flex>
     <template v-else-if="plans && plans.length > 0">
       <v-flex v-if="selectingMode">
         <v-select :items="plans"

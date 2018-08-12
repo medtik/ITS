@@ -86,6 +86,7 @@
     </v-layout>
     <!--DIALOG-->
     <v-dialog v-model="emailInputDialog" max-width="550">
+      <!--RECOVER PASSWORD-->
       <v-card>
         <v-card-title class="white--text light-blue darken-2 title">
           Khôi phục mật khẩu
@@ -116,6 +117,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+
   </v-content>
 </template>
 
@@ -130,20 +132,22 @@
         loading: {
           signinBtn: false
         },
-
+        //RECOVER PASSWORD
         recoverEmailInput: undefined,
+        emailInputDialog: false,
+
+        //
         emailInput: undefined,
         passwordInput: undefined,
 
         error: {},
         signinAlert: {},
-        emailInputDialog: false,
       }
     },
     computed: {
       ...mapState('account', {
-        recoverLoading: state => state.loading.recoverPassword
-      })
+        recoverLoading: state => state.loading.recoverPassword,
+      }),
     },
     methods: {
       signin() {
