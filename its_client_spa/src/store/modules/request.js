@@ -45,10 +45,11 @@ export default {
         status
       } = payload;
 
-      state.groupInvitation = _.mapValues(state.groupInvitation, (invitation) => {
+      state.groupInvitation = _.map(state.groupInvitation, (invitation) => {
         if (invitation.id == id) {
-          return invitation.status = status;
+          invitation.status = status;
         }
+        return invitation;
       })
     }
   },

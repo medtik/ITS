@@ -117,14 +117,10 @@
         this.$store.dispatch('group/sendGroupInvitationRequest', {
           ...this.inviteInput,
           groupId: this.groupId
-        }).catch(response => {
-          if (response.status == 400) {
-            if (response.data.message) {
-              this.errorDialog = {
-                dialog: true,
-                message: response.data.message
-              }
-            }
+        }).catch(message => {
+          this.errorDialog = {
+            dialog: true,
+            message: message
           }
         })
       }

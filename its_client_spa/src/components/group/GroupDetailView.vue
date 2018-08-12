@@ -50,6 +50,7 @@
                   <AccountCard v-bind="account">
                     <template slot="actionBtn">
                       <v-icon small
+                              v-if=""
                               @click="onDeleteUser(account.id)"
                               color="red"
                               class="fakeLink"

@@ -6,12 +6,8 @@
           <img :src="avatar"/>
         </v-avatar>
       </v-flex>
-      <v-icon small
-              color="red"
-              class="fakeLink"
-              style="position: absolute;top:5%; right: 2%">
-        fas fa-user-minus
-      </v-icon>
+      <slot name="actionBtn">
+      </slot>
     </v-card-media>
     <v-card-text>
       <v-layout column>
