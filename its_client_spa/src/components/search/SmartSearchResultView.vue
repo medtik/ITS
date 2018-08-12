@@ -38,7 +38,13 @@
                 class="white">
           <LocationFullWidth v-bind="location"
                              :isCheckable="selectingMode"
-                             @save="onSave"/>
+                             @save="onSave">
+            <template slot="action">
+              <v-checkbox v-model="locationsCheck" :value="location.id">
+
+              </v-checkbox>
+            </template>
+          </LocationFullWidth>
         </v-flex>
         <v-flex>
           <v-btn block flat color="secondary">
@@ -54,6 +60,7 @@
     </v-layout>
     <MessageInputDialog
       v-bind="messageDialog"
+      @close="messageDialog.dialog = false"
       @confirm="onSendRequestConfirm"
     ></MessageInputDialog>
     <SuccessDialog
@@ -124,10 +131,8 @@
         context: 'searchContext'
       }),
       selectedLocationCount() {
-        return _.filter(this.locationsCheck, locationCheck => {
-          return locationCheck.isCheck;
-        }).length;
-      }
+        return this.locationsCheck.length;
+      },
     },
     methods: {
       onConfirmAddLocations() {
@@ -193,9 +198,9 @@
 
       },
       addLocation() {
-        let addLocationToPlanRequests = _.map(this.locationsCheck, (location) => {
+        let addLocationToPlanRequests = _.map(this.locationsCheck, (locationId) => {
           return {
-            locationId: location.id,
+            locationId: locationId,
             planId: this.selectedPlanId,
             planDay: this.selectedDay
           }
