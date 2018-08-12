@@ -48,6 +48,7 @@
               :selectedLocationCount="selectedLocationCount"
               @select="onSelect"
               @confirm="onConfirm"
+              @create="onCreatePlan"
               @sendRequest="messageDialog.dialog = true"
               @addLocations="onConfirmAddLocations"
               @selectingMode="onSelectingMode"
@@ -293,6 +294,18 @@
       },
       resetLocationsFullWidth() {
         this.locationsFullWidthSuffix = _.uniqueId('lfw');
+      },
+      onCreatePlan(){
+        this.$store.commit('createPlanContext', {
+          context: {
+            returnRoute: {
+              name: 'Search'
+            }
+          }
+        });
+        this.$router.push({
+          name: "PlanCreate"
+        })
       }
     }
 

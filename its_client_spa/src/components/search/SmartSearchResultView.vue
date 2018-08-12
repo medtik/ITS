@@ -17,6 +17,7 @@
               @select="onSelect"
               @addLocations="onConfirmAddLocations"
               @confirm="onConfirm"
+              @create="onCreatePlan"
               @sendRequest="messageDialog.dialog = true"
               @selectingMode="onSelectingMode"
             ></ChoosePlanDaySection>
@@ -217,6 +218,18 @@
       },
       resetLocationsFullWidth() {
         this.locationsFullWidthSuffix = _.uniqueId('lfw');
+      },
+      onCreatePlan(){
+        this.$store.commit('createPlanContext', {
+          context: {
+            returnRoute: {
+              name: 'SmartSearchResult'
+            }
+          }
+        });
+        this.$router.push({
+          name: "PlanCreate"
+        })
       }
     }
   }

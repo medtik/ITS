@@ -253,16 +253,7 @@
         this.$emit('sendRequest');
       },
       onCreatePlanClick() {
-        this.$store.commit('createPlanContext', {
-          context: {
-            returnRoute: {
-              name: 'SmartSearchResult'
-            }
-          }
-        });
-        this.$router.push({
-          name: "PlanCreate"
-        })
+        this.$emit('create');
       }
     }
   }
