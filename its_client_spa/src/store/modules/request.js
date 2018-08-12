@@ -17,7 +17,7 @@ export default {
       const groupInvitation = _.map(state.groupInvitation, (invitation) => {
         return {
           id: invitation.id,
-          key: "GroupInvitation_"+invitation.id,
+          key: "GroupInvitation_" + invitation.id,
           status: invitation.status,
           statusText: formatter.getStatusText(invitation.status),
           title: `Mời vào`,
@@ -39,11 +39,17 @@ export default {
     setLoading(state, payload) {
       state.loading = _.assign(state.loading, payload.loading);
     },
-    acceptGroupInvitation() {
+    changeStatusGroupInvitation(state, payload) {
+      const {
+        id,
+        status
+      } = payload;
 
-    },
-    denyGroupInvitation() {
-
+      state.groupInvitation = _.mapValues(state.groupInvitation, (invitation) => {
+        if (invitation.id == id) {
+          return invitation.status = status;
+        }
+      })
     }
   },
   actions: {
@@ -111,7 +117,7 @@ export default {
         id
       } = payload;
 
-      axiosInstance.put('api/Group/AcceptGroupInvitation?groupInvitationId='+id)
+      axiosInstance.put('api/Group/AcceptGroupInvitation?groupInvitationId=' + id)
     },
     denyGroupInvitation(context, payload) {
       // put /api/Group/DenyGroupInvitation
@@ -119,7 +125,7 @@ export default {
         id
       } = payload;
 
-      axiosInstance.put('api/Group/DenyGroupInvitation?groupInvitationId='+id)
+      axiosInstance.put('api/Group/DenyGroupInvitation?groupInvitationId=' + id)
     }
   }
 }

@@ -82,9 +82,17 @@
     },
     methods: {
       onAcceptGroupInvitation(id) {
+        this.$store.commit('request/changeStatusGroupInvitation',{
+          id,
+          status: 1
+        });
         this.$store.dispatch('request/acceptGroupInvitation', {id});
       },
       onDenyGroupInvitation(id) {
+        this.$store.commit('request/changeStatusGroupInvitation',{
+          id,
+          status: 2
+        });
         this.$store.dispatch('request/denyGroupInvitation', {id});
       }
     }
