@@ -113,10 +113,8 @@ export default {
       } = payload;
 
       axiosInstance.put('api/Group/RemoveUser', {
-        userRemove: {
-          "userId": userId,
-          "groupId": groupId
-        }
+        "userId": userId,
+        "groupId": groupId
       })
     },
     fetchById(context, payload) {
