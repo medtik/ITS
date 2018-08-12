@@ -101,7 +101,7 @@
                              @delete="onLocationDelete(item)">
             <template slot="action">
               <v-layout>
-                <v-checkbox label="hoàn thành">
+                <v-checkbox>
 
                 </v-checkbox>
               </v-layout>

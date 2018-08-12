@@ -33,6 +33,9 @@
       </v-layout>
     </v-container>
     <!--DIALOG-->
+    <ErrorDialog v-bind="errorDialog"
+                 @close="errorDialog.dialog = false"
+    ></ErrorDialog>
     <MessageInputDialog v-bind="messageInputDialog"
                         @confirm="onInviteUserConfirm"
                         v-model="inviteInput.message"
@@ -43,13 +46,15 @@
 <script>
   import {mapGetters, mapState} from "vuex"
   import _ from "lodash";
+  import {ErrorDialog} from "../../common/block";
 
   import {MessageInputDialog} from "../../common/input";
 
   export default {
     name: "GroupInviteView",
     components: {
-      MessageInputDialog
+      MessageInputDialog,
+      ErrorDialog
     },
     data() {
       return {
@@ -62,6 +67,10 @@
         },
         messageInputDialog: {
           dialog: false
+        },
+        errorDialog: {
+          dialog: false,
+          message: ''
         }
       }
     },
@@ -108,6 +117,11 @@
         this.$store.dispatch('group/sendGroupInvitationRequest', {
           ...this.inviteInput,
           groupId: this.groupId
+        }).catch(message => {
+          this.errorDialog = {
+            dialog: true,
+            message: message
+          }
         })
       }
     }

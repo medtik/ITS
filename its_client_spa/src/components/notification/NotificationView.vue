@@ -40,7 +40,7 @@
                     </v-flex>
                   </template>
                   <template v-else-if="item.status == 1">
-                    <v-chip color="green">
+                    <v-chip color="green" class="white--text">
                       {{item.statusText}}
                     </v-chip>
                   </template>
@@ -82,9 +82,17 @@
     },
     methods: {
       onAcceptGroupInvitation(id) {
+        this.$store.commit('request/changeStatusGroupInvitation',{
+          id,
+          status: 1
+        });
         this.$store.dispatch('request/acceptGroupInvitation', {id});
       },
       onDenyGroupInvitation(id) {
+        this.$store.commit('request/changeStatusGroupInvitation',{
+          id,
+          status: 2
+        });
         this.$store.dispatch('request/denyGroupInvitation', {id});
       }
     }

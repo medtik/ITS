@@ -6,6 +6,9 @@ export default {
     loading: {
       search: false,
     },
+    input:{
+      areaInput: false
+    },
     searchResult: {
       locations: undefined
     }
@@ -28,6 +31,9 @@ export default {
     setSearchResultArea(state, payload) {
       state.searchResult.area = payload.area;
     },
+    setAreaInput(state, payload){
+      state.input.areaInput = payload.areaId;
+    },
     setLoading(state, payload) {
       state.loading = _.assign(state.loading, payload.loading);
     }
@@ -39,12 +45,14 @@ export default {
         areaId
       } = payload;
 
+      console.debug(payload.areaId);
+
       context.commit('setLoading', {
         loading: {search: true}
       });
       return new Promise((resolve, reject) => {
 
-        axiosInstance.get('api/location', {
+        axiosInstance.get('api/Location/SearchClient', {
           params: {
             searchValue: search,
             pageSize: -1,

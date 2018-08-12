@@ -113,8 +113,10 @@
     },
     mounted() {
       if (this.isHavingContext) {
-        this.input.areaId = this.previousSearchAreaId;
-        this.lockAreaId = true;
+        if(!!this.previousSearchAreaId){
+          this.input.areaId = this.previousSearchAreaId;
+          this.lockAreaId = true;
+        }
       }
     },
     methods: {

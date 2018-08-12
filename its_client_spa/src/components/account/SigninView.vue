@@ -38,14 +38,24 @@
                   </v-alert>
                 </v-flex>
                 <v-flex>
-                  <v-layout>
-                    <v-flex xs6 d-flex class="justify-center">
-                      <v-btn color="primary" @click="signin" :loading="loading.signinBtn">
+                  <v-layout row wrap>
+                    <v-flex xs12 class="justify-center">
+                      <v-btn color="primary" block
+                             :loading="loading.signinBtn"
+                             @click="signin">
                         Đăng nhập
                       </v-btn>
                     </v-flex>
-                    <v-flex xs6 d-flex class="justify-center">
-                      <v-btn color="success" :to="{name: 'Signup'}">
+                    <v-flex pa-1 xs6 class="justify-center">
+                      <v-btn color="secondary" block
+                             :loading="recoverLoading"
+                             @click="emailInputDialog = true">
+                        Khôi phục mật khẩu
+                      </v-btn>
+                    </v-flex>
+                    <v-flex pa-1 xs6 class="justify-center">
+                      <v-btn color="success" block
+                             :to="{name: 'Signup'}">
                         Đăng ký
                       </v-btn>
                     </v-flex>
@@ -74,11 +84,46 @@
         </v-card-text>
       </v-card>
     </v-layout>
+    <!--DIALOG-->
+    <v-dialog v-model="emailInputDialog" max-width="550">
+      <!--RECOVER PASSWORD-->
+      <v-card>
+        <v-card-title class="white--text light-blue darken-2 title">
+          Khôi phục mật khẩu
+        </v-card-title>
+        <v-card-text>
+          <v-layout column>
+            <v-flex>
+              Chúng tôi sẽ gửi mật khẩu mới đến email mà bạn đã đăng kí
+            </v-flex>
+            <v-flex>
+              <v-text-field label="Email" v-model="recoverEmailInput">
+
+              </v-text-field>
+            </v-flex>
+          </v-layout>
+        </v-card-text>
+        <v-card-actions>
+          <v-layout>
+            <v-btn color="primary"
+                   :loading="recoverLoading"
+                   @click="onRecoverClick">
+              Khôi phục
+            </v-btn>
+            <v-btn color="secondary" @click="emailInputDialog = false">
+              Hủy
+            </v-btn>
+          </v-layout>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
   </v-content>
 </template>
 
 <script>
-  import Raven from "raven-js"
+  import Raven from "raven-js";
+  import {mapState} from "vuex";
 
   export default {
     name: "SigninView",
@@ -87,11 +132,22 @@
         loading: {
           signinBtn: false
         },
+        //RECOVER PASSWORD
+        recoverEmailInput: undefined,
+        emailInputDialog: false,
+
+        //
         emailInput: undefined,
         passwordInput: undefined,
+
         error: {},
-        signinAlert: {}
+        signinAlert: {},
       }
+    },
+    computed: {
+      ...mapState('account', {
+        recoverLoading: state => state.loading.recoverPassword,
+      }),
     },
     methods: {
       signin() {
@@ -102,6 +158,7 @@
         })
           .then(value => {
             this.$store.commit('authenticate/setToken', {token: value});
+            this.$store.dispatch('user/fetchCurrentInfo');
             if (!!this.$store.state['user/mobileToken']) {
               this.$store.dispatch('user/updateMobileToken');
             }
@@ -153,6 +210,12 @@
           .catch(reason => {
             this.error = {...reason};
           })
+      },
+      onRecoverClick() {
+        this.emailInputDialog = false;
+        this.$store.dispatch('account/recoverPassword', {
+          email: this.recoverEmailInput
+        })
       }
     }
   }

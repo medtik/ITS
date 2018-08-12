@@ -50,47 +50,9 @@
       </v-flex>
     </v-layout>
     <v-layout slot="action" column align-end>
-      <!--PLAN DETAIL-->
-      <!--delete, check-->
-      <template v-if="isOwn">
-        <v-btn icon flat color="secondary" small
-               @click="$emit('delete',id)">
-          <v-icon small>
-            fas fa-trash
-          </v-icon>
-        </v-btn>
-      </template>
+      <slot name="action">
 
-      <!--PLAN EDIT-->
-      <!--up, down, change date-->
-      <!--<template v-if="isOwnEdit">-->
-      <!--<v-btn icon flat color="success"-->
-      <!--@click="$emit('save',id)">-->
-      <!--<v-icon>-->
-      <!--fas fa-heart-->
-      <!--</v-icon>-->
-      <!--</v-btn>-->
-      <!--</template>-->
-
-      <!--SEARCH RESULT-->
-      <!--save to plan-->
-      <template v-if="isCheckable">
-        <v-btn v-if="localIsChecked"
-               icon flat color="success"
-               @click="onCheck">
-          <v-icon>
-            fas fa-plus-circle
-          </v-icon>
-        </v-btn>
-        <v-btn v-if="!localIsChecked"
-               icon flat
-               @click="onCheck">
-          <v-icon>
-            fas fa-plus-circle
-          </v-icon>
-        </v-btn>
-      </template>
-
+      </slot>
     </v-layout>
   </ListItemLayout>
 </template>
@@ -105,11 +67,6 @@
       StarRating,
       ListItemLayout
     },
-    data() {
-      return {
-        'localIsChecked': false
-      }
-    },
     props: [
       'id',
       'type',
@@ -121,17 +78,7 @@
       'address',
       'reasons',
       'primaryPhoto',
-      'isOwn',
-      'isSearchResult',
-      'isOwnEdit',
-      'isCheck',
-      'isCheckable'
     ],
-    watch: {
-      isCheck(val) {
-        this.localIsChecked = val;
-      }
-    },
     computed: {
       isSmallScreen() {
         return this.$vuetify.breakpoint.name === 'xs'
@@ -171,15 +118,6 @@
             id: this.id
           }
         }
-      }
-    },
-    methods: {
-      onCheck() {
-        this.$emit('save', {
-          id: this.id,
-          check: !this.localIsChecked
-        });
-        this.localIsChecked = !this.localIsChecked;
       }
     }
   }

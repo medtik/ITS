@@ -48,7 +48,8 @@
               :selectedLocationCount="selectedLocationCount"
               @select="onSelect"
               @confirm="onConfirm"
-              @sendRequest="onSendRequest"
+              @create="onCreatePlan"
+              @sendRequest="messageDialog.dialog = true"
               @addLocations="onConfirmAddLocations"
               @selectingMode="onSelectingMode"
             ></ChoosePlanDaySection>
@@ -87,6 +88,10 @@
         </v-layout>
       </v-flex>
     </v-layout>
+    <MessageInputDialog
+      v-bind="messageDialog"
+      @confirm="onSendRequestConfirm"
+    ></MessageInputDialog>
     <ChoosePlanDialog
       :dialog="dialog.choosePlan"
       @select="onPlanSelect"
@@ -96,7 +101,8 @@
 <script>
   import {
     AreaInput,
-    ChoosePlanDialog
+    ChoosePlanDialog,
+    MessageInputDialog
   } from "../../common/input";
   import {
     LocationFullWidth,
@@ -111,7 +117,8 @@
       AreaInput,
       ChoosePlanDialog,
       LocationFullWidth,
-      ChoosePlanDaySection
+      ChoosePlanDaySection,
+      MessageInputDialog
     },
     data() {
       return {
@@ -123,7 +130,7 @@
         requestMessage: '',
 
         locationsCheck: [],
-        locationsFullWidthSuffix:'',
+        locationsFullWidthSuffix: '',
         selectingMode: false,
         selectedPlanId: undefined,
         selectedDay: 0,
@@ -131,6 +138,12 @@
         choosePlanDayValue: {
           planId: undefined,
           planDay: undefined,
+        },
+        messageDialog: {
+          dialog: false,
+          messageInput: '',
+          title: 'Ghi chú',
+          message: "Ghi chú cho yêu cầu thêm địa điểm"
         },
 
         loading: {
@@ -164,8 +177,8 @@
         return this.locations && this.locations.length > 0;
       },
     },
-    mounted(){
-      if(this.context && this.context.areaId){
+    mounted() {
+      if (this.context && this.context.areaId) {
         this.areaIdInput = this.context.areaId;
         this.lockAreaIdInput = true;
       }
@@ -175,9 +188,10 @@
         this.$store.commit('searchContext', {
           areaId: this.areaId
         });
+        this.$store.commit('previousSearchAreaId', {areaId: this.areaIdInput});
         this.$store.dispatch('search/fetchSearchResult', {
           search: this.searchInput,
-          areaId: this.areaId
+          areaId: this.areaIdInput
         })
       },
       onSave({id, check}) {
@@ -205,7 +219,7 @@
           planId: plan.id
         })
       },
-      onAreaSelect(areaId){
+      onAreaSelect(areaId) {
         this.areaIdInput = areaId;
       },
       onSigninClick() {
@@ -245,7 +259,7 @@
       onSelectingMode() {
         this.selectingMode = true;
       },
-      onSendRequest(){
+      onSendRequestConfirm() {
         let addLocationToPlanRequests = _.map(this.locationsCheck, (locationId) => {
           return {
             locationId: locationId,
@@ -280,6 +294,18 @@
       },
       resetLocationsFullWidth() {
         this.locationsFullWidthSuffix = _.uniqueId('lfw');
+      },
+      onCreatePlan(){
+        this.$store.commit('createPlanContext', {
+          context: {
+            returnRoute: {
+              name: 'Search'
+            }
+          }
+        });
+        this.$router.push({
+          name: "PlanCreate"
+        })
       }
     }
 

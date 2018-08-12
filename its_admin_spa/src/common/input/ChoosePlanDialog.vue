@@ -6,9 +6,9 @@
           <!--CONTENT-->
           <v-list subheader avatar
                   v-for="plans in groupedPlans"
-                  :key="`planGroup_${plans[0].group}`">
+                  :key="`planGroup_${plans ? plans[0].groupName : ''}`">
 
-            <v-subheader v-if="plans[0].group">
+            <v-subheader v-if="plans && plans[0].groupName">
               {{plans[0].group}}
             </v-subheader>
             <v-subheader v-else>
@@ -60,7 +60,8 @@
     props: [
       'dialog',
       'value',
-      'destinations'
+      'destinations',
+      'currentGroup'
     ],
     data() {
       return {
@@ -71,12 +72,15 @@
       ...mapGetters('plan', {
         groupedPlans: 'myVisiblePlans',
         loading: 'myVisiblePlansLoading'
+      }),
+      ...mapGetters('authenticate',{
+        isLoggedIn: "isLoggedIn"
       })
     },
     mounted(){
-      if(!this.groupedPlans || !this.groupedPlans.length > 0){
-        this.$store.dispatch('plan/fetchVisiblePlans');
-      }
+        if(this.isLoggedIn){
+          this.$store.dispatch('plan/fetchVisiblePlans');
+        }
     },
     methods: {
       onSelect() {

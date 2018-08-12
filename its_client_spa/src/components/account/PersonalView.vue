@@ -36,13 +36,42 @@
       </v-flex>
       <v-flex>
         <v-btn color="success">Cập nhật</v-btn>
-        <v-btn color="secondary">Đổi mật khẩu</v-btn>
+        <v-btn color="secondary" :loading="changePasswordLoading">Đổi mật khẩu</v-btn>
         <v-btn color="secondary" @click="signout">Đăng xuất</v-btn>
       </v-flex>
       <v-flex style="height: 30vh">
         <!--Holder-->
       </v-flex>
     </v-layout>
+    <!--CHANGE PASSWORD DIALOG-->
+    <v-dialog v-model="changePasswordDialog.dialog" max-width="550">
+      <v-card>
+        <v-card-title class="white--text light-blue darken-2 title">
+          Thay đổi mật khẩu
+        </v-card-title>
+        <v-card-text>
+          <v-layout column>
+            <v-text-field label="Mật khẩu" v-model="changePasswordDialog.newPassword">
+
+            </v-text-field>
+            <v-text-field label="Nhập lại mật khảu" v-model="changePasswordDialog.reNewPassword">
+
+            </v-text-field>
+          </v-layout>
+        </v-card-text>
+        <v-card-actions>
+          <v-layout>
+            <v-btn color="primary"
+                   :loading="changePassword">
+              Xác nhận
+            </v-btn>
+            <v-btn color="secondary" @click="emailInputDialog = false">
+              Hủy
+            </v-btn>
+          </v-layout>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-content>
 </template>
 
@@ -70,12 +99,21 @@
           phoneNumber: undefined,
           address: undefined,
           birthdate: undefined
+        },
+        changePasswordDialog:{
+          //CHANGE PASSWORD
+          newPassword: undefined,
+          reNewPassword: undefined,
+          dialog: false,
         }
       }
     },
     computed: {
       ...mapState('user',{
         currentAccount: 'current'
+      }),
+      ...mapState('account', {
+        changePasswordLoading: state => state.loading.changePsssword,
       })
     },
     mounted() {
@@ -100,6 +138,9 @@
         this.$router.push({
           name: 'Home'
         });
+      },
+      changePassword(){
+
       }
     }
   }
