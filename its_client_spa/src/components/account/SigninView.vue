@@ -158,6 +158,7 @@
         })
           .then(value => {
             this.$store.commit('authenticate/setToken', {token: value});
+            this.$store.dispatch('user/fetchCurrentInfo');
             if (!!this.$store.state['user/mobileToken']) {
               this.$store.dispatch('user/updateMobileToken');
             }

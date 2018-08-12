@@ -50,7 +50,7 @@
                   <AccountCard v-bind="account">
                     <template slot="actionBtn">
                       <v-icon small
-                              v-if=""
+                              v-if="currentUser.id != account.id && group.isOwner"
                               @click="onDeleteUser(account.id)"
                               color="red"
                               class="fakeLink"
@@ -148,6 +148,9 @@
       ...mapState('group', {
         addLoading: (state) => state.loading.addPlanToGroup || state.loading.updateDetailedGroup
       }),
+      ...mapState('user', {
+        currentUser: 'current'
+      }),
       inviteLink() {
         return {
           name: 'GroupInvite',
@@ -156,7 +159,7 @@
             groupName: this.group.name
           }
         }
-      }
+      },
     },
     created() {
       const {
