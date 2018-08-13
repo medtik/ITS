@@ -43,7 +43,7 @@ export default {
     myVisiblePlansFlattened(state) {
       return _.flatten(state.myVisiblePlans);
     },
-    createNoteLoading(state){
+    createNoteLoading(state) {
       return state.loading.createNoteBtn;
     },
     addLocationToPlanLoading(state) {
@@ -148,13 +148,13 @@ export default {
 
       const planDays = [];
       for (let i = 0; i < diffDays + 2; i++) {
-        const matchedItem = _.find(items, item =>{
+        const matchedItem = _.find(items, item => {
           return item.planDay == i
         });
 
-        if(matchedItem){
+        if (matchedItem) {
           planDays.push(matchedItem);
-        }else{
+        } else {
           planDays.push(formatter.getDaysObj(i, detailedPlan.startDay));
         }
       }
@@ -187,6 +187,22 @@ export default {
     }
   },
   actions: {
+    togglePlanLocation(context, payload) {
+      // put /api/Plan/SwitchStatusPlanLocation
+      const {
+        id
+      } = payload;
+
+      axiosInstance.put(`api/Plan/SwitchStatusPlanLocation?id=${id}`);
+    },
+    togglePlanNote(context, payload) {
+      // put /api/Plan/SwitchStatusPlanNote
+      const {
+        id
+      } = payload;
+
+      axiosInstance.put(`api/Plan/SwitchStatusPlanNote?id=${id}`);
+    },
     getFeatured(context) {
       // get /api/FeaturedTrip
       context.commit('setLoading', {
@@ -261,7 +277,7 @@ export default {
           })
       });
     },
-    fetchVisiblePlans(context,payload) {
+    fetchVisiblePlans(context, payload) {
       //get /api/User/MyVisiblePlan
       const {
         areaId
@@ -270,8 +286,8 @@ export default {
       context.commit('setLoading', {
         loading: {myVisiblePlans: true}
       });
-      axiosInstance.get('api/User/MyVisiblePlan',{
-        params:{
+      axiosInstance.get('api/User/MyVisiblePlan', {
+        params: {
           areaId
         }
       })

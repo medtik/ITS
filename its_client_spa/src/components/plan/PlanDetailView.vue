@@ -101,14 +101,21 @@
                              @delete="onLocationDelete(item)">
             <template slot="action">
               <v-layout>
-                <v-checkbox>
-
+                <v-checkbox :value="item.id"
+                            @change="onToggleLocation(item.id)">
                 </v-checkbox>
               </v-layout>
             </template>
           </LocationFullWidth>
           <NoteFullWidth v-else v-bind="item.note"
-                         @delete="onNoteDelete(item)">
+                         @delete="onNoteDelete(item,id)">
+            <template slot="action">
+              <v-layout>
+                <v-checkbox :value="item.id"
+                            @change="onToggleNote(item.id)">
+                </v-checkbox>
+              </v-layout>
+            </template>
           </NoteFullWidth>
         </v-flex>
         <!--SPACER-->
@@ -334,6 +341,13 @@
         this.$store.dispatch('plan/removeNoteFromPlan', {
           id: note.id
         })
+      },
+      onToggleLocation(id) {
+        console.debug('onToggleLocation', id);
+        this.$store.dispatch('plan/togglePlanLocation', {id});
+      },
+      onToggleNote(id) {
+        this.$store.dispatch('plan/togglePlanNote', {id});
       },
       onPublish() {
         this.loading.publishBtn = true;

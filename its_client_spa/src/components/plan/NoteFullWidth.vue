@@ -16,12 +16,9 @@
       </v-flex>
     </v-layout>
     <v-layout slot="action" justify-end>
-      <v-btn icon flat color="secondary" small
-             @click="$emit('delete',id)">
-        <v-icon small>
-          fas fa-trash
-        </v-icon>
-      </v-btn>
+      <slot name="action">
+
+      </slot>
     </v-layout>
   </ListItemLayout>
 </template>
@@ -31,7 +28,7 @@
 
   export default {
     name: "NoteFullWidth",
-    components:{
+    components: {
       ListItemLayout
     },
     props: [

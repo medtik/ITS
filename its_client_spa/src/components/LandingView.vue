@@ -6,6 +6,7 @@
     />
 
     <section>
+      <!--SMART SEARCH-->
       <v-layout
         column
         wrap
@@ -51,6 +52,7 @@
     </section>
 
     <section>
+      <!--NORMAL SEARCH-->
       <v-parallax src="static/place_holder.jpg" height="150">
         <v-layout column align-center justify-center>
           <v-flex xs2 class="headline font-weight-black white--text text-xs-center">
@@ -66,13 +68,30 @@
       </v-parallax>
     </section>
 
+    <section v-if="false">
+      <!--NEARBY-->
+      <v-layout column my-5>
+        <v-flex class="text-xs-center display-1 font-weight-black">
+          Gần đây
+        </v-flex>
+        <v-flex>
+          <v-layout row pa-1>
+            <v-flex>
+
+            </v-flex>
+          </v-layout>
+        </v-flex>
+      </v-layout>
+    </section>
+
     <section>
+      <!--FEATURED-->
       <v-container grid-list-xl>
         <v-layout column my-5>
           <v-flex class="text-xs-center display-1 font-weight-black">
             Tiêu điểm
           </v-flex>
-          <v-flex justify-start mt-5>
+          <v-flex justify-start mt-5 v-if="featuredAreas">
             <div class="title">Các khu vực nổi bật</div>
             <div style="overflow-y: auto;">
               <v-layout row my-1>
@@ -84,7 +103,7 @@
               </v-layout>
             </div>
           </v-flex>
-          <v-flex justify-start mt-5>
+          <v-flex justify-start mt-5 v-if="featuredPlans">
             <div class="title">Các chuyến đi nổi bật</div>
             <div style="overflow-x: auto;">
               <v-layout row my-1>
@@ -110,7 +129,7 @@
 <script>
   import AreaCard from "../common/card/AreaCard"
   import PlanCard from "../common/card/PlanCard"
-  import {mapGetters} from "vuex";
+  import {mapGetters, mapState} from "vuex";
 
   import ParallaxHeader from "../common/layout/ParallaxHeader"
 
@@ -129,7 +148,7 @@
       ...mapGetters('area', {
         featuredAreas: 'featuredAreas',
         featuredAreasLoading: 'featuredAreasLoading'
-      })
+      }),
     },
     mounted() {
       this.$store.dispatch('area/getFeatured');
