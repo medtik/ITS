@@ -31,7 +31,6 @@
     name: "ErrorDialog",
     props: [
       'dialog',
-      'title',
       'message'
     ],
     methods: {

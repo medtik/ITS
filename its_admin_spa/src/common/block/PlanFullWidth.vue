@@ -45,10 +45,10 @@
     <v-divider></v-divider>
     <v-flex mt-2>
       <div style="overflow-x: auto;" v-if="isHaveLocations">
-        <v-layout row my-1>
+        <v-layout row my-1 justify-start>
           <v-flex v-for="(location,index) in locations"
                   :key="`${id}_${location.id}_${index}`"
-                  xs6 mx-2>
+                  mx-2 shrink>
             <LocationCard v-bind="location"/>
           </v-flex>
         </v-layout>
