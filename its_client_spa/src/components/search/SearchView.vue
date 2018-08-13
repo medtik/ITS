@@ -143,7 +143,7 @@
           dialog: false,
           messageInput: '',
           title: 'Ghi chú',
-          message: "Ghi chú cho yêu cầu thêm địa điểm"
+          message: "Lời nhắn cho chủ"
         },
 
         loading: {
@@ -266,8 +266,6 @@
             planId: this.selectedPlanId
           }
         });
-
-
       },
       addLocation() {
         let addLocationToPlanRequests = _.map(this.locationsCheck, (locationId) => {
@@ -278,7 +276,6 @@
           }
         });
         this.locationsCheck = [];
-        this.resetLocationsFullWidth();
         let responses = [];
         for (let req of addLocationToPlanRequests) {
           let res = this.$store.dispatch('plan/addLocationToPlan', req);
@@ -291,9 +288,6 @@
               resolve();
             })
         });
-      },
-      resetLocationsFullWidth() {
-        this.locationsFullWidthSuffix = _.uniqueId('lfw');
       },
       onCreatePlan(){
         this.$store.commit('createPlanContext', {
