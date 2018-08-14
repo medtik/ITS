@@ -8,7 +8,7 @@
       <!--Separate edit view-->
       <v-flex>
         <PictureInput
-          v-model="input.photo"
+          v-model="input.avatar"
           width="300"
           height="300"
           text="Ảnh đại diện"
@@ -89,7 +89,7 @@
           page: true
         },
         input: {
-          photo: undefined,
+          avatar: undefined,
           name: undefined,
           emailAddress: undefined,
           phoneNumber: undefined,
@@ -121,7 +121,7 @@
     },
     methods: {
       setInputs(account) {
-        this.input.photo = account.photo;
+        this.input.avatar = account.avatar;
         this.input.name = account.name;
         this.input.emailAddress = account.emailAddress;
         this.input.phoneNumber = account.phoneNumber;
