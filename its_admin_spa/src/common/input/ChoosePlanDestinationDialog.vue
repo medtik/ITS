@@ -9,7 +9,7 @@
               <v-subheader>
                 Cá nhân
               </v-subheader>
-              <v-list-tile @click="selectedIndex = -1">
+              <v-list-tile @click="selectedGroup = -1">
                 <v-list-tile-avatar>
                   <v-icon>
                     fas fa-user
@@ -22,7 +22,7 @@
                 </v-list-tile-content>
                 <v-list-tile-action>
                   <v-icon
-                    v-if="selectedIndex === -1"
+                    v-if="selectedGroup == -1"
                     color="green">
                     check
                   </v-icon>
@@ -31,12 +31,12 @@
               </v-list-tile>
             </v-list>
             <!--GROUP-->
-            <v-list subheader avatar>
+            <v-list subheader avatar v-if="!myGroupsLoading && isAnyQualified">
               <v-subheader>
                 Nhóm
               </v-subheader>
               <v-list-tile v-for="(group) in myGroups" :key="group.id"
-                           v-if="!myGroupsLoading && (isShowAll || group.isOwner)"
+                           v-if="isShowAll || group.isOwner"
                            @click="selectedGroup = group">
                 <v-list-tile-content>
                   <v-list-tile-title>
@@ -52,8 +52,8 @@
                   <v-icon v-else/>
                 </v-list-tile-action>
               </v-list-tile>
-              <v-progress-linear v-if="myGroupsLoading" indeterminate color="primary"></v-progress-linear>
             </v-list>
+            <v-progress-linear v-if="myGroupsLoading" indeterminate color="primary"></v-progress-linear>
           </v-layout>
         </v-flex>
         <v-flex>
@@ -78,7 +78,6 @@
   import {mapGetters} from "vuex";
   import _ from "lodash";
 
-
   export default {
     name: "ChoosePlanDestinationDialog",
     props: [
@@ -89,14 +88,19 @@
     ],
     data() {
       return {
-        selectedGroup: {}
+        selectedGroup: {},
       }
     },
     computed: {
       ...mapGetters('group', {
         myGroups: 'myGroups',
         myGroupsLoading: 'myGroupsLoading'
-      })
+      }),
+      isAnyQualified() {
+        return _.some(this.myGroups, (group) => {
+          return this.isShowAll || group.isOwner
+        })
+      }
     },
     mounted() {
       if (!this.myGroups || this.myGroups.length == 0) {
@@ -105,7 +109,11 @@
     },
     methods: {
       onSelect() {
-        this.$emit('select', {group:_.cloneDeep(this.selectedGroup)});
+        if(this.selectedGroup == -1){
+          this.$emit('select',{group: undefined});
+        }else{
+          this.$emit('select', {group: _.cloneDeep(this.selectedGroup)});
+        }
         this.selectedGroup = {};
       },
       onClose() {
