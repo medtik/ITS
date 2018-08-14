@@ -16,21 +16,17 @@
       </v-flex>
       <v-flex>
         <v-layout column>
-          <v-text-field label="Tên"
-                        :readonly="!editMode"
+          <v-text-field label="Tên"PictureInput
                         v-model="input.name"/>
           <v-text-field label="Email"
-                        :readonly="!editMode"
+                        readonly
                         v-model="input.emailAddress"/>
           <v-text-field label="Điện thoại"
-                        :readonly="!editMode"
                         v-model="input.phoneNumber"/>
           <v-text-field label="Địa chỉ"
-                        :readonly="!editMode"
                         v-model="input.address"/>
           <v-text-field label="Ngày sinh"
                         type="date"
-                        :readonly="!editMode"
                         v-model="input.birthdate"/>
         </v-layout>
       </v-flex>
