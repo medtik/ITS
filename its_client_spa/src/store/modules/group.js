@@ -182,6 +182,7 @@ export default {
       });
     },
     addPlanToGroup(context, payload) {
+      // PUT /api/Group/SavePlan
       const {
         planId,
         groupId
@@ -190,8 +191,12 @@ export default {
       context.commit('setLoading', {
         loading: {addPlanToGroup: true}
       });
+      let url = `api/Group/SavePlan?planId=${planId}`;
+      if(groupId){
+        url += `&groupId=${groupId}`
+      }
       return new Promise((resolve, reject) => {
-        axiosInstance.put(`api/group/AddPlan?planId=${planId}&groupId=${groupId}`)
+        axiosInstance.put(url)
           .then(value => {
             context.commit('setLoading', {
               loading: {addPlanToGroup: false}

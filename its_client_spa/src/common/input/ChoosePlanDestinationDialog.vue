@@ -9,7 +9,7 @@
               <v-subheader>
                 Cá nhân
               </v-subheader>
-              <v-list-tile @click="selectedIndex = -1">
+              <v-list-tile @click="selectedGroup = -1">
                 <v-list-tile-avatar>
                   <v-icon>
                     fas fa-user
@@ -22,7 +22,7 @@
                 </v-list-tile-content>
                 <v-list-tile-action>
                   <v-icon
-                    v-if="selectedIndex === -1"
+                    v-if="selectedGroup == -1"
                     color="green">
                     check
                   </v-icon>
@@ -88,7 +88,7 @@
     ],
     data() {
       return {
-        selectedGroup: {}
+        selectedGroup: {},
       }
     },
     computed: {
@@ -109,7 +109,11 @@
     },
     methods: {
       onSelect() {
-        this.$emit('select', {group: _.cloneDeep(this.selectedGroup)});
+        if(this.selectedGroup == -1){
+          this.$emit('select',{group: undefined});
+        }else{
+          this.$emit('select', {group: _.cloneDeep(this.selectedGroup)});
+        }
         this.selectedGroup = {};
       },
       onClose() {

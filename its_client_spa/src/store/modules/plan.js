@@ -152,7 +152,6 @@ export default {
         .values()
         .value();
 
-
       const planDays = [];
       for (let i = 0; i < diffDays + 2; i++) {
         const matchedItem = _.find(items, item => {

@@ -193,7 +193,7 @@
     </v-dialog>
     <!--DIALOG-->
     <ChoosePlanDestinationDialog :dialog="dialog.choosePlanDestination"
-                                 :showPersonal="plan.isPublic"
+                                 :showPersonal="plan.isPublic || !plan.isOwn"
                                  @select="onAddToGroupSelected"
                                  @close="dialog.choosePlanDestination = false"/>
     <SearchMethodDialog
@@ -316,15 +316,20 @@
         const {
           group
         } = payload;
+        const successMessage = group ?
+          `Thêm chuyến đi hiện tại vào ${group.name} thành công.` :
+          `Thêm chuyến đi thành công.`;
+
+
         this.dialog.choosePlanDestination = false;
         this.$store.dispatch('group/addPlanToGroup', {
           planId: this.planId,
-          groupId: group.id
+          groupId: group ? group.id : undefined
         })
-          .then((value) => {
+          .then(() => {
             this.success = {
               dialog: true,
-              message: `Thêm chuyến đi hiện tại vào nhóm ${group.name} thành công.`
+              message: successMessage
             }
           })
       },
