@@ -1,40 +1,40 @@
 import ChoosePlanDaySection from "./ChoosePlanDaySection";
 import {MessageInputDialog} from "../../common/input";
 
-import {mapState} from "vuex";
+import {mapState, mapGetters} from "vuex";
 import _ from "lodash";
-
-//required
-
 
 export default {
   component: {
     ChoosePlanDaySection,
     MessageInputDialog
   },
-  data: {
-    locationsCheckboxValues: [],
+  data() {
+    return {
+      locationsCheckboxValues: [],
 
-    messageInputDialog: {
-      dialog: false,
-      messageInput: '',
-      title: 'Ghi chú',
-      message: "Lời nhắn cho chủ nhóm"
-    },
-
-    choosePlanSection: {
-      loading: undefined,
-      plans: [],
-      selectedPlanId: undefined,
-      selectedPlanDay: undefined,
+      messageInputDialog: {
+        dialog: false,
+        messageInput: '',
+        title: 'Ghi chú',
+        message: "Lời nhắn cho chủ nhóm"
+      },
+      choosePlanSection: {
+        loading: undefined,
+        selectedPlanId: undefined,
+        selectedPlanDay: undefined,
+      }
     }
   },
   computed: {
     ...mapState({
       context: (state) => state.searchContext
     }),
+    ...mapGetters('authenticate', {
+      isLoggedIn: 'isLoggedIn'
+    }),
     isSelectingMode() {
-      return !!this.selectedPlanId
+      return !!this.choosePlanSection.selectedPlanId
     },
     formattedAddLocationToPlanRequest() {
       return _.map(this.locationsCheckboxValues, (locationId) => {
@@ -44,7 +44,10 @@ export default {
           planDay: this.choosePlanSection.selectedPlanDay
         }
       });
-    }
+    },
+    selectedLocationCount() {
+      return this.locationsCheckboxValues.length;
+    },
   },
   methods: {
     onPlanIdSelect(planId) {
@@ -52,7 +55,7 @@ export default {
     },
 
     onAddLocationClick() {
-      let addLocationToPlanRequests = this.formattedAddLocationToPlanRequest();
+      let addLocationToPlanRequests = this.formattedAddLocationToPlanRequest;
 
       this.locationsCheckboxValues = [];
       let responses = [];
@@ -67,6 +70,12 @@ export default {
           resolve();
         })
     },
+    onSelect({planId, planDay, plan}) {
+      this.choosePlanSection = {
+        selectedPlanId: planId,
+        selectedPlanDay: planDay
+      }
+    },
     onSendRequestClick() {
       this.messageInputDialog.dialog = true;
     },
@@ -80,7 +89,7 @@ export default {
       this.$router.push({
         name: 'PlanDetail',
         query: {
-          id: this.selectedPlanId
+          id: this.choosePlanSection.selectedPlanId
         }
       })
     },

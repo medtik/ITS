@@ -97,7 +97,7 @@ export default {
     },
     setDetailedPlan(state, payload) {
       const detailedPlan = _.cloneDeep(payload.plan);
-      const startDate = moment(detailedPlan.startDay);
+      const startDate = moment(detailedPlan.startDate);
       const endDate = moment(detailedPlan.endDate);
       const diffDays = endDate.diff(startDate, 'days');
 
@@ -144,7 +144,7 @@ export default {
           return {
             ...formatter.getDaysObj(
               key,
-              detailedPlan.isPublic ? undefined : detailedPlan.startDay
+              detailedPlan.isPublic ? undefined : detailedPlan.startDate
             ),
             items: value
           }
@@ -163,7 +163,7 @@ export default {
         } else {
           planDays.push(formatter.getDaysObj(
             i,
-            detailedPlan.isPublic ? undefined : detailedPlan.startDay
+            detailedPlan.isPublic ? undefined : detailedPlan.startDate
           ));
         }
       }
