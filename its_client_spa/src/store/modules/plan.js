@@ -23,6 +23,8 @@ export default {
       detailedPlan: true,
       addLocationToPlan: false,
       createNoteBtn: false,
+      publishPlan: false,
+      savePlan: false,
       create: false,
       delete: false
     }
@@ -116,6 +118,7 @@ export default {
               id: item.planLocationId,
               planDay: item.planDay,
               index: item.index,
+              isDone: item.isDone,
               type: 'location',
             }
           } else {
@@ -128,6 +131,7 @@ export default {
               id: item.id,
               planDay: item.planDay,
               index: item.index,
+              isDone: item.isDone,
               type: 'note',
             }
           }
@@ -138,7 +142,10 @@ export default {
         })
         .map((value, key) => {
           return {
-            ...formatter.getDaysObj(key, detailedPlan.startDay),
+            ...formatter.getDaysObj(
+              key,
+              detailedPlan.isPublic ? undefined : detailedPlan.startDay
+            ),
             items: value
           }
         })
@@ -155,7 +162,10 @@ export default {
         if (matchedItem) {
           planDays.push(matchedItem);
         } else {
-          planDays.push(formatter.getDaysObj(i, detailedPlan.startDay));
+          planDays.push(formatter.getDaysObj(
+            i,
+            detailedPlan.isPublic ? undefined : detailedPlan.startDay
+          ));
         }
       }
 
@@ -187,6 +197,67 @@ export default {
     }
   },
   actions: {
+    publishPlan(context, payload) {
+      // put /api/Plan/PublicPlan
+      const {
+        id
+      } = payload;
+
+      context.commit('setLoading', {
+        loading: {
+          publishPlan: true
+        }
+      });
+      axiosInstance.put('api/Plan/PublicPlan?planId=' + id)
+        .then(() => {
+          context.commit('setLoading', {
+            loading: {
+              publishPlan: false
+            }
+          })
+        })
+        .catch(reason => {
+          Raven.captureException(reason);
+          context.commit('setLoading', {
+            loading: {
+              publishPlan: false
+            }
+          })
+        })
+    },
+    savePlan(context, payload) {
+      // put /api/Group/SavePlan
+      const {
+        planId,
+        groupId
+      } = payload;
+
+      context.commit('loading', {
+        loading: {
+          savePlan: true
+        }
+      });
+      let url = 'api/Group/SavePlan?planId=' + planId;
+      if (!!groupId) {
+        url += '&groupId=' + groupId;
+      }
+      axiosInstance.put(url)
+        .then(() => {
+          context.commit('loading', {
+            loading: {
+              savePlan: false
+            }
+          })
+        })
+        .catch(reason => {
+          Raven.captureException(reason);
+          context.commit('loading', {
+            loading: {
+              savePlan: false
+            }
+          })
+        })
+    },
     togglePlanLocation(context, payload) {
       // put /api/Plan/SwitchStatusPlanLocation
       const {
@@ -230,29 +301,33 @@ export default {
         });
       }
 
-      axiosInstance.get('api/Plan/Details', {
-        params: {id}
+      return new Promise((resolve, reject) => {
+        axiosInstance.get('api/Plan/Details', {
+          params: {id}
+        })
+          .then((value) => {
+            context.commit('setDetailedPlan', {plan: value.data});
+            if (!noLoading) {
+              context.commit('setLoading', {
+                loading: {
+                  detailedPlan: false
+                }
+              });
+            }
+            resolve();
+          })
+          .catch(reason => {
+            Raven.captureException(reason);
+            if (!noLoading) {
+              context.commit('setLoading', {
+                loading: {
+                  detailedPlan: false
+                }
+              });
+            }
+            reject();
+          })
       })
-        .then((value) => {
-          context.commit('setDetailedPlan', {plan: value.data});
-          if (!noLoading) {
-            context.commit('setLoading', {
-              loading: {
-                detailedPlan: false
-              }
-            });
-          }
-        })
-        .catch(reason => {
-          console.error('fetchPlanById', reason.response);
-          if (!noLoading) {
-            context.commit('setLoading', {
-              loading: {
-                detailedPlan: false
-              }
-            });
-          }
-        })
     },
     fetchMyPlans(context) {
       context.commit('setLoading', {

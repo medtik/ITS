@@ -35,7 +35,7 @@
           <v-icon large>edit</v-icon>
           <span v-if="!isSmallScreen">Chỉnh sửa</span>
         </v-btn>
-        <v-btn flat @click="dialog.publishPlan = true">
+        <v-btn flat @click="dialog.publishPlan = true" :loading="publishLoading">
           <v-icon large>publish</v-icon>
           <span v-if="!isSmallScreen">Đăng</span>
         </v-btn>
@@ -102,6 +102,7 @@
             <template slot="action">
               <v-layout>
                 <v-checkbox :value="item.id"
+                            v-model="checkboxValues"
                             @change="onToggleLocation(item.id)">
                 </v-checkbox>
               </v-layout>
@@ -112,6 +113,7 @@
             <template slot="action">
               <v-layout>
                 <v-checkbox :value="item.id"
+                            v-model="checkboxValues"
                             @change="onToggleNote(item.id)">
                 </v-checkbox>
               </v-layout>
@@ -144,7 +146,6 @@
               <v-divider></v-divider>
               <v-flex>
                 <v-btn color="success"
-                       :loading="loading.publishBtn"
                        @click="onPublish">
                   Xác nhận
                 </v-btn>
@@ -192,6 +193,7 @@
     </v-dialog>
     <!--DIALOG-->
     <ChoosePlanDestinationDialog :dialog="dialog.choosePlanDestination"
+                                 :showPersonal="plan.isPublic"
                                  @select="onAddToGroupSelected"
                                  @close="dialog.choosePlanDestination = false"/>
     <SearchMethodDialog
@@ -207,7 +209,7 @@
 </template>
 
 <script>
-  import {mapGetters} from "vuex";
+  import {mapGetters, mapState} from "vuex";
   import {FormRuleMixin} from "../../common/mixin"
   import _ from "lodash";
 
@@ -240,7 +242,6 @@
         selectedPlanDay: undefined,
         groupName: undefined,
         loading: {
-          publishBtn: false,
           searchMethod: false
         },
         success: {
@@ -259,7 +260,7 @@
           titleInput: undefined,
           descriptionInput: undefined
         },
-        items: [],
+        checkboxValues: [],
       }
     },
     created() {
@@ -285,6 +286,9 @@
       ...mapGetters('group', {
         addPlanToGroupLoading: 'addPlanToGroupLoading'
       }),
+      ...mapState('plan', {
+        publishLoading: state => state.loading.publishPlan
+      }),
       formattedStartDate() {
         return moment(this.plan.startDate).format('DD/MM/YYYY');
       },
@@ -296,7 +300,17 @@
       loadData() {
         this.$store.dispatch('plan/fetchPlanById', {
           id: this.planId
-        });
+        }).then(() => {
+          for (let day of this.plan.days) {
+            if (day.items) {
+              for (let item of day.items) {
+                if (item.isDone) {
+                  this.checkboxValues.push(item.id);
+                }
+              }
+            }
+          }
+        })
       },
       onAddToGroupSelected(payload) {
         const {
@@ -350,11 +364,8 @@
         this.$store.dispatch('plan/togglePlanNote', {id});
       },
       onPublish() {
-        this.loading.publishBtn = true;
-        setTimeout(() => {
-          this.dialog.publishPlan = false;
-          this.loading.publishBtn = false;
-        }, 1500)
+        this.dialog.publishPlan = false;
+        this.$store.dispatch('plan/publishPlan', {id: this.planId});
       },
       onLocationDelete(item) {
         this.$store.dispatch('plan/removeLocationFromPlan', {
