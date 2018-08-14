@@ -84,6 +84,9 @@ export default {
     }
   },
   actions: {
+    addLocationSuggestion(context) {
+
+    },
     fetchMyGroups(context) {
       context.commit('setLoading', {
         loading: {myGroups: true}
@@ -192,7 +195,7 @@ export default {
         loading: {addPlanToGroup: true}
       });
       let url = `api/Group/SavePlan?planId=${planId}`;
-      if(groupId){
+      if (groupId) {
         url += `&groupId=${groupId}`
       }
       return new Promise((resolve, reject) => {
