@@ -58,7 +58,7 @@
         <v-card-actions>
           <v-layout>
             <v-btn color="primary"
-                   :loading="changePassword">
+                   :loading="changePasswordLoading">
               Xác nhận
             </v-btn>
             <v-btn color="secondary" @click="emailInputDialog = false">
