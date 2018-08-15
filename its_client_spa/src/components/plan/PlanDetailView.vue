@@ -298,7 +298,7 @@
         return moment(this.plan.endDate).format('DD/MM/YYYY');
       },
       isOwnPlan(){
-        return this.plan.isOwn && this.plan.isPublic
+        return this.plan.isOwn || !this.plan.isPublic
       }
     },
     methods: {

@@ -128,11 +128,9 @@
       }
     },
     mounted() {
-      if (!this.plans || this.plans.length < 1) {
-        this.$store.dispatch('plan/fetchVisiblePlans', {
-          areaId: this.context.areaId
-        })
-      }
+      this.$store.dispatch('plan/fetchVisiblePlans', {
+        areaId: this.context.areaId
+      });
 
       if (this.plans && this.context) {
         this.initValue();
@@ -243,7 +241,7 @@
         this.selectedDay = planDay;
         this.emitSelect();
       },
-      emitSelect(){
+      emitSelect() {
         this.$emit('select', {
           planId: this.selectedPlanId,
           planDay: this.selectedDay,
