@@ -31,11 +31,13 @@
           <v-icon large>fas fa-heart</v-icon>
           <span v-if="!isSmallScreen">&nbsp; Lưu</span>
         </v-btn>
-        <v-btn flat :to="{name:'PlanEdit'}">
+        <v-btn v-if="plan.isOwner"
+               flat :to="{name:'PlanEdit'}">
           <v-icon large>edit</v-icon>
           <span v-if="!isSmallScreen">Chỉnh sửa</span>
         </v-btn>
-        <v-btn flat @click="dialog.publishPlan = true" :loading="publishLoading">
+        <v-btn v-if="plan.isOwner"
+               flat @click="dialog.publishPlan = true" :loading="publishLoading">
           <v-icon large>publish</v-icon>
           <span v-if="!isSmallScreen">Đăng</span>
         </v-btn>

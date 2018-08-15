@@ -50,7 +50,6 @@
           </v-btn>
           <v-btn color="primary"
                  v-if="selectingMode"
-                 :loading="confirmLoading"
                  @click="onConfirm">
             <v-icon small>
               fas fa-check
@@ -108,7 +107,6 @@
       ChoosePlanDialog
     },
     props: [
-      'confirmLoading',
       'addLocationConfirmLoading',
       'selectedLocationCount',
     ],
@@ -164,12 +162,12 @@
           {planDay: 0, planDayText: "Chưa lên lịch"}
         ];
         if (this.selectedPlan) {
-          const startDate = moment(this.selectedPlan.startDay);
+          const startDate = moment(this.selectedPlan.startDate);
           const endDate = moment(this.selectedPlan.endDate);
           const diffDays = endDate.diff(startDate, 'days');
 
           for (let i = 1; i < diffDays + 2; i++) {
-            planDays.push(formatter.getDaysObj(i, this.selectedPlan.startDay));
+            planDays.push(formatter.getDaysObj(i, this.selectedPlan.startDate));
           }
         }
         return planDays;
@@ -241,12 +239,15 @@
         this.selectedPlanId = planId;
       },
       onDaySelect(planDay) {
+        this.selectedDay = planDay;
+        this.emitSelect();
+      },
+      emitSelect(){
         this.$emit('select', {
           planId: this.selectedPlanId,
-          planDay: planDay,
+          planDay: this.selectedDay,
           plan: this.selectedPlan
         });
-        this.selectedDay = planDay;
       },
       onConfirm() {
         this.$emit('confirm');

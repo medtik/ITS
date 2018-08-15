@@ -82,20 +82,24 @@
             />
           </v-layout>
         </v-flex>
-        <v-flex my-2 mx-2 v-if="location.comments && location.comments.length > 0">
+        <v-flex my-2 mx-2>
           <v-layout align-baseline>
             <v-flex class="title">Bình luận</v-flex>
             <v-btn color="success" :to="{name:'ReviewWrite', params:{id: location.id}}">
               <v-icon>rate_review</v-icon>
-              &nbsp &nbsp Đánh giá
+              &nbsp &nbsp Bình luận
             </v-btn>
           </v-layout>
-          <v-layout column my-2>
+          <v-layout v-if="location.comments && location.comments.length > 0"
+                    column my-2>
             <v-flex v-for="review in location.reviews"
                     :key="review.id"
                     elevation-2>
               <LocationReview v-bind="review" @report="$router.push({name: 'ReviewReport'})"/>
             </v-flex>
+          </v-layout>
+          <v-layout row my-2 justify-center class="subheading">
+            <span>Chưa có bình luận nào</span>
           </v-layout>
         </v-flex>
         <v-flex my-2 mx-2>
@@ -209,34 +213,34 @@
                 day = moment().day(0);
                 break;
               case 'day2':
-                day =  moment().day(1);
+                day = moment().day(1);
                 break;
               case 'day3':
-                day =  moment().day(2);
+                day = moment().day(2);
                 break;
               case 'day4':
-                day =  moment().day(3);
+                day = moment().day(3);
                 break;
               case 'day5':
-                day =  moment().day(4);
+                day = moment().day(4);
                 break;
               case 'day6':
-                day =  moment().day(5);
+                day = moment().day(5);
                 break;
               case 'day7':
-                day =  moment().day(6);
+                day = moment().day(6);
                 break;
             }
             let now = moment();
             let from = moment(day)
-              .set('hour',fromTime.get('hour'))
-              .set('minute',fromTime.get('minute'))
-              .set('second',0);
+              .set('hour', fromTime.get('hour'))
+              .set('minute', fromTime.get('minute'))
+              .set('second', 0);
 
             let to = moment(day)
-              .set('hour',toTime.get('hour'))
-              .set('minute',toTime.get('minute'))
-              .set('second',0);
+              .set('hour', toTime.get('hour'))
+              .set('minute', toTime.get('minute'))
+              .set('second', 0);
 
 
             let formattedBusinessHour = {
@@ -252,9 +256,9 @@
 
             return formattedBusinessHour;
           })
-          .filter(formattedBusinessHour =>{
+          .filter(formattedBusinessHour => {
             const now = moment();
-            return now.isSame(formattedBusinessHour.day,'day');
+            return now.isSame(formattedBusinessHour.day, 'day');
           })
           .head();
 

@@ -38,7 +38,7 @@ export default {
         phoneNumber,
         emailAddress,
         birthdate,
-        photo
+        avatar
       } = _.cloneDeep(payload.user);
       const birthdateFormatted = moment(birthdate).format('YYYY-MM-DD');
 
@@ -49,7 +49,7 @@ export default {
         phoneNumber,
         emailAddress,
         birthdate: birthdateFormatted,
-        photo
+        avatar
       };
     },
     setLoading(state, payload) {

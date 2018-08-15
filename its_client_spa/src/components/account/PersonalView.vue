@@ -8,7 +8,7 @@
       <!--Separate edit view-->
       <v-flex>
         <PictureInput
-          v-model="input.photo"
+          v-model="input.avatar"
           width="300"
           height="300"
           text="Ảnh đại diện"
@@ -16,21 +16,17 @@
       </v-flex>
       <v-flex>
         <v-layout column>
-          <v-text-field label="Tên"
-                        :readonly="!editMode"
+          <v-text-field label="Tên"PictureInput
                         v-model="input.name"/>
           <v-text-field label="Email"
-                        :readonly="!editMode"
+                        readonly
                         v-model="input.emailAddress"/>
           <v-text-field label="Điện thoại"
-                        :readonly="!editMode"
                         v-model="input.phoneNumber"/>
           <v-text-field label="Địa chỉ"
-                        :readonly="!editMode"
                         v-model="input.address"/>
           <v-text-field label="Ngày sinh"
                         type="date"
-                        :readonly="!editMode"
                         v-model="input.birthdate"/>
         </v-layout>
       </v-flex>
@@ -93,7 +89,7 @@
           page: true
         },
         input: {
-          photo: undefined,
+          avatar: undefined,
           name: undefined,
           emailAddress: undefined,
           phoneNumber: undefined,
@@ -125,7 +121,7 @@
     },
     methods: {
       setInputs(account) {
-        this.input.photo = account.photo;
+        this.input.avatar = account.avatar;
         this.input.name = account.name;
         this.input.emailAddress = account.emailAddress;
         this.input.phoneNumber = account.phoneNumber;

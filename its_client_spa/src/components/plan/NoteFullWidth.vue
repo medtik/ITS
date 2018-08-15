@@ -15,7 +15,7 @@
         {{description}}
       </v-flex>
     </v-layout>
-    <v-layout slot="action" justify-end>
+    <v-layout slot="action" column align-end>
       <slot name="action">
 
       </slot>

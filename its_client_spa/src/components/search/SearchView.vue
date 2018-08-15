@@ -41,20 +41,18 @@
       <v-flex v-if="isShowResult" class="grey lighten-4">
         <!--Add to plans-->
         <v-layout justify-center>
-          <v-flex shrink v-if="isShowPlanSection">
+          <v-flex shrink v-if="isLoggedIn">
             <ChoosePlanDaySection
-              :confirmable="locationsCheck.length > 0"
-              :confirmLoading="loading.confirm"
+              :confirmable="locationsCheckboxValues.length > 0"
               :selectedLocationCount="selectedLocationCount"
               @select="onSelect"
-              @confirm="onConfirm"
-              @create="onCreatePlan"
-              @sendRequest="messageDialog.dialog = true"
-              @addLocations="onConfirmAddLocations"
-              @selectingMode="onSelectingMode"
+              @confirm="onCompleteClick"
+              @create="onCreatePlanClick"
+              @sendRequest="messageInputDialog.dialog = true"
+              @addLocations="onAddLocationClick"
             ></ChoosePlanDaySection>
           </v-flex>
-          <v-flex v-if="!isShowPlanSection"
+          <v-flex v-if="!isLoggedIn"
                   shrink my-3
                   class="text-xs-center title">
             Bạn cần đăng nhập để thêm các địa điểm bên dưới vào chuyến đi
@@ -70,12 +68,10 @@
           </v-flex>
           <v-flex v-for="location in locations"
                   :key="location.id" mb-2 elevation-1 class="white">
-            <LocationFullWidth v-bind="location"
-                               :isCheckable="selectingMode"
-                               @save="onSave">
-              <template slot="action">
+            <LocationFullWidth v-bind="location">
+              <template slot="action" v-if="isSelectingMode">
                 <v-layout column>
-                  <v-checkbox v-model="locationsCheck" :value="location.id">
+                  <v-checkbox v-model="locationsCheckboxValues" :value="location.id">
 
                   </v-checkbox>
                 </v-layout>
@@ -89,13 +85,9 @@
       </v-flex>
     </v-layout>
     <MessageInputDialog
-      v-bind="messageDialog"
-      @confirm="onSendRequestConfirm"
+      v-bind="messageInputDialog"
+      @confirm="onAddMessageConfirm"
     ></MessageInputDialog>
-    <ChoosePlanDialog
-      :dialog="dialog.choosePlan"
-      @select="onPlanSelect"
-      @close="dialog.choosePlan = false"/>
   </v-content>
 </template>
 <script>
@@ -107,12 +99,15 @@
   import {
     LocationFullWidth,
   } from "../../common/block";
+  import AddToPlanMixin from "./AddToPlanMixin";
+
   import ChoosePlanDaySection from "./ChoosePlanDaySection";
   import {mapGetters} from "vuex";
   import _ from "lodash";
 
   export default {
     name: "SearchView",
+    mixins: [AddToPlanMixin],
     components: {
       AreaInput,
       ChoosePlanDialog,
@@ -129,26 +124,8 @@
         selectedPlan: '',
         requestMessage: '',
 
-        locationsCheck: [],
-        locationsFullWidthSuffix: '',
-        selectingMode: false,
-        selectedPlanId: undefined,
-        selectedDay: 0,
         lockAreaIdInput: false,
-        choosePlanDayValue: {
-          planId: undefined,
-          planDay: undefined,
-        },
-        messageDialog: {
-          dialog: false,
-          messageInput: '',
-          title: 'Ghi chú',
-          message: "Lời nhắn cho chủ"
-        },
 
-        loading: {
-          confirm: false
-        },
         result: {
           show: true,
           loading: false,
@@ -164,15 +141,6 @@
         locations: 'searchResultLocations',
         searchLoading: 'searchResultLoading'
       }),
-      ...mapGetters('authenticate', {
-        isShowPlanSection: 'isLoggedIn'
-      }),
-      ...mapGetters({
-        context: 'searchContext'
-      }),
-      selectedLocationCount() {
-        return this.locationsCheck.length;
-      },
       isShowResult() {
         return this.locations && this.locations.length > 0;
       },
@@ -194,112 +162,8 @@
           areaId: this.areaIdInput
         })
       },
-      onSave({id, check}) {
-        let found = false;
-        let locations = _.map(this.locationsCheck, (location) => {
-          if (location.id == id) {
-            location.isCheck = check;
-            found = true;
-          }
-          return location;
-        });
-        if (!found) {
-          locations.push({
-            id,
-            isCheck: check
-          })
-        }
-        this.locationsCheck = locations;
-      },
-      onPlanSelect(plan) {
-        this.dialog.choosePlan = false;
-
-        this.$store.dispatch('plan/addLocationToPlan', {
-          locationId: this.selectedLocation.id,
-          planId: plan.id
-        })
-      },
-      onAreaSelect(areaId) {
-        this.areaIdInput = areaId;
-      },
-      onSigninClick() {
-        this.$store.commit('signinContext', {
-          context: {
-            returnRoute: {
-              name: 'Search'
-            }
-          }
-        });
-
-        this.$router.push({
-          name: 'Signin'
-        })
-      },
-      onConfirm() {
-        this.loading.confirm = true;
-        this.$router.push({
-          name: 'PlanDetail',
-          query: {
-            id: this.selectedPlanId
-          }
-        })
-      },
-      onConfirmAddLocations() {
-        this.loading.addLocationConfirm = true;
-        this.addLocation()
-          .then(() => {
-            this.loading.addLocationConfirm = false;
-          });
-      },
-      onSelect({planId, planDay, plan}) {
-        this.selectedPlanId = planId;
-        this.selectedDay = planDay;
-        this.selectedPlan = plan;
-      },
-      onSelectingMode() {
-        this.selectingMode = true;
-      },
-      onSendRequestConfirm() {
-        let addLocationToPlanRequests = _.map(this.locationsCheck, (locationId) => {
-          return {
-            locationId: locationId,
-            planId: this.selectedPlanId
-          }
-        });
-      },
-      addLocation() {
-        let addLocationToPlanRequests = _.map(this.locationsCheck, (locationId) => {
-          return {
-            locationId: locationId,
-            planId: this.selectedPlanId,
-            planDay: this.selectedDay
-          }
-        });
-        this.locationsCheck = [];
-        let responses = [];
-        for (let req of addLocationToPlanRequests) {
-          let res = this.$store.dispatch('plan/addLocationToPlan', req);
-          responses.push(res);
-        }
-
-        return new Promise((resolve) => {
-          Promise.all(responses)
-            .then(value => {
-              resolve();
-            })
-        });
-      },
-      onCreatePlan(){
-        this.$store.commit('createPlanContext', {
-          context: {
-            returnRoute: {
-              name: 'Search'
-            }
-          }
-        });
-        this.$router.push({
-          name: "PlanCreate"
-        })
+      onAreaSelect(id){
+        this.areaIdInput = id;
       }
     }
 

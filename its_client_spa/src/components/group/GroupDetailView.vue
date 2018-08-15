@@ -35,7 +35,7 @@
           <v-flex xs12 px-2 py-1 class="grey lighten-4">
             <!--USERS-->
             <v-layout column>
-              <v-flex>
+              <v-flex v-if="group.isOwner">
                 <v-btn color="success"
                        :to="inviteLink">
                   <v-icon>fas fa-user-plus</v-icon>
@@ -67,7 +67,7 @@
         <v-tab-item key="trips">
           <v-flex xs12 px-2 py-1 class="grey lighten-4">
             <v-layout column>
-              <v-flex>
+              <v-flex v-if="group.isOwner">
                 <v-btn color="success"
                        :loading="addLoading"
                        @click="dialog.choosePlan = true">

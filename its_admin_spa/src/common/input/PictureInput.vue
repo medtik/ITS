@@ -40,7 +40,6 @@
       height: null,
       text: null,
       size: {
-        type: Number,
         default: 50
       },
       center: {

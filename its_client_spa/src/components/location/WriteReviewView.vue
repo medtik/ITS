@@ -21,7 +21,7 @@
             label="Tiêu đề"
             v-model="titleInput"
           />
-          <v-text-field
+          <v-textarea
             label="Mô tả"
             v-model="descriptionInput"
           />

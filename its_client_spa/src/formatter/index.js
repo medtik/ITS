@@ -22,14 +22,14 @@ export default {
     };
   },
 
-  getPlanDayText(planDay, startDay) {
+  getPlanDayText(planDay, startDate) {
     switch (planDay) {
       case "0":
       case 0:
         return "Chưa lên lịch";
       default:
-        if (startDay) {
-          return moment(startDay)
+        if (startDate) {
+          return moment(startDate)
             .add(planDay - 1, "days")
             .format('DD/MM/YYYY');
         } else {
@@ -38,9 +38,9 @@ export default {
     }
   },
 
-  getDaysObj(planDay, startDay) {
+  getDaysObj(planDay, startDate) {
     return {
-      planDayText: this.getPlanDayText(planDay, startDay),
+      planDayText: this.getPlanDayText(planDay, startDate),
       planDay: _.toNumber(planDay),
       key: `day_${planDay}`,
     }
