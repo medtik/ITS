@@ -36,15 +36,6 @@ export default {
     isSelectingMode() {
       return !!this.choosePlanSection.selectedPlanId
     },
-    formattedAddLocationToPlanRequest() {
-      return _.map(this.locationsCheckboxValues, (locationId) => {
-        return {
-          locationId: locationId,
-          planId: this.choosePlanSection.selectedPlanId,
-          planDay: this.choosePlanSection.selectedPlanDay
-        }
-      });
-    },
     selectedLocationCount() {
       return this.locationsCheckboxValues.length;
     },
@@ -55,7 +46,14 @@ export default {
     },
 
     onAddLocationClick() {
-      let addLocationToPlanRequests = this.formattedAddLocationToPlanRequest;
+      let addLocationToPlanRequests = _.map(this.locationsCheckboxValues,
+        (locationId) => {
+          return {
+            locationId: locationId,
+            planId: this.choosePlanSection.selectedPlanId,
+            planDay: this.choosePlanSection.selectedPlanDay
+          }
+        });
 
       this.locationsCheckboxValues = [];
       let responses = [];
@@ -80,10 +78,15 @@ export default {
       this.messageInputDialog.dialog = true;
     },
     onAddMessageConfirm() {
+      let locationRequest = {
+        locations: this.locationsCheckboxValues,
+        planId: this.choosePlanSection.selectedPlanId,
+        planDay: this.choosePlanSection.selectedPlanDay,
+        message: this.messageInputDialog.messageInput
+      };
+
+      this.$store.dispatch('request/createLocationSuggestion', locationRequest);
       this.locationsCheckboxValues = [];
-
-      let addLocationToPlanRequests = this.formattedAddLocationToPlanRequest();
-
     },
     onCompleteClick() {
       this.$router.push({

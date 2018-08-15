@@ -51,6 +51,9 @@ export default {
         }
         return invitation;
       })
+    },
+    changeStatusLocationSuggestion(state, payload) {
+
     }
   },
   actions: {
@@ -94,23 +97,46 @@ export default {
     createLocationSuggestion(context, payload) {
       // post /api/Plan/AddSuggestion
       const {
-        locationId,
+        locations,
         planId,
-        comment
+        planDay,
+        message
       } = payload;
 
-      axiosInstance.post('api/Plan/AddSuggestion', {
-        locationSuggestion: {
-          "planId": planId,
-          "locationId": locationId,
-          "comment": comment
-        }
+      return new Promise((resolve, reject) => {
+        axiosInstance.post('api/Plan/AddSuggestion', {
+          "locationSuggestion": {
+            "planId": planId,
+            "locationIds": locations,
+            "planDay": planDay,
+            "comment": message
+          }
+        })
+          .then((value) => {
+            resolve(value.data);
+          })
+          .catch((reason) => {
+            Raven.captureException(reason);
+            reject(reason.response);
+          })
       })
-    },
-    acceptLocationSuggestion(context, payload) {
 
     },
+    acceptLocationSuggestion(context, payload) {
+      // PUT /api/Location/ApproveSuggestion
+      const {
+        id
+      } = payload;
+
+      axiosInstance.put('api/Location/ApproveSuggestion?suggestionId=' + id);
+    },
     denyLocationSuggestion(context, payload) {
+      // PUT /api/Location/RejectSuggestion
+      const {
+        id
+      } = payload;
+
+      axiosInstance.put('api/Location/RejectSuggestion?suggestionId=' + id);
     },
     acceptGroupInvitation(context, payload) {
       // put /api/Group/AcceptGroupInvitation
