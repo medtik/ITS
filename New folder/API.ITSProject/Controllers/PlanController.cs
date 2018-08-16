@@ -96,15 +96,15 @@
 
         #region Post
         [HttpPost]
-        [Authorize, Route("api/Plan/AddSuggestion")]
-        public async Task<IHttpActionResult> AddSuggestionToPlan(LocationSuggestionViewModels locationSuggestion)
+        [Route("api/Plan/AddSuggestion")]
+        public IHttpActionResult AddSuggestionToPlan(LocationSuggestionViewModels locationSuggestion)
         {
             try
             {
-                int userId = (await CurrentUser()).Id;
+                int userId = 1;
                 ICollection<Location> locations = new List<Location>();
 
-                foreach (var item in locationSuggestion.LocationIds)
+                foreach (var item in locationSuggestion.LocationIds ?? new List<int>())
                 {
                     var location = _locationService.Find(item);
                     if (location != null)
