@@ -1,8 +1,8 @@
 <template>
   <v-content>
-    <v-toolbar class="light-blue" flat dark>
+    <v-toolbar class="light-blue darken-2" flat dark>
       <v-toolbar-title>
-        {{title}}
+        Tạo chuyến đi
       </v-toolbar-title>
     </v-toolbar>
     <v-layout column mx-3>
@@ -34,21 +34,11 @@
                @click="onCreate">
           Tiếp tục
         </v-btn>
-        <v-btn v-else-if="isCreateMode"
+        <v-btn v-else
                color="success"
                :loading="createLoading"
                @click="onCreate">
           Tạo
-        </v-btn>
-        <v-btn v-else
-               color="success"
-               :loading="editLoading"
-               @click="onEdit">
-          <v-icon>
-            fas fa-check
-          </v-icon>
-          &nbsp;
-          Xác nhận
         </v-btn>
         <v-btn color="secondary"
                @click="onCancel">
@@ -88,24 +78,6 @@
       isHavingContext() {
         return !!this.context.returnRoute
       },
-      isCreateMode(){
-        const {
-          name
-        } = this.$route;
-
-       return name == 'PlanCreate';
-      },
-      title() {
-        const {
-          name
-        } = this.$route;
-
-        if (name == 'PlanCreate') {
-          return "Tạo chuyến đi";
-        } else {
-          return "Chỉnh sửa chuyến đi";
-        }
-      },
       ...mapGetters('plan', {
         createLoading: 'createLoading',
         editLoading: 'editLoading'
@@ -137,9 +109,6 @@
           }
 
         })
-      },
-      onEdit(){
-
       },
       onCancel() {
         this.$router.back();
