@@ -4,7 +4,7 @@
       <v-progress-linear indeterminate color="primary"></v-progress-linear>
     </v-flex>
     <template v-else-if="plans && plans.length > 0">
-      <v-flex v-if="selectingMode">
+      <v-flex>
         <v-select :items="plans"
                   item-text="name"
                   item-value="id"
@@ -24,7 +24,7 @@
             </v-layout>
           </template>
         </v-select>
-        <v-select v-if="selectedPlanId && isOwnSelectedPlan"
+        <v-select v-if="selectedPlanId"
                   :items="days"
                   item-text="planDayText"
                   item-value="planDay"
@@ -68,7 +68,7 @@
         <v-layout v-if="!isOwnSelectedPlan">
           <v-btn color="primary"
                  :disabled="!isConfirmable"
-                 :loading="confirmLoading"
+                 :loading="sendRequestConfirmLoading"
                  @click="onSendRequest">
             <v-icon small>
               fas fa-check
@@ -108,6 +108,7 @@
     },
     props: [
       'addLocationConfirmLoading',
+      'sendRequestConfirmLoading',
       'selectedLocationCount',
     ],
     data() {
@@ -127,11 +128,9 @@
       }
     },
     mounted() {
-      if (!this.plans || this.plans.length < 1) {
-        this.$store.dispatch('plan/fetchVisiblePlans', {
-          areaId: this.context.areaId
-        })
-      }
+      this.$store.dispatch('plan/fetchVisiblePlans', {
+        areaId: this.context.areaId
+      });
 
       if (this.plans && this.context) {
         this.initValue();
@@ -242,7 +241,7 @@
         this.selectedDay = planDay;
         this.emitSelect();
       },
-      emitSelect(){
+      emitSelect() {
         this.$emit('select', {
           planId: this.selectedPlanId,
           planDay: this.selectedDay,

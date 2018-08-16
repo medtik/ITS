@@ -67,7 +67,8 @@
             Kết quả
           </v-flex>
           <v-flex v-for="location in locations"
-                  :key="location.id" mb-2 elevation-1 class="white">
+                  :key="location.id"
+                  mb-2 elevation-1 class="white">
             <LocationFullWidth v-bind="location">
               <template slot="action" v-if="isSelectingMode">
                 <v-layout column>
@@ -120,19 +121,12 @@
         searchInput: '',
         areaIdInput: '',
 
-        selectedLocation: '',
-        selectedPlan: '',
-        requestMessage: '',
-
         lockAreaIdInput: false,
 
         result: {
           show: true,
           loading: false,
         },
-        dialog: {
-          choosePlan: false,
-        }
       }
     },
     computed: {

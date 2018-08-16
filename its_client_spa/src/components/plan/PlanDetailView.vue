@@ -31,12 +31,12 @@
           <v-icon large>fas fa-heart</v-icon>
           <span v-if="!isSmallScreen">&nbsp; Lưu</span>
         </v-btn>
-        <v-btn v-if="plan.isOwner"
+        <v-btn v-if="isOwnPlan"
                flat :to="{name:'PlanEdit'}">
           <v-icon large>edit</v-icon>
           <span v-if="!isSmallScreen">Chỉnh sửa</span>
         </v-btn>
-        <v-btn v-if="plan.isOwner"
+        <v-btn v-if="isOwnPlan"
                flat @click="dialog.publishPlan = true" :loading="publishLoading">
           <v-icon large>publish</v-icon>
           <span v-if="!isSmallScreen">Đăng</span>
@@ -101,7 +101,7 @@
                              v-bind="item.location"
                              :isOwn="true"
                              @delete="onLocationDelete(item)">
-            <template slot="action">
+            <template v-if="isOwnPlan" slot="action">
               <v-layout>
                 <v-checkbox :value="item.id"
                             v-model="checkboxValues"
@@ -112,7 +112,7 @@
           </LocationFullWidth>
           <NoteFullWidth v-else v-bind="item.note"
                          @delete="onNoteDelete(item,id)">
-            <template slot="action">
+            <template v-if="isOwnPlan" slot="action">
               <v-layout>
                 <v-checkbox :value="item.id"
                             v-model="checkboxValues"
@@ -296,6 +296,9 @@
       },
       formattedEndDate() {
         return moment(this.plan.endDate).format('DD/MM/YYYY');
+      },
+      isOwnPlan(){
+        return this.plan.isOwn || !this.plan.isPublic
       }
     },
     methods: {
