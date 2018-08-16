@@ -23,7 +23,7 @@ import GroupDetailView from "../components/group/GroupDetailView";
 import GroupCreateView from "../components/group/GroupCreateView";
 import GroupInviteView from "../components/group/GroupInviteView";
 import LocationClaimView from "../components/location/LocationClaimView";
-
+import PlanEditView from "../components/plan/PlanEditView"
 
 Vue.use(Router);
 
@@ -62,7 +62,7 @@ export default new Router({
     {
       path: '/plan/edit',
       name: 'PlanEdit',
-      component: PlanCreateView
+      component: PlanEditView
     },
     {
       path: '/group/list',

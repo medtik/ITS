@@ -113,6 +113,13 @@
               </v-btn>
             </v-flex>
             <v-divider></v-divider>
+            <v-flex>
+              <v-btn block flat>
+                <v-icon>far fa-building</v-icon>
+                &nbsp &nbsp Các địa điểm gần đây
+              </v-btn>
+            </v-flex>
+            <v-divider></v-divider>
           </v-layout>
         </v-flex>
         <v-flex my-2 mx-2>
@@ -121,15 +128,8 @@
             <v-divider></v-divider>
             <v-flex>
               <v-btn block flat :to="{name:'LocationChangeRequest'}">
-                <v-icon>edit_location</v-icon>
-                &nbsp; &nbsp; Cập nhật thông tin
-              </v-btn>
-            </v-flex>
-            <v-divider></v-divider>
-            <v-flex>
-              <v-btn block flat :to="{name:'LocationClaimRequest'}">
-                <v-icon>person_pin_circle</v-icon>
-                &nbsp; &nbsp; Tôi sở hữu địa điểm này
+                <v-icon>far fa-edit</v-icon>
+                &nbsp; &nbsp; Cải thiện hồ sơ
               </v-btn>
             </v-flex>
             <v-divider></v-divider>

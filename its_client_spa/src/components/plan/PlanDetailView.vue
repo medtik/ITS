@@ -32,7 +32,7 @@
           <span v-if="!isSmallScreen">&nbsp; Lưu</span>
         </v-btn>
         <v-btn v-if="isOwnPlan"
-               flat :to="{name:'PlanEdit'}">
+               flat :to="{name:'PlanEdit',query:{id: planId}}">
           <v-icon large>edit</v-icon>
           <span v-if="!isSmallScreen">Chỉnh sửa</span>
         </v-btn>
