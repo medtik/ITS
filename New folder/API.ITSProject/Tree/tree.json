@@ -1,0 +1,6605 @@
+﻿{
+  "Key": 0,
+  "IsRoot": true,
+  "Data": null,
+  "Childs": [
+    {
+      "Key": 25,
+      "IsRoot": false,
+      "Data": [
+        30,
+        31,
+        32,
+        48,
+        58,
+        60,
+        77
+      ],
+      "Childs": [
+        {
+          "Key": 17,
+          "IsRoot": false,
+          "Data": [
+            30,
+            32,
+            77
+          ],
+          "Childs": [
+            {
+              "Key": 38,
+              "IsRoot": false,
+              "Data": [
+                30,
+                32,
+                77
+              ],
+              "Childs": [
+                {
+                  "Key": 43,
+                  "IsRoot": false,
+                  "Data": [
+                    30
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 36,
+                      "IsRoot": false,
+                      "Data": [
+                        30
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 71,
+                          "IsRoot": false,
+                          "Data": [
+                            30
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 41,
+                              "IsRoot": false,
+                              "Data": [
+                                30
+                              ],
+                              "Childs": [
+                                {
+                                  "Key": 18,
+                                  "IsRoot": false,
+                                  "Data": [
+                                    30
+                                  ],
+                                  "Childs": [
+                                    {
+                                      "Key": 16,
+                                      "IsRoot": false,
+                                      "Data": [
+                                        30
+                                      ],
+                                      "Childs": [
+                                        {
+                                          "Key": 42,
+                                          "IsRoot": false,
+                                          "Data": [
+                                            30
+                                          ],
+                                          "Childs": [
+                                            {
+                                              "Key": 32,
+                                              "IsRoot": false,
+                                              "Data": [
+                                                30
+                                              ],
+                                              "Childs": [
+                                                {
+                                                  "Key": 34,
+                                                  "IsRoot": false,
+                                                  "Data": [
+                                                    30
+                                                  ],
+                                                  "Childs": []
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "Key": 81,
+                  "IsRoot": false,
+                  "Data": [
+                    32
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 43,
+                      "IsRoot": false,
+                      "Data": [
+                        32
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 36,
+                          "IsRoot": false,
+                          "Data": [
+                            32
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 71,
+                              "IsRoot": false,
+                              "Data": [
+                                32
+                              ],
+                              "Childs": [
+                                {
+                                  "Key": 35,
+                                  "IsRoot": false,
+                                  "Data": [
+                                    32
+                                  ],
+                                  "Childs": [
+                                    {
+                                      "Key": 18,
+                                      "IsRoot": false,
+                                      "Data": [
+                                        32
+                                      ],
+                                      "Childs": [
+                                        {
+                                          "Key": 16,
+                                          "IsRoot": false,
+                                          "Data": [
+                                            32
+                                          ],
+                                          "Childs": [
+                                            {
+                                              "Key": 42,
+                                              "IsRoot": false,
+                                              "Data": [
+                                                32
+                                              ],
+                                              "Childs": [
+                                                {
+                                                  "Key": 85,
+                                                  "IsRoot": false,
+                                                  "Data": [
+                                                    32
+                                                  ],
+                                                  "Childs": [
+                                                    {
+                                                      "Key": 34,
+                                                      "IsRoot": false,
+                                                      "Data": [
+                                                        32
+                                                      ],
+                                                      "Childs": []
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "Key": 101,
+                  "IsRoot": false,
+                  "Data": [
+                    77
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 16,
+                      "IsRoot": false,
+                      "Data": [
+                        77
+                      ],
+                      "Childs": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 33,
+          "IsRoot": false,
+          "Data": [
+            31,
+            60
+          ],
+          "Childs": [
+            {
+              "Key": 17,
+              "IsRoot": false,
+              "Data": [
+                31,
+                60
+              ],
+              "Childs": [
+                {
+                  "Key": 38,
+                  "IsRoot": false,
+                  "Data": [
+                    31
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 81,
+                      "IsRoot": false,
+                      "Data": [
+                        31
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 37,
+                          "IsRoot": false,
+                          "Data": [
+                            31
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 36,
+                              "IsRoot": false,
+                              "Data": [
+                                31
+                              ],
+                              "Childs": [
+                                {
+                                  "Key": 39,
+                                  "IsRoot": false,
+                                  "Data": [
+                                    31
+                                  ],
+                                  "Childs": [
+                                    {
+                                      "Key": 76,
+                                      "IsRoot": false,
+                                      "Data": [
+                                        31
+                                      ],
+                                      "Childs": [
+                                        {
+                                          "Key": 35,
+                                          "IsRoot": false,
+                                          "Data": [
+                                            31
+                                          ],
+                                          "Childs": [
+                                            {
+                                              "Key": 41,
+                                              "IsRoot": false,
+                                              "Data": [
+                                                31
+                                              ],
+                                              "Childs": [
+                                                {
+                                                  "Key": 18,
+                                                  "IsRoot": false,
+                                                  "Data": [
+                                                    31
+                                                  ],
+                                                  "Childs": [
+                                                    {
+                                                      "Key": 42,
+                                                      "IsRoot": false,
+                                                      "Data": [
+                                                        31
+                                                      ],
+                                                      "Childs": [
+                                                        {
+                                                          "Key": 34,
+                                                          "IsRoot": false,
+                                                          "Data": [
+                                                            31
+                                                          ],
+                                                          "Childs": []
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "Key": 22,
+                  "IsRoot": false,
+                  "Data": [
+                    60
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 79,
+                      "IsRoot": false,
+                      "Data": [
+                        60
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 18,
+                          "IsRoot": false,
+                          "Data": [
+                            60
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 94,
+                              "IsRoot": false,
+                              "Data": [
+                                60
+                              ],
+                              "Childs": [
+                                {
+                                  "Key": 74,
+                                  "IsRoot": false,
+                                  "Data": [
+                                    60
+                                  ],
+                                  "Childs": []
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 80,
+          "IsRoot": false,
+          "Data": [
+            48,
+            58
+          ],
+          "Childs": [
+            {
+              "Key": 18,
+              "IsRoot": false,
+              "Data": [
+                48,
+                58
+              ],
+              "Childs": [
+                {
+                  "Key": 26,
+                  "IsRoot": false,
+                  "Data": [
+                    48
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 16,
+                      "IsRoot": false,
+                      "Data": [
+                        48
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 32,
+                          "IsRoot": false,
+                          "Data": [
+                            48
+                          ],
+                          "Childs": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "Key": 16,
+                  "IsRoot": false,
+                  "Data": [
+                    58
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 94,
+                      "IsRoot": false,
+                      "Data": [
+                        58
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 32,
+                          "IsRoot": false,
+                          "Data": [
+                            58
+                          ],
+                          "Childs": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 17,
+      "IsRoot": false,
+      "Data": [
+        30,
+        31,
+        32,
+        38,
+        42,
+        60,
+        77
+      ],
+      "Childs": [
+        {
+          "Key": 38,
+          "IsRoot": false,
+          "Data": [
+            30,
+            31,
+            32,
+            77
+          ],
+          "Childs": [
+            {
+              "Key": 43,
+              "IsRoot": false,
+              "Data": [
+                30
+              ],
+              "Childs": [
+                {
+                  "Key": 36,
+                  "IsRoot": false,
+                  "Data": [
+                    30
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 71,
+                      "IsRoot": false,
+                      "Data": [
+                        30
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 41,
+                          "IsRoot": false,
+                          "Data": [
+                            30
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 18,
+                              "IsRoot": false,
+                              "Data": [
+                                30
+                              ],
+                              "Childs": [
+                                {
+                                  "Key": 16,
+                                  "IsRoot": false,
+                                  "Data": [
+                                    30
+                                  ],
+                                  "Childs": [
+                                    {
+                                      "Key": 42,
+                                      "IsRoot": false,
+                                      "Data": [
+                                        30
+                                      ],
+                                      "Childs": [
+                                        {
+                                          "Key": 32,
+                                          "IsRoot": false,
+                                          "Data": [
+                                            30
+                                          ],
+                                          "Childs": [
+                                            {
+                                              "Key": 34,
+                                              "IsRoot": false,
+                                              "Data": [
+                                                30
+                                              ],
+                                              "Childs": []
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Key": 81,
+              "IsRoot": false,
+              "Data": [
+                31,
+                32
+              ],
+              "Childs": [
+                {
+                  "Key": 37,
+                  "IsRoot": false,
+                  "Data": [
+                    31
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 36,
+                      "IsRoot": false,
+                      "Data": [
+                        31
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 39,
+                          "IsRoot": false,
+                          "Data": [
+                            31
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 76,
+                              "IsRoot": false,
+                              "Data": [
+                                31
+                              ],
+                              "Childs": [
+                                {
+                                  "Key": 35,
+                                  "IsRoot": false,
+                                  "Data": [
+                                    31
+                                  ],
+                                  "Childs": [
+                                    {
+                                      "Key": 41,
+                                      "IsRoot": false,
+                                      "Data": [
+                                        31
+                                      ],
+                                      "Childs": [
+                                        {
+                                          "Key": 18,
+                                          "IsRoot": false,
+                                          "Data": [
+                                            31
+                                          ],
+                                          "Childs": [
+                                            {
+                                              "Key": 42,
+                                              "IsRoot": false,
+                                              "Data": [
+                                                31
+                                              ],
+                                              "Childs": [
+                                                {
+                                                  "Key": 34,
+                                                  "IsRoot": false,
+                                                  "Data": [
+                                                    31
+                                                  ],
+                                                  "Childs": []
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "Key": 43,
+                  "IsRoot": false,
+                  "Data": [
+                    32
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 36,
+                      "IsRoot": false,
+                      "Data": [
+                        32
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 71,
+                          "IsRoot": false,
+                          "Data": [
+                            32
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 35,
+                              "IsRoot": false,
+                              "Data": [
+                                32
+                              ],
+                              "Childs": [
+                                {
+                                  "Key": 18,
+                                  "IsRoot": false,
+                                  "Data": [
+                                    32
+                                  ],
+                                  "Childs": [
+                                    {
+                                      "Key": 16,
+                                      "IsRoot": false,
+                                      "Data": [
+                                        32
+                                      ],
+                                      "Childs": [
+                                        {
+                                          "Key": 42,
+                                          "IsRoot": false,
+                                          "Data": [
+                                            32
+                                          ],
+                                          "Childs": [
+                                            {
+                                              "Key": 85,
+                                              "IsRoot": false,
+                                              "Data": [
+                                                32
+                                              ],
+                                              "Childs": [
+                                                {
+                                                  "Key": 34,
+                                                  "IsRoot": false,
+                                                  "Data": [
+                                                    32
+                                                  ],
+                                                  "Childs": []
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Key": 101,
+              "IsRoot": false,
+              "Data": [
+                77
+              ],
+              "Childs": [
+                {
+                  "Key": 16,
+                  "IsRoot": false,
+                  "Data": [
+                    77
+                  ],
+                  "Childs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 81,
+          "IsRoot": false,
+          "Data": [
+            38
+          ],
+          "Childs": [
+            {
+              "Key": 37,
+              "IsRoot": false,
+              "Data": [
+                38
+              ],
+              "Childs": [
+                {
+                  "Key": 88,
+                  "IsRoot": false,
+                  "Data": [
+                    38
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 91,
+                      "IsRoot": false,
+                      "Data": [
+                        38
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 92,
+                          "IsRoot": false,
+                          "Data": [
+                            38
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 79,
+                              "IsRoot": false,
+                              "Data": [
+                                38
+                              ],
+                              "Childs": [
+                                {
+                                  "Key": 19,
+                                  "IsRoot": false,
+                                  "Data": [
+                                    38
+                                  ],
+                                  "Childs": []
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 88,
+          "IsRoot": false,
+          "Data": [
+            42
+          ],
+          "Childs": [
+            {
+              "Key": 22,
+              "IsRoot": false,
+              "Data": [
+                42
+              ],
+              "Childs": []
+            }
+          ]
+        },
+        {
+          "Key": 22,
+          "IsRoot": false,
+          "Data": [
+            60
+          ],
+          "Childs": [
+            {
+              "Key": 79,
+              "IsRoot": false,
+              "Data": [
+                60
+              ],
+              "Childs": [
+                {
+                  "Key": 18,
+                  "IsRoot": false,
+                  "Data": [
+                    60
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 94,
+                      "IsRoot": false,
+                      "Data": [
+                        60
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 74,
+                          "IsRoot": false,
+                          "Data": [
+                            60
+                          ],
+                          "Childs": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 38,
+      "IsRoot": false,
+      "Data": [
+        30,
+        31,
+        32,
+        33,
+        77
+      ],
+      "Childs": [
+        {
+          "Key": 43,
+          "IsRoot": false,
+          "Data": [
+            30
+          ],
+          "Childs": [
+            {
+              "Key": 36,
+              "IsRoot": false,
+              "Data": [
+                30
+              ],
+              "Childs": [
+                {
+                  "Key": 71,
+                  "IsRoot": false,
+                  "Data": [
+                    30
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 41,
+                      "IsRoot": false,
+                      "Data": [
+                        30
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 18,
+                          "IsRoot": false,
+                          "Data": [
+                            30
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 16,
+                              "IsRoot": false,
+                              "Data": [
+                                30
+                              ],
+                              "Childs": [
+                                {
+                                  "Key": 42,
+                                  "IsRoot": false,
+                                  "Data": [
+                                    30
+                                  ],
+                                  "Childs": [
+                                    {
+                                      "Key": 32,
+                                      "IsRoot": false,
+                                      "Data": [
+                                        30
+                                      ],
+                                      "Childs": [
+                                        {
+                                          "Key": 34,
+                                          "IsRoot": false,
+                                          "Data": [
+                                            30
+                                          ],
+                                          "Childs": []
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 81,
+          "IsRoot": false,
+          "Data": [
+            31,
+            32,
+            33
+          ],
+          "Childs": [
+            {
+              "Key": 37,
+              "IsRoot": false,
+              "Data": [
+                31,
+                33
+              ],
+              "Childs": [
+                {
+                  "Key": 36,
+                  "IsRoot": false,
+                  "Data": [
+                    31
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 39,
+                      "IsRoot": false,
+                      "Data": [
+                        31
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 76,
+                          "IsRoot": false,
+                          "Data": [
+                            31
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 35,
+                              "IsRoot": false,
+                              "Data": [
+                                31
+                              ],
+                              "Childs": [
+                                {
+                                  "Key": 41,
+                                  "IsRoot": false,
+                                  "Data": [
+                                    31
+                                  ],
+                                  "Childs": [
+                                    {
+                                      "Key": 18,
+                                      "IsRoot": false,
+                                      "Data": [
+                                        31
+                                      ],
+                                      "Childs": [
+                                        {
+                                          "Key": 42,
+                                          "IsRoot": false,
+                                          "Data": [
+                                            31
+                                          ],
+                                          "Childs": [
+                                            {
+                                              "Key": 34,
+                                              "IsRoot": false,
+                                              "Data": [
+                                                31
+                                              ],
+                                              "Childs": []
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "Key": 88,
+                  "IsRoot": false,
+                  "Data": [
+                    33
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 87,
+                      "IsRoot": false,
+                      "Data": [
+                        33
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 22,
+                          "IsRoot": false,
+                          "Data": [
+                            33
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 41,
+                              "IsRoot": false,
+                              "Data": [
+                                33
+                              ],
+                              "Childs": [
+                                {
+                                  "Key": 18,
+                                  "IsRoot": false,
+                                  "Data": [
+                                    33
+                                  ],
+                                  "Childs": [
+                                    {
+                                      "Key": 44,
+                                      "IsRoot": false,
+                                      "Data": [
+                                        33
+                                      ],
+                                      "Childs": [
+                                        {
+                                          "Key": 42,
+                                          "IsRoot": false,
+                                          "Data": [
+                                            33
+                                          ],
+                                          "Childs": [
+                                            {
+                                              "Key": 32,
+                                              "IsRoot": false,
+                                              "Data": [
+                                                33
+                                              ],
+                                              "Childs": []
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Key": 43,
+              "IsRoot": false,
+              "Data": [
+                32
+              ],
+              "Childs": [
+                {
+                  "Key": 36,
+                  "IsRoot": false,
+                  "Data": [
+                    32
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 71,
+                      "IsRoot": false,
+                      "Data": [
+                        32
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 35,
+                          "IsRoot": false,
+                          "Data": [
+                            32
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 18,
+                              "IsRoot": false,
+                              "Data": [
+                                32
+                              ],
+                              "Childs": [
+                                {
+                                  "Key": 16,
+                                  "IsRoot": false,
+                                  "Data": [
+                                    32
+                                  ],
+                                  "Childs": [
+                                    {
+                                      "Key": 42,
+                                      "IsRoot": false,
+                                      "Data": [
+                                        32
+                                      ],
+                                      "Childs": [
+                                        {
+                                          "Key": 85,
+                                          "IsRoot": false,
+                                          "Data": [
+                                            32
+                                          ],
+                                          "Childs": [
+                                            {
+                                              "Key": 34,
+                                              "IsRoot": false,
+                                              "Data": [
+                                                32
+                                              ],
+                                              "Childs": []
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 101,
+          "IsRoot": false,
+          "Data": [
+            77
+          ],
+          "Childs": [
+            {
+              "Key": 16,
+              "IsRoot": false,
+              "Data": [
+                77
+              ],
+              "Childs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 43,
+      "IsRoot": false,
+      "Data": [
+        30,
+        32,
+        34
+      ],
+      "Childs": [
+        {
+          "Key": 36,
+          "IsRoot": false,
+          "Data": [
+            30,
+            32
+          ],
+          "Childs": [
+            {
+              "Key": 71,
+              "IsRoot": false,
+              "Data": [
+                30,
+                32
+              ],
+              "Childs": [
+                {
+                  "Key": 41,
+                  "IsRoot": false,
+                  "Data": [
+                    30
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 18,
+                      "IsRoot": false,
+                      "Data": [
+                        30
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 16,
+                          "IsRoot": false,
+                          "Data": [
+                            30
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 42,
+                              "IsRoot": false,
+                              "Data": [
+                                30
+                              ],
+                              "Childs": [
+                                {
+                                  "Key": 32,
+                                  "IsRoot": false,
+                                  "Data": [
+                                    30
+                                  ],
+                                  "Childs": [
+                                    {
+                                      "Key": 34,
+                                      "IsRoot": false,
+                                      "Data": [
+                                        30
+                                      ],
+                                      "Childs": []
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "Key": 35,
+                  "IsRoot": false,
+                  "Data": [
+                    32
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 18,
+                      "IsRoot": false,
+                      "Data": [
+                        32
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 16,
+                          "IsRoot": false,
+                          "Data": [
+                            32
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 42,
+                              "IsRoot": false,
+                              "Data": [
+                                32
+                              ],
+                              "Childs": [
+                                {
+                                  "Key": 85,
+                                  "IsRoot": false,
+                                  "Data": [
+                                    32
+                                  ],
+                                  "Childs": [
+                                    {
+                                      "Key": 34,
+                                      "IsRoot": false,
+                                      "Data": [
+                                        32
+                                      ],
+                                      "Childs": []
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 80,
+          "IsRoot": false,
+          "Data": [
+            34
+          ],
+          "Childs": [
+            {
+              "Key": 22,
+              "IsRoot": false,
+              "Data": [
+                34
+              ],
+              "Childs": [
+                {
+                  "Key": 18,
+                  "IsRoot": false,
+                  "Data": [
+                    34
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 16,
+                      "IsRoot": false,
+                      "Data": [
+                        34
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 85,
+                          "IsRoot": false,
+                          "Data": [
+                            34
+                          ],
+                          "Childs": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 36,
+      "IsRoot": false,
+      "Data": [
+        30,
+        31,
+        32,
+        55,
+        65,
+        71
+      ],
+      "Childs": [
+        {
+          "Key": 71,
+          "IsRoot": false,
+          "Data": [
+            30,
+            32
+          ],
+          "Childs": [
+            {
+              "Key": 41,
+              "IsRoot": false,
+              "Data": [
+                30
+              ],
+              "Childs": [
+                {
+                  "Key": 18,
+                  "IsRoot": false,
+                  "Data": [
+                    30
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 16,
+                      "IsRoot": false,
+                      "Data": [
+                        30
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 42,
+                          "IsRoot": false,
+                          "Data": [
+                            30
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 32,
+                              "IsRoot": false,
+                              "Data": [
+                                30
+                              ],
+                              "Childs": [
+                                {
+                                  "Key": 34,
+                                  "IsRoot": false,
+                                  "Data": [
+                                    30
+                                  ],
+                                  "Childs": []
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Key": 35,
+              "IsRoot": false,
+              "Data": [
+                32
+              ],
+              "Childs": [
+                {
+                  "Key": 18,
+                  "IsRoot": false,
+                  "Data": [
+                    32
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 16,
+                      "IsRoot": false,
+                      "Data": [
+                        32
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 42,
+                          "IsRoot": false,
+                          "Data": [
+                            32
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 85,
+                              "IsRoot": false,
+                              "Data": [
+                                32
+                              ],
+                              "Childs": [
+                                {
+                                  "Key": 34,
+                                  "IsRoot": false,
+                                  "Data": [
+                                    32
+                                  ],
+                                  "Childs": []
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 39,
+          "IsRoot": false,
+          "Data": [
+            31,
+            65
+          ],
+          "Childs": [
+            {
+              "Key": 76,
+              "IsRoot": false,
+              "Data": [
+                31
+              ],
+              "Childs": [
+                {
+                  "Key": 35,
+                  "IsRoot": false,
+                  "Data": [
+                    31
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 41,
+                      "IsRoot": false,
+                      "Data": [
+                        31
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 18,
+                          "IsRoot": false,
+                          "Data": [
+                            31
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 42,
+                              "IsRoot": false,
+                              "Data": [
+                                31
+                              ],
+                              "Childs": [
+                                {
+                                  "Key": 34,
+                                  "IsRoot": false,
+                                  "Data": [
+                                    31
+                                  ],
+                                  "Childs": []
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Key": 57,
+              "IsRoot": false,
+              "Data": [
+                65
+              ],
+              "Childs": []
+            }
+          ]
+        },
+        {
+          "Key": 76,
+          "IsRoot": false,
+          "Data": [
+            55
+          ],
+          "Childs": [
+            {
+              "Key": 35,
+              "IsRoot": false,
+              "Data": [
+                55
+              ],
+              "Childs": [
+                {
+                  "Key": 29,
+                  "IsRoot": false,
+                  "Data": [
+                    55
+                  ],
+                  "Childs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 66,
+          "IsRoot": false,
+          "Data": [
+            71
+          ],
+          "Childs": [
+            {
+              "Key": 92,
+              "IsRoot": false,
+              "Data": [
+                71
+              ],
+              "Childs": [
+                {
+                  "Key": 104,
+                  "IsRoot": false,
+                  "Data": [
+                    71
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 32,
+                      "IsRoot": false,
+                      "Data": [
+                        71
+                      ],
+                      "Childs": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 71,
+      "IsRoot": false,
+      "Data": [
+        30,
+        32
+      ],
+      "Childs": [
+        {
+          "Key": 41,
+          "IsRoot": false,
+          "Data": [
+            30
+          ],
+          "Childs": [
+            {
+              "Key": 18,
+              "IsRoot": false,
+              "Data": [
+                30
+              ],
+              "Childs": [
+                {
+                  "Key": 16,
+                  "IsRoot": false,
+                  "Data": [
+                    30
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 42,
+                      "IsRoot": false,
+                      "Data": [
+                        30
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 32,
+                          "IsRoot": false,
+                          "Data": [
+                            30
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 34,
+                              "IsRoot": false,
+                              "Data": [
+                                30
+                              ],
+                              "Childs": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 35,
+          "IsRoot": false,
+          "Data": [
+            32
+          ],
+          "Childs": [
+            {
+              "Key": 18,
+              "IsRoot": false,
+              "Data": [
+                32
+              ],
+              "Childs": [
+                {
+                  "Key": 16,
+                  "IsRoot": false,
+                  "Data": [
+                    32
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 42,
+                      "IsRoot": false,
+                      "Data": [
+                        32
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 85,
+                          "IsRoot": false,
+                          "Data": [
+                            32
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 34,
+                              "IsRoot": false,
+                              "Data": [
+                                32
+                              ],
+                              "Childs": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 41,
+      "IsRoot": false,
+      "Data": [
+        30,
+        31,
+        33
+      ],
+      "Childs": [
+        {
+          "Key": 18,
+          "IsRoot": false,
+          "Data": [
+            30,
+            31,
+            33
+          ],
+          "Childs": [
+            {
+              "Key": 16,
+              "IsRoot": false,
+              "Data": [
+                30
+              ],
+              "Childs": [
+                {
+                  "Key": 42,
+                  "IsRoot": false,
+                  "Data": [
+                    30
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 32,
+                      "IsRoot": false,
+                      "Data": [
+                        30
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 34,
+                          "IsRoot": false,
+                          "Data": [
+                            30
+                          ],
+                          "Childs": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Key": 42,
+              "IsRoot": false,
+              "Data": [
+                31
+              ],
+              "Childs": [
+                {
+                  "Key": 34,
+                  "IsRoot": false,
+                  "Data": [
+                    31
+                  ],
+                  "Childs": []
+                }
+              ]
+            },
+            {
+              "Key": 44,
+              "IsRoot": false,
+              "Data": [
+                33
+              ],
+              "Childs": [
+                {
+                  "Key": 42,
+                  "IsRoot": false,
+                  "Data": [
+                    33
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 32,
+                      "IsRoot": false,
+                      "Data": [
+                        33
+                      ],
+                      "Childs": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 18,
+      "IsRoot": false,
+      "Data": [
+        30,
+        31,
+        32,
+        33,
+        34,
+        39,
+        40,
+        45,
+        48,
+        58,
+        59,
+        60,
+        62,
+        63
+      ],
+      "Childs": [
+        {
+          "Key": 16,
+          "IsRoot": false,
+          "Data": [
+            30,
+            32,
+            34,
+            45,
+            58
+          ],
+          "Childs": [
+            {
+              "Key": 42,
+              "IsRoot": false,
+              "Data": [
+                30,
+                32
+              ],
+              "Childs": [
+                {
+                  "Key": 32,
+                  "IsRoot": false,
+                  "Data": [
+                    30
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 34,
+                      "IsRoot": false,
+                      "Data": [
+                        30
+                      ],
+                      "Childs": []
+                    }
+                  ]
+                },
+                {
+                  "Key": 85,
+                  "IsRoot": false,
+                  "Data": [
+                    32
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 34,
+                      "IsRoot": false,
+                      "Data": [
+                        32
+                      ],
+                      "Childs": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Key": 85,
+              "IsRoot": false,
+              "Data": [
+                34
+              ],
+              "Childs": []
+            },
+            {
+              "Key": 93,
+              "IsRoot": false,
+              "Data": [
+                45
+              ],
+              "Childs": []
+            },
+            {
+              "Key": 94,
+              "IsRoot": false,
+              "Data": [
+                58
+              ],
+              "Childs": [
+                {
+                  "Key": 32,
+                  "IsRoot": false,
+                  "Data": [
+                    58
+                  ],
+                  "Childs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 42,
+          "IsRoot": false,
+          "Data": [
+            31
+          ],
+          "Childs": [
+            {
+              "Key": 34,
+              "IsRoot": false,
+              "Data": [
+                31
+              ],
+              "Childs": []
+            }
+          ]
+        },
+        {
+          "Key": 44,
+          "IsRoot": false,
+          "Data": [
+            33
+          ],
+          "Childs": [
+            {
+              "Key": 42,
+              "IsRoot": false,
+              "Data": [
+                33
+              ],
+              "Childs": [
+                {
+                  "Key": 32,
+                  "IsRoot": false,
+                  "Data": [
+                    33
+                  ],
+                  "Childs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 19,
+          "IsRoot": false,
+          "Data": [
+            39
+          ],
+          "Childs": [
+            {
+              "Key": 32,
+              "IsRoot": false,
+              "Data": [
+                39
+              ],
+              "Childs": []
+            }
+          ]
+        },
+        {
+          "Key": 32,
+          "IsRoot": false,
+          "Data": [
+            40
+          ],
+          "Childs": []
+        },
+        {
+          "Key": 26,
+          "IsRoot": false,
+          "Data": [
+            48
+          ],
+          "Childs": [
+            {
+              "Key": 16,
+              "IsRoot": false,
+              "Data": [
+                48
+              ],
+              "Childs": [
+                {
+                  "Key": 32,
+                  "IsRoot": false,
+                  "Data": [
+                    48
+                  ],
+                  "Childs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 34,
+          "IsRoot": false,
+          "Data": [
+            59
+          ],
+          "Childs": []
+        },
+        {
+          "Key": 94,
+          "IsRoot": false,
+          "Data": [
+            60
+          ],
+          "Childs": [
+            {
+              "Key": 74,
+              "IsRoot": false,
+              "Data": [
+                60
+              ],
+              "Childs": []
+            }
+          ]
+        },
+        {
+          "Key": 28,
+          "IsRoot": false,
+          "Data": [
+            62
+          ],
+          "Childs": [
+            {
+              "Key": 90,
+              "IsRoot": false,
+              "Data": [
+                62
+              ],
+              "Childs": [
+                {
+                  "Key": 19,
+                  "IsRoot": false,
+                  "Data": [
+                    62
+                  ],
+                  "Childs": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 16,
+      "IsRoot": false,
+      "Data": [
+        30,
+        32,
+        34,
+        45,
+        48,
+        58,
+        77
+      ],
+      "Childs": [
+        {
+          "Key": 42,
+          "IsRoot": false,
+          "Data": [
+            30,
+            32
+          ],
+          "Childs": [
+            {
+              "Key": 32,
+              "IsRoot": false,
+              "Data": [
+                30
+              ],
+              "Childs": [
+                {
+                  "Key": 34,
+                  "IsRoot": false,
+                  "Data": [
+                    30
+                  ],
+                  "Childs": []
+                }
+              ]
+            },
+            {
+              "Key": 85,
+              "IsRoot": false,
+              "Data": [
+                32
+              ],
+              "Childs": [
+                {
+                  "Key": 34,
+                  "IsRoot": false,
+                  "Data": [
+                    32
+                  ],
+                  "Childs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 85,
+          "IsRoot": false,
+          "Data": [
+            34
+          ],
+          "Childs": []
+        },
+        {
+          "Key": 93,
+          "IsRoot": false,
+          "Data": [
+            45
+          ],
+          "Childs": []
+        },
+        {
+          "Key": 32,
+          "IsRoot": false,
+          "Data": [
+            48
+          ],
+          "Childs": []
+        },
+        {
+          "Key": 94,
+          "IsRoot": false,
+          "Data": [
+            58
+          ],
+          "Childs": [
+            {
+              "Key": 32,
+              "IsRoot": false,
+              "Data": [
+                58
+              ],
+              "Childs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 42,
+      "IsRoot": false,
+      "Data": [
+        30,
+        31,
+        32,
+        33
+      ],
+      "Childs": [
+        {
+          "Key": 32,
+          "IsRoot": false,
+          "Data": [
+            30,
+            33
+          ],
+          "Childs": [
+            {
+              "Key": 34,
+              "IsRoot": false,
+              "Data": [
+                30
+              ],
+              "Childs": []
+            }
+          ]
+        },
+        {
+          "Key": 34,
+          "IsRoot": false,
+          "Data": [
+            31
+          ],
+          "Childs": []
+        },
+        {
+          "Key": 85,
+          "IsRoot": false,
+          "Data": [
+            32
+          ],
+          "Childs": [
+            {
+              "Key": 34,
+              "IsRoot": false,
+              "Data": [
+                32
+              ],
+              "Childs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 32,
+      "IsRoot": false,
+      "Data": [
+        30,
+        33,
+        39,
+        40,
+        43,
+        46,
+        48,
+        49,
+        54,
+        58,
+        71
+      ],
+      "Childs": [
+        {
+          "Key": 34,
+          "IsRoot": false,
+          "Data": [
+            30
+          ],
+          "Childs": []
+        },
+        {
+          "Key": 93,
+          "IsRoot": false,
+          "Data": [
+            43
+          ],
+          "Childs": []
+        }
+      ]
+    },
+    {
+      "Key": 34,
+      "IsRoot": false,
+      "Data": [
+        30,
+        31,
+        32,
+        59
+      ],
+      "Childs": []
+    },
+    {
+      "Key": 33,
+      "IsRoot": false,
+      "Data": [
+        31,
+        36,
+        56,
+        60
+      ],
+      "Childs": [
+        {
+          "Key": 17,
+          "IsRoot": false,
+          "Data": [
+            31,
+            60
+          ],
+          "Childs": [
+            {
+              "Key": 38,
+              "IsRoot": false,
+              "Data": [
+                31
+              ],
+              "Childs": [
+                {
+                  "Key": 81,
+                  "IsRoot": false,
+                  "Data": [
+                    31
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 37,
+                      "IsRoot": false,
+                      "Data": [
+                        31
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 36,
+                          "IsRoot": false,
+                          "Data": [
+                            31
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 39,
+                              "IsRoot": false,
+                              "Data": [
+                                31
+                              ],
+                              "Childs": [
+                                {
+                                  "Key": 76,
+                                  "IsRoot": false,
+                                  "Data": [
+                                    31
+                                  ],
+                                  "Childs": [
+                                    {
+                                      "Key": 35,
+                                      "IsRoot": false,
+                                      "Data": [
+                                        31
+                                      ],
+                                      "Childs": [
+                                        {
+                                          "Key": 41,
+                                          "IsRoot": false,
+                                          "Data": [
+                                            31
+                                          ],
+                                          "Childs": [
+                                            {
+                                              "Key": 18,
+                                              "IsRoot": false,
+                                              "Data": [
+                                                31
+                                              ],
+                                              "Childs": [
+                                                {
+                                                  "Key": 42,
+                                                  "IsRoot": false,
+                                                  "Data": [
+                                                    31
+                                                  ],
+                                                  "Childs": [
+                                                    {
+                                                      "Key": 34,
+                                                      "IsRoot": false,
+                                                      "Data": [
+                                                        31
+                                                      ],
+                                                      "Childs": []
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Key": 22,
+              "IsRoot": false,
+              "Data": [
+                60
+              ],
+              "Childs": [
+                {
+                  "Key": 79,
+                  "IsRoot": false,
+                  "Data": [
+                    60
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 18,
+                      "IsRoot": false,
+                      "Data": [
+                        60
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 94,
+                          "IsRoot": false,
+                          "Data": [
+                            60
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 74,
+                              "IsRoot": false,
+                              "Data": [
+                                60
+                              ],
+                              "Childs": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 77,
+          "IsRoot": false,
+          "Data": [
+            36
+          ],
+          "Childs": [
+            {
+              "Key": 78,
+              "IsRoot": false,
+              "Data": [
+                36
+              ],
+              "Childs": [
+                {
+                  "Key": 37,
+                  "IsRoot": false,
+                  "Data": [
+                    36
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 22,
+                      "IsRoot": false,
+                      "Data": [
+                        36
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 19,
+                          "IsRoot": false,
+                          "Data": [
+                            36
+                          ],
+                          "Childs": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 81,
+          "IsRoot": false,
+          "Data": [
+            56
+          ],
+          "Childs": [
+            {
+              "Key": 37,
+              "IsRoot": false,
+              "Data": [
+                56
+              ],
+              "Childs": [
+                {
+                  "Key": 88,
+                  "IsRoot": false,
+                  "Data": [
+                    56
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 91,
+                      "IsRoot": false,
+                      "Data": [
+                        56
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 87,
+                          "IsRoot": false,
+                          "Data": [
+                            56
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 22,
+                              "IsRoot": false,
+                              "Data": [
+                                56
+                              ],
+                              "Childs": [
+                                {
+                                  "Key": 19,
+                                  "IsRoot": false,
+                                  "Data": [
+                                    56
+                                  ],
+                                  "Childs": []
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 81,
+      "IsRoot": false,
+      "Data": [
+        31,
+        32,
+        33,
+        38,
+        56
+      ],
+      "Childs": [
+        {
+          "Key": 37,
+          "IsRoot": false,
+          "Data": [
+            31,
+            33,
+            38,
+            56
+          ],
+          "Childs": [
+            {
+              "Key": 36,
+              "IsRoot": false,
+              "Data": [
+                31
+              ],
+              "Childs": [
+                {
+                  "Key": 39,
+                  "IsRoot": false,
+                  "Data": [
+                    31
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 76,
+                      "IsRoot": false,
+                      "Data": [
+                        31
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 35,
+                          "IsRoot": false,
+                          "Data": [
+                            31
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 41,
+                              "IsRoot": false,
+                              "Data": [
+                                31
+                              ],
+                              "Childs": [
+                                {
+                                  "Key": 18,
+                                  "IsRoot": false,
+                                  "Data": [
+                                    31
+                                  ],
+                                  "Childs": [
+                                    {
+                                      "Key": 42,
+                                      "IsRoot": false,
+                                      "Data": [
+                                        31
+                                      ],
+                                      "Childs": [
+                                        {
+                                          "Key": 34,
+                                          "IsRoot": false,
+                                          "Data": [
+                                            31
+                                          ],
+                                          "Childs": []
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Key": 88,
+              "IsRoot": false,
+              "Data": [
+                33,
+                38,
+                56
+              ],
+              "Childs": [
+                {
+                  "Key": 87,
+                  "IsRoot": false,
+                  "Data": [
+                    33
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 22,
+                      "IsRoot": false,
+                      "Data": [
+                        33
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 41,
+                          "IsRoot": false,
+                          "Data": [
+                            33
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 18,
+                              "IsRoot": false,
+                              "Data": [
+                                33
+                              ],
+                              "Childs": [
+                                {
+                                  "Key": 44,
+                                  "IsRoot": false,
+                                  "Data": [
+                                    33
+                                  ],
+                                  "Childs": [
+                                    {
+                                      "Key": 42,
+                                      "IsRoot": false,
+                                      "Data": [
+                                        33
+                                      ],
+                                      "Childs": [
+                                        {
+                                          "Key": 32,
+                                          "IsRoot": false,
+                                          "Data": [
+                                            33
+                                          ],
+                                          "Childs": []
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "Key": 91,
+                  "IsRoot": false,
+                  "Data": [
+                    38,
+                    56
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 92,
+                      "IsRoot": false,
+                      "Data": [
+                        38
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 79,
+                          "IsRoot": false,
+                          "Data": [
+                            38
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 19,
+                              "IsRoot": false,
+                              "Data": [
+                                38
+                              ],
+                              "Childs": []
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "Key": 87,
+                      "IsRoot": false,
+                      "Data": [
+                        56
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 22,
+                          "IsRoot": false,
+                          "Data": [
+                            56
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 19,
+                              "IsRoot": false,
+                              "Data": [
+                                56
+                              ],
+                              "Childs": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 43,
+          "IsRoot": false,
+          "Data": [
+            32
+          ],
+          "Childs": [
+            {
+              "Key": 36,
+              "IsRoot": false,
+              "Data": [
+                32
+              ],
+              "Childs": [
+                {
+                  "Key": 71,
+                  "IsRoot": false,
+                  "Data": [
+                    32
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 35,
+                      "IsRoot": false,
+                      "Data": [
+                        32
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 18,
+                          "IsRoot": false,
+                          "Data": [
+                            32
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 16,
+                              "IsRoot": false,
+                              "Data": [
+                                32
+                              ],
+                              "Childs": [
+                                {
+                                  "Key": 42,
+                                  "IsRoot": false,
+                                  "Data": [
+                                    32
+                                  ],
+                                  "Childs": [
+                                    {
+                                      "Key": 85,
+                                      "IsRoot": false,
+                                      "Data": [
+                                        32
+                                      ],
+                                      "Childs": [
+                                        {
+                                          "Key": 34,
+                                          "IsRoot": false,
+                                          "Data": [
+                                            32
+                                          ],
+                                          "Childs": []
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 37,
+      "IsRoot": false,
+      "Data": [
+        31,
+        33,
+        36,
+        38,
+        56,
+        71
+      ],
+      "Childs": [
+        {
+          "Key": 36,
+          "IsRoot": false,
+          "Data": [
+            31
+          ],
+          "Childs": [
+            {
+              "Key": 39,
+              "IsRoot": false,
+              "Data": [
+                31
+              ],
+              "Childs": [
+                {
+                  "Key": 76,
+                  "IsRoot": false,
+                  "Data": [
+                    31
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 35,
+                      "IsRoot": false,
+                      "Data": [
+                        31
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 41,
+                          "IsRoot": false,
+                          "Data": [
+                            31
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 18,
+                              "IsRoot": false,
+                              "Data": [
+                                31
+                              ],
+                              "Childs": [
+                                {
+                                  "Key": 42,
+                                  "IsRoot": false,
+                                  "Data": [
+                                    31
+                                  ],
+                                  "Childs": [
+                                    {
+                                      "Key": 34,
+                                      "IsRoot": false,
+                                      "Data": [
+                                        31
+                                      ],
+                                      "Childs": []
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 88,
+          "IsRoot": false,
+          "Data": [
+            33,
+            38,
+            56
+          ],
+          "Childs": [
+            {
+              "Key": 87,
+              "IsRoot": false,
+              "Data": [
+                33
+              ],
+              "Childs": [
+                {
+                  "Key": 22,
+                  "IsRoot": false,
+                  "Data": [
+                    33
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 41,
+                      "IsRoot": false,
+                      "Data": [
+                        33
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 18,
+                          "IsRoot": false,
+                          "Data": [
+                            33
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 44,
+                              "IsRoot": false,
+                              "Data": [
+                                33
+                              ],
+                              "Childs": [
+                                {
+                                  "Key": 42,
+                                  "IsRoot": false,
+                                  "Data": [
+                                    33
+                                  ],
+                                  "Childs": [
+                                    {
+                                      "Key": 32,
+                                      "IsRoot": false,
+                                      "Data": [
+                                        33
+                                      ],
+                                      "Childs": []
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Key": 91,
+              "IsRoot": false,
+              "Data": [
+                38,
+                56
+              ],
+              "Childs": [
+                {
+                  "Key": 92,
+                  "IsRoot": false,
+                  "Data": [
+                    38
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 79,
+                      "IsRoot": false,
+                      "Data": [
+                        38
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 19,
+                          "IsRoot": false,
+                          "Data": [
+                            38
+                          ],
+                          "Childs": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "Key": 87,
+                  "IsRoot": false,
+                  "Data": [
+                    56
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 22,
+                      "IsRoot": false,
+                      "Data": [
+                        56
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 19,
+                          "IsRoot": false,
+                          "Data": [
+                            56
+                          ],
+                          "Childs": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 22,
+          "IsRoot": false,
+          "Data": [
+            36
+          ],
+          "Childs": [
+            {
+              "Key": 19,
+              "IsRoot": false,
+              "Data": [
+                36
+              ],
+              "Childs": []
+            }
+          ]
+        },
+        {
+          "Key": 112,
+          "IsRoot": false,
+          "Data": [
+            71
+          ],
+          "Childs": [
+            {
+              "Key": 97,
+              "IsRoot": false,
+              "Data": [
+                71
+              ],
+              "Childs": [
+                {
+                  "Key": 49,
+                  "IsRoot": false,
+                  "Data": [
+                    71
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 36,
+                      "IsRoot": false,
+                      "Data": [
+                        71
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 66,
+                          "IsRoot": false,
+                          "Data": [
+                            71
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 92,
+                              "IsRoot": false,
+                              "Data": [
+                                71
+                              ],
+                              "Childs": [
+                                {
+                                  "Key": 104,
+                                  "IsRoot": false,
+                                  "Data": [
+                                    71
+                                  ],
+                                  "Childs": [
+                                    {
+                                      "Key": 32,
+                                      "IsRoot": false,
+                                      "Data": [
+                                        71
+                                      ],
+                                      "Childs": []
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 39,
+      "IsRoot": false,
+      "Data": [
+        31,
+        65
+      ],
+      "Childs": [
+        {
+          "Key": 76,
+          "IsRoot": false,
+          "Data": [
+            31
+          ],
+          "Childs": [
+            {
+              "Key": 35,
+              "IsRoot": false,
+              "Data": [
+                31
+              ],
+              "Childs": [
+                {
+                  "Key": 41,
+                  "IsRoot": false,
+                  "Data": [
+                    31
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 18,
+                      "IsRoot": false,
+                      "Data": [
+                        31
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 42,
+                          "IsRoot": false,
+                          "Data": [
+                            31
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 34,
+                              "IsRoot": false,
+                              "Data": [
+                                31
+                              ],
+                              "Childs": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 57,
+          "IsRoot": false,
+          "Data": [
+            65
+          ],
+          "Childs": []
+        }
+      ]
+    },
+    {
+      "Key": 76,
+      "IsRoot": false,
+      "Data": [
+        31,
+        41,
+        43,
+        44,
+        45,
+        46,
+        51,
+        52,
+        54,
+        55
+      ],
+      "Childs": [
+        {
+          "Key": 35,
+          "IsRoot": false,
+          "Data": [
+            31,
+            55
+          ],
+          "Childs": [
+            {
+              "Key": 41,
+              "IsRoot": false,
+              "Data": [
+                31
+              ],
+              "Childs": [
+                {
+                  "Key": 18,
+                  "IsRoot": false,
+                  "Data": [
+                    31
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 42,
+                      "IsRoot": false,
+                      "Data": [
+                        31
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 34,
+                          "IsRoot": false,
+                          "Data": [
+                            31
+                          ],
+                          "Childs": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Key": 29,
+              "IsRoot": false,
+              "Data": [
+                55
+              ],
+              "Childs": []
+            }
+          ]
+        },
+        {
+          "Key": 22,
+          "IsRoot": false,
+          "Data": [
+            41,
+            46
+          ],
+          "Childs": [
+            {
+              "Key": 32,
+              "IsRoot": false,
+              "Data": [
+                46
+              ],
+              "Childs": []
+            }
+          ]
+        },
+        {
+          "Key": 26,
+          "IsRoot": false,
+          "Data": [
+            43,
+            51,
+            54
+          ],
+          "Childs": [
+            {
+              "Key": 32,
+              "IsRoot": false,
+              "Data": [
+                43
+              ],
+              "Childs": [
+                {
+                  "Key": 93,
+                  "IsRoot": false,
+                  "Data": [
+                    43
+                  ],
+                  "Childs": []
+                }
+              ]
+            },
+            {
+              "Key": 29,
+              "IsRoot": false,
+              "Data": [
+                51,
+                54
+              ],
+              "Childs": [
+                {
+                  "Key": 96,
+                  "IsRoot": false,
+                  "Data": [
+                    54
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 32,
+                      "IsRoot": false,
+                      "Data": [
+                        54
+                      ],
+                      "Childs": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 93,
+          "IsRoot": false,
+          "Data": [
+            44
+          ],
+          "Childs": []
+        },
+        {
+          "Key": 18,
+          "IsRoot": false,
+          "Data": [
+            45
+          ],
+          "Childs": [
+            {
+              "Key": 16,
+              "IsRoot": false,
+              "Data": [
+                45
+              ],
+              "Childs": [
+                {
+                  "Key": 93,
+                  "IsRoot": false,
+                  "Data": [
+                    45
+                  ],
+                  "Childs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 29,
+          "IsRoot": false,
+          "Data": [
+            52
+          ],
+          "Childs": []
+        }
+      ]
+    },
+    {
+      "Key": 35,
+      "IsRoot": false,
+      "Data": [
+        31,
+        32,
+        55
+      ],
+      "Childs": [
+        {
+          "Key": 41,
+          "IsRoot": false,
+          "Data": [
+            31
+          ],
+          "Childs": [
+            {
+              "Key": 18,
+              "IsRoot": false,
+              "Data": [
+                31
+              ],
+              "Childs": [
+                {
+                  "Key": 42,
+                  "IsRoot": false,
+                  "Data": [
+                    31
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 34,
+                      "IsRoot": false,
+                      "Data": [
+                        31
+                      ],
+                      "Childs": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 18,
+          "IsRoot": false,
+          "Data": [
+            32
+          ],
+          "Childs": [
+            {
+              "Key": 16,
+              "IsRoot": false,
+              "Data": [
+                32
+              ],
+              "Childs": [
+                {
+                  "Key": 42,
+                  "IsRoot": false,
+                  "Data": [
+                    32
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 85,
+                      "IsRoot": false,
+                      "Data": [
+                        32
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 34,
+                          "IsRoot": false,
+                          "Data": [
+                            32
+                          ],
+                          "Childs": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 29,
+          "IsRoot": false,
+          "Data": [
+            55
+          ],
+          "Childs": []
+        }
+      ]
+    },
+    {
+      "Key": 85,
+      "IsRoot": false,
+      "Data": [
+        32,
+        34
+      ],
+      "Childs": [
+        {
+          "Key": 34,
+          "IsRoot": false,
+          "Data": [
+            32
+          ],
+          "Childs": []
+        }
+      ]
+    },
+    {
+      "Key": 88,
+      "IsRoot": false,
+      "Data": [
+        33,
+        38,
+        39,
+        40,
+        42,
+        55,
+        56,
+        59,
+        63,
+        65
+      ],
+      "Childs": [
+        {
+          "Key": 87,
+          "IsRoot": false,
+          "Data": [
+            33,
+            39
+          ],
+          "Childs": [
+            {
+              "Key": 22,
+              "IsRoot": false,
+              "Data": [
+                33,
+                39
+              ],
+              "Childs": [
+                {
+                  "Key": 41,
+                  "IsRoot": false,
+                  "Data": [
+                    33
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 18,
+                      "IsRoot": false,
+                      "Data": [
+                        33
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 44,
+                          "IsRoot": false,
+                          "Data": [
+                            33
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 42,
+                              "IsRoot": false,
+                              "Data": [
+                                33
+                              ],
+                              "Childs": [
+                                {
+                                  "Key": 32,
+                                  "IsRoot": false,
+                                  "Data": [
+                                    33
+                                  ],
+                                  "Childs": []
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "Key": 18,
+                  "IsRoot": false,
+                  "Data": [
+                    39
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 19,
+                      "IsRoot": false,
+                      "Data": [
+                        39
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 32,
+                          "IsRoot": false,
+                          "Data": [
+                            39
+                          ],
+                          "Childs": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 91,
+          "IsRoot": false,
+          "Data": [
+            38,
+            56
+          ],
+          "Childs": [
+            {
+              "Key": 92,
+              "IsRoot": false,
+              "Data": [
+                38
+              ],
+              "Childs": [
+                {
+                  "Key": 79,
+                  "IsRoot": false,
+                  "Data": [
+                    38
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 19,
+                      "IsRoot": false,
+                      "Data": [
+                        38
+                      ],
+                      "Childs": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Key": 87,
+              "IsRoot": false,
+              "Data": [
+                56
+              ],
+              "Childs": [
+                {
+                  "Key": 22,
+                  "IsRoot": false,
+                  "Data": [
+                    56
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 19,
+                      "IsRoot": false,
+                      "Data": [
+                        56
+                      ],
+                      "Childs": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 22,
+          "IsRoot": false,
+          "Data": [
+            40,
+            42,
+            59
+          ],
+          "Childs": [
+            {
+              "Key": 79,
+              "IsRoot": false,
+              "Data": [
+                40,
+                59
+              ],
+              "Childs": [
+                {
+                  "Key": 18,
+                  "IsRoot": false,
+                  "Data": [
+                    40,
+                    59
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 32,
+                      "IsRoot": false,
+                      "Data": [
+                        40
+                      ],
+                      "Childs": []
+                    },
+                    {
+                      "Key": 34,
+                      "IsRoot": false,
+                      "Data": [
+                        59
+                      ],
+                      "Childs": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 36,
+          "IsRoot": false,
+          "Data": [
+            55,
+            65
+          ],
+          "Childs": [
+            {
+              "Key": 76,
+              "IsRoot": false,
+              "Data": [
+                55
+              ],
+              "Childs": [
+                {
+                  "Key": 35,
+                  "IsRoot": false,
+                  "Data": [
+                    55
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 29,
+                      "IsRoot": false,
+                      "Data": [
+                        55
+                      ],
+                      "Childs": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Key": 39,
+              "IsRoot": false,
+              "Data": [
+                65
+              ],
+              "Childs": [
+                {
+                  "Key": 57,
+                  "IsRoot": false,
+                  "Data": [
+                    65
+                  ],
+                  "Childs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 18,
+          "IsRoot": false,
+          "Data": [
+            63
+          ],
+          "Childs": []
+        }
+      ]
+    },
+    {
+      "Key": 87,
+      "IsRoot": false,
+      "Data": [
+        33,
+        39,
+        56
+      ],
+      "Childs": [
+        {
+          "Key": 22,
+          "IsRoot": false,
+          "Data": [
+            33,
+            39,
+            56
+          ],
+          "Childs": [
+            {
+              "Key": 41,
+              "IsRoot": false,
+              "Data": [
+                33
+              ],
+              "Childs": [
+                {
+                  "Key": 18,
+                  "IsRoot": false,
+                  "Data": [
+                    33
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 44,
+                      "IsRoot": false,
+                      "Data": [
+                        33
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 42,
+                          "IsRoot": false,
+                          "Data": [
+                            33
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 32,
+                              "IsRoot": false,
+                              "Data": [
+                                33
+                              ],
+                              "Childs": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Key": 18,
+              "IsRoot": false,
+              "Data": [
+                39
+              ],
+              "Childs": [
+                {
+                  "Key": 19,
+                  "IsRoot": false,
+                  "Data": [
+                    39
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 32,
+                      "IsRoot": false,
+                      "Data": [
+                        39
+                      ],
+                      "Childs": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Key": 19,
+              "IsRoot": false,
+              "Data": [
+                56
+              ],
+              "Childs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 22,
+      "IsRoot": false,
+      "Data": [
+        33,
+        34,
+        36,
+        37,
+        39,
+        40,
+        41,
+        42,
+        46,
+        49,
+        56,
+        59,
+        60
+      ],
+      "Childs": [
+        {
+          "Key": 41,
+          "IsRoot": false,
+          "Data": [
+            33
+          ],
+          "Childs": [
+            {
+              "Key": 18,
+              "IsRoot": false,
+              "Data": [
+                33
+              ],
+              "Childs": [
+                {
+                  "Key": 44,
+                  "IsRoot": false,
+                  "Data": [
+                    33
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 42,
+                      "IsRoot": false,
+                      "Data": [
+                        33
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 32,
+                          "IsRoot": false,
+                          "Data": [
+                            33
+                          ],
+                          "Childs": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 18,
+          "IsRoot": false,
+          "Data": [
+            34,
+            39
+          ],
+          "Childs": [
+            {
+              "Key": 16,
+              "IsRoot": false,
+              "Data": [
+                34
+              ],
+              "Childs": [
+                {
+                  "Key": 85,
+                  "IsRoot": false,
+                  "Data": [
+                    34
+                  ],
+                  "Childs": []
+                }
+              ]
+            },
+            {
+              "Key": 19,
+              "IsRoot": false,
+              "Data": [
+                39
+              ],
+              "Childs": [
+                {
+                  "Key": 32,
+                  "IsRoot": false,
+                  "Data": [
+                    39
+                  ],
+                  "Childs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 19,
+          "IsRoot": false,
+          "Data": [
+            36,
+            56
+          ],
+          "Childs": []
+        },
+        {
+          "Key": 90,
+          "IsRoot": false,
+          "Data": [
+            37,
+            49
+          ],
+          "Childs": [
+            {
+              "Key": 89,
+              "IsRoot": false,
+              "Data": [
+                37
+              ],
+              "Childs": []
+            },
+            {
+              "Key": 32,
+              "IsRoot": false,
+              "Data": [
+                49
+              ],
+              "Childs": []
+            }
+          ]
+        },
+        {
+          "Key": 79,
+          "IsRoot": false,
+          "Data": [
+            40,
+            59,
+            60
+          ],
+          "Childs": [
+            {
+              "Key": 18,
+              "IsRoot": false,
+              "Data": [
+                40,
+                59,
+                60
+              ],
+              "Childs": [
+                {
+                  "Key": 32,
+                  "IsRoot": false,
+                  "Data": [
+                    40
+                  ],
+                  "Childs": []
+                },
+                {
+                  "Key": 34,
+                  "IsRoot": false,
+                  "Data": [
+                    59
+                  ],
+                  "Childs": []
+                },
+                {
+                  "Key": 94,
+                  "IsRoot": false,
+                  "Data": [
+                    60
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 74,
+                      "IsRoot": false,
+                      "Data": [
+                        60
+                      ],
+                      "Childs": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 32,
+          "IsRoot": false,
+          "Data": [
+            46
+          ],
+          "Childs": []
+        }
+      ]
+    },
+    {
+      "Key": 44,
+      "IsRoot": false,
+      "Data": [
+        33
+      ],
+      "Childs": [
+        {
+          "Key": 42,
+          "IsRoot": false,
+          "Data": [
+            33
+          ],
+          "Childs": [
+            {
+              "Key": 32,
+              "IsRoot": false,
+              "Data": [
+                33
+              ],
+              "Childs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 77,
+      "IsRoot": false,
+      "Data": [
+        34,
+        36,
+        54,
+        62
+      ],
+      "Childs": [
+        {
+          "Key": 43,
+          "IsRoot": false,
+          "Data": [
+            34
+          ],
+          "Childs": [
+            {
+              "Key": 80,
+              "IsRoot": false,
+              "Data": [
+                34
+              ],
+              "Childs": [
+                {
+                  "Key": 22,
+                  "IsRoot": false,
+                  "Data": [
+                    34
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 18,
+                      "IsRoot": false,
+                      "Data": [
+                        34
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 16,
+                          "IsRoot": false,
+                          "Data": [
+                            34
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 85,
+                              "IsRoot": false,
+                              "Data": [
+                                34
+                              ],
+                              "Childs": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 78,
+          "IsRoot": false,
+          "Data": [
+            36,
+            62
+          ],
+          "Childs": [
+            {
+              "Key": 37,
+              "IsRoot": false,
+              "Data": [
+                36
+              ],
+              "Childs": [
+                {
+                  "Key": 22,
+                  "IsRoot": false,
+                  "Data": [
+                    36
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 19,
+                      "IsRoot": false,
+                      "Data": [
+                        36
+                      ],
+                      "Childs": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Key": 91,
+              "IsRoot": false,
+              "Data": [
+                62
+              ],
+              "Childs": [
+                {
+                  "Key": 18,
+                  "IsRoot": false,
+                  "Data": [
+                    62
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 28,
+                      "IsRoot": false,
+                      "Data": [
+                        62
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 90,
+                          "IsRoot": false,
+                          "Data": [
+                            62
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 19,
+                              "IsRoot": false,
+                              "Data": [
+                                62
+                              ],
+                              "Childs": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 76,
+          "IsRoot": false,
+          "Data": [
+            54
+          ],
+          "Childs": [
+            {
+              "Key": 26,
+              "IsRoot": false,
+              "Data": [
+                54
+              ],
+              "Childs": [
+                {
+                  "Key": 29,
+                  "IsRoot": false,
+                  "Data": [
+                    54
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 96,
+                      "IsRoot": false,
+                      "Data": [
+                        54
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 32,
+                          "IsRoot": false,
+                          "Data": [
+                            54
+                          ],
+                          "Childs": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 80,
+      "IsRoot": false,
+      "Data": [
+        34,
+        48,
+        58,
+        80
+      ],
+      "Childs": [
+        {
+          "Key": 22,
+          "IsRoot": false,
+          "Data": [
+            34
+          ],
+          "Childs": [
+            {
+              "Key": 18,
+              "IsRoot": false,
+              "Data": [
+                34
+              ],
+              "Childs": [
+                {
+                  "Key": 16,
+                  "IsRoot": false,
+                  "Data": [
+                    34
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 85,
+                      "IsRoot": false,
+                      "Data": [
+                        34
+                      ],
+                      "Childs": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 18,
+          "IsRoot": false,
+          "Data": [
+            48,
+            58
+          ],
+          "Childs": [
+            {
+              "Key": 26,
+              "IsRoot": false,
+              "Data": [
+                48
+              ],
+              "Childs": [
+                {
+                  "Key": 16,
+                  "IsRoot": false,
+                  "Data": [
+                    48
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 32,
+                      "IsRoot": false,
+                      "Data": [
+                        48
+                      ],
+                      "Childs": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Key": 16,
+              "IsRoot": false,
+              "Data": [
+                58
+              ],
+              "Childs": [
+                {
+                  "Key": 94,
+                  "IsRoot": false,
+                  "Data": [
+                    58
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 32,
+                      "IsRoot": false,
+                      "Data": [
+                        58
+                      ],
+                      "Childs": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 21,
+      "IsRoot": false,
+      "Data": [
+        36,
+        40,
+        41,
+        81
+      ],
+      "Childs": [
+        {
+          "Key": 33,
+          "IsRoot": false,
+          "Data": [
+            36
+          ],
+          "Childs": [
+            {
+              "Key": 77,
+              "IsRoot": false,
+              "Data": [
+                36
+              ],
+              "Childs": [
+                {
+                  "Key": 78,
+                  "IsRoot": false,
+                  "Data": [
+                    36
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 37,
+                      "IsRoot": false,
+                      "Data": [
+                        36
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 22,
+                          "IsRoot": false,
+                          "Data": [
+                            36
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 19,
+                              "IsRoot": false,
+                              "Data": [
+                                36
+                              ],
+                              "Childs": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 88,
+          "IsRoot": false,
+          "Data": [
+            40
+          ],
+          "Childs": [
+            {
+              "Key": 22,
+              "IsRoot": false,
+              "Data": [
+                40
+              ],
+              "Childs": [
+                {
+                  "Key": 79,
+                  "IsRoot": false,
+                  "Data": [
+                    40
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 18,
+                      "IsRoot": false,
+                      "Data": [
+                        40
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 32,
+                          "IsRoot": false,
+                          "Data": [
+                            40
+                          ],
+                          "Childs": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 76,
+          "IsRoot": false,
+          "Data": [
+            41
+          ],
+          "Childs": [
+            {
+              "Key": 22,
+              "IsRoot": false,
+              "Data": [
+                41
+              ],
+              "Childs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 78,
+      "IsRoot": false,
+      "Data": [
+        36,
+        59,
+        62
+      ],
+      "Childs": [
+        {
+          "Key": 37,
+          "IsRoot": false,
+          "Data": [
+            36
+          ],
+          "Childs": [
+            {
+              "Key": 22,
+              "IsRoot": false,
+              "Data": [
+                36
+              ],
+              "Childs": [
+                {
+                  "Key": 19,
+                  "IsRoot": false,
+                  "Data": [
+                    36
+                  ],
+                  "Childs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 88,
+          "IsRoot": false,
+          "Data": [
+            59
+          ],
+          "Childs": [
+            {
+              "Key": 22,
+              "IsRoot": false,
+              "Data": [
+                59
+              ],
+              "Childs": [
+                {
+                  "Key": 79,
+                  "IsRoot": false,
+                  "Data": [
+                    59
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 18,
+                      "IsRoot": false,
+                      "Data": [
+                        59
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 34,
+                          "IsRoot": false,
+                          "Data": [
+                            59
+                          ],
+                          "Childs": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 91,
+          "IsRoot": false,
+          "Data": [
+            62
+          ],
+          "Childs": [
+            {
+              "Key": 18,
+              "IsRoot": false,
+              "Data": [
+                62
+              ],
+              "Childs": [
+                {
+                  "Key": 28,
+                  "IsRoot": false,
+                  "Data": [
+                    62
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 90,
+                      "IsRoot": false,
+                      "Data": [
+                        62
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 19,
+                          "IsRoot": false,
+                          "Data": [
+                            62
+                          ],
+                          "Childs": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 19,
+      "IsRoot": false,
+      "Data": [
+        36,
+        38,
+        39,
+        56,
+        62
+      ],
+      "Childs": [
+        {
+          "Key": 32,
+          "IsRoot": false,
+          "Data": [
+            39
+          ],
+          "Childs": []
+        }
+      ]
+    },
+    {
+      "Key": 90,
+      "IsRoot": false,
+      "Data": [
+        37,
+        49,
+        62
+      ],
+      "Childs": [
+        {
+          "Key": 89,
+          "IsRoot": false,
+          "Data": [
+            37
+          ],
+          "Childs": []
+        },
+        {
+          "Key": 32,
+          "IsRoot": false,
+          "Data": [
+            49
+          ],
+          "Childs": []
+        },
+        {
+          "Key": 19,
+          "IsRoot": false,
+          "Data": [
+            62
+          ],
+          "Childs": []
+        }
+      ]
+    },
+    {
+      "Key": 89,
+      "IsRoot": false,
+      "Data": [
+        37
+      ],
+      "Childs": []
+    },
+    {
+      "Key": 91,
+      "IsRoot": false,
+      "Data": [
+        38,
+        56,
+        62
+      ],
+      "Childs": [
+        {
+          "Key": 92,
+          "IsRoot": false,
+          "Data": [
+            38
+          ],
+          "Childs": [
+            {
+              "Key": 79,
+              "IsRoot": false,
+              "Data": [
+                38
+              ],
+              "Childs": [
+                {
+                  "Key": 19,
+                  "IsRoot": false,
+                  "Data": [
+                    38
+                  ],
+                  "Childs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 87,
+          "IsRoot": false,
+          "Data": [
+            56
+          ],
+          "Childs": [
+            {
+              "Key": 22,
+              "IsRoot": false,
+              "Data": [
+                56
+              ],
+              "Childs": [
+                {
+                  "Key": 19,
+                  "IsRoot": false,
+                  "Data": [
+                    56
+                  ],
+                  "Childs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 18,
+          "IsRoot": false,
+          "Data": [
+            62
+          ],
+          "Childs": [
+            {
+              "Key": 28,
+              "IsRoot": false,
+              "Data": [
+                62
+              ],
+              "Childs": [
+                {
+                  "Key": 90,
+                  "IsRoot": false,
+                  "Data": [
+                    62
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 19,
+                      "IsRoot": false,
+                      "Data": [
+                        62
+                      ],
+                      "Childs": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 92,
+      "IsRoot": false,
+      "Data": [
+        38,
+        64,
+        66,
+        71
+      ],
+      "Childs": [
+        {
+          "Key": 79,
+          "IsRoot": false,
+          "Data": [
+            38
+          ],
+          "Childs": [
+            {
+              "Key": 19,
+              "IsRoot": false,
+              "Data": [
+                38
+              ],
+              "Childs": []
+            }
+          ]
+        },
+        {
+          "Key": 57,
+          "IsRoot": false,
+          "Data": [
+            64,
+            66
+          ],
+          "Childs": []
+        },
+        {
+          "Key": 104,
+          "IsRoot": false,
+          "Data": [
+            71
+          ],
+          "Childs": [
+            {
+              "Key": 32,
+              "IsRoot": false,
+              "Data": [
+                71
+              ],
+              "Childs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 79,
+      "IsRoot": false,
+      "Data": [
+        38,
+        40,
+        59,
+        60
+      ],
+      "Childs": [
+        {
+          "Key": 19,
+          "IsRoot": false,
+          "Data": [
+            38
+          ],
+          "Childs": []
+        },
+        {
+          "Key": 18,
+          "IsRoot": false,
+          "Data": [
+            40,
+            59,
+            60
+          ],
+          "Childs": [
+            {
+              "Key": 32,
+              "IsRoot": false,
+              "Data": [
+                40
+              ],
+              "Childs": []
+            },
+            {
+              "Key": 34,
+              "IsRoot": false,
+              "Data": [
+                59
+              ],
+              "Childs": []
+            },
+            {
+              "Key": 94,
+              "IsRoot": false,
+              "Data": [
+                60
+              ],
+              "Childs": [
+                {
+                  "Key": 74,
+                  "IsRoot": false,
+                  "Data": [
+                    60
+                  ],
+                  "Childs": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 23,
+      "IsRoot": false,
+      "Data": [
+        43,
+        44,
+        45,
+        48
+      ],
+      "Childs": [
+        {
+          "Key": 76,
+          "IsRoot": false,
+          "Data": [
+            43
+          ],
+          "Childs": [
+            {
+              "Key": 26,
+              "IsRoot": false,
+              "Data": [
+                43
+              ],
+              "Childs": [
+                {
+                  "Key": 32,
+                  "IsRoot": false,
+                  "Data": [
+                    43
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 93,
+                      "IsRoot": false,
+                      "Data": [
+                        43
+                      ],
+                      "Childs": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 31,
+          "IsRoot": false,
+          "Data": [
+            44,
+            45
+          ],
+          "Childs": [
+            {
+              "Key": 76,
+              "IsRoot": false,
+              "Data": [
+                44,
+                45
+              ],
+              "Childs": [
+                {
+                  "Key": 93,
+                  "IsRoot": false,
+                  "Data": [
+                    44
+                  ],
+                  "Childs": []
+                },
+                {
+                  "Key": 18,
+                  "IsRoot": false,
+                  "Data": [
+                    45
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 16,
+                      "IsRoot": false,
+                      "Data": [
+                        45
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 93,
+                          "IsRoot": false,
+                          "Data": [
+                            45
+                          ],
+                          "Childs": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 25,
+          "IsRoot": false,
+          "Data": [
+            48
+          ],
+          "Childs": [
+            {
+              "Key": 80,
+              "IsRoot": false,
+              "Data": [
+                48
+              ],
+              "Childs": [
+                {
+                  "Key": 18,
+                  "IsRoot": false,
+                  "Data": [
+                    48
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 26,
+                      "IsRoot": false,
+                      "Data": [
+                        48
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 16,
+                          "IsRoot": false,
+                          "Data": [
+                            48
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 32,
+                              "IsRoot": false,
+                              "Data": [
+                                48
+                              ],
+                              "Childs": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 26,
+      "IsRoot": false,
+      "Data": [
+        43,
+        48,
+        51,
+        54,
+        74
+      ],
+      "Childs": [
+        {
+          "Key": 32,
+          "IsRoot": false,
+          "Data": [
+            43
+          ],
+          "Childs": [
+            {
+              "Key": 93,
+              "IsRoot": false,
+              "Data": [
+                43
+              ],
+              "Childs": []
+            }
+          ]
+        },
+        {
+          "Key": 16,
+          "IsRoot": false,
+          "Data": [
+            48
+          ],
+          "Childs": [
+            {
+              "Key": 32,
+              "IsRoot": false,
+              "Data": [
+                48
+              ],
+              "Childs": []
+            }
+          ]
+        },
+        {
+          "Key": 29,
+          "IsRoot": false,
+          "Data": [
+            51,
+            54
+          ],
+          "Childs": [
+            {
+              "Key": 96,
+              "IsRoot": false,
+              "Data": [
+                54
+              ],
+              "Childs": [
+                {
+                  "Key": 32,
+                  "IsRoot": false,
+                  "Data": [
+                    54
+                  ],
+                  "Childs": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 93,
+      "IsRoot": false,
+      "Data": [
+        43,
+        44,
+        45
+      ],
+      "Childs": []
+    },
+    {
+      "Key": 31,
+      "IsRoot": false,
+      "Data": [
+        44,
+        45,
+        52,
+        55,
+        77
+      ],
+      "Childs": [
+        {
+          "Key": 76,
+          "IsRoot": false,
+          "Data": [
+            44,
+            45
+          ],
+          "Childs": [
+            {
+              "Key": 93,
+              "IsRoot": false,
+              "Data": [
+                44
+              ],
+              "Childs": []
+            },
+            {
+              "Key": 18,
+              "IsRoot": false,
+              "Data": [
+                45
+              ],
+              "Childs": [
+                {
+                  "Key": 16,
+                  "IsRoot": false,
+                  "Data": [
+                    45
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 93,
+                      "IsRoot": false,
+                      "Data": [
+                        45
+                      ],
+                      "Childs": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 95,
+          "IsRoot": false,
+          "Data": [
+            52
+          ],
+          "Childs": [
+            {
+              "Key": 76,
+              "IsRoot": false,
+              "Data": [
+                52
+              ],
+              "Childs": [
+                {
+                  "Key": 29,
+                  "IsRoot": false,
+                  "Data": [
+                    52
+                  ],
+                  "Childs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 88,
+          "IsRoot": false,
+          "Data": [
+            55
+          ],
+          "Childs": [
+            {
+              "Key": 36,
+              "IsRoot": false,
+              "Data": [
+                55
+              ],
+              "Childs": [
+                {
+                  "Key": 76,
+                  "IsRoot": false,
+                  "Data": [
+                    55
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 35,
+                      "IsRoot": false,
+                      "Data": [
+                        55
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 29,
+                          "IsRoot": false,
+                          "Data": [
+                            55
+                          ],
+                          "Childs": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 25,
+          "IsRoot": false,
+          "Data": [
+            77
+          ],
+          "Childs": [
+            {
+              "Key": 17,
+              "IsRoot": false,
+              "Data": [
+                77
+              ],
+              "Childs": [
+                {
+                  "Key": 38,
+                  "IsRoot": false,
+                  "Data": [
+                    77
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 101,
+                      "IsRoot": false,
+                      "Data": [
+                        77
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 16,
+                          "IsRoot": false,
+                          "Data": [
+                            77
+                          ],
+                          "Childs": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 24,
+      "IsRoot": false,
+      "Data": [
+        46,
+        49,
+        55
+      ],
+      "Childs": [
+        {
+          "Key": 76,
+          "IsRoot": false,
+          "Data": [
+            46
+          ],
+          "Childs": [
+            {
+              "Key": 22,
+              "IsRoot": false,
+              "Data": [
+                46
+              ],
+              "Childs": [
+                {
+                  "Key": 32,
+                  "IsRoot": false,
+                  "Data": [
+                    46
+                  ],
+                  "Childs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 22,
+          "IsRoot": false,
+          "Data": [
+            49
+          ],
+          "Childs": [
+            {
+              "Key": 90,
+              "IsRoot": false,
+              "Data": [
+                49
+              ],
+              "Childs": [
+                {
+                  "Key": 32,
+                  "IsRoot": false,
+                  "Data": [
+                    49
+                  ],
+                  "Childs": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 31,
+          "IsRoot": false,
+          "Data": [
+            55
+          ],
+          "Childs": [
+            {
+              "Key": 88,
+              "IsRoot": false,
+              "Data": [
+                55
+              ],
+              "Childs": [
+                {
+                  "Key": 36,
+                  "IsRoot": false,
+                  "Data": [
+                    55
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 76,
+                      "IsRoot": false,
+                      "Data": [
+                        55
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 35,
+                          "IsRoot": false,
+                          "Data": [
+                            55
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 29,
+                              "IsRoot": false,
+                              "Data": [
+                                55
+                              ],
+                              "Childs": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 29,
+      "IsRoot": false,
+      "Data": [
+        51,
+        52,
+        54,
+        55
+      ],
+      "Childs": [
+        {
+          "Key": 96,
+          "IsRoot": false,
+          "Data": [
+            54
+          ],
+          "Childs": [
+            {
+              "Key": 32,
+              "IsRoot": false,
+              "Data": [
+                54
+              ],
+              "Childs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 95,
+      "IsRoot": false,
+      "Data": [
+        52
+      ],
+      "Childs": [
+        {
+          "Key": 76,
+          "IsRoot": false,
+          "Data": [
+            52
+          ],
+          "Childs": [
+            {
+              "Key": 29,
+              "IsRoot": false,
+              "Data": [
+                52
+              ],
+              "Childs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 96,
+      "IsRoot": false,
+      "Data": [
+        54
+      ],
+      "Childs": [
+        {
+          "Key": 32,
+          "IsRoot": false,
+          "Data": [
+            54
+          ],
+          "Childs": []
+        }
+      ]
+    },
+    {
+      "Key": 94,
+      "IsRoot": false,
+      "Data": [
+        58,
+        60
+      ],
+      "Childs": [
+        {
+          "Key": 32,
+          "IsRoot": false,
+          "Data": [
+            58
+          ],
+          "Childs": []
+        },
+        {
+          "Key": 74,
+          "IsRoot": false,
+          "Data": [
+            60
+          ],
+          "Childs": []
+        }
+      ]
+    },
+    {
+      "Key": 74,
+      "IsRoot": false,
+      "Data": [
+        60
+      ],
+      "Childs": []
+    },
+    {
+      "Key": 27,
+      "IsRoot": false,
+      "Data": [
+        62,
+        81
+      ],
+      "Childs": [
+        {
+          "Key": 77,
+          "IsRoot": false,
+          "Data": [
+            62
+          ],
+          "Childs": [
+            {
+              "Key": 78,
+              "IsRoot": false,
+              "Data": [
+                62
+              ],
+              "Childs": [
+                {
+                  "Key": 91,
+                  "IsRoot": false,
+                  "Data": [
+                    62
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 18,
+                      "IsRoot": false,
+                      "Data": [
+                        62
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 28,
+                          "IsRoot": false,
+                          "Data": [
+                            62
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 90,
+                              "IsRoot": false,
+                              "Data": [
+                                62
+                              ],
+                              "Childs": [
+                                {
+                                  "Key": 19,
+                                  "IsRoot": false,
+                                  "Data": [
+                                    62
+                                  ],
+                                  "Childs": []
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 21,
+          "IsRoot": false,
+          "Data": [
+            81
+          ],
+          "Childs": []
+        }
+      ]
+    },
+    {
+      "Key": 28,
+      "IsRoot": false,
+      "Data": [
+        62
+      ],
+      "Childs": [
+        {
+          "Key": 90,
+          "IsRoot": false,
+          "Data": [
+            62
+          ],
+          "Childs": [
+            {
+              "Key": 19,
+              "IsRoot": false,
+              "Data": [
+                62
+              ],
+              "Childs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 60,
+      "IsRoot": false,
+      "Data": [
+        63,
+        65,
+        66
+      ],
+      "Childs": [
+        {
+          "Key": 88,
+          "IsRoot": false,
+          "Data": [
+            63
+          ],
+          "Childs": [
+            {
+              "Key": 18,
+              "IsRoot": false,
+              "Data": [
+                63
+              ],
+              "Childs": []
+            }
+          ]
+        },
+        {
+          "Key": 64,
+          "IsRoot": false,
+          "Data": [
+            65
+          ],
+          "Childs": [
+            {
+              "Key": 97,
+              "IsRoot": false,
+              "Data": [
+                65
+              ],
+              "Childs": [
+                {
+                  "Key": 88,
+                  "IsRoot": false,
+                  "Data": [
+                    65
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 36,
+                      "IsRoot": false,
+                      "Data": [
+                        65
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 39,
+                          "IsRoot": false,
+                          "Data": [
+                            65
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 57,
+                              "IsRoot": false,
+                              "Data": [
+                                65
+                              ],
+                              "Childs": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 99,
+          "IsRoot": false,
+          "Data": [
+            66
+          ],
+          "Childs": [
+            {
+              "Key": 64,
+              "IsRoot": false,
+              "Data": [
+                66
+              ],
+              "Childs": [
+                {
+                  "Key": 97,
+                  "IsRoot": false,
+                  "Data": [
+                    66
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 92,
+                      "IsRoot": false,
+                      "Data": [
+                        66
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 57,
+                          "IsRoot": false,
+                          "Data": [
+                            66
+                          ],
+                          "Childs": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 75,
+      "IsRoot": false,
+      "Data": [
+        64
+      ],
+      "Childs": [
+        {
+          "Key": 64,
+          "IsRoot": false,
+          "Data": [
+            64
+          ],
+          "Childs": [
+            {
+              "Key": 97,
+              "IsRoot": false,
+              "Data": [
+                64
+              ],
+              "Childs": [
+                {
+                  "Key": 92,
+                  "IsRoot": false,
+                  "Data": [
+                    64
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 57,
+                      "IsRoot": false,
+                      "Data": [
+                        64
+                      ],
+                      "Childs": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 64,
+      "IsRoot": false,
+      "Data": [
+        64,
+        65,
+        66
+      ],
+      "Childs": [
+        {
+          "Key": 97,
+          "IsRoot": false,
+          "Data": [
+            64,
+            65,
+            66
+          ],
+          "Childs": [
+            {
+              "Key": 92,
+              "IsRoot": false,
+              "Data": [
+                64,
+                66
+              ],
+              "Childs": [
+                {
+                  "Key": 57,
+                  "IsRoot": false,
+                  "Data": [
+                    64,
+                    66
+                  ],
+                  "Childs": []
+                }
+              ]
+            },
+            {
+              "Key": 88,
+              "IsRoot": false,
+              "Data": [
+                65
+              ],
+              "Childs": [
+                {
+                  "Key": 36,
+                  "IsRoot": false,
+                  "Data": [
+                    65
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 39,
+                      "IsRoot": false,
+                      "Data": [
+                        65
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 57,
+                          "IsRoot": false,
+                          "Data": [
+                            65
+                          ],
+                          "Childs": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 97,
+      "IsRoot": false,
+      "Data": [
+        64,
+        65,
+        66,
+        71
+      ],
+      "Childs": [
+        {
+          "Key": 92,
+          "IsRoot": false,
+          "Data": [
+            64,
+            66
+          ],
+          "Childs": [
+            {
+              "Key": 57,
+              "IsRoot": false,
+              "Data": [
+                64,
+                66
+              ],
+              "Childs": []
+            }
+          ]
+        },
+        {
+          "Key": 88,
+          "IsRoot": false,
+          "Data": [
+            65
+          ],
+          "Childs": [
+            {
+              "Key": 36,
+              "IsRoot": false,
+              "Data": [
+                65
+              ],
+              "Childs": [
+                {
+                  "Key": 39,
+                  "IsRoot": false,
+                  "Data": [
+                    65
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 57,
+                      "IsRoot": false,
+                      "Data": [
+                        65
+                      ],
+                      "Childs": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Key": 49,
+          "IsRoot": false,
+          "Data": [
+            71
+          ],
+          "Childs": [
+            {
+              "Key": 36,
+              "IsRoot": false,
+              "Data": [
+                71
+              ],
+              "Childs": [
+                {
+                  "Key": 66,
+                  "IsRoot": false,
+                  "Data": [
+                    71
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 92,
+                      "IsRoot": false,
+                      "Data": [
+                        71
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 104,
+                          "IsRoot": false,
+                          "Data": [
+                            71
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 32,
+                              "IsRoot": false,
+                              "Data": [
+                                71
+                              ],
+                              "Childs": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 57,
+      "IsRoot": false,
+      "Data": [
+        64,
+        65,
+        66
+      ],
+      "Childs": []
+    },
+    {
+      "Key": 99,
+      "IsRoot": false,
+      "Data": [
+        66
+      ],
+      "Childs": [
+        {
+          "Key": 64,
+          "IsRoot": false,
+          "Data": [
+            66
+          ],
+          "Childs": [
+            {
+              "Key": 97,
+              "IsRoot": false,
+              "Data": [
+                66
+              ],
+              "Childs": [
+                {
+                  "Key": 92,
+                  "IsRoot": false,
+                  "Data": [
+                    66
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 57,
+                      "IsRoot": false,
+                      "Data": [
+                        66
+                      ],
+                      "Childs": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 112,
+      "IsRoot": false,
+      "Data": [
+        71
+      ],
+      "Childs": [
+        {
+          "Key": 97,
+          "IsRoot": false,
+          "Data": [
+            71
+          ],
+          "Childs": [
+            {
+              "Key": 49,
+              "IsRoot": false,
+              "Data": [
+                71
+              ],
+              "Childs": [
+                {
+                  "Key": 36,
+                  "IsRoot": false,
+                  "Data": [
+                    71
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 66,
+                      "IsRoot": false,
+                      "Data": [
+                        71
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 92,
+                          "IsRoot": false,
+                          "Data": [
+                            71
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 104,
+                              "IsRoot": false,
+                              "Data": [
+                                71
+                              ],
+                              "Childs": [
+                                {
+                                  "Key": 32,
+                                  "IsRoot": false,
+                                  "Data": [
+                                    71
+                                  ],
+                                  "Childs": []
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 49,
+      "IsRoot": false,
+      "Data": [
+        71
+      ],
+      "Childs": [
+        {
+          "Key": 36,
+          "IsRoot": false,
+          "Data": [
+            71
+          ],
+          "Childs": [
+            {
+              "Key": 66,
+              "IsRoot": false,
+              "Data": [
+                71
+              ],
+              "Childs": [
+                {
+                  "Key": 92,
+                  "IsRoot": false,
+                  "Data": [
+                    71
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 104,
+                      "IsRoot": false,
+                      "Data": [
+                        71
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 32,
+                          "IsRoot": false,
+                          "Data": [
+                            71
+                          ],
+                          "Childs": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 66,
+      "IsRoot": false,
+      "Data": [
+        71
+      ],
+      "Childs": [
+        {
+          "Key": 92,
+          "IsRoot": false,
+          "Data": [
+            71
+          ],
+          "Childs": [
+            {
+              "Key": 104,
+              "IsRoot": false,
+              "Data": [
+                71
+              ],
+              "Childs": [
+                {
+                  "Key": 32,
+                  "IsRoot": false,
+                  "Data": [
+                    71
+                  ],
+                  "Childs": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 104,
+      "IsRoot": false,
+      "Data": [
+        71
+      ],
+      "Childs": [
+        {
+          "Key": 32,
+          "IsRoot": false,
+          "Data": [
+            71
+          ],
+          "Childs": []
+        }
+      ]
+    },
+    {
+      "Key": 115,
+      "IsRoot": false,
+      "Data": [
+        74,
+        76,
+        77,
+        79
+      ],
+      "Childs": [
+        {
+          "Key": 26,
+          "IsRoot": false,
+          "Data": [
+            74
+          ],
+          "Childs": []
+        },
+        {
+          "Key": 31,
+          "IsRoot": false,
+          "Data": [
+            77
+          ],
+          "Childs": [
+            {
+              "Key": 25,
+              "IsRoot": false,
+              "Data": [
+                77
+              ],
+              "Childs": [
+                {
+                  "Key": 17,
+                  "IsRoot": false,
+                  "Data": [
+                    77
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 38,
+                      "IsRoot": false,
+                      "Data": [
+                        77
+                      ],
+                      "Childs": [
+                        {
+                          "Key": 101,
+                          "IsRoot": false,
+                          "Data": [
+                            77
+                          ],
+                          "Childs": [
+                            {
+                              "Key": 16,
+                              "IsRoot": false,
+                              "Data": [
+                                77
+                              ],
+                              "Childs": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 101,
+      "IsRoot": false,
+      "Data": [
+        77,
+        82
+      ],
+      "Childs": [
+        {
+          "Key": 16,
+          "IsRoot": false,
+          "Data": [
+            77
+          ],
+          "Childs": []
+        },
+        {
+          "Key": 52,
+          "IsRoot": false,
+          "Data": [
+            82
+          ],
+          "Childs": [
+            {
+              "Key": 70,
+              "IsRoot": false,
+              "Data": [
+                82
+              ],
+              "Childs": [
+                {
+                  "Key": 121,
+                  "IsRoot": false,
+                  "Data": [
+                    82
+                  ],
+                  "Childs": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 59,
+      "IsRoot": false,
+      "Data": [
+        78
+      ],
+      "Childs": []
+    },
+    {
+      "Key": 120,
+      "IsRoot": false,
+      "Data": [
+        82
+      ],
+      "Childs": [
+        {
+          "Key": 101,
+          "IsRoot": false,
+          "Data": [
+            82
+          ],
+          "Childs": [
+            {
+              "Key": 52,
+              "IsRoot": false,
+              "Data": [
+                82
+              ],
+              "Childs": [
+                {
+                  "Key": 70,
+                  "IsRoot": false,
+                  "Data": [
+                    82
+                  ],
+                  "Childs": [
+                    {
+                      "Key": 121,
+                      "IsRoot": false,
+                      "Data": [
+                        82
+                      ],
+                      "Childs": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 52,
+      "IsRoot": false,
+      "Data": [
+        82
+      ],
+      "Childs": [
+        {
+          "Key": 70,
+          "IsRoot": false,
+          "Data": [
+            82
+          ],
+          "Childs": [
+            {
+              "Key": 121,
+              "IsRoot": false,
+              "Data": [
+                82
+              ],
+              "Childs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Key": 70,
+      "IsRoot": false,
+      "Data": [
+        82
+      ],
+      "Childs": [
+        {
+          "Key": 121,
+          "IsRoot": false,
+          "Data": [
+            82
+          ],
+          "Childs": []
+        }
+      ]
+    },
+    {
+      "Key": 121,
+      "IsRoot": false,
+      "Data": [
+        82
+      ],
+      "Childs": []
+    }
+  ]
+}
