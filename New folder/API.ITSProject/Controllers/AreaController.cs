@@ -17,7 +17,7 @@
         private readonly IAreaService _areaService;
 
         public AreaController(ILoggingService loggingService, IPagingService paggingService,
-            IIdentityService identityService, IAreaService areaService) : base(loggingService, paggingService, identityService)
+            IIdentityService identityService, IAreaService areaService, IPhotoService photoService) : base(loggingService, paggingService, identityService, photoService)
         {
             this._areaService = areaService;
         }
@@ -35,7 +35,6 @@
                     _ => _.Plans.Select(__ => __.Voters),
                     _ => _.Plans.Select(__ => __.PlanLocations.Select(___ => ___.Location).Select(____ => ____.Photos.Select(_____ => _____.Photo))),
                     _ => _.Photos.Select(__ => __.Photo)
-
                     ).FirstOrDefault();
                 if (area == null)
                 {

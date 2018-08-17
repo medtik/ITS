@@ -20,6 +20,7 @@
         private readonly IRepository<Plan> _planRepository;
         private readonly IRepository<PlanLocation> _planLocationRepository;
         private readonly IRepository<BusinessHour> _businessHourRepository;
+        private readonly IRepository<Review> _reviewRepository;
 
         public LocationService(ILoggingService loggingService, IUnitOfWork unitOfWork) : base(loggingService, unitOfWork)
         {
@@ -30,6 +31,7 @@
             _locationSuggestionRepository = unitOfWork.GetRepository<LocationSuggestion>();
             _planRepository = unitOfWork.GetRepository<Plan>();
             _planLocationRepository = unitOfWork.GetRepository<PlanLocation>();
+            _reviewRepository = unitOfWork.GetRepository<Review>();
         }
 
         public bool AcceptStatusLocationSuggestion(int suggestionId)
@@ -62,6 +64,26 @@
             {
                 _loggingService.Write(GetType().Name, nameof(AcceptStatusLocationSuggestion), ex);
 
+                return false;
+            }
+        }
+
+        public bool AddReview(Review review)
+        {
+            try
+            {
+                using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required))
+                {
+                    _reviewRepository.Create(review);
+
+                    _unitOfWork.SaveChanges();
+                    scope.Complete();
+                    return true;
+                }//end scope
+            }
+            catch (Exception ex)
+            {
+                _loggingService.Write(GetType().Name, nameof(Create), ex);
                 return false;
             }
         }

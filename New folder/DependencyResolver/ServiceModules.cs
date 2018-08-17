@@ -29,6 +29,7 @@ namespace DependencyResolver
             Bind<IQuestionService>().To<QuestionService>();
             Bind<IPlanService>().To<PlanService>();
             Bind<IGroupService>().To<GroupService>();
+            Bind<IPhotoService>().To<PhotoService>();
 
             //identity
             Bind<IIdentityService>().To<IdentityService>();

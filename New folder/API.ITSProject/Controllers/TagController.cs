@@ -18,7 +18,7 @@
         private readonly ITagService _tagService;
 
         public TagController(ILoggingService loggingService, IPagingService paggingService, 
-            IIdentityService identityService, ITagService tagService) : base(loggingService, paggingService, identityService)
+            IIdentityService identityService, ITagService tagService, IPhotoService photoService) : base(loggingService, paggingService, identityService, photoService)
         {
             this._tagService = tagService;
         }

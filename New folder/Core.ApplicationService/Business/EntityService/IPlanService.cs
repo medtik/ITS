@@ -19,6 +19,8 @@
 
         bool Create(Note planNote);
 
+        bool Update(Plan plan);
+
         bool Create(LocationSuggestion locationSuggestion);
 
         bool Delete(Plan plan);

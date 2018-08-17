@@ -5,6 +5,25 @@
     using System.Runtime.Serialization;
 
     [DataContract(Name = "User")]
+    public class UpdateUserViewModels
+    {
+        [DataMember]
+        public string Name { get; set; }
+
+        [DataMember]
+        public string PhoneNumber { get; set; }
+
+        [DataMember]
+        public string Address { get; set; }
+
+        [DataMember]
+        public DateTimeOffset Birthdate { get; set; }
+
+        [DataMember]
+        public string Avatar { get; set; }
+    }
+
+    [DataContract(Name = "User")]
     public class SearchUserViewModels
     {
         [DataMember]

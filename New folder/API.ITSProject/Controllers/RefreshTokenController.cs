@@ -5,10 +5,11 @@
     using Core.ApplicationService.Business.IdentityService;
     using Core.ApplicationService.Business.LogService;
     using Core.ApplicationService.Business.PagingService;
+    using Core.ApplicationService.Business.EntityService;
 
     public class RefreshTokenController : _BaseController
     {
-        public RefreshTokenController(ILoggingService loggingService, IPagingService paggingService, IIdentityService identityService) : base(loggingService, paggingService, identityService)
+        public RefreshTokenController(ILoggingService loggingService, IPagingService paggingService, IIdentityService identityService, IPhotoService photoService) : base(loggingService, paggingService, identityService, photoService)
         {
         }
 

@@ -26,7 +26,7 @@
 
         public GroupController(ILoggingService loggingService, IPagingService paggingService, 
             IIdentityService identityService, IGroupService groupService, IPlanService planService,
-            IUserService userService) : base(loggingService, paggingService, identityService)
+            IUserService userService, IPhotoService photoService) : base(loggingService, paggingService, identityService, photoService)
         {
             client = new HttpClient();
             client.BaseAddress = new Uri("https://exp.host");

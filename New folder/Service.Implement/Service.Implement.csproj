@@ -49,6 +49,7 @@
     <Compile Include="Entity\AreaService.cs" />
     <Compile Include="Entity\GroupService.cs" />
     <Compile Include="Entity\LocationService.cs" />
+    <Compile Include="Entity\PhotoService.cs" />
     <Compile Include="Entity\PlanService.cs" />
     <Compile Include="Entity\QuestionService.cs" />
     <Compile Include="Entity\TagService.cs" />

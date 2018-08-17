@@ -19,7 +19,7 @@
         private readonly ILocationService _locationService;
 
         public PlanController(ILoggingService loggingService, IPagingService paggingService,
-            IIdentityService identityService, IPlanService planService, ILocationService locationService) : base(loggingService, paggingService, identityService)
+            IIdentityService identityService, IPlanService planService, ILocationService locationService, IPhotoService photoService) : base(loggingService, paggingService, identityService, photoService)
         {
             this._planService = planService;
             this._locationService = locationService;
@@ -197,6 +197,30 @@
         #endregion
 
         #region Put
+        [HttpPut]
+        [Route("api/Plan/UpdatePlan")]
+        public IHttpActionResult UpdatePlan(UpdatePlanViewModels viewModels)
+        {
+            try
+            {
+                Plan plan = _planService.Find(viewModels.Id);
+                if (plan == null)
+                    return BadRequest();
+                plan.StartDate = viewModels.StartDate;
+                plan.EndDate = viewModels.EndDate;
+                plan.Name = viewModels.Name;
+
+                _planService.Update(plan);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _loggingService.Write(GetType().Name, nameof(UpdatePlan), ex);
+
+                return InternalServerError(ex);
+            }
+        }
+
         [HttpPut]
         [Route("api/Plan/PublicPlan")]
         public IHttpActionResult PublicPlan(int planId)

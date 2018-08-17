@@ -8,6 +8,8 @@
 
     public interface ILocationService
     {
+        bool AddReview(Review review);
+
         bool Create(Location location, Photo priamryPhoto, IEnumerable<Photo> photos, IEnumerable<BusinessHour> businessHours, int[] tagList);
 
         bool Delete(int locationId);

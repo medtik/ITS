@@ -4,6 +4,25 @@
     using System.ComponentModel.DataAnnotations;
     using System.Runtime.Serialization;
 
+    [DataContract]
+    public class ReviewViewModels
+    {
+        [DataMember]
+        public int LocationId { get; set; }
+
+        [DataMember]
+        public string Title { get; set; }
+
+        [DataMember]
+        public string Description { get; set; }
+
+        [DataMember, Range(0.0, 5.0, ErrorMessage = "Invalid range (0.0 - 5.0)")]
+        public float Rating { get; set; }
+
+        [DataMember]
+        public IEnumerable<string> Photos { get; set; }
+    }
+
     [DataContract(Name = "Location")]
     public class LocationViewModels
     {

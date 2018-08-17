@@ -50,6 +50,7 @@
     <Compile Include="Business\EntityService\ITagService.cs" />
     <Compile Include="Business\EntityService\IUserService.cs" />
     <Compile Include="Business\IdentityService\IIdentityService.cs" />
+    <Compile Include="Business\EntityService\IPhotoService.cs" />
     <Compile Include="Business\LogService\ILoggingService.cs" />
     <Compile Include="Business\MailService\IMailService.cs" />
     <Compile Include="Business\PagingService\IPagingService.cs" />

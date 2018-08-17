@@ -35,5 +35,7 @@
         IEnumerable<RefreshToken> GetAllRefreshTokens();
 
         Task<bool> ChangePassword(string username, string newPassword);
+
+        void SaveChanges();
     }
 }

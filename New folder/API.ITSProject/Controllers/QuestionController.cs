@@ -19,8 +19,7 @@
         private readonly ITagService _tagService;
 
         public QuestionController(ILoggingService loggingService, IPagingService paggingService, 
-            IIdentityService identityService, IQuestionService questionService, ITagService tagService) : 
-            base(loggingService, paggingService, identityService)
+            IIdentityService identityService, IQuestionService questionService, ITagService tagService, IPhotoService photoService) : base(loggingService, paggingService, identityService, photoService)
         {
             this._questionService = questionService;
             this._tagService = tagService;

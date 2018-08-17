@@ -244,6 +244,11 @@
                 return false;
             }
         }
+
+        public void SaveChanges()
+        {
+            _dbContext.SaveChanges();
+        }
         #endregion
     }
 }

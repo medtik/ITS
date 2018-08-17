@@ -21,10 +21,11 @@
         private readonly IPlanService _planService;
 
         public UserController(ILoggingService loggingService, IPagingService paggingService, 
-            IIdentityService identityService, IUserService userService, IPlanService planService) : base(loggingService, paggingService, identityService)
+            IIdentityService identityService, IUserService userService, IPlanService planService, IPhotoService photoService) : base(loggingService, paggingService, identityService, photoService)
         {
             this._userService = userService;
             this._planService = planService;
+            
         }
 
         #region Get
@@ -252,6 +253,36 @@
         #endregion
 
         #region Put
+        [HttpPut]
+        [Authorize, Route("api/User/Update")]
+        public async Task<IHttpActionResult> UpdateUser(UpdateUserViewModels viewModels)
+        {
+            try
+            {
+                User userInfo = await CurrentUser();
+                Account accountInfo = (await _identityService.FindAccount(User.Identity.GetUserId())).Data as Account;
+
+                userInfo.Address = viewModels.Address;
+                userInfo.Avatar = viewModels.Avatar;
+                userInfo.Birthdate = viewModels.Birthdate;
+                userInfo.FullName = viewModels.Name;
+                accountInfo.PhoneNumber = viewModels.PhoneNumber;
+
+                bool user = _userService.Update(userInfo);
+                _identityService.SaveChanges();
+                if (user)
+                    return Ok();
+                else
+                    return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                _loggingService.Write(GetType().Name, nameof(UpdateUser), ex);
+
+                return InternalServerError(ex);
+            }
+        }
+
         [HttpPut]
         [Authorize, Route("api/User/SetMobileToken")]
         public async Task<IHttpActionResult> SetMobileToken(string token)
