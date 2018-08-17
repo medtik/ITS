@@ -21,6 +21,7 @@ namespace Service.Implement.Entity
         private readonly IRepository<PlanLocation> _planLocationRepository;
         private readonly IRepository<LocationSuggestion> _locationSuggestionRepository;
         private readonly IRepository<Note> _noteRepository;
+        private readonly IRepository<Location> _locationRepository;
         private HttpClient client;
 
         
@@ -38,6 +39,7 @@ namespace Service.Implement.Entity
             _planLocationRepository = unitOfWork.GetRepository<PlanLocation>();
             _noteRepository = unitOfWork.GetRepository<Note>();
             _locationSuggestionRepository = unitOfWork.GetRepository<LocationSuggestion>();
+            _locationRepository = unitOfWork.GetRepository<Location>();
 
             client = new HttpClient {BaseAddress = new Uri("https://maps.googleapis.com")};
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -260,8 +262,8 @@ namespace Service.Implement.Entity
                     DateTimeOffset currentDate = plan.StartDate.AddDays(i);
 
                     Dictionary<NessecityType, Location> nessecityLocationMap;
-                    PolulateNecessityLocations(plan, locations, currentDate, out nessecityLocationMap);
-                    PolulateEntertainmentLocations(plan, locations, currentDate,nessecityLocationMap);
+                    PolulateNecessityLocations(plan, locations, currentDate, out nessecityLocationMap, i);
+                    PolulateEntertainmentLocations(plan, locations, currentDate, nessecityLocationMap);
                 }
 
                 _repository.Create(plan);
@@ -274,21 +276,77 @@ namespace Service.Implement.Entity
                 return null;
             }
         }
-        
+
         private void PolulateNecessityLocations(
             Plan plan,
             List<TreeViewModels> locations,
             DateTimeOffset currentDate,
-            out Dictionary<NessecityType, Location> nessecityLocationMap)
+            out Dictionary<NessecityType, Location> nessecityLocationMap, int dateIndex)
         {
             Location hotel = null;
             Location breakfast = null;
             Location lunch = null;
             Location dinner = null;
+            int maxList = dateIndex * 3 + 1;
 
-            #region findLocation
-            //locations
+            #region hotel
+            var findHotel = locations.Where(_ => _.Categories == "Nơi ở").OrderByDescending(_ => _.Percent);
+            if (findHotel.ElementAtOrDefault(0) != null)
+            {
+                hotel = _locationRepository.Get(_ => _.Id == findHotel.ElementAtOrDefault(0).Id, _ => _.BusinessHours);
+            }
+            #endregion
+            #region breakfast
+            TimeSpan breakFastTime = new TimeSpan(8, 30, 00);
+            TimeSpan lunchTime = new TimeSpan(12, 00, 00);
+            TimeSpan dinnerTime = new TimeSpan(17, 30, 00);
 
+            locations.ForEach(_ =>
+            {
+                var tmpLocation = _locationRepository.Get(__ => __.Id == findHotel.ElementAtOrDefault(0).Id, __ => __.BusinessHours);
+
+                if (tmpLocation != null)
+                {
+                    if (breakfast == null)
+                    {
+                        tmpLocation.BusinessHours.ToList().ForEach(__ =>
+                        {
+                            if (IsInRange(__.OpenTime, __.CloseTime, breakFastTime))
+                            {
+                                if (__.Day.Contains(ParseDate(currentDate)))
+                                {
+                                    breakfast = tmpLocation;
+                                }
+                            }
+                        });
+                    }
+                    else if (lunch == null)
+                    {
+                        tmpLocation.BusinessHours.ToList().ForEach(__ =>
+                        {
+                            if (IsInRange(__.OpenTime, __.CloseTime, lunchTime))
+                            {
+                                if (__.Day.Contains(ParseDate(currentDate)))
+                                {
+                                    lunch = tmpLocation;
+                                }
+                            }
+                        });
+                    } else if (dinner == null)
+                    {
+                        tmpLocation.BusinessHours.ToList().ForEach(__ =>
+                        {
+                            if (IsInRange(__.OpenTime, __.CloseTime, dinnerTime))
+                            {
+                                if (__.Day.Contains(ParseDate(currentDate)))
+                                {
+                                    dinner = tmpLocation;
+                                }
+                            }
+                        });
+                    }
+                }
+            });
             #endregion
 
             if (hotel == null ||
@@ -296,6 +354,13 @@ namespace Service.Implement.Entity
                 lunch == null ||
                 dinner == null)
             {
+                var selector = locations.FirstOrDefault(_ => _.Id == breakfast.Id);
+                locations.Remove(selector);
+                selector = locations.FirstOrDefault(_ => _.Id == lunch.Id);
+                locations.Remove(selector);
+                selector = locations.FirstOrDefault(_ => _.Id == dinner.Id);
+                locations.Remove(selector);
+
                 nessecityLocationMap = new Dictionary<NessecityType, Location>();
                 nessecityLocationMap[NessecityType.Hotel] = hotel;
                 nessecityLocationMap[NessecityType.Breakfast] = breakfast;
@@ -314,7 +379,19 @@ namespace Service.Implement.Entity
             DateTimeOffset currentDate,
             Dictionary<NessecityType, Location> nessecityLocationMap)
         {
-            
+
+        }
+
+        private string ParseDate(DateTimeOffset currentDate)
+        {
+            string date = currentDate.DayOfWeek.ToString("d");
+            int dateValue = int.Parse(date) + 1;
+            return dateValue.ToString();
+        }
+
+        private bool IsInRange(TimeSpan start, TimeSpan end, TimeSpan time)
+        {
+            return (time > start) && (time < end);
         }
 
         private async void FetchGoogleRoute(
