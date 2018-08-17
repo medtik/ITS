@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Web;
 
 namespace Service.Implement.Entity
 {
@@ -18,6 +21,9 @@ namespace Service.Implement.Entity
         private readonly IRepository<PlanLocation> _planLocationRepository;
         private readonly IRepository<LocationSuggestion> _locationSuggestionRepository;
         private readonly IRepository<Note> _noteRepository;
+        private HttpClient client;
+
+        
         private enum NessecityType
         {
             Hotel,
@@ -32,6 +38,9 @@ namespace Service.Implement.Entity
             _planLocationRepository = unitOfWork.GetRepository<PlanLocation>();
             _noteRepository = unitOfWork.GetRepository<Note>();
             _locationSuggestionRepository = unitOfWork.GetRepository<LocationSuggestion>();
+
+            client = new HttpClient {BaseAddress = new Uri("https://maps.googleapis.com")};
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         public bool UpdatePlanLocation(PlanLocation entity)
@@ -307,5 +316,32 @@ namespace Service.Implement.Entity
         {
             
         }
+
+        private async void FetchGoogleRoute(
+            Location origin, 
+            Location destination,
+            List<Location> waypoints)
+        {
+            
+            var uriBuilder = new UriBuilder("/maps/api/directions/json");
+            var query = HttpUtility.ParseQueryString(string.Empty);
+            query["key"] = "AIzaSyDN8SAnYcPJYAoGUszfiRqvVzKH2mCUrVc";
+            query["language"] = "vi";
+            query["units"] = "metric";
+            query["origin"] =  $"{origin.Latitude},{origin.Longitude}";
+            query["destination"] = $"{destination.Latitude},{destination.Longitude}";
+            StringBuilder waypointsStringBuilder = new StringBuilder();
+            waypointsStringBuilder.Append("optimize:true");
+            foreach (Location waypoint in waypoints)
+            {
+                
+            }
+            
+            query["waypoints"] = waypointsStringBuilder.ToString();
+            uriBuilder.Query = query.ToString();
+            await client.GetAsync(uriBuilder.ToString());
+        }
+        
+        
     }
 }

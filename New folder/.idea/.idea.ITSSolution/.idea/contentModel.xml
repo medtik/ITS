@@ -141,6 +141,7 @@
           <e p="GroupInvitation.cs" t="Include" />
           <e p="Helper" t="Include">
             <e p="Clone.cs" t="Include" />
+            <e p="TreeViewModels.cs" t="Include" />
           </e>
           <e p="Location.cs" t="Include" />
           <e p="LocationPhoto.cs" t="Include" />
@@ -234,45 +235,9 @@
         </e>
         <e p="Infrastructure.Entity.csproj" t="IncludeRecursive" />
         <e p="Migrations" t="Include">
-          <e p="201807210508021_123.cs" t="Include" />
-          <e p="201807210508021_123.Designer.cs" t="Include" />
-          <e p="201807210508021_123.resx" t="Include" />
-          <e p="201807220407203_formatDay.cs" t="Include" />
-          <e p="201807220407203_formatDay.Designer.cs" t="Include" />
-          <e p="201807220407203_formatDay.resx" t="Include" />
-          <e p="201807270743156_editDatabase.cs" t="Include" />
-          <e p="201807270743156_editDatabase.Designer.cs" t="Include" />
-          <e p="201807270743156_editDatabase.resx" t="Include" />
-          <e p="201807270751046_editDatabase2.cs" t="Include" />
-          <e p="201807270751046_editDatabase2.Designer.cs" t="Include" />
-          <e p="201807270751046_editDatabase2.resx" t="Include" />
-          <e p="201808030616059_8_3_2018.cs" t="Include" />
-          <e p="201808030616059_8_3_2018.Designer.cs" t="Include" />
-          <e p="201808030616059_8_3_2018.resx" t="Include" />
-          <e p="201808030620426_8_3_2018_2.cs" t="Include" />
-          <e p="201808030620426_8_3_2018_2.Designer.cs" t="Include" />
-          <e p="201808030620426_8_3_2018_2.resx" t="Include" />
-          <e p="201808050322113_8_5_2018.cs" t="Include" />
-          <e p="201808050322113_8_5_2018.Designer.cs" t="Include" />
-          <e p="201808050322113_8_5_2018.resx" t="Include" />
-          <e p="201808050326126_8_5_2018_2.cs" t="Include" />
-          <e p="201808050326126_8_5_2018_2.Designer.cs" t="Include" />
-          <e p="201808050326126_8_5_2018_2.resx" t="Include" />
-          <e p="201808050329318_8_5_2018_3.cs" t="Include" />
-          <e p="201808050329318_8_5_2018_3.Designer.cs" t="Include" />
-          <e p="201808050329318_8_5_2018_3.resx" t="Include" />
-          <e p="201808050444090_8_5_2018_123.cs" t="Include" />
-          <e p="201808050444090_8_5_2018_123.Designer.cs" t="Include" />
-          <e p="201808050444090_8_5_2018_123.resx" t="Include" />
-          <e p="201808081049468_8_8_2018.cs" t="Include" />
-          <e p="201808081049468_8_8_2018.Designer.cs" t="Include" />
-          <e p="201808081049468_8_8_2018.resx" t="Include" />
-          <e p="201808110433329_8_11_2018.cs" t="Include" />
-          <e p="201808110433329_8_11_2018.Designer.cs" t="Include" />
-          <e p="201808110433329_8_11_2018.resx" t="Include" />
-          <e p="201808130725129_13_8_2018.cs" t="Include" />
-          <e p="201808130725129_13_8_2018.Designer.cs" t="Include" />
-          <e p="201808130725129_13_8_2018.resx" t="Include" />
+          <e p="201808170912095_recreate_Database.cs" t="Include" />
+          <e p="201808170912095_recreate_Database.Designer.cs" t="Include" />
+          <e p="201808170912095_recreate_Database.resx" t="Include" />
           <e p="Configuration.cs" t="Include" />
         </e>
         <e p="obj" t="ExcludeRecursive" />
@@ -292,7 +257,6 @@
         <e p="App.config" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="Configuration" t="Include">
-          <e p="AccountConfig.cs" t="Include" />
           <e p="ClientConfig.cs" t="Include" />
           <e p="RefreshTokenConfig.cs" t="Include" />
         </e>
@@ -303,9 +267,9 @@
         <e p="Infrastructure.Identity.csproj" t="IncludeRecursive" />
         <e p="MachineKeyDataProtector.cs" t="Include" />
         <e p="Migrations" t="Include">
-          <e p="201807280417143_refreshToken.cs" t="Include" />
-          <e p="201807280417143_refreshToken.Designer.cs" t="Include" />
-          <e p="201807280417143_refreshToken.resx" t="Include" />
+          <e p="201808170910264_recreat_Database.cs" t="Include" />
+          <e p="201808170910264_recreat_Database.Designer.cs" t="Include" />
+          <e p="201808170910264_recreat_Database.resx" t="Include" />
           <e p="Configuration.cs" t="Include" />
         </e>
         <e p="Models" t="Include">
