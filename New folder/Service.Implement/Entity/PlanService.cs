@@ -18,6 +18,14 @@ namespace Service.Implement.Entity
         private readonly IRepository<PlanLocation> _planLocationRepository;
         private readonly IRepository<LocationSuggestion> _locationSuggestionRepository;
         private readonly IRepository<Note> _noteRepository;
+        private enum NessecityType
+        {
+            Hotel,
+            Breakfast,
+            Lunch,
+            Dinner
+        }
+
 
         public PlanService(ILoggingService loggingService, IUnitOfWork unitOfWork) : base(loggingService, unitOfWork)
         {
@@ -37,7 +45,7 @@ namespace Service.Implement.Entity
 
                     scope.Complete();
                     return true;
-                }//end scope
+                } //end scope
             }
             catch (Exception ex)
             {
@@ -93,25 +101,25 @@ namespace Service.Implement.Entity
 
         public IQueryable<Plan> GetFeaturedTrip()
             => _repository.SearchAsQueryable(_ => _.IsPublic, _ => _.Voters, _ => _.PlanLocations
-                            .Select(__ => __.Location)
-                            .Select(___ => ___.Photos.Select(____ => ____.Photo)), _ => _.Area)
-                            .OrderByDescending(_ => _.Voters.Count()).Take(10);
+                    .Select(__ => __.Location)
+                    .Select(___ => ___.Photos.Select(____ => ____.Photo)), _ => _.Area)
+                .OrderByDescending(_ => _.Voters.Count()).Take(10);
 
         public IQueryable<Plan> GetGroupPlans(int groupId)
             => _repository.SearchAsQueryable(_ => _.GroupId == groupId,
-                    _ =>
-                        _.PlanLocations.Select(__ => __.Location).Select(___ => ___.Photos.Select(_____ => _____.Photo)),
-                        _ => _.PlanLocations.Select(__ => __.Location.Reviews),
-                        _ => _.Notes,
-                        _ => _.Area, _ => _.Group);
+                _ =>
+                    _.PlanLocations.Select(__ => __.Location).Select(___ => ___.Photos.Select(_____ => _____.Photo)),
+                _ => _.PlanLocations.Select(__ => __.Location.Reviews),
+                _ => _.Notes,
+                _ => _.Area, _ => _.Group);
 
         public IQueryable<Plan> GetPlans(int userId)
             => _repository.SearchAsQueryable(_ => _.MemberId == userId,
                 _ =>
                     _.PlanLocations.Select(__ => __.Location).Select(___ => ___.Photos.Select(_____ => _____.Photo)),
-                    _ => _.PlanLocations.Select(__ => __.Location.Reviews),
-                    _ => _.Notes,
-                    _ => _.Area, _ => _.Group);
+                _ => _.PlanLocations.Select(__ => __.Location.Reviews),
+                _ => _.Notes,
+                _ => _.Area, _ => _.Group);
 
         public PlanLocation FindPlanLocation(int id)
             => _planLocationRepository.Get(_ => _.Id == id);
@@ -132,7 +140,7 @@ namespace Service.Implement.Entity
 
                     scope.Complete();
                     return true;
-                }//end scope
+                } //end scope
             }
             catch (Exception ex)
             {
@@ -152,7 +160,7 @@ namespace Service.Implement.Entity
 
                     scope.Complete();
                     return true;
-                }//end scope
+                } //end scope
             }
             catch (Exception ex)
             {
@@ -175,8 +183,9 @@ namespace Service.Implement.Entity
 
                         scope.Complete();
                         return true;
-                    }//end scope
+                    } //end scope
                 }
+
                 return false;
             }
             catch (Exception ex)
@@ -197,7 +206,7 @@ namespace Service.Implement.Entity
 
                     scope.Complete();
                     return true;
-                }//end scope
+                } //end scope
             }
             catch (Exception ex)
             {
@@ -241,9 +250,11 @@ namespace Service.Implement.Entity
                 {
                     DateTimeOffset currentDate = plan.StartDate.AddDays(i);
 
-                    PolulateNecessityLocations(plan, locations, currentDate);
-                    PolulateEntertainmentLocations(plan, locations, currentDate);
+                    Dictionary<NessecityType, Location> nessecityLocaionsMap;
+                    PolulateNecessityLocations(plan, locations, currentDate,out nessecityLocaionsMap);
+                    PolulateEntertainmentLocations(plan, locations, currentDate,nessecityLocaionsMap);
                 }
+
                 _repository.Create(plan);
                 _unitOfWork.SaveChanges();
                 return plan;
@@ -252,17 +263,47 @@ namespace Service.Implement.Entity
             {
                 _loggingService.Write(GetType().Name, nameof(CreateSuggestedPlan), ex);
                 return null;
-            }           
-        }
-
-        private void PolulateNecessityLocations(Plan plan, List<Location> locations, DateTimeOffset currentDate)
-        {
-            throw new NotImplementedException();
+            }
         }
         
-        private void PolulateEntertainmentLocations(Plan plan, List<Location> locations,DateTimeOffset currentDate)
+        private void PolulateNecessityLocations(
+            Plan plan,
+            List<Location> locations,
+            DateTimeOffset currentDate,
+            out Dictionary<NessecityType, Location> nessecityLocaionsMap)
         {
-            throw new NotImplementedException();
+            Location hotel = null;
+            Location breakfast = null;
+            Location lunch = null;
+            Location dinner = null;
+
+            // 
+            // Code here
+            //
+
+            if (hotel == null ||
+                breakfast == null ||
+                lunch == null ||
+                dinner == null)
+            {
+                nessecityLocaionsMap = new Dictionary<NessecityType, Location>();
+                nessecityLocaionsMap[NessecityType.Hotel] = hotel;
+                nessecityLocaionsMap[NessecityType.Breakfast] = breakfast;
+                nessecityLocaionsMap[NessecityType.Lunch] = lunch;
+                nessecityLocaionsMap[NessecityType.Dinner] = dinner;
+            }
+            else
+            {
+                throw new InvalidOperationException("Missing Necessity");
+            }
+        }
+
+        private void PolulateEntertainmentLocations(
+            Plan plan,
+            List<Location> locations,
+            DateTimeOffset currentDate,
+            Dictionary<NessecityType, Location> nessecityLocaionsMap)
+        {
         }
     }
 }
