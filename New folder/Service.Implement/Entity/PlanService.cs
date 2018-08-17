@@ -241,7 +241,7 @@ namespace Service.Implement.Entity
             return Clone.CloneObject(plan);
         }
 
-        public Plan CreateSuggestedPlan(Plan plan, List<Location> locations)
+        public Plan CreateSuggestedPlan(Plan plan, List<TreeViewModels> locations)
         {
             try
             {
@@ -251,7 +251,7 @@ namespace Service.Implement.Entity
                     DateTimeOffset currentDate = plan.StartDate.AddDays(i);
 
                     Dictionary<NessecityType, Location> nessecityLocationMap;
-                    PolulateNecessityLocations(plan, locations, currentDate,out nessecityLocationMap);
+                    PolulateNecessityLocations(plan, locations, currentDate, out nessecityLocationMap);
                     PolulateEntertainmentLocations(plan, locations, currentDate,nessecityLocationMap);
                 }
 
@@ -268,7 +268,7 @@ namespace Service.Implement.Entity
         
         private void PolulateNecessityLocations(
             Plan plan,
-            List<Location> locations,
+            List<TreeViewModels> locations,
             DateTimeOffset currentDate,
             out Dictionary<NessecityType, Location> nessecityLocationMap)
         {
@@ -277,9 +277,10 @@ namespace Service.Implement.Entity
             Location lunch = null;
             Location dinner = null;
 
-            // 
-            // Code here
-            //
+            #region findLocation
+            //locations
+
+            #endregion
 
             if (hotel == null ||
                 breakfast == null ||
@@ -300,7 +301,7 @@ namespace Service.Implement.Entity
 
         private void PolulateEntertainmentLocations(
             Plan plan,
-            List<Location> locations,
+            List<TreeViewModels> locations,
             DateTimeOffset currentDate,
             Dictionary<NessecityType, Location> nessecityLocationMap)
         {

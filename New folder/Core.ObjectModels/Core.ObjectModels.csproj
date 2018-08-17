@@ -54,6 +54,7 @@
     <Compile Include="Entities\ClaimOwnerRequest.cs" />
     <Compile Include="Entities\EnumType\RequestStatus.cs" />
     <Compile Include="Entities\Helper\Clone.cs" />
+    <Compile Include="Entities\Helper\TreeViewModels.cs" />
     <Compile Include="Entities\LocationPhoto.cs" />
     <Compile Include="Entities\StaticType\Category.cs" />
     <Compile Include="Entities\Group.cs" />

@@ -108,7 +108,7 @@
                 resultList.Add(result);
             }
             var locationListResult = resultList.OrderByDescending(_ => _.Reasons.Count);
-
+            
             return Ok();
         }
 
