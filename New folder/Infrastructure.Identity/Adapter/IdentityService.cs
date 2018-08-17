@@ -249,6 +249,19 @@
         {
             _dbContext.SaveChanges();
         }
+
+        public async Task<string> GetRole(string username)
+        {
+            Account identity = _dbContext.Set<Account>().Include(_ => _.Roles).FirstOrDefault(_ => _.UserName == username);
+            
+            if (identity != null)
+            {
+                string roleId = identity.Roles.FirstOrDefault().RoleId;
+                return (await _roleService.FindByIdAsync(roleId)).Name;
+            }
+            else
+                return null;
+        }
         #endregion
     }
 }

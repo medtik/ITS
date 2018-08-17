@@ -77,15 +77,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adapter\IdentityService.cs" />
-    <Compile Include="Configuration\AccountConfig.cs" />
     <Compile Include="Configuration\ClientConfig.cs" />
     <Compile Include="Configuration\RefreshTokenConfig.cs" />
     <Compile Include="Database\IdentityContext.cs" />
     <Compile Include="Database\IdentityITSContext.cs" />
     <Compile Include="MachineKeyDataProtector.cs" />
-    <Compile Include="Migrations\201807280417143_refreshToken.cs" />
-    <Compile Include="Migrations\201807280417143_refreshToken.Designer.cs">
-      <DependentUpon>201807280417143_refreshToken.cs</DependentUpon>
+    <Compile Include="Migrations\201808170910264_recreat_Database.cs" />
+    <Compile Include="Migrations\201808170910264_recreat_Database.Designer.cs">
+      <DependentUpon>201808170910264_recreat_Database.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
@@ -118,8 +117,8 @@
     <Folder Include="Models\Enum\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201807280417143_refreshToken.resx">
-      <DependentUpon>201807280417143_refreshToken.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201808170910264_recreat_Database.resx">
+      <DependentUpon>201808170910264_recreat_Database.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
