@@ -105,12 +105,10 @@ export default {
 
       return new Promise((resolve, reject) => {
         axiosInstance.post('api/Plan/AddSuggestion', {
-          "locationSuggestion": {
-            "planId": planId,
-            "locationIds": locations,
-            "planDay": planDay,
-            "comment": message
-          }
+          "planId": planId,
+          "locationIds": locations,
+          "planDay": planDay,
+          "comment": message
         })
           .then((value) => {
             resolve(value.data);

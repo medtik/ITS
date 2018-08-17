@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\Phong\.Rider2018.1\system\resharper-host\local\Transient\ReSharperHost\v12\SolutionCaches\_ITSSolution.1238059876.00" t="ExcludeRecursive" />
+    <e p="D:\Project\ITS\New folder" t="IncludeFlat">
+      <e p="API" t="Include" />
+      <e p="API.ITSProject" t="IncludeRecursive">
+        <e p="API.ITSProject.csproj" t="IncludeRecursive" />
+        <e p="App_Data" t="Include" />
+        <e p="App_Start" t="Include">
+          <e p="SwaggerConfig.cs" t="Include" />
+          <e p="WebApiConfig.cs" t="Include" />
+        </e>
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Controllers" t="Include">
+          <e p="_BaseController.cs" t="Include" />
+          <e p="AccountController.cs" t="Include" />
+          <e p="AreaController.cs" t="Include" />
+          <e p="GroupController.cs" t="Include" />
+          <e p="LocationController.cs" t="Include" />
+          <e p="PlanController.cs" t="Include" />
+          <e p="QuestionController.cs" t="Include" />
+          <e p="RefreshTokenController.cs" t="Include" />
+          <e p="TagController.cs" t="Include" />
+          <e p="UserController.cs" t="Include" />
+        </e>
+        <e p="CustomAttribute" t="Include">
+          <e p="AuthorizeRolesAttribute.cs" t="Include" />
+        </e>
+        <e p="Helper.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="packages.config" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+          <e p="PublishProfiles" t="Include">
+            <e p="ITSSolution - FTP.pubxml" t="Include" />
+            <e p="ITSSolution - Web Deploy.pubxml" t="Include" />
+          </e>
+        </e>
+        <e p="Provider" t="Include">
+          <e p="CustomOAuthServer.cs" t="Include" />
+          <e p="CustomRefreshTokenServer.cs" t="Include" />
+          <e p="ExternalLogin" t="Include">
+            <e p="_ExternalOAuthServer.cs" t="Include" />
+            <e p="FacebookAuthServer.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Resource" t="Include">
+          <e p="RecoverMail.html" t="Include" />
+          <e p="RoleType.cs" t="Include" />
+        </e>
+        <e p="Startup.cs" t="Include" />
+        <e p="Tree" t="Include">
+          <e p="tree.json" t="Include" />
+        </e>
+        <e p="ViewModels" t="Include">
+          <e p="_ModelBuilder.cs" t="Include" />
+          <e p="AreaViewModels.cs" t="Include" />
+          <e p="BusinessHourViewModels.cs" t="Include" />
+          <e p="CommentViewModels.cs" t="Include" />
+          <e p="GroupViewModels.cs" t="Include" />
+          <e p="LocationViewModels.cs" t="Include" />
+          <e p="PlanViewModels.cs" t="Include" />
+          <e p="QuestionViewModels.cs" t="Include" />
+          <e p="TagViewModels.cs" t="Include" />
+          <e p="TreeViewModels.cs" t="Include" />
+          <e p="UserViewModels.cs" t="Include" />
+        </e>
+        <e p="Web.config" t="Include" />
+        <e p="Web.Debug.config" t="Include" />
+        <e p="Web.Release.config" t="Include" />
+      </e>
+      <e p="Core" t="Include" />
+      <e p="Core.ApplicationService" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Business" t="Include">
+          <e p="Algorithm" t="Include">
+            <e p="ISearchTreeService.cs" t="Include" />
+          </e>
+          <e p="EntityService" t="Include">
+            <e p="IAnswerService.cs" t="Include" />
+            <e p="IAreaService.cs" t="Include" />
+            <e p="IGroupService.cs" t="Include" />
+            <e p="ILocationService.cs" t="Include" />
+            <e p="IPlanService.cs" t="Include" />
+            <e p="IQuestionService.cs" t="Include" />
+            <e p="ITagService.cs" t="Include" />
+            <e p="IUserService.cs" t="Include" />
+          </e>
+          <e p="IdentityService" t="Include">
+            <e p="IIdentityService.cs" t="Include" />
+          </e>
+          <e p="LogService" t="Include">
+            <e p="ILoggingService.cs" t="Include" />
+          </e>
+          <e p="MailService" t="Include">
+            <e p="IMailService.cs" t="Include" />
+          </e>
+          <e p="PagingService" t="Include">
+            <e p="IPagingService.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Core.ApplicationService.csproj" t="IncludeRecursive" />
+        <e p="Database" t="Include">
+          <e p="Entities" t="Include">
+            <e p="IEntityContext.cs" t="Include" />
+          </e>
+          <e p="IDbContext.cs" t="Include" />
+          <e p="Identities" t="Include">
+            <e p="IIdentityContext.cs" t="Include" />
+          </e>
+          <e p="Log" t="Include">
+            <e p="ILogContext.cs" t="Include" />
+          </e>
+        </e>
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+      </e>
+      <e p="Core.ObjectModels" t="IncludeRecursive">
+        <e p="Algorithm" t="Include">
+          <e p="Node.cs" t="Include" />
+          <e p="Tree.cs" t="Include" />
+        </e>
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Core.ObjectModels.csproj" t="IncludeRecursive" />
+        <e p="Entities" t="Include">
+          <e p="_BaseEntity.cs" t="Include" />
+          <e p="Answer.cs" t="Include" />
+          <e p="Area.cs" t="Include" />
+          <e p="AreaPhoto.cs" t="Include" />
+          <e p="BusinessHour.cs" t="Include" />
+          <e p="ChangeRequest.cs" t="Include" />
+          <e p="ClaimOwnerRequest.cs" t="Include" />
+          <e p="EnumType" t="Include">
+            <e p="RequestStatus.cs" t="Include" />
+          </e>
+          <e p="Group.cs" t="Include" />
+          <e p="GroupInvitation.cs" t="Include" />
+          <e p="Helper" t="Include">
+            <e p="Clone.cs" t="Include" />
+          </e>
+          <e p="Location.cs" t="Include" />
+          <e p="LocationPhoto.cs" t="Include" />
+          <e p="LocationSuggestion.cs" t="Include" />
+          <e p="Note.cs" t="Include" />
+          <e p="Photo.cs" t="Include" />
+          <e p="Plan.cs" t="Include" />
+          <e p="PlanLocation.cs" t="Include" />
+          <e p="Question.cs" t="Include" />
+          <e p="Report.cs" t="Include" />
+          <e p="Review.cs" t="Include" />
+          <e p="StaticType" t="Include">
+            <e p="Category.cs" t="Include" />
+          </e>
+          <e p="Tag.cs" t="Include" />
+          <e p="User.cs" t="Include" />
+        </e>
+        <e p="Identity" t="Include">
+          <e p="_IdentityData.cs" t="Include" />
+          <e p="Client.cs" t="Include" />
+          <e p="Enum" t="Include">
+            <e p="ApplicationTypes.cs" t="Include" />
+          </e>
+          <e p="RefreshToken.cs" t="Include" />
+        </e>
+        <e p="Logs" t="Include">
+          <e p="Log.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="packages.config" t="Include" />
+        <e p="Pagination" t="Include">
+          <e p="Pager.cs" t="Include" />
+        </e>
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+      </e>
+      <e p="Core.ObjectService" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Core.ObjectService.csproj" t="IncludeRecursive" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="Repositories" t="Include">
+          <e p="IRepository.cs" t="Include" />
+          <e p="IUnitOfWork.cs" t="Include" />
+        </e>
+      </e>
+      <e p="DependencyResolver" t="IncludeRecursive">
+        <e p="App.config" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="DependencyResolver.csproj" t="IncludeRecursive" />
+        <e p="InfrastructureModules.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="packages.config" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="ServiceModules.cs" t="Include" />
+      </e>
+      <e p="Infrastructure" t="Include" />
+      <e p="Infrastructure.Entity" t="IncludeRecursive">
+        <e p="App.config" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Config" t="Include">
+          <e p="AnswerConfiguration.cs" t="Include" />
+          <e p="AreaConfiguration.cs" t="Include" />
+          <e p="AreaPhotoConfiguration.cs" t="Include" />
+          <e p="BusinessHourConfiguration.cs" t="Include" />
+          <e p="ChangeRequestConfiguration.cs" t="Include" />
+          <e p="ClaimOwnerRequestConfiguration.cs" t="Include" />
+          <e p="GroupConfiguration.cs" t="Include" />
+          <e p="GroupInvitationConfiguration.cs" t="Include" />
+          <e p="LocationConfiguration.cs" t="Include" />
+          <e p="LocationPhotoConfiguration.cs" t="Include" />
+          <e p="LocationSuggestionConfiguration.cs" t="Include" />
+          <e p="NoteConfiguration.cs" t="Include" />
+          <e p="PhotoConfiguration.cs" t="Include" />
+          <e p="PlanConfiguration.cs" t="Include" />
+          <e p="PlanLocationConfiguration.cs" t="Include" />
+          <e p="QuestionConfiguration.cs" t="Include" />
+          <e p="ReportConfiguration.cs" t="Include" />
+          <e p="ReviewConfiguration.cs" t="Include" />
+          <e p="TagConfiguration.cs" t="Include" />
+          <e p="UserConfiguration.cs" t="Include" />
+        </e>
+        <e p="Database" t="Include">
+          <e p="EntityContext.cs" t="Include" />
+          <e p="ITSContext.cs" t="Include" />
+        </e>
+        <e p="Infrastructure.Entity.csproj" t="IncludeRecursive" />
+        <e p="Migrations" t="Include">
+          <e p="201807210508021_123.cs" t="Include" />
+          <e p="201807210508021_123.Designer.cs" t="Include" />
+          <e p="201807210508021_123.resx" t="Include" />
+          <e p="201807220407203_formatDay.cs" t="Include" />
+          <e p="201807220407203_formatDay.Designer.cs" t="Include" />
+          <e p="201807220407203_formatDay.resx" t="Include" />
+          <e p="201807270743156_editDatabase.cs" t="Include" />
+          <e p="201807270743156_editDatabase.Designer.cs" t="Include" />
+          <e p="201807270743156_editDatabase.resx" t="Include" />
+          <e p="201807270751046_editDatabase2.cs" t="Include" />
+          <e p="201807270751046_editDatabase2.Designer.cs" t="Include" />
+          <e p="201807270751046_editDatabase2.resx" t="Include" />
+          <e p="201808030616059_8_3_2018.cs" t="Include" />
+          <e p="201808030616059_8_3_2018.Designer.cs" t="Include" />
+          <e p="201808030616059_8_3_2018.resx" t="Include" />
+          <e p="201808030620426_8_3_2018_2.cs" t="Include" />
+          <e p="201808030620426_8_3_2018_2.Designer.cs" t="Include" />
+          <e p="201808030620426_8_3_2018_2.resx" t="Include" />
+          <e p="201808050322113_8_5_2018.cs" t="Include" />
+          <e p="201808050322113_8_5_2018.Designer.cs" t="Include" />
+          <e p="201808050322113_8_5_2018.resx" t="Include" />
+          <e p="201808050326126_8_5_2018_2.cs" t="Include" />
+          <e p="201808050326126_8_5_2018_2.Designer.cs" t="Include" />
+          <e p="201808050326126_8_5_2018_2.resx" t="Include" />
+          <e p="201808050329318_8_5_2018_3.cs" t="Include" />
+          <e p="201808050329318_8_5_2018_3.Designer.cs" t="Include" />
+          <e p="201808050329318_8_5_2018_3.resx" t="Include" />
+          <e p="201808050444090_8_5_2018_123.cs" t="Include" />
+          <e p="201808050444090_8_5_2018_123.Designer.cs" t="Include" />
+          <e p="201808050444090_8_5_2018_123.resx" t="Include" />
+          <e p="201808081049468_8_8_2018.cs" t="Include" />
+          <e p="201808081049468_8_8_2018.Designer.cs" t="Include" />
+          <e p="201808081049468_8_8_2018.resx" t="Include" />
+          <e p="201808110433329_8_11_2018.cs" t="Include" />
+          <e p="201808110433329_8_11_2018.Designer.cs" t="Include" />
+          <e p="201808110433329_8_11_2018.resx" t="Include" />
+          <e p="201808130725129_13_8_2018.cs" t="Include" />
+          <e p="201808130725129_13_8_2018.Designer.cs" t="Include" />
+          <e p="201808130725129_13_8_2018.resx" t="Include" />
+          <e p="Configuration.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="packages.config" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="Repositories" t="Include">
+          <e p="Repository.cs" t="Include" />
+          <e p="UnitOfWork.cs" t="Include" />
+        </e>
+      </e>
+      <e p="Infrastructure.Identity" t="IncludeRecursive">
+        <e p="Adapter" t="Include">
+          <e p="IdentityService.cs" t="Include" />
+        </e>
+        <e p="App.config" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Configuration" t="Include">
+          <e p="AccountConfig.cs" t="Include" />
+          <e p="ClientConfig.cs" t="Include" />
+          <e p="RefreshTokenConfig.cs" t="Include" />
+        </e>
+        <e p="Database" t="Include">
+          <e p="IdentityContext.cs" t="Include" />
+          <e p="IdentityITSContext.cs" t="Include" />
+        </e>
+        <e p="Infrastructure.Identity.csproj" t="IncludeRecursive" />
+        <e p="MachineKeyDataProtector.cs" t="Include" />
+        <e p="Migrations" t="Include">
+          <e p="201807280417143_refreshToken.cs" t="Include" />
+          <e p="201807280417143_refreshToken.Designer.cs" t="Include" />
+          <e p="201807280417143_refreshToken.resx" t="Include" />
+          <e p="Configuration.cs" t="Include" />
+        </e>
+        <e p="Models" t="Include">
+          <e p="Account.cs" t="Include" />
+          <e p="Enum" t="Include" />
+          <e p="Role.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="packages.config" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="Service" t="Include">
+          <e p="AccountService.cs" t="Include" />
+          <e p="ClientService.cs" t="Include" />
+          <e p="RefreshTokenService.cs" t="Include" />
+          <e p="RoleService.cs" t="Include" />
+        </e>
+      </e>
+      <e p="Infrastructure.Logging" t="IncludeRecursive">
+        <e p="App.config" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Config" t="Include">
+          <e p="LogConfiguration.cs" t="Include" />
+        </e>
+        <e p="Database" t="Include">
+          <e p="ITSLoggingContext.cs" t="Include" />
+          <e p="LogContext.cs" t="Include" />
+        </e>
+        <e p="Infrastructure.Logging.csproj" t="IncludeRecursive" />
+        <e p="Migrations" t="Include">
+          <e p="201807171534133_create_log_object.cs" t="Include" />
+          <e p="201807171534133_create_log_object.Designer.cs" t="Include" />
+          <e p="201807171534133_create_log_object.resx" t="Include" />
+          <e p="Configuration.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="packages.config" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="Service" t="Include">
+          <e p="LoggingService.cs" t="Include" />
+        </e>
+      </e>
+      <e p="ITSSolution.sln" t="IncludeFlat" />
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Service" t="Include" />
+      <e p="Service.Implement" t="IncludeRecursive">
+        <e p="Algorithm" t="Include">
+          <e p="SearchTreeService.cs" t="Include" />
+        </e>
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Entity" t="Include">
+          <e p="_BaseService.cs" t="Include" />
+          <e p="AnswerService.cs" t="Include" />
+          <e p="AreaService.cs" t="Include" />
+          <e p="GroupService.cs" t="Include" />
+          <e p="LocationService.cs" t="Include" />
+          <e p="PlanService.cs" t="Include" />
+          <e p="QuestionService.cs" t="Include" />
+          <e p="TagService.cs" t="Include" />
+          <e p="UserService.cs" t="Include" />
+        </e>
+        <e p="Mail" t="Include">
+          <e p="MailService.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="packages.config" t="Include" />
+        <e p="Pagination" t="Include">
+          <e p="PagingService.cs" t="Include" />
+        </e>
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="Service.Implement.csproj" t="IncludeRecursive" />
+      </e>
+    </e>
+  </component>
+</project>
