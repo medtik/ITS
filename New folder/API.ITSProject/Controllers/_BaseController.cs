@@ -13,27 +13,39 @@
     using System.Net.Http;
     using System.Security.Cryptography;
     using System.Text;
+    using System;
+    using System.IO;
+    using System.Drawing;
+    using Core.ApplicationService.Business.EntityService;
+    using System.Drawing.Imaging;
+    using System.Net;
+    using System.Net.Http.Headers;
+    using System.Text.RegularExpressions;
+    using System.Linq;
 
     public abstract class _BaseController : ApiController
     {
         private _ModelBuilder _modelBuilder;
-
+        protected readonly IPhotoService _photoService;
+        protected readonly string CurrentUrl;
         protected readonly ILoggingService _loggingService;
         protected readonly IPagingService _paggingService;
 
         protected readonly IIdentityService _identityService;
 
-        public _ModelBuilder ModelBuilder => _modelBuilder ?? (_modelBuilder = new _ModelBuilder());
+        public _ModelBuilder ModelBuilder => _modelBuilder ?? (_modelBuilder = new _ModelBuilder($"{CurrentContext.Request.Url.GetLeftPart(UriPartial.Authority)}/api/photo/converPhotoBase64?id="));
 
         protected HttpContext CurrentContext => HttpContext.Current;
         protected IAuthenticationManager Authentication => Request.GetOwinContext().Authentication;
 
         public _BaseController(ILoggingService loggingService, IPagingService paggingService,
-            IIdentityService identityService)
+            IIdentityService identityService, IPhotoService photoService)
         {
             _loggingService = loggingService;
             _paggingService = paggingService;
             _identityService = identityService;
+            _photoService = photoService;
+            CurrentUrl = $"{CurrentContext.Request.Url.GetLeftPart(UriPartial.Authority)}/api/photo/converPhotoBase64?id=";
         }
 
         protected void AddModelError(string message) => ModelState.AddModelError(string.Empty, message);
@@ -59,5 +71,19 @@
             }
             return result.ToString();
         }
+
+        protected byte[] ConvertToStream(int photoId)
+        {
+            string base64encodedstring = _photoService.GetBase64(photoId);
+            //string converted = base64encodedstring.Replace('-', '+');
+            //converted = converted.Replace('_', '/');
+            var imageParts = base64encodedstring.Split(',').ToList<string>();
+            //Exclude the header from base64 by taking second element in List.
+            byte[] bytes = Convert.FromBase64String(imageParts[1]);
+            //var bytes = Convert.FromBase64String(response);
+            return bytes;
+        }
+
+       
     }
 }

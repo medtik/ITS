@@ -18,18 +18,20 @@ namespace API.ITSProject.Controllers
     using Core.ApplicationService.Business.Algorithm;
     using API.ITSProject.ViewModels;
     using System.Device.Location;
+    using System.Net.Http;
+    using System.Net;
+    using System.IO;
+    using System.Net.Http.Headers;
 
     public class LocationController : _BaseController
     {
         private readonly ILocationService _locationService;
         private readonly ITagService _tagService;
-
         private readonly ISearchTreeService _searchTreeService;
 
         public LocationController(ILoggingService loggingService, IPagingService paggingService,
             IIdentityService identityService, ILocationService locationService, ISearchTreeService searchTreeService,
-            ITagService tagService)
-            : base(loggingService, paggingService, identityService)
+            ITagService tagService, IPhotoService photoService) : base(loggingService, paggingService, identityService, photoService)
         {
             this._locationService = locationService;
             this._tagService = tagService;
@@ -37,6 +39,19 @@ namespace API.ITSProject.Controllers
         }
 
         #region Get
+        [HttpGet]
+        [Route("api/photo/converPhotoBase64")]
+        public HttpResponseMessage ConvertToImage(int id)
+        {
+            var result = new HttpResponseMessage(HttpStatusCode.OK);
+
+            MemoryStream memoryStream = new MemoryStream(ConvertToStream(id));
+
+            result.Content = new ByteArrayContent(memoryStream.ToArray());
+            result.Content.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
+            return result;
+        }
+
         [HttpGet]
         [Route("api/Location/NearbyLocation")]
         public IHttpActionResult GetNearbyLocation(double longitude, double latitude, double radius)
@@ -145,7 +160,7 @@ namespace API.ITSProject.Controllers
                     Address = location.Address,
                     Location = location.Name,
                     Percent = (tags.Count / commonTags.Count()).ToString(),
-                    PrimaryPhoto = location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Path,
+                    PrimaryPhoto = CurrentUrl + location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Id.ToString(),
                     Rating = rating,
                     Reasons = commonTags.Select(tag => tag.Name).ToList(),
                     ReviewCount = location.Reviews.Count,
@@ -338,6 +353,40 @@ namespace API.ITSProject.Controllers
 
         #region Post
         [HttpPost]
+        [Authorize, Route("api/Location/AddImageToLocation")]
+        public async Task<IHttpActionResult> AddImageToLocation(int locationId, string avatar)
+        {
+            try
+            {
+                int userId = (await CurrentUser()).Id;
+                var temp = _locationService.Find(locationId);
+                var photo = new Photo
+                {
+                    Path = avatar,
+                    UserId = userId
+                };
+                _photoService.Create(photo);
+
+                List<LocationPhoto> locationPhotos = new List<LocationPhoto>();
+                locationPhotos.Add(new LocationPhoto
+                {
+                    IsPrimary = false,
+                    LocationId = locationId,
+                    PhotoId = photo.Id
+                });
+                photo.Locations = locationPhotos;
+                _photoService.Update(photo);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _loggingService.Write(GetType().Name, nameof(AddImageToLocation), ex);
+
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpPost]
         [Authorize]
         public async Task<IHttpActionResult> Post(CreateLocationViewModels data)
         {
@@ -373,6 +422,47 @@ namespace API.ITSProject.Controllers
         #endregion
 
         #region Put
+        [HttpPut]
+        [Authorize, Route("api/Location/AddReview")]
+        public async Task<IHttpActionResult> Review(ReviewViewModels viewModels)
+        {
+            try
+            {
+
+                int userId = (await CurrentUser()).Id;
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
+                List<Photo> photos = new List<Photo>();
+                foreach (var item in viewModels.Photos ?? new List<string>())
+                {
+                    var photo = new Photo
+                    {
+                        UserId = userId,
+                        Path = item
+                    };
+                    _photoService.Create(photo);
+                    photos.Add(photo);
+                }
+                _locationService.AddReview(new Review
+                {
+                    CreatorId = userId,
+                    Title = viewModels.Title,
+                    Description = viewModels.Description,
+                    LocationId = viewModels.LocationId,
+                    Rating = viewModels.Rating,
+                    Photos = photos
+                });
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _loggingService.Write(GetType().Name, nameof(AppectLocationSuggestion), ex);
+
+                return InternalServerError(ex);
+            }
+        }
+
         [HttpPut]
         [Authorize, Route("api/Location/ApproveSuggestion")]
         public IHttpActionResult AppectLocationSuggestion(int suggestionId)

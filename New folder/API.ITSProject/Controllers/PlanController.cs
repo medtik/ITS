@@ -12,20 +12,106 @@
     using Core.ApplicationService.Business.PagingService;
     using Core.ApplicationService.Business.EntityService;
     using API.ITSProject.ViewModels;
+    using Core.ApplicationService.Business.Algorithm;
+    using Core.ObjectModels.Algorithm;
+    using System.Data.Entity;
 
     public class PlanController : _BaseController
     {
         private readonly IPlanService _planService;
         private readonly ILocationService _locationService;
+        private readonly ITagService _tagService;
+        private readonly ISearchTreeService _searchTreeService;
 
         public PlanController(ILoggingService loggingService, IPagingService paggingService,
-            IIdentityService identityService, IPlanService planService, ILocationService locationService) : base(loggingService, paggingService, identityService)
+            IIdentityService identityService, IPlanService planService, ILocationService locationService, IPhotoService photoService,
+            ITagService tagService, ISearchTreeService searchTreeService) : base(loggingService, paggingService, identityService, photoService)
         {
             this._planService = planService;
             this._locationService = locationService;
+            this._tagService = tagService;
+            this._searchTreeService = searchTreeService;
         }
 
+        #region Other
+        private void WrireTree()
+        {
+            Tree tree = _searchTreeService.BuildTree(_locationService.GetAll(_ => _.Tags).ToList());
+            var path = CurrentContext.Server.MapPath("/Tree/tree.json");
+            _searchTreeService.WriteTree(path, tree);
+            //            var tree = _treeBuilder.BuildTree(_locationService.GetAll(_ => _.Tags).ToList());
+            //            System.IO.File.WriteAllText(CurrentContext.Server.MapPath($"/Tree/tree.json"),
+            //                JsonConvert.SerializeObject(tree), Encoding.UTF8);
+        }
+        #endregion
+
         #region Get
+        [HttpGet]
+        [Route("api/Test2")]
+        public IHttpActionResult Algorithm([FromUri] int[] list, int? areaId)
+        {
+            WrireTree();
+            if (list == null)
+            {
+                return BadRequest();
+            }
+
+            List<Tag> tags = _tagService.GetAll()
+                .Where(tag => tag.Answer
+                    .Any(answer => list.Contains(answer.Id))
+                )
+                .ToList();
+
+            var path = CurrentContext.Server.MapPath("/Tree/tree.json");
+            Tree tree = _searchTreeService.ReadTree(path);
+            if (tree == null)
+            {
+                tree = _searchTreeService.BuildTree(_locationService.GetAll().Include(location => location.Tags).ToList());
+                _searchTreeService.WriteTree(path, tree);
+            }
+
+            var resultIds = _searchTreeService.SearchTree(tags, tree);
+            var locationsResult = _locationService.GetAll()
+                .Include(location => location.Reviews)
+                .Include(location => location.Tags)
+                .Include(location => location.Photos.Select(__ => __.Photo))
+                .Where(location => !areaId.HasValue || location.AreaId == areaId)
+                .Where(location => resultIds.Contains(location.Id));
+
+            List<TreeViewModels> resultList = new List<TreeViewModels>();
+            foreach (Location location in locationsResult)
+            {
+                var locationTags = location.Tags;
+                var commonTags = locationTags.Intersect(tags);
+                int ratingCount = location.Reviews.Count;
+                var rating = location.Reviews.Sum(_ => _.Rating) / ratingCount;
+                rating = float.IsNaN(rating) ? 0 : rating;
+
+                foreach (Review review in location.Reviews)
+                {
+                    rating += review.Rating;
+                }
+
+                TreeViewModels result = new TreeViewModels
+                {
+                    Id = location.Id,
+                    Address = location.Address,
+                    Location = location.Name,
+                    Percent = (tags.Count / commonTags.Count()).ToString(),
+                    PrimaryPhoto = CurrentUrl + location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Id.ToString(),
+                    Rating = rating,
+                    Reasons = commonTags.Select(tag => tag.Name).ToList(),
+                    ReviewCount = location.Reviews.Count,
+                    Categories = location.Category
+                };
+
+                resultList.Add(result);
+            }
+            var locationListResult = resultList.OrderByDescending(_ => _.Reasons.Count);
+
+            return Ok();
+        }
+
         [HttpGet]
         [Route("api/Plan/Details")]
         public async Task<IHttpActionResult> Details([FromUri]int id)
@@ -96,15 +182,15 @@
 
         #region Post
         [HttpPost]
-        [Authorize, Route("api/Plan/AddSuggestion")]
-        public async Task<IHttpActionResult> AddSuggestionToPlan(LocationSuggestionViewModels locationSuggestion)
+        [Route("api/Plan/AddSuggestion")]
+        public IHttpActionResult AddSuggestionToPlan(LocationSuggestionViewModels locationSuggestion)
         {
             try
             {
-                int userId = (await CurrentUser()).Id;
+                int userId = 1;
                 ICollection<Location> locations = new List<Location>();
 
-                foreach (var item in locationSuggestion.LocationIds)
+                foreach (var item in locationSuggestion.LocationIds ?? new List<int>())
                 {
                     var location = _locationService.Find(item);
                     if (location != null)
@@ -197,6 +283,30 @@
         #endregion
 
         #region Put
+        [HttpPut]
+        [Route("api/Plan/UpdatePlan")]
+        public IHttpActionResult UpdatePlan(UpdatePlanViewModels viewModels)
+        {
+            try
+            {
+                Plan plan = _planService.Find(viewModels.Id);
+                if (plan == null)
+                    return BadRequest();
+                plan.StartDate = viewModels.StartDate;
+                plan.EndDate = viewModels.EndDate;
+                plan.Name = viewModels.Name;
+
+                _planService.Update(plan);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _loggingService.Write(GetType().Name, nameof(UpdatePlan), ex);
+
+                return InternalServerError(ex);
+            }
+        }
+
         [HttpPut]
         [Route("api/Plan/PublicPlan")]
         public IHttpActionResult PublicPlan(int planId)
@@ -460,5 +570,7 @@
             }
         }
         #endregion
+
+        
     }
 }

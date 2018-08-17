@@ -4,6 +4,22 @@
     using System.Collections.Generic;
     using System.Runtime.Serialization;
 
+    [DataContract(Name = "UpdatePlan")]
+    public class UpdatePlanViewModels
+    {
+        [DataMember]
+        public int Id { get; set; }
+
+        [DataMember]
+        public string Name { get; set; }
+
+        [DataMember]
+        public DateTimeOffset StartDate { get; set; }
+
+        [DataMember]
+        public DateTimeOffset EndDate { get; set; }
+    }
+
     [DataContract(Name = "IndexPlanLocationAndNote")]
     public class UpdateIndexPlanLocationAndNote
     {
@@ -305,5 +321,8 @@
 
         [DataMember]
         public bool IsPublic { get; set; }
+
+        [DataMember]
+        public string GroupName { get; set; }
     }
 }

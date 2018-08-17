@@ -1,4 +1,6 @@
-﻿namespace Core.ApplicationService.Business.EntityService
+﻿using System.Collections.Generic;
+
+namespace Core.ApplicationService.Business.EntityService
 {
     using System;
     using System.Linq;
@@ -18,6 +20,8 @@
         bool Create(Plan plan);
 
         bool Create(Note planNote);
+
+        bool Update(Plan plan);
 
         bool Create(LocationSuggestion locationSuggestion);
 
@@ -40,5 +44,7 @@
         Plan PublicPlan(int planId);
 
         Plan ClonePlan(int planId);
+
+        Plan CreateSuggestedPlan(Plan plan, List<Location> locations);
     }
 }
