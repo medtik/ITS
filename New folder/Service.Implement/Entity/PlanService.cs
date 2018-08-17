@@ -250,9 +250,9 @@ namespace Service.Implement.Entity
                 {
                     DateTimeOffset currentDate = plan.StartDate.AddDays(i);
 
-                    Dictionary<NessecityType, Location> nessecityLocaionsMap;
-                    PolulateNecessityLocations(plan, locations, currentDate,out nessecityLocaionsMap);
-                    PolulateEntertainmentLocations(plan, locations, currentDate,nessecityLocaionsMap);
+                    Dictionary<NessecityType, Location> nessecityLocationMap;
+                    PolulateNecessityLocations(plan, locations, currentDate,out nessecityLocationMap);
+                    PolulateEntertainmentLocations(plan, locations, currentDate,nessecityLocationMap);
                 }
 
                 _repository.Create(plan);
@@ -270,7 +270,7 @@ namespace Service.Implement.Entity
             Plan plan,
             List<Location> locations,
             DateTimeOffset currentDate,
-            out Dictionary<NessecityType, Location> nessecityLocaionsMap)
+            out Dictionary<NessecityType, Location> nessecityLocationMap)
         {
             Location hotel = null;
             Location breakfast = null;
@@ -286,11 +286,11 @@ namespace Service.Implement.Entity
                 lunch == null ||
                 dinner == null)
             {
-                nessecityLocaionsMap = new Dictionary<NessecityType, Location>();
-                nessecityLocaionsMap[NessecityType.Hotel] = hotel;
-                nessecityLocaionsMap[NessecityType.Breakfast] = breakfast;
-                nessecityLocaionsMap[NessecityType.Lunch] = lunch;
-                nessecityLocaionsMap[NessecityType.Dinner] = dinner;
+                nessecityLocationMap = new Dictionary<NessecityType, Location>();
+                nessecityLocationMap[NessecityType.Hotel] = hotel;
+                nessecityLocationMap[NessecityType.Breakfast] = breakfast;
+                nessecityLocationMap[NessecityType.Lunch] = lunch;
+                nessecityLocationMap[NessecityType.Dinner] = dinner;
             }
             else
             {
@@ -302,8 +302,9 @@ namespace Service.Implement.Entity
             Plan plan,
             List<Location> locations,
             DateTimeOffset currentDate,
-            Dictionary<NessecityType, Location> nessecityLocaionsMap)
+            Dictionary<NessecityType, Location> nessecityLocationMap)
         {
+            
         }
     }
 }
