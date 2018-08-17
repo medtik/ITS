@@ -234,6 +234,34 @@ namespace Service.Implement.Entity
 
         public Plan CreateSuggestedPlan(Plan plan, List<Location> locations)
         {
+            try
+            {
+                var diffDays = (plan.EndDate - plan.StartDate).TotalDays;
+                for (int i = 1; i <= diffDays; i++)
+                {
+                    DateTimeOffset currentDate = plan.StartDate.AddDays(i);
+
+                    PolulateNecessityLocations(plan, locations, currentDate);
+                    PolulateEntertainmentLocations(plan, locations, currentDate);
+                }
+                _repository.Create(plan);
+                _unitOfWork.SaveChanges();
+                return plan;
+            }
+            catch (Exception ex)
+            {
+                _loggingService.Write(GetType().Name, nameof(CreateSuggestedPlan), ex);
+                return null;
+            }           
+        }
+
+        private void PolulateNecessityLocations(Plan plan, List<Location> locations, DateTimeOffset currentDate)
+        {
+            throw new NotImplementedException();
+        }
+        
+        private void PolulateEntertainmentLocations(Plan plan, List<Location> locations,DateTimeOffset currentDate)
+        {
             throw new NotImplementedException();
         }
     }
