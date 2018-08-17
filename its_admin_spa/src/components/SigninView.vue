@@ -76,7 +76,7 @@
           password: this.passwordInput
         })
           .then(value => {
-            if(value.role != "user"){
+            if(value.role != "User"){
               this.$store.commit('authenticate/setToken', {token: value});
               this.$router.push({
                 name: 'AccountList'
