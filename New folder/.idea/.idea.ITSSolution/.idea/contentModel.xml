@@ -82,6 +82,7 @@
             <e p="IAreaService.cs" t="Include" />
             <e p="IGroupService.cs" t="Include" />
             <e p="ILocationService.cs" t="Include" />
+            <e p="IPhotoService.cs" t="Include" />
             <e p="IPlanService.cs" t="Include" />
             <e p="IQuestionService.cs" t="Include" />
             <e p="ITagService.cs" t="Include" />
@@ -364,6 +365,7 @@
           <e p="AreaService.cs" t="Include" />
           <e p="GroupService.cs" t="Include" />
           <e p="LocationService.cs" t="Include" />
+          <e p="PhotoService.cs" t="Include" />
           <e p="PlanService.cs" t="Include" />
           <e p="QuestionService.cs" t="Include" />
           <e p="TagService.cs" t="Include" />

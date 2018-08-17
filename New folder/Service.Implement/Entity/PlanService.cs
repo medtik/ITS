@@ -1,4 +1,7 @@
-﻿namespace Service.Implement.Entity
+﻿using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+
+namespace Service.Implement.Entity
 {
     using System;
     using System.Linq.Expressions;
@@ -227,6 +230,11 @@
         {
             var plan = Find(planId, _ => _.Notes, _ => _.PlanLocations);
             return Clone.CloneObject(plan);
+        }
+
+        public Plan CreateSuggestedPlan(Plan plan, List<Location> locations)
+        {
+            throw new NotImplementedException();
         }
     }
 }

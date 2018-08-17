@@ -1,4 +1,6 @@
-﻿namespace Core.ApplicationService.Business.EntityService
+﻿using System.Collections.Generic;
+
+namespace Core.ApplicationService.Business.EntityService
 {
     using System;
     using System.Linq;
@@ -42,5 +44,7 @@
         Plan PublicPlan(int planId);
 
         Plan ClonePlan(int planId);
+
+        Plan CreateSuggestedPlan(Plan plan, List<Location> locations);
     }
 }
