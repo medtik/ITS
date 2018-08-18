@@ -126,7 +126,8 @@
                     new Dictionary<string, string>
                     {
                         { "as:client_id", (context.ClientId == null) ? string.Empty : context.ClientId },
-                        { "userName", context.UserName }
+                        { "userName", context.UserName },
+                        { "role", await _identityService.GetRole(context.UserName) }
                     });
                 context.Validated(new AuthenticationTicket(data.Data as ClaimsIdentity, props));
             }//end if check is error

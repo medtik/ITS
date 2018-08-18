@@ -20,6 +20,8 @@
 
         Task<string> GetFullName(string username);
 
+        Task<string> GetRole(string userName);
+
         Task<_IdentityData> Create(string usernameOrEmail, string password, string fullName, string address, string phoneNumber, DateTimeOffset birthdate, params string[] roles);
 
         Client FindClient(string clientId);

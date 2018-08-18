@@ -178,7 +178,6 @@
         //    return Redirect(redirectUri);
 
         //}
-
         public async Task<IHttpActionResult> Register(RegisterViewModels register)
         {
             try

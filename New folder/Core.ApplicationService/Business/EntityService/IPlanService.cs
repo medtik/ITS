@@ -6,6 +6,7 @@ namespace Core.ApplicationService.Business.EntityService
     using System.Linq;
     using System.Linq.Expressions;
     using Core.ObjectModels.Entities;
+    using Core.ObjectModels.Entities.Helper;
 
     public interface IPlanService
     {
@@ -45,6 +46,6 @@ namespace Core.ApplicationService.Business.EntityService
 
         Plan ClonePlan(int planId);
 
-        Plan CreateSuggestedPlan(Plan plan, List<Location> locations);
+        Plan CreateSuggestedPlan(Plan plan, List<TreeViewModels> locations);
     }
 }

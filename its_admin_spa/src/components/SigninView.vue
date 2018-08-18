@@ -76,10 +76,17 @@
           password: this.passwordInput
         })
           .then(value => {
-            this.$store.commit('authenticate/setToken', {token: value});
-            this.$router.push({
-              name: 'AccountList'
-            });
+            if(value.role != "User"){
+              this.$store.commit('authenticate/setToken', {token: value});
+              this.$router.push({
+                name: 'AccountList'
+              });
+            }else{
+              this.error = {
+                show: true,
+                message: "Bạn không có quyền truy cập hệ thống"
+              }
+            }
           })
           .catch(reason => {
             this.error = {
