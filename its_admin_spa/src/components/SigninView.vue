@@ -86,6 +86,7 @@
                 show: true,
                 message: "Bạn không có quyền truy cập hệ thống"
               }
+              this.loading.signinBtn = false;
             }
           })
           .catch(reason => {
