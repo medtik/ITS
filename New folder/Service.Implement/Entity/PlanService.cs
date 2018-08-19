@@ -451,10 +451,12 @@ namespace Service.Implement.Entity
                         areaOffSet
                     );
                     areaOffSet += 500;
+                    
                     locationWithRouteList = await FitSchedule(
                         currentMealPair,
                         nextMealPair,
-                        locationsBetweenMeal
+                        locationsBetweenMeal,
+                        currentDate
                     );
                 }
 
@@ -518,16 +520,33 @@ namespace Service.Implement.Entity
         private async Task<List<KeyValuePair<JObject, KeyValuePair<Location, Location>>>> FitSchedule(
             KeyValuePair<Location, NessecityType> origin,
             KeyValuePair<Location, NessecityType> destination,
-            List<Location> locationsToGo)
+            List<Location> locationsToGo,
+            DateTimeOffset currentDate)
         {
             var result = new List<KeyValuePair<JObject, KeyValuePair<Location, Location>>>();
-            //TODO filter by hours
-            
-            //
             TimeSpan departureTime =
                 GetMealTime(origin.Value).Add(GetLocationStayTime(origin.Key));
             TimeSpan arriveTime = GetMealTime(destination.Value);
 
+            #region Filter opening time
+            locationsToGo.RemoveAll(location =>
+            {
+                bool isDelete = true;
+                location.BusinessHours.ToList().ForEach(businessHour =>
+                {
+                    if (businessHour.OpenTime > departureTime && businessHour.CloseTime < arriveTime)
+                    {
+                        if (businessHour.Day.Contains(ParseDate(currentDate)))
+                        {
+                            isDelete = false;
+                        }
+                    }
+                });
+                return isDelete;
+            });
+            #endregion
+
+            #region Calculate arrive time
             JObject responseJObject = await FetchGoogleRoute(origin.Key, destination.Key, locationsToGo);
 
             JArray legs = responseJObject["routes"][0]["legs"].Value<JArray>();
@@ -535,7 +554,7 @@ namespace Service.Implement.Entity
 
             var map = MapLegsAndLocationPair(legs, waypointOrder, origin.Key, destination.Key, locationsToGo);
             TimeSpan totalTime = new TimeSpan(0);
-            bool breaked = false;
+            bool enough = false;
             foreach (KeyValuePair<JObject, KeyValuePair<Location, Location>> keyValuePair in map)
             {
                 int travelTimeMinutes = keyValuePair.Key["duration"]["value"].Value<int>();
@@ -550,12 +569,13 @@ namespace Service.Implement.Entity
                 }
                 else
                 {
-                    breaked = true;
+                    enough = true;
                     break;
                 }
             }
-
-            return !breaked ? null : result;
+            #endregion
+            
+            return !enough ? null : result;
         }
 
         private List<KeyValuePair<JObject, KeyValuePair<Location, Location>>> MapLegsAndLocationPair(
