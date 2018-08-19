@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Runtime.InteropServices;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -403,17 +404,20 @@ namespace Service.Implement.Entity
             {
                 Location breakfast = _locationRepository.Get(
                     location => nessecityLocationMap[NessecityType.Breakfast].Id == location.Id
-                );;
+                );
+                ;
                 Location lunch = _locationRepository.Get(
                     location => nessecityLocationMap[NessecityType.Lunch].Id == location.Id
-                );;
+                );
+                ;
                 Location dinner = _locationRepository.Get(
                     location => nessecityLocationMap[NessecityType.Dinner].Id == location.Id
-                );;
-                
-                KeyValuePair<Location, NessecityType> currentMealPair = new KeyValuePair<Location, NessecityType>();
-                KeyValuePair<Location, NessecityType> nextMealPair = new KeyValuePair<Location, NessecityType>();
-                
+                );
+                ;
+
+                KeyValuePair<Location, NessecityType> currentMealPair;
+                KeyValuePair<Location, NessecityType> nextMealPair;
+
                 switch (nessecityLocation.Key)
                 {
                     case NessecityType.Breakfast:
@@ -429,41 +433,49 @@ namespace Service.Implement.Entity
                             breakfast, NessecityType.Lunch
                         );
                         nextMealPair = new KeyValuePair<Location, NessecityType>(
-                            lunch, NessecityType.Dinner
+                            dinner, NessecityType.Dinner
                         );
                         break;
-                    default:                        
+                    default:
                         continue;
                 }
-                
-                List<Location> locationsBetweenMeal = null;
 
+                List<KeyValuePair<JObject, KeyValuePair<Location, Location>>> locationWithRouteList = null;
                 int areaOffSet = 500;
-                do
+                while(locationWithRouteList == null)
                 {
-                    locationsBetweenMeal = GetLocationsBetweenMeal(
+                    var locationsBetweenMeal = GetLocationsBetweenMeal(
                         currentMealPair,
                         nextMealPair,
                         locationList,
                         areaOffSet
                     );
                     areaOffSet += 500;
-                } while (!await IsEnoughToSchedule(
-                    currentMealPair,
-                    nextMealPair,
-                    locationsBetweenMeal
-                ));
+                    locationWithRouteList = await FitSchedule(
+                        currentMealPair,
+                        nextMealPair,
+                        locationsBetweenMeal
+                    );
+                }
 
-                foreach (Location location in locationsBetweenMeal)
+                
+                for (int i = 0; i < locationWithRouteList.Count; i++)
                 {
-                    TreeViewModels model = treeLocations.Find(treeLocation => location.Id == treeLocation.Id);
-                    treeLocations.Remove(model);
+                    var locationWithRoute = locationWithRouteList[i];
+                    if (i == 0)
+                    {
+                        var location = locationWithRoute.Value.Value;
+                        locationList.Remove(location);
+                    }
+                    else
+                    {
+                        var location = locationWithRoute.Value.Key;
+                        locationList.Remove(location);
+                    }
                 }
                 
-                plan.
+                
             }
-            
-            
         }
 
         public GeoCoordinate GetFrationGeoPoint(double frac, GeoCoordinate origin, GeoCoordinate destination)
@@ -503,16 +515,91 @@ namespace Service.Implement.Entity
             return resultLocations;
         }
 
-        private async Task<bool> IsEnoughToSchedule(
+        private async Task<List<KeyValuePair<JObject, KeyValuePair<Location, Location>>>> FitSchedule(
             KeyValuePair<Location, NessecityType> origin,
             KeyValuePair<Location, NessecityType> destination,
             List<Location> locationsToGo)
         {
+            var result = new List<KeyValuePair<JObject, KeyValuePair<Location, Location>>>();
+            //TODO filter by hours
+            
+            //
             TimeSpan departureTime =
                 GetMealTime(origin.Value).Add(GetLocationStayTime(origin.Key));
+            TimeSpan arriveTime = GetMealTime(destination.Value);
 
-            JObject jObject = await FetchGoogleRoute(origin.Key, destination.Key, locationsToGo);
-            throw new NotImplementedException();
+            JObject responseJObject = await FetchGoogleRoute(origin.Key, destination.Key, locationsToGo);
+
+            JArray legs = responseJObject["routes"][0]["legs"].Value<JArray>();
+            JArray waypointOrder = responseJObject["routes"][0]["waypoint_order"].Value<JArray>();
+
+            var map = MapLegsAndLocationPair(legs, waypointOrder, origin.Key, destination.Key, locationsToGo);
+            TimeSpan totalTime = new TimeSpan(0);
+            bool breaked = false;
+            foreach (KeyValuePair<JObject, KeyValuePair<Location, Location>> keyValuePair in map)
+            {
+                int travelTimeMinutes = keyValuePair.Key["duration"]["value"].Value<int>();
+                TimeSpan travelTime = new TimeSpan(0, travelTimeMinutes, 0);
+                TimeSpan stayTime = GetLocationStayTime(keyValuePair.Value.Key);
+
+                totalTime = totalTime.Add(travelTime + stayTime);
+
+                if (departureTime.Add(totalTime) < arriveTime)
+                {
+                    result.Add(keyValuePair);
+                }
+                else
+                {
+                    breaked = true;
+                    break;
+                }
+            }
+
+            return !breaked ? null : result;
+        }
+
+        private List<KeyValuePair<JObject, KeyValuePair<Location, Location>>> MapLegsAndLocationPair(
+            JArray legs,
+            JArray waypointOrder,
+            Location origin,
+            Location destination,
+            List<Location> middle)
+        {
+            var result = new List<KeyValuePair<JObject, KeyValuePair<Location, Location>>>();
+            for (int i = 0; i < legs.Count; i++)
+            {
+                KeyValuePair<Location, Location> fromToPair;
+                if (i == 0)
+                {
+                    fromToPair = new KeyValuePair<Location, Location>(
+                        origin,
+                        middle[waypointOrder[0].Value<int>()]
+                    );
+                }
+                else if (i == legs.Count - 1)
+                {
+                    fromToPair = new KeyValuePair<Location, Location>(
+                        middle[waypointOrder[0].Value<int>()],
+                        destination
+                    );
+                }
+                else
+                {
+                    fromToPair = new KeyValuePair<Location, Location>(
+                        middle[waypointOrder[i - 1].Value<int>()],
+                        middle[waypointOrder[i].Value<int>()]
+                    );
+                }
+
+                result.Add(
+                    new KeyValuePair<JObject, KeyValuePair<Location, Location>>(
+                        legs[i].Value<JObject>(),
+                        fromToPair
+                    )
+                );
+            }
+
+            return result;
         }
 
         private TimeSpan GetLocationStayTime(Location location)
