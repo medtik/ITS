@@ -54,6 +54,14 @@
             </v-list-tile>
           </v-list>
         </v-flex>
+        <v-flex lg6 xs12>
+          <div class="title">
+            Đề nghị thêm địa điểm
+          </div>
+          <v-list>
+
+          </v-list>
+        </v-flex>
       </v-layout>
     </v-container>
     <v-flex style="height: 25vh">

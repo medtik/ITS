@@ -15,7 +15,8 @@
               fas fa-download
             </v-icon>
           </v-btn>
-          <v-btn icon flat large
+          <v-btn v-if="isOwner"
+                 icon flat large
                  color="red"
                  @click="$emit('delete',id)">
             <v-icon>
@@ -80,12 +81,16 @@
       'reason',
       'duration',
       'locations',
-      'isSaveable'
+      'isSaveable',
+      'isGroupOwner'
     ],
     computed: {
       mode() {
         if (this.voteCount) return 'public';
         else return 'private'
+      },
+      isOwner() {
+        return this.isGroupOwner;
       },
       isHaveLocations() {
         return this.locations && this.locations.length > 0;

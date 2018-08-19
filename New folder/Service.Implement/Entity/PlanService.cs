@@ -1,8 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Device.Location;
+using System.Drawing;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Service.Implement.Entity
 {
@@ -379,7 +384,55 @@ namespace Service.Implement.Entity
             DateTimeOffset currentDate,
             Dictionary<NessecityType, Location> nessecityLocationMap)
         {
+            
+            foreach (KeyValuePair<NessecityType,Location> nessecityLocation in nessecityLocationMap)
+            {
+                switch (nessecityLocation.Key)
+                {
+                    case NessecityType.Breakfast:
+                        
+                        break;
+                    case NessecityType.Lunch:
+                        break;
+                    case NessecityType.Dinner:
+                        break;
+                    default:
+                        continue;
+                }
+            }
+        }
+        
+        public GeoCoordinate GetFrationGeoPoint(double frac, GeoCoordinate origin, GeoCoordinate destination)
+        {
+            Double longitude = origin.Longitude + frac * (destination.Longitude - origin.Longitude);
+            Double latitude = origin.Latitude + frac * (destination.Latitude - origin.Latitude);
+          
+            return new GeoCoordinate(latitude, longitude);
+        }
+        
+        private List<Location> GetLocationBetweenLocations(Location origin, Location destination, List<Location> locations, int offset)
+        {
+            List<Location> resultLocations = new List<Location>();
+            var originGeo = new GeoCoordinate(origin.Latitude, origin.Longitude);
+            var destinationGeo = new GeoCoordinate(destination.Latitude, destination.Longitude);
 
+            var distanceGeo = originGeo.GetDistanceTo(destinationGeo);
+            double numberOfFraction = Math.Ceiling(distanceGeo / 1000);
+            for (int i = 0; i <= numberOfFraction; i++)
+            {
+                GeoCoordinate middleGeoPoint = GetFrationGeoPoint(i/numberOfFraction, originGeo, destinationGeo);
+
+                foreach (var location in locations)
+                {
+                    GeoCoordinate locationGeo = new GeoCoordinate(location.Latitude, location.Longitude);
+                    if (locationGeo.GetDistanceTo(middleGeoPoint) <= offset)
+                    {
+                        resultLocations.Add(location); 
+                    }
+                }
+            }
+
+            return resultLocations;
         }
 
         private string ParseDate(DateTimeOffset currentDate)
@@ -407,16 +460,22 @@ namespace Service.Implement.Entity
             query["units"] = "metric";
             query["origin"] =  $"{origin.Latitude},{origin.Longitude}";
             query["destination"] = $"{destination.Latitude},{destination.Longitude}";
+            
             StringBuilder waypointsStringBuilder = new StringBuilder();
             waypointsStringBuilder.Append("optimize:true");
             foreach (Location waypoint in waypoints)
             {
-                
-            }
-            
+                waypointsStringBuilder.Append('|');
+                waypointsStringBuilder.Append($"{waypoint.Latitude},{waypoint.Longitude}");
+            }            
             query["waypoints"] = waypointsStringBuilder.ToString();
+            
             uriBuilder.Query = query.ToString();
-            await client.GetAsync(uriBuilder.ToString());
+            HttpResponseMessage response = await client.GetAsync(uriBuilder.ToString());
+            response.EnsureSuccessStatusCode();
+            string responseBody = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<JObject>(responseBody);
+            
         }
         
         
