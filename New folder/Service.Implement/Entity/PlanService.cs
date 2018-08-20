@@ -46,7 +46,7 @@ namespace Service.Implement.Entity
             _locationRepository = unitOfWork.GetRepository<Location>();
 
             _client = new HttpClient {BaseAddress = new Uri("https://maps.googleapis.com")};
-            _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));            
+            _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         public bool UpdatePlanLocation(PlanLocation entity)
@@ -258,10 +258,10 @@ namespace Service.Implement.Entity
 
         public Plan CreateSuggestedPlan(Plan plan, List<TreeViewModels> locations)
         {
-            _loggingService.AddSentryBreadCrum("CreateSuggestedPlan",data: new Dictionary<string, object>
+            _loggingService.AddSentryBreadCrum("CreateSuggestedPlan", data: new Dictionary<string, object>
             {
                 ["plan"] = plan,
-                ["locations"] = locations
+                ["locations count"] = locations.Count
             });
             try
             {
@@ -271,7 +271,7 @@ namespace Service.Implement.Entity
                     DateTimeOffset currentDate = plan.StartDate.AddDays(i);
                     Dictionary<NessecityType, Location> nessecityLocationMap;
                     PolulateNecessityLocations(plan, locations, currentDate, out nessecityLocationMap, i);
-                   
+
                     PolulateEntertainmentLocations(plan, locations, currentDate, nessecityLocationMap);
                 }
 
@@ -313,6 +313,14 @@ namespace Service.Implement.Entity
             TimeSpan breakFastTime = GetMealTime(NessecityType.Breakfast);
             TimeSpan lunchTime = GetMealTime(NessecityType.Lunch);
             TimeSpan dinnerTime = GetMealTime(NessecityType.Dinner);
+
+            _loggingService.AddSentryBreadCrum(
+                "PolulateNecessityLocations",
+                message: "Start adding restaurant",
+                data: new Dictionary<string, object>
+                {
+                    ["foundHotel"] = findHotel,
+                });
 
             locations.ForEach(_ =>
             {
@@ -364,12 +372,26 @@ namespace Service.Implement.Entity
             });
 
             #endregion
+            
+            
 
-            if (hotel == null ||
-                breakfast == null ||
-                lunch == null ||
-                dinner == null)
+            if (hotel != null &&
+                breakfast != null &&
+                lunch != null &&
+                dinner != null)
             {
+                
+                _loggingService.AddSentryBreadCrum(
+                    "PolulateNecessityLocations",
+                    message: "Returning",
+                    data: new Dictionary<string, object>
+                    {
+                        ["hotel"] = hotel,
+                        ["breakfast"] = breakfast,
+                        ["lunch"] = lunch,
+                        ["dinner"] = dinner,
+                    });
+                
                 var selector = locations.FirstOrDefault(_ => _.Id == breakfast.Id);
                 locations.Remove(selector);
                 selector = locations.FirstOrDefault(_ => _.Id == lunch.Id);
@@ -444,7 +466,7 @@ namespace Service.Implement.Entity
 
                 List<KeyValuePair<JObject, KeyValuePair<Location, Location>>> locationWithRouteList = null;
                 int areaOffSet = 500;
-                while(locationWithRouteList == null)
+                while (locationWithRouteList == null)
                 {
                     var locationsBetweenMeal = GetLocationsBetweenMeal(
                         currentMealPair,
@@ -453,7 +475,7 @@ namespace Service.Implement.Entity
                         areaOffSet
                     );
                     areaOffSet += 500;
-                    
+
                     locationWithRouteList = await FitSchedule(
                         currentMealPair,
                         nextMealPair,
@@ -462,7 +484,7 @@ namespace Service.Implement.Entity
                     );
                 }
 
-                
+
                 for (int i = 0; i < locationWithRouteList.Count; i++)
                 {
                     var locationWithRoute = locationWithRouteList[i];
@@ -477,8 +499,6 @@ namespace Service.Implement.Entity
                         locationList.Remove(location);
                     }
                 }
-                
-                
             }
         }
 
@@ -531,6 +551,7 @@ namespace Service.Implement.Entity
             TimeSpan arriveTime = GetMealTime(destination.Value);
 
             #region Filter opening time
+
             locationsToGo.RemoveAll(location =>
             {
                 bool isDelete = true;
@@ -546,9 +567,11 @@ namespace Service.Implement.Entity
                 });
                 return isDelete;
             });
+
             #endregion
 
             #region Calculate arrive time
+
             JObject responseJObject = await FetchGoogleRoute(origin.Key, destination.Key, locationsToGo);
 
             JArray legs = responseJObject["routes"][0]["legs"].Value<JArray>();
@@ -575,8 +598,9 @@ namespace Service.Implement.Entity
                     break;
                 }
             }
+
             #endregion
-            
+
             return !enough ? null : result;
         }
 
