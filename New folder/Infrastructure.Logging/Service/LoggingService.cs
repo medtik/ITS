@@ -1,4 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SharpRaven;
 using SharpRaven.Data;
 
@@ -18,7 +22,7 @@ namespace Infrastructure.Logging.Service
         public LoggingService(ILogContext context)
         {
             _dbContext = context.GetContext as DbContext;
-            
+
             _ravenClient = new RavenClient("https://b577de4f9b1c408d839aa1600461383c@sentry.io/1265094");
         }
 
@@ -48,13 +52,42 @@ namespace Infrastructure.Logging.Service
             _ravenClient.Capture(new SentryEvent(ex));
         }
 
-        public void AddSentryBreadCrum(String title,String message,  Dictionary<string,string> data)
+        public void AddSentryBreadCrum(String title, Dictionary<string, object> data = null, String message = null)
         {
-            _ravenClient.AddTrail(new Breadcrumb(title){
+            var breadcrumb = new Breadcrumb(title)
+            {
                 Level = BreadcrumbLevel.Info,
-                Data = data,
-                Message = message
-            });
+            };
+
+            if (data != null)
+            {
+                var dataDic = new Dictionary<string, string>();
+                foreach (KeyValuePair<string, object> pair in data)
+                {
+                    string key = pair.Key;
+                    string value;
+
+                    try
+                    {
+                        value = JsonConvert.SerializeObject(pair.Value);
+                    }
+                    catch (Exception)
+                    {
+                        value = "Can't convert to json";
+                    }
+
+                    dataDic.Add(key, value);
+                }
+
+                breadcrumb.Data = dataDic;
+            }
+
+            if (message != null)
+            {
+                breadcrumb.Message = message;
+            }
+
+            _ravenClient.AddTrail(breadcrumb);
         }
     }
 }

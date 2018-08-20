@@ -258,6 +258,11 @@ namespace Service.Implement.Entity
 
         public Plan CreateSuggestedPlan(Plan plan, List<TreeViewModels> locations)
         {
+            _loggingService.AddSentryBreadCrum("CreateSuggestedPlan",data: new Dictionary<string, object>
+            {
+                ["plan"] = plan,
+                ["locations"] = locations
+            });
             try
             {
                 var diffDays = (plan.EndDate - plan.StartDate).TotalDays + 1;
