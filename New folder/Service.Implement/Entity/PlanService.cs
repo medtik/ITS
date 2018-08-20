@@ -375,23 +375,22 @@ namespace Service.Implement.Entity
             
             
 
+            _loggingService.AddSentryBreadCrum(
+                "PolulateNecessityLocations",
+                message: "wrapping up nessecity",
+                data: new Dictionary<string, object>
+                {
+                    ["hotel"] = hotel,
+                    ["breakfast"] = breakfast,
+                    ["lunch"] = lunch,
+                    ["dinner"] = dinner,
+                });
+            
             if (hotel != null &&
                 breakfast != null &&
                 lunch != null &&
                 dinner != null)
             {
-                
-                _loggingService.AddSentryBreadCrum(
-                    "PolulateNecessityLocations",
-                    message: "Returning",
-                    data: new Dictionary<string, object>
-                    {
-                        ["hotel"] = hotel,
-                        ["breakfast"] = breakfast,
-                        ["lunch"] = lunch,
-                        ["dinner"] = dinner,
-                    });
-                
                 var selector = locations.FirstOrDefault(_ => _.Id == breakfast.Id);
                 locations.Remove(selector);
                 selector = locations.FirstOrDefault(_ => _.Id == lunch.Id);
@@ -406,6 +405,17 @@ namespace Service.Implement.Entity
                     [NessecityType.Lunch] = lunch,
                     [NessecityType.Dinner] = dinner
                 };
+                
+                _loggingService.AddSentryBreadCrum(
+                    "PolulateNecessityLocations",
+                    message: "Returning",
+                    data: new Dictionary<string, object>
+                    {
+                        ["hotel"] = hotel,
+                        ["breakfast"] = breakfast,
+                        ["lunch"] = lunch,
+                        ["dinner"] = dinner,
+                    });
             }
             else
             {
