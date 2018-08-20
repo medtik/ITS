@@ -61,8 +61,6 @@
     </v-card>
   </v-dialog>
 </template>
-<!--REQUIRE tag dialog store module to work-->
-<!--TODO sort by selected-->
 <script>
   import {mapState} from "vuex";
 
