@@ -1,4 +1,6 @@
-﻿namespace Service.Implement.Entity
+﻿using SharpRaven;
+
+namespace Service.Implement.Entity
 {
     using System;
     using System.Transactions;
@@ -11,6 +13,7 @@
 
         protected readonly IUnitOfWork _unitOfWork;
         protected readonly IRepository<T> _repository;
+
 
         public _BaseService(ILoggingService loggingService, IUnitOfWork unitOfWork)
         {

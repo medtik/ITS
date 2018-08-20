@@ -1,10 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Device.Location;
-using System.Drawing;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Runtime.InteropServices;
-using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -29,7 +26,7 @@ namespace Service.Implement.Entity
         private readonly IRepository<LocationSuggestion> _locationSuggestionRepository;
         private readonly IRepository<Note> _noteRepository;
         private readonly IRepository<Location> _locationRepository;
-        private HttpClient client;
+        private readonly HttpClient _client;
 
 
         private enum NessecityType
@@ -48,8 +45,8 @@ namespace Service.Implement.Entity
             _locationSuggestionRepository = unitOfWork.GetRepository<LocationSuggestion>();
             _locationRepository = unitOfWork.GetRepository<Location>();
 
-            client = new HttpClient {BaseAddress = new Uri("https://maps.googleapis.com")};
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            _client = new HttpClient {BaseAddress = new Uri("https://maps.googleapis.com")};
+            _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));            
         }
 
         public bool UpdatePlanLocation(PlanLocation entity)
@@ -263,13 +260,13 @@ namespace Service.Implement.Entity
         {
             try
             {
-                var diffDays = (plan.EndDate - plan.StartDate).TotalDays;
+                var diffDays = (plan.EndDate - plan.StartDate).TotalDays + 1;
                 for (int i = 1; i <= diffDays; i++)
                 {
                     DateTimeOffset currentDate = plan.StartDate.AddDays(i);
-
                     Dictionary<NessecityType, Location> nessecityLocationMap;
                     PolulateNecessityLocations(plan, locations, currentDate, out nessecityLocationMap, i);
+                   
                     PolulateEntertainmentLocations(plan, locations, currentDate, nessecityLocationMap);
                 }
 
@@ -674,7 +671,7 @@ namespace Service.Implement.Entity
             query["waypoints"] = waypointsStringBuilder.ToString();
 
             uriBuilder.Query = query.ToString();
-            HttpResponseMessage response = await client.GetAsync(uriBuilder.ToString());
+            HttpResponseMessage response = await _client.GetAsync(uriBuilder.ToString());
             response.EnsureSuccessStatusCode();
             string responseBody = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<JObject>(responseBody);
