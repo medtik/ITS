@@ -45,7 +45,7 @@ namespace Service.Implement.Entity
             _locationSuggestionRepository = unitOfWork.GetRepository<LocationSuggestion>();
             _locationRepository = unitOfWork.GetRepository<Location>();
 
-            _client = new HttpClient {BaseAddress = new Uri("https://maps.googleapis.com")};
+            _client = new HttpClient { BaseAddress = new Uri("https://maps.googleapis.com") };
             _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
@@ -322,58 +322,71 @@ namespace Service.Implement.Entity
                     ["foundHotel"] = findHotel,
                 });
 
-            locations.ForEach(_ =>
+            foreach (var _ in locations.ToList())
             {
-                var tmpLocation = _locationRepository.Get(__ => __.Id == findHotel.ElementAtOrDefault(0).Id,
+                var tmpLocation = _locationRepository.Get(__ => __.Id == _.Id,
                     __ => __.BusinessHours);
 
                 if (tmpLocation != null)
                 {
                     if (breakfast == null)
                     {
-                        tmpLocation.BusinessHours.ToList().ForEach(__ =>
+                        foreach (var __ in tmpLocation.BusinessHours.ToList())
                         {
-                            if (IsInRange(__.OpenTime, __.CloseTime, breakFastTime))
+                            foreach (var ___ in tmpLocation.BusinessHours.ToList())
                             {
-                                if (__.Day.Contains(ParseDate(currentDate)))
+                                if (IsInRange(___.OpenTime, ___.CloseTime, breakFastTime))
                                 {
-                                    breakfast = tmpLocation;
+                                    if (___.Day.Contains(ParseDate(currentDate)))
+                                    {
+                                        breakfast = tmpLocation;
+                                    }
                                 }
                             }
-                        });
+                        }
                     }
                     else if (lunch == null)
                     {
-                        tmpLocation.BusinessHours.ToList().ForEach(__ =>
+                        foreach (var __ in tmpLocation.BusinessHours.ToList())
                         {
-                            if (IsInRange(__.OpenTime, __.CloseTime, lunchTime))
+                            foreach (var ___ in tmpLocation.BusinessHours.ToList())
                             {
-                                if (__.Day.Contains(ParseDate(currentDate)))
+                                if (IsInRange(___.OpenTime, ___.CloseTime, lunchTime))
                                 {
-                                    lunch = tmpLocation;
+                                    if (___.Day.Contains(ParseDate(currentDate)))
+                                    {
+                                        lunch = tmpLocation;
+                                    }
                                 }
                             }
-                        });
+                        }
                     }
                     else if (dinner == null)
                     {
-                        tmpLocation.BusinessHours.ToList().ForEach(__ =>
+                        foreach (var __ in tmpLocation.BusinessHours.ToList())
                         {
-                            if (IsInRange(__.OpenTime, __.CloseTime, dinnerTime))
+                            foreach (var ___ in tmpLocation.BusinessHours.ToList())
                             {
-                                if (__.Day.Contains(ParseDate(currentDate)))
+                                if (IsInRange(___.OpenTime, ___.CloseTime, dinnerTime))
                                 {
-                                    dinner = tmpLocation;
+                                    if (___.Day.Contains(ParseDate(currentDate)))
+                                    {
+                                        dinner = tmpLocation;
+                                    }
                                 }
                             }
-                        });
+                        }
                     }
                 }
+            }
+            locations.ForEach(_ =>
+            {
+
             });
 
             #endregion
-            
-            
+
+
 
             _loggingService.AddSentryBreadCrum(
                 "PolulateNecessityLocations",
@@ -385,7 +398,7 @@ namespace Service.Implement.Entity
                     ["lunch"] = lunch,
                     ["dinner"] = dinner,
                 });
-            
+
             if (hotel != null &&
                 breakfast != null &&
                 lunch != null &&
@@ -405,7 +418,7 @@ namespace Service.Implement.Entity
                     [NessecityType.Lunch] = lunch,
                     [NessecityType.Dinner] = dinner
                 };
-                
+
                 _loggingService.AddSentryBreadCrum(
                     "PolulateNecessityLocations",
                     message: "Returning",
@@ -662,7 +675,7 @@ namespace Service.Implement.Entity
         {
             if (location.TotalTimeStay != null && location.TotalStayCount != null)
             {
-                int minutes = (int) location.TotalTimeStay / (int) location.TotalStayCount;
+                int minutes = (int)location.TotalTimeStay / (int)location.TotalStayCount;
                 return new TimeSpan(0, minutes, 0);
             }
 
