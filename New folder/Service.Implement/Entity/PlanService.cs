@@ -45,7 +45,7 @@ namespace Service.Implement.Entity
             _locationSuggestionRepository = unitOfWork.GetRepository<LocationSuggestion>();
             _locationRepository = unitOfWork.GetRepository<Location>();
 
-            _client = new HttpClient { BaseAddress = new Uri("https://maps.googleapis.com") };
+            _client = new HttpClient();
             _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
@@ -379,13 +379,10 @@ namespace Service.Implement.Entity
                     }
                 }
             }
-            locations.ForEach(_ =>
-            {
 
-            });
+            locations.ForEach(_ => { });
 
             #endregion
-
 
 
             _loggingService.AddSentryBreadCrum(
@@ -444,7 +441,7 @@ namespace Service.Implement.Entity
         {
             int[] locationIds = treeLocations.Select(location => location.Id).ToArray();
             List<Location> locationList = _locationRepository
-                .GetAllAsQueryable(location => locationIds.Contains(location.Id))
+                .Search(location => locationIds.Contains(location.Id))
                 .ToList();
 
             foreach (KeyValuePair<NessecityType, Location> nessecityLocation in nessecityLocationMap)
@@ -488,23 +485,38 @@ namespace Service.Implement.Entity
                 }
 
                 List<KeyValuePair<JObject, KeyValuePair<Location, Location>>> locationWithRouteList = null;
-                int areaOffSet = 500;
-                while (locationWithRouteList == null)
+                int areaOffSet = 2000;
+                try
                 {
-                    var locationsBetweenMeal = GetLocationsBetweenMeal(
-                        currentMealPair,
-                        nextMealPair,
-                        locationList,
-                        areaOffSet
-                    );
-                    areaOffSet += 500;
+                    while (locationWithRouteList == null)
+                    {
+                        var locationsBetweenMeal = GetLocationsBetweenMeal(
+                            currentMealPair,
+                            nextMealPair,
+                            locationList,
+                            areaOffSet
+                        );
 
-                    locationWithRouteList = await FitSchedule(
-                        currentMealPair,
-                        nextMealPair,
-                        locationsBetweenMeal,
-                        currentDate
-                    );
+                        _loggingService.AddSentryBreadCrum("PolulateEntertainmentLocations",
+                            data:new Dictionary<string, object>
+                            {
+                                ["areaOffSet"]= areaOffSet,
+                                ["locationsBetweenMeal_length"] = locationsBetweenMeal.Count
+                            });
+                        areaOffSet += 500;
+
+                        locationWithRouteList = await FitSchedule(
+                            currentMealPair,
+                            nextMealPair,
+                            locationsBetweenMeal,
+                            currentDate,
+                            areaOffSet >= 3000
+                        );
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _loggingService.CaptureSentryException(ex);
                 }
 
 
@@ -566,7 +578,8 @@ namespace Service.Implement.Entity
             KeyValuePair<Location, NessecityType> origin,
             KeyValuePair<Location, NessecityType> destination,
             List<Location> locationsToGo,
-            DateTimeOffset currentDate)
+            DateTimeOffset currentDate,
+            bool IsLastTry = false)
         {
             var result = new List<KeyValuePair<JObject, KeyValuePair<Location, Location>>>();
             TimeSpan departureTime =
@@ -603,28 +616,35 @@ namespace Service.Implement.Entity
             var map = MapLegsAndLocationPair(legs, waypointOrder, origin.Key, destination.Key, locationsToGo);
             TimeSpan totalTime = new TimeSpan(0);
             bool enough = false;
-            foreach (KeyValuePair<JObject, KeyValuePair<Location, Location>> keyValuePair in map)
+            try
             {
-                int travelTimeMinutes = keyValuePair.Key["duration"]["value"].Value<int>();
-                TimeSpan travelTime = new TimeSpan(0, travelTimeMinutes, 0);
-                TimeSpan stayTime = GetLocationStayTime(keyValuePair.Value.Key);
-
-                totalTime = totalTime.Add(travelTime + stayTime);
-
-                if (departureTime.Add(totalTime) < arriveTime)
+                foreach (KeyValuePair<JObject, KeyValuePair<Location, Location>> keyValuePair in map)
                 {
-                    result.Add(keyValuePair);
+                    int travelTimeMinutes = keyValuePair.Key["duration"]["value"].Value<int>();
+                    TimeSpan travelTime = new TimeSpan(0, travelTimeMinutes, 0);
+                    TimeSpan stayTime = GetLocationStayTime(keyValuePair.Value.Key);
+
+                    totalTime = totalTime.Add(travelTime + stayTime);
+
+                    if (departureTime.Add(totalTime) < arriveTime)
+                    {
+                        result.Add(keyValuePair);
+                    }
+                    else
+                    {
+                        enough = true;
+                        break;
+                    }
                 }
-                else
-                {
-                    enough = true;
-                    break;
-                }
+            }
+            catch (Exception ex)
+            {
+                _loggingService.CaptureSentryException(ex);
             }
 
             #endregion
 
-            return !enough ? null : result;
+            return !enough && !IsLastTry ? null : result;
         }
 
         private List<KeyValuePair<JObject, KeyValuePair<Location, Location>>> MapLegsAndLocationPair(
@@ -675,7 +695,7 @@ namespace Service.Implement.Entity
         {
             if (location.TotalTimeStay != null && location.TotalStayCount != null)
             {
-                int minutes = (int)location.TotalTimeStay / (int)location.TotalStayCount;
+                int minutes = (int) location.TotalTimeStay / (int) location.TotalStayCount;
                 return new TimeSpan(0, minutes, 0);
             }
 
@@ -700,7 +720,7 @@ namespace Service.Implement.Entity
             List<Location> waypoints,
             bool isOptimized = false)
         {
-            var uriBuilder = new UriBuilder("/maps/api/directions/json");
+            var uriBuilder = new UriBuilder("https://maps.googleapis.com/maps/api/directions/json");
             var query = HttpUtility.ParseQueryString(string.Empty);
             query["key"] = "AIzaSyDN8SAnYcPJYAoGUszfiRqvVzKH2mCUrVc";
             query["language"] = "vi";
@@ -723,6 +743,14 @@ namespace Service.Implement.Entity
             query["waypoints"] = waypointsStringBuilder.ToString();
 
             uriBuilder.Query = query.ToString();
+            _loggingService.AddSentryBreadCrum(
+                "FetchGoogleRoute",
+                new Dictionary<string, object>
+                {
+                    ["query"] = query.ToString(),
+                    ["url"] = uriBuilder.ToString(),
+                });
+
             HttpResponseMessage response = await _client.GetAsync(uriBuilder.ToString());
             response.EnsureSuccessStatusCode();
             string responseBody = await response.Content.ReadAsStringAsync();

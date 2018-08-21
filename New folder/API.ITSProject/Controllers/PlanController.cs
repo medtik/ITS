@@ -127,7 +127,7 @@
                 CreatorId = 2,
                 IsPublic = false,
                 MemberId = 2,
-                StartDate = new DateTimeOffset(2018,8,28,0,0,0, new TimeSpan()),
+                StartDate = new DateTimeOffset(2018,8,30,0,0,0, new TimeSpan()),
                 EndDate = new DateTimeOffset(2018,8,30,0,0,0, new TimeSpan()),
                 
             };
