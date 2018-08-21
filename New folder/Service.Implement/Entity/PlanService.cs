@@ -257,7 +257,7 @@ namespace Service.Implement.Entity
             return Clone.CloneObject(plan);
         }
 
-        public Plan CreateSuggestedPlan(Plan plan, List<TreeViewModels> locations)
+        public async Task<Plan> CreateSuggestedPlan(Plan plan, List<TreeViewModels> locations)
         {
             _loggingService.AddSentryBreadCrum("CreateSuggestedPlan", data: new Dictionary<string, object>
             {
@@ -272,8 +272,7 @@ namespace Service.Implement.Entity
                     DateTimeOffset currentDate = plan.StartDate.AddDays(i);
                     Dictionary<NessecityType, Location> nessecityLocationMap;
                     PolulateNecessityLocations(plan, locations, currentDate, out nessecityLocationMap, i);
-
-                    PolulateEntertainmentLocations(plan, locations, currentDate, nessecityLocationMap);
+                    await PolulateEntertainmentLocations(plan, locations, currentDate, nessecityLocationMap);
                 }
 
                 _repository.Create(plan);
@@ -434,7 +433,7 @@ namespace Service.Implement.Entity
             }
         }
 
-        private async void PolulateEntertainmentLocations(
+        private async Task PolulateEntertainmentLocations(
             Plan plan,
             List<TreeViewModels> treeLocations,
             DateTimeOffset currentDate,

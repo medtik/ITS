@@ -1,4 +1,6 @@
-﻿namespace API.ITSProject.ViewModels
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace API.ITSProject.ViewModels
 {
     using System;
     using System.Collections.Generic;
@@ -124,6 +126,25 @@
         public DateTimeOffset EndDate { get; set; }
 
         [DataMember]
+        public int AreaId { get; set; }
+    }
+    
+    [DataContract(Name = "Plan")]
+    public class CreateSuggestedPlanViewModels
+    {
+        [DataMember, Required]
+        public int[] Answers { get; set; }
+        
+        [DataMember, Required]
+        public string Name { get; set; }
+
+        [DataMember, Required]
+        public DateTimeOffset StartDate { get; set; }
+
+        [DataMember, Required]
+        public DateTimeOffset EndDate { get; set; }
+
+        [DataMember,Required]
         public int AreaId { get; set; }
     }
 

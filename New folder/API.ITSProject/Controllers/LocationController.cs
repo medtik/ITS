@@ -112,7 +112,6 @@ namespace API.ITSProject.Controllers
         [Route("api/Test")]
         public IHttpActionResult Algorithm([FromUri] int[] list, int? areaId)
         {
-            WrireTree();
             if (list == null)
             {
                 return BadRequest();
