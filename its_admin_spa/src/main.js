@@ -6,26 +6,11 @@ import router from './router'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import store from "./store"
+import {VietnameseLocate} from "./common/util";
 
-const vn = {
-  dataIterator: {
-    rowsPerPageText: 'Vật phẩm mỗi trang:',
-    rowsPerPageAll: 'Toàn bộ',
-    pageText: '{0}-{1} trên {2}',
-    noResultsText: 'Không có bản ghi phù hợp',
-    nextPage: 'Trang tiếp',
-    prevPage: 'Trang trước'
-  },
-  dataTable: {
-    rowsPerPageText: 'Bản ghi mỗi trang:'
-  },
-  noDataText: 'Không có dữ liệu'
-};
-
-// noinspection JSUnresolvedFunction
 Vue.use(Vuetify,{
   lang: {
-    locales: { vn },
+    locales: { VietnameseLocate },
     current: 'vn'
   }
 });

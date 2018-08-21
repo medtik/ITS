@@ -7,9 +7,9 @@
     <v-container class="text-xs-center" v-if="pageLoading">
       <v-progress-circular indeterminate size="40" color="primary"></v-progress-circular>
     </v-container>
-    <v-container v-else fluid>
-      <v-layout row class="white" justify-center>
-        <v-flex v-if="notifications" lg6 xs12>
+    <v-container v-else fluid class="white">
+      <v-layout row justify-center>
+        <v-flex v-if="notifications" lg6 xs12 pa-1>
           <div class="title">
             Lời mời vào nhóm
           </div>
@@ -54,6 +54,17 @@
             </v-list-tile>
           </v-list>
         </v-flex>
+        <v-flex shrink>
+          <v-divider vertical></v-divider>
+        </v-flex>
+        <v-flex lg6 xs12 pa-1>
+          <div class="title">
+            Đề nghị thêm địa điểm
+          </div>
+          <v-list>
+
+          </v-list>
+        </v-flex>
       </v-layout>
     </v-container>
     <v-flex style="height: 25vh">
@@ -82,14 +93,14 @@
     },
     methods: {
       onAcceptGroupInvitation(id) {
-        this.$store.commit('request/changeStatusGroupInvitation',{
+        this.$store.commit('request/changeStatusGroupInvitation', {
           id,
           status: 1
         });
         this.$store.dispatch('request/acceptGroupInvitation', {id});
       },
       onDenyGroupInvitation(id) {
-        this.$store.commit('request/changeStatusGroupInvitation',{
+        this.$store.commit('request/changeStatusGroupInvitation', {
           id,
           status: 2
         });

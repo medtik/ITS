@@ -107,7 +107,32 @@
 
                 resultList.Add(result);
             }
-            var locationListResult = resultList.OrderByDescending(_ => _.Reasons.Count);
+
+            var locationListResult = resultList.OrderByDescending(_ => _.Reasons.Count)
+                .Select(model => new Core.ObjectModels.Entities.Helper.TreeViewModels
+                {
+                    Address = model.Address,
+                    Categories = model.Categories,
+                    Id = model.Id,
+                    Location = model.Location,
+                    Percent = model.Percent,
+                    PrimaryPhoto = model.PrimaryPhoto,
+                    Rating = model.Rating,
+                })
+                .ToList();
+                    
+            var plan = new Plan
+            {
+                AreaId = 2,
+                CreatorId = 2,
+                IsPublic = false,
+                MemberId = 2,
+                StartDate = new DateTimeOffset(2018,8,30,0,0,0, new TimeSpan()),
+                EndDate = new DateTimeOffset(2018,8,30,0,0,0, new TimeSpan()),
+                
+            };
+
+            _planService.CreateSuggestedPlan(plan,locationListResult);
             
             return Ok();
         }

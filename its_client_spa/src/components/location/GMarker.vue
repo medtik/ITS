@@ -49,7 +49,6 @@
           default:
             return;
         }
-        //TODO: Problem here
         return {
           size: this.google && new this.google.maps.Size(this.iconWidth, this.iconHeight),
           url

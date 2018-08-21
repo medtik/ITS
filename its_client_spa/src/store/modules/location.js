@@ -1,12 +1,15 @@
 import {axiosInstance} from "../../common/util";
 import _ from "lodash";
+import Raven from "raven-js";
 
 export default {
   namespaced: true,
   state: {
     detailedLocation: undefined,
+    nearbyLocations: undefined,
     loading: {
       detailedLocation: true,
+      nearbyLocations: true
     }
   },
   getters: {
@@ -35,7 +38,7 @@ export default {
       return Promise.resolve();
     },
 
-    getDetails(context,payload) {
+    getDetails(context, payload) {
       const {
         id
       } = payload;
@@ -43,13 +46,13 @@ export default {
         loading: {detailedLocation: true}
       });
       return new Promise((resolve, reject) => {
-        axiosInstance.get('api/details',{
-          params:{
+        axiosInstance.get('api/details', {
+          params: {
             id: id
           }
         })
           .then(value => {
-            context.commit('setDetailedLocation',{
+            context.commit('setDetailedLocation', {
               location: value.data
             });
             context.commit('setLoading', {
@@ -62,6 +65,40 @@ export default {
               loading: {detailedLocation: false}
             });
             reject(reason.response);
+          })
+      });
+    },
+    fetchNearbyLocations(context, payload) {
+      // get /api/Location/NearbyLocation
+      const {
+        long, lat
+      } = payload;
+
+      context.commit('setLoading',{
+        loading: {
+          nearbyLocations: true
+        }
+      });
+      axiosInstance.get('api/Location/NearbyLocation', {
+        params: {
+          longitude: long,
+          latitude: lat,
+          radius: 1000
+        }
+          .then(value =>{
+            context.commit('setLoading',{
+              loading: {
+                nearbyLocations: false
+              }
+            });
+          })
+          .catch(reason =>{
+            Raven.captureException(reason);
+            context.commit('setLoading',{
+              loading: {
+                nearbyLocations: false
+              }
+            });
           })
       })
     }

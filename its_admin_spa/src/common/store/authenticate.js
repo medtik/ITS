@@ -44,6 +44,7 @@ export default {
           access_token: token.access_token,
           token_type: token.token_type,
           expires_in: token.expires_in,
+          role: token.role,
           issued: token['.issued'],
           expires: token['.expires'],
         }

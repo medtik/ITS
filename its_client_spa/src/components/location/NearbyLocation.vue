@@ -14,29 +14,44 @@
     </v-container>
   </v-content>
 </template>
-
+<!--TODO test this-->
 <script>
   import {LocationFullWidth} from "../../common/block";
+  import {mapState} from "vuex";
+
 
   export default {
     name: "NearbyLocation",
     components: {
       LocationFullWidth
     },
-    computed: {
-      pageLoading() {
-        return true;
-      },
-      nearbyLocations() {
-        return [];
+    data() {
+      return {
+        long,
+        lat
       }
     },
-    mounted(){
-      this.$store.dispatch('fetchNearbyLocations');
+    computed: {
+      ...mapState('location', {
+        pageLoading: state => state.loading.nearbyLocations,
+        nearbyLocations: state => state.nearbyLocations
+      })
     },
-    onAddLocation(){
+    created() {
+      const {
+        long,
+        lat
+      } = this.$route.query;
 
-    }
+      this.long = long;
+      this.lat = lat;
+    },
+    mounted() {
+      this.$store.dispatch('location/fetchNearbyLocations', {
+        long: this.long,
+        lat: this.lat
+      });
+    },
   }
 </script>
 

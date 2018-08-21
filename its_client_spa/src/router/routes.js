@@ -23,6 +23,7 @@ import GroupDetailView from "../components/group/GroupDetailView";
 import GroupCreateView from "../components/group/GroupCreateView";
 import GroupInviteView from "../components/group/GroupInviteView";
 import LocationClaimView from "../components/location/LocationClaimView";
+import NearbyLocationList from "../components/location/NearbyLocation";
 import PlanEditView from "../components/plan/PlanEditView"
 
 Vue.use(Router);
@@ -133,6 +134,11 @@ export default new Router({
       path: '/location/claimOwner',
       name: 'LocationClaimRequest',
       component: LocationClaimView
+    },
+    {
+      path: '/location/nearby',
+      name: 'LocationNearbyList',
+      component: NearbyLocationList
     },
     {
       path: '/group/detail',

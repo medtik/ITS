@@ -1,5 +1,7 @@
 import router from "./routes";
 import store from "../store";
+import Raven from "raven-js";
+
 import _ from "lodash";
 
 //PlanDetail
@@ -31,7 +33,19 @@ function getDataRedirect(to) {
           name: 'SmartSearch'
         };
       }
+      break;
     }
+    case 'NearbyLocationList':{
+      const {
+        long,
+        lat
+      }= to.query;
+
+      if(long == null || lat == null){
+        Raven.captureException(new Error('Missing long, lat on NearbyLocationList'))
+      }
+    }
+
   }
 }
 

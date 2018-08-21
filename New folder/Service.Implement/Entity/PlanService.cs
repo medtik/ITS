@@ -1,5 +1,12 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+using System.Device.Location;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Service.Implement.Entity
 {
@@ -19,6 +26,9 @@ namespace Service.Implement.Entity
         private readonly IRepository<LocationSuggestion> _locationSuggestionRepository;
         private readonly IRepository<Note> _noteRepository;
         private readonly IRepository<Location> _locationRepository;
+        private readonly HttpClient _client;
+
+
         private enum NessecityType
         {
             Hotel,
@@ -34,6 +44,9 @@ namespace Service.Implement.Entity
             _noteRepository = unitOfWork.GetRepository<Note>();
             _locationSuggestionRepository = unitOfWork.GetRepository<LocationSuggestion>();
             _locationRepository = unitOfWork.GetRepository<Location>();
+
+            _client = new HttpClient();
+            _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         public bool UpdatePlanLocation(PlanLocation entity)
@@ -245,15 +258,20 @@ namespace Service.Implement.Entity
 
         public Plan CreateSuggestedPlan(Plan plan, List<TreeViewModels> locations)
         {
+            _loggingService.AddSentryBreadCrum("CreateSuggestedPlan", data: new Dictionary<string, object>
+            {
+                ["plan"] = plan,
+                ["locations count"] = locations.Count
+            });
             try
             {
-                var diffDays = (plan.EndDate - plan.StartDate).TotalDays;
+                var diffDays = (plan.EndDate - plan.StartDate).TotalDays + 1;
                 for (int i = 1; i <= diffDays; i++)
                 {
                     DateTimeOffset currentDate = plan.StartDate.AddDays(i);
-
                     Dictionary<NessecityType, Location> nessecityLocationMap;
                     PolulateNecessityLocations(plan, locations, currentDate, out nessecityLocationMap, i);
+
                     PolulateEntertainmentLocations(plan, locations, currentDate, nessecityLocationMap);
                 }
 
@@ -281,69 +299,107 @@ namespace Service.Implement.Entity
             int maxList = dateIndex * 3 + 1;
 
             #region hotel
+
             var findHotel = locations.Where(_ => _.Categories == "Nơi ở").OrderByDescending(_ => _.Percent);
             if (findHotel.ElementAtOrDefault(0) != null)
             {
                 hotel = _locationRepository.Get(_ => _.Id == findHotel.ElementAtOrDefault(0).Id, _ => _.BusinessHours);
             }
-            #endregion
-            #region breakfast
-            TimeSpan breakFastTime = new TimeSpan(8, 30, 00);
-            TimeSpan lunchTime = new TimeSpan(12, 00, 00);
-            TimeSpan dinnerTime = new TimeSpan(17, 30, 00);
 
-            locations.ForEach(_ =>
+            #endregion
+
+            #region breakfast
+
+            TimeSpan breakFastTime = GetMealTime(NessecityType.Breakfast);
+            TimeSpan lunchTime = GetMealTime(NessecityType.Lunch);
+            TimeSpan dinnerTime = GetMealTime(NessecityType.Dinner);
+
+            _loggingService.AddSentryBreadCrum(
+                "PolulateNecessityLocations",
+                message: "Start adding restaurant",
+                data: new Dictionary<string, object>
+                {
+                    ["foundHotel"] = findHotel,
+                });
+
+            foreach (var _ in locations.ToList())
             {
-                var tmpLocation = _locationRepository.Get(__ => __.Id == findHotel.ElementAtOrDefault(0).Id, __ => __.BusinessHours);
+                var tmpLocation = _locationRepository.Get(__ => __.Id == _.Id,
+                    __ => __.BusinessHours);
 
                 if (tmpLocation != null)
                 {
                     if (breakfast == null)
                     {
-                        tmpLocation.BusinessHours.ToList().ForEach(__ =>
+                        foreach (var __ in tmpLocation.BusinessHours.ToList())
                         {
-                            if (IsInRange(__.OpenTime, __.CloseTime, breakFastTime))
+                            foreach (var ___ in tmpLocation.BusinessHours.ToList())
                             {
-                                if (__.Day.Contains(ParseDate(currentDate)))
+                                if (IsInRange(___.OpenTime, ___.CloseTime, breakFastTime))
                                 {
-                                    breakfast = tmpLocation;
+                                    if (___.Day.Contains(ParseDate(currentDate)))
+                                    {
+                                        breakfast = tmpLocation;
+                                    }
                                 }
                             }
-                        });
+                        }
                     }
                     else if (lunch == null)
                     {
-                        tmpLocation.BusinessHours.ToList().ForEach(__ =>
+                        foreach (var __ in tmpLocation.BusinessHours.ToList())
                         {
-                            if (IsInRange(__.OpenTime, __.CloseTime, lunchTime))
+                            foreach (var ___ in tmpLocation.BusinessHours.ToList())
                             {
-                                if (__.Day.Contains(ParseDate(currentDate)))
+                                if (IsInRange(___.OpenTime, ___.CloseTime, lunchTime))
                                 {
-                                    lunch = tmpLocation;
+                                    if (___.Day.Contains(ParseDate(currentDate)))
+                                    {
+                                        lunch = tmpLocation;
+                                    }
                                 }
                             }
-                        });
-                    } else if (dinner == null)
+                        }
+                    }
+                    else if (dinner == null)
                     {
-                        tmpLocation.BusinessHours.ToList().ForEach(__ =>
+                        foreach (var __ in tmpLocation.BusinessHours.ToList())
                         {
-                            if (IsInRange(__.OpenTime, __.CloseTime, dinnerTime))
+                            foreach (var ___ in tmpLocation.BusinessHours.ToList())
                             {
-                                if (__.Day.Contains(ParseDate(currentDate)))
+                                if (IsInRange(___.OpenTime, ___.CloseTime, dinnerTime))
                                 {
-                                    dinner = tmpLocation;
+                                    if (___.Day.Contains(ParseDate(currentDate)))
+                                    {
+                                        dinner = tmpLocation;
+                                    }
                                 }
                             }
-                        });
+                        }
                     }
                 }
-            });
+            }
+
+            locations.ForEach(_ => { });
+
             #endregion
 
-            if (hotel == null ||
-                breakfast == null ||
-                lunch == null ||
-                dinner == null)
+
+            _loggingService.AddSentryBreadCrum(
+                "PolulateNecessityLocations",
+                message: "wrapping up nessecity",
+                data: new Dictionary<string, object>
+                {
+                    ["hotel"] = hotel,
+                    ["breakfast"] = breakfast,
+                    ["lunch"] = lunch,
+                    ["dinner"] = dinner,
+                });
+
+            if (hotel != null &&
+                breakfast != null &&
+                lunch != null &&
+                dinner != null)
             {
                 var selector = locations.FirstOrDefault(_ => _.Id == breakfast.Id);
                 locations.Remove(selector);
@@ -352,11 +408,24 @@ namespace Service.Implement.Entity
                 selector = locations.FirstOrDefault(_ => _.Id == dinner.Id);
                 locations.Remove(selector);
 
-                nessecityLocationMap = new Dictionary<NessecityType, Location>();
-                nessecityLocationMap[NessecityType.Hotel] = hotel;
-                nessecityLocationMap[NessecityType.Breakfast] = breakfast;
-                nessecityLocationMap[NessecityType.Lunch] = lunch;
-                nessecityLocationMap[NessecityType.Dinner] = dinner;
+                nessecityLocationMap = new Dictionary<NessecityType, Location>
+                {
+                    [NessecityType.Hotel] = hotel,
+                    [NessecityType.Breakfast] = breakfast,
+                    [NessecityType.Lunch] = lunch,
+                    [NessecityType.Dinner] = dinner
+                };
+
+                _loggingService.AddSentryBreadCrum(
+                    "PolulateNecessityLocations",
+                    message: "Returning",
+                    data: new Dictionary<string, object>
+                    {
+                        ["hotel"] = hotel,
+                        ["breakfast"] = breakfast,
+                        ["lunch"] = lunch,
+                        ["dinner"] = dinner,
+                    });
             }
             else
             {
@@ -364,13 +433,273 @@ namespace Service.Implement.Entity
             }
         }
 
-        private void PolulateEntertainmentLocations(
+        private async void PolulateEntertainmentLocations(
             Plan plan,
-            List<TreeViewModels> locations,
+            List<TreeViewModels> treeLocations,
             DateTimeOffset currentDate,
             Dictionary<NessecityType, Location> nessecityLocationMap)
         {
+            int[] locationIds = treeLocations.Select(location => location.Id).ToArray();
+            List<Location> locationList = _locationRepository
+                .Search(location => locationIds.Contains(location.Id))
+                .ToList();
 
+            foreach (KeyValuePair<NessecityType, Location> nessecityLocation in nessecityLocationMap)
+            {
+                Location breakfast = _locationRepository.Get(
+                    location => nessecityLocationMap[NessecityType.Breakfast].Id == location.Id
+                );
+                ;
+                Location lunch = _locationRepository.Get(
+                    location => nessecityLocationMap[NessecityType.Lunch].Id == location.Id
+                );
+                ;
+                Location dinner = _locationRepository.Get(
+                    location => nessecityLocationMap[NessecityType.Dinner].Id == location.Id
+                );
+                ;
+
+                KeyValuePair<Location, NessecityType> currentMealPair;
+                KeyValuePair<Location, NessecityType> nextMealPair;
+
+                switch (nessecityLocation.Key)
+                {
+                    case NessecityType.Breakfast:
+                        currentMealPair = new KeyValuePair<Location, NessecityType>(
+                            breakfast, NessecityType.Breakfast
+                        );
+                        nextMealPair = new KeyValuePair<Location, NessecityType>(
+                            lunch, NessecityType.Lunch
+                        );
+                        break;
+                    case NessecityType.Lunch:
+                        currentMealPair = new KeyValuePair<Location, NessecityType>(
+                            breakfast, NessecityType.Lunch
+                        );
+                        nextMealPair = new KeyValuePair<Location, NessecityType>(
+                            dinner, NessecityType.Dinner
+                        );
+                        break;
+                    default:
+                        continue;
+                }
+
+                List<KeyValuePair<JObject, KeyValuePair<Location, Location>>> locationWithRouteList = null;
+                int areaOffSet = 2000;
+                try
+                {
+                    while (locationWithRouteList == null)
+                    {
+                        var locationsBetweenMeal = GetLocationsBetweenMeal(
+                            currentMealPair,
+                            nextMealPair,
+                            locationList,
+                            areaOffSet
+                        );
+
+                        _loggingService.AddSentryBreadCrum("PolulateEntertainmentLocations",
+                            data:new Dictionary<string, object>
+                            {
+                                ["areaOffSet"]= areaOffSet,
+                                ["locationsBetweenMeal_length"] = locationsBetweenMeal.Count
+                            });
+                        areaOffSet += 500;
+
+                        locationWithRouteList = await FitSchedule(
+                            currentMealPair,
+                            nextMealPair,
+                            locationsBetweenMeal,
+                            currentDate,
+                            areaOffSet >= 3000
+                        );
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _loggingService.CaptureSentryException(ex);
+                }
+
+
+                for (int i = 0; i < locationWithRouteList.Count; i++)
+                {
+                    var locationWithRoute = locationWithRouteList[i];
+                    if (i == 0)
+                    {
+                        var location = locationWithRoute.Value.Value;
+                        locationList.Remove(location);
+                    }
+                    else
+                    {
+                        var location = locationWithRoute.Value.Key;
+                        locationList.Remove(location);
+                    }
+                }
+            }
+        }
+
+        public GeoCoordinate GetFrationGeoPoint(double frac, GeoCoordinate origin, GeoCoordinate destination)
+        {
+            Double longitude = origin.Longitude + frac * (destination.Longitude - origin.Longitude);
+            Double latitude = origin.Latitude + frac * (destination.Latitude - origin.Latitude);
+
+            return new GeoCoordinate(latitude, longitude);
+        }
+
+        private List<Location> GetLocationsBetweenMeal(
+            KeyValuePair<Location, NessecityType> origin,
+            KeyValuePair<Location, NessecityType> destination,
+            List<Location> locations,
+            int areaOffset)
+        {
+            List<Location> resultLocations = new List<Location>();
+            var originGeo = new GeoCoordinate(origin.Key.Latitude, origin.Key.Longitude);
+            var destinationGeo = new GeoCoordinate(destination.Key.Latitude, destination.Key.Longitude);
+
+            var distanceGeo = originGeo.GetDistanceTo(destinationGeo);
+            double numberOfFraction = Math.Ceiling(distanceGeo / 1000);
+            for (int i = 0; i <= numberOfFraction; i++)
+            {
+                GeoCoordinate middleGeoPoint = GetFrationGeoPoint(i / numberOfFraction, originGeo, destinationGeo);
+
+                foreach (var location in locations)
+                {
+                    GeoCoordinate locationGeo = new GeoCoordinate(location.Latitude, location.Longitude);
+                    if (locationGeo.GetDistanceTo(middleGeoPoint) <= areaOffset)
+                    {
+                        resultLocations.Add(location);
+                    }
+                }
+            }
+
+            return resultLocations;
+        }
+
+        private async Task<List<KeyValuePair<JObject, KeyValuePair<Location, Location>>>> FitSchedule(
+            KeyValuePair<Location, NessecityType> origin,
+            KeyValuePair<Location, NessecityType> destination,
+            List<Location> locationsToGo,
+            DateTimeOffset currentDate,
+            bool IsLastTry = false)
+        {
+            var result = new List<KeyValuePair<JObject, KeyValuePair<Location, Location>>>();
+            TimeSpan departureTime =
+                GetMealTime(origin.Value).Add(GetLocationStayTime(origin.Key));
+            TimeSpan arriveTime = GetMealTime(destination.Value);
+
+            #region Filter opening time
+
+            locationsToGo.RemoveAll(location =>
+            {
+                bool isDelete = true;
+                location.BusinessHours.ToList().ForEach(businessHour =>
+                {
+                    if (businessHour.OpenTime > departureTime && businessHour.CloseTime < arriveTime)
+                    {
+                        if (businessHour.Day.Contains(ParseDate(currentDate)))
+                        {
+                            isDelete = false;
+                        }
+                    }
+                });
+                return isDelete;
+            });
+
+            #endregion
+
+            #region Calculate arrive time
+
+            JObject responseJObject = await FetchGoogleRoute(origin.Key, destination.Key, locationsToGo);
+
+            JArray legs = responseJObject["routes"][0]["legs"].Value<JArray>();
+            JArray waypointOrder = responseJObject["routes"][0]["waypoint_order"].Value<JArray>();
+
+            var map = MapLegsAndLocationPair(legs, waypointOrder, origin.Key, destination.Key, locationsToGo);
+            TimeSpan totalTime = new TimeSpan(0);
+            bool enough = false;
+            try
+            {
+                foreach (KeyValuePair<JObject, KeyValuePair<Location, Location>> keyValuePair in map)
+                {
+                    int travelTimeMinutes = keyValuePair.Key["duration"]["value"].Value<int>();
+                    TimeSpan travelTime = new TimeSpan(0, travelTimeMinutes, 0);
+                    TimeSpan stayTime = GetLocationStayTime(keyValuePair.Value.Key);
+
+                    totalTime = totalTime.Add(travelTime + stayTime);
+
+                    if (departureTime.Add(totalTime) < arriveTime)
+                    {
+                        result.Add(keyValuePair);
+                    }
+                    else
+                    {
+                        enough = true;
+                        break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _loggingService.CaptureSentryException(ex);
+            }
+
+            #endregion
+
+            return !enough && !IsLastTry ? null : result;
+        }
+
+        private List<KeyValuePair<JObject, KeyValuePair<Location, Location>>> MapLegsAndLocationPair(
+            JArray legs,
+            JArray waypointOrder,
+            Location origin,
+            Location destination,
+            List<Location> middle)
+        {
+            var result = new List<KeyValuePair<JObject, KeyValuePair<Location, Location>>>();
+            for (int i = 0; i < legs.Count; i++)
+            {
+                KeyValuePair<Location, Location> fromToPair;
+                if (i == 0)
+                {
+                    fromToPair = new KeyValuePair<Location, Location>(
+                        origin,
+                        middle[waypointOrder[0].Value<int>()]
+                    );
+                }
+                else if (i == legs.Count - 1)
+                {
+                    fromToPair = new KeyValuePair<Location, Location>(
+                        middle[waypointOrder[0].Value<int>()],
+                        destination
+                    );
+                }
+                else
+                {
+                    fromToPair = new KeyValuePair<Location, Location>(
+                        middle[waypointOrder[i - 1].Value<int>()],
+                        middle[waypointOrder[i].Value<int>()]
+                    );
+                }
+
+                result.Add(
+                    new KeyValuePair<JObject, KeyValuePair<Location, Location>>(
+                        legs[i].Value<JObject>(),
+                        fromToPair
+                    )
+                );
+            }
+
+            return result;
+        }
+
+        private TimeSpan GetLocationStayTime(Location location)
+        {
+            if (location.TotalTimeStay != null && location.TotalStayCount != null)
+            {
+                int minutes = (int) location.TotalTimeStay / (int) location.TotalStayCount;
+                return new TimeSpan(0, minutes, 0);
+            }
+
+            return new TimeSpan(0);
         }
 
         private string ParseDate(DateTimeOffset currentDate)
@@ -383,6 +712,64 @@ namespace Service.Implement.Entity
         private bool IsInRange(TimeSpan start, TimeSpan end, TimeSpan time)
         {
             return (time > start) && (time < end);
+        }
+
+        private async Task<JObject> FetchGoogleRoute(
+            Location origin,
+            Location destination,
+            List<Location> waypoints,
+            bool isOptimized = false)
+        {
+            var uriBuilder = new UriBuilder("https://maps.googleapis.com/maps/api/directions/json");
+            var query = HttpUtility.ParseQueryString(string.Empty);
+            query["key"] = "AIzaSyDN8SAnYcPJYAoGUszfiRqvVzKH2mCUrVc";
+            query["language"] = "vi";
+            query["units"] = "metric";
+            query["origin"] = $"{origin.Latitude},{origin.Longitude}";
+            query["destination"] = $"{destination.Latitude},{destination.Longitude}";
+
+            StringBuilder waypointsStringBuilder = new StringBuilder();
+            if (isOptimized)
+            {
+                waypointsStringBuilder.Append("optimize:true");
+            }
+
+            foreach (Location waypoint in waypoints)
+            {
+                waypointsStringBuilder.Append('|');
+                waypointsStringBuilder.Append($"{waypoint.Latitude},{waypoint.Longitude}");
+            }
+
+            query["waypoints"] = waypointsStringBuilder.ToString();
+
+            uriBuilder.Query = query.ToString();
+            _loggingService.AddSentryBreadCrum(
+                "FetchGoogleRoute",
+                new Dictionary<string, object>
+                {
+                    ["query"] = query.ToString(),
+                    ["url"] = uriBuilder.ToString(),
+                });
+
+            HttpResponseMessage response = await _client.GetAsync(uriBuilder.ToString());
+            response.EnsureSuccessStatusCode();
+            string responseBody = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<JObject>(responseBody);
+        }
+
+        private TimeSpan GetMealTime(NessecityType type)
+        {
+            switch (type)
+            {
+                case NessecityType.Breakfast:
+                    return new TimeSpan(8, 30, 00);
+                case NessecityType.Lunch:
+                    return new TimeSpan(12, 00, 00);
+                case NessecityType.Dinner:
+                    return new TimeSpan(17, 30, 00);
+                default:
+                    throw new InvalidOperationException();
+            }
         }
     }
 }

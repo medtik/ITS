@@ -11,11 +11,20 @@ import RNMsgChannel from 'react-native-webview-messaging';
 import * as VueGoogleMaps from 'vue2-google-maps'
 import 'vuetify/dist/vuetify.min.css'
 import '@fortawesome/fontawesome-free/css/all.css'
+import {VietnameseLocate} from "./common/util";
+
 
 Raven
   .config('https://044c78991b114aebbfad9a13b6d85a63@sentry.io/1256786')
   .addPlugin(RavenVue, Vue)
   .install();
+
+Vue.use(Vuetify,{
+  lang: {
+    locales: { VietnameseLocate },
+    current: 'vn'
+  }
+});
 
 Vue.use(Vuetify, {
   iconfont: 'fa'
@@ -32,16 +41,19 @@ if (localToken) {
   store.commit('authenticate/setToken', {token: localToken})
 }
 
-
-function onBridgeReady(cb) {
-  if (window.postMessage.length !== 1) {
-    setTimeout(function () {
-      onBridgeReady(cb)
-    }, 200);
-  } else {
-    cb();
-  }
-}
+//
+// let bridgeTriedCount = 0;
+// function onBridgeReady(cb) {
+//   if (window.postMessage.length !== 1) {
+//     bridgeTriedCount++
+//     if();
+//     setTimeout(function () {
+//       onBridgeReady(cb)
+//     }, 200);
+//   } else {
+//     cb();
+//   }
+// }
 
 onBridgeReady(function () {
   RNMsgChannel.sendJSON({

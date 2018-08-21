@@ -21,7 +21,6 @@
     </v-layout>
   </v-content>
 </template>
-<!--TODO thêm chuyến đi-->
 <script>
   import {mapGetters} from "vuex";
 
