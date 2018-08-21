@@ -1,0 +1,517 @@
+POST http://localhost:56288/api/Test2
+Content-Type: application/json
+Authorization: bearer rUVQ1lgWjkC1F9MAzEKz27oYTYGfvaMXdH-bE_ZtT6C4unCZP-mGupHRkrS_A0U07xCF1oMF1_b0X1nz98stmpLOcBoMD0Kn1oRiBd2e217Yc9CvKc677R-IRk9cNQUYkWqwJtBJ01tqpvWl9CPhSD6n32wsCG-k3WYfVE6_WdHknFFrZ6LUOea_1JTG-Bv-s59D12gUN_GyNawFMEy-rVKCZ2X9ayvWbyt1kTQfhLuh2xmMnxLk2O2AMBKVII1dKMgxXuOCbJvGwaewC5q-77AIzFZdHbteAk5Y0B7Ndx4sCePnAnSjoIySSOjkWbNzw15kKV_5kt6Bv_SQcn6h8Xw1-O7Edb71g3k0fiFq3CFpUbe61qlgEPsyzFtIX5HD_yFvP06yL2bacel0BHY1nN101xhIA3pbh8zr8mKiXo86dA1_sVkkfnJDy7f-C60akEyvZr5KlC_v6sD_JAJkdhm-b6vOwYJiZNAli7u5oQ48qRfTrQW5lIgAlnyiL3a5rNFbKgPQ851pLD4ISjkQZ3I2xME
+
+{
+  "answers": [
+    173,
+    174,
+    175,
+    176,
+    177,
+    178
+  ],
+  "name": "test suggested plan",
+  "startDate": "2018-08-21",
+  "endDate": "2018-08-21",
+  "areaId": 2
+}
+
+<> 2018-08-21T112323.200.json
+
+###
+
+POST http://localhost:56288/api/Test2
+Content-Type: application/json
+Authorization: bearer rUVQ1lgWjkC1F9MAzEKz27oYTYGfvaMXdH-bE_ZtT6C4unCZP-mGupHRkrS_A0U07xCF1oMF1_b0X1nz98stmpLOcBoMD0Kn1oRiBd2e217Yc9CvKc677R-IRk9cNQUYkWqwJtBJ01tqpvWl9CPhSD6n32wsCG-k3WYfVE6_WdHknFFrZ6LUOea_1JTG-Bv-s59D12gUN_GyNawFMEy-rVKCZ2X9ayvWbyt1kTQfhLuh2xmMnxLk2O2AMBKVII1dKMgxXuOCbJvGwaewC5q-77AIzFZdHbteAk5Y0B7Ndx4sCePnAnSjoIySSOjkWbNzw15kKV_5kt6Bv_SQcn6h8Xw1-O7Edb71g3k0fiFq3CFpUbe61qlgEPsyzFtIX5HD_yFvP06yL2bacel0BHY1nN101xhIA3pbh8zr8mKiXo86dA1_sVkkfnJDy7f-C60akEyvZr5KlC_v6sD_JAJkdhm-b6vOwYJiZNAli7u5oQ48qRfTrQW5lIgAlnyiL3a5rNFbKgPQ851pLD4ISjkQZ3I2xME
+
+{
+  "answers": [
+    173,
+    174,
+    175,
+    176,
+    177,
+    178
+  ],
+  "name": "test suggested plan",
+  "startDate": "2018-08-21",
+  "endDate": "2018-08-21",
+  "areaId": 2
+}
+
+<> 2018-08-21T111326.200.json
+
+###
+
+POST http://localhost:56288/api/Test2
+Content-Type: application/json
+Authorization: bearer rUVQ1lgWjkC1F9MAzEKz27oYTYGfvaMXdH-bE_ZtT6C4unCZP-mGupHRkrS_A0U07xCF1oMF1_b0X1nz98stmpLOcBoMD0Kn1oRiBd2e217Yc9CvKc677R-IRk9cNQUYkWqwJtBJ01tqpvWl9CPhSD6n32wsCG-k3WYfVE6_WdHknFFrZ6LUOea_1JTG-Bv-s59D12gUN_GyNawFMEy-rVKCZ2X9ayvWbyt1kTQfhLuh2xmMnxLk2O2AMBKVII1dKMgxXuOCbJvGwaewC5q-77AIzFZdHbteAk5Y0B7Ndx4sCePnAnSjoIySSOjkWbNzw15kKV_5kt6Bv_SQcn6h8Xw1-O7Edb71g3k0fiFq3CFpUbe61qlgEPsyzFtIX5HD_yFvP06yL2bacel0BHY1nN101xhIA3pbh8zr8mKiXo86dA1_sVkkfnJDy7f-C60akEyvZr5KlC_v6sD_JAJkdhm-b6vOwYJiZNAli7u5oQ48qRfTrQW5lIgAlnyiL3a5rNFbKgPQ851pLD4ISjkQZ3I2xME
+
+{
+  "answers": [
+    173,
+    174,
+    175,
+    176,
+    177,
+    178
+  ],
+  "name": "test suggested plan",
+  "startDate": "2018-08-21",
+  "endDate": "2018-08-21",
+  "areaId": 2
+}
+
+<> 2018-08-21T110356.200.json
+
+###
+
+POST http://localhost:56288/api/Test2
+Content-Type: application/json
+Authorization: bearer rUVQ1lgWjkC1F9MAzEKz27oYTYGfvaMXdH-bE_ZtT6C4unCZP-mGupHRkrS_A0U07xCF1oMF1_b0X1nz98stmpLOcBoMD0Kn1oRiBd2e217Yc9CvKc677R-IRk9cNQUYkWqwJtBJ01tqpvWl9CPhSD6n32wsCG-k3WYfVE6_WdHknFFrZ6LUOea_1JTG-Bv-s59D12gUN_GyNawFMEy-rVKCZ2X9ayvWbyt1kTQfhLuh2xmMnxLk2O2AMBKVII1dKMgxXuOCbJvGwaewC5q-77AIzFZdHbteAk5Y0B7Ndx4sCePnAnSjoIySSOjkWbNzw15kKV_5kt6Bv_SQcn6h8Xw1-O7Edb71g3k0fiFq3CFpUbe61qlgEPsyzFtIX5HD_yFvP06yL2bacel0BHY1nN101xhIA3pbh8zr8mKiXo86dA1_sVkkfnJDy7f-C60akEyvZr5KlC_v6sD_JAJkdhm-b6vOwYJiZNAli7u5oQ48qRfTrQW5lIgAlnyiL3a5rNFbKgPQ851pLD4ISjkQZ3I2xME
+
+{
+  "answers": [
+    173,
+    174,
+    175,
+    176,
+    177,
+    178
+  ],
+  "name": "test suggested plan",
+  "startDate": "2018-08-21",
+  "endDate": "2018-08-21",
+  "areaId": 2
+}
+
+###
+
+POST http://localhost:56288/api/Test2
+Content-Type: application/json
+Authorization: bearer rUVQ1lgWjkC1F9MAzEKz27oYTYGfvaMXdH-bE_ZtT6C4unCZP-mGupHRkrS_A0U07xCF1oMF1_b0X1nz98stmpLOcBoMD0Kn1oRiBd2e217Yc9CvKc677R-IRk9cNQUYkWqwJtBJ01tqpvWl9CPhSD6n32wsCG-k3WYfVE6_WdHknFFrZ6LUOea_1JTG-Bv-s59D12gUN_GyNawFMEy-rVKCZ2X9ayvWbyt1kTQfhLuh2xmMnxLk2O2AMBKVII1dKMgxXuOCbJvGwaewC5q-77AIzFZdHbteAk5Y0B7Ndx4sCePnAnSjoIySSOjkWbNzw15kKV_5kt6Bv_SQcn6h8Xw1-O7Edb71g3k0fiFq3CFpUbe61qlgEPsyzFtIX5HD_yFvP06yL2bacel0BHY1nN101xhIA3pbh8zr8mKiXo86dA1_sVkkfnJDy7f-C60akEyvZr5KlC_v6sD_JAJkdhm-b6vOwYJiZNAli7u5oQ48qRfTrQW5lIgAlnyiL3a5rNFbKgPQ851pLD4ISjkQZ3I2xME
+
+{
+  "answers": [
+    173,
+    174,
+    175,
+    176,
+    177,
+    178
+  ],
+  "name": "test suggested plan",
+  "startDate": "2018-08-21",
+  "endDate": "2018-08-21",
+  "areaId": 2
+}
+
+###
+
+POST http://localhost:56288/api/Test2
+Content-Type: application/json
+Authorization: bearer rUVQ1lgWjkC1F9MAzEKz27oYTYGfvaMXdH-bE_ZtT6C4unCZP-mGupHRkrS_A0U07xCF1oMF1_b0X1nz98stmpLOcBoMD0Kn1oRiBd2e217Yc9CvKc677R-IRk9cNQUYkWqwJtBJ01tqpvWl9CPhSD6n32wsCG-k3WYfVE6_WdHknFFrZ6LUOea_1JTG-Bv-s59D12gUN_GyNawFMEy-rVKCZ2X9ayvWbyt1kTQfhLuh2xmMnxLk2O2AMBKVII1dKMgxXuOCbJvGwaewC5q-77AIzFZdHbteAk5Y0B7Ndx4sCePnAnSjoIySSOjkWbNzw15kKV_5kt6Bv_SQcn6h8Xw1-O7Edb71g3k0fiFq3CFpUbe61qlgEPsyzFtIX5HD_yFvP06yL2bacel0BHY1nN101xhIA3pbh8zr8mKiXo86dA1_sVkkfnJDy7f-C60akEyvZr5KlC_v6sD_JAJkdhm-b6vOwYJiZNAli7u5oQ48qRfTrQW5lIgAlnyiL3a5rNFbKgPQ851pLD4ISjkQZ3I2xME
+
+{
+  "answers": [
+    173,
+    174,
+    175,
+    176,
+    177,
+    178
+  ],
+  "name": "test suggested plan",
+  "startDate": "2018-08-21",
+  "endDate": "2018-08-21",
+  "areaId": 2
+}
+
+<> 2018-08-21T105521.500.json
+
+###
+
+POST http://localhost:56288/api/Test2
+Content-Type: application/json
+Authorization: bearer rUVQ1lgWjkC1F9MAzEKz27oYTYGfvaMXdH-bE_ZtT6C4unCZP-mGupHRkrS_A0U07xCF1oMF1_b0X1nz98stmpLOcBoMD0Kn1oRiBd2e217Yc9CvKc677R-IRk9cNQUYkWqwJtBJ01tqpvWl9CPhSD6n32wsCG-k3WYfVE6_WdHknFFrZ6LUOea_1JTG-Bv-s59D12gUN_GyNawFMEy-rVKCZ2X9ayvWbyt1kTQfhLuh2xmMnxLk2O2AMBKVII1dKMgxXuOCbJvGwaewC5q-77AIzFZdHbteAk5Y0B7Ndx4sCePnAnSjoIySSOjkWbNzw15kKV_5kt6Bv_SQcn6h8Xw1-O7Edb71g3k0fiFq3CFpUbe61qlgEPsyzFtIX5HD_yFvP06yL2bacel0BHY1nN101xhIA3pbh8zr8mKiXo86dA1_sVkkfnJDy7f-C60akEyvZr5KlC_v6sD_JAJkdhm-b6vOwYJiZNAli7u5oQ48qRfTrQW5lIgAlnyiL3a5rNFbKgPQ851pLD4ISjkQZ3I2xME
+
+{
+  "answers": [
+    173,
+    174,
+    175,
+    176,
+    177,
+    178
+  ],
+  "name": "test suggested plan",
+  "startDate": "2018-08-21",
+  "endDate": "2018-08-21",
+  "areaId": 2
+}
+
+###
+
+POST http://localhost:56288/api/Test2
+Content-Type: application/json
+Authorization: bearer rUVQ1lgWjkC1F9MAzEKz27oYTYGfvaMXdH-bE_ZtT6C4unCZP-mGupHRkrS_A0U07xCF1oMF1_b0X1nz98stmpLOcBoMD0Kn1oRiBd2e217Yc9CvKc677R-IRk9cNQUYkWqwJtBJ01tqpvWl9CPhSD6n32wsCG-k3WYfVE6_WdHknFFrZ6LUOea_1JTG-Bv-s59D12gUN_GyNawFMEy-rVKCZ2X9ayvWbyt1kTQfhLuh2xmMnxLk2O2AMBKVII1dKMgxXuOCbJvGwaewC5q-77AIzFZdHbteAk5Y0B7Ndx4sCePnAnSjoIySSOjkWbNzw15kKV_5kt6Bv_SQcn6h8Xw1-O7Edb71g3k0fiFq3CFpUbe61qlgEPsyzFtIX5HD_yFvP06yL2bacel0BHY1nN101xhIA3pbh8zr8mKiXo86dA1_sVkkfnJDy7f-C60akEyvZr5KlC_v6sD_JAJkdhm-b6vOwYJiZNAli7u5oQ48qRfTrQW5lIgAlnyiL3a5rNFbKgPQ851pLD4ISjkQZ3I2xME
+
+{
+  "answers": [
+    173,
+    174,
+    175,
+    176,
+    177,
+    178
+  ],
+  "name": "test suggested plan",
+  "startDate": "2018-08-21",
+  "endDate": "2018-08-21",
+  "areaId": 2
+}
+
+###
+
+POST http://localhost:56288/api/Test2
+Content-Type: application/json
+Authorization: bearer rUVQ1lgWjkC1F9MAzEKz27oYTYGfvaMXdH-bE_ZtT6C4unCZP-mGupHRkrS_A0U07xCF1oMF1_b0X1nz98stmpLOcBoMD0Kn1oRiBd2e217Yc9CvKc677R-IRk9cNQUYkWqwJtBJ01tqpvWl9CPhSD6n32wsCG-k3WYfVE6_WdHknFFrZ6LUOea_1JTG-Bv-s59D12gUN_GyNawFMEy-rVKCZ2X9ayvWbyt1kTQfhLuh2xmMnxLk2O2AMBKVII1dKMgxXuOCbJvGwaewC5q-77AIzFZdHbteAk5Y0B7Ndx4sCePnAnSjoIySSOjkWbNzw15kKV_5kt6Bv_SQcn6h8Xw1-O7Edb71g3k0fiFq3CFpUbe61qlgEPsyzFtIX5HD_yFvP06yL2bacel0BHY1nN101xhIA3pbh8zr8mKiXo86dA1_sVkkfnJDy7f-C60akEyvZr5KlC_v6sD_JAJkdhm-b6vOwYJiZNAli7u5oQ48qRfTrQW5lIgAlnyiL3a5rNFbKgPQ851pLD4ISjkQZ3I2xME
+
+{
+  "answers": [
+    173,
+    174,
+    175,
+    176,
+    177,
+    178
+  ],
+  "name": "test suggested plan",
+  "startDate": "2018-08-21",
+  "endDate": "2018-08-21",
+  "areaId": 2
+}
+
+<> 2018-08-21T104120.500.json
+
+###
+
+GET https://maps.googleapis.com:443/maps/api/directions/json?key=AIzaSyDN8SAnYcPJYAoGUszfiRqvVzKH2mCUrVc&language=vi&units=metric&origin=10.8592478,106.5849894&destination=10.7696892,106.6992559&waypoints=optimize:true|10.7704851,106.7052846|10.7704851,106.7052846|10.7704851,106.7052846|10.7704851,106.7052846|10.7704851,106.7052846|10.7704851,106.7052846|10.7247197,106.7185178
+
+<> 2018-08-21T103635.200.json
+
+###
+
+GET https://maps.googleapis.com:443/maps/api/directions/json?key=AIzaSyDN8SAnYcPJYAoGUszfiRqvVzKH2mCUrVc&language=vi&units=metric&origin=10.8592478,106.5849894&destination=10.7696892,106.6992559&waypoints=optimize:true|10.7704851,106.7052846|10.7704851,106.7052846|10.7704851,106.7052846|10.7704851,106.7052846|10.7704851,106.7052846|10.7704851,106.7052846|10.7247197,106.7185178
+
+<> 2018-08-21T094300.200.json
+
+###
+
+POST http://localhost:56288/api/Test2
+Content-Type: application/json
+Authorization: bearer rUVQ1lgWjkC1F9MAzEKz27oYTYGfvaMXdH-bE_ZtT6C4unCZP-mGupHRkrS_A0U07xCF1oMF1_b0X1nz98stmpLOcBoMD0Kn1oRiBd2e217Yc9CvKc677R-IRk9cNQUYkWqwJtBJ01tqpvWl9CPhSD6n32wsCG-k3WYfVE6_WdHknFFrZ6LUOea_1JTG-Bv-s59D12gUN_GyNawFMEy-rVKCZ2X9ayvWbyt1kTQfhLuh2xmMnxLk2O2AMBKVII1dKMgxXuOCbJvGwaewC5q-77AIzFZdHbteAk5Y0B7Ndx4sCePnAnSjoIySSOjkWbNzw15kKV_5kt6Bv_SQcn6h8Xw1-O7Edb71g3k0fiFq3CFpUbe61qlgEPsyzFtIX5HD_yFvP06yL2bacel0BHY1nN101xhIA3pbh8zr8mKiXo86dA1_sVkkfnJDy7f-C60akEyvZr5KlC_v6sD_JAJkdhm-b6vOwYJiZNAli7u5oQ48qRfTrQW5lIgAlnyiL3a5rNFbKgPQ851pLD4ISjkQZ3I2xME
+
+{
+  "answers": [
+    173,
+    174,
+    175,
+    176,
+    177,
+    178
+  ],
+  "name": "test suggested plan",
+  "startDate": "2018-08-21",
+  "endDate": "2018-08-21",
+  "areaId": 2
+}
+
+<> 2018-08-21T051624.500.json
+
+###
+
+POST http://localhost:56288/api/Test2
+Content-Type: application/json
+Authorization: bearer rUVQ1lgWjkC1F9MAzEKz27oYTYGfvaMXdH-bE_ZtT6C4unCZP-mGupHRkrS_A0U07xCF1oMF1_b0X1nz98stmpLOcBoMD0Kn1oRiBd2e217Yc9CvKc677R-IRk9cNQUYkWqwJtBJ01tqpvWl9CPhSD6n32wsCG-k3WYfVE6_WdHknFFrZ6LUOea_1JTG-Bv-s59D12gUN_GyNawFMEy-rVKCZ2X9ayvWbyt1kTQfhLuh2xmMnxLk2O2AMBKVII1dKMgxXuOCbJvGwaewC5q-77AIzFZdHbteAk5Y0B7Ndx4sCePnAnSjoIySSOjkWbNzw15kKV_5kt6Bv_SQcn6h8Xw1-O7Edb71g3k0fiFq3CFpUbe61qlgEPsyzFtIX5HD_yFvP06yL2bacel0BHY1nN101xhIA3pbh8zr8mKiXo86dA1_sVkkfnJDy7f-C60akEyvZr5KlC_v6sD_JAJkdhm-b6vOwYJiZNAli7u5oQ48qRfTrQW5lIgAlnyiL3a5rNFbKgPQ851pLD4ISjkQZ3I2xME
+
+{
+  "answers": [
+    173,
+    174,
+    175,
+    176,
+    177,
+    178
+  ],
+  "name": "test suggested plan",
+  "startDate": "2018-08-21",
+  "endDate": "2018-08-21",
+  "areaId": 2
+}
+
+###
+
+POST http://localhost:56288/api/Test2
+Content-Type: application/json
+Authorization: bearer rUVQ1lgWjkC1F9MAzEKz27oYTYGfvaMXdH-bE_ZtT6C4unCZP-mGupHRkrS_A0U07xCF1oMF1_b0X1nz98stmpLOcBoMD0Kn1oRiBd2e217Yc9CvKc677R-IRk9cNQUYkWqwJtBJ01tqpvWl9CPhSD6n32wsCG-k3WYfVE6_WdHknFFrZ6LUOea_1JTG-Bv-s59D12gUN_GyNawFMEy-rVKCZ2X9ayvWbyt1kTQfhLuh2xmMnxLk2O2AMBKVII1dKMgxXuOCbJvGwaewC5q-77AIzFZdHbteAk5Y0B7Ndx4sCePnAnSjoIySSOjkWbNzw15kKV_5kt6Bv_SQcn6h8Xw1-O7Edb71g3k0fiFq3CFpUbe61qlgEPsyzFtIX5HD_yFvP06yL2bacel0BHY1nN101xhIA3pbh8zr8mKiXo86dA1_sVkkfnJDy7f-C60akEyvZr5KlC_v6sD_JAJkdhm-b6vOwYJiZNAli7u5oQ48qRfTrQW5lIgAlnyiL3a5rNFbKgPQ851pLD4ISjkQZ3I2xME
+
+{
+  "answers": [
+    173,
+    174,
+    175,
+    176,
+    177,
+    178
+  ],
+  "name": "test suggested plan",
+  "startDate": "2018-08-21",
+  "endDate": "2018-08-21",
+  "areaId": 2
+}
+
+<> 2018-08-21T050154.200.json
+
+###
+
+POST http://localhost:56288/api/Test2
+Content-Type: application/json
+Authorization: bearer rUVQ1lgWjkC1F9MAzEKz27oYTYGfvaMXdH-bE_ZtT6C4unCZP-mGupHRkrS_A0U07xCF1oMF1_b0X1nz98stmpLOcBoMD0Kn1oRiBd2e217Yc9CvKc677R-IRk9cNQUYkWqwJtBJ01tqpvWl9CPhSD6n32wsCG-k3WYfVE6_WdHknFFrZ6LUOea_1JTG-Bv-s59D12gUN_GyNawFMEy-rVKCZ2X9ayvWbyt1kTQfhLuh2xmMnxLk2O2AMBKVII1dKMgxXuOCbJvGwaewC5q-77AIzFZdHbteAk5Y0B7Ndx4sCePnAnSjoIySSOjkWbNzw15kKV_5kt6Bv_SQcn6h8Xw1-O7Edb71g3k0fiFq3CFpUbe61qlgEPsyzFtIX5HD_yFvP06yL2bacel0BHY1nN101xhIA3pbh8zr8mKiXo86dA1_sVkkfnJDy7f-C60akEyvZr5KlC_v6sD_JAJkdhm-b6vOwYJiZNAli7u5oQ48qRfTrQW5lIgAlnyiL3a5rNFbKgPQ851pLD4ISjkQZ3I2xME
+
+{
+  "answers": [
+    173,
+    174,
+    175,
+    176,
+    177,
+    178
+  ],
+  "name": "test suggested plan",
+  "startDate": "2018-08-21",
+  "endDate": "2018-08-21",
+  "areaId": 2
+}
+
+###
+
+POST http://localhost:56288/api/Test2
+Content-Type: application/json
+Authorization: bearer rUVQ1lgWjkC1F9MAzEKz27oYTYGfvaMXdH-bE_ZtT6C4unCZP-mGupHRkrS_A0U07xCF1oMF1_b0X1nz98stmpLOcBoMD0Kn1oRiBd2e217Yc9CvKc677R-IRk9cNQUYkWqwJtBJ01tqpvWl9CPhSD6n32wsCG-k3WYfVE6_WdHknFFrZ6LUOea_1JTG-Bv-s59D12gUN_GyNawFMEy-rVKCZ2X9ayvWbyt1kTQfhLuh2xmMnxLk2O2AMBKVII1dKMgxXuOCbJvGwaewC5q-77AIzFZdHbteAk5Y0B7Ndx4sCePnAnSjoIySSOjkWbNzw15kKV_5kt6Bv_SQcn6h8Xw1-O7Edb71g3k0fiFq3CFpUbe61qlgEPsyzFtIX5HD_yFvP06yL2bacel0BHY1nN101xhIA3pbh8zr8mKiXo86dA1_sVkkfnJDy7f-C60akEyvZr5KlC_v6sD_JAJkdhm-b6vOwYJiZNAli7u5oQ48qRfTrQW5lIgAlnyiL3a5rNFbKgPQ851pLD4ISjkQZ3I2xME
+
+{
+  "answers": [
+    173,
+    174,
+    175,
+    176,
+    177,
+    178
+  ],
+  "name": "test suggested plan",
+  "startDate": "2018-08-21",
+  "endDate": "2018-08-21",
+  "areaId": 2
+}
+
+<> 2018-08-21T045845.500.json
+
+###
+
+POST http://localhost:56288/api/Test2
+Content-Type: application/json
+Authorization: rUVQ1lgWjkC1F9MAzEKz27oYTYGfvaMXdH-bE_ZtT6C4unCZP-mGupHRkrS_A0U07xCF1oMF1_b0X1nz98stmpLOcBoMD0Kn1oRiBd2e217Yc9CvKc677R-IRk9cNQUYkWqwJtBJ01tqpvWl9CPhSD6n32wsCG-k3WYfVE6_WdHknFFrZ6LUOea_1JTG-Bv-s59D12gUN_GyNawFMEy-rVKCZ2X9ayvWbyt1kTQfhLuh2xmMnxLk2O2AMBKVII1dKMgxXuOCbJvGwaewC5q-77AIzFZdHbteAk5Y0B7Ndx4sCePnAnSjoIySSOjkWbNzw15kKV_5kt6Bv_SQcn6h8Xw1-O7Edb71g3k0fiFq3CFpUbe61qlgEPsyzFtIX5HD_yFvP06yL2bacel0BHY1nN101xhIA3pbh8zr8mKiXo86dA1_sVkkfnJDy7f-C60akEyvZr5KlC_v6sD_JAJkdhm-b6vOwYJiZNAli7u5oQ48qRfTrQW5lIgAlnyiL3a5rNFbKgPQ851pLD4ISjkQZ3I2xME
+
+{
+  "answers": [
+    173,
+    174,
+    175,
+    176,
+    177,
+    178
+  ],
+  "name": "test suggested plan",
+  "startDate": "2018-08-21",
+  "endDate": "2018-08-21",
+  "areaId": 2
+}
+
+<> 2018-08-21T045745.401.json
+
+###
+
+POST http://localhost:56288/api/Test2
+Content-Type: application/json
+Authorization: rUVQ1lgWjkC1F9MAzEKz27oYTYGfvaMXdH-bE_ZtT6C4unCZP-mGupHRkrS_A0U07xCF1oMF1_b0X1nz98stmpLOcBoMD0Kn1oRiBd2e217Yc9CvKc677R-IRk9cNQUYkWqwJtBJ01tqpvWl9CPhSD6n32wsCG-k3WYfVE6_WdHknFFrZ6LUOea_1JTG-Bv-s59D12gUN_GyNawFMEy-rVKCZ2X9ayvWbyt1kTQfhLuh2xmMnxLk2O2AMBKVII1dKMgxXuOCbJvGwaewC5q-77AIzFZdHbteAk5Y0B7Ndx4sCePnAnSjoIySSOjkWbNzw15kKV_5kt6Bv_SQcn6h8Xw1-O7Edb71g3k0fiFq3CFpUbe61qlgEPsyzFtIX5HD_yFvP06yL2bacel0BHY1nN101xhIA3pbh8zr8mKiXo86dA1_sVkkfnJDy7f-C60akEyvZr5KlC_v6sD_JAJkdhm-b6vOwYJiZNAli7u5oQ48qRfTrQW5lIgAlnyiL3a5rNFbKgPQ851pLD4ISjkQZ3I2xME
+{: 
+  "answers": [
+    173,: 
+    174,: 
+    175,: 
+    176,: 
+    177,: 
+    178: 
+  ],: 
+  "name": "test suggested plan",
+  "startDate": "2018-08-21",
+  "endDate": "2018-08-21",
+  "areaId": 2
+}: 
+
+<> 2018-08-21T045724.400.html
+
+###
+
+POST http://localhost:56288/token
+Content-Type: text/plain
+
+grant_type=password&username=tlp@tlp.com&password=123456
+
+<> 2018-08-21T045701.200.json
+
+###
+
+POST http://localhost:56288/token
+Content-Type: text/plain
+
+grant_type=password&username=tlp@tlp.com&passwrord=123456
+
+<> 2018-08-21T045648.400.json
+
+###
+
+POST http://localhost:56288/api/Test2
+Content-Type: application/json
+
+{
+  "answers": [
+    173,
+    174,
+    175,
+    176,
+    177,
+    178
+  ],
+  "name": "test suggested plan",
+  "startDate": "2018-08-21",
+  "endDate": "2018-08-21",
+  "areaId": 2
+}
+
+<> 2018-08-21T045215.200.json
+
+###
+
+POST http://localhost:56288/api/Test2
+Content-Type: application/json
+
+{
+  "answers": [
+    173,
+    174,
+    175,
+    176,
+    177,
+    178
+  ],
+  "name": "test suggested plan",
+  "startDate": "2018-08-21",
+  "endDate": "2018-08-21",
+  "areaId": 2
+}
+
+<> 2018-08-21T044952.200.json
+
+###
+
+POST http://localhost:56288/api/Test2
+Content-Type: application/json
+
+{
+  "answers": [
+    173,
+    174,
+    175,
+    176,
+    177,
+    178
+  ],
+  "name": "test suggested plan",
+  "startDate": "2018-08-21",
+  "endDate": "2018-08-21",
+  "areaId": 2
+}
+
+<> 2018-08-21T044911.200.json
+
+###
+
+POST http://localhost:56288/api/Test2
+Content-Type: application/json
+
+{
+  "answers": [
+    173,
+    174,
+    175,
+    176,
+    177,
+    178
+  ],
+  "name": "test suggested plan",
+  "startDate": "2018-08-21",
+  "endDate": "2018-08-21",
+  "areaId": 2
+}
+
+<> 2018-08-21T044641.500.json
+
+###
+
+POST http://localhost:56288/api/Test2
+Content-Type: application/json
+
+{
+  "answers": [
+    173,
+    174,
+    175,
+    176,
+    177,
+    178
+  ],
+  "name": "test suggested plan",
+  "startDate": "2018-08-21",
+  "endDate": "2018-08-21",
+  "areaId": 2
+}
+
+<> 2018-08-21T044606.200.json
+
+###
+
+POST http://localhost:56288/api/Test2
+Content-Type: application/json
+
+{
+  "answers": [
+    173,
+    174,
+    175,
+    176,
+    177,
+    178
+  ],
+  "name": "test suggested plan",
+  "startDate": "2018-08-21",
+  "endDate": "2018-08-21",
+  "areaId": 2
+}
+
+<> 2018-08-21T044255.200.json
+
+###
+

@@ -26,13 +26,16 @@
       </v-toolbar-title>
       <v-spacer v-if="!isSmallScreen"></v-spacer>
       <v-toolbar-items>
-        <v-btn flat @click="dialog.choosePlanDestination = true"
+        <v-btn v-if="!isOwnPlan"
+               flat
+               @click="dialog.choosePlanDestination = true"
                :loading="addPlanToGroupLoading">
           <v-icon large>fas fa-cloud-download-alt</v-icon>
           <span>&nbsp; Lưu</span>
         </v-btn>
-        <v-btn flat @click=""
-               :loading="addPlanToGroupLoading">
+        <v-btn
+          v-if="!isOwnPlan"
+          flat>
           <v-icon large>far fa-heart</v-icon>
           <span>&nbsp; Thích</span>
         </v-btn>
@@ -291,7 +294,7 @@
       isSmallScreen() {
         return this.$vuetify.breakpoint.name === 'xs'
       },
-      ...mapGetters('authenticate',{
+      ...mapGetters('authenticate', {
         isLoggedIn: "isLoggedIn"
       }),
       ...mapGetters('plan', {
@@ -311,7 +314,7 @@
       formattedEndDate() {
         return moment(this.plan.endDate).format('DD/MM/YYYY');
       },
-      isOwnPlan(){
+      isOwnPlan() {
         return this.plan.isOwn || !this.plan.isPublic
       }
     },

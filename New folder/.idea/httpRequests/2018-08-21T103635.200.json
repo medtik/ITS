@@ -1,0 +1,1549 @@
+{
+  "geocoded_waypoints": [
+    {
+      "geocoder_status": "OK",
+      "place_id": "ChIJbdSaBl8qdTERzgVwrTat6zk",
+      "types": [
+        "street_address"
+      ]
+    },
+    {
+      "geocoder_status": "OK",
+      "place_id": "ChIJ9zc6e0EvdTEREr2GeVRRa9M",
+      "types": [
+        "street_address"
+      ]
+    },
+    {
+      "geocoder_status": "OK",
+      "place_id": "ChIJ9zc6e0EvdTEREr2GeVRRa9M",
+      "types": [
+        "street_address"
+      ]
+    },
+    {
+      "geocoder_status": "OK",
+      "place_id": "ChIJ9zc6e0EvdTEREr2GeVRRa9M",
+      "types": [
+        "street_address"
+      ]
+    },
+    {
+      "geocoder_status": "OK",
+      "place_id": "ChIJ9zc6e0EvdTEREr2GeVRRa9M",
+      "types": [
+        "street_address"
+      ]
+    },
+    {
+      "geocoder_status": "OK",
+      "place_id": "ChIJ9zc6e0EvdTEREr2GeVRRa9M",
+      "types": [
+        "street_address"
+      ]
+    },
+    {
+      "geocoder_status": "OK",
+      "place_id": "ChIJ9zc6e0EvdTEREr2GeVRRa9M",
+      "types": [
+        "street_address"
+      ]
+    },
+    {
+      "geocoder_status": "OK",
+      "place_id": "ChIJSZHRAIsvdTERxypqZncz03c",
+      "types": [
+        "street_address"
+      ]
+    },
+    {
+      "geocoder_status": "OK",
+      "place_id": "ChIJjYIwhD8vdTERNg6MVX_4QJ4",
+      "types": [
+        "street_address"
+      ]
+    }
+  ],
+  "routes": [
+    {
+      "bounds": {
+        "northeast": {
+          "lat": 10.8674398,
+          "lng": 106.7285096
+        },
+        "southwest": {
+          "lat": 10.7237248,
+          "lng": 106.5843646
+        }
+      },
+      "copyrights": "Dữ liệu bản đồ ©2018 Google",
+      "legs": [
+        {
+          "distance": {
+            "text": "19,8 km",
+            "value": 19787
+          },
+          "duration": {
+            "text": "54 phút",
+            "value": 3216
+          },
+          "end_address": "19 Hàm Nghi, Phường Nguyễn Thái Bìn, Quận 1, Hồ Chí Minh, Việt Nam",
+          "end_location": {
+            "lat": 10.7706175,
+            "lng": 106.7052936
+          },
+          "start_address": "133 Nguyễn Thị Thử, Xuân Thới Thượng, Hóc Môn, Hồ Chí Minh, Việt Nam",
+          "start_location": {
+            "lat": 10.8589025,
+            "lng": 106.5844323
+          },
+          "steps": [
+            {
+              "distance": {
+                "text": "0,1 km",
+                "value": 113
+              },
+              "duration": {
+                "text": "1 phút",
+                "value": 37
+              },
+              "end_location": {
+                "lat": 10.8578887,
+                "lng": 106.5843646
+              },
+              "html_instructions": "Đi về hướng \u003cb\u003eNam\u003c/b\u003e về phía \u003cb\u003eNguyễn Thị Thử\u003c/b\u003e",
+              "polyline": {
+                "points": "c{gaAugpiShEL"
+              },
+              "start_location": {
+                "lat": 10.8589025,
+                "lng": 106.5844323
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "0,6 km",
+                "value": 603
+              },
+              "duration": {
+                "text": "2 phút",
+                "value": 92
+              },
+              "end_location": {
+                "lat": 10.8584369,
+                "lng": 106.5897494
+              },
+              "html_instructions": "Rẽ \u003cb\u003etrái\u003c/b\u003e tại Công Ty Tnhh Trần Văn vào \u003cb\u003eNguyễn Thị Thử\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eBăng qua Công Ty Tnhh Quốc Thịnh (ở phía bên phải)\u003c/div\u003e",
+              "maneuver": "turn-left",
+              "polyline": {
+                "points": "ytgaAggpiSa@mCCMEUo@mDSgAWsAKm@G_@?S?W@QDUJkA@M@Q@S?UCSC_@AK@I@QB_@@GFa@HcA@I?M"
+              },
+              "start_location": {
+                "lat": 10.8578887,
+                "lng": 106.5843646
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "0,6 km",
+                "value": 639
+              },
+              "duration": {
+                "text": "2 phút",
+                "value": 98
+              },
+              "end_location": {
+                "lat": 10.8640683,
+                "lng": 106.5890665
+              },
+              "html_instructions": "Rẽ \u003cb\u003etrái\u003c/b\u003e sau Đại Lý Phân Phối Sơn Trâm Anh (ở bên phải)\u003cdiv style=\"font-size:0.9em\"\u003eBăng qua Tiệm Sửa Xe Tuấn Khang (ở phía bên trái)\u003c/div\u003e",
+              "maneuver": "turn-left",
+              "polyline": {
+                "points": "gxgaA}hqiSmBFUAoBLmBJ}@HE@[HWJ_Ab@WHYJI@W@i@BU?aADc@@g@@]@W@Q?e@AmACmBC"
+              },
+              "start_location": {
+                "lat": 10.8584369,
+                "lng": 106.5897494
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "1,3 km",
+                "value": 1259
+              },
+              "duration": {
+                "text": "4 phút",
+                "value": 224
+              },
+              "end_location": {
+                "lat": 10.8674398,
+                "lng": 106.5985291
+              },
+              "html_instructions": "Rẽ \u003cb\u003ephải\u003c/b\u003e tại Quán Phở Lan vào \u003cb\u003eĐường Võ Thị Hồi\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eBăng qua cty gỗ (ở phía bên trái)\u003c/div\u003e",
+              "maneuver": "turn-right",
+              "polyline": {
+                "points": "m{haAudqiSFe@D{@@w@?c@HgC@g@Da@Fk@Ha@BWF{@Bq@@_@?e@?]?OC]COCEEECCGA?KAMCS?ICi@AW?MAKGaAGi@?IEa@AKIq@E[CQCOGSCKKSQYMOMOOWOQo@w@k@s@a@m@WUAAC??AC@A?C?QNWPUNWPA?A@C?A?AAA?AASWOSg@u@k@eAs@mAq@mA]k@[k@"
+              },
+              "start_location": {
+                "lat": 10.8640683,
+                "lng": 106.5890665
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "0,5 km",
+                "value": 491
+              },
+              "duration": {
+                "text": "1 phút",
+                "value": 55
+              },
+              "end_location": {
+                "lat": 10.8638152,
+                "lng": 106.6010978
+              },
+              "html_instructions": "Rẽ \u003cb\u003ephải\u003c/b\u003e tại Tiệm Sửa Xe Gia Nhẫn vào \u003cb\u003eQL22\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eBăng qua Cửa Hàng Văn Phòng Phẩm Tân Xuân (ở phía bên trái)\u003c/div\u003e",
+              "maneuver": "turn-right",
+              "polyline": {
+                "points": "opiaAy_siSlCiBtA}@nAw@tA}@p@_@b@WjAw@zA}@jAu@"
+              },
+              "start_location": {
+                "lat": 10.8674398,
+                "lng": 106.5985291
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "2,8 km",
+                "value": 2794
+              },
+              "duration": {
+                "text": "6 phút",
+                "value": 363
+              },
+              "end_location": {
+                "lat": 10.8428708,
+                "lng": 106.6150787
+              },
+              "html_instructions": "Đi \u003cb\u003ebên trái\u003c/b\u003e để đi tiếp \u003cb\u003eXuyên Á\u003c/b\u003e/\u003cb\u003eQL22\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eBăng qua Cửa Hàng Âm Thanh Tiến Thịnh (ở phía bên phải)\u003c/div\u003e",
+              "maneuver": "keep-left",
+              "polyline": {
+                "points": "{yhaA{osiSGKpBqA|@k@fD{BbCuAl@_@rZqR?At@c@vCeB`Ai@f@]fFsCfBaAl@_@^QxDwBnBgAxAw@pBiA\\Sd@WjDmBb@W`E{BxDwBRMRKTOnC}AnBgAl@[VO|@g@dBaAl@[`B{@vBgAzAs@"
+              },
+              "start_location": {
+                "lat": 10.8638152,
+                "lng": 106.6010978
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "3,9 km",
+                "value": 3852
+              },
+              "duration": {
+                "text": "8 phút",
+                "value": 487
+              },
+              "end_location": {
+                "lat": 10.8136459,
+                "lng": 106.632687
+              },
+              "html_instructions": "Tại vòng xuyến, đi theo lối ra \u003cb\u003ethứ 3\u003c/b\u003e vào \u003cb\u003eTrường Chinh\u003c/b\u003e tới \u003cb\u003eTrung tâm Thành phố\u003c/b\u003e/\u003cb\u003eAsian Highway 1\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eBăng qua Vận Tải Miền Nam (ở phía bên phải)\u003c/div\u003e",
+              "maneuver": "roundabout-right",
+              "polyline": {
+                "points": "}vdaAggviSBBD@D@B@D@D?D?D?H?FCHCFCDGDEDGBE?C?A@A?A?A?A@A?C?C?C?C?C?C?E?EJCNIrBgAhE}BbEuBvDsB`DgBhAo@TMDCnAo@dAo@jAq@RM^SXOdAm@xFaDRKd@Wf@YtBkAd@WhAo@lHaEjEcCpF{C`GgD@?HI^Wf@_@HI~@u@TWhEqEt@{@PUp@u@jBwBlBuBjDqDRQl@]b@W|@_@pAa@vA]n@MVEzBc@NEXId@KtDu@vOcDlE_ArEaAtCm@"
+              },
+              "start_location": {
+                "lat": 10.8428708,
+                "lng": 106.6150787
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "0,7 km",
+                "value": 656
+              },
+              "duration": {
+                "text": "1 phút",
+                "value": 72
+              },
+              "end_location": {
+                "lat": 10.8079988,
+                "lng": 106.6344139
+              },
+              "html_instructions": "Đi \u003cb\u003ebên trái\u003c/b\u003e để đi tiếp \u003cb\u003eLạc Long Quân\u003c/b\u003e/\u003cb\u003eTrường Chinh\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eBăng qua Giàn Giào Hùng Việt Cường (ở phía bên trái)\u003c/div\u003e",
+              "maneuver": "keep-left",
+              "polyline": {
+                "points": "i`_aAiuyiShE{@nAYbMcCnBe@XG`GoA"
+              },
+              "start_location": {
+                "lat": 10.8136459,
+                "lng": 106.632687
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "1,5 km",
+                "value": 1482
+              },
+              "duration": {
+                "text": "4 phút",
+                "value": 230
+              },
+              "end_location": {
+                "lat": 10.8020274,
+                "lng": 106.6453506
+              },
+              "html_instructions": "Chếch sang \u003cb\u003etrái\u003c/b\u003e tại Daiichi Life Trường Chinh vào \u003cb\u003eCộng Hòa\u003c/b\u003e/\u003cb\u003eLạc Long Quân\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eĐi tiếp tục theo Cộng Hòa\u003c/div\u003e\u003cdiv style=\"font-size:0.9em\"\u003eBăng qua Công Ty TNHH TTC (ở phía bên phải)\u003c/div\u003e",
+              "maneuver": "turn-slight-left",
+              "polyline": {
+                "points": "_}}`Aa`ziSt@]p@_@b@]LGNQNQf@e@zBoCVYb@a@`C{A|AaAPIdBeAVOvBqAp@e@JOv@aANYVm@BGN{@H_@F_@Fc@D_@FeB@SBc@D{AHmA@SBwBPiF@c@DeAJaCDuADy@"
+              },
+              "start_location": {
+                "lat": 10.8079988,
+                "lng": 106.6344139
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "55 m",
+                "value": 55
+              },
+              "duration": {
+                "text": "1 phút",
+                "value": 7
+              },
+              "end_location": {
+                "lat": 10.8020313,
+                "lng": 106.6458508
+              },
+              "html_instructions": "Đi bên \u003cb\u003etrái\u003c/b\u003e để đi tiếp về hướng \u003cb\u003eCầu vượt Cộng Hòa - Hoàng Hoa Thám\u003c/b\u003e",
+              "maneuver": "keep-left",
+              "polyline": {
+                "points": "uw|`Amd|iS?cB"
+              },
+              "start_location": {
+                "lat": 10.8020274,
+                "lng": 106.6453506
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "0,4 km",
+                "value": 435
+              },
+              "duration": {
+                "text": "1 phút",
+                "value": 50
+              },
+              "end_location": {
+                "lat": 10.8016471,
+                "lng": 106.6497983
+              },
+              "html_instructions": "Tiếp tục vào \u003cb\u003eCầu vượt Cộng Hòa - Hoàng Hoa Thám\u003c/b\u003e",
+              "polyline": {
+                "points": "uw|`Aqg|iSV}G`@oMPg@"
+              },
+              "start_location": {
+                "lat": 10.8020313,
+                "lng": 106.6458508
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "1,0 km",
+                "value": 985
+              },
+              "duration": {
+                "text": "3 phút",
+                "value": 151
+              },
+              "end_location": {
+                "lat": 10.8008837,
+                "lng": 106.6587844
+              },
+              "html_instructions": "Chếch sang \u003cb\u003etrái\u003c/b\u003e tại Nhà hàng Quen vào \u003cb\u003eCộng Hòa\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eBăng qua Phong Vũ (ở bên phải cách 800&nbsp;m)\u003c/div\u003e",
+              "maneuver": "turn-slight-left",
+              "polyline": {
+                "points": "iu|`Ag`}iSBw@LuCBo@FsB@CNwD@]RkFBeADo@@g@Dq@JgCFuAFgADoAJiC@i@@SN}D"
+              },
+              "start_location": {
+                "lat": 10.8016471,
+                "lng": 106.6497983
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "0,2 km",
+                "value": 219
+              },
+              "duration": {
+                "text": "1 phút",
+                "value": 28
+              },
+              "end_location": {
+                "lat": 10.8007555,
+                "lng": 106.6607817
+              },
+              "html_instructions": "Đi bên \u003cb\u003etrái\u003c/b\u003e để đi tiếp về hướng \u003cb\u003eCầu vượt Cộng Hòa - Hoàng Văn Thụ\u003c/b\u003e",
+              "maneuver": "keep-left",
+              "polyline": {
+                "points": "op|`Akx~iSVoK"
+              },
+              "start_location": {
+                "lat": 10.8008837,
+                "lng": 106.6587844
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "0,3 km",
+                "value": 329
+              },
+              "duration": {
+                "text": "1 phút",
+                "value": 40
+              },
+              "end_location": {
+                "lat": 10.8005467,
+                "lng": 106.6637895
+              },
+              "html_instructions": "Tiếp tục vào \u003cb\u003eCầu vượt Cộng Hòa - Hoàng Văn Thụ\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eBăng qua cầu (ở bên trái)\u003c/div\u003e",
+              "polyline": {
+                "points": "wo|`A{d_jSD}AD_BDoABk@Bm@NqF"
+              },
+              "start_location": {
+                "lat": 10.8007555,
+                "lng": 106.6607817
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "0,4 km",
+                "value": 391
+              },
+              "duration": {
+                "text": "1 phút",
+                "value": 65
+              },
+              "end_location": {
+                "lat": 10.8002462,
+                "lng": 106.6673531
+              },
+              "html_instructions": "Nhập vào \u003cb\u003eHoàng Văn Thụ\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eBăng qua Htx Vận Tải Du Lịch 27-7 (ở phía bên trái)\u003c/div\u003e",
+              "maneuver": "merge",
+              "polyline": {
+                "points": "mn|`Auw_jSDcBF_BDeAFsATcFDm@?]By@"
+              },
+              "start_location": {
+                "lat": 10.8005467,
+                "lng": 106.6637895
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "1,8 km",
+                "value": 1758
+              },
+              "duration": {
+                "text": "5 phút",
+                "value": 307
+              },
+              "end_location": {
+                "lat": 10.7921974,
+                "lng": 106.6811905
+              },
+              "html_instructions": "Chếch sang \u003cb\u003ephải\u003c/b\u003e tại Công Ty Tnhh Mtv Vinatay vào \u003cb\u003eNguyễn Văn Trỗi\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eBăng qua Vespa Topcom Nguyễn Văn Trỗi (ở bên phải cách 1,3&nbsp;km)\u003c/div\u003e",
+              "maneuver": "turn-slight-right",
+              "polyline": {
+                "points": "ql|`A}m`jSL]Li@FSHYT_@b@{@tAuCZk@~DeId@_A\\o@n@sAjAeCRg@vBcE`AmB@CBG|@oBf@aAXe@xAyCl@qAh@_AbAsBb@u@Xu@HQN_@~A}CTe@lAyBhCqF"
+              },
+              "start_location": {
+                "lat": 10.8002462,
+                "lng": 106.6673531
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "0,2 km",
+                "value": 202
+              },
+              "duration": {
+                "text": "1 phút",
+                "value": 24
+              },
+              "end_location": {
+                "lat": 10.7909648,
+                "lng": 106.6825502
+              },
+              "html_instructions": "Tiếp tục đi thẳng qua Sang Nhuong 24h vào \u003cb\u003eCầu Công Lý\u003c/b\u003e/\u003cb\u003eNguyễn Văn Trỗi\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eBăng qua TAPHALAW (ở phía bên phải)\u003c/div\u003e",
+              "maneuver": "straight",
+              "polyline": {
+                "points": "gzz`AmdcjSlAsALONOX]V[FGXYZa@Z]"
+              },
+              "start_location": {
+                "lat": 10.7921974,
+                "lng": 106.6811905
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "3,0 km",
+                "value": 3037
+              },
+              "duration": {
+                "text": "13 phút",
+                "value": 788
+              },
+              "end_location": {
+                "lat": 10.7711259,
+                "lng": 106.7010666
+              },
+              "html_instructions": "Tại Công ty tnhh Thương mại FC việt nam, tiếp tục vào \u003cb\u003eNam Kỳ Khởi Nghĩa\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eBăng qua Showroom Cavani - Ho Chi Minh (ở bên phải cách 750&nbsp;m)\u003c/div\u003e",
+              "polyline": {
+                "points": "orz`A}lcjSj@q@jAuAx@aAh@m@|@cAlBsBNMnAyAn@u@lBoB~@aA~BgCb@e@~@gAlF}F\\a@|CqDdCoCNQ~@gAX_@z@aAd@o@hD}DX_@`EiEzDcEvDmEl@s@h@q@r@{@l@o@rDaElDeERQNGBALE`DcAb@QjCo@j@UNI\\W`@O`@I`ASxAg@xBs@dCu@"
+              },
+              "start_location": {
+                "lat": 10.7909648,
+                "lng": 106.6825502
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "0,4 km",
+                "value": 402
+              },
+              "duration": {
+                "text": "1 phút",
+                "value": 84
+              },
+              "end_location": {
+                "lat": 10.770722,
+                "lng": 106.7045763
+              },
+              "html_instructions": "Rẽ \u003cb\u003etrái\u003c/b\u003e vào \u003cb\u003eHàm Nghi\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eBăng qua Hàm Nghi E (ở phía bên phải)\u003c/div\u003e",
+              "maneuver": "turn-left",
+              "polyline": {
+                "points": "qvv`Au`gjSRGZKJkGFaEL{E"
+              },
+              "start_location": {
+                "lat": 10.7711259,
+                "lng": 106.7010666
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "85 m",
+                "value": 85
+              },
+              "duration": {
+                "text": "1 phút",
+                "value": 14
+              },
+              "end_location": {
+                "lat": 10.7706175,
+                "lng": 106.7052936
+              },
+              "html_instructions": "Đi \u003cb\u003ebên phải\u003c/b\u003e để vào \u003cb\u003eHàm Nghi\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eĐiểm đến sẽ ở bên phải\u003c/div\u003e",
+              "maneuver": "keep-right",
+              "polyline": {
+                "points": "_tv`AsvgjSJ?FmC"
+              },
+              "start_location": {
+                "lat": 10.770722,
+                "lng": 106.7045763
+              },
+              "travel_mode": "DRIVING"
+            }
+          ],
+          "traffic_speed_entry": [],
+          "via_waypoint": []
+        },
+        {
+          "distance": {
+            "text": "1 m",
+            "value": 0
+          },
+          "duration": {
+            "text": "1 phút",
+            "value": 0
+          },
+          "end_address": "19 Hàm Nghi, Phường Nguyễn Thái Bìn, Quận 1, Hồ Chí Minh, Việt Nam",
+          "end_location": {
+            "lat": 10.7706175,
+            "lng": 106.7052936
+          },
+          "start_address": "19 Hàm Nghi, Phường Nguyễn Thái Bìn, Quận 1, Hồ Chí Minh, Việt Nam",
+          "start_location": {
+            "lat": 10.7706175,
+            "lng": 106.7052936
+          },
+          "steps": [
+            {
+              "distance": {
+                "text": "1 m",
+                "value": 0
+              },
+              "duration": {
+                "text": "1 phút",
+                "value": 0
+              },
+              "end_location": {
+                "lat": 10.7706175,
+                "lng": 106.7052936
+              },
+              "html_instructions": "Hướng lên \u003cb\u003eHàm Nghi\u003c/b\u003e",
+              "polyline": {
+                "points": "ksv`Aa{gjS"
+              },
+              "start_location": {
+                "lat": 10.7706175,
+                "lng": 106.7052936
+              },
+              "travel_mode": "DRIVING"
+            }
+          ],
+          "traffic_speed_entry": [],
+          "via_waypoint": []
+        },
+        {
+          "distance": {
+            "text": "1 m",
+            "value": 0
+          },
+          "duration": {
+            "text": "1 phút",
+            "value": 0
+          },
+          "end_address": "19 Hàm Nghi, Phường Nguyễn Thái Bìn, Quận 1, Hồ Chí Minh, Việt Nam",
+          "end_location": {
+            "lat": 10.7706175,
+            "lng": 106.7052936
+          },
+          "start_address": "19 Hàm Nghi, Phường Nguyễn Thái Bìn, Quận 1, Hồ Chí Minh, Việt Nam",
+          "start_location": {
+            "lat": 10.7706175,
+            "lng": 106.7052936
+          },
+          "steps": [
+            {
+              "distance": {
+                "text": "1 m",
+                "value": 0
+              },
+              "duration": {
+                "text": "1 phút",
+                "value": 0
+              },
+              "end_location": {
+                "lat": 10.7706175,
+                "lng": 106.7052936
+              },
+              "html_instructions": "Hướng lên \u003cb\u003eHàm Nghi\u003c/b\u003e",
+              "polyline": {
+                "points": "ksv`Aa{gjS"
+              },
+              "start_location": {
+                "lat": 10.7706175,
+                "lng": 106.7052936
+              },
+              "travel_mode": "DRIVING"
+            }
+          ],
+          "traffic_speed_entry": [],
+          "via_waypoint": []
+        },
+        {
+          "distance": {
+            "text": "1 m",
+            "value": 0
+          },
+          "duration": {
+            "text": "1 phút",
+            "value": 0
+          },
+          "end_address": "19 Hàm Nghi, Phường Nguyễn Thái Bìn, Quận 1, Hồ Chí Minh, Việt Nam",
+          "end_location": {
+            "lat": 10.7706175,
+            "lng": 106.7052936
+          },
+          "start_address": "19 Hàm Nghi, Phường Nguyễn Thái Bìn, Quận 1, Hồ Chí Minh, Việt Nam",
+          "start_location": {
+            "lat": 10.7706175,
+            "lng": 106.7052936
+          },
+          "steps": [
+            {
+              "distance": {
+                "text": "1 m",
+                "value": 0
+              },
+              "duration": {
+                "text": "1 phút",
+                "value": 0
+              },
+              "end_location": {
+                "lat": 10.7706175,
+                "lng": 106.7052936
+              },
+              "html_instructions": "Hướng lên \u003cb\u003eHàm Nghi\u003c/b\u003e",
+              "polyline": {
+                "points": "ksv`Aa{gjS"
+              },
+              "start_location": {
+                "lat": 10.7706175,
+                "lng": 106.7052936
+              },
+              "travel_mode": "DRIVING"
+            }
+          ],
+          "traffic_speed_entry": [],
+          "via_waypoint": []
+        },
+        {
+          "distance": {
+            "text": "1 m",
+            "value": 0
+          },
+          "duration": {
+            "text": "1 phút",
+            "value": 0
+          },
+          "end_address": "19 Hàm Nghi, Phường Nguyễn Thái Bìn, Quận 1, Hồ Chí Minh, Việt Nam",
+          "end_location": {
+            "lat": 10.7706175,
+            "lng": 106.7052936
+          },
+          "start_address": "19 Hàm Nghi, Phường Nguyễn Thái Bìn, Quận 1, Hồ Chí Minh, Việt Nam",
+          "start_location": {
+            "lat": 10.7706175,
+            "lng": 106.7052936
+          },
+          "steps": [
+            {
+              "distance": {
+                "text": "1 m",
+                "value": 0
+              },
+              "duration": {
+                "text": "1 phút",
+                "value": 0
+              },
+              "end_location": {
+                "lat": 10.7706175,
+                "lng": 106.7052936
+              },
+              "html_instructions": "Hướng lên \u003cb\u003eHàm Nghi\u003c/b\u003e",
+              "polyline": {
+                "points": "ksv`Aa{gjS"
+              },
+              "start_location": {
+                "lat": 10.7706175,
+                "lng": 106.7052936
+              },
+              "travel_mode": "DRIVING"
+            }
+          ],
+          "traffic_speed_entry": [],
+          "via_waypoint": []
+        },
+        {
+          "distance": {
+            "text": "1 m",
+            "value": 0
+          },
+          "duration": {
+            "text": "1 phút",
+            "value": 0
+          },
+          "end_address": "19 Hàm Nghi, Phường Nguyễn Thái Bìn, Quận 1, Hồ Chí Minh, Việt Nam",
+          "end_location": {
+            "lat": 10.7706175,
+            "lng": 106.7052936
+          },
+          "start_address": "19 Hàm Nghi, Phường Nguyễn Thái Bìn, Quận 1, Hồ Chí Minh, Việt Nam",
+          "start_location": {
+            "lat": 10.7706175,
+            "lng": 106.7052936
+          },
+          "steps": [
+            {
+              "distance": {
+                "text": "1 m",
+                "value": 0
+              },
+              "duration": {
+                "text": "1 phút",
+                "value": 0
+              },
+              "end_location": {
+                "lat": 10.7706175,
+                "lng": 106.7052936
+              },
+              "html_instructions": "Hướng lên \u003cb\u003eHàm Nghi\u003c/b\u003e",
+              "polyline": {
+                "points": "ksv`Aa{gjS"
+              },
+              "start_location": {
+                "lat": 10.7706175,
+                "lng": 106.7052936
+              },
+              "travel_mode": "DRIVING"
+            }
+          ],
+          "traffic_speed_entry": [],
+          "via_waypoint": []
+        },
+        {
+          "distance": {
+            "text": "7,0 km",
+            "value": 6987
+          },
+          "duration": {
+            "text": "16 phút",
+            "value": 972
+          },
+          "end_address": "111 Tôn Dật Tiên, Tân Phú, Quận 7, Hồ Chí Minh, Việt Nam",
+          "end_location": {
+            "lat": 10.7247914,
+            "lng": 106.7193417
+          },
+          "start_address": "19 Hàm Nghi, Phường Nguyễn Thái Bìn, Quận 1, Hồ Chí Minh, Việt Nam",
+          "start_location": {
+            "lat": 10.7706175,
+            "lng": 106.7052936
+          },
+          "steps": [
+            {
+              "distance": {
+                "text": "0,1 km",
+                "value": 99
+              },
+              "duration": {
+                "text": "1 phút",
+                "value": 16
+              },
+              "end_location": {
+                "lat": 10.7705583,
+                "lng": 106.7062
+              },
+              "html_instructions": "Đi về hướng \u003cb\u003eĐông\u003c/b\u003e lên \u003cb\u003eHàm Nghi\u003c/b\u003e về phía \u003cb\u003eCầu Khánh Hội\u003c/b\u003e/\u003cb\u003eĐường Tôn Đức Thắng\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eBăng qua Công Ty Tnhh Tm Xuất Nhập Khẩu Vũ Thanh Bình (ở phía bên phải)\u003c/div\u003e",
+              "polyline": {
+                "points": "ksv`Aa{gjSJuD"
+              },
+              "start_location": {
+                "lat": 10.7706175,
+                "lng": 106.7052936
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "0,4 km",
+                "value": 362
+              },
+              "duration": {
+                "text": "1 phút",
+                "value": 44
+              },
+              "end_location": {
+                "lat": 10.7675203,
+                "lng": 106.705986
+              },
+              "html_instructions": "Rẽ \u003cb\u003ephải\u003c/b\u003e tại Bidv - Atm vào \u003cb\u003eCầu Khánh Hội\u003c/b\u003e",
+              "maneuver": "turn-right",
+              "polyline": {
+                "points": "_sv`Aw`hjSF@L@\\DVFZFRFRHd@RLFRJNFRHLDTFPBVBTBP?T?NANANAx@Qt@[v@a@"
+              },
+              "start_location": {
+                "lat": 10.7705583,
+                "lng": 106.7062
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "2,1 km",
+                "value": 2071
+              },
+              "duration": {
+                "text": "5 phút",
+                "value": 318
+              },
+              "end_location": {
+                "lat": 10.755727,
+                "lng": 106.7197399
+              },
+              "html_instructions": "Tại Công Ty Cp Tm - Dv Nam Đông Dương, tiếp tục vào \u003cb\u003eNguyễn Tất Thành\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eBăng qua Nha Khoa Chí Đại (ở bên phải cách 600&nbsp;m)\u003c/div\u003e",
+              "polyline": {
+                "points": "_`v`Am_hjSvAo@~@a@bDmAvCcANI|@[d@OZK~FsBd@Q~Am@LQ`@w@h@_AjAwBVm@z@gBLU\\u@Vg@r@qAHOTi@d@aAnAgCLWpEeJ@At@}AJSZo@nB_EVs@Xy@Tm@p@kBHQRc@JSFOHMLQpB}C|A_C"
+              },
+              "start_location": {
+                "lat": 10.7675203,
+                "lng": 106.705986
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "0,4 km",
+                "value": 424
+              },
+              "duration": {
+                "text": "1 phút",
+                "value": 39
+              },
+              "end_location": {
+                "lat": 10.753398,
+                "lng": 106.7228139
+              },
+              "html_instructions": "Tiếp tục vào \u003cb\u003eCầu Tân Thuận 2\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eBăng qua cầu (ở bên trái)\u003c/div\u003e",
+              "polyline": {
+                "points": "ivs`AkujjSDGfBaCt@gADEBG`AwA~@wAJM~AaCt@eA"
+              },
+              "start_location": {
+                "lat": 10.755727,
+                "lng": 106.7197399
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "0,2 km",
+                "value": 194
+              },
+              "duration": {
+                "text": "1 phút",
+                "value": 25
+              },
+              "end_location": {
+                "lat": 10.7523449,
+                "lng": 106.7242341
+              },
+              "html_instructions": "Đi thẳng\u003cdiv style=\"font-size:0.9em\"\u003eBăng qua Cầu Tân Thuận 2 (ở phía bên phải)\u003c/div\u003e",
+              "maneuver": "straight",
+              "polyline": {
+                "points": "wgs`AqhkjSfCmDjAmB"
+              },
+              "start_location": {
+                "lat": 10.753398,
+                "lng": 106.7228139
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "2,4 km",
+                "value": 2417
+              },
+              "duration": {
+                "text": "4 phút",
+                "value": 252
+              },
+              "end_location": {
+                "lat": 10.7317386,
+                "lng": 106.7200404
+              },
+              "html_instructions": "Rẽ \u003cb\u003ephải\u003c/b\u003e vào \u003cb\u003eNguyễn Văn Linh\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eBăng qua Công Ty Tư Vấn Thiết Kế B.R (ở phía bên phải)\u003c/div\u003e",
+              "maneuver": "turn-right",
+              "polyline": {
+                "points": "cas`AmqkjSf@WHENC\\J\\RPDDFPT~@dAn@r@?@b@^dAt@t@f@`Ah@b@RpBt@fBb@lB\\pALj@Dh@Bx@Dj@Bj@?vA?hDBxJDhDDvIFlNF\\?N@v@@B?xDFf@?hABvADx@DdBNx@J`@FbBXfAXt@N^FfBp@tAl@`BdA"
+              },
+              "start_location": {
+                "lat": 10.7523449,
+                "lng": 106.7242341
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "0,3 km",
+                "value": 271
+              },
+              "duration": {
+                "text": "1 phút",
+                "value": 75
+              },
+              "end_location": {
+                "lat": 10.7296842,
+                "lng": 106.7211575
+              },
+              "html_instructions": "Rẽ \u003cb\u003etrái\u003c/b\u003e vào \u003cb\u003eNguyễn Lương Bằng\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eBăng qua Phòng Khám E.X.M (ở phía bên phải)\u003c/div\u003e",
+              "maneuver": "turn-left",
+              "polyline": {
+                "points": "k`o`AgwjjSXR`@UBCl@Y^Ur@[|Aw@zBuA"
+              },
+              "start_location": {
+                "lat": 10.7317386,
+                "lng": 106.7200404
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "0,1 km",
+                "value": 135
+              },
+              "duration": {
+                "text": "1 phút",
+                "value": 21
+              },
+              "end_location": {
+                "lat": 10.7286544,
+                "lng": 106.7217191
+              },
+              "html_instructions": "Đi \u003cb\u003ebên phải\u003c/b\u003e",
+              "maneuver": "keep-right",
+              "polyline": {
+                "points": "osn`Ag~jjSBHhEyB"
+              },
+              "start_location": {
+                "lat": 10.7296842,
+                "lng": 106.7211575
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "66 m",
+                "value": 66
+              },
+              "duration": {
+                "text": "1 phút",
+                "value": 8
+              },
+              "end_location": {
+                "lat": 10.7281468,
+                "lng": 106.722037
+              },
+              "html_instructions": "Đi thẳng",
+              "maneuver": "straight",
+              "polyline": {
+                "points": "amn`AwakjSbB_A"
+              },
+              "start_location": {
+                "lat": 10.7286544,
+                "lng": 106.7217191
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "68 m",
+                "value": 68
+              },
+              "duration": {
+                "text": "1 phút",
+                "value": 8
+              },
+              "end_location": {
+                "lat": 10.7276241,
+                "lng": 106.7223634
+              },
+              "html_instructions": "Đi \u003cb\u003ebên phải\u003c/b\u003e để đi tiếp về hướng \u003cb\u003eTrần Văn Trà\u003c/b\u003e",
+              "maneuver": "keep-right",
+              "polyline": {
+                "points": "}in`AwckjShB_A"
+              },
+              "start_location": {
+                "lat": 10.7281468,
+                "lng": 106.722037
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "0,1 km",
+                "value": 131
+              },
+              "duration": {
+                "text": "1 phút",
+                "value": 16
+              },
+              "end_location": {
+                "lat": 10.7266168,
+                "lng": 106.7229799
+              },
+              "html_instructions": "Đi thẳng",
+              "maneuver": "straight",
+              "polyline": {
+                "points": "sfn`AwekjSfE{B"
+              },
+              "start_location": {
+                "lat": 10.7276241,
+                "lng": 106.7223634
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "0,1 km",
+                "value": 133
+              },
+              "duration": {
+                "text": "1 phút",
+                "value": 20
+              },
+              "end_location": {
+                "lat": 10.7255989,
+                "lng": 106.7236165
+              },
+              "html_instructions": "Đi \u003cb\u003ebên phải\u003c/b\u003e để đi tiếp về hướng \u003cb\u003eTrần Văn Trà\u003c/b\u003e",
+              "maneuver": "keep-right",
+              "polyline": {
+                "points": "k`n`AsikjSHE~CcB`@U"
+              },
+              "start_location": {
+                "lat": 10.7266168,
+                "lng": 106.7229799
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "0,4 km",
+                "value": 397
+              },
+              "duration": {
+                "text": "1 phút",
+                "value": 50
+              },
+              "end_location": {
+                "lat": 10.7237248,
+                "lng": 106.720523
+              },
+              "html_instructions": "Rẽ \u003cb\u003ephải\u003c/b\u003e tại Công Ty Tnhh Dịch Vụ Kỹ Thuật Sol vào \u003cb\u003eTrần Văn Trà\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eBăng qua Trường Mầm Non Nam Sài Gòn (ở phía bên trái)\u003c/div\u003e",
+              "maneuver": "turn-right",
+              "polyline": {
+                "points": "_zm`AsmkjS~BnErAjCf@~@zBnE"
+              },
+              "start_location": {
+                "lat": 10.7255989,
+                "lng": 106.7236165
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "0,2 km",
+                "value": 168
+              },
+              "duration": {
+                "text": "1 phút",
+                "value": 51
+              },
+              "end_location": {
+                "lat": 10.7250255,
+                "lng": 106.7197417
+              },
+              "html_instructions": "Rẽ \u003cb\u003ephải\u003c/b\u003e tại Trường Cao Đẳng Quốc Tế Cetana PSB Intellis vào \u003cb\u003ePhan Văn Chương\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eCác đoạn của đường này có thể đóng cửa vào một số thời điểm hoặc ngày\u003c/div\u003e\u003cdiv style=\"font-size:0.9em\"\u003eBăng qua Nhà hàng Cham Charm (ở phía bên trái)\u003c/div\u003e",
+              "maneuver": "turn-right",
+              "polyline": {
+                "points": "gnm`AgzjjS{Ap@gCtAa@R"
+              },
+              "start_location": {
+                "lat": 10.7237248,
+                "lng": 106.720523
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "51 m",
+                "value": 51
+              },
+              "duration": {
+                "text": "1 phút",
+                "value": 29
+              },
+              "end_location": {
+                "lat": 10.7247914,
+                "lng": 106.7193417
+              },
+              "html_instructions": "Rẽ \u003cb\u003etrái\u003c/b\u003e vào \u003cb\u003eCầu Ánh Sao\u003c/b\u003e/\u003cb\u003eTôn Dật Tiên\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eCó thể đóng cửa vào một số thời điểm hoặc ngày\u003c/div\u003e",
+              "maneuver": "turn-left",
+              "polyline": {
+                "points": "mvm`AkujjSFFFFDHFHBHBFFR@D"
+              },
+              "start_location": {
+                "lat": 10.7250255,
+                "lng": 106.7197417
+              },
+              "travel_mode": "DRIVING"
+            }
+          ],
+          "traffic_speed_entry": [],
+          "via_waypoint": []
+        },
+        {
+          "distance": {
+            "text": "8,4 km",
+            "value": 8360
+          },
+          "duration": {
+            "text": "23 phút",
+            "value": 1374
+          },
+          "end_address": "97A Phó Đức Chính, Phường Nguyễn Thái Bìn, Quận 1, Hồ Chí Minh, Việt Nam",
+          "end_location": {
+            "lat": 10.769803,
+            "lng": 106.6994816
+          },
+          "start_address": "111 Tôn Dật Tiên, Tân Phú, Quận 7, Hồ Chí Minh, Việt Nam",
+          "start_location": {
+            "lat": 10.7247914,
+            "lng": 106.7193417
+          },
+          "steps": [
+            {
+              "distance": {
+                "text": "0,5 km",
+                "value": 525
+              },
+              "duration": {
+                "text": "3 phút",
+                "value": 152
+              },
+              "end_location": {
+                "lat": 10.7277863,
+                "lng": 106.718096
+              },
+              "html_instructions": "Đi về hướng \u003cb\u003eĐông\u003c/b\u003e lên \u003cb\u003eCầu Ánh Sao\u003c/b\u003e/\u003cb\u003eTôn Dật Tiên\u003c/b\u003e về phía \u003cb\u003ePhan Văn Chương\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eĐi tiếp tục theo Tôn Dật Tiên\u003c/div\u003e\u003cdiv style=\"font-size:0.9em\"\u003eCó thể đóng cửa vào một số thời điểm hoặc ngày\u003c/div\u003e\u003cdiv style=\"font-size:0.9em\"\u003eBăng qua Bảo Hiểm Prisma - Prisma Insurance (ở phía bên trái)\u003c/div\u003e",
+              "polyline": {
+                "points": "}tm`A{rjjSAEGSCGCIGIEIGGGGOOOMOMQMSKQIQGOEOCUCQAQAQ?Q@Q@YD]H_@LYLWPURSROTSb@M^I`@Eb@MvAE`@EVMT"
+              },
+              "start_location": {
+                "lat": 10.7247914,
+                "lng": 106.7193417
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "0,3 km",
+                "value": 320
+              },
+              "duration": {
+                "text": "1 phút",
+                "value": 87
+              },
+              "end_location": {
+                "lat": 10.7295836,
+                "lng": 106.7185523
+              },
+              "html_instructions": "Tiếp tục đi thẳng qua Bedding Gallery\u003cdiv style=\"font-size:0.9em\"\u003eCác đoạn của đường này có thể đóng cửa vào một số thời điểm hoặc ngày\u003c/div\u003e",
+              "maneuver": "straight",
+              "polyline": {
+                "points": "ugn`AckjjSGRELONa@b@MJIJA@iAr@EBC?C?C?GCKAQEOEe@oAa@cA?Ac@cAMU"
+              },
+              "start_location": {
+                "lat": 10.7277863,
+                "lng": 106.718096
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "0,3 km",
+                "value": 251
+              },
+              "duration": {
+                "text": "1 phút",
+                "value": 41
+              },
+              "end_location": {
+                "lat": 10.7310278,
+                "lng": 106.7203073
+              },
+              "html_instructions": "Đi \u003cb\u003ebên phải\u003c/b\u003e để đi tiếp về hướng \u003cb\u003eNguyễn Văn Linh\u003c/b\u003e",
+              "maneuver": "keep-right",
+              "polyline": {
+                "points": "{rn`A}mjjSEIk@aA_AyAmAyAkAiAUU"
+              },
+              "start_location": {
+                "lat": 10.7295836,
+                "lng": 106.7185523
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "2,9 km",
+                "value": 2891
+              },
+              "duration": {
+                "text": "6 phút",
+                "value": 366
+              },
+              "end_location": {
+                "lat": 10.752664,
+                "lng": 106.7284397
+              },
+              "html_instructions": "Đi \u003cb\u003ebên trái\u003c/b\u003e để đi tiếp \u003cb\u003eNguyễn Văn Linh\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eBăng qua Sửa Chữa Đồ Gỗ Giá Rẻ Á Đông (ở bên phải cách 850&nbsp;m)\u003c/div\u003e",
+              "maneuver": "keep-left",
+              "polyline": {
+                "points": "}{n`A}xjjSYW_@RsAiAq@_@w@c@u@Ys@Uu@Us@O_@Kc@Ga@GYCg@G_@AKAyBEwCEgFAM?aEDS@aEB_@?aSKeDA}JG}HG}@Cm@Eg@Ci@Gi@GA?SC[EqAWKCYIUE]KOGOEyB_Ak@YUMUMi@]i@_@UQUUUSSWk@o@SWSWW_@_@q@EGKUOWWi@e@oASu@I[I[Ik@Ik@Em@Ei@Ak@EeC?[CaB"
+              },
+              "start_location": {
+                "lat": 10.7310278,
+                "lng": 106.7203073
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "0,7 km",
+                "value": 743
+              },
+              "duration": {
+                "text": "2 phút",
+                "value": 136
+              },
+              "end_location": {
+                "lat": 10.7555296,
+                "lng": 106.7232546
+              },
+              "html_instructions": "Rẽ \u003cb\u003etrái\u003c/b\u003e tại Công Ty Tnhh Tư Vấn &amp; Phát Triển Xây Dựng Cộng Đồng vào \u003cb\u003eHuỳnh Tấn Phát\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eBăng qua Trung Tâm Bảo Hành Alaska TP Hồ Chí Minh (ở phía bên phải)\u003c/div\u003e",
+              "maneuver": "turn-left",
+              "polyline": {
+                "points": "ccs`AwkljS?MY@cADy@Hy@HM@ODMDMFOFOJONGFQVU^IZEREL?BU~AYpBE`@Gb@EVCTU|AQlACJUzAE`@W|AOrACT"
+              },
+              "start_location": {
+                "lat": 10.752664,
+                "lng": 106.7284397
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "0,5 km",
+                "value": 545
+              },
+              "duration": {
+                "text": "1 phút",
+                "value": 63
+              },
+              "end_location": {
+                "lat": 10.7566445,
+                "lng": 106.7188379
+              },
+              "html_instructions": "Rẽ \u003cb\u003etrái\u003c/b\u003e tại Tiệm Vàng Tăng Hồng vào \u003cb\u003eCầu Tân Thuận\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eBăng qua Salon Nail Đào Kim (ở phía bên phải)\u003c/div\u003e",
+              "maneuver": "turn-left",
+              "polyline": {
+                "points": "aus`AikkjSHHVXLVHBFDDDFHDFHNBRBJ?L?JALKZUj@EHWn@m@|AGNENsAnDUr@]dAg@zAWt@"
+              },
+              "start_location": {
+                "lat": 10.7555296,
+                "lng": 106.7232546
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "1,6 km",
+                "value": 1629
+              },
+              "duration": {
+                "text": "3 phút",
+                "value": 207
+              },
+              "end_location": {
+                "lat": 10.7651211,
+                "lng": 106.7072401
+              },
+              "html_instructions": "Tại Công Ty Tnhh Inter Bond, tiếp tục vào \u003cb\u003eNguyễn Tất Thành\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eBăng qua Dia Warehouse (ở phía bên trái)\u003c/div\u003e",
+              "polyline": {
+                "points": "_|s`AwojjSQb@GPITKNk@vA_@dAqApD]v@mEdJA@oE`J}A~CqGxMS`@k@dAk@bAa@t@EHGJEDA@OFgA`@cBl@gBp@E@qBl@a@LaA^"
+              },
+              "start_location": {
+                "lat": 10.7566445,
+                "lng": 106.7188379
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "0,4 km",
+                "value": 433
+              },
+              "duration": {
+                "text": "2 phút",
+                "value": 97
+              },
+              "end_location": {
+                "lat": 10.763467,
+                "lng": 106.7037776
+              },
+              "html_instructions": "Rẽ \u003cb\u003etrái\u003c/b\u003e tại Quán Xiên Que - Trà Sữa Thái Liêm Mập vào \u003cb\u003eHoàng Diệu\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eBăng qua Công Ty Tnhh Xuất Nhập Khẩu Thương Mại &amp; Dịch Vụ Sài Gòn Vina (ở phía bên phải)\u003c/div\u003e",
+              "maneuver": "turn-left",
+              "polyline": {
+                "points": "_qu`AgghjSGBGBBLd@xAb@|AHR\\jARl@Vj@x@hCX^T^fAvADH"
+              },
+              "start_location": {
+                "lat": 10.7651211,
+                "lng": 106.7072401
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "39 m",
+                "value": 39
+              },
+              "duration": {
+                "text": "1 phút",
+                "value": 8
+              },
+              "end_location": {
+                "lat": 10.7637206,
+                "lng": 106.703531
+              },
+              "html_instructions": "Rẽ \u003cb\u003ephải\u003c/b\u003e tại Áo Cưới Black &amp; White vào \u003cb\u003eĐoàn Văn Bơ\u003c/b\u003e",
+              "maneuver": "turn-right",
+              "polyline": {
+                "points": "ufu`AsqgjSONONQP"
+              },
+              "start_location": {
+                "lat": 10.763467,
+                "lng": 106.7037776
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "0,7 km",
+                "value": 742
+              },
+              "duration": {
+                "text": "2 phút",
+                "value": 133
+              },
+              "end_location": {
+                "lat": 10.7684413,
+                "lng": 106.6988071
+              },
+              "html_instructions": "Chếch sang \u003cb\u003etrái\u003c/b\u003e tại 후띠에우 수프 vào \u003cb\u003eCalmette\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eBăng qua The Coffee House Nguyễn Thái Bình (ở bên trái cách 700&nbsp;m)\u003c/div\u003e",
+              "maneuver": "turn-slight-left",
+              "polyline": {
+                "points": "ghu`AapgjSO^uAtB_BfCc@p@SV_@\\A@OLA@KJiAbA[ZSNYVGDoAx@cAx@]VIFe@\\KFKNIFqEjD"
+              },
+              "start_location": {
+                "lat": 10.7637206,
+                "lng": 106.703531
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "0,2 km",
+                "value": 167
+              },
+              "duration": {
+                "text": "1 phút",
+                "value": 61
+              },
+              "end_location": {
+                "lat": 10.7694613,
+                "lng": 106.6999242
+              },
+              "html_instructions": "Rẽ \u003cb\u003ephải\u003c/b\u003e sau Kai Coffee Shop - Nguyễn Thái Bình (ở bên phải)\u003cdiv style=\"font-size:0.9em\"\u003eBăng qua B's Mart (ở phía bên trái)\u003c/div\u003e",
+              "maneuver": "turn-right",
+              "polyline": {
+                "points": "wev`AqrfjSc@e@i@m@}BiC"
+              },
+              "start_location": {
+                "lat": 10.7684413,
+                "lng": 106.6988071
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "45 m",
+                "value": 45
+              },
+              "duration": {
+                "text": "1 phút",
+                "value": 11
+              },
+              "end_location": {
+                "lat": 10.7698024,
+                "lng": 106.6997085
+              },
+              "html_instructions": "Rẽ \u003cb\u003etrái\u003c/b\u003e tại Báo Mua &amp; Bán - Vpgd vào \u003cb\u003ePhó Đức Chính\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eBăng qua Công Ty Cp Dv Tm Xây Dựng Địa Ốc An Phát Thịnh (ở phía bên phải)\u003c/div\u003e",
+              "maneuver": "turn-left",
+              "polyline": {
+                "points": "clv`AoyfjScAh@"
+              },
+              "start_location": {
+                "lat": 10.7694613,
+                "lng": 106.6999242
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "30 m",
+                "value": 30
+              },
+              "duration": {
+                "text": "1 phút",
+                "value": 12
+              },
+              "end_location": {
+                "lat": 10.769803,
+                "lng": 106.6994816
+              },
+              "html_instructions": "Rẽ \u003cb\u003etrái \u003c/b\u003e tại Chú Mập Quán\u003cdiv style=\"font-size:0.9em\"\u003eĐiểm đến sẽ ở bên trái\u003c/div\u003e",
+              "maneuver": "turn-left",
+              "polyline": {
+                "points": "gnv`AexfjSHX@B?@?@?@?@A@E@CB"
+              },
+              "start_location": {
+                "lat": 10.7698024,
+                "lng": 106.6997085
+              },
+              "travel_mode": "DRIVING"
+            }
+          ],
+          "traffic_speed_entry": [],
+          "via_waypoint": []
+        }
+      ],
+      "overview_polyline": {
+        "points": "c{gaAugpiShELa@mCIc@gBwJGs@@i@TaC@i@Gs@DgATwB?MmBFUAoBLkDTa@JiCdAaBFkDJ}CCmBCFe@FsBPuFPmAJsADuCCm@GUIIGA?KEa@Cs@KsBOaBWoBK_@]m@{@iAuCoDEC[PgAr@I?g@m@yDwGy@wAbFgDzFmDfDuBjAu@GKpBqAdFgDpDuBrZsRvHqEr[iQdf@gXxEcCzAs@BBJBHBZ?^SP]@Y?I?EJCbCqAlKsFxLyGfFuCnN_IrOuI`UgMzAkAtAmA~FmG|GyH~DcEpAu@|@_@pAa@fCk@|Dy@dq@kNrPiDzGwAfB}@p@e@bEyEz@{@~E}CfGqD|@u@fA{AZu@X{ANcALeCTaFDkCRmG\\wI?cBV}G`@oMPg@PmEJcDf@eMr@eQ^eKh@}S\\oLj@}MDkABy@L]T}@^y@tIcQ~DiInE}I`AwB`AgBtF_LvA}CtBcEvEkJdCqCbHgIfBqB|BaC~BoClDqDpMsNpIuJzDyEbE}E|JmKnGsH`BkBrDaElDeEb@YPGdEuAvDeAl@a@bAY`ASxAg@~FiBn@SRmML{EJ?RcIjAPn@Nx@\\dAd@b@Lh@Ff@Bd@A^Cx@Qt@[nCqAbFoBjGyB`L_EdDaG~BaFjBsDtLkVfCsFn@gBzAuDpCmE`GqIjC}DhHcKjAmBf@WXIz@^PDDFpAzAn@t@hBtAvBpAtChAtE`A|BRbBHxIFhj@ZlNT~CTzARbBXfAXtAV|D~AzBxArBiApCsAzBuABHhEyBlE_CrK{FvJjRcFfCa@RFFLPJRJZ@DAEK[KSe@i@eAu@cA[kAGc@Bw@Ny@Zm@d@c@h@a@bAOdASxBa@nAiAjAuAx@[Ea@KgAsCw@eBkB{CmAyAkAiAo@m@_@RsAiAiBcAiBo@iBe@cAScCUeCG_KGeLJee@U{JKuAIiBSsCk@sA_@eDyAk@[sA}@k@g@iBsBqAqB[m@}@yBq@yCOyAGuAIqGqEZy@T_@RWVQV_@z@a@dCm@nEsB|NCTHHd@p@^XNVBRBXAX_A`CoClHsBjGo@zA{DfK}NhZeHzNwAhCu@pA}DxAmBr@sCz@iAb@GBBLhAvDf@~Aj@xAx@hCX^|AvBDHONa@`@eBtCcCxDs@t@_@\\sCfCyDpCo@d@WV{ErDmAsA}BiCcAh@J\\?DABID"
+      },
+      "summary": "Trường Chinh",
+      "warnings": [],
+      "waypoint_order": [
+        5,
+        4,
+        3,
+        2,
+        1,
+        0,
+        6
+      ]
+    }
+  ],
+  "status": "OK"
+}
