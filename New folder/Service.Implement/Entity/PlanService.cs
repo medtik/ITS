@@ -272,7 +272,29 @@ namespace Service.Implement.Entity
                     DateTimeOffset currentDate = plan.StartDate.AddDays(i);
                     Dictionary<NessecityType, Location> nessecityLocationMap;
                     PolulateNecessityLocations(plan, locations, currentDate, out nessecityLocationMap, i);
-                    await PolulateEntertainmentLocations(plan, locations, currentDate, nessecityLocationMap);
+                    var locationsWithRouteList = await PolulateEntertainmentLocations(plan, locations, currentDate, nessecityLocationMap);
+
+
+                    int index = 0; 
+                    plan.PlanLocations.Add(new PlanLocation
+                    {
+                        PlanDay = i,
+                        Index = index++,
+                        Comment = "Xuất phát từ khách sạn",
+                        Done = false,
+                        Location = nessecityLocationMap[NessecityType.Hotel]
+                    });
+                    
+
+                    for (var j = 0; j < locationsWithRouteList.Count; j++)
+                    {
+                        var locationsWithRoute = locationsWithRouteList[i];
+
+                        if (j == 0)
+                        {
+                            
+                        }
+                    }
                 }
 
                 _repository.Create(plan);
@@ -433,12 +455,13 @@ namespace Service.Implement.Entity
             }
         }
 
-        private async Task PolulateEntertainmentLocations(
+        private async Task<List<KeyValuePair<JObject, KeyValuePair<Location, Location>>>> PolulateEntertainmentLocations(
             Plan plan,
             List<TreeViewModels> treeLocations,
             DateTimeOffset currentDate,
             Dictionary<NessecityType, Location> nessecityLocationMap)
         {
+            var result = new List<KeyValuePair<JObject, KeyValuePair<Location, Location>>>();
             int[] locationIds = treeLocations.Select(location => location.Id).ToArray();
             List<Location> locationList = _locationRepository
                 .Search(location => locationIds.Contains(location.Id))
@@ -518,6 +541,8 @@ namespace Service.Implement.Entity
                 {
                     _loggingService.CaptureSentryException(ex);
                 }
+                
+                
 
 
                 for (int i = 0; i < locationWithRouteList.Count; i++)
@@ -534,7 +559,10 @@ namespace Service.Implement.Entity
                         locationList.Remove(location);
                     }
                 }
+                result.AddRange(locationWithRouteList);
             }
+
+            return result;
         }
 
         public GeoCoordinate GetFrationGeoPoint(double frac, GeoCoordinate origin, GeoCoordinate destination)
