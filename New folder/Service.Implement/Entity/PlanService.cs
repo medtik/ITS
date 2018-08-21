@@ -611,7 +611,7 @@ namespace Service.Implement.Entity
                 foreach (KeyValuePair<JObject, KeyValuePair<Location, Location>> keyValuePair in map)
                 {
                     int travelTimeMinutes = keyValuePair.Key["duration"]["value"].Value<int>();
-                    TimeSpan travelTime = new TimeSpan(0, 0, 0,travelTimeMinutes,0);
+                    TimeSpan travelTime = new TimeSpan(0, 0, 0, travelTimeMinutes, 0);
                     TimeSpan stayTime = GetLocationStayTime(keyValuePair.Value.Key);
 
                     totalTime = totalTime.Add(travelTime + stayTime);
@@ -706,13 +706,11 @@ namespace Service.Implement.Entity
 
         private TimeSpan GetLocationStayTime(Location location)
         {
-            if (location.TotalTimeStay != null && location.TotalStayCount != null)
-            {
-                int minutes = (int) location.TotalTimeStay / (int) location.TotalStayCount;
-                return new TimeSpan(0, minutes, 0);
-            }
+            if (location.TotalTimeStay == null || location.TotalStayCount == null || location.TotalStayCount == 0)
+                return new TimeSpan(0);
 
-            return new TimeSpan(0);
+            int minutes = (int) location.TotalTimeStay / (int) location.TotalStayCount;
+            return new TimeSpan(0, minutes, 0);
         }
 
         private string ParseDate(DateTimeOffset currentDate)
