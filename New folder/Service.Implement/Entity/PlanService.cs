@@ -266,39 +266,145 @@ namespace Service.Implement.Entity
             });
             try
             {
+                var planLocations = new List<PlanLocation>();
+                var notes = new List<Note>();
+
                 var diffDays = (plan.EndDate - plan.StartDate).TotalDays + 1;
                 for (int i = 1; i <= diffDays; i++)
                 {
                     DateTimeOffset currentDate = plan.StartDate.AddDays(i);
                     Dictionary<NessecityType, Location> nessecityLocationMap;
                     PolulateNecessityLocations(plan, locations, currentDate, out nessecityLocationMap, i);
-                    var locationsWithRouteList = await PolulateEntertainmentLocations(plan, locations, currentDate, nessecityLocationMap);
+                    var locationsWithRouteList = await PolulateEntertainmentLocations(
+                        plan,
+                        locations,
+                        currentDate,
+                        nessecityLocationMap
+                    );
 
 
-                    int index = 0; 
-                    plan.PlanLocations.Add(new PlanLocation
+                    int index = 0;
+                    var hotel = nessecityLocationMap[NessecityType.Hotel];
+                    planLocations.Add(new PlanLocation
                     {
                         PlanDay = i,
                         Index = index++,
-                        Comment = "Xuất phát từ khách sạn",
+                        Done = false,
+                        Location = hotel
+                    });
+
+
+                    JObject fromHotelJObject = await FetchGoogleRoute(
+                        nessecityLocationMap[NessecityType.Hotel],
+                        nessecityLocationMap[NessecityType.Breakfast],
+                        null
+                    );
+
+                    StringBuilder builder = new StringBuilder();
+                    
+                    JArray fromHotelSteps = fromHotelJObject["routes"][0]["legs"][0]["steps"].Value<JArray>();
+                    builder.Append("Xuất phát từ khách sạn");                        
+                    builder.Append("<br/>");
+                    foreach (JToken step in fromHotelSteps)
+                    {
+                        builder.Append(step["html_instructions"]);
+                        builder.Append("<br/>");
+                    }
+                    notes.Add(new Note
+                    {
+                        Index = index++,
+                        PlanDay = i,
+                        Title = "Cách đi",
+                        Content = builder.ToString()
+                    });
+                    
+                    planLocations.Add(new PlanLocation
+                    {
+                        PlanDay = i,
+                        Index = index++,
+                        Done = false,
+                        Location = nessecityLocationMap[NessecityType.Breakfast]
+                    });
+
+
+                    Location lastLocation = null;
+                    foreach (var locationsWithRoute in locationsWithRouteList)
+                    {
+                       
+                        JArray steps = locationsWithRoute.Key["steps"].Value<JArray>();
+                        builder.Clear();
+                        foreach (JToken step in steps)
+                        {
+                            builder.Append(step["html_instructions"]);
+                            builder.Append("<br/>");
+                        }
+                        notes.Add(new Note
+                            {
+                                Index = index++,
+                                PlanDay = i,
+                                Title = "Cách đi",
+                                Content = builder.ToString()
+                            });
+                        
+                        planLocations.Add(new PlanLocation
+                        {
+                            PlanDay = i,
+                            Index = index++,
+                            Done = false,
+                            Location = locationsWithRoute.Value.Value
+                        });
+                        lastLocation = locationsWithRoute.Value.Value;
+                    }
+                    
+                    
+                    JObject toHotelStepsJObject = await FetchGoogleRoute(
+                        lastLocation,
+                        nessecityLocationMap[NessecityType.Hotel],
+                        null
+                    );
+                    JArray toHotelSteps = toHotelStepsJObject["routes"][0]["legs"][0]["steps"].Value<JArray>();    
+                    builder.Clear();
+                    foreach (JToken step in toHotelSteps)
+                    {
+                        builder.Append(step["html_instructions"]);
+                        builder.Append("<br/>");
+                    }
+
+                    Note toHotel = new Note
+                    {
+                        Index = index++,
+                        PlanDay = i,
+                        Title = "Cách đi",
+                        Content = builder.ToString()
+                    };
+                    
+                    planLocations.Add(new PlanLocation
+                    {
+                        PlanDay = i,
+                        Index = index++,
                         Done = false,
                         Location = nessecityLocationMap[NessecityType.Hotel]
                     });
                     
-
-                    for (var j = 0; j < locationsWithRouteList.Count; j++)
-                    {
-                        var locationsWithRoute = locationsWithRouteList[i];
-
-                        if (j == 0)
-                        {
-                            
-                        }
-                    }
+                    notes.Add(toHotel);
                 }
 
                 _repository.Create(plan);
                 _unitOfWork.SaveChanges();
+
+                planLocations.ForEach(planLocation =>
+                {
+                    planLocation.PlanId = plan.Id;
+                    _planLocationRepository.Create(planLocation);
+                });
+                notes.ForEach(note =>
+                {
+                    note.PlanId = plan.Id;
+                    _noteRepository.Create(note);
+                });
+                _unitOfWork.SaveChanges();
+
+
                 return plan;
             }
             catch (Exception ex)
@@ -455,11 +561,12 @@ namespace Service.Implement.Entity
             }
         }
 
-        private async Task<List<KeyValuePair<JObject, KeyValuePair<Location, Location>>>> PolulateEntertainmentLocations(
-            Plan plan,
-            List<TreeViewModels> treeLocations,
-            DateTimeOffset currentDate,
-            Dictionary<NessecityType, Location> nessecityLocationMap)
+        private async Task<List<KeyValuePair<JObject, KeyValuePair<Location, Location>>>>
+            PolulateEntertainmentLocations(
+                Plan plan,
+                List<TreeViewModels> treeLocations,
+                DateTimeOffset currentDate,
+                Dictionary<NessecityType, Location> nessecityLocationMap)
         {
             var result = new List<KeyValuePair<JObject, KeyValuePair<Location, Location>>>();
             int[] locationIds = treeLocations.Select(location => location.Id).ToArray();
@@ -541,8 +648,6 @@ namespace Service.Implement.Entity
                 {
                     _loggingService.CaptureSentryException(ex);
                 }
-                
-                
 
 
                 for (int i = 0; i < locationWithRouteList.Count; i++)
@@ -559,6 +664,7 @@ namespace Service.Implement.Entity
                         locationList.Remove(location);
                     }
                 }
+
                 result.AddRange(locationWithRouteList);
             }
 

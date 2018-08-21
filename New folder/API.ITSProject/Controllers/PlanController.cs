@@ -36,6 +36,7 @@
         }
 
         #region Get
+
         [HttpGet]
         [Route("api/Plan/Details")]
         public async Task<IHttpActionResult> Details([FromUri] int id)
@@ -107,7 +108,7 @@
         #endregion
 
         #region Post
-        
+
         [HttpPost]
         [Authorize]
         [Route("api/Test2")]
@@ -183,8 +184,7 @@
                     Rating = model.Rating,
                 })
                 .ToList();
-            
-            
+
 
             int userId = (await CurrentUser()).Id;
             Plan resultPlan = await _planService.CreateSuggestedPlan(
@@ -194,7 +194,8 @@
                     AreaId = viewModel.AreaId,
                     StartDate = viewModel.StartDate,
                     EndDate = viewModel.EndDate,
-                    CreatorId = userId
+                    CreatorId = userId,
+                    MemberId = userId
                 },
                 locationListResult);
 
