@@ -41,19 +41,20 @@ if (localToken) {
   store.commit('authenticate/setToken', {token: localToken})
 }
 
-//
-// let bridgeTriedCount = 0;
-// function onBridgeReady(cb) {
-//   if (window.postMessage.length !== 1) {
-//     bridgeTriedCount++
-//     if();
-//     setTimeout(function () {
-//       onBridgeReady(cb)
-//     }, 200);
-//   } else {
-//     cb();
-//   }
-// }
+
+let bridgeTriedCount = 0;
+function onBridgeReady(cb) {
+  if (window.postMessage.length !== 1) {
+    bridgeTriedCount++;
+    if(bridgeTriedCount < 6){
+      setTimeout(function () {
+        onBridgeReady(cb)
+      }, 500);
+    }
+  } else {
+    cb();
+  }
+}
 
 onBridgeReady(function () {
   RNMsgChannel.sendJSON({

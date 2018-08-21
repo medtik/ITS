@@ -6,23 +6,25 @@
       </v-card-title>
       <v-card-text>
         <v-layout column>
-          <v-text-field label="Tên">
+          <v-text-field label="Tên" v-model="input.name">
 
           </v-text-field>
+          <AreaInput v-model="input.areaId" v-if="!this.areaId">
 
-          <v-text-field label="Ngày bắt đầu">
+          </AreaInput>
+          <v-text-field label="Ngày bắt đầu" type="date" v-model="input.startDate">
 
           </v-text-field>
-          <v-text-field label="Ngày kết thúc">
+          <v-text-field label="Ngày kết thúc" type="date" v-model="input.endDate">
 
           </v-text-field>
         </v-layout>
       </v-card-text>
       <v-card-actions>
-        <v-btn color="success">
+        <v-btn color="success" @click="onConfirm">
           Xác nhận
         </v-btn>
-        <v-btn color="secondary">
+        <v-btn color="secondary" @click="onClose">
           Hủy
         </v-btn>
       </v-card-actions>
@@ -31,11 +33,93 @@
 </template>
 
 <script>
+  import moment from "moment"
+  import {AreaInput} from "../../common/input"
+
   export default {
     name: "CreatePlanDialog",
+    components:[
+      AreaInput
+    ],
     props: [
-      'dialog'
-    ]
+      'dialog',
+      'areaId'
+    ],
+    data() {
+      return {
+        isOpen: undefined,
+        input: {
+          name: undefined,
+          areaId: undefined,
+          startDate: undefined,
+          endDate: undefined,
+        },
+        formError: {
+          name: undefined,
+          areaId: undefined,
+          startDate: undefined,
+          endDate: undefined,
+        }
+      }
+    },
+    watch:{
+      areaId: function (val){
+        this.input.areaId = val;
+      }
+    },
+    methods: {
+      validate() {
+        let nameError = undefined;
+        let areaIdError = undefined;
+        let startDateError = undefined;
+        let endDateError = undefined;
+
+        nameError = !this.input.name ? 'Tên không được trống' : undefined;
+        areaIdError = !this.input.areaId ? 'Khu vực không được trống' : undefined;
+        startDateError = !this.input.startDate ? 'Ngày bắt đầu không được trống' : undefined;
+        endDateError = !this.input.endDate ? 'Ngày kết thúc không được trống được trống' : undefined;
+
+        if (!!this.input.startDate) {
+          const now = moment();
+          const startDate = moment(this.input.startDate);
+          if (startDate.isBefore(now, 'day')) {
+            startDateError = "Ngày bắt đầu không được trong quá khứ";
+          }
+        }
+
+        if (!!this.input.startDate && !!this.input.endDate) {
+          const startDate = moment(this.input.startDate);
+          const endDate = moment(this.input.endDate);
+          if (endDate.isSameOrAfter(startDate, 'day')) {
+            endDateError = "Ngày kết thức phải sau ngày bắt đầu";
+          }
+        }
+
+        this.error = {
+          name: nameError,
+          areaId: areaIdError,
+          startDate: startDateError,
+          endDate: endDateError
+        };
+      },
+      onConfirm() {
+        this.validate();
+        if (!this.error.name &&
+          !this.error.areaId &&
+          !this.error.startDate &&
+          !this.error.endDate) {
+          this.$emit('confirm', value);
+          this.reset();
+        }
+      },
+      onClose() {
+        this.$emit('close');
+        this.reset();
+      },
+      reset() {
+        Object.assign(this.$data, this.$options.data())
+      }
+    }
   }
 </script>
 
