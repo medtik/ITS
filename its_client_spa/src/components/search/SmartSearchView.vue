@@ -68,8 +68,17 @@
             <v-flex my-2>
               <v-divider></v-divider>
             </v-flex>
-            <v-layout justify-center>
-              <v-flex style="flex-grow: 0">
+            <v-layout align-center column>
+              <v-flex>
+                <v-btn color="primary"
+                       @click="OnCreatePlanClick"
+                       :disabled="!questions">
+                  Tạo chuyến đi tự động
+                </v-btn>
+              </v-flex>
+              <v-flex py-2>
+              </v-flex>
+              <v-flex>
                 <v-btn color="success"
                        @click="onSubmit"
                        :disabled="!questions || !isHaveAnswer"
@@ -94,14 +103,15 @@
 <script>
   import ParallaxHeader from "../../common/layout/ParallaxHeader";
   import AreaSelect from "../../common/input/AreaInput";
-
+  import CreatePlanDialog from "../plan/CreatePlanDialog"
   import {mapGetters} from "vuex"
 
   export default {
     name: "SmartSearchView",
     components: {
       ParallaxHeader,
-      AreaSelect
+      AreaSelect,
+      CreatePlanDialog
     },
     data() {
       return {

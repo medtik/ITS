@@ -48,10 +48,10 @@
           </v-data-table>
         </v-flex>
         <v-flex xs12 mb-3>
-          <!--<v-btn dark color="green lighten-1"-->
-                 <!--v-on:click="onSaveClick">-->
-            <!--Thêm-->
-          <!--</v-btn>-->
+          <v-btn dark color="green lighten-1"
+                 v-on:click="onSaveClick">
+            Thêm
+          </v-btn>
           <v-btn dark color="secondary"
                  v-on:click="onCancelClick">
             Hủy
