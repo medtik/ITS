@@ -28,18 +28,23 @@
       <v-toolbar-items>
         <v-btn flat @click="dialog.choosePlanDestination = true"
                :loading="addPlanToGroupLoading">
-          <v-icon large>fas fa-heart</v-icon>
-          <span v-if="!isSmallScreen">&nbsp; Lưu</span>
+          <v-icon large>fas fa-cloud-download-alt</v-icon>
+          <span>&nbsp; Lưu</span>
+        </v-btn>
+        <v-btn flat @click=""
+               :loading="addPlanToGroupLoading">
+          <v-icon large>far fa-heart</v-icon>
+          <span>&nbsp; Thích</span>
         </v-btn>
         <v-btn v-if="isOwnPlan"
                flat :to="{name:'PlanEdit',query:{id: planId}}">
           <v-icon large>edit</v-icon>
-          <span v-if="!isSmallScreen">Chỉnh sửa</span>
+          <span>Chỉnh sửa</span>
         </v-btn>
         <v-btn v-if="isOwnPlan"
                flat @click="dialog.publishPlan = true" :loading="publishLoading">
           <v-icon large>publish</v-icon>
-          <span v-if="!isSmallScreen">Đăng</span>
+          <span>Đăng</span>
         </v-btn>
       </v-toolbar-items>
       <!--TABS-->
@@ -194,10 +199,16 @@
       </v-card>
     </v-dialog>
     <!--DIALOG-->
-    <ChoosePlanDestinationDialog :dialog="dialog.choosePlanDestination"
-                                 :showPersonal="plan.isPublic || !plan.isOwn"
-                                 @select="onAddToGroupSelected"
-                                 @close="dialog.choosePlanDestination = false"/>
+    <template v-if="isLoggedIn">
+      <ChoosePlanDestinationDialog :dialog="dialog.choosePlanDestination"
+                                   :showPersonal="plan.isPublic || !plan.isOwn"
+                                   @select="onAddToGroupSelected"
+                                   @close="dialog.choosePlanDestination = false"/>
+    </template>
+    <template v-else>
+
+    </template>
+
     <SearchMethodDialog
       :dialog="dialog.chooseSearchMethod"
       @select="onSearchMethodChoose"
@@ -280,6 +291,9 @@
       isSmallScreen() {
         return this.$vuetify.breakpoint.name === 'xs'
       },
+      ...mapGetters('authenticate',{
+        isLoggedIn: "isLoggedIn"
+      }),
       ...mapGetters('plan', {
         plan: 'detailedPlan',
         pageLoading: 'detailedPlanLoading',

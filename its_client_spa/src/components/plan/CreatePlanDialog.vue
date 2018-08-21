@@ -9,9 +9,6 @@
           <v-text-field label="Tên" v-model="input.name">
 
           </v-text-field>
-          <AreaInput v-model="input.areaId" v-if="!this.areaId">
-
-          </AreaInput>
           <v-text-field label="Ngày bắt đầu" type="date" v-model="input.startDate">
 
           </v-text-field>
@@ -50,13 +47,11 @@
         isOpen: undefined,
         input: {
           name: undefined,
-          areaId: undefined,
           startDate: undefined,
           endDate: undefined,
         },
         formError: {
           name: undefined,
-          areaId: undefined,
           startDate: undefined,
           endDate: undefined,
         }
@@ -70,12 +65,10 @@
     methods: {
       validate() {
         let nameError = undefined;
-        let areaIdError = undefined;
         let startDateError = undefined;
         let endDateError = undefined;
 
         nameError = !this.input.name ? 'Tên không được trống' : undefined;
-        areaIdError = !this.input.areaId ? 'Khu vực không được trống' : undefined;
         startDateError = !this.input.startDate ? 'Ngày bắt đầu không được trống' : undefined;
         endDateError = !this.input.endDate ? 'Ngày kết thúc không được trống được trống' : undefined;
 
@@ -97,7 +90,6 @@
 
         this.error = {
           name: nameError,
-          areaId: areaIdError,
           startDate: startDateError,
           endDate: endDateError
         };
@@ -105,11 +97,9 @@
       onConfirm() {
         this.validate();
         if (!this.error.name &&
-          !this.error.areaId &&
           !this.error.startDate &&
           !this.error.endDate) {
           this.$emit('confirm', value);
-          this.reset();
         }
       },
       onClose() {
