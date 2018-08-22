@@ -6,13 +6,16 @@
       </v-card-title>
       <v-card-text>
         <v-layout column>
-          <v-text-field label="Tên" v-model="input.name">
+          <v-text-field label="Tên" v-model="input.name"
+                        :error="!!formError.name" :error-messages="formError.name">
 
           </v-text-field>
-          <v-text-field label="Ngày bắt đầu" type="date" v-model="input.startDate">
+          <v-text-field label="Ngày bắt đầu" type="date" v-model="input.startDate"
+                        :error="!!formError.startDate" :error-messages="formError.startDate">
 
           </v-text-field>
-          <v-text-field label="Ngày kết thúc" type="date" v-model="input.endDate">
+          <v-text-field label="Ngày kết thúc" type="date" v-model="input.endDate"
+                        :error="!!formError.endDate" :error-messages="formError.endDate">
 
           </v-text-field>
         </v-layout>
@@ -35,9 +38,9 @@
 
   export default {
     name: "CreatePlanDialog",
-    components:[
+    components: {
       AreaInput
-    ],
+    },
     props: [
       'dialog',
       'areaId'
@@ -57,8 +60,8 @@
         }
       }
     },
-    watch:{
-      areaId: function (val){
+    watch: {
+      areaId: function (val) {
         this.input.areaId = val;
       }
     },
@@ -83,23 +86,23 @@
         if (!!this.input.startDate && !!this.input.endDate) {
           const startDate = moment(this.input.startDate);
           const endDate = moment(this.input.endDate);
-          if (endDate.isSameOrAfter(startDate, 'day')) {
+          if (endDate.isAfter(startDate, 'day')) {
             endDateError = "Ngày kết thức phải sau ngày bắt đầu";
           }
         }
 
-        this.error = {
+        this.formError = {
           name: nameError,
           startDate: startDateError,
           endDate: endDateError
         };
+        return nameError == undefined &&
+          startDateError == undefined &&
+          endDateError == undefined
       },
       onConfirm() {
-        this.validate();
-        if (!this.error.name &&
-          !this.error.startDate &&
-          !this.error.endDate) {
-          this.$emit('confirm', value);
+        if (this.validate()) {
+          this.$emit('confirm', this.input);
         }
       },
       onClose() {

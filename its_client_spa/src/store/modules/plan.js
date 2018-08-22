@@ -23,6 +23,7 @@ export default {
       detailedPlan: true,
       addLocationToPlan: false,
       createNoteBtn: false,
+      createSuggestedPlan: false,
       publishPlan: false,
       savePlan: false,
       create: false,
@@ -196,6 +197,49 @@ export default {
     }
   },
   actions: {
+    createSuggestedPlan(context, payload) {
+      //POST /api/Test2
+      const {
+        name,
+        startDate,
+        endDate,
+        answers,
+        areaId
+      } = payload;
+
+      context.commit('setLoading',{
+        loading:{
+          createSuggestedPlan : true
+        }
+      });
+      return new Promise((resolve, reject) => {
+        axiosInstance.post('api/test2', {
+          "answers": answers,
+          "name": name,
+          "startDate": startDate,
+          "endDate": endDate,
+          "areaId": areaId
+        })
+          .then(value => {
+            context.commit('setLoading',{
+              loading:{
+                createSuggestedPlan : false
+              }
+            });
+            resolve({
+              id: value.data
+            })
+          })
+          .catch(reason => {
+            context.commit('setLoading',{
+              loading:{
+                createSuggestedPlan : false
+              }
+            });
+            Raven.captureException(reason);
+          })
+      })
+    },
     publishPlan(context, payload) {
       // put /api/Plan/PublicPlan
       const {
