@@ -72,6 +72,7 @@
               <v-flex v-if="context">
                 <v-btn
                   color="primary"
+                  :loading="loading.createSuggestedPlan"
                   @click="onCreateSuggestedPlanClick"
                   :disabled="!questions">
                   Tạo chuyến đi tự động
@@ -82,7 +83,7 @@
               <v-flex>
                 <v-btn color="success"
                        @click="onSubmit"
-                       :disabled="!questions || !isHaveAnswer"
+                       :disabled="!questions || !isHaveAnswer || loading.createSuggestedPlan"
                        :loading="loading.finishBtn">
                   <v-icon>check</v-icon>
                   &nbsp;&nbsp;
@@ -98,8 +99,11 @@
       </v-flex>
     </v-layout>
     <!--DIALOG-->
-    <CreatePlanDialog :dialog="createPlanDialog.dialog"
-    :areaId="createPlanDialog.areaId">
+    <CreatePlanDialog
+      :dialog="createPlanDialog.dialog"
+      :areaId="createPlanDialog.areaId"
+      @close="createPlanDialog.dialog = false"
+      @confirm="onCreateSuggestedPlanConfirm">
 
     </CreatePlanDialog>
   </v-content>
@@ -125,6 +129,7 @@
         loading: {
           finishBtn: false,
           areaSelect: false,
+          createSuggestedPlan: false,
         },
         lockAreaSelect: false,
         selectedAreaId: undefined,
@@ -199,8 +204,31 @@
       onCreateSuggestedPlanClick() {
         this.createPlanDialog = {
           dialog: true,
-
         }
+      },
+      onCreateSuggestedPlanConfirm(inputs) {
+        const {
+          name,
+          startDate,
+          endDate
+        } = inputs;
+
+        this.createPlanDialog = {
+          dialog: false
+        };
+        this.loading.createSuggestedPlan = true;
+        this.$store.dispatch("plan/createSuggestedPlan", {
+          name,
+          startDate,
+          endDate,
+          areaId: this.selectedAreaId,
+          answers: this.selectedAnswers
+        }).then(value => {
+          this.$router.push({
+            name: 'PlanDetail',
+            query: value
+          })
+        })
       }
     }
   }

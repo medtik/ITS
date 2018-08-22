@@ -452,7 +452,7 @@ namespace Service.Implement.Entity
 
             foreach (var _ in locations.ToList())
             {
-                var tmpLocation = _locationRepository.Get(__ => __.Id == _.Id,
+                var tmpLocation = _locationRepository.Get(__ => __.Id == _.Id && _.Categories == "Ăn uống",
                     __ => __.BusinessHours);
 
                 if (tmpLocation != null)

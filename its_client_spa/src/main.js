@@ -21,7 +21,7 @@ Raven
 
 Vue.use(Vuetify,{
   lang: {
-    locales: { VietnameseLocate },
+    locales: VietnameseLocate,
     current: 'vn'
   }
 });
