@@ -24,8 +24,10 @@
         private readonly ISearchTreeService _searchTreeService;
 
         public PlanController(ILoggingService loggingService, IPagingService paggingService,
-            IIdentityService identityService, IPlanService planService, ILocationService locationService, IPhotoService photoService,
-            ITagService tagService, ISearchTreeService searchTreeService) : base(loggingService, paggingService, identityService, photoService)
+            IIdentityService identityService, IPlanService planService, ILocationService locationService,
+            IPhotoService photoService,
+            ITagService tagService, ISearchTreeService searchTreeService) : base(loggingService, paggingService,
+            identityService, photoService)
         {
             this._planService = planService;
             this._locationService = locationService;
@@ -33,119 +35,18 @@
             this._searchTreeService = searchTreeService;
         }
 
-        #region Other
-        private void WrireTree()
-        {
-            Tree tree = _searchTreeService.BuildTree(_locationService.GetAll(_ => _.Tags).ToList());
-            var path = CurrentContext.Server.MapPath("/Tree/tree.json");
-            _searchTreeService.WriteTree(path, tree);
-            //            var tree = _treeBuilder.BuildTree(_locationService.GetAll(_ => _.Tags).ToList());
-            //            System.IO.File.WriteAllText(CurrentContext.Server.MapPath($"/Tree/tree.json"),
-            //                JsonConvert.SerializeObject(tree), Encoding.UTF8);
-        }
-        #endregion
-
         #region Get
-        [HttpGet]
-        [Route("api/Test2")]
-        public IHttpActionResult Algorithm([FromUri] int[] list, int? areaId)
-        {
-            WrireTree();
-            if (list == null)
-            {
-                return BadRequest();
-            }
-
-            List<Tag> tags = _tagService.GetAll()
-                .Where(tag => tag.Answer
-                    .Any(answer => list.Contains(answer.Id))
-                )
-                .ToList();
-
-            var path = CurrentContext.Server.MapPath("/Tree/tree.json");
-            Tree tree = _searchTreeService.ReadTree(path);
-            if (tree == null)
-            {
-                tree = _searchTreeService.BuildTree(_locationService.GetAll().Include(location => location.Tags).ToList());
-                _searchTreeService.WriteTree(path, tree);
-            }
-
-            var resultIds = _searchTreeService.SearchTree(tags, tree);
-            var locationsResult = _locationService.GetAll()
-                .Include(location => location.Reviews)
-                .Include(location => location.Tags)
-                .Include(location => location.Photos.Select(__ => __.Photo))
-                .Where(location => !areaId.HasValue || location.AreaId == areaId)
-                .Where(location => resultIds.Contains(location.Id));
-
-            List<TreeViewModels> resultList = new List<TreeViewModels>();
-            foreach (Location location in locationsResult)
-            {
-                var locationTags = location.Tags;
-                var commonTags = locationTags.Intersect(tags);
-                int ratingCount = location.Reviews.Count;
-                var rating = location.Reviews.Sum(_ => _.Rating) / ratingCount;
-                rating = float.IsNaN(rating) ? 0 : rating;
-
-                foreach (Review review in location.Reviews)
-                {
-                    rating += review.Rating;
-                }
-
-                TreeViewModels result = new TreeViewModels
-                {
-                    Id = location.Id,
-                    Address = location.Address,
-                    Location = location.Name,
-                    Percent = (tags.Count / commonTags.Count()).ToString(),
-                    PrimaryPhoto = CurrentUrl + location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Id.ToString(),
-                    Rating = rating,
-                    Reasons = commonTags.Select(tag => tag.Name).ToList(),
-                    ReviewCount = location.Reviews.Count,
-                    Categories = location.Category
-                };
-
-                resultList.Add(result);
-            }
-
-            var locationListResult = resultList.OrderByDescending(_ => _.Reasons.Count)
-                .Select(model => new Core.ObjectModels.Entities.Helper.TreeViewModels
-                {
-                    Address = model.Address,
-                    Categories = model.Categories,
-                    Id = model.Id,
-                    Location = model.Location,
-                    Percent = model.Percent,
-                    PrimaryPhoto = model.PrimaryPhoto,
-                    Rating = model.Rating,
-                })
-                .ToList();
-                    
-            var plan = new Plan
-            {
-                AreaId = 2,
-                CreatorId = 2,
-                IsPublic = false,
-                MemberId = 2,
-                StartDate = new DateTimeOffset(2018,8,30,0,0,0, new TimeSpan()),
-                EndDate = new DateTimeOffset(2018,8,30,0,0,0, new TimeSpan()),
-                
-            };
-
-            _planService.CreateSuggestedPlan(plan,locationListResult);
-            
-            return Ok();
-        }
 
         [HttpGet]
         [Route("api/Plan/Details")]
-        public async Task<IHttpActionResult> Details([FromUri]int id)
+        public async Task<IHttpActionResult> Details([FromUri] int id)
         {
             try
             {
                 int userId = (await CurrentUser()).Id;
                 Plan plan = _planService.Find(id, _ =>
-                    _.PlanLocations.Select(__ => __.Location).Select(___ => ___.Photos.Select(_____ => _____.Photo)),
+                        _.PlanLocations.Select(__ => __.Location)
+                            .Select(___ => ___.Photos.Select(_____ => _____.Photo)),
                     _ => _.PlanLocations.Select(__ => __.Location.Reviews),
                     _ => _.Notes, _ => _.Area);
 
@@ -203,9 +104,105 @@
                 return InternalServerError(ex);
             }
         }
+
         #endregion
 
         #region Post
+
+        [HttpPost]
+        [Authorize]
+        [Route("api/Test2")]
+        public async Task<IHttpActionResult> Algorithm(CreateSuggestedPlanViewModels viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            List<Tag> tags = _tagService.GetAll()
+                .Where(tag => tag.Answer
+                    .Any(answer => viewModel.Answers.Contains(answer.Id))
+                )
+                .ToList();
+
+            var path = CurrentContext.Server.MapPath("/Tree/tree.json");
+            Tree tree = _searchTreeService.ReadTree(path);
+            if (tree == null)
+            {
+                tree = _searchTreeService.BuildTree(_locationService.GetAll().Include(location => location.Tags)
+                    .ToList());
+                _searchTreeService.WriteTree(path, tree);
+            }
+
+            var resultIds = _searchTreeService.SearchTree(tags, tree);
+            var locationsResult = _locationService.GetAll()
+                .Include(location => location.Reviews)
+                .Include(location => location.Tags)
+                .Include(location => location.Photos.Select(__ => __.Photo))
+                .Where(location => location.AreaId == viewModel.AreaId)
+                .Where(location => resultIds.Contains(location.Id));
+
+            List<TreeViewModels> resultList = new List<TreeViewModels>();
+            foreach (Location location in locationsResult)
+            {
+                var locationTags = location.Tags;
+                var commonTags = locationTags.Intersect(tags);
+                int ratingCount = location.Reviews.Count;
+                var rating = location.Reviews.Sum(_ => _.Rating) / ratingCount;
+                rating = float.IsNaN(rating) ? 0 : rating;
+
+                foreach (Review review in location.Reviews)
+                {
+                    rating += review.Rating;
+                }
+
+                TreeViewModels result = new TreeViewModels
+                {
+                    Id = location.Id,
+                    Address = location.Address,
+                    Location = location.Name,
+                    Percent = (tags.Count / commonTags.Count()).ToString(),
+                    PrimaryPhoto = CurrentUrl + location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Id.ToString(),
+                    Rating = rating,
+                    Reasons = commonTags.Select(tag => tag.Name).ToList(),
+                    ReviewCount = location.Reviews.Count,
+                    Categories = location.Category
+                };
+
+                resultList.Add(result);
+            }
+
+            var locationListResult = resultList.OrderByDescending(_ => _.Reasons.Count)
+                .Select(model => new Core.ObjectModels.Entities.Helper.TreeViewModels
+                {
+                    Address = model.Address,
+                    Categories = model.Categories,
+                    Id = model.Id,
+                    Location = model.Location,
+                    Percent = model.Percent,
+                    PrimaryPhoto = model.PrimaryPhoto,
+                    Rating = model.Rating,
+                })
+                .ToList();
+
+
+            int userId = (await CurrentUser()).Id;
+            Plan resultPlan = await _planService.CreateSuggestedPlan(
+                new Plan
+                {
+                    Name = viewModel.Name,
+                    AreaId = viewModel.AreaId,
+                    StartDate = viewModel.StartDate,
+                    EndDate = viewModel.EndDate,
+                    CreatorId = userId,
+                    MemberId = userId
+                },
+                locationListResult);
+
+            return Ok(resultPlan.Id);
+        }
+
+
         [HttpPost]
         [Route("api/Plan/AddSuggestion")]
         public IHttpActionResult AddSuggestionToPlan(LocationSuggestionViewModels locationSuggestion)
@@ -223,10 +220,11 @@
                     else
                         return BadRequest("Location not existed");
                 }
+
                 bool result = _planService.Create(new LocationSuggestion
                 {
                     Comment = locationSuggestion.Comment,
-                    Locations = locations,//need to edit
+                    Locations = locations, //need to edit
                     UserId = userId,
                     PlanId = locationSuggestion.PlanId,
                     Status = RequestStatus.NotYet,
@@ -260,8 +258,12 @@
                     IEnumerable<PlanLocation> planLocations = plan.PlanLocations;
                     IEnumerable<Note> planNotes = plan.Notes;
 
-                    int maxLocationIndex = planLocations.OrderByDescending(_ => _.Index).FirstOrDefault() != null ? planLocations.OrderByDescending(_ => _.Index).FirstOrDefault().Index : 0;
-                    int maxPlanIndex = planNotes.OrderByDescending(_ => _.Index).FirstOrDefault() != null ? planNotes.OrderByDescending(_ => _.Index).FirstOrDefault().Index : 0;
+                    int maxLocationIndex = planLocations.OrderByDescending(_ => _.Index).FirstOrDefault() != null
+                        ? planLocations.OrderByDescending(_ => _.Index).FirstOrDefault().Index
+                        : 0;
+                    int maxPlanIndex = planNotes.OrderByDescending(_ => _.Index).FirstOrDefault() != null
+                        ? planNotes.OrderByDescending(_ => _.Index).FirstOrDefault().Index
+                        : 0;
 
                     note.Index = (maxLocationIndex > maxPlanIndex ? maxLocationIndex : maxPlanIndex) + 1;
                 }
@@ -296,6 +298,7 @@
                 {
                     return Ok(tmpPlan.Id);
                 }
+
                 return BadRequest();
             }
             catch (Exception ex)
@@ -305,9 +308,11 @@
                 return InternalServerError(ex);
             }
         }
+
         #endregion
 
         #region Put
+
         [HttpPut]
         [Route("api/Plan/UpdatePlan")]
         public IHttpActionResult UpdatePlan(UpdatePlanViewModels viewModels)
@@ -352,7 +357,8 @@
 
         [HttpPut]
         [Route("api/Plan/EditIndexPlanLocationAndNote")]
-        public IHttpActionResult EditIndexPlanLocationAndNote(UpdateIndexPlanLocationAndNote updateIndexPlanLocationAndNote)
+        public IHttpActionResult EditIndexPlanLocationAndNote(
+            UpdateIndexPlanLocationAndNote updateIndexPlanLocationAndNote)
         {
             try
             {
@@ -378,6 +384,7 @@
                         result = _planService.UpdatePlanNote(planNote);
                     }
                 }
+
                 if (result)
                     return Ok();
                 else
@@ -447,7 +454,6 @@
             {
                 PlanLocation location = ModelBuilder.ConvertToModels(planLocation);
 
-                
 
                 if (!planLocation.Index.HasValue)
                 {
@@ -456,11 +462,15 @@
                     IEnumerable<PlanLocation> planLocations = plan.PlanLocations;
                     IEnumerable<Note> planNotes = plan.Notes;
 
-                    int maxLocationIndex = planLocations.OrderByDescending(_ => _.Index).FirstOrDefault() != null ? planLocations.OrderByDescending(_ => _.Index).FirstOrDefault().Index : 0;
-                    int maxPlanIndex = planNotes.OrderByDescending(_ => _.Index).FirstOrDefault() != null ? planNotes.OrderByDescending(_ => _.Index).FirstOrDefault().Index : 0;
+                    int maxLocationIndex = planLocations.OrderByDescending(_ => _.Index).FirstOrDefault() != null
+                        ? planLocations.OrderByDescending(_ => _.Index).FirstOrDefault().Index
+                        : 0;
+                    int maxPlanIndex = planNotes.OrderByDescending(_ => _.Index).FirstOrDefault() != null
+                        ? planNotes.OrderByDescending(_ => _.Index).FirstOrDefault().Index
+                        : 0;
 
                     location.Index = (maxLocationIndex > maxPlanIndex ? maxLocationIndex : maxPlanIndex) + 1;
-                }//end if identity max index
+                } //end if identity max index
 
                 bool result = _planService.AddLocationToPlan(location);
 
@@ -519,9 +529,11 @@
                 return InternalServerError(ex);
             }
         }
+
         #endregion
 
         #region Delete
+
         [HttpDelete]
         [Route("api/Plan/DeleteNote")]
         public IHttpActionResult RemoveNote(int noteId)
@@ -585,6 +597,7 @@
                         return Unauthorized();
                     }
                 }
+
                 return BadRequest();
             }
             catch (Exception ex)
@@ -594,8 +607,7 @@
                 return InternalServerError(ex);
             }
         }
-        #endregion
 
-        
+        #endregion
     }
 }

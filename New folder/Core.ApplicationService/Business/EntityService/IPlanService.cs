@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Core.ApplicationService.Business.EntityService
 {
@@ -46,6 +47,6 @@ namespace Core.ApplicationService.Business.EntityService
 
         Plan ClonePlan(int planId);
 
-        Plan CreateSuggestedPlan(Plan plan, List<TreeViewModels> locations);
+        Task<Plan> CreateSuggestedPlan(Plan plan, List<TreeViewModels> locations);
     }
 }

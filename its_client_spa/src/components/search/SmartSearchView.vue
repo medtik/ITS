@@ -69,10 +69,11 @@
               <v-divider></v-divider>
             </v-flex>
             <v-layout align-center column>
-              <v-flex>
-                <v-btn color="primary"
-                       @click="OnCreatePlanClick"
-                       :disabled="!questions">
+              <v-flex v-if="context">
+                <v-btn
+                  color="primary"
+                  @click="onCreateSuggestedPlanClick"
+                  :disabled="!questions">
                   Tạo chuyến đi tự động
                 </v-btn>
               </v-flex>
@@ -96,21 +97,27 @@
         <!--Holder-->
       </v-flex>
     </v-layout>
+    <!--DIALOG-->
+    <CreatePlanDialog :dialog="createPlanDialog.dialog"
+    :areaId="createPlanDialog.areaId">
+
+    </CreatePlanDialog>
   </v-content>
 </template>
 
 
 <script>
-  import ParallaxHeader from "../../common/layout/ParallaxHeader";
-  import AreaSelect from "../../common/input/AreaInput";
+  import {ParallaxHeader} from "../../common/layout";
+  import {AreaInput} from "../../common/input/";
   import CreatePlanDialog from "../plan/CreatePlanDialog"
   import {mapGetters} from "vuex"
+
 
   export default {
     name: "SmartSearchView",
     components: {
       ParallaxHeader,
-      AreaSelect,
+      AreaSelect: AreaInput,
       CreatePlanDialog
     },
     data() {
@@ -122,7 +129,12 @@
         lockAreaSelect: false,
         selectedAreaId: undefined,
         selectedAnswers: [],
-        error: {}
+        error: {},
+        //
+        createPlanDialog: {
+          dialog: false,
+          areaId: undefined,
+        }
       }
     },
     computed: {
@@ -167,7 +179,7 @@
       onSubmit() {
         this.loading.finishBtn = true;
         this.$store.dispatch('smartSearch/getSuggestion', {
-          answers: this.selectedAnswers ,
+          answers: this.selectedAnswers,
           areaId: this.selectedAreaId || this.context.areaId
         })
           .then(value => {
@@ -183,6 +195,12 @@
             };
             this.loading.finishBtn = false;
           })
+      },
+      onCreateSuggestedPlanClick() {
+        this.createPlanDialog = {
+          dialog: true,
+
+        }
       }
     }
   }

@@ -11,8 +11,7 @@
       </v-flex>
     </v-layout>
     <v-layout slot="detail">
-      <v-flex class="body-1">
-        {{description}}
+      <v-flex class="body-1" v-html="description">
       </v-flex>
     </v-layout>
     <v-layout slot="action" column align-end>
@@ -32,6 +31,7 @@
       ListItemLayout
     },
     props: [
+      'id',
       'name',
       'description'
     ],
@@ -39,6 +39,11 @@
       isSmallScreen() {
         return this.$vuetify.breakpoint.name === 'xs'
       },
+      content(){
+        let parser = new DOMParser();
+        let doc = parser.parseFromString(this.description, "text/xml");
+
+      }
     },
     methods: {}
   }
