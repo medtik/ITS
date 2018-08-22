@@ -8,6 +8,7 @@
             item-value="id"
             :loading="loading"
             :dark="dark"
+            no-data-text="Chưa có dữ liệu"
   >
 
   </v-select>

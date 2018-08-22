@@ -69,7 +69,7 @@
               <v-divider></v-divider>
             </v-flex>
             <v-layout align-center column>
-              <v-flex v-if="context">
+              <v-flex v-if="!context && isLoggedIn">
                 <v-btn
                   color="primary"
                   :loading="loading.createSuggestedPlan"
@@ -146,6 +146,9 @@
       ...mapGetters('smartSearch', {
         questions: 'questions',
         questionsLoading: 'questionsLoading'
+      }),
+      ...mapGetters('authenticate',{
+        isLoggedIn: 'isLoggedIn'
       }),
       ...mapGetters({
         context: 'searchContext'
