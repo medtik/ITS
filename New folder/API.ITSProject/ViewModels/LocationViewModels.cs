@@ -3,6 +3,58 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Runtime.Serialization;
+    
+    [DataContract]
+    public class EditLocationViewModels
+    {
+        [DataMember]
+        public string Name { get; set; }
+
+        [DataMember]
+        public string Address { get; set; }
+
+        [DataMember]
+        public string Desription { get; set; }
+
+        [DataMember]
+        public double Lat { get; set; }
+
+        [DataMember]
+        public double  Long { get; set; }
+
+        [DataMember]
+        public string Web { get; set; }
+
+        [DataMember]
+        public string Phone { get; set; }
+
+        [DataMember]
+        public string Email { get; set; }
+
+        [DataMember]
+        public int AreaId { get; set; }
+
+        [DataMember]
+        public string Category { get; set; }
+
+        [DataMember]
+        public bool IsVerified { get; set; }
+
+        [DataMember]
+        public bool IsClosed { get; set; }
+
+        [DataMember]
+        public int[] Tags { get; set; }//list tag id
+
+        [DataMember]
+        public string PrimaryPhoto { get; set; }//base64
+
+        [DataMember]
+        public string[] OtherPhotos { get; set; }//base64
+
+        [DataMember]
+        public ICollection<BusinessHourViewModels> Days { get; set; }
+    }
 
     [DataContract]
     public class ReviewViewModels

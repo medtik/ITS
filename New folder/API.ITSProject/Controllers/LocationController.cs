@@ -89,7 +89,7 @@ namespace API.ITSProject.Controllers
             try
             {
                 LocationDetailViewModels locationDetail;
-                Location location = _locationService.Find(id, _ => _.BusinessHours, _ => _.Reviews,
+                Location location = _locationService.Find(id, _ => _.BusinessHours, _ => _.Reviews.Select(__ => __.Creator),
                     _ => _.BusinessHours, _ => _.Tags, _ => _.Photos.Select(__ => __.Photo));
 
                 if (location == null)
@@ -421,6 +421,48 @@ namespace API.ITSProject.Controllers
         #endregion
 
         #region Put
+        [HttpPatch]
+        public async Task<IHttpActionResult> Edit(EditLocationViewModels data)
+        {
+            try
+            {
+                try
+                {
+                    int userId = (await CurrentUser()).Id;
+
+                    Photo primaryPhoto = ModelBuilder.ConvertToModels(data.PrimaryPhoto, userId);
+                    IEnumerable<Photo> otherPhoto = ModelBuilder.ConvertToModels(data.OtherPhotos.AsEnumerable(), userId);
+
+                    Location location = ModelBuilder.ConvertToModels(data);
+
+                    IEnumerable<BusinessHour> businessHours = ModelBuilder.ConvertToModels(data.Days);
+
+                    bool result = _locationService.Create(location, primaryPhoto, otherPhoto, businessHours, data.Tags);
+
+                    if (result)
+                    {
+                        WrireTree();
+                        return Ok();
+                    }
+                    else
+                        return BadRequest();
+                }
+                catch (Exception ex)
+                {
+                    _loggingService.Write(GetType().Name, nameof(Post), ex);
+
+                    return InternalServerError(ex);
+                }
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _loggingService.Write(GetType().Name, nameof(Edit), ex);
+
+                return InternalServerError(ex);
+            }
+        }
+
         [HttpPut]
         [Authorize, Route("api/Location/AddReview")]
         public async Task<IHttpActionResult> Review(ReviewViewModels viewModels)
