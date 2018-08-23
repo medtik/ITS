@@ -2,31 +2,34 @@ import _locations from "./mockdata/locations";
 import {axiosInstance} from "../../common/util";
 
 import formatter from "../../formatter";
-
+import Raven from "raven-js"
 import _ from "lodash";
-
-
-function mockShell(bodyFunc, noFail) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (noFail || Math.random() > 0.1) {
-        //Success
-        let result = bodyFunc();
-        resolve(result);
-      } else {
-        //error
-        reject({
-          message: 'Có lỗi xẩy ra !'
-        })
-      }
-
-    }, 1500 + (Math.random() * 1000))
-  })
-}
 
 
 export default {
   namespaced: true,
+  state:{
+    categories: [],
+    loading:{
+      categories: false
+    }
+  },
+  getters:{
+    categoriesLoading(state){
+      return state.loading.categories;
+    },
+    categories(state){
+      return state.categories;
+    }
+  },
+  mutations:{
+    setCategories(state, payload){
+      state.categories = payload.categories;
+    },
+    setLoading(state, payload) {
+      state.loading = _.assign(state.loading, payload.loading);
+    }
+  },
   actions: {
     getAll(context, payload) {
       return new Promise((resolve, reject) => {
@@ -36,7 +39,7 @@ export default {
           .then(value => {
 
             const locations = _.map(value.data.currentList,
-              (value, key, colelction) => {
+              (value) => {
                 return _.mapKeys(value, (value, key) => {
                   switch (key) {
                     case 'phoneNumber':
@@ -75,14 +78,6 @@ export default {
     },
     create(context, payload) {
       return new Promise((resolve, reject) => {
-        // payload.businessHoursInput = _.map(payload.businessHoursInput,
-        //   (value, key, collection) => {
-        //     return {
-        //       day: key,
-        //       from: value.from,
-        //       to: value.to,
-        //     }
-        //   });
         payload.secondaryPhotos = _.map(payload.secondaryPhotos,
           (value, key, collection) => {
             console.debug('payload.secondaryPhotos', value, key);
@@ -154,6 +149,20 @@ export default {
           .then(resolve)
           .catch(reject)
       })
+    },
+    fetchCategories(context){
+      //GET api/location/categories
+
+      context.commit('setLoading',{loading:{categories: true}});
+      axiosInstance.get('api/location/categories')
+        .then(value =>{
+          context.commit('setCategories', {categories: value.data});
+          context.commit('setLoading',{loading:{categories: false}});
+        })
+        .catch(reason =>{
+          context.commit('setLoading',{loading:{categories: false}});
+          Raven.captureException(reason);
+        })
     }
   }
 }

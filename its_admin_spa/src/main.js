@@ -7,10 +7,18 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import store from "./store"
 import {locates} from "./common/util";
+import Raven from 'raven-js';
+import RavenVue from 'raven-js/plugins/vue';
+
+Raven
+  .config('https://044c78991b114aebbfad9a13b6d85a63@sentry.io/1256786')
+  .addPlugin(RavenVue, Vue)
+  .install();
+
 
 Vue.use(Vuetify,{
   lang: {
-    locales: locates.vn ,
+    locales: locates,
     current: 'vn'
   }
 });

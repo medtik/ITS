@@ -33,7 +33,7 @@ Vue.use(VueGoogleMaps, {
 
 Vue.use(Vuetify,{
   lang: {
-    locales: locates.vn,
+    locales: locates,
     current: 'vn'
   }
 });
