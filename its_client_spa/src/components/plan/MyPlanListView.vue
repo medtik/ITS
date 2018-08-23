@@ -44,6 +44,7 @@
   import PlanFullWidth from "../../common/block/PlanFullWidth";
   import ChoosePlanDestinationDialog from "../../common/input/ChoosePlanDestinationDialog";
   import {mapGetters} from "vuex";
+  import _ from "lodash";
 
 
   export default {
@@ -62,9 +63,13 @@
     },
     computed: {
       ...mapGetters('plan', {
-        myPlans: 'myPlans',
         myPlansLoading: 'myPlansLoading'
-      })
+      }),
+      myPlans(){
+        return _.filter(this.$store.getters['plan/myPlans'],(plan) => {
+          return plan.isPlanOwner && (plan.groupName == undefined || plan.groupName == "");
+        })
+      }
     },
     mounted() {
       this.$store.dispatch('plan/fetchMyPlans')
