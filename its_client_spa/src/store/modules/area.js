@@ -6,8 +6,10 @@ export default {
   state: {
     areas: [],
     featuredAreas: [],
+    detailedArea: undefined,
     loading: {
       areas: true,
+      detailedArea: true,
       featuredAreas: false
     },
   },

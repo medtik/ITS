@@ -1,7 +1,7 @@
 <template>
   <router-link :to="detailLink" tag="div" class="fakeLink">
     <v-card style="width: 300px;">
-      <v-card-media>
+      <v-card-media style="height: 300px">
         <img :src='photo'/>
       </v-card-media>
       <v-card-text>

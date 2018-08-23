@@ -1,7 +1,7 @@
 import axiosInstance from "./axiosInstance"
-import VietnameseLocate from "./VietnameseLocate";
+import locates from "./Locates";
 
 export {
   axiosInstance,
-  VietnameseLocate
+  locates
 }

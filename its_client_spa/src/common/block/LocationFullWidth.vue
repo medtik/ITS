@@ -101,7 +101,13 @@
           case 'Địa điểm thăm quan':
             return 'fas fa-university';
           case 'Dịch vụ':
-            return 'fas fa-gas-pump'
+            return 'fas fa-gas-pump';
+          case 'Tiền tệ':
+            return 'fas fa-credit-card';
+          case 'Trụ sở ban ngành':
+            return 'far fa-building';
+          case 'Trạm xăng':
+            return 'fas fa-gas-pump';
         }
       },
       locationName() {

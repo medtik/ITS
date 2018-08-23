@@ -11,7 +11,7 @@ import RNMsgChannel from 'react-native-webview-messaging';
 import * as VueGoogleMaps from 'vue2-google-maps'
 import 'vuetify/dist/vuetify.min.css'
 import '@fortawesome/fontawesome-free/css/all.css'
-import {VietnameseLocate} from "./common/util";
+import {locates} from "./common/util";
 
 
 Raven
@@ -19,12 +19,7 @@ Raven
   .addPlugin(RavenVue, Vue)
   .install();
 
-Vue.use(Vuetify,{
-  lang: {
-    locales: VietnameseLocate,
-    current: 'vn'
-  }
-});
+
 
 Vue.use(Vuetify, {
   iconfont: 'fa'
@@ -33,6 +28,13 @@ Vue.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyAxQfGcJgUa5iZSfXirufK8Lbb8i5qDnwQ',
     libraries: 'places, directions',
+  }
+});
+
+Vue.use(Vuetify,{
+  lang: {
+    locales: locates.vn,
+    current: 'vn'
   }
 });
 

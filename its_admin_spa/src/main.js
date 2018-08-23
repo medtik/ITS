@@ -6,11 +6,11 @@ import router from './router'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import store from "./store"
-import {VietnameseLocate} from "./common/util";
+import {locates} from "./common/util";
 
 Vue.use(Vuetify,{
   lang: {
-    locales: { VietnameseLocate },
+    locales: locates.vn ,
     current: 'vn'
   }
 });
