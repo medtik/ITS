@@ -424,7 +424,6 @@ namespace Service.Implement.Entity
             Location breakfast = null;
             Location lunch = null;
             Location dinner = null;
-            int maxList = dateIndex * 3 + 1;
 
             #region hotel
 
@@ -508,11 +507,7 @@ namespace Service.Implement.Entity
                 }
             }
 
-            locations.ForEach(_ => { });
-
             #endregion
-
-
             _loggingService.AddSentryBreadCrum(
                 "PolulateNecessityLocations",
                 message: "wrapping up nessecity",
@@ -697,9 +692,7 @@ namespace Service.Implement.Entity
 
                 foreach (var location in locations)
                 {
-                    if (location.Category == "Địa điểm thăm quan" ||
-                        location.Category == "Giải trí" ||
-                        location.Category == "Mua sắm")
+                    if (location.Category == "Địa điểm thăm quan")
                     {
                         GeoCoordinate locationGeo = new GeoCoordinate(location.Latitude, location.Longitude);
                         if (locationGeo.GetDistanceTo(middleGeoPoint) <= areaOffset)
