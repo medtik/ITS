@@ -1,38 +1,10 @@
 <template>
   <v-content>
     <v-container v-if="!pageLoading" pa-0 fluid>
-      <ParallaxHeader
-        src="https://picsum.photos/1200/900/?blur"
-        :text="area.name"
-      />
+      <v-layout>
+
+      </v-layout>
       <v-layout column mx-2>
-        <v-flex>
-          <v-toolbar flat light>
-            <v-toolbar-items style="width: 100%"
-                             class="d-flex justify-center">
-              <v-btn flat color="light-blue" @click="$vuetify.goTo('#hotel',{offset:-50})">
-                <v-icon large>
-                  hotel
-                </v-icon>
-              </v-btn>
-              <v-btn flat color="light-blue" @click="$vuetify.goTo('#restaurant',{offset:-50})">
-                <v-icon large>
-                  restaurant
-                </v-icon>
-              </v-btn>
-              <v-btn flat color="light-blue" @click="$vuetify.goTo('#activity',{offset:-50})">
-                <v-icon large>
-                  local_activity
-                </v-icon>
-              </v-btn>
-              <v-btn flat color="light-blue" @click="$vuetify.goTo('#service',{offset:-50})">
-                <v-icon large>
-                  fas fa-gas-pump
-                </v-icon>
-              </v-btn>
-            </v-toolbar-items>
-          </v-toolbar>
-        </v-flex>
         <v-flex my-4>
           <div class="title">
             Địa điểm nổi bật
@@ -50,46 +22,6 @@
           <v-layout style="overflow-y: auto;">
             <v-flex v-for="n in 5" :key="n" mx-2 mt-2>
               <PlanCard/>
-            </v-flex>
-          </v-layout>
-        </v-flex>
-        <v-flex my-4 id="hotel">
-          <div class="title">
-            Nơi ở
-          </div>
-          <v-layout style="overflow-y: auto;">
-            <v-flex v-for="n in 5" :key="n" mx-2 mt-2>
-              <LocationCard/>
-            </v-flex>
-          </v-layout>
-        </v-flex>
-        <v-flex my-4 id="restaurant">
-          <div class="title">
-            Ăn uống
-          </div>
-          <v-layout style="overflow-y: auto;">
-            <v-flex v-for="n in 5" :key="n" mx-2 mt-2>
-              <LocationCard/>
-            </v-flex>
-          </v-layout>
-        </v-flex>
-        <v-flex my-4 id="activity">
-          <div class="title">
-            Giải trí
-          </div>
-          <v-layout style="overflow-y: auto;">
-            <v-flex v-for="n in 5" :key="n" mx-2 mt-2>
-              <LocationCard/>
-            </v-flex>
-          </v-layout>
-        </v-flex>
-        <v-flex my-4 id="service">
-          <div class="title">
-            Dịch vụ
-          </div>
-          <v-layout style="overflow-y: auto;">
-            <v-flex v-for="n in 5" :key="n" mx-2 mt-2>
-              <LocationCard/>
             </v-flex>
           </v-layout>
         </v-flex>
@@ -129,5 +61,29 @@
 </script>
 
 <style scoped>
+  .grid-layout {
+    display: grid;
+    grid-row-gap: 0.5rem;
+  }
+  .grid-layout.desktop {
+    grid-template-columns: 600px auto;
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas:
+     "photo info-restaurant"
+     "photo info-hotel"
+     "photo info-activity"
+     "photo info-service";
+  }
 
+  .grid-layout.mobile {
+    grid-template-columns: 100%;
+    grid-template-rows: auto auto auto auto auto;
+    grid-template-areas:
+      "photo"
+      "info-restaurant"
+      "info-hotel"
+      "info-activity"
+      "info-service"
+      "info-service";
+  }
 </style>

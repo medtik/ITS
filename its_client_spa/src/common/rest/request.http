@@ -29,3 +29,9 @@ Authorization: {{token}}
 
 ###
 
+
+GET http://localhost:56288/api/Area/Details?id=2
+Content-Type: application/json
+Authorization: {{token}}
+
+###
