@@ -215,6 +215,7 @@
                 AreaName = plan.Area.Name,
                 GroupName = plan.Group == null ? "" : plan.Group.Name,
                 IsGroupOwner = currentUserId == (plan.Group != null ? plan.Group.CreatorId : -1),
+                IsPlanOwner = currentUserId == plan.Id
             };
         }
 
@@ -235,7 +236,8 @@
                 Voter = plan.Voters.Count,
                 Photo = string.IsNullOrWhiteSpace(plan.PlanLocations.FirstOrDefault()?.Location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Id.ToString()) ? null : CurrentUrl + plan.PlanLocations.FirstOrDefault()?.Location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Id.ToString(),
                 AreaId = plan.AreaId,
-                AreaName = plan.Area.Name
+                AreaName = plan.Area.Name,
+                CreatorId = plan.CreatorId
             };
 
         public IEnumerable<FeaturedPlanViewModels> ConvertToFeaturedPlanViewModels(IEnumerable<Plan> plans)
