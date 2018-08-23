@@ -33,12 +33,22 @@
           <v-icon large>fas fa-cloud-download-alt</v-icon>
           <span>&nbsp; Lưu</span>
         </v-btn>
-        <v-btn
-          v-if="!isOwnPlan"
-          flat>
-          <v-icon large>far fa-heart</v-icon>
-          <span>&nbsp; Thích</span>
-        </v-btn>
+        <v-flex v-if="!isOwnPlan" pt-1>
+          <v-btn
+            v-if="!plan.isVoted"
+            flat
+            @click="onVotePlan">
+            <v-icon large>far fa-heart</v-icon>
+            <span>&nbsp; Thích</span>
+          </v-btn>
+          <v-btn
+            v-if="plan.isVoted"
+            flat
+            @click="onVotePlan">
+            <v-icon large color="success">fas fa-heart</v-icon>
+          </v-btn>
+        </v-flex>
+
         <v-btn v-if="isOwnPlan"
                flat :to="{name:'PlanEdit',query:{id: planId}}">
           <v-icon large>edit</v-icon>
@@ -409,7 +419,7 @@
           }
         });
       },
-      onSearchMethodsClose(){
+      onSearchMethodsClose() {
         this.dialog.chooseSearchMethod = false;
         this.$store.commit('consumeSearchContext');
       },
@@ -423,6 +433,10 @@
             name: "Search"
           });
         }
+      },
+      onVotePlan() {
+        this.$store.dispatch('plan/vote', {id: this.planId});
+        this.$store.commit('plan/vote');
       }
     }
   }

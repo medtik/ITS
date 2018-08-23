@@ -9,10 +9,10 @@
                   :key="`planGroup_${plans ? plans[0].groupName : ''}`">
 
             <v-subheader v-if="plans && plans[0].groupName">
-              {{plans[0].group}}
+              {{plans[0].groupName}}
             </v-subheader>
             <v-subheader v-else>
-              Cá nhân
+              Chuyến đi cá nhân
             </v-subheader>
 
             <v-list-tile v-for="(plan) in plans" :key="`plan_${plan.id}`"
