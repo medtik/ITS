@@ -413,17 +413,22 @@ namespace Service.Implement.Entity
             }
         }
 
+        private List<TreeViewModels> localList = new List<TreeViewModels>();
+
         private void PolulateNecessityLocations(
             Plan plan,
             List<TreeViewModels> locations,
             DateTimeOffset currentDate,
             out Dictionary<NessecityType, Location> nessecityLocationMap, int dateIndex)
         {
+            if (dateIndex == 1)
+            {
+                localList = locations;
+            } 
             Location hotel = null;
             Location breakfast = null;
             Location lunch = null;
             Location dinner = null;
-
             #region hotel
 
             var findHotel = locations.Where(_ => _.Categories == "Nơi ở").OrderByDescending(_ => _.Percent);
@@ -498,6 +503,67 @@ namespace Service.Implement.Entity
                                     if (___.Day.Contains(ParseDate(currentDate)))
                                     {
                                         dinner = tmpLocation;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if (breakfast == null || lunch == null || dinner == null)
+            {
+                locations = localList;//reset list
+                foreach (var _ in locations.ToList())
+                {
+                    var tmpLocation = _locationRepository.Get(__ => __.Id == _.Id && _.Categories == "Ăn uống",
+                        __ => __.BusinessHours);
+
+                    if (tmpLocation != null)
+                    {
+                        if (breakfast == null)
+                        {
+                            foreach (var __ in tmpLocation.BusinessHours.ToList())
+                            {
+                                foreach (var ___ in tmpLocation.BusinessHours.ToList())
+                                {
+                                    if (IsInRange(___.OpenTime, ___.CloseTime, breakFastTime))
+                                    {
+                                        if (___.Day.Contains(ParseDate(currentDate)))
+                                        {
+                                            breakfast = tmpLocation;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        else if (lunch == null)
+                        {
+                            foreach (var __ in tmpLocation.BusinessHours.ToList())
+                            {
+                                foreach (var ___ in tmpLocation.BusinessHours.ToList())
+                                {
+                                    if (IsInRange(___.OpenTime, ___.CloseTime, lunchTime))
+                                    {
+                                        if (___.Day.Contains(ParseDate(currentDate)))
+                                        {
+                                            lunch = tmpLocation;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        else if (dinner == null)
+                        {
+                            foreach (var __ in tmpLocation.BusinessHours.ToList())
+                            {
+                                foreach (var ___ in tmpLocation.BusinessHours.ToList())
+                                {
+                                    if (IsInRange(___.OpenTime, ___.CloseTime, dinnerTime))
+                                    {
+                                        if (___.Day.Contains(ParseDate(currentDate)))
+                                        {
+                                            dinner = tmpLocation;
+                                        }
                                     }
                                 }
                             }
