@@ -42,7 +42,7 @@
       routerLink() {
         return {
           name: 'AreaDetail',
-          params: {
+          query: {
             id: this.id
           }
         }
