@@ -34,17 +34,6 @@
                 {{error.message}}
               </v-alert>
             </v-flex>
-            <!--<v-divider></v-divider>-->
-            <!--<v-flex id="button-container" pa-2>-->
-            <!--<v-btn id="facebookBtn" dark>-->
-            <!--<v-icon dark left>fab fa-facebook</v-icon>-->
-            <!--Đăng nhập Facebook-->
-            <!--</v-btn>-->
-            <!--<v-btn id="googleBtn" dark>-->
-            <!--<v-icon dark left>fab fa-google</v-icon>-->
-            <!--Đăng nhập Google-->
-            <!--</v-btn>-->
-            <!--</v-flex>-->
           </v-layout>
         </v-card>
       </v-flex>
@@ -60,8 +49,8 @@
         loading: {
           signinBtn: false
         },
-        emailInput: 'tlp@tlp.com',
-        passwordInput: '',
+        emailInput: 'admin@bao.com',
+        passwordInput: '123456',
         error: {
           show: false,
           message: ''

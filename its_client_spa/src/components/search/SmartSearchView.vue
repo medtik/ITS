@@ -69,13 +69,21 @@
               <v-divider></v-divider>
             </v-flex>
             <v-layout align-center column>
-              <v-flex v-if="context">
+              <v-flex v-if="!context['plan'] && isLoggedIn">
                 <v-btn
                   color="primary"
                   :loading="loading.createSuggestedPlan"
                   @click="onCreateSuggestedPlanClick"
                   :disabled="!questions">
                   Tạo chuyến đi tự động
+                </v-btn>
+              </v-flex>
+              <v-flex v-if="!context['plan'] && !isLoggedIn" class="text-xs-center">
+                <div class="body-1">
+                  Vui lòng đang nhập để tạo chuyến đi tự động
+                </div>
+                <v-btn color="success" @click="onSigninClick">
+                  Đăng nhập
                 </v-btn>
               </v-flex>
               <v-flex py-2>
@@ -146,6 +154,9 @@
       ...mapGetters('smartSearch', {
         questions: 'questions',
         questionsLoading: 'questionsLoading'
+      }),
+      ...mapGetters('authenticate',{
+        isLoggedIn: 'isLoggedIn'
       }),
       ...mapGetters({
         context: 'searchContext'
@@ -229,7 +240,20 @@
             query: value
           })
         })
-      }
+      },
+      onSigninClick() {
+        this.$store.commit('signinContext', {
+          context: {
+            returnRoute: {
+              name: this.$route.name
+            }
+          }
+        });
+
+        this.$router.push({
+          name: 'Signin'
+        })
+      },
     }
   }
 </script>

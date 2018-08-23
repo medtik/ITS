@@ -86,7 +86,7 @@
         if (!!this.input.startDate && !!this.input.endDate) {
           const startDate = moment(this.input.startDate);
           const endDate = moment(this.input.endDate);
-          if (endDate.isAfter(startDate, 'day')) {
+          if (endDate.isBefore(startDate, 'day')) {
             endDateError = "Ngày kết thức phải sau ngày bắt đầu";
           }
         }

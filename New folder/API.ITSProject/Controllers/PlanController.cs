@@ -195,7 +195,7 @@
                     Name = viewModel.Name,
                     AreaId = viewModel.AreaId,
                     StartDate = viewModel.StartDate,
-                    EndDate = viewModel.EndDate,
+                    EndDate = viewModel.EndDate,    
                     CreatorId = userId,
                     MemberId = userId
                 },
