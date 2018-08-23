@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7270baf9-4c8b-47c4-9e26-08d97eeabdd3" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ITSSolution/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ITSSolution/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.ITSProject_2/Controllers/LocationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.ITSProject_2/Controllers/LocationController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_client_spa/TaskQueue" beforeDir="false" afterPath="$PROJECT_DIR$/../its_client_spa/TaskQueue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_client_spa/src/common/card/AreaCard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../its_client_spa/src/common/card/AreaCard.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_client_spa/src/components/LandingView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../its_client_spa/src/components/LandingView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_client_spa/src/components/area/AreaDetailView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../its_client_spa/src/components/area/AreaDetailView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_client_spa/src/store/modules/area.js" beforeDir="false" afterPath="$PROJECT_DIR$/../its_client_spa/src/store/modules/area.js" afterDir="false" />
-    </list>
+    <list default="true" id="7270baf9-4c8b-47c4-9e26-08d97eeabdd3" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.idea/httpRequests/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -587,7 +579,7 @@
       <workItem from="1534944113653" duration="1349000" />
       <workItem from="1534981471032" duration="4462000" />
       <workItem from="1534990810542" duration="52000" />
-      <workItem from="1534991823092" duration="5510000" />
+      <workItem from="1534991823092" duration="5858000" />
     </task>
     <task id="LOCAL-00001" summary="Fix some localized problem in clinet">
       <created>1534724273331</created>
@@ -663,7 +655,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62879000" />
+    <option name="totallyTimeSpent" value="63227000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -675,7 +667,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="34" width="1039" height="1086" extended-state="0" />
+    <frame x="-8" y="34" width="1039" height="1086" extended-state="1" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32954547" />
       <window_info anchor="right" id="Errors In Solution" order="3" weight="0.32958034" />
