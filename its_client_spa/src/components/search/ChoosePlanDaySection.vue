@@ -55,7 +55,7 @@
               fas fa-check
             </v-icon>
             &nbsp; Hoàn tất
-          </v-btn>onSigninClick
+          </v-btn>
           <v-btn v-if="!selectingMode"
                  color="light-blue accent"
                  @click="onAddToPlan">

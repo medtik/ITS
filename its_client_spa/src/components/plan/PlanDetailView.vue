@@ -215,7 +215,7 @@
     <SearchMethodDialog
       :dialog="dialog.chooseSearchMethod"
       @select="onSearchMethodChoose"
-      @close="dialog.chooseSearchMethod = false"
+      @close="onSearchMethodsClose"
     ></SearchMethodDialog>
     <SuccessDialog
       v-bind="success"
@@ -408,6 +408,10 @@
             areaId: this.plan.areaId
           }
         });
+      },
+      onSearchMethodsClose(){
+        this.dialog.chooseSearchMethod = false;
+        this.$store.commit('consumeSearchContext');
       },
       onSearchMethodChoose(searchMethod) {
         if (searchMethod == 'smart') {

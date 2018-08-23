@@ -6,7 +6,7 @@ export default {
   state: {
     areas: [],
     featuredAreas: [],
-    detailedArea: undefined,
+    detailedArea: {},
     loading: {
       areas: true,
       detailedArea: true,
@@ -33,6 +33,9 @@ export default {
     },
     setFeaturedAreas(state, payload) {
       state.featuredAreas = payload.areas;
+    },
+    setDetailedArea(state, payload) {
+      state.detailedArea = payload.area;
     },
     setLoading(state, payload) {
       state.loading = _.assign(state.loading, payload.loading);
@@ -72,6 +75,23 @@ export default {
         })
         .catch(reason => {
           context.commit('setLoading', {loading: {featuredAreas: false}});
+          Raven.captureException(reason);
+        })
+    },
+    fetchDetailedArea(context, payload) {
+
+      const {
+        id
+      } = payload;
+      context.commit('setLoading', {loading: {detailedArea: true}});
+
+      axiosInstance.get('api/Area/Details', {params: {id}})
+        .then(value => {
+          context.commit('setLoading', {loading: {detailedArea: false}});
+          context.commit('setDetailedArea', {area: value.data})
+        })
+        .catch(reason => {
+          context.commit('setLoading', {loading: {detailedArea: false}});
           Raven.captureException(reason);
         })
     }
