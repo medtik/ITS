@@ -190,6 +190,9 @@ namespace API.ITSProject.ViewModels
 
         [DataMember]
         public string AreaName { get; set; }
+
+        [DataMember]
+        public int CreatorId { get; set; }
     }
 
     [DataContract(Name = "Plan")]
@@ -221,6 +224,9 @@ namespace API.ITSProject.ViewModels
 
         [DataMember]
         public bool IsGroupOwner { get; set; }
+
+        [DataMember]
+        public bool IsPlanOwner { get; set; }
     }
 
     [DataContract(Name = "Location")]
@@ -345,5 +351,8 @@ namespace API.ITSProject.ViewModels
 
         [DataMember]
         public string GroupName { get; set; }
+
+        [DataMember]
+        public bool IsVoted { get; set; }
     }
 }

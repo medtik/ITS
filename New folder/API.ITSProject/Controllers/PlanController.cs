@@ -38,6 +38,7 @@
         #region Get
 
         [HttpGet]
+        [Authorize]
         [Route("api/Plan/Details")]
         public async Task<IHttpActionResult> Details([FromUri] int id)
         {
@@ -48,7 +49,7 @@
                         _.PlanLocations.Select(__ => __.Location)
                             .Select(___ => ___.Photos.Select(_____ => _____.Photo)),
                     _ => _.PlanLocations.Select(__ => __.Location.Reviews),
-                    _ => _.Notes, _ => _.Area);
+                    _ => _.Notes, _ => _.Area, _ => _.Voters);
 
                 if (plan == null)
                     return BadRequest("Not found");
@@ -56,6 +57,7 @@
                 {
                     var temp = ModelBuilder.ConvertToPlanDetailViewModels(plan);
                     temp.IsOwner = temp.MemberId == userId;
+                    temp.IsVoted = plan.Voters.Contains(await CurrentUser());
                     return Ok(temp);
                 }
             }
@@ -312,6 +314,30 @@
         #endregion
 
         #region Put
+        [HttpPut]
+        public async Task<IHttpActionResult> VotePlan([FromBody]int planId)
+        {
+            try
+            {
+                User user = await CurrentUser();
+                Plan plan = _planService.Find(planId, _ => _.Voters);
+                if (plan.Voters.Contains(user))
+                {
+                    plan.Voters.Remove(user);
+                } else
+                {
+                    plan.Voters.Add(user);
+                }
+                _planService.Update(plan);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _loggingService.Write(GetType().Name, nameof(VotePlan), ex);
+
+                return InternalServerError(ex);
+            }
+        }
 
         [HttpPut]
         [Route("api/Plan/UpdatePlan")]
