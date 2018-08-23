@@ -2,21 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7270baf9-4c8b-47c4-9e26-08d97eeabdd3" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/../its_client_spa/TaskQueue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ITSSolution/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ITSSolution/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ITSSolution/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ITSSolution/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/config/applicationhost.config" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/config/applicationhost.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.ITSProject/Controllers/PlanController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/API.ITSProject/Controllers/PlanController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_admin_spa/src/common/block/LocationFullWidth.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../its_admin_spa/src/common/block/LocationFullWidth.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_admin_spa/src/common/input/AreaInput.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../its_admin_spa/src/common/input/AreaInput.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_client_spa/note" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_client_spa/src/common/block/LocationFullWidth.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../its_client_spa/src/common/block/LocationFullWidth.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_client_spa/src/common/card/PlanCard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../its_client_spa/src/common/card/PlanCard.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_client_spa/src/common/input/AreaInput.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../its_client_spa/src/common/input/AreaInput.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_client_spa/src/components/search/ChoosePlanDaySection.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../its_client_spa/src/components/search/ChoosePlanDaySection.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_client_spa/src/components/search/SmartSearchView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../its_client_spa/src/components/search/SmartSearchView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_client_spa/text" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_client_spa/users" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/httpRequests/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -696,7 +682,7 @@
       <workItem from="1534898364533" duration="1601000" />
       <workItem from="1534913698627" duration="1730000" />
       <workItem from="1534944113653" duration="1349000" />
-      <workItem from="1534981471032" duration="3180000" />
+      <workItem from="1534981471032" duration="3952000" />
     </task>
     <task id="LOCAL-00001" summary="Fix some localized problem in clinet">
       <created>1534724273331</created>
@@ -765,7 +751,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="56035000" />
+    <option name="totallyTimeSpent" value="56807000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -777,8 +763,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="0" width="1037" height="1118" extended-state="1" />
-    <editor active="true" />
+    <frame x="-6" y="0" width="1037" height="1118" extended-state="0" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32954547" />
       <window_info anchor="right" id="Errors In Solution" order="3" weight="0.32958034" />
