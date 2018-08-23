@@ -1,9 +1,14 @@
 area detail
 
 add link to title of location full width
----
 add category to location edit/create
 location edit task detail
+review location
+---
+Votepublic plan
+Edit account
+Add photo to location
+
 location suggestion
 
 
@@ -14,7 +19,10 @@ working on nearby locations of user
 working on auto check location of plan (check on multiple plan)
 add description into location detail
 No parallax for location detail
+
 Edit, create area
+List, create,edit account
 edit question
+
 validate business hours
 parallax header should get smaller when on small screen

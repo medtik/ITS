@@ -85,7 +85,7 @@
         <v-flex my-2 mx-2>
           <v-layout align-baseline>
             <v-flex class="title">Bình luận</v-flex>
-            <v-btn color="success" :to="{name:'ReviewWrite', params:{id: location.id}}">
+            <v-btn color="success" :to="{name:'ReviewWrite', query:{id: location.id, name: location.name}}">
               <v-icon>rate_review</v-icon>
               &nbsp &nbsp Bình luận
             </v-btn>
