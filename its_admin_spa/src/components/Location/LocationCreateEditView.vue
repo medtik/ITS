@@ -56,6 +56,9 @@
                 item-text="name"
                 item-value="id"
               />
+              <LocationCategoryInput
+                v-model="input.category"
+              />
             </v-flex>
           </v-flex>
           <v-flex my-3>
@@ -158,7 +161,8 @@
     PictureInput,
     TagsInput,
     LocationBusinessHoursInput,
-    MultiPhotoInput
+    MultiPhotoInput,
+    LocationCategoryInput
   } from "../../common/input";
 
   export default {
@@ -171,7 +175,8 @@
       TagsInput,
       LocationBusinessHoursInput,
       TagCreateEditDialog,
-      MultiPhotoInput
+      MultiPhotoInput,
+      LocationCategoryInput
     },
     data() {
       return {
@@ -195,11 +200,11 @@
           phoneInput: undefined,
           emailInput: undefined,
           areaInput: undefined,
+          category: undefined,
           isVerifiedInput: undefined,
           isCloseInput: undefined,
           tagsInput: [],
           reviewsInput: [],
-          //BusinessHours inputs
           businessHoursInput: [],
           primaryPhotoInput: undefined,
           secondaryPhotoInput: undefined,
