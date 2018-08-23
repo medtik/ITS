@@ -156,6 +156,69 @@
             return Update(entity);
         }
 
+        public bool Edit(Location location, Photo priamryPhoto, IEnumerable<Photo> photos, IEnumerable<BusinessHour> businessHours, int[] tagList)
+        {
+            try
+            {
+                using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required))
+                {
+                    location.Tags = new List<Tag>();
+                    location.BusinessHours = new List<BusinessHour>();
+                    base.Update(location);
+
+                    List<Tag> tags = new List<Tag>();
+                    tagList.ToList().ForEach(_ =>
+                    {
+                        var ele = _tagRepository.Get(__ => __.Id == _);
+                        tags.Add(ele);
+                    });
+                    location.Tags = tags;
+                    base.Update(location);
+
+                    _photoRepository.Create(priamryPhoto);
+                    _unitOfWork.SaveChanges();
+                    _locationPhotoRepository.Create(new LocationPhoto
+                    {
+                        LocationId = location.Id,
+                        PhotoId = priamryPhoto.Id,
+                        IsPrimary = true
+                    });
+
+                    photos.ToList().ForEach(_ =>
+                    {
+                        _photoRepository.Create(_);
+                        _unitOfWork.SaveChanges();
+                        _locationPhotoRepository.Create(new LocationPhoto
+                        {
+                            LocationId = location.Id,
+                            PhotoId = _.Id,
+                            IsPrimary = false
+                        });
+                    });
+
+                    businessHours.ToList().ForEach(_ =>
+                    {
+                        _businessHourRepository.Create(new BusinessHour
+                        {
+                            LocationId = location.Id,
+                            Day = _.Day,
+                            OpenTime = _.OpenTime,
+                            CloseTime = _.CloseTime
+                        });
+                    });
+
+                    _unitOfWork.SaveChanges();
+                    scope.Complete();
+                    return true;
+                }//end scope
+            }
+            catch (Exception ex)
+            {
+                _loggingService.Write(GetType().Name, nameof(Create), ex);
+                return false;
+            }
+        }
+
         public Location Find(int locationId, params Expression<Func<Location, object>>[] includes)
         {
             Location location = null;

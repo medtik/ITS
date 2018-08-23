@@ -112,6 +112,23 @@
                 PlanDay = planNote.PlanDay ?? 0
             };
 
+        public Location ConvertToModels(EditLocationViewModels model)
+           => new Location
+            {
+                Address = model.Address,
+                AreaId = model.AreaId,
+                Description = model.Desription,
+                EmailAddress = model.Email,
+                IsClosed = model.IsClosed,
+                IsVerified = model.IsVerified,
+                Latitude = model.Lat,
+                Longitude = model.Long,
+                Name = model.Name,
+                PhoneNumber = model.Phone,
+                Website = model.Web,
+                Category = model.Category
+            };
+
         public Plan ConvertToModels(CreatePlanViewModels planLocation)
             => new Plan
             {
