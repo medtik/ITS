@@ -89,7 +89,7 @@ namespace API.ITSProject.Controllers
             try
             {
                 LocationDetailViewModels locationDetail;
-                Location location = _locationService.Find(id, _ => _.BusinessHours, _ => _.Reviews,
+                Location location = _locationService.Find(id, _ => _.BusinessHours, _ => _.Reviews.Select(__ => __.Creator),
                     _ => _.BusinessHours, _ => _.Tags, _ => _.Photos.Select(__ => __.Photo));
 
                 if (location == null)
