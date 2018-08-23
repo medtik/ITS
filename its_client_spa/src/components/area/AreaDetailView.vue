@@ -10,7 +10,6 @@
           &nbsp; {{restaurantCount}} nhà hàng
         </v-layout>
         <v-layout style="grid-area: info-hotel" class="light-blue white--text headline" align-center justify-start pl-4>
-          <v-divider></v-divider>
           <v-icon class="white--text">fas fa-hotel</v-icon>
           &nbsp; {{hotelCount}} nơi ở
         </v-layout>

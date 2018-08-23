@@ -9,15 +9,19 @@
         </router-link>
       </v-flex>
     </v-layout>
-    <v-layout slot="title" px-1>
-      <v-icon v-if="locationIcon">
-        {{locationIcon}}
-      </v-icon>
-      &nbsp;
-      <v-flex class="title" pl-1>
-        {{locationName}}
-      </v-flex>
-    </v-layout>
+    <router-link class="fakeLink"
+                 tag="div"
+                 :to="link">
+      <v-layout slot="title" px-1>
+        <v-icon v-if="locationIcon">
+          {{locationIcon}}
+        </v-icon>
+        &nbsp;
+        <v-flex class="title" pl-1>
+          {{locationName}}
+        </v-flex>
+      </v-layout>
+    </router-link>
     <v-layout slot="detail" column pl-2>
       <StarRating
         read-only
