@@ -12,6 +12,8 @@
 
         bool Create(Location location, Photo priamryPhoto, IEnumerable<Photo> photos, IEnumerable<BusinessHour> businessHours, int[] tagList);
 
+        bool Edit(Location location, Photo priamryPhoto, IEnumerable<Photo> photos, IEnumerable<BusinessHour> businessHours, int[] tagList);
+
         bool Delete(int locationId);
 
         bool AcceptStatusLocationSuggestion(int suggestionId);

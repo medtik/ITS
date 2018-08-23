@@ -30,17 +30,55 @@ export default {
   },
   actions: {
     addImage(context, payload) {
+      //post /api/Location/AddImageToLocation
       const {
         locationId,
         photo
       } = payload;
 
-      return Promise.resolve();
+
+      return new Promise((resolve, reject) => {
+        axiosInstance.post('api/Location/AddImageToLocation',{
+          params: {
+
+          }
+        })
+      })
+    },
+
+    review(context, payload) {
+      // put /api/Location/AddReview
+      const {
+        locationId,
+        title,
+        description,
+        rating,
+        photos
+      } = payload;
+
+      return new Promise((resolve, reject) => {
+        axiosInstance.put('api/Location/AddReview', {
+          "locationId": locationId,
+          "title": title,
+          "description": description,
+          "rating": rating,
+          "photos": photos
+        })
+          .then(value => {
+            resolve(value.data)
+          })
+          .catch(reason => {
+            Raven.captureException(reason);
+            reject();
+          })
+      });
+
     },
 
     getDetails(context, payload) {
       const {
-        id
+        id,
+        name
       } = payload;
       context.commit('setLoading', {
         loading: {detailedLocation: true}
@@ -74,7 +112,7 @@ export default {
         long, lat
       } = payload;
 
-      context.commit('setLoading',{
+      context.commit('setLoading', {
         loading: {
           nearbyLocations: true
         }
@@ -85,16 +123,16 @@ export default {
           latitude: lat,
           radius: 1000
         }
-          .then(value =>{
-            context.commit('setLoading',{
+          .then(value => {
+            context.commit('setLoading', {
               loading: {
                 nearbyLocations: false
               }
             });
           })
-          .catch(reason =>{
+          .catch(reason => {
             Raven.captureException(reason);
-            context.commit('setLoading',{
+            context.commit('setLoading', {
               loading: {
                 nearbyLocations: false
               }

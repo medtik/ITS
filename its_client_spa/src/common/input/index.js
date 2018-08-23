@@ -9,7 +9,7 @@ import TagChooseDialog from "./TagChooseDialog.vue";
 import TagsInput from "./TagsInput.vue";
 import TagCategoryInput from "./TagCategoryInput.vue";
 import MessageInputDialog from "./MessageInputDialog.vue";
-
+import LocationCategoryInput from "./LocationCategoryInput"
 export {
   AreaInput,
   ChoosePlanDialog,
@@ -21,5 +21,6 @@ export {
   TagChooseDialog,
   TagsInput,
   TagCategoryInput,
-  MessageInputDialog
+  MessageInputDialog,
+  LocationCategoryInput
 }

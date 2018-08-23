@@ -24,7 +24,7 @@
         private readonly IPlanService _planService;
         private readonly IUserService _userService;
 
-        public GroupController(ILoggingService loggingService, IPagingService paggingService, 
+        public GroupController(ILoggingService loggingService, IPagingService paggingService,
             IIdentityService identityService, IGroupService groupService, IPlanService planService,
             IUserService userService, IPhotoService photoService) : base(loggingService, paggingService, identityService, photoService)
         {
@@ -65,20 +65,29 @@
 
         [HttpGet]
         [Route("api/Group/GetLocationSuggestions")]
-        public IHttpActionResult GetLocationSuggestion(int groupId)
+        public async Task<IHttpActionResult> GetLocationSuggestion()
         {
             try
             {
-                List<GroupLocationSuggestionViewModels> result = new List<GroupLocationSuggestionViewModels>();
-                var group = _groupService.Find(groupId,
-                    _ => _.Plans.Select(__ => __.LocationSuggestion.Select(___ => ___.User).Select(____ => ____.Photos)),
-                    _ => _.Plans.Select(__ => __.LocationSuggestion.Select(___ => ___.Locations.Select(____ => ____.Photos.Select(______ => ______.Photo)))));
+                int userId = (await CurrentUser()).Id;
 
-                foreach (var item in group.Plans)
+                List<object> temp = new List<object>();
+
+                User user = _userService.Find(userId, _ => _.LocationSuggestions);
+
+                foreach (var item in user.LocationSuggestions)
                 {
-                    result.AddRange(ModelBuilder.ConvertToGroupLocationSuggestionViewModels(item.LocationSuggestion));
+                    temp.Add(new
+                    {
+                        item.Comment,
+                        item.Status,
+                        item.PlanId,
+                        item.PlanDay,
+                        item.Plan.Name,
+                        LocationIds = item.Locations.Select(_ => _.Id)
+                    });
                 }
-                return Ok(result);
+                return Ok(temp);
             }
             catch (Exception ex)
             {
@@ -95,8 +104,8 @@
             try
             {
                 int userId = (await CurrentUser()).Id;
-                Group group = _groupService.Find(id, 
-                    _ => _.Creator, 
+                Group group = _groupService.Find(id,
+                    _ => _.Creator,
                     _ => _.Members,
                     _ => _.Plans.Select(__ => __.PlanLocations.Select(___ => ___.Location).Select(____ => ____.Photos.Select(_____ => _____.Photo))),
                     _ => _.Plans.Select(__ => __.PlanLocations.Select(___ => ___.Location).Select(____ => ____.Reviews)),
@@ -118,7 +127,8 @@
                     {
                         _.PhoneNumber = userInfo.PhoneNumber;
                         _.EmailAddress = userInfo.Email;
-                    } else
+                    }
+                    else
                     {
                         _.PhoneNumber = null;
                         _.EmailAddress = null;
@@ -209,7 +219,8 @@
 
                     if (result)
                         return Ok();
-                } else
+                }
+                else
                     return Unauthorized();
 
                 return BadRequest();
@@ -257,7 +268,7 @@
 
                 return Ok();
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 _loggingService.Write(GetType().Name, nameof(SavePublicPlan), ex);
 
@@ -337,7 +348,7 @@
 
                 bool result = _groupService.
                     GroupInvitations(userInvitation.UserId, userInvitation.GroupId, userInvitation.Message);
-                
+
 
                 if (result)
                 {

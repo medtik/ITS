@@ -112,6 +112,23 @@
                 PlanDay = planNote.PlanDay ?? 0
             };
 
+        public Location ConvertToModels(EditLocationViewModels model)
+           => new Location
+            {
+                Address = model.Address,
+                AreaId = model.AreaId,
+                Description = model.Desription,
+                EmailAddress = model.Email,
+                IsClosed = model.IsClosed,
+                IsVerified = model.IsVerified,
+                Latitude = model.Lat,
+                Longitude = model.Long,
+                Name = model.Name,
+                PhoneNumber = model.Phone,
+                Website = model.Web,
+                Category = model.Category
+            };
+
         public Plan ConvertToModels(CreatePlanViewModels planLocation)
             => new Plan
             {
@@ -215,6 +232,7 @@
                 AreaName = plan.Area.Name,
                 GroupName = plan.Group == null ? "" : plan.Group.Name,
                 IsGroupOwner = currentUserId == (plan.Group != null ? plan.Group.CreatorId : -1),
+                IsPlanOwner = currentUserId == plan.Id
             };
         }
 
@@ -235,7 +253,8 @@
                 Voter = plan.Voters.Count,
                 Photo = string.IsNullOrWhiteSpace(plan.PlanLocations.FirstOrDefault()?.Location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Id.ToString()) ? null : CurrentUrl + plan.PlanLocations.FirstOrDefault()?.Location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Id.ToString(),
                 AreaId = plan.AreaId,
-                AreaName = plan.Area.Name
+                AreaName = plan.Area.Name,
+                CreatorId = plan.CreatorId
             };
 
         public IEnumerable<FeaturedPlanViewModels> ConvertToFeaturedPlanViewModels(IEnumerable<Plan> plans)

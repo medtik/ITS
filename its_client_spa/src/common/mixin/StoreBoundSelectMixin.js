@@ -12,15 +12,13 @@ export default function mixin({alias, itemsPath, loadingPath, getItemPath}) {
       })
     },
     mounted() {
-      if (this.loading) {
-        this.$store.dispatch(`${alias}/${getItemPath}`)
-      }
+      this.$store.dispatch(`${alias}/${getItemPath}`)
     },
     methods: {
       onSelect(value) {
         this.$emit('input', value);
         this.$emit('change', value);
-      }
+      },
     }
   }
 }
