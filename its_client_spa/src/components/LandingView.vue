@@ -84,7 +84,7 @@
       </v-layout>
     </section>
 
-    <section>
+    <section v-if="!featuredPlansLoading && !featuredAreasLoading">
       <!--FEATURED-->
       <v-container grid-list-xl>
         <v-layout column my-5>
@@ -116,6 +116,11 @@
             </div>
           </v-flex>
         </v-layout>
+      </v-container>
+    </section>
+    <section>
+      <v-container class="text-xs-center" v-if="featuredPlansLoading || featuredAreasLoading">
+        <v-progress-circular indeterminate size="40" color="primary"></v-progress-circular>
       </v-container>
     </section>
     <section>
