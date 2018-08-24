@@ -257,6 +257,7 @@
   import moment from "moment";
   import {
     SuccessDialog,
+    ErrorDialog,
     LocationFullWidth
   } from "../../common/block";
 
@@ -270,7 +271,8 @@
       ChoosePlanDestinationDialog,
       draggable,
       SuccessDialog,
-      SearchMethodDialog
+      SearchMethodDialog,
+      ErrorDialog
     },
     data() {
       return {
