@@ -153,14 +153,14 @@
           id,
           status: 1
         });
-        this.$store.dispatch('request/acceptGroupInvitation', {id});
+        this.$store.dispatch('request/acceptLocationSuggestion', {id});
       },
       onDenyLocationSuggestion(id) {
         this.$store.commit('request/changeStatusLocationSuggestion', {
           id,
           status: 2
         });
-        this.$store.dispatch('request/denyGroupInvitation', {id});
+        this.$store.dispatch('request/denyLocationSuggestion', {id});
       }
     }
 
