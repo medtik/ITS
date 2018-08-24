@@ -19,7 +19,7 @@
             </v-chip>
           </div>
           <div v-if="todayHours">
-            <span>Hôm nay:{{todayHours.todayDisplayString}}</span>
+            <span>Hôm nay:{{todayHours.displayString}}</span>
 
             <span class="subheading font-weight-bold"
                   v-if="todayHours.isOpen"
@@ -250,16 +250,15 @@
               day
             };
 
-            formattedBusinessHour.todayDisplayString = `Mở từ ${from.format('LT')} đến ${to.format('LT')}`;
-
-            formattedBusinessHour.isNow = now.isBetween(
-              formattedBusinessHour.from,
-              formattedBusinessHour.to,
-            );
-
             if(from.isSame(zeroTime) && to.isSame(zeroTime)){
               formattedBusinessHour.isNow = true;
-              formattedBusinessHour.todayDisplayString = `Mở cả ngày`;
+              formattedBusinessHour.displayString = `Mở cả ngày`;
+            }else{
+              formattedBusinessHour.isNow = now.isBetween(
+                formattedBusinessHour.from,
+                formattedBusinessHour.to,
+              );
+              formattedBusinessHour.displayString = `Mở từ ${from.format('LT')} đến ${to.format('LT')}`;
             }
 
             return formattedBusinessHour;
@@ -273,7 +272,8 @@
         return {
           from: todayHour.from.format('HH:mm'),
           to: todayHour.to.format('HH:mm'),
-          isOpen: todayHour.isNow
+          isOpen: todayHour.isNow,
+          displayString: todayHour.displayString
         }
       }
     },
