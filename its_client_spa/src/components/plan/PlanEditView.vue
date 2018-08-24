@@ -25,6 +25,73 @@
                     label="Ngày kết thúc" type="date">
       </v-text-field>
     </v-container>
+    <v-flex v-for="(day,index) in plan.days"
+            :key="day.key"
+            class="grey lighten-5">
+      <v-divider></v-divider>
+      <v-flex class="title text-xs-center white" pb-2 pt-4>
+        <span :id="'tab_item_'+day.key">{{day.planDayText}}</span>
+        <v-flex v-if="!isPublic">
+          <v-btn flat @click="onAddLocation(day)">
+            <v-icon>add_location</v-icon>
+            <span>Thêm địa điểm</span>
+          </v-btn>
+          <v-btn flat @click="onAddNote(day)" v-if="isOwnPlan">
+            <v-icon>note_add</v-icon>
+            <span>Thêm ghi chú</span>
+          </v-btn>
+        </v-flex>
+      </v-flex>
+      <!--ITEMS-->
+      <v-flex py-2 mb-1
+              v-for="item in day.items"
+              :key="item.id"
+              class="white">
+        <LocationFullWidth v-if="item.location"
+                           v-bind="item.location"
+                           :isOwn="true"
+                           @delete="onLocationDelete(item)">
+          <template v-if="isOwnPlan" slot="action">
+            <v-layout column align-center>
+              <v-checkbox :value="item.id"
+                          v-model="checkboxValues"
+                          @change="onToggleLocation(item.id)">
+              </v-checkbox>
+              <v-btn icon flat color="red" @click="onLocationDelete(item)">
+                <v-icon>
+                  fas fa-trash
+                </v-icon>
+              </v-btn>
+            </v-layout>
+          </template>
+        </LocationFullWidth>
+        <NoteFullWidth v-else v-bind="item.note"
+                       @delete="onNoteDelete(item,id)">
+          <template v-if="isOwnPlan" slot="action">
+            <v-layout column align-center>
+              <v-checkbox :value="item.id"
+                          v-model="checkboxValues"
+                          @change="onToggleNote(item.id)">
+              </v-checkbox>
+
+              <v-btn icon flat color="red" @click="onNoteDelete(item)">
+                <v-icon>
+                  fas fa-trash
+                </v-icon>
+              </v-btn>
+            </v-layout>
+          </template>
+        </NoteFullWidth>
+      </v-flex>
+      <!--SPACER-->
+      <v-flex v-if="plan.days[index].length <= 0" style="height: 50px">
+      </v-flex>
+    </v-flex>
+    <v-layout v-if="!plan.days"
+              class="title font-weight-bold"
+              justify-center align-center pa-5>
+      Chuyến đi của bạn đang trống
+    </v-layout>
     <v-container class="text-xs-center" v-else>
       <v-progress-circular indeterminate size="40" color="primary"></v-progress-circular>
     </v-container>

@@ -193,6 +193,9 @@ namespace API.ITSProject.ViewModels
 
         [DataMember]
         public int CreatorId { get; set; }
+
+        [DataMember]
+        public string CreatorName { get; set; }
     }
 
     [DataContract(Name = "Plan")]
@@ -227,6 +230,9 @@ namespace API.ITSProject.ViewModels
 
         [DataMember]
         public bool IsPlanOwner { get; set; }
+
+        [DataMember]
+        public bool IsPublic { get; set; }
     }
 
     [DataContract(Name = "Location")]
@@ -308,6 +314,9 @@ namespace API.ITSProject.ViewModels
 
         [DataMember]
         public bool IsDone { get; set; }
+
+        [DataMember]
+        public int? TotalTimeStay { get; set; }
     }
 
     [DataContract(Name = "Plan")]

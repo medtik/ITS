@@ -15,9 +15,13 @@
     using Core.ApplicationService.Business.Algorithm;
     using Core.ObjectModels.Algorithm;
     using System.Data.Entity;
+    using Newtonsoft.Json;
+    using System.Net.Http;
+    using System.Net.Http.Headers;
 
     public class PlanController : _BaseController
     {
+        private HttpClient client;
         private readonly IPlanService _planService;
         private readonly ILocationService _locationService;
         private readonly ITagService _tagService;
@@ -29,6 +33,11 @@
             ITagService tagService, ISearchTreeService searchTreeService) : base(loggingService, paggingService,
             identityService, photoService)
         {
+            client = new HttpClient();
+            client.BaseAddress = new Uri("https://exp.host");
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
+            client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("deflate"));
             this._planService = planService;
             this._locationService = locationService;
             this._tagService = tagService;
@@ -95,7 +104,7 @@
             try
             {
                 int userId = (await CurrentUser()).Id;
-                IQueryable<Plan> plans = _planService.GetPlans(userId);
+                IQueryable<Plan> plans = _planService.GetPlans(userId).Where(_ => !_.IsPublic && _.GroupId == null);
 
                 return Ok(ModelBuilder.ConvertToMyPlan(plans, userId));
             }
@@ -168,7 +177,8 @@
                     Rating = rating,
                     Reasons = commonTags.Select(tag => tag.Name).ToList(),
                     ReviewCount = location.Reviews.Count,
-                    Categories = location.Category
+                    Categories = location.Category,
+                    TotalTimeStay = location.TotalTimeStay
                 };
 
                 resultList.Add(result);
@@ -184,6 +194,7 @@
                     Percent = model.Percent,
                     PrimaryPhoto = model.PrimaryPhoto,
                     Rating = model.Rating,
+                    Reasons = model.Reasons
                 })
                 .ToList();
 
@@ -207,11 +218,11 @@
 
         [HttpPost]
         [Route("api/Plan/AddSuggestion")]
-        public IHttpActionResult AddSuggestionToPlan(LocationSuggestionViewModels locationSuggestion)
+        public async Task<IHttpActionResult> AddSuggestionToPlan(LocationSuggestionViewModels locationSuggestion)
         {
             try
             {
-                int userId = 1;
+                int userId = (await CurrentUser()).Id;
                 ICollection<Location> locations = new List<Location>();
 
                 foreach (var item in locationSuggestion.LocationIds ?? new List<int>())
@@ -223,15 +234,31 @@
                         return BadRequest("Location not existed");
                 }
 
-                bool result = _planService.Create(new LocationSuggestion
+                var locationSuggest = new LocationSuggestion
                 {
                     Comment = locationSuggestion.Comment,
-                    Locations = locations, //need to edit
+                    Locations = locations, 
                     UserId = userId,
                     PlanId = locationSuggestion.PlanId,
                     Status = RequestStatus.NotYet,
                     PlanDay = locationSuggestion.PlanDay
-                });
+                };
+                bool result = _planService.Create(locationSuggest);
+
+                var plan = _planService.Find(locationSuggestion.PlanId, _ => _.Creator);
+                var creatorGroup = plan.Creator;
+                var content = new
+                {
+                    to = $"{creatorGroup.MobileToken}",
+                    title = $"{(await CurrentUser()).FullName} muốn thêm { string.Join(", ", locations.Select(_ => _.Name)) } địa điểm vào chuyến đi {plan.Name}",
+                    body = $"{locationSuggestion.Comment}",
+                    data = new
+                    {
+                        type = "LocationSuggestion"
+                    }
+                };
+                var temp = JsonConvert.SerializeObject(content);
+                HttpResponseMessage responseMessage = await client.PostAsJsonAsync("/--/api/v2/push/send", content);
 
                 if (result)
                     return Ok();
@@ -315,6 +342,7 @@
 
         #region Put
         [HttpPut]
+        [Route("api/Plan/VotePlan")]
         public async Task<IHttpActionResult> VotePlan([FromBody]int planId)
         {
             try
@@ -341,7 +369,7 @@
 
         [HttpPut]
         [Route("api/Plan/UpdatePlan")]
-        public IHttpActionResult UpdatePlan(UpdatePlanViewModels viewModels)
+        public IHttpActionResult UpdatePlan(UpdatePlanViewModels viewModels, UpdateIndexPlanLocationAndNote updateIndexPlanLocationAndNote)
         {
             try
             {
@@ -353,6 +381,43 @@
                 plan.Name = viewModels.Name;
 
                 _planService.Update(plan);
+
+                try
+                {
+                    bool result = false;
+
+                    foreach (var item in updateIndexPlanLocationAndNote.PlanLocation)
+                    {
+                        var planLocation = _planService.FindPlanLocation(item.Id);
+                        planLocation.Index = item.Index;
+                        planLocation.PlanDay = item.PlanDay;
+
+                        result = _planService.UpdatePlanLocation(planLocation);
+                    }
+
+                    if (result)
+                    {
+                        foreach (var item in updateIndexPlanLocationAndNote.PlanNotes)
+                        {
+                            var planNote = _planService.FindNote(item.Id);
+                            planNote.Index = item.Index;
+                            planNote.PlanDay = item.PlanDay;
+
+                            result = _planService.UpdatePlanNote(planNote);
+                        }
+                    }
+
+                    if (result)
+                        return Ok();
+                    else
+                        return BadRequest();
+                }
+                catch (Exception ex)
+                {
+                    _loggingService.Write(GetType().Name, nameof(EditIndexPlanLocationAndNote), ex);
+
+                    return InternalServerError(ex);
+                }
                 return Ok();
             }
             catch (Exception ex)
@@ -369,6 +434,11 @@
         {
             try
             {
+                var plan = _planService.Find(planId, _ => _.PlanLocations);
+                if (plan.PlanLocations.Count == 0)
+                {
+                    return BadRequest("Chuyến đi của bạn đang trống");
+                }
                 var temp = _planService.PublicPlan(planId);
 
                 return Ok(temp.Id);

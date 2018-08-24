@@ -34,10 +34,28 @@
         }
 
         [HttpGet]
+        [Route("api/Question/Detail")]
+        public IHttpActionResult GetQuestionDetails(int id)
+        {
+            try
+            {
+                var quest = _questionService.Find(id, _ => _.Answers.Select(__ => __.Tags));
+                
+                return Ok(ModelBuilder.ConvertToQuestionDetailsViewModels(quest));
+            }
+            catch (Exception ex)
+            {
+                _loggingService.Write(GetType().Name, nameof(GetQuestionDetails), ex);
+
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpGet]
         [Route("api/Question/QuestionsByArea")]
         public IHttpActionResult GetQuestionByArea(int areaId)
         {
-            return Ok(ModelBuilder.ConvertToQuestionDetailsViewModels(_questionService.GetQuestionByArea(areaId, _ => _.Answers)));
+            return Ok(ModelBuilder.ConvertToQuestionDetailsViewModels(_questionService.GetQuestionByArea(areaId, _ => _.Answers.Select(__ => __.Tags))));
         }
 
         [HttpGet]

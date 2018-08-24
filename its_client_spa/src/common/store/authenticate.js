@@ -111,7 +111,6 @@ export default {
           useId: authResponse.userID,
           appId: context.state.facebookAppId
         })
-          .then()
       }
     },
     signinFacebook(context, payload){

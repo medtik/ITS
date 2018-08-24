@@ -23,10 +23,11 @@
         private readonly IGroupService _groupService;
         private readonly IPlanService _planService;
         private readonly IUserService _userService;
+        private readonly ILocationService _locationService;
 
         public GroupController(ILoggingService loggingService, IPagingService paggingService,
             IIdentityService identityService, IGroupService groupService, IPlanService planService,
-            IUserService userService, IPhotoService photoService) : base(loggingService, paggingService, identityService, photoService)
+            IUserService userService, IPhotoService photoService, ILocationService locationService) : base(loggingService, paggingService, identityService, photoService)
         {
             client = new HttpClient();
             client.BaseAddress = new Uri("https://exp.host");
@@ -36,6 +37,7 @@
             this._groupService = groupService;
             this._planService = planService;
             this._userService = userService;
+            this._locationService = locationService;
         }
 
         #region Get
@@ -65,6 +67,7 @@
 
         [HttpGet]
         [Route("api/Group/GetLocationSuggestions")]
+        [Authorize]
         public async Task<IHttpActionResult> GetLocationSuggestion()
         {
             try
@@ -73,18 +76,19 @@
 
                 List<object> temp = new List<object>();
 
-                User user = _userService.Find(userId, _ => _.LocationSuggestions);
+                var list = _locationService.GetLocationSuggestion(userId);
 
-                foreach (var item in user.LocationSuggestions)
+                foreach (var item in list)
                 {
                     temp.Add(new
                     {
+                        item.Id,
                         item.Comment,
                         item.Status,
                         item.PlanId,
                         item.PlanDay,
                         item.Plan.Name,
-                        LocationIds = item.Locations.Select(_ => _.Id)
+                        Locations = item.Locations.Select(_ => (_.Id, _.Name))
                     });
                 }
                 return Ok(temp);

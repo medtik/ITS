@@ -83,7 +83,8 @@
       'locations',
       'isSaveable',
       'isGroupOwner',
-      'isOwnPlan'
+      'isOwnPlan',
+      'isPlanOwner'
     ],
     computed: {
       mode() {
@@ -91,7 +92,7 @@
         else return 'private'
       },
       isOwner() {
-        return this.isGroupOwner || this.isOwnPlan;
+        return this.isGroupOwner || this.isOwnPlan || this.isPlanOwner
       },
       isHaveLocations() {
         return this.locations && this.locations.length > 0;
