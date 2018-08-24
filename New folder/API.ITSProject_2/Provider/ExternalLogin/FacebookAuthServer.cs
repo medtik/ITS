@@ -1,4 +1,4 @@
-﻿namespace API.ITSProject.Provider.ExternalLogin
+﻿namespace API.ITSProject_2.Provider.ExternalLogin
 {
     using System.Security.Claims;
     using System.Threading.Tasks;

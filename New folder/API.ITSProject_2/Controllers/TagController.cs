@@ -1,4 +1,4 @@
-﻿namespace API.ITSProject.Controllers
+﻿namespace API.ITSProject_2.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -11,7 +11,7 @@
     using Core.ApplicationService.Business.IdentityService;
     using Core.ApplicationService.Business.LogService;
     using Core.ApplicationService.Business.PagingService;
-    using API.ITSProject.ViewModels;
+    using API.ITSProject_2.ViewModels;
 
     public class TagController : _BaseController
     {

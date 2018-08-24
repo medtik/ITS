@@ -186,6 +186,7 @@
     <Compile Include="ViewModels\AreaViewModels.cs" />
     <Compile Include="ViewModels\BusinessHourViewModels.cs" />
     <Compile Include="ViewModels\CommentViewModels.cs" />
+    <Compile Include="ViewModels\ExternalLoginViewModel.cs" />
     <Compile Include="ViewModels\GroupViewModels.cs" />
     <Compile Include="ViewModels\LocationViewModels.cs" />
     <Compile Include="ViewModels\PlanViewModels.cs" />

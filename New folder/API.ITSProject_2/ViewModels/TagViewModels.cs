@@ -1,4 +1,4 @@
-﻿namespace API.ITSProject.ViewModels
+﻿namespace API.ITSProject_2.ViewModels
 {
     using System.Runtime.Serialization;
 

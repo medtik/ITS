@@ -1,4 +1,4 @@
-﻿namespace API.ITSProject.Controllers
+﻿namespace API.ITSProject_2.Controllers
 {
     using System;
     using System.Linq;
@@ -11,143 +11,54 @@
     using Core.ApplicationService.Business.LogService;
     using Core.ApplicationService.Business.PagingService;
     using Core.ApplicationService.Business.EntityService;
-    using API.ITSProject.ViewModels;
+    using API.ITSProject_2.ViewModels;
     using Core.ApplicationService.Business.Algorithm;
     using Core.ObjectModels.Algorithm;
     using System.Data.Entity;
+    using Newtonsoft.Json;
+    using System.Net.Http;
+    using System.Net.Http.Headers;
 
     public class PlanController : _BaseController
     {
+        private HttpClient client;
         private readonly IPlanService _planService;
         private readonly ILocationService _locationService;
         private readonly ITagService _tagService;
         private readonly ISearchTreeService _searchTreeService;
 
         public PlanController(ILoggingService loggingService, IPagingService paggingService,
-            IIdentityService identityService, IPlanService planService, ILocationService locationService, IPhotoService photoService,
-            ITagService tagService, ISearchTreeService searchTreeService) : base(loggingService, paggingService, identityService, photoService)
+            IIdentityService identityService, IPlanService planService, ILocationService locationService,
+            IPhotoService photoService,
+            ITagService tagService, ISearchTreeService searchTreeService) : base(loggingService, paggingService,
+            identityService, photoService)
         {
+            client = new HttpClient();
+            client.BaseAddress = new Uri("https://exp.host");
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("gzip"));
+            client.DefaultRequestHeaders.AcceptEncoding.Add(new StringWithQualityHeaderValue("deflate"));
             this._planService = planService;
             this._locationService = locationService;
             this._tagService = tagService;
             this._searchTreeService = searchTreeService;
         }
 
-        #region Other
-        private void WrireTree()
-        {
-            Tree tree = _searchTreeService.BuildTree(_locationService.GetAll(_ => _.Tags).ToList());
-            var path = CurrentContext.Server.MapPath("/Tree/tree.json");
-            _searchTreeService.WriteTree(path, tree);
-            //            var tree = _treeBuilder.BuildTree(_locationService.GetAll(_ => _.Tags).ToList());
-            //            System.IO.File.WriteAllText(CurrentContext.Server.MapPath($"/Tree/tree.json"),
-            //                JsonConvert.SerializeObject(tree), Encoding.UTF8);
-        }
-        #endregion
-
         #region Get
-        [HttpGet]
-        [Route("api/Test2")]
-        public IHttpActionResult Algorithm([FromUri] int[] list, int? areaId)
-        {
-            WrireTree();
-            if (list == null)
-            {
-                return BadRequest();
-            }
-
-            List<Tag> tags = _tagService.GetAll()
-                .Where(tag => tag.Answer
-                    .Any(answer => list.Contains(answer.Id))
-                )
-                .ToList();
-
-            var path = CurrentContext.Server.MapPath("/Tree/tree.json");
-            Tree tree = _searchTreeService.ReadTree(path);
-            if (tree == null)
-            {
-                tree = _searchTreeService.BuildTree(_locationService.GetAll().Include(location => location.Tags).ToList());
-                _searchTreeService.WriteTree(path, tree);
-            }
-
-            var resultIds = _searchTreeService.SearchTree(tags, tree);
-            var locationsResult = _locationService.GetAll()
-                .Include(location => location.Reviews)
-                .Include(location => location.Tags)
-                .Include(location => location.Photos.Select(__ => __.Photo))
-                .Where(location => !areaId.HasValue || location.AreaId == areaId)
-                .Where(location => resultIds.Contains(location.Id));
-
-            List<TreeViewModels> resultList = new List<TreeViewModels>();
-            foreach (Location location in locationsResult)
-            {
-                var locationTags = location.Tags;
-                var commonTags = locationTags.Intersect(tags);
-                int ratingCount = location.Reviews.Count;
-                var rating = location.Reviews.Sum(_ => _.Rating) / ratingCount;
-                rating = float.IsNaN(rating) ? 0 : rating;
-
-                foreach (Review review in location.Reviews)
-                {
-                    rating += review.Rating;
-                }
-
-                TreeViewModels result = new TreeViewModels
-                {
-                    Id = location.Id,
-                    Address = location.Address,
-                    Location = location.Name,
-                    Percent = (tags.Count / commonTags.Count()).ToString(),
-                    PrimaryPhoto = CurrentUrl + location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Id.ToString(),
-                    Rating = rating,
-                    Reasons = commonTags.Select(tag => tag.Name).ToList(),
-                    ReviewCount = location.Reviews.Count,
-                    Categories = location.Category
-                };
-
-                resultList.Add(result);
-            }
-
-            var locationListResult = resultList.OrderByDescending(_ => _.Reasons.Count)
-                .Select(model => new Core.ObjectModels.Entities.Helper.TreeViewModels
-                {
-                    Address = model.Address,
-                    Categories = model.Categories,
-                    Id = model.Id,
-                    Location = model.Location,
-                    Percent = model.Percent,
-                    PrimaryPhoto = model.PrimaryPhoto,
-                    Rating = model.Rating,
-                })
-                .ToList();
-                    
-            var plan = new Plan
-            {
-                AreaId = 2,
-                CreatorId = 2,
-                IsPublic = false,
-                MemberId = 2,
-                StartDate = new DateTimeOffset(2018,8,28,0,0,0, new TimeSpan()),
-                EndDate = new DateTimeOffset(2018,8,30,0,0,0, new TimeSpan()),
-                
-            };
-
-            _planService.CreateSuggestedPlan(plan,locationListResult);
-            
-            return Ok();
-        }
 
         [HttpGet]
+        [Authorize]
         [Route("api/Plan/Details")]
-        public async Task<IHttpActionResult> Details([FromUri]int id)
+        public async Task<IHttpActionResult> Details([FromUri] int id)
         {
             try
             {
                 int userId = (await CurrentUser()).Id;
                 Plan plan = _planService.Find(id, _ =>
-                    _.PlanLocations.Select(__ => __.Location).Select(___ => ___.Photos.Select(_____ => _____.Photo)),
+                        _.PlanLocations.Select(__ => __.Location)
+                            .Select(___ => ___.Photos.Select(_____ => _____.Photo)),
                     _ => _.PlanLocations.Select(__ => __.Location.Reviews),
-                    _ => _.Notes, _ => _.Area);
+                    _ => _.Notes, _ => _.Area, _ => _.Voters);
 
                 if (plan == null)
                     return BadRequest("Not found");
@@ -155,6 +66,7 @@
                 {
                     var temp = ModelBuilder.ConvertToPlanDetailViewModels(plan);
                     temp.IsOwner = temp.MemberId == userId;
+                    temp.IsVoted = plan.Voters.Contains(await CurrentUser());
                     return Ok(temp);
                 }
             }
@@ -192,7 +104,7 @@
             try
             {
                 int userId = (await CurrentUser()).Id;
-                IQueryable<Plan> plans = _planService.GetPlans(userId);
+                var plans = _planService.GetPlans(userId).ToList().Where(_ => !_.IsPublic && _.GroupId == null);
 
                 return Ok(ModelBuilder.ConvertToMyPlan(plans, userId));
             }
@@ -203,16 +115,114 @@
                 return InternalServerError(ex);
             }
         }
+
         #endregion
 
         #region Post
+
+        [HttpPost]
+        [Authorize]
+        [Route("api/Test2")]
+        public async Task<IHttpActionResult> Algorithm(CreateSuggestedPlanViewModels viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            List<Tag> tags = _tagService.GetAll()
+                .Where(tag => tag.Answer
+                    .Any(answer => viewModel.Answers.Contains(answer.Id))
+                )
+                .ToList();
+
+            var path = CurrentContext.Server.MapPath("/Tree/tree.json");
+            Tree tree = _searchTreeService.ReadTree(path);
+            if (tree == null)
+            {
+                tree = _searchTreeService.BuildTree(_locationService.GetAll().Include(location => location.Tags)
+                    .ToList());
+                _searchTreeService.WriteTree(path, tree);
+            }
+
+            var resultIds = _searchTreeService.SearchTree(tags, tree);
+            var locationsResult = _locationService.GetAll()
+                .Include(location => location.Reviews)
+                .Include(location => location.Tags)
+                .Include(location => location.Photos.Select(__ => __.Photo))
+                .Where(location => location.AreaId == viewModel.AreaId)
+                .Where(location => resultIds.Contains(location.Id));
+
+            List<TreeViewModels> resultList = new List<TreeViewModels>();
+            foreach (Location location in locationsResult)
+            {
+                var locationTags = location.Tags;
+                var commonTags = locationTags.Intersect(tags);
+                int ratingCount = location.Reviews.Count;
+                var rating = location.Reviews.Sum(_ => _.Rating) / ratingCount;
+                rating = float.IsNaN(rating) ? 0 : rating;
+
+                foreach (Review review in location.Reviews)
+                {
+                    rating += review.Rating;
+                }
+
+                TreeViewModels result = new TreeViewModels
+                {
+                    Id = location.Id,
+                    Address = location.Address,
+                    Location = location.Name,
+                    Percent = (tags.Count / commonTags.Count()).ToString(),
+                    PrimaryPhoto = location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Path.ToString(),
+                    Rating = rating,
+                    Reasons = commonTags.Select(tag => tag.Name).ToList(),
+                    ReviewCount = location.Reviews.Count,
+                    Categories = location.Category,
+                    TotalTimeStay = location.TotalTimeStay
+                };
+
+                resultList.Add(result);
+            }
+
+            var locationListResult = resultList.OrderByDescending(_ => _.Reasons.Count)
+                .Select(model => new Core.ObjectModels.Entities.Helper.TreeViewModels
+                {
+                    Address = model.Address,
+                    Categories = model.Categories,
+                    Id = model.Id,
+                    Location = model.Location,
+                    Percent = model.Percent,
+                    PrimaryPhoto = model.PrimaryPhoto,
+                    Rating = model.Rating,
+                    Reasons = model.Reasons
+                })
+                .ToList();
+
+
+            int userId = (await CurrentUser()).Id;
+            Plan resultPlan = await _planService.CreateSuggestedPlan(
+                new Plan
+                {
+                    Name = viewModel.Name,
+                    AreaId = viewModel.AreaId,
+                    StartDate = viewModel.StartDate,
+                    EndDate = viewModel.EndDate,    
+                    CreatorId = userId,
+                    MemberId = userId
+                },
+                locationListResult);
+
+            return Ok(resultPlan.Id);
+        }
+
+
         [HttpPost]
         [Route("api/Plan/AddSuggestion")]
-        public IHttpActionResult AddSuggestionToPlan(LocationSuggestionViewModels locationSuggestion)
+        public async Task<IHttpActionResult> AddSuggestionToPlan(LocationSuggestionViewModels locationSuggestion)
         {
             try
             {
-                int userId = 1;
+                int userId = (await CurrentUser()).Id;
                 ICollection<Location> locations = new List<Location>();
 
                 foreach (var item in locationSuggestion.LocationIds ?? new List<int>())
@@ -223,15 +233,32 @@
                     else
                         return BadRequest("Location not existed");
                 }
-                bool result = _planService.Create(new LocationSuggestion
+
+                var locationSuggest = new LocationSuggestion
                 {
                     Comment = locationSuggestion.Comment,
-                    Locations = locations,//need to edit
+                    Locations = locations, 
                     UserId = userId,
                     PlanId = locationSuggestion.PlanId,
                     Status = RequestStatus.NotYet,
                     PlanDay = locationSuggestion.PlanDay
-                });
+                };
+                bool result = _planService.Create(locationSuggest);
+
+                var plan = _planService.Find(locationSuggestion.PlanId, _ => _.Creator);
+                var creatorGroup = plan.Creator;
+                var content = new
+                {
+                    to = $"{creatorGroup.MobileToken}",
+                    title = $"{(await CurrentUser()).FullName} muốn thêm { string.Join(", ", locations.Select(_ => _.Name)) } địa điểm vào chuyến đi {plan.Name}",
+                    body = $"{locationSuggestion.Comment}",
+                    data = new
+                    {
+                        type = "LocationSuggestion"
+                    }
+                };
+                var temp = JsonConvert.SerializeObject(content);
+                HttpResponseMessage responseMessage = await client.PostAsJsonAsync("/--/api/v2/push/send", content);
 
                 if (result)
                     return Ok();
@@ -260,8 +287,12 @@
                     IEnumerable<PlanLocation> planLocations = plan.PlanLocations;
                     IEnumerable<Note> planNotes = plan.Notes;
 
-                    int maxLocationIndex = planLocations.OrderByDescending(_ => _.Index).FirstOrDefault() != null ? planLocations.OrderByDescending(_ => _.Index).FirstOrDefault().Index : 0;
-                    int maxPlanIndex = planNotes.OrderByDescending(_ => _.Index).FirstOrDefault() != null ? planNotes.OrderByDescending(_ => _.Index).FirstOrDefault().Index : 0;
+                    int maxLocationIndex = planLocations.OrderByDescending(_ => _.Index).FirstOrDefault() != null
+                        ? planLocations.OrderByDescending(_ => _.Index).FirstOrDefault().Index
+                        : 0;
+                    int maxPlanIndex = planNotes.OrderByDescending(_ => _.Index).FirstOrDefault() != null
+                        ? planNotes.OrderByDescending(_ => _.Index).FirstOrDefault().Index
+                        : 0;
 
                     note.Index = (maxLocationIndex > maxPlanIndex ? maxLocationIndex : maxPlanIndex) + 1;
                 }
@@ -296,6 +327,7 @@
                 {
                     return Ok(tmpPlan.Id);
                 }
+
                 return BadRequest();
             }
             catch (Exception ex)
@@ -305,12 +337,39 @@
                 return InternalServerError(ex);
             }
         }
+
         #endregion
 
         #region Put
         [HttpPut]
+        [Route("api/Plan/VotePlan")]
+        public async Task<IHttpActionResult> VotePlan([FromBody]int planId)
+        {
+            try
+            {
+                User user = await CurrentUser();
+                Plan plan = _planService.Find(planId, _ => _.Voters);
+                if (plan.Voters.Contains(user))
+                {
+                    plan.Voters.Remove(user);
+                } else
+                {
+                    plan.Voters.Add(user);
+                }
+                _planService.Update(plan);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _loggingService.Write(GetType().Name, nameof(VotePlan), ex);
+
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpPut]
         [Route("api/Plan/UpdatePlan")]
-        public IHttpActionResult UpdatePlan(UpdatePlanViewModels viewModels)
+        public IHttpActionResult UpdatePlan(UpdatePlanViewModels viewModels, UpdateIndexPlanLocationAndNote updateIndexPlanLocationAndNote)
         {
             try
             {
@@ -322,6 +381,43 @@
                 plan.Name = viewModels.Name;
 
                 _planService.Update(plan);
+
+                try
+                {
+                    bool result = false;
+
+                    foreach (var item in updateIndexPlanLocationAndNote.PlanLocation)
+                    {
+                        var planLocation = _planService.FindPlanLocation(item.Id);
+                        planLocation.Index = item.Index;
+                        planLocation.PlanDay = item.PlanDay;
+
+                        result = _planService.UpdatePlanLocation(planLocation);
+                    }
+
+                    if (result)
+                    {
+                        foreach (var item in updateIndexPlanLocationAndNote.PlanNotes)
+                        {
+                            var planNote = _planService.FindNote(item.Id);
+                            planNote.Index = item.Index;
+                            planNote.PlanDay = item.PlanDay;
+
+                            result = _planService.UpdatePlanNote(planNote);
+                        }
+                    }
+
+                    if (result)
+                        return Ok();
+                    else
+                        return BadRequest();
+                }
+                catch (Exception ex)
+                {
+                    _loggingService.Write(GetType().Name, nameof(EditIndexPlanLocationAndNote), ex);
+
+                    return InternalServerError(ex);
+                }
                 return Ok();
             }
             catch (Exception ex)
@@ -338,6 +434,11 @@
         {
             try
             {
+                var plan = _planService.Find(planId, _ => _.PlanLocations);
+                if (plan.PlanLocations.Count == 0)
+                {
+                    return BadRequest("Chuyến đi của bạn đang trống");
+                }
                 var temp = _planService.PublicPlan(planId);
 
                 return Ok(temp.Id);
@@ -352,7 +453,8 @@
 
         [HttpPut]
         [Route("api/Plan/EditIndexPlanLocationAndNote")]
-        public IHttpActionResult EditIndexPlanLocationAndNote(UpdateIndexPlanLocationAndNote updateIndexPlanLocationAndNote)
+        public IHttpActionResult EditIndexPlanLocationAndNote(
+            UpdateIndexPlanLocationAndNote updateIndexPlanLocationAndNote)
         {
             try
             {
@@ -378,6 +480,7 @@
                         result = _planService.UpdatePlanNote(planNote);
                     }
                 }
+
                 if (result)
                     return Ok();
                 else
@@ -447,7 +550,6 @@
             {
                 PlanLocation location = ModelBuilder.ConvertToModels(planLocation);
 
-                
 
                 if (!planLocation.Index.HasValue)
                 {
@@ -456,11 +558,15 @@
                     IEnumerable<PlanLocation> planLocations = plan.PlanLocations;
                     IEnumerable<Note> planNotes = plan.Notes;
 
-                    int maxLocationIndex = planLocations.OrderByDescending(_ => _.Index).FirstOrDefault() != null ? planLocations.OrderByDescending(_ => _.Index).FirstOrDefault().Index : 0;
-                    int maxPlanIndex = planNotes.OrderByDescending(_ => _.Index).FirstOrDefault() != null ? planNotes.OrderByDescending(_ => _.Index).FirstOrDefault().Index : 0;
+                    int maxLocationIndex = planLocations.OrderByDescending(_ => _.Index).FirstOrDefault() != null
+                        ? planLocations.OrderByDescending(_ => _.Index).FirstOrDefault().Index
+                        : 0;
+                    int maxPlanIndex = planNotes.OrderByDescending(_ => _.Index).FirstOrDefault() != null
+                        ? planNotes.OrderByDescending(_ => _.Index).FirstOrDefault().Index
+                        : 0;
 
                     location.Index = (maxLocationIndex > maxPlanIndex ? maxLocationIndex : maxPlanIndex) + 1;
-                }//end if identity max index
+                } //end if identity max index
 
                 bool result = _planService.AddLocationToPlan(location);
 
@@ -519,9 +625,11 @@
                 return InternalServerError(ex);
             }
         }
+
         #endregion
 
         #region Delete
+
         [HttpDelete]
         [Route("api/Plan/DeleteNote")]
         public IHttpActionResult RemoveNote(int noteId)
@@ -585,6 +693,7 @@
                         return Unauthorized();
                     }
                 }
+
                 return BadRequest();
             }
             catch (Exception ex)
@@ -594,8 +703,7 @@
                 return InternalServerError(ex);
             }
         }
-        #endregion
 
-        
+        #endregion
     }
 }

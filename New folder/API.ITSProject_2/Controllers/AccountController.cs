@@ -1,23 +1,24 @@
-﻿namespace API.ITSProject.Controllers
+﻿namespace API.ITSProject_2.Controllers
 {
     using System;
-    using System.IO;
-    using System.Web.Http;
     using System.Threading.Tasks;
+    using System.Web.Http;
+    using Microsoft.AspNet.Identity;
     using Core.ObjectModels.Identity;
-    using Core.ApplicationService.Business.MailService;
-    using Core.ApplicationService.Business.EntityService;
     using Core.ApplicationService.Business.IdentityService;
     using Core.ApplicationService.Business.LogService;
     using Core.ApplicationService.Business.PagingService;
-    using API.ITSProject.Resource;
-    using API.ITSProject.ViewModels;
-    using Microsoft.AspNet.Identity;
-    using API.ITSProject.Provider.ExternalLogin;
-    using System.Security.Claims;
+    using API.ITSProject_2.Resource;
+    using API.ITSProject_2.ViewModels;
+    using API.ITSProject_2.Provider.ExternalLogin;
     using System.Net.Http;
-    using System.Linq;
+    using System.Security.Claims;
     using Infrastructure.Identity.Models;
+    using System.Linq;
+    using Core.ApplicationService.Business.MailService;
+    using Microsoft.Owin.Security.DataProtection;
+    using System.IO;
+    using Core.ApplicationService.Business.EntityService;
 
     public class AccountController : _BaseController
     {
@@ -30,62 +31,62 @@
         }
 
         #region Helper
-        private string ValidateClientAndRedirectUri(HttpRequestMessage request, ref string redirectUriOutput)
-        {
+        //private string ValidateClientAndRedirectUri(HttpRequestMessage request, ref string redirectUriOutput)
+        //{
 
-            Uri redirectUri;
+        //    Uri redirectUri;
 
-            var redirectUriString = GetQueryString(Request, "redirect_uri");
+        //    var redirectUriString = GetQueryString(Request, "redirect_uri");
 
-            if (string.IsNullOrWhiteSpace(redirectUriString))
-            {
-                return "redirect_uri is required";
-            }
+        //    if (string.IsNullOrWhiteSpace(redirectUriString))
+        //    {
+        //        return "redirect_uri is required";
+        //    }
 
-            bool validUri = Uri.TryCreate(redirectUriString, UriKind.Absolute, out redirectUri);
+        //    bool validUri = Uri.TryCreate(redirectUriString, UriKind.Absolute, out redirectUri);
 
-            if (!validUri)
-            {
-                return "redirect_uri is invalid";
-            }
+        //    if (!validUri)
+        //    {
+        //        return "redirect_uri is invalid";
+        //    }
 
-            var clientId = GetQueryString(Request, "client_id");
+        //    var clientId = GetQueryString(Request, "client_id");
 
-            if (string.IsNullOrWhiteSpace(clientId))
-            {
-                return "client_Id is required";
-            }
+        //    if (string.IsNullOrWhiteSpace(clientId))
+        //    {
+        //        return "client_Id is required";
+        //    }
 
-            var client = _identityService.FindClient(clientId) as Client;
+        //    //var client =  (.FindAccount(clientId).Data) as Account;
 
-            if (client == null)
-            {
-                return string.Format("client_id '{0}' is not registered in the system.", clientId);
-            }
+        //    //if (client == null)
+        //    //{
+        //    //    return string.Format("Client_id '{0}' is not registered in the system.", clientId);
+        //    //}
 
-            if (!string.Equals(client.AllowedOrigin, redirectUri.GetLeftPart(UriPartial.Authority), StringComparison.OrdinalIgnoreCase))
-            {
-                return string.Format("the given url is not allowed by client_id '{0}' configuration.", clientId);
-            }
+        //    //if (!string.Equals(client.AllowedOrigin, redirectUri.GetLeftPart(UriPartial.Authority), StringComparison.OrdinalIgnoreCase))
+        //    //{
+        //    //    return string.Format("The given URL is not allowed by Client_id '{0}' configuration.", clientId);
+        //    //}
 
-            redirectUriOutput = redirectUri.AbsoluteUri;
+        //    redirectUriOutput = redirectUri.AbsoluteUri;
 
-            return string.Empty;
+        //    return string.Empty;
 
-        }
+        //}
 
-        private string GetQueryString(HttpRequestMessage request, string key)
-        {
-            var queryStrings = request.GetQueryNameValuePairs();
+        //private string GetQueryString(HttpRequestMessage request, string key)
+        //{
+        //    var queryStrings = request.GetQueryNameValuePairs();
 
-            if (queryStrings == null) return null;
+        //    if (queryStrings == null) return null;
 
-            var match = queryStrings.FirstOrDefault(keyValue => string.Compare(keyValue.Key, key, true) == 0);
+        //    var match = queryStrings.FirstOrDefault(keyValue => string.Compare(keyValue.Key, key, true) == 0);
 
-            if (string.IsNullOrEmpty(match.Value)) return null;
+        //    if (string.IsNullOrEmpty(match.Value)) return null;
 
-            return match.Value;
-        }
+        //    return match.Value;
+        //}
         #endregion
 
         [HttpPost]
@@ -125,58 +126,58 @@
             }
         }
 
-        [OverrideAuthentication]
-        [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
-        [AllowAnonymous]
-        [Route("ExternalLogin", Name = "ExternalLogin")]
-        public async Task<IHttpActionResult> GetExternalLogin(string provider, string error = null)
-        {
-            string redirectUri = string.Empty;
+        //[OverrideAuthentication]
+        //[HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
+        //[AllowAnonymous]
+        //[Route("ExternalLogin", Name = "ExternalLogin")]
+        //public async Task<IHttpActionResult> GetExternalLogin(string provider, string error = null)
+        //{
+        //    string redirectUri = string.Empty;
 
-            if (error != null)
-            {
-                return BadRequest(Uri.EscapeDataString(error));
-            }
+        //    if (error != null)
+        //    {
+        //        return BadRequest(Uri.EscapeDataString(error));
+        //    }
 
-            if (!User.Identity.IsAuthenticated)
-            {
-                return new _ExternalOAuthServer(provider, this.Request);
-            }
+        //    if (!User.Identity.IsAuthenticated)
+        //    {
+        //        return new _ExternalOAuthServer(provider, this.Request);
+        //    }
 
-            var redirectUriValidationResult = ValidateClientAndRedirectUri(this.Request, ref redirectUri);
+        //    var redirectUriValidationResult = ValidateClientAndRedirectUri(this.Request, ref redirectUri);
 
-            if (!string.IsNullOrWhiteSpace(redirectUriValidationResult))
-            {
-                return BadRequest(redirectUriValidationResult);
-            }
+        //    if (!string.IsNullOrWhiteSpace(redirectUriValidationResult))
+        //    {
+        //        return BadRequest(redirectUriValidationResult);
+        //    }
 
-            ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
+        //    ExternalLoginData externalLogin = ExternalLoginData.FromIdentity(User.Identity as ClaimsIdentity);
 
-            if (externalLogin == null)
-            {
-                return InternalServerError();
-            }
+        //    if (externalLogin == null)
+        //    {
+        //        return InternalServerError();
+        //    }
 
-            if (externalLogin.LoginProvider != provider)
-            {
-                Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-                return new _ExternalOAuthServer(provider, this.Request);
-            }
+        //    if (externalLogin.LoginProvider != provider)
+        //    {
+        //        Authentication.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+        //        return new _ExternalOAuthServer(provider, this.Request);
+        //    }
 
-            var user = await _identityService.LoginExternalAsync(externalLogin.LoginProvider, externalLogin.ProviderKey);
+        //    var user = await _identityService.LoginExternalAsync(externalLogin.LoginProvider, externalLogin.ProviderKey);
 
-            bool hasRegistered = user != null;
+        //    bool hasRegistered = user != null;
 
-            redirectUri = string.Format("{0}#external_access_token={1}&provider={2}&haslocalaccount={3}&external_user_name={4}",
-                                            redirectUri,
-                                            externalLogin.ExternalAccessToken,
-                                            externalLogin.LoginProvider,
-                                            hasRegistered.ToString(),
-                                            externalLogin.UserName);
+        //    redirectUri = string.Format("{0}#external_access_token={1}&provider={2}&haslocalaccount={3}&external_user_name={4}",
+        //                                    redirectUri,
+        //                                    externalLogin.ExternalAccessToken,
+        //                                    externalLogin.LoginProvider,
+        //                                    hasRegistered.ToString(),
+        //                                    externalLogin.UserName);
 
-            return Redirect(redirectUri);
-        }
+        //    return Redirect(redirectUri);
 
+        //}
         public async Task<IHttpActionResult> Register(RegisterViewModels register)
         {
             try
@@ -211,40 +212,40 @@
             }
         }
 
-        private class ExternalLoginData
-        {
-            public string LoginProvider { get; set; }
-            public string ProviderKey { get; set; }
-            public string UserName { get; set; }
-            public string ExternalAccessToken { get; set; }
+        //private class ExternalLoginData
+        //{
+        //    public string LoginProvider { get; set; }
+        //    public string ProviderKey { get; set; }
+        //    public string UserName { get; set; }
+        //    public string ExternalAccessToken { get; set; }
 
-            public static ExternalLoginData FromIdentity(ClaimsIdentity identity)
-            {
-                if (identity == null)
-                {
-                    return null;
-                }
+        //    public static ExternalLoginData FromIdentity(ClaimsIdentity identity)
+        //    {
+        //        if (identity == null)
+        //        {
+        //            return null;
+        //        }
 
-                Claim providerKeyClaim = identity.FindFirst(ClaimTypes.NameIdentifier);
+        //        Claim providerKeyClaim = identity.FindFirst(ClaimTypes.NameIdentifier);
 
-                if (providerKeyClaim == null || String.IsNullOrEmpty(providerKeyClaim.Issuer) || String.IsNullOrEmpty(providerKeyClaim.Value))
-                {
-                    return null;
-                }
+        //        if (providerKeyClaim == null || String.IsNullOrEmpty(providerKeyClaim.Issuer) || String.IsNullOrEmpty(providerKeyClaim.Value))
+        //        {
+        //            return null;
+        //        }
 
-                if (providerKeyClaim.Issuer == ClaimsIdentity.DefaultIssuer)
-                {
-                    return null;
-                }
+        //        if (providerKeyClaim.Issuer == ClaimsIdentity.DefaultIssuer)
+        //        {
+        //            return null;
+        //        }
 
-                return new ExternalLoginData
-                {
-                    LoginProvider = providerKeyClaim.Issuer,
-                    ProviderKey = providerKeyClaim.Value,
-                    UserName = identity.FindFirstValue(ClaimTypes.Name),
-                    ExternalAccessToken = identity.FindFirstValue("ExternalAccessToken"),
-                };
-            }
-        }
+        //        return new ExternalLoginData
+        //        {
+        //            LoginProvider = providerKeyClaim.Issuer,
+        //            ProviderKey = providerKeyClaim.Value,
+        //            UserName = identity.FindFirstValue(ClaimTypes.Name),
+        //            ExternalAccessToken = identity.FindFirstValue("ExternalAccessToken"),
+        //        };
+        //    }
+        //}
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace API.ITSProject.Controllers
+﻿namespace API.ITSProject_2.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -11,18 +11,20 @@
     using Core.ApplicationService.Business.IdentityService;
     using Core.ApplicationService.Business.LogService;
     using Core.ApplicationService.Business.PagingService;
-    using API.ITSProject.ViewModels;
+    using API.ITSProject_2.ViewModels;
 
     public class QuestionController : _BaseController
     {
         private readonly IQuestionService _questionService;
+        private readonly IAreaService _areaService;
         private readonly ITagService _tagService;
 
-        public QuestionController(ILoggingService loggingService, IPagingService paggingService, 
+        public QuestionController(ILoggingService loggingService, IPagingService paggingService, IAreaService areaService,
             IIdentityService identityService, IQuestionService questionService, ITagService tagService, IPhotoService photoService) : base(loggingService, paggingService, identityService, photoService)
         {
             this._questionService = questionService;
             this._tagService = tagService;
+            _areaService = areaService;
         }
 
         #region Get
@@ -34,10 +36,28 @@
         }
 
         [HttpGet]
+        [Route("api/Question/Detail")]
+        public IHttpActionResult GetQuestionDetails(int id)
+        {
+            try
+            {
+                var quest = _questionService.Find(id, _ => _.Answers.Select(__ => __.Tags));
+                
+                return Ok(ModelBuilder.ConvertToQuestionDetailsViewModels(quest));
+            }
+            catch (Exception ex)
+            {
+                _loggingService.Write(GetType().Name, nameof(GetQuestionDetails), ex);
+
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpGet]
         [Route("api/Question/QuestionsByArea")]
         public IHttpActionResult GetQuestionByArea(int areaId)
         {
-            return Ok(ModelBuilder.ConvertToQuestionDetailsViewModels(_questionService.GetQuestionByArea(areaId, _ => _.Answers)));
+            return Ok(ModelBuilder.ConvertToQuestionDetailsViewModels(_questionService.GetQuestionByArea(areaId, _ => _.Answers.Select(__ => __.Tags))));
         }
 
         [HttpGet]
@@ -175,6 +195,50 @@
                 _loggingService.Write(GetType().Name, nameof(Delete), ex);
 
                 return InternalServerError(ex);
+            }
+        }
+        #endregion
+
+        #region Put
+        [HttpPut]
+        public IHttpActionResult EditQuestion(CreateQuestionViewModels data,[FromBody] int id)
+        {
+
+            if (ModelState.IsValid)
+            {
+                var baseQuestion = _questionService.Find(id, _ => _.Areas);
+
+                var area = baseQuestion.Areas.Select(_ => _areaService.Find(_.Id, __ => __.Questions));
+                Question question = ModelBuilder.ConvertToModels(data);
+                ICollection<Answer> answers = new List<Answer>();
+
+                if (data.Answers != null)
+                {
+                    data.Answers.ToList().ForEach(_ => {
+                        ICollection<Tag> tags = new List<Tag>();
+                        _.Tags.ToList().ForEach(__ =>
+                        {
+                            tags.Add(_tagService.Find(__));
+                        });
+
+                        answers.Add(new Answer
+                        {
+                            Content = _.Answer,
+                            Tags = tags
+                        });
+                    });
+                }
+                _questionService.Create(question, answers);
+                foreach (var item in area)
+                {
+                    item.Questions.Add(question);
+                    _areaService.Update(item);
+                }
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
             }
         }
         #endregion

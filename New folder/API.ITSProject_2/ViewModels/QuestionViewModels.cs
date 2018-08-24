@@ -1,4 +1,4 @@
-﻿namespace API.ITSProject.ViewModels
+﻿namespace API.ITSProject_2.ViewModels
 {
     using System.Collections.Generic;
     using System.Runtime.Serialization;
@@ -27,6 +27,11 @@
 
         [DataMember]
         public IEnumerable<AnswerViewModels> Answer { get; set; }
+
+        [DataMember]
+        public string Category { get; set; }
+
+        public int Id { get; set; }
     }
 
     [DataContract(Name = "Answer")]
@@ -37,6 +42,9 @@
 
         [DataMember]
         public string Content { get; set; }
+
+        [DataMember]
+        public (int id, string tag)[] Tags { get; set; }
     }
 
     [DataContract(Name = "Question")]

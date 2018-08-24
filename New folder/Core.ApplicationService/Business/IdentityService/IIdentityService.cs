@@ -8,6 +8,8 @@
 
     public interface IIdentityService
     {
+        Task<_IdentityData> AddLoginAsync(string userId, string a, string b);
+
         Task<User> Find(string accountId);
 
         Task<_IdentityData> FindAccount(string accountId);
@@ -39,5 +41,9 @@
         Task<bool> ChangePassword(string username, string newPassword);
 
         void SaveChanges();
+
+        Task<_IdentityData> FindAsync(string provider, string userId);
+
+        Task<_IdentityData> CreateAsync(string UserName);
     }
 }

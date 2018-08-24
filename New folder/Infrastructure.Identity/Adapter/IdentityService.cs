@@ -253,7 +253,7 @@
         public async Task<string> GetRole(string username)
         {
             Account identity = _dbContext.Set<Account>().Include(_ => _.Roles).FirstOrDefault(_ => _.UserName == username);
-            
+
             if (identity != null)
             {
                 string roleId = identity.Roles.FirstOrDefault().RoleId;
@@ -261,6 +261,31 @@
             }
             else
                 return null;
+        }
+
+        public async Task<_IdentityData> FindAsync(string provider, string userId)
+        {
+            _IdentityData data = new _IdentityData();
+            data.Data = await _accountService.FindAsync(new UserLoginInfo(provider, userId)) as Account;
+            return data;
+        }
+
+        public async Task<_IdentityData> CreateAsync(string UserName)
+            => (new _IdentityData()
+            {
+                Data = await _accountService.CreateAsync(new Account
+                {
+                    UserName = UserName
+                })
+            });
+
+        public async Task<_IdentityData> AddLoginAsync(string userId, string a, string b)
+        {
+            UserLoginInfo login = new UserLoginInfo(a, b);
+            _IdentityData result = new _IdentityData();
+            result.Data = await _accountService.AddLoginAsync(userId, login);
+
+            return result;
         }
         #endregion
     }

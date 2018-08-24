@@ -10,12 +10,12 @@ namespace API.ITSProject_2
             var thisAssembly = typeof(SwaggerConfig).Assembly;
 
             config.EnableSwagger(c =>
-            {
-                c.SingleApiVersion("v1", "API.ITSProject");
-            })
+                    {
+                        c.SingleApiVersion("v1", "API.ITSProject_2");
+                    })
                 .EnableSwaggerUi(c =>
-                {
-                });
+                    {
+                    });
         }
     }
 }
