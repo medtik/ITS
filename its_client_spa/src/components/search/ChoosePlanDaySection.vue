@@ -56,6 +56,9 @@
             </v-icon>
             &nbsp; Hoàn tất
           </v-btn>
+
+        </v-layout>
+        <v-layout>
           <v-btn v-if="!selectingMode"
                  color="light-blue accent"
                  @click="onAddToPlan">
@@ -65,7 +68,7 @@
             &nbsp; Thêm vào chuyến đi
           </v-btn>
         </v-layout>
-        <v-layout v-if="!isOwnSelectedPlan">
+        <v-layout v-if="!isOwnSelectedPlan && selectingMode">
           <v-btn color="primary"
                  :disabled="!isConfirmable"
                  :loading="sendRequestConfirmLoading"

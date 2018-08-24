@@ -108,7 +108,7 @@
           const startDate = moment(this.input.startDate);
           const endDate = moment(this.input.endDate);
           if (endDate.isBefore(startDate, 'day')) {
-            endDateError = "Ngày kết thức phải sau ngày bắt đầu";
+            endDateError = "Ngày kết thúc phải sau ngày bắt đầu";
           }
         }
 
@@ -120,7 +120,7 @@
 
         return nameError == undefined &&
           startDateError == undefined &&
-          endDateError == undefined
+          endDateError == undefined;
       },
     }
   }

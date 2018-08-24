@@ -12,14 +12,14 @@ import * as VueGoogleMaps from 'vue2-google-maps'
 import 'vuetify/dist/vuetify.min.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 import {locates} from "./common/util";
+import moment from "moment";
 
+moment.locale('vn');
 
 Raven
   .config('https://044c78991b114aebbfad9a13b6d85a63@sentry.io/1256786')
   .addPlugin(RavenVue, Vue)
   .install();
-
-
 
 Vue.use(Vuetify, {
   iconfont: 'fa'
@@ -30,7 +30,6 @@ Vue.use(VueGoogleMaps, {
     libraries: 'places, directions',
   }
 });
-
 Vue.use(Vuetify,{
   lang: {
     locales: locates,
@@ -42,7 +41,6 @@ const localToken = store.getters['authenticate/getlocalToken'];
 if (localToken) {
   store.commit('authenticate/setToken', {token: localToken})
 }
-
 
 let bridgeTriedCount = 0;
 function onBridgeReady(cb) {
@@ -97,6 +95,37 @@ RNMsgChannel.on('json', json => {
   }
 });
 
+window.fbAsyncInit = function() {
+  FB.init({
+    appId            : '323220695095906',
+    autoLogAppEvents : true,
+    xfbml            : true,
+    version          : 'v3.1'
+  });
+  FB.getLoginStatus(function(response) {
+    Raven.captureMessage("FB login status - init", {
+      extra:{
+        response
+      }
+    });
+    store.commit('authenticate/setFacebookInstance',{
+      instance: FB
+    });
+    store.commit('authenticate/setFacebookAuthentication', {
+      status: response
+    })
+  });
+};
+
+(function(d, s, id){
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "https://connect.facebook.net/en_US/sdk.js";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
@@ -107,3 +136,5 @@ new Vue({
   components: {App},
   template: '<App/>'
 });
+
+
