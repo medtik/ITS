@@ -78,13 +78,13 @@
                     <template v-if="item.status == 0">
                       <v-flex pa-2>
                         <v-btn color="success" icon flat
-                               @click="onAccept(item.id)">
+                               @click="onAcceptLocationSuggestion(item.id)">
                           <v-icon> fas fa-check</v-icon>
                         </v-btn>
                       </v-flex>
                       <v-flex pa-2>
                         <v-btn color=secondary icon flat
-                               @click="onDenyGroupInvitation(item.id)">
+                               @click="onDenyLocationSuggestion(item.id)">
                           <v-icon>fas fa-times</v-icon>
                         </v-btn>
                       </v-flex>
