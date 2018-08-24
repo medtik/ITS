@@ -15,8 +15,22 @@ export default {
     }
   },
   getters: {
-    notifications(state) {
-      const groupInvitation = _.map(state.groupInvitation, (invitation) => {
+    locationSuggestions(state){
+      return _.map(state.locationSuggestion, (suggestion) => {
+        return {
+          id: suggestion.id,
+          key: "LocationSuggestion_" + suggestion.id,
+          status: suggestion.status,
+          statusText: formatter.getStatusText(suggestion.status),
+          title: `Yêu cầu thêm chuyến đi`,
+          message: suggestion.comment,
+          type: "LocationSuggestion",
+          data: suggestion
+        }
+      });
+    },
+    groupInvitations(state){
+      return _.map(state.groupInvitation, (invitation) => {
         return {
           id: invitation.id,
           key: "GroupInvitation_" + invitation.id,
@@ -28,7 +42,6 @@ export default {
           data: invitation
         }
       });
-      return groupInvitation
     },
     notificationsLoading(state) {
       return state.loading.groupInvitation && state.loading.locationSuggestion;
@@ -101,6 +114,7 @@ export default {
       context.commit('setLoading', {
         loading: {locationSuggestion: true}
       });
+
       return new Promise((resolve, reject) => {
         axiosInstance.get('api/Group/GetLocationSuggestions')
           .then((value) => {

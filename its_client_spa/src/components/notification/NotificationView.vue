@@ -9,12 +9,12 @@
     </v-container>
     <v-container v-else fluid class="white">
       <v-layout row justify-center>
-        <v-flex v-if="notifications" lg6 xs12 pa-1>
+        <v-flex v-if="groupInvitation" lg6 xs12 pa-1>
           <div class="title">
             Lời mời vào nhóm
           </div>
           <v-list two-line>
-            <v-list-tile v-for="item of notifications" :key="item.key">
+            <v-list-tile v-for="item of groupInvitation" :key="item.key">
               <v-list-tile-content>
                 <v-list-tile-title>
                   {{item.title}}&nbsp;<a>{{item.data.groupName}}</a>
@@ -62,7 +62,47 @@
             Đề nghị thêm địa điểm
           </div>
           <v-list>
-
+            <v-list two-line>
+              <v-list-tile v-for="item of locationSuggestions" :key="item.key">
+                <v-list-tile-content>
+                  <v-list-tile-title>
+                    <!--{{item.title}}&nbsp;<a>{{item.data.groupName}}</a>-->
+                    {{item.title}}
+                  </v-list-tile-title>
+                  <v-list-tile-sub-title>
+                    {{item.message}}
+                  </v-list-tile-sub-title>
+                </v-list-tile-content>
+                <v-list-tile-action>
+                  <v-layout row justify-center>
+                    <template v-if="item.status == 0">
+                      <v-flex pa-2>
+                        <v-btn color="success" icon flat
+                               @click="onAccept(item.id)">
+                          <v-icon> fas fa-check</v-icon>
+                        </v-btn>
+                      </v-flex>
+                      <v-flex pa-2>
+                        <v-btn color=secondary icon flat
+                               @click="onDenyGroupInvitation(item.id)">
+                          <v-icon>fas fa-times</v-icon>
+                        </v-btn>
+                      </v-flex>
+                    </template>
+                    <template v-else-if="item.status == 1">
+                      <v-chip color="green" class="white--text">
+                        {{item.statusText}}
+                      </v-chip>
+                    </template>
+                    <template v-else-if="item.status == 2">
+                      <v-chip color="red" class="white--text">
+                        {{item.statusText}}
+                      </v-chip>
+                    </template>
+                  </v-layout>
+                </v-list-tile-action>
+              </v-list-tile>
+            </v-list>
           </v-list>
         </v-flex>
       </v-layout>
@@ -84,7 +124,8 @@
     },
     computed: {
       ...mapGetters('request', {
-        notifications: 'notifications',
+        groupInvitation: 'groupInvitations',
+        locationSuggestions: 'locationSuggestions',
         pageLoading: 'notificationsLoading'
       })
     },
@@ -101,6 +142,21 @@
       },
       onDenyGroupInvitation(id) {
         this.$store.commit('request/changeStatusGroupInvitation', {
+          id,
+          status: 2
+        });
+        this.$store.dispatch('request/denyGroupInvitation', {id});
+      },
+
+      onAcceptLocationSuggestion(id) {
+        this.$store.commit('request/changeStatusLocationSuggestion', {
+          id,
+          status: 1
+        });
+        this.$store.dispatch('request/acceptGroupInvitation', {id});
+      },
+      onDenyLocationSuggestion(id) {
+        this.$store.commit('request/changeStatusLocationSuggestion', {
           id,
           status: 2
         });

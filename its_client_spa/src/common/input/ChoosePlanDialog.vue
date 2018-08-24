@@ -2,7 +2,7 @@
   <v-dialog v-model="dialog" max-width="450" persistent>
     <v-card>
       <v-layout column>
-        <v-flex>
+        <v-flex v-if="groupedPlans && groupedPlans.length > 0">
           <!--CONTENT-->
           <v-list subheader avatar
                   v-for="plans in groupedPlans"
@@ -33,6 +33,10 @@
               </v-list-tile-action>
             </v-list-tile>
           </v-list>
+        </v-flex>
+        <v-flex v-else
+                class="title">
+          Bạn chưa có chuyến đi nào
         </v-flex>
         <v-divider/>
         <v-flex>
@@ -73,14 +77,14 @@
         groupedPlans: 'myVisiblePlans',
         loading: 'myVisiblePlansLoading'
       }),
-      ...mapGetters('authenticate',{
+      ...mapGetters('authenticate', {
         isLoggedIn: "isLoggedIn"
       })
     },
-    mounted(){
-        if(this.isLoggedIn){
-          this.$store.dispatch('plan/fetchVisiblePlans');
-        }
+    mounted() {
+      if (this.isLoggedIn) {
+        this.$store.dispatch('plan/fetchVisiblePlans');
+      }
     },
     methods: {
       onSelect() {
