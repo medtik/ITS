@@ -50,6 +50,7 @@
               @create="onCreatePlanClick"
               @sendRequest="messageInputDialog.dialog = true"
               @addLocations="onAddLocationClick"
+              @selectingMode="onSelectingMode"
             ></ChoosePlanDaySection>
           </v-flex>
           <v-flex v-if="!isLoggedIn"

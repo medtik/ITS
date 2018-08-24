@@ -14,7 +14,7 @@ import '@fortawesome/fontawesome-free/css/all.css'
 import {locates} from "./common/util";
 import moment from "moment";
 
-moment.locale('vn');
+moment.locale('vi');
 
 Raven
   .config('https://044c78991b114aebbfad9a13b6d85a63@sentry.io/1256786')
