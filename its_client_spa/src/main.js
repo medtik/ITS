@@ -30,7 +30,7 @@ Vue.use(VueGoogleMaps, {
     libraries: 'places, directions',
   }
 });
-Vue.use(Vuetify,{
+Vue.use(Vuetify, {
   lang: {
     locales: locates,
     current: 'vn'
@@ -43,10 +43,11 @@ if (localToken) {
 }
 
 let bridgeTriedCount = 0;
+
 function onBridgeReady(cb) {
   if (window.postMessage.length !== 1) {
     bridgeTriedCount++;
-    if(bridgeTriedCount < 6){
+    if (bridgeTriedCount < 6) {
       setTimeout(function () {
         onBridgeReady(cb)
       }, 500);
@@ -95,20 +96,23 @@ RNMsgChannel.on('json', json => {
   }
 });
 
-window.fbAsyncInit = function() {
+window.fbAsyncInit = function () {
   FB.init({
-    appId            : '323220695095906',
-    autoLogAppEvents : true,
-    xfbml            : true,
-    version          : 'v3.1'
+    appId: '266318357470729',
+    autoLogAppEvents: true,
+    status: false, // Check login status
+    cookie: true, // Enable cookies to allow the server to access the session
+    xfbml: true,  // Parse XFBML
+    oauth: true,
+    version: 'v3.1'
   });
-  FB.getLoginStatus(function(response) {
+  FB.getLoginStatus(function (response) {
     Raven.captureMessage("FB login status - init", {
-      extra:{
+      extra: {
         response
       }
     });
-    store.commit('authenticate/setFacebookInstance',{
+    store.commit('authenticate/setFacebookInstance', {
       instance: FB
     });
     store.commit('authenticate/setFacebookAuthentication', {
@@ -117,10 +121,13 @@ window.fbAsyncInit = function() {
   });
 };
 
-(function(d, s, id){
+(function (d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id;
+  if (d.getElementById(id)) {
+    return;
+  }
+  js = d.createElement(s);
+  js.id = id;
   js.src = "https://connect.facebook.net/en_US/sdk.js";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));

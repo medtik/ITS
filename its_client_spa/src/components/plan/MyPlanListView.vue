@@ -65,8 +65,8 @@
       }),
       myPlans(){
         return _.filter(this.$store.getters['plan/myPlans'],(plan) => {
-          // return plan.isPlanOwner && (plan.groupName == undefined || plan.groupName == "");
-          return plan.groupName == undefined || plan.groupName == "";
+          return plan.isPlanOwner && (plan.groupName == undefined || plan.groupName == "");
+          // return plan.groupName == undefined || plan.groupName == "";
         })
       }
     },

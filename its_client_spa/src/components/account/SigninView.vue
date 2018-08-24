@@ -202,14 +202,14 @@
       },
       signinFacebook() {
         this.$store.dispatch('authenticate/signinFacebook')
-          .then(value => {
-            this.$router.push({
-              name: 'Home'
-            })
-          })
-          .catch(reason => {
-            this.error = {...reason};
-          })
+          // .then(value => {
+          //   this.$router.push({
+          //     name: 'Home'
+          //   })
+          // })
+          // .catch(reason => {
+          //   this.error = {...reason};
+          // })
       },
       onRecoverClick() {
         this.emailInputDialog = false;
