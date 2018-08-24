@@ -78,6 +78,9 @@ export default {
     setMyVisiblePlans(state, payload) {
       state.myVisiblePlans = payload.plans
     },
+    vote(state){
+      state.detailedPlan.isVoted = !state.detailedPlan.isVoted;
+    },
     deleteMyPlan(state, payload) {
       const {
         id
@@ -239,6 +242,16 @@ export default {
             Raven.captureException(reason);
           })
       })
+    },
+    vote(context, payload){
+      // put /api/Plan/VotePlan
+      const {
+        id
+      } = payload;
+
+      axiosInstance.put('api/Plan/VotePlan',{
+        planId: id
+      });
     },
     publishPlan(context, payload) {
       // put /api/Plan/PublicPlan

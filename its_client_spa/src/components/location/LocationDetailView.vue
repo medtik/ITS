@@ -19,7 +19,7 @@
             </v-chip>
           </div>
           <div v-if="todayHours">
-            <span>Hôm nay: Mở từ {{todayHours.from}} đến {{todayHours.to}} | </span>
+            <span>Hôm nay:{{todayHours.displayString}}</span>
 
             <span class="subheading font-weight-bold"
                   v-if="todayHours.isOpen"
@@ -85,7 +85,7 @@
         <v-flex my-2 mx-2>
           <v-layout align-baseline>
             <v-flex class="title">Bình luận</v-flex>
-            <v-btn color="success" :to="{name:'ReviewWrite', params:{id: location.id}}">
+            <v-btn color="success" :to="{name:'ReviewWrite', query:{id: location.id, name: location.name}}">
               <v-icon>rate_review</v-icon>
               &nbsp &nbsp Bình luận
             </v-btn>
@@ -207,6 +207,7 @@
           .map(businessHour => {
             const fromTime = moment(businessHour.from, "HH:mm");
             const toTime = moment(businessHour.to, "HH:mm");
+            const zeroTime = moment("00:00", "HH:mm");
             let day;
             switch (businessHour.day) {
               case 'day1':
@@ -249,10 +250,16 @@
               day
             };
 
-            formattedBusinessHour.isNow = now.isBetween(
-              formattedBusinessHour.from,
-              formattedBusinessHour.to,
-            );
+            if(from.isSame(zeroTime,"hour") && to.isSame(zeroTime,"hour")){
+              formattedBusinessHour.isNow = true;
+              formattedBusinessHour.displayString = `Mở cả ngày`;
+            }else{
+              formattedBusinessHour.isNow = now.isBetween(
+                formattedBusinessHour.from,
+                formattedBusinessHour.to,
+              );
+              formattedBusinessHour.displayString = `Mở từ ${from.format('LT')} đến ${to.format('LT')}`;
+            }
 
             return formattedBusinessHour;
           })
@@ -265,7 +272,8 @@
         return {
           from: todayHour.from.format('HH:mm'),
           to: todayHour.to.format('HH:mm'),
-          isOpen: todayHour.isNow
+          isOpen: todayHour.isNow,
+          displayString: todayHour.displayString
         }
       }
     },

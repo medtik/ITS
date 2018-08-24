@@ -12,7 +12,7 @@ export default {
   data() {
     return {
       locationsCheckboxValues: [],
-
+      selectingMode: false,
       messageInputDialog: {
         dialog: false,
         messageInput: '',
@@ -34,7 +34,7 @@ export default {
       isLoggedIn: 'isLoggedIn'
     }),
     isSelectingMode() {
-      return !!this.choosePlanSection.selectedPlanId
+      return this.selectingMode;
     },
     selectedLocationCount() {
       return this.locationsCheckboxValues.length;
@@ -84,7 +84,7 @@ export default {
         planDay: this.choosePlanSection.selectedPlanDay,
         message: this.messageInputDialog.messageInput
       };
-
+      this.messageInputDialog.dialog = false;
       this.$store.dispatch('request/createLocationSuggestion', locationRequest);
       this.locationsCheckboxValues = [];
     },
@@ -120,6 +120,9 @@ export default {
       this.$router.push({
         name: "PlanCreate"
       })
+    },
+    onSelectingMode(){
+      this.selectingMode = true
     }
   }
 }

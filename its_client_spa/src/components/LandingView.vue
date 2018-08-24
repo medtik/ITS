@@ -84,7 +84,7 @@
       </v-layout>
     </section>
 
-    <section>
+    <section v-if="!featuredPlansLoading && !featuredAreasLoading">
       <!--FEATURED-->
       <v-container grid-list-xl>
         <v-layout column my-5>
@@ -103,7 +103,7 @@
               </v-layout>
             </div>
           </v-flex>
-          <v-flex justify-start mt-5 v-if="featuredPlans">
+          <v-flex justify-start mt-5 v-if="featuredPlans && featuredPlans.length > 0">
             <div class="title">Các chuyến đi nổi bật</div>
             <div style="overflow-x: auto;">
               <v-layout row my-1>
@@ -116,6 +116,11 @@
             </div>
           </v-flex>
         </v-layout>
+      </v-container>
+    </section>
+    <section>
+      <v-container class="text-xs-center" v-if="featuredPlansLoading || featuredAreasLoading">
+        <v-progress-circular indeterminate size="40" color="primary"></v-progress-circular>
       </v-container>
     </section>
     <section>

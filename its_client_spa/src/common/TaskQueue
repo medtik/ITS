@@ -1,0 +1,49 @@
+area detail
+area loading for landing page
+add link to title of location full width
+add location edit's detail task
+work on review location
+add category to location edit/create
+location suggestion not send extra comment to back
+
+-----
+00:00 -> 00:00 ở location detail
+Tạo chuyến đi tự động chuyển vào trang smart search result
+Edit plan
+validate business hours
+Add "from time - to time" to location in plan detail
+Add travel time to "cách đi"
+
+Edit location
+work on location suggestion
+VotePublic plan
+
+work on add photo location
+
+Edit account (client)
+add description to location detail view
+
+Working on location map
+working on nearby locations of location
+working on nearby locations of user
+  start in landing page
+
+working on auto check location of plan (check on multiple plan)
+  by send current coor and previous location | server response with current location
+
+work on change request
+
+add description into location detail
+No parallax for location detail
+
+Edit, create area
+List, create,edit account
+edit question
+
+"Thêm vào chuyến đi" in context search some time show unexpectedly
+myvisible plan in plan context should filter by chosen area
+add "add to plan" btn in location detail
+parallax header should get smaller when on small screen
+Fix a bug where group owner still can be remove most of the time
+Fix a bug where public plan after save to group still consist of old day
+

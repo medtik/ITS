@@ -29,8 +29,12 @@ Authorization: {{token}}
 
 ###
 
+GET http://{{host}}/api/Group/GetLocationSuggestions
+Content-Type: application/json
+Authorization: {{token}}
 
-GET http://localhost:56288/api/Area/Details?id=2
+###
+GET http://{{host}}/api/GetGroups
 Content-Type: application/json
 Authorization: {{token}}
 

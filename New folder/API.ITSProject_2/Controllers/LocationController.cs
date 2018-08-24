@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Web.Caching;
 using Core.ObjectModels.Algorithm;
 
 namespace API.ITSProject.Controllers
@@ -45,9 +46,7 @@ namespace API.ITSProject.Controllers
         {
             var result = new HttpResponseMessage(HttpStatusCode.OK);
 
-            MemoryStream memoryStream = new MemoryStream(ConvertToStream(id));
-
-            result.Content = new ByteArrayContent(memoryStream.ToArray());
+            result.Content = new ByteArrayContent(ConvertToStream(id));
             result.Content.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
             return result;
         }

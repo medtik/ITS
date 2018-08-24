@@ -18,6 +18,7 @@
               @create="onCreatePlanClick"
               @sendRequest="messageInputDialog.dialog = true"
               @addLocations="onAddLocationClick"
+              @selectingMode="onSelectingMode"
             ></ChoosePlanDaySection>
           </v-flex>
           <v-flex v-if="!isLoggedIn"
@@ -55,7 +56,9 @@
     </v-layout>
     <MessageInputDialog
       v-bind="messageInputDialog"
+      v-model="messageInputDialog.messageInput"
       @confirm="onAddMessageConfirm"
+      @close="messageInputDialog.dialog = false"
     ></MessageInputDialog>
   </v-content>
 </template>
@@ -84,11 +87,17 @@
       ChoosePlanDaySection,
       MessageInputDialog
     },
+    data(){
+      return {
+        selectingMode: false,
+        messageInputDialog: {},
+      }
+    },
     computed: {
       ...mapGetters('smartSearch', {
         locations: 'searchResult'
       }),
-    }
+    },
   }
 </script>
 

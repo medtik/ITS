@@ -4,22 +4,25 @@
       <v-toolbar-title>
         Chỉnh sửa chuyến đi
       </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn color="success" :loading="confirmLoading">
+        <v-icon>fas fa-check</v-icon>
+        &nbsp; Xác nhận
+      </v-btn>
     </v-toolbar>
     <v-container v-if="!pageLoading">
       <v-text-field v-model="input.name"
-                    :error="!!input.nameError" :error-messages="input.nameError"
+                    :error="!!formError.name" :error-messages="formError.name"
                     label="Tên">
-
       </v-text-field>
       <v-text-field v-model="input.startDate"
-                    :error="!!input.startDateError" :error-messages="input.startDateError"
+                    :error="!!formError.startDate" :error-messages="formError.startDate"
                     label="Ngày bắt đầu" type="date">
 
       </v-text-field>
       <v-text-field v-model="input.endDate"
-                    :error="!!input.endDateError" :error-messages="input.endDateError"
+                    :error="!!formError.endDate" :error-messages="formError.endDate"
                     label="Ngày kết thúc" type="date">
-
       </v-text-field>
     </v-container>
     <v-container class="text-xs-center" v-else>
@@ -37,16 +40,17 @@
     data() {
       return {
         planId: undefined,
+        confirmLoading: false,
         input: {
           name: undefined,
           startDate: undefined,
           endDate: undefined,
-          //
-          nameError: undefined,
-          startDateError: undefined,
-          endDateError: undefined,
         },
-
+        formError:{
+          name,
+          startDate,
+          endDate
+        }
       }
     },
     computed: {
@@ -78,9 +82,46 @@
             }
           })
       },
-      validateBasicForm(){
+      onConfirmBtnClick(){
+        if(this.validate()){
 
-      }
+        }
+      },
+      validate() {
+        let nameError = undefined;
+        let startDateError = undefined;
+        let endDateError = undefined;
+
+        nameError = !this.input.name ? 'Tên không được trống' : undefined;
+        startDateError = !this.input.startDate ? 'Ngày bắt đầu không được trống' : undefined;
+        endDateError = !this.input.endDate ? 'Ngày kết thúc không được trống được trống' : undefined;
+
+        if (!!this.input.startDate) {
+          const now = moment();
+          const startDate = moment(this.input.startDate);
+          if (startDate.isBefore(now, 'day')) {
+            startDateError = "Ngày bắt đầu không được trong quá khứ";
+          }
+        }
+
+        if (!!this.input.startDate && !!this.input.endDate) {
+          const startDate = moment(this.input.startDate);
+          const endDate = moment(this.input.endDate);
+          if (endDate.isBefore(startDate, 'day')) {
+            endDateError = "Ngày kết thúc phải sau ngày bắt đầu";
+          }
+        }
+
+        this.formError = {
+          name: nameError,
+          startDate: startDateError,
+          endDate: endDateError
+        };
+
+        return nameError == undefined &&
+          startDateError == undefined &&
+          endDateError == undefined;
+      },
     }
   }
 </script>

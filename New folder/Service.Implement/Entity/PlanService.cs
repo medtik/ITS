@@ -675,7 +675,7 @@ namespace Service.Implement.Entity
                 }
 
                 List<KeyValuePair<JObject, KeyValuePair<Location, Location>>> locationWithRouteList = null;
-                int areaOffSet = 6000;
+                int areaOffSet = 4000;
                 try
                 {
                     while (locationWithRouteList == null)
@@ -693,14 +693,14 @@ namespace Service.Implement.Entity
                                 ["areaOffSet"] = areaOffSet,
                                 ["locationsBetweenMeal_length"] = locationsBetweenMeal.Count
                             });
-                        areaOffSet += 500;
+                        areaOffSet += 4000;
 
                         locationWithRouteList = await FitSchedule(
                             currentMealPair,
                             nextMealPair,
                             locationsBetweenMeal,
                             currentDate,
-                            areaOffSet >= 6000
+                            areaOffSet >= 20000
                         );
                     }
                 }

@@ -5,9 +5,9 @@
                     width="200"
                     height="200"
                     text="Hình ảnh">
-        <v-flex slot="extraAction">
+        <v-flex slot="extraAction" v-if="photoInput">
           <v-btn block color="success" @click="addImageClick">
-            <v-icon>fa fa-plus</v-icon>
+            <v-icon>fa fa-plus</v-icon> &nbsp; thêm
           </v-btn>
         </v-flex>
       </PictureInput>

@@ -4,7 +4,7 @@
       <v-progress-linear indeterminate color="primary"></v-progress-linear>
     </v-flex>
     <template v-else-if="plans && plans.length > 0">
-      <v-flex>
+      <v-flex v-if="selectingMode">
         <v-select :items="plans"
                   item-text="name"
                   item-value="id"
@@ -55,7 +55,10 @@
               fas fa-check
             </v-icon>
             &nbsp; Hoàn tất
-          </v-btn>onSigninClick
+          </v-btn>
+
+        </v-layout>
+        <v-layout>
           <v-btn v-if="!selectingMode"
                  color="light-blue accent"
                  @click="onAddToPlan">
@@ -65,7 +68,7 @@
             &nbsp; Thêm vào chuyến đi
           </v-btn>
         </v-layout>
-        <v-layout v-if="!isOwnSelectedPlan">
+        <v-layout v-if="!isOwnSelectedPlan && selectingMode">
           <v-btn color="primary"
                  :disabled="!isConfirmable"
                  :loading="sendRequestConfirmLoading"
@@ -148,13 +151,7 @@
         return this.selectedLocationCount > 0 && !!this.selectedPlanId
       },
       isOwnSelectedPlan() {
-        if (this.selectedPlan &&
-          this.selectedPlan.groupName != "" &&
-          this.selectedPlan.groupName != undefined) {
-          return this.selectedPlan.isGroupOwner;
-        } else {
-          return true;
-        }
+        return this.selectedPlan.isOwner;
       },
       days() {
         const planDays = [

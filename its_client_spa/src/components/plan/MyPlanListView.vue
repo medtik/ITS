@@ -17,9 +17,7 @@
       <v-flex v-else-if="myPlans.length > 0"
               v-for="plan in myPlans"
               :key="plan.id"
-              my-2
-              py-2
-              elevation-1
+              my-2 py-2 elevation-1
               class="white">
         <PlanFullWidth @save="dialog.choosePlanDestination = true"
                        @delete="deletePlan"
@@ -44,6 +42,7 @@
   import PlanFullWidth from "../../common/block/PlanFullWidth";
   import ChoosePlanDestinationDialog from "../../common/input/ChoosePlanDestinationDialog";
   import {mapGetters} from "vuex";
+  import _ from "lodash";
 
 
   export default {
@@ -62,9 +61,14 @@
     },
     computed: {
       ...mapGetters('plan', {
-        myPlans: 'myPlans',
         myPlansLoading: 'myPlansLoading'
-      })
+      }),
+      myPlans(){
+        return _.filter(this.$store.getters['plan/myPlans'],(plan) => {
+          return plan.isPlanOwner && (plan.groupName == undefined || plan.groupName == "");
+          // return plan.groupName == undefined || plan.groupName == "";
+        })
+      }
     },
     mounted() {
       this.$store.dispatch('plan/fetchMyPlans')
