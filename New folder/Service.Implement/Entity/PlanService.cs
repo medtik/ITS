@@ -117,7 +117,7 @@ namespace Service.Implement.Entity
         public IQueryable<Plan> GetFeaturedTrip()
             => _repository.SearchAsQueryable(_ => _.IsPublic, _ => _.Voters, _ => _.PlanLocations
                     .Select(__ => __.Location)
-                    .Select(___ => ___.Photos.Select(____ => ____.Photo)), _ => _.Area)
+                    .Select(___ => ___.Photos.Select(____ => ____.Photo)), _ => _.Area, _ => _.Creator)
                 .OrderByDescending(_ => _.Voters.Count()).Take(10);
 
         public IQueryable<Plan> GetGroupPlans(int groupId)
@@ -453,7 +453,7 @@ namespace Service.Implement.Entity
                     ["foundHotel"] = findHotel,
                 });
 
-            foreach (var _ in locations.ToList())
+            foreach (var _ in locations.Where(_ => !_.Reasons.Contains("cafe")).ToList())
             {
                 var tmpLocation = _locationRepository.Get(__ => __.Id == _.Id && _.Categories == "Ăn uống",
                     __ => __.BusinessHours);

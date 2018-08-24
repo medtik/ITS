@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using Core.ObjectModels.Entities;
     using Infrastructure.Identity.Models;
+    using System;
 
     public class _ModelBuilder
     {
@@ -164,7 +165,7 @@
                 AreaName = plan.Area.Name,
                 MemberId = plan.MemberId.HasValue ? plan.MemberId.Value : -1,
                 IsPublic = plan.IsPublic,
-                GroupName = plan.Group == null ? null : plan.Group.Name
+                GroupName = plan.Group == null ? null : plan.Group.Name,
             };
         }
 
@@ -207,7 +208,8 @@
                 Index = planLocation.Index,
                 PlanDay = planLocation.PlanDay,
                 Category = planLocation.Location.Category,
-                IsDone = planLocation.Done
+                IsDone = planLocation.Done,
+                TotalTimeStay = planLocation.Location.TotalTimeStay
             };
         }
 
@@ -227,12 +229,13 @@
                 EndDate = plan.EndDate,
                 StartDate = plan.StartDate,
                 Name = plan.Name,
-                Locations = ConvertToPlanLocationViewModels(plan.PlanLocations.Select(_ => _.Location)),
+                Locations = ConvertToPlanLocationViewModels(plan.PlanLocations.Select(_ => _.Location).GroupBy(_ => _.Id).Select(_ => _.First())),
                 AreaId = plan.AreaId,
                 AreaName = plan.Area.Name,
                 GroupName = plan.Group == null ? "" : plan.Group.Name,
                 IsGroupOwner = currentUserId == (plan.Group != null ? plan.Group.CreatorId : -1),
-                IsPlanOwner = currentUserId == plan.Id
+                IsPlanOwner = currentUserId == plan.CreatorId,
+                IsPublic = plan.IsPublic
             };
         }
 
@@ -254,7 +257,8 @@
                 Photo = string.IsNullOrWhiteSpace(plan.PlanLocations.FirstOrDefault()?.Location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Id.ToString()) ? null : CurrentUrl + plan.PlanLocations.FirstOrDefault()?.Location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Id.ToString(),
                 AreaId = plan.AreaId,
                 AreaName = plan.Area.Name,
-                CreatorId = plan.CreatorId
+                CreatorId = plan.CreatorId,
+                CreatorName = plan.Creator.FullName
             };
 
         public IEnumerable<FeaturedPlanViewModels> ConvertToFeaturedPlanViewModels(IEnumerable<Plan> plans)
@@ -276,7 +280,7 @@
                 Name = area.Name,
                 Locations = new List<CategoriesLocationCounter>(),
                 FeaturedLocation = ConvertToPlanLocationViewModels(area.Locations).OrderByDescending(_ => _.Rating).Take(10).ToList(),
-                FeaturedPlan = ConvertToFeaturedPlanViewModels(area.Plans).OrderByDescending(_ => _.Voter).Take(10).ToList()
+                FeaturedPlan = ConvertToFeaturedPlanViewModels(area.Plans.Where(_ => _.IsPublic)).OrderByDescending(_ => _.Voter).Take(10).ToList()
             };
             foreach (var item in area.Locations)
             {
@@ -348,7 +352,7 @@
         #region Location
         public LocationDetailViewModels ConvertToLocationDetailViewModels(Location location)
         {
-            int ratingCount = location.Reviews.Count;
+            int ratingCount = location.Reviews.Count;   
             float rating = location.Reviews.Sum(_ => _.Rating) / ratingCount;
             rating = float.IsNaN(rating) ? 0 : rating;
 
@@ -367,7 +371,13 @@
                 PrimaryPhoto = CurrentUrl + location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Id.ToString(),
                 OtherPhotos = location.Photos.Where(_ => !_.IsPrimary).Select(_ => _.Photo).Select(_ => CurrentUrl + _.Id.ToString()),
                 Comments = ConvertToCommentViewModels(location.Reviews).OrderByDescending(_ => _.Id).Take(5),
-                Category = location.Category
+                Category = location.Category,
+                Area = location.Area.Name,
+                Description = location.Description,
+                IsClose = location.IsClosed,
+                IsVerified = location.IsVerified,
+                Lat = location.Latitude,
+                Long = location.Longitude
             };
         }
 
@@ -527,9 +537,12 @@
                 Answer = question.Answers.Select(_ => new AnswerViewModels
                 {
                     Content = _.Content,
-                    Id = _.Id
+                    Id = _.Id,
+                    Tags = _.Tags.Select(__ => (__.Id, __.Name)).ToArray()
                 }),
-                Content = question.Content
+                Content = question.Content,
+                Id = question.Id,
+                Category = question.Categories
             };
 
         public IEnumerable<QuestionDetailsViewModels> ConvertToQuestionDetailsViewModels(IEnumerable<Question> question)

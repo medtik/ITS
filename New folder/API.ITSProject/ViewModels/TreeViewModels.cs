@@ -32,5 +32,8 @@
 
         [DataMember]
         public string Categories { get; set; }
+
+        [DataMember]
+        public int? TotalTimeStay { get; set; }
     }
 }

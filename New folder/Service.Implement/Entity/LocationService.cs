@@ -20,6 +20,8 @@
         private readonly IRepository<Plan> _planRepository;
         private readonly IRepository<PlanLocation> _planLocationRepository;
         private readonly IRepository<BusinessHour> _businessHourRepository;
+        private readonly IRepository<Creator> _creatorRepository;
+        private readonly IRepository<Group> _grouprRepository;
         private readonly IRepository<Review> _reviewRepository;
 
         public LocationService(ILoggingService loggingService, IUnitOfWork unitOfWork) : base(loggingService, unitOfWork)
@@ -32,6 +34,8 @@
             _planRepository = unitOfWork.GetRepository<Plan>();
             _planLocationRepository = unitOfWork.GetRepository<PlanLocation>();
             _reviewRepository = unitOfWork.GetRepository<Review>();
+            _creatorRepository = unitOfWork.GetRepository<Creator>();
+            _grouprRepository = unitOfWork.GetRepository<Group>();
         }
 
         public bool AcceptStatusLocationSuggestion(int suggestionId)
@@ -267,6 +271,22 @@
         public IEnumerable<string> GetCategories()
         {
             return GetAll().Select(_ => _.Category);
+        }
+
+        public IEnumerable<LocationSuggestion> GetLocationSuggestion(int userId)
+        {
+            List<LocationSuggestion> locationSuggestions = new List<LocationSuggestion>();
+            Creator user = _creatorRepository.Get(_ => _.Id == userId, _ => _.Groups.Select(__ => __.Plans.Select(___ => ___.LocationSuggestion.Select(____ => ____.Locations))));
+
+            foreach (var ele in user.Groups)
+            {
+                foreach (var item in ele.Plans)
+                {
+                    locationSuggestions.AddRange(item.LocationSuggestion);
+                }
+            }
+
+            return locationSuggestions;
         }
 
         public bool RejectStatusLocationSuggestion(int suggestionId)

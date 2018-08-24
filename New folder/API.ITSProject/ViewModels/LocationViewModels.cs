@@ -219,6 +219,24 @@
         public IEnumerable<CommentViewModels> Comments { get; set; }
 
         [DataMember]
+        public string Description { get; set; }
+
+        [DataMember]
+        public double Long { get; set; }
+
+        [DataMember]
+        public double Lat { get; set; }
+
+        [DataMember]
         public string Category { get; set; }
+
+        [DataMember]
+        public string Area { get; set; }
+
+        [DataMember]
+        public bool IsVerified { get; set; }
+
+        [DataMember]
+        public bool IsClose { get; set; }
     }
 }

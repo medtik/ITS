@@ -43,13 +43,21 @@ namespace API.ITSProject.Controllers
         [Route("api/photo/converPhotoBase64")]
         public HttpResponseMessage ConvertToImage(int id)
         {
-            var result = new HttpResponseMessage(HttpStatusCode.OK);
+            try
+            {
+                var result = new HttpResponseMessage(HttpStatusCode.OK);
 
-            MemoryStream memoryStream = new MemoryStream(ConvertToStream(id));
+                MemoryStream memoryStream = new MemoryStream(ConvertToStream(id));
 
-            result.Content = new ByteArrayContent(memoryStream.ToArray());
-            result.Content.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
-            return result;
+                result.Content = new ByteArrayContent(memoryStream.ToArray());
+                result.Content.Headers.ContentType = new MediaTypeHeaderValue("image/jpeg");
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _loggingService.Write(GetType().Name, nameof(ConvertToImage), ex);
+                throw;
+            }
         }
 
         [HttpGet]
@@ -90,7 +98,9 @@ namespace API.ITSProject.Controllers
             {
                 LocationDetailViewModels locationDetail;
                 Location location = _locationService.Find(id, _ => _.BusinessHours, _ => _.Reviews.Select(__ => __.Creator),
-                    _ => _.BusinessHours, _ => _.Tags, _ => _.Photos.Select(__ => __.Photo));
+                    _ => _.Reviews.Select(__ => __.Photos),
+                    _ => _.BusinessHours, _ => _.Tags, _ => _.Photos.Select(__ => __.Photo),
+                    _ => _.Area);
 
                 if (location == null)
                 {
@@ -163,7 +173,8 @@ namespace API.ITSProject.Controllers
                     Rating = rating,
                     Reasons = commonTags.Select(tag => tag.Name).ToList(),
                     ReviewCount = location.Reviews.Count,
-                    Categories = location.Category
+                    Categories = location.Category,
+                    TotalTimeStay = location.TotalTimeStay
                 };
 
                 resultList.Add(result);
@@ -353,7 +364,7 @@ namespace API.ITSProject.Controllers
         #region Post
         [HttpPost]
         [Authorize, Route("api/Location/AddImageToLocation")]
-        public async Task<IHttpActionResult> AddImageToLocation(int locationId, string avatar)
+        public async Task<IHttpActionResult> AddImageToLocation([FromBody] int locationId, [FromBody] string avatar)
         {
             try
             {
@@ -421,7 +432,7 @@ namespace API.ITSProject.Controllers
         #endregion
 
         #region Put
-        [HttpPatch]
+        [HttpPut]
         public async Task<IHttpActionResult> Edit(EditLocationViewModels data)
         {
             try
@@ -498,7 +509,7 @@ namespace API.ITSProject.Controllers
             }
             catch (Exception ex)
             {
-                _loggingService.Write(GetType().Name, nameof(AppectLocationSuggestion), ex);
+                _loggingService.Write(GetType().Name, nameof(Review), ex);
 
                 return InternalServerError(ex);
             }
