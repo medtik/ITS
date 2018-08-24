@@ -88,7 +88,9 @@
     </v-layout>
     <MessageInputDialog
       v-bind="messageInputDialog"
+      v-model="messageInputDialog.messageInput"
       @confirm="onAddMessageConfirm"
+      @close="messageInputDialog.dialog = false"
     ></MessageInputDialog>
   </v-content>
 </template>
