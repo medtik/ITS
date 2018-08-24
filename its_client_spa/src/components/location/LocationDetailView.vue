@@ -250,7 +250,7 @@
               day
             };
 
-            if(from.isSame(zeroTime) && to.isSame(zeroTime)){
+            if(from.isSame(zeroTime,"hour") && to.isSame(zeroTime,"hour")){
               formattedBusinessHour.isNow = true;
               formattedBusinessHour.displayString = `Mở cả ngày`;
             }else{
