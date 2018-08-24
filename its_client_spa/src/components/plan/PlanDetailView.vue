@@ -26,14 +26,13 @@
       </v-toolbar-title>
       <v-spacer v-if="!isSmallScreen"></v-spacer>
       <v-toolbar-items>
-        <v-btn v-if="!isOwnPlan && !isPublic"
-               flat
+        <v-btn flat
                @click="dialog.choosePlanDestination = true"
                :loading="addPlanToGroupLoading">
           <v-icon large>fas fa-cloud-download-alt</v-icon>
           <span>&nbsp; Lưu</span>
         </v-btn>
-        <v-flex v-if="!isOwnPlan && !isPublic" pt-1>
+        <v-flex v-if="isPublic" pt-1>
           <v-btn
             v-if="!plan.isVoted"
             flat
@@ -258,6 +257,7 @@
   import moment from "moment";
   import {
     SuccessDialog,
+    ErrorDialog,
     LocationFullWidth
   } from "../../common/block";
 
@@ -271,7 +271,8 @@
       ChoosePlanDestinationDialog,
       draggable,
       SuccessDialog,
-      SearchMethodDialog
+      SearchMethodDialog,
+      ErrorDialog
     },
     data() {
       return {

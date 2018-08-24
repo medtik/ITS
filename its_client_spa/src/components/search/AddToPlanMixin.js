@@ -84,7 +84,7 @@ export default {
         planDay: this.choosePlanSection.selectedPlanDay,
         message: this.messageInputDialog.messageInput
       };
-
+      this.messageInputDialog.dialog = false;
       this.$store.dispatch('request/createLocationSuggestion', locationRequest);
       this.locationsCheckboxValues = [];
     },

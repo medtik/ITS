@@ -151,13 +151,7 @@
         return this.selectedLocationCount > 0 && !!this.selectedPlanId
       },
       isOwnSelectedPlan() {
-        if (this.selectedPlan &&
-          this.selectedPlan.groupName != "" &&
-          this.selectedPlan.groupName != undefined) {
-          return this.selectedPlan.isGroupOwner;
-        } else {
-          return true;
-        }
+        return this.selectedPlan.isOwner;
       },
       days() {
         const planDays = [
