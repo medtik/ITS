@@ -716,12 +716,12 @@ namespace Service.Implement.Entity
                     if (i == 0)
                     {
                         var location = locationWithRoute.Value.Value;
-                        locationList.Remove(location);
+                        locationList.RemoveAll(tmpLocation => tmpLocation.Id == location.Id);
                     }
                     else
                     {
                         var location = locationWithRoute.Value.Key;
-                        locationList.Remove(location);
+                        locationList.RemoveAll(tmpLocation => tmpLocation.Id == location.Id);
                     }
                 }
 

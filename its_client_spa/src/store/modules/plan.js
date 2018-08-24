@@ -78,7 +78,7 @@ export default {
     setMyVisiblePlans(state, payload) {
       state.myVisiblePlans = payload.plans
     },
-    vote(state){
+    vote(state) {
       state.detailedPlan.isVoted = !state.detailedPlan.isVoted;
     },
     deleteMyPlan(state, payload) {
@@ -210,9 +210,9 @@ export default {
         areaId
       } = payload;
 
-      context.commit('setLoading',{
-        loading:{
-          createSuggestedPlan : true
+      context.commit('setLoading', {
+        loading: {
+          createSuggestedPlan: true
         }
       });
       return new Promise((resolve, reject) => {
@@ -224,9 +224,9 @@ export default {
           "areaId": areaId
         })
           .then(value => {
-            context.commit('setLoading',{
-              loading:{
-                createSuggestedPlan : false
+            context.commit('setLoading', {
+              loading: {
+                createSuggestedPlan: false
               }
             });
             resolve({
@@ -234,24 +234,22 @@ export default {
             })
           })
           .catch(reason => {
-            context.commit('setLoading',{
-              loading:{
-                createSuggestedPlan : false
+            context.commit('setLoading', {
+              loading: {
+                createSuggestedPlan: false
               }
             });
             Raven.captureException(reason);
           })
       })
     },
-    vote(context, payload){
+    vote(context, payload) {
       // put /api/Plan/VotePlan
       const {
         id
       } = payload;
 
-      axiosInstance.put('api/Plan/VotePlan',{
-        planId: id
-      });
+      axiosInstance.put('api/Plan/VotePlan', id, {headers: {'Content-Type': 'application/json'}});
     },
     publishPlan(context, payload) {
       // put /api/Plan/PublicPlan
