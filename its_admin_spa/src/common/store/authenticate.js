@@ -1,11 +1,15 @@
 import axiosInstance from "../util/axiosInstance";
 import RNMsgChannel from 'react-native-webview-messaging';
 import moment from "moment";
+import Raven from "raven-js"
 
 export default {
   namespaced: true,
   state: {
+    facebookAppId: "266318357470729",
     token: undefined,
+    facebookStatus: undefined,
+    facebookInstance: undefined
   },
   getters: {
     isLoggedIn(state) {
@@ -59,6 +63,12 @@ export default {
       localStorage.removeItem('token');
       axiosInstance.defaults.headers.common['Authorization'] = undefined;
     },
+    setFacebookAuthentication(state, payload){
+      state.facebookStatus = payload.status;
+    },
+    setFacebookInstance(state, payload){
+      state.facebookInstance = payload.instance;
+    }
   },
   actions: {
     fetchToken(context, payload) {
@@ -88,6 +98,45 @@ export default {
           }
         };
       });
+    },
+    getTokenUsingFacebook (context, payload){
+      const {
+        status,
+        authResponse
+      } = payload.response;
+
+      if(status == "connected"){
+        axiosInstance.post('', {
+          accessToken: authResponse.accessToken,
+          useId: authResponse.userID,
+          appId: context.state.facebookAppId
+        })
+          .then()
+      }
+    },
+    signinFacebook(context, payload){
+      const FB = context.state.facebookInstance;
+
+      FB.login(function(response){
+        Raven.captureMessage("FB login status - after logged in", {
+          extra:{
+            response
+          }
+        });
+        if(response.status != 'unknown'){
+          //reload or redirect once logged in...
+          window.location.reload();
+        }
+      });
+    },
+    logout(context){
+      const {
+        facebookInstance
+      } = context.state;
+
+      if(context.state.facebookInstance){
+        facebookInstance.logout();
+      }
     }
   }
 }
