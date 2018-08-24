@@ -24,6 +24,9 @@ export default {
     setDetailedLocation(state, payload) {
       state.detailedLocation = payload.location;
     },
+    setNearbyLocations(state, payload){
+      state.nearbyLocations = payload.locations;
+    },
     setLoading(state, payload) {
       state.loading = _.assign(state.loading, payload.loading);
     }

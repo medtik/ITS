@@ -244,11 +244,14 @@ export default {
       })
     },
     vote(context, payload){
-      // axiosInstance.put
+      // put /api/Plan/VotePlan
       const {
         id
       } = payload;
 
+      axiosInstance.put('api/Plan/VotePlan',{
+        planId: id
+      });
     },
     publishPlan(context, payload) {
       // put /api/Plan/PublicPlan

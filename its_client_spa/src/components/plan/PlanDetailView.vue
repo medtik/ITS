@@ -26,14 +26,14 @@
       </v-toolbar-title>
       <v-spacer v-if="!isSmallScreen"></v-spacer>
       <v-toolbar-items>
-        <v-btn v-if="!isOwnPlan"
+        <v-btn v-if="!isOwnPlan && !isPublic"
                flat
                @click="dialog.choosePlanDestination = true"
                :loading="addPlanToGroupLoading">
           <v-icon large>fas fa-cloud-download-alt</v-icon>
           <span>&nbsp; Lưu</span>
         </v-btn>
-        <v-flex v-if="!isOwnPlan" pt-1>
+        <v-flex v-if="!isOwnPlan && !isPublic" pt-1>
           <v-btn
             v-if="!plan.isVoted"
             flat
@@ -99,14 +99,14 @@
         <v-divider></v-divider>
         <v-flex class="title text-xs-center white" pb-2 pt-4>
           <span :id="'tab_item_'+day.key">{{day.planDayText}}</span>
-          <v-flex>
+          <v-flex v-if="!isPublic">
             <v-btn flat @click="onAddLocation(day)">
               <v-icon>add_location</v-icon>
-              <span v-if="!isSmallScreen">Thêm địa điểm</span>
+              <span>Thêm địa điểm</span>
             </v-btn>
-            <v-btn flat @click="onAddNote(day)">
+            <v-btn flat @click="onAddNote(day)" v-if="isOwnPlan">
               <v-icon>note_add</v-icon>
-              <span v-if="!isSmallScreen">Thêm ghi chú</span>
+              <span>Thêm ghi chú</span>
             </v-btn>
           </v-flex>
         </v-flex>
@@ -120,13 +120,12 @@
                              :isOwn="true"
                              @delete="onLocationDelete(item)">
             <template v-if="isOwnPlan" slot="action">
-              <v-layout column>
+              <v-layout column align-center>
                 <v-checkbox :value="item.id"
                             v-model="checkboxValues"
                             @change="onToggleLocation(item.id)">
                 </v-checkbox>
-
-                <v-btn icon color="red" @click="onLocationDelete(item)">
+                <v-btn icon flat color="red" @click="onLocationDelete(item)">
                   <v-icon>
                     fas fa-trash
                   </v-icon>
@@ -137,13 +136,13 @@
           <NoteFullWidth v-else v-bind="item.note"
                          @delete="onNoteDelete(item,id)">
             <template v-if="isOwnPlan" slot="action">
-              <v-layout column>
+              <v-layout column align-center>
                 <v-checkbox :value="item.id"
                             v-model="checkboxValues"
                             @change="onToggleNote(item.id)">
                 </v-checkbox>
 
-                <v-btn icon color="red" @click="onLocationDelete(item)">
+                <v-btn icon flat color="red" @click="onNoteDelete(item)">
                   <v-icon>
                     fas fa-trash
                   </v-icon>
@@ -337,7 +336,10 @@
         return moment(this.plan.endDate).format('DD/MM/YYYY');
       },
       isOwnPlan() {
-        return this.plan.isOwn || !this.plan.isPublic
+        return this.plan.isOwner && !this.plan.isPublic
+      },
+      isPublic(){
+        return this.plan.isPublic;
       }
     },
     methods: {
