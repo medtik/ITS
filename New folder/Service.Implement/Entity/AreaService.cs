@@ -14,6 +14,9 @@
         {
         }
 
+        public Area Find(int id, params Expression<Func<Area, object>>[] includes)
+            => _repository.Get(_ => _.Id == id, includes);
+
         public IQueryable<Area> Search(Expression<Func<Area, bool>> searchValue, params Expression<Func<Area, object>>[] includes)
         {
             IQueryable<Area> areas = null;

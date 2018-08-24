@@ -8,5 +8,9 @@
     public interface IAreaService
     {
         IQueryable<Area> Search(Expression<Func<Area, bool>> searchValue, params Expression<Func<Area, object>>[] includes);
+
+        Area Find(int id, params Expression<Func<Area, object>>[] includes);
+
+        bool Update(Area area);
     }
 }
