@@ -74,7 +74,7 @@
                   color="primary"
                   :loading="loading.createSuggestedPlan"
                   @click="onCreateSuggestedPlanClick"
-                  :disabled="!questions">
+                  :disabled="!questions || loading.finishBtn">
                   Tạo chuyến đi tự động
                 </v-btn>
               </v-flex>

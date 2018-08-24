@@ -120,22 +120,34 @@
                              :isOwn="true"
                              @delete="onLocationDelete(item)">
             <template v-if="isOwnPlan" slot="action">
-              <v-layout>
+              <v-layout column>
                 <v-checkbox :value="item.id"
                             v-model="checkboxValues"
                             @change="onToggleLocation(item.id)">
                 </v-checkbox>
+
+                <v-btn icon color="red" @click="onLocationDelete(item)">
+                  <v-icon>
+                    fas fa-trash
+                  </v-icon>
+                </v-btn>
               </v-layout>
             </template>
           </LocationFullWidth>
           <NoteFullWidth v-else v-bind="item.note"
                          @delete="onNoteDelete(item,id)">
             <template v-if="isOwnPlan" slot="action">
-              <v-layout>
+              <v-layout column>
                 <v-checkbox :value="item.id"
                             v-model="checkboxValues"
                             @change="onToggleNote(item.id)">
                 </v-checkbox>
+
+                <v-btn icon color="red" @click="onLocationDelete(item)">
+                  <v-icon>
+                    fas fa-trash
+                  </v-icon>
+                </v-btn>
               </v-layout>
             </template>
           </NoteFullWidth>

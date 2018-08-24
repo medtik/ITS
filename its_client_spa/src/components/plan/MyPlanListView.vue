@@ -17,9 +17,7 @@
       <v-flex v-else-if="myPlans.length > 0"
               v-for="plan in myPlans"
               :key="plan.id"
-              my-2
-              py-2
-              elevation-1
+              my-2 py-2 elevation-1
               class="white">
         <PlanFullWidth @save="dialog.choosePlanDestination = true"
                        @delete="deletePlan"
@@ -67,7 +65,8 @@
       }),
       myPlans(){
         return _.filter(this.$store.getters['plan/myPlans'],(plan) => {
-          return plan.isPlanOwner && (plan.groupName == undefined || plan.groupName == "");
+          // return plan.isPlanOwner && (plan.groupName == undefined || plan.groupName == "");
+          return plan.groupName == undefined || plan.groupName == "";
         })
       }
     },

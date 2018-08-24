@@ -190,7 +190,7 @@
           })
       },
       signinGoogle() {
-        this.$store.dispatch('account/signinGoogle')
+        this.$store.dispatch('authenticate/signinGoogle')
           .then(value => {
             this.$router.push({
               name: 'Home'
@@ -201,7 +201,7 @@
           })
       },
       signinFacebook() {
-        this.$store.dispatch('account/signinFacebook')
+        this.$store.dispatch('authenticate/signinFacebook')
           .then(value => {
             this.$router.push({
               name: 'Home'

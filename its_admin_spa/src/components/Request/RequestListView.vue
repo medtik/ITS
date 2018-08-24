@@ -34,7 +34,6 @@
                   :key="request.id">
             <RequestReportReview v-if="request.type == 'reportReview'" v-bind="request"/>
             <RequestChangeLocationInfo v-if="request.type == 'locationChangeRequest'" v-bind="request"/>
-            <RequestClaimOwner v-if="request.type == 'claimOwner'" v-bind="request"/>
           </v-flex>
         </v-layout>
         <v-layout v-if="total">

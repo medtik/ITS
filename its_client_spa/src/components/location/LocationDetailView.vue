@@ -19,7 +19,7 @@
             </v-chip>
           </div>
           <div v-if="todayHours">
-            <span>Hôm nay: Mở từ {{todayHours.from}} đến {{todayHours.to}} | </span>
+            <span>Hôm nay:{{todayHours.todayDisplayString}}</span>
 
             <span class="subheading font-weight-bold"
                   v-if="todayHours.isOpen"
@@ -207,6 +207,7 @@
           .map(businessHour => {
             const fromTime = moment(businessHour.from, "HH:mm");
             const toTime = moment(businessHour.to, "HH:mm");
+            const zeroTime = moment("00:00", "HH:mm");
             let day;
             switch (businessHour.day) {
               case 'day1':
@@ -249,10 +250,17 @@
               day
             };
 
+            formattedBusinessHour.todayDisplayString = `Mở từ ${from.format('LT')} đến ${to.format('LT')}`;
+
             formattedBusinessHour.isNow = now.isBetween(
               formattedBusinessHour.from,
               formattedBusinessHour.to,
             );
+
+            if(from.isSame(zeroTime) && to.isSame(zeroTime)){
+              formattedBusinessHour.isNow = true;
+              formattedBusinessHour.todayDisplayString = `Mở cả ngày`;
+            }
 
             return formattedBusinessHour;
           })
