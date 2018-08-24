@@ -4,7 +4,7 @@
       <v-progress-linear indeterminate color="primary"></v-progress-linear>
     </v-flex>
     <template v-else-if="plans && plans.length > 0">
-      <v-flex>
+      <v-flex v-if="selectingMode">
         <v-select :items="plans"
                   item-text="name"
                   item-value="id"

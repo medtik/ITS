@@ -103,7 +103,7 @@
               </v-layout>
             </div>
           </v-flex>
-          <v-flex justify-start mt-5 v-if="featuredPlans">
+          <v-flex justify-start mt-5 v-if="featuredPlans && featuredPlans.length > 0">
             <div class="title">Các chuyến đi nổi bật</div>
             <div style="overflow-x: auto;">
               <v-layout row my-1>

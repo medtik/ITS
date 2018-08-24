@@ -8,22 +8,22 @@ import _ from "lodash";
 
 export default {
   namespaced: true,
-  state:{
+  state: {
     categories: [],
-    loading:{
+    loading: {
       categories: false
     }
   },
-  getters:{
-    categoriesLoading(state){
+  getters: {
+    categoriesLoading(state) {
       return state.loading.categories;
     },
-    categories(state){
+    categories(state) {
       return state.categories;
     }
   },
-  mutations:{
-    setCategories(state, payload){
+  mutations: {
+    setCategories(state, payload) {
       state.categories = payload.categories;
     },
     setLoading(state, payload) {
@@ -136,8 +136,43 @@ export default {
       })
     },
     update(context, payload) {
-      return mockShell(() => {
-      })
+      const {
+        nameInput,
+        addressInput,
+        descriptionInput,
+        longInput,
+        latInput,
+        websiteInput,
+        emailInput,
+        areaInput,
+        category,
+        isVerifiedInput,
+        isCloseInput,
+        tagsInput,
+        reviewsInput,
+        businessHoursInput,
+        primaryPhotoInput,
+        secondaryPhotos,
+      } = payload;
+
+      axiosInstance.patch('api/location', {
+        "name": nameInput,
+        "address": addressInput,
+        "desription": descriptionInput,
+        "lat": latInput,
+        "long": longInput,
+        "web": websiteInput,
+        "phone": phoneInput,
+        "email": emailInput,
+        "areaId": areaInput,
+        "category": category,
+        "isVerified": isVerifiedInput,
+        "isClosed": isCloseInput,
+        "tags": tagsInput,
+        "primaryPhoto": primaryPhotoInput,
+        "otherPhotos": secondaryPhotos,
+        "days": businessHoursInput
+      });
     },
     delete(context, payload) {
       return new Promise((resolve, reject) => {
@@ -150,17 +185,17 @@ export default {
           .catch(reject)
       })
     },
-    fetchCategories(context){
+    fetchCategories(context) {
       //GET api/location/categories
 
-      context.commit('setLoading',{loading:{categories: true}});
+      context.commit('setLoading', {loading: {categories: true}});
       axiosInstance.get('api/location/categories')
-        .then(value =>{
+        .then(value => {
           context.commit('setCategories', {categories: value.data});
-          context.commit('setLoading',{loading:{categories: false}});
+          context.commit('setLoading', {loading: {categories: false}});
         })
-        .catch(reason =>{
-          context.commit('setLoading',{loading:{categories: false}});
+        .catch(reason => {
+          context.commit('setLoading', {loading: {categories: false}});
           Raven.captureException(reason);
         })
     }

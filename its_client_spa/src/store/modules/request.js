@@ -8,8 +8,10 @@ export default {
   state: {
     // {id: 3, status: 0, message: null, groupId: 36, groupName: "nhóm phượt 2"}
     groupInvitation: [],
+    locationSuggestion:[],
     loading: {
-      groupInvitation: true
+      groupInvitation: true,
+      locationSuggestion:true
     }
   },
   getters: {
@@ -29,12 +31,15 @@ export default {
       return groupInvitation
     },
     notificationsLoading(state) {
-      return state.loading.groupInvitation;
+      return state.loading.groupInvitation && state.loading.locationSuggestion;
     }
   },
   mutations: {
     setGroupInvitationRequests(state, payload) {
       state.groupInvitation = payload.requests;
+    },
+    setLocationSuggestionRequest(state, payload) {
+      state.locationSuggestion = payload.requests;
     },
     setLoading(state, payload) {
       state.loading = _.assign(state.loading, payload.loading);
@@ -53,7 +58,17 @@ export default {
       })
     },
     changeStatusLocationSuggestion(state, payload) {
+      const {
+        id,
+        status
+      } = payload;
 
+      state.locationSuggestion = _.map(state.locationSuggestion, (suggestion) => {
+        if (suggestion.id == id) {
+          suggestion.status = status;
+        }
+        return suggestion;
+      })
     }
   },
   actions: {
@@ -80,11 +95,36 @@ export default {
           })
       })
     },
+
+    fetchLocationSuggestionRequests(context) {
+      // get /api/Group/GetLocationSuggestions
+      context.commit('setLoading', {
+        loading: {locationSuggestion: true}
+      });
+      return new Promise((resolve, reject) => {
+        axiosInstance.get('api/Group/GetLocationSuggestions')
+          .then((value) => {
+            context.commit('setLocationSuggestionRequest', {requests: value.data});
+            context.commit('setLoading', {
+              loading: {locationSuggestion: false}
+            });
+            resolve(value.data)
+          })
+          .catch((reason) => {
+            Raven.captureException(reason);
+            context.commit('setLoading', {
+              loading: {locationSuggestion: false}
+            });
+            reject(reason.response);
+          })
+      })
+    },
     fetchNotifications(context) {
       const groupInvitationPromise = context.dispatch('fetchGroupInvitationRequests');
+      const locationSuggestionPromise = context.dispatch('fetchLocationSuggestionRequests');
 
       return new Promise((resolve, reject) => {
-        Promise.all([groupInvitationPromise])
+        Promise.all([groupInvitationPromise, locationSuggestionPromise])
           .then(() => {
             resolve();
           })
