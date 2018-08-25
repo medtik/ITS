@@ -25,7 +25,10 @@
                     label="Ngày kết thúc" type="date">
       </v-text-field>
 
-      <v-flex v-for="(day,index) in input.days"
+      <v-flex class="title">
+        Xếp lịch
+      </v-flex>
+      <v-flex v-for="(day,index) in plan.days"
               :key="day.key"
               class="grey lighten-5">
         <v-divider></v-divider>
@@ -33,15 +36,17 @@
           <span :id="'tab_item_'+day.key">{{day.planDayText}}</span>
         </v-flex>
         <!--ITEMS-->
-        <draggable v-model="day.items" :options="{handle:'.handle-bar', group:'days'}">
+        <draggable :list="input.days[index].items"
+                   :options="{handle:'.handle-bar', group:'days'}"
+                   style="padding-top: 5rem"
+                   class="white">
           <v-flex py-2 mb-1
-                  v-for="item in day.items"
-                  :key="item.id"
-                  class="white">
+                  v-for="item in input.days[index].items"
+                  :key="item.id">
             <LocationFullWidth v-if="item.location"
                                v-bind="item.location">
               <template slot="handle">
-                <v-layout class="handle-bar">
+                <v-layout class="handle-bar" justify-center align-center>
                   <v-icon>
                     fas fa-grip-vertical
                   </v-icon>
@@ -50,7 +55,7 @@
             </LocationFullWidth>
             <NoteFullWidth v-else v-bind="item.note">
               <template slot="handle">
-                <v-layout class="handle-bar">
+                <v-layout class="handle-bar" justify-center align-center>
                   <v-icon>
                     fas fa-grip-vertical
                   </v-icon>
@@ -58,10 +63,8 @@
               </template>
             </NoteFullWidth>
           </v-flex>
+
         </draggable>
-        <!--SPACER-->
-        <v-flex v-if="plan.days[index].length <= 0" style="height: 50px">
-        </v-flex>
       </v-flex>
     </v-container>
     <v-container class="text-xs-center" v-else>
@@ -76,11 +79,12 @@
   import NoteFullWidth from "./NoteFullWidth"
   import Raven from "raven-js";
   import moment from "moment" ;
-  import draggable from 'vuedraggable'
+  import draggable from 'vuedraggable';
+  import _ from "lodash"
 
   export default {
     name: "PlanEditView",
-    components:{
+    components: {
       LocationFullWidth,
       NoteFullWidth,
       draggable
@@ -93,9 +97,9 @@
           name: undefined,
           startDate: undefined,
           endDate: undefined,
-          days:[]
+          days: []
         },
-        formError:{
+        formError: {
           name: undefined,
           startDate: undefined,
           endDate: undefined
@@ -122,18 +126,23 @@
       loadData() {
         this.$store.dispatch('plan/fetchPlanById', {id: this.planId})
           .then(() => {
-            if(this.plan && this.plan.days){
+            if (this.plan && this.plan.days) {
               this.input.name = this.plan.name;
               this.input.startDate = moment(this.plan.startDate).format('YYYY-MM-DD');
               this.input.endDate = moment(this.plan.endDate).format('YYYY-MM-DD');
-              this.input.days = this.plan.days;
-            }else{
+              this.input.days = _.map(this.plan.days, (day) => {
+                  if (!day.items) {
+                    day.items = [];
+                  }
+                  return day;
+              });
+            } else {
               Raven.captureException(new Error("Invalid data"));
             }
           })
       },
-      onConfirmBtnClick(){
-        if(this.validate()){
+      onConfirmBtnClick() {
+        if (this.validate()) {
 
         }
       },
