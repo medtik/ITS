@@ -69,23 +69,6 @@
               <v-divider></v-divider>
             </v-flex>
             <v-layout align-center column>
-              <v-flex v-if="!context['plan'] && isLoggedIn">
-                <v-btn
-                  color="primary"
-                  :loading="loading.createSuggestedPlan"
-                  @click="onCreateSuggestedPlanClick"
-                  :disabled="!questions || loading.finishBtn">
-                  Tạo chuyến đi tự động
-                </v-btn>
-              </v-flex>
-              <v-flex v-if="!context['plan'] && !isLoggedIn" class="text-xs-center">
-                <div class="body-1">
-                  Vui lòng đang nhập để tạo chuyến đi tự động
-                </div>
-                <v-btn color="success" @click="onSigninClick">
-                  Đăng nhập
-                </v-btn>
-              </v-flex>
               <v-flex py-2>
               </v-flex>
               <v-flex>
@@ -106,14 +89,6 @@
         <!--Holder-->
       </v-flex>
     </v-layout>
-    <!--DIALOG-->
-    <CreatePlanDialog
-      :dialog="createPlanDialog.dialog"
-      :areaId="createPlanDialog.areaId"
-      @close="createPlanDialog.dialog = false"
-      @confirm="onCreateSuggestedPlanConfirm">
-
-    </CreatePlanDialog>
   </v-content>
 </template>
 
@@ -201,7 +176,11 @@
           .then(value => {
             this.$router.push({
               name: 'SmartSearchResult',
-              params: value
+              params: {
+                ...value,
+                answers: this.selectedAnswers,
+                areaId: this.selectedAreaId
+              }
             });
             this.loading.finishBtn = false;
           })

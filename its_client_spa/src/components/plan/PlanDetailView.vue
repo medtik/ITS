@@ -142,7 +142,11 @@
                             v-model="checkboxValues"
                             @change="onToggleNote(item.id)">
                 </v-checkbox>
-
+                <v-btn icon flat color="primary" @click="onNoteEdit(item)">
+                  <v-icon>
+                    fas fa-edit
+                  </v-icon>
+                </v-btn>
                 <v-btn icon flat color="red" @click="onNoteDelete(item)">
                   <v-icon>
                     fas fa-trash
@@ -249,13 +253,9 @@
 <script>
   import {mapGetters, mapState} from "vuex";
   import {FormRuleMixin} from "../../common/mixin"
-  import _ from "lodash";
-
   import NoteFullWidth from "./NoteFullWidth";
   import SearchMethodDialog from "../search/SearchMethodDialog";
-
-  import {ChoosePlanDestinationDialog} from "../../common/input";
-  import draggable from 'vuedraggable'
+  import {ChoosePlanDestinationDialog, MessageInputDialog} from "../../common/input";
   import moment from "moment";
   import {
     SuccessDialog,
@@ -271,10 +271,10 @@
       LocationFullWidth,
       NoteFullWidth,
       ChoosePlanDestinationDialog,
-      draggable,
       SuccessDialog,
       SearchMethodDialog,
-      ErrorDialog
+      ErrorDialog,
+      MessageInputDialog
     },
     data() {
       return {
@@ -341,7 +341,7 @@
       isOwnPlan() {
         return this.plan.isGroupOwner || this.plan.isOwner && !this.plan.isPublic
       },
-      isPublic(){
+      isPublic() {
         return this.plan.isPublic;
       }
     },
