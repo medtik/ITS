@@ -6,6 +6,7 @@
           <!--CONTENT-->
           <v-list subheader avatar
                   v-for="plans in groupedPlans"
+                  v-if="plans[0].groupName != currentGroup.groupName"
                   :key="`planGroup_${plans ? plans[0].groupName : ''}`">
 
             <v-subheader v-if="plans && plans[0].groupName">
@@ -65,7 +66,7 @@
       'dialog',
       'value',
       'destinations',
-      'currentGroup'
+      'currentGroup',
     ],
     data() {
       return {

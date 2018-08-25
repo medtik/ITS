@@ -33,15 +33,17 @@
               class="grey lighten-5">
         <v-divider></v-divider>
         <v-flex class="title text-xs-center white" pb-2 pt-4>
-          <span :id="'tab_item_'+day.key">{{day.planDayText}}</span>
+          <span :id="'tab_item_'+day.key">
+            <v-icon>far fa-calendar</v-icon> &nbsp; {{day.planDayText}}
+          </span>
         </v-flex>
         <!--ITEMS-->
-        <draggable :list="input.days[index].items"
+        <draggable :list="input.days[index]"
                    :options="{handle:'.handle-bar', group:'days'}"
                    style="padding-top: 5rem"
                    class="white">
           <v-flex py-2 mb-1
-                  v-for="item in input.days[index].items"
+                  v-for="item in input.days[index]"
                   :key="item.id">
             <LocationFullWidth v-if="item.location"
                                v-bind="item.location">
@@ -134,7 +136,7 @@
                   if (!day.items) {
                     day.items = [];
                   }
-                  return day;
+                  return day.items;
               });
             } else {
               Raven.captureException(new Error("Invalid data"));

@@ -101,6 +101,7 @@
                                  @close="dialog.choosePlanDestination = false"
     />
     <ChoosePlanDialog
+      :currentGroup="group"
       :dialog="dialog.choosePlan"
       @select="onChoosePlanSelect"
       @close="dialog.choosePlan = false"

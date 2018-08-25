@@ -1,5 +1,6 @@
 import axios from "axios";
-const root = "http://itssolutiong8.azurewebsites.net/";
+// const root = "http://itssolutiong8.azurewebsites.net/";
+const root = "http://localhost:56288/";
 
 const instance = axios.create({
   baseURL: root,
