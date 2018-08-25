@@ -72,9 +72,9 @@ namespace API.ITSProject_2
             //token generation
             #region facebook
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
-            app.UseFacebookAuthentication(new FacebookAuthenticationOptions
+            app.UseFacebookAuthentication(facebookAuthOptions = new FacebookAuthenticationOptions
             {
-                AppId = "266318357470729",
+                AppId = "497342497392676",
                 AppSecret = "c425f789382947f98760dc4b55ca6a9f",
                 Provider = new FacebookAuthServer()
             });

@@ -86,6 +86,14 @@
     <Compile Include="Migrations\201808170910264_recreat_Database.Designer.cs">
       <DependentUpon>201808170910264_recreat_Database.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808250309217_123.cs" />
+    <Compile Include="Migrations\201808250309217_123.Designer.cs">
+      <DependentUpon>201808250309217_123.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808250358193_123213.cs" />
+    <Compile Include="Migrations\201808250358193_123213.Designer.cs">
+      <DependentUpon>201808250358193_123213.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Role.cs" />
@@ -119,6 +127,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201808170910264_recreat_Database.resx">
       <DependentUpon>201808170910264_recreat_Database.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808250309217_123.resx">
+      <DependentUpon>201808250309217_123.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808250358193_123213.resx">
+      <DependentUpon>201808250358193_123213.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

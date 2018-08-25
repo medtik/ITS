@@ -18,17 +18,23 @@
 
         public async Task<bool> AddRefreshToken(RefreshToken token)
         {
-
-            var existingToken = _dbContext.Set<RefreshToken>().Where(r => r.Subject == token.Subject && r.ClientId == token.ClientId).SingleOrDefault();
-
-            if (existingToken != null)
+            try
             {
-                var result = await RemoveRefreshToken(existingToken);
+                var existingToken = _dbContext.Set<RefreshToken>().Where(r => r.Subject == token.Subject && r.ClientId == token.ClientId).SingleOrDefault();
+
+                if (existingToken != null)
+                {
+                    var result = await RemoveRefreshToken(existingToken);
+                }
+
+                _dbContext.Set<RefreshToken>().Add(token);
+
+                return await _dbContext.SaveChangesAsync() > 0;
             }
-
-            _dbContext.Set<RefreshToken>().Add(token);
-
-            return await _dbContext.SaveChangesAsync() > 0;
+            catch (System.Exception ex)
+            {
+                throw;
+            }
         }
 
         public async Task<bool> RemoveRefreshToken(string refreshTokenId)
