@@ -27,7 +27,8 @@ export default {
       publishPlan: false,
       savePlan: false,
       create: false,
-      delete: false
+      delete: false,
+      edit: false
     }
   },
   getters: {
@@ -615,6 +616,38 @@ export default {
               loading: {delete: false}
             });
             reject(reason.response);
+          })
+      })
+    },
+    edit(context, payload){
+      // put /api/Plan/UpdatePlan
+      const {
+        id,
+        startDate,
+        endDate,
+        name,
+        planLocation,
+        planNotes
+      } = payload;
+
+      context.commit('setLoading',{loading: {edit: true}});
+      return new Promise((resolve, reject) => {
+        axiosInstance.put('api/Plan/UpdatePlan',{
+          id,
+          startDate,
+          endDate,
+          name,
+          planLocation,
+          planNotes
+        })
+          .then(value =>{
+            context.commit('setLoading',{loading: {edit: false}});
+            resolve();
+          })
+          .catch(reason => {
+            context.commit('setLoading',{loading: {edit: false}});
+            Raven.captureException(reason);
+            reject();
           })
       })
     }

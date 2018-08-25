@@ -337,6 +337,12 @@
           <e p="201808170910264_recreat_Database.cs" t="Include" />
           <e p="201808170910264_recreat_Database.Designer.cs" t="Include" />
           <e p="201808170910264_recreat_Database.resx" t="Include" />
+          <e p="201808250309217_123.cs" t="Include" />
+          <e p="201808250309217_123.Designer.cs" t="Include" />
+          <e p="201808250309217_123.resx" t="Include" />
+          <e p="201808250358193_123213.cs" t="Include" />
+          <e p="201808250358193_123213.Designer.cs" t="Include" />
+          <e p="201808250358193_123213.resx" t="Include" />
           <e p="Configuration.cs" t="Include" />
         </e>
         <e p="Models" t="Include">

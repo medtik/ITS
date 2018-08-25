@@ -2,7 +2,10 @@ import axiosInstance from "../util/axiosInstance";
 import RNMsgChannel from 'react-native-webview-messaging';
 import moment from "moment";
 import Raven from "raven-js"
-const root = "http://itssolutiong8.azurewebsites.net/";
+
+const root = "https://itssolutiong9.azurewebsites.net/";
+// const root = "http://localhost:56288/";
+
 
 export default {
   namespaced: true,
@@ -10,11 +13,17 @@ export default {
     facebookAppId: "266318357470729",
     token: undefined,
     facebookStatus: undefined,
-    facebookInstance: undefined
+    facebookInstance: undefined,
+    loading: {
+      facebookExternalLogin: false
+    }
   },
   getters: {
     isLoggedIn(state) {
       return !!state.token;
+    },
+    isLoggedInFacebook(state) {
+      return !!state.facebookStatus ? state.facebookStatus.status == "Connected" : false;
     },
     authorizeHeader(state, getters) {
       if (getters.isLoggedIn) {
@@ -64,11 +73,14 @@ export default {
       localStorage.removeItem('token');
       axiosInstance.defaults.headers.common['Authorization'] = undefined;
     },
-    setFacebookAuthentication(state, payload){
+    setFacebookAuthentication(state, payload) {
       state.facebookStatus = payload.status;
     },
-    setFacebookInstance(state, payload){
+    setFacebookInstance(state, payload) {
       state.facebookInstance = payload.instance;
+    },
+    setLoading(state, payload) {
+      state.loading = _.assign(state.loading, payload.loading);
     }
   },
   actions: {
@@ -100,41 +112,46 @@ export default {
         };
       });
     },
-    getTokenUsingFacebook (context, payload){
-      const {
-        status,
-        authResponse
-      } = payload.response;
-
-      if(status == "connected"){
-        axiosInstance.post('', {
-          accessToken: authResponse.accessToken,
-          useId: authResponse.userID,
-          appId: context.state.facebookAppId
-        })
-      }
-    },
-    signinFacebook(context, payload){
+    signinFacebook(context, payload) {
       const FB = context.state.facebookInstance;
 
-      FB.login(function(response){
-        Raven.captureMessage("FB login status - after logged in", {
-          extra:{
-            response
-          }
+      return new Promise((resolve, reject) => {
+        FB.login(function (response) {
+          context.commit('setLoading', {loading: {facebookExternalLogin: true}});
+          Raven.captureMessage('Login facebook token', {
+            extra: {
+              response
+            }
+          });
+          axiosInstance.post('RegisterExternal ', {
+            ExternalAccessToken: response.authResponse.accessToken,
+            userName: response.authResponse.userID,
+            provider: 'Facebook'
+          })
+            .then(value => {
+              Raven.captureMessage('Login facebook token', {
+                extra: {
+                  value
+                }
+              });
+              context.commit('setLoading', {loading: {facebookExternalLogin: false}});
+              resolve();
+            })
+            .catch(reason => {
+              Raven.captureException(reason);
+              context.commit('setLoading', {loading: {facebookExternalLogin: false}});
+              reject();
+            })
         });
-        if(response.status != 'unknown'){
-          //reload or redirect once logged in...
-          window.location.reload();
-        }
       });
     },
-    logout(context){
+    logout(context) {
       const {
         facebookInstance
       } = context.state;
+      context.dispatch('resetUserData',{}, {root: true});
 
-      if(context.state.facebookInstance){
+      if (context.state.facebookInstance) {
         facebookInstance.logout();
       }
     }

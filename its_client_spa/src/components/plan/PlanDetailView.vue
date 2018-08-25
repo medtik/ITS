@@ -97,7 +97,9 @@
               class="grey lighten-5">
         <v-divider></v-divider>
         <v-flex class="title text-xs-center white" pb-2 pt-4>
-          <span :id="'tab_item_'+day.key">{{day.planDayText}}</span>
+          <span :id="'tab_item_'+day.key">
+            <v-icon>far fa-calendar</v-icon> &nbsp; {{day.planDayText}}
+          </span>
           <v-flex v-if="!isPublic">
             <v-btn flat @click="onAddLocation(day)">
               <v-icon>add_location</v-icon>
