@@ -7,6 +7,16 @@ namespace API.ITSProject_2.ViewModels
     using System.Runtime.Serialization;
 
     [DataContract(Name = "UpdatePlan")]
+    public class UpdatePlanViewModel
+    {
+        [DataMember]
+        public UpdatePlanViewModels plan { get; set; }
+
+        [DataMember]
+        public UpdateIndexPlanLocationAndNote updateIndexPlanLocationAndNote { get; set; }
+    }
+
+    [DataContract(Name = "UpdatePlan")]
     public class UpdatePlanViewModels
     {
         [DataMember]
@@ -363,5 +373,11 @@ namespace API.ITSProject_2.ViewModels
 
         [DataMember]
         public bool IsVoted { get; set; }
+
+        [DataMember]
+        public int GroupCreatorId { get; set; }
+
+        [DataMember]
+        public bool IsGroupOwner { get; set; }
     }
 }

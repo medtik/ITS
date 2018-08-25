@@ -152,6 +152,25 @@
             return identityData;
         }
 
+        public async Task<_IdentityData> FindByUsername(string username)
+        {
+            _IdentityData identityData = null;
+            try
+            {
+                identityData = new _IdentityData();
+
+                Account account = await _accountService.FindAsync(username ?? string.Empty, null);
+                identityData.Data = account;
+                return identityData;
+            }
+            catch (Exception ex)
+            {
+                _loggingService.Write(GetType().Name, nameof(Find), ex);
+            }
+
+            return identityData;
+        }
+
         public async Task<User> Find(string accountId)
         {
             Account identity = await _accountService.FindByIdAsync(accountId);
@@ -270,22 +289,21 @@
             return data;
         }
 
-        public async Task<_IdentityData> CreateAsync(string UserName)
+        public async Task<string> CreateAsync(string UserName)
         {
             User user = new Creator
             {
                 FullName = UserName
             };
             int userId = _userService.CreateUser(user);
-            return new _IdentityData()
+            Account temp = new Account
             {
-                Data = await _accountService.CreateAsync(new Account
-                {
-                    UserName = UserName,
-                    UserId = userId,
-                    Email = "defaultEmail@gmail.com"
-                })
+                UserName = UserName,
+                UserId = userId,
+                Email = "defaultEmail@gmail.com"
             };
+            await _accountService.CreateAsync(temp);
+            return temp.Id;
         }
 
         public async Task<_IdentityData> AddLoginAsync(string userId, string a, string b)

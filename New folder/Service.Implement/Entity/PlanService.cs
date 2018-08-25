@@ -234,6 +234,8 @@ namespace Service.Implement.Entity
         {
             var plan = Find(planId, _ => _.Notes, _ => _.PlanLocations);
             var cloner = Clone.CloneObject(plan);
+            cloner.MemberId = null;
+            cloner.GroupId = null;
             cloner.IsPublic = true;
             foreach (var item in cloner.Notes)
             {
@@ -414,6 +416,7 @@ namespace Service.Implement.Entity
         }
 
         private List<TreeViewModels> localList = new List<TreeViewModels>();
+        private int maxDate = 0;
 
         private void PolulateNecessityLocations(
             Plan plan,
@@ -421,10 +424,11 @@ namespace Service.Implement.Entity
             DateTimeOffset currentDate,
             out Dictionary<NessecityType, Location> nessecityLocationMap, int dateIndex)
         {
-            if (dateIndex == 1)
+            if (dateIndex == 1 || localList.Count == maxDate)
             {
+                maxDate = localList.Count;
                 localList = locations;
-            } 
+            }
             Location hotel = null;
             Location breakfast = null;
             Location lunch = null;

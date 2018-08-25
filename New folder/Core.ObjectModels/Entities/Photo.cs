@@ -1,10 +1,19 @@
 ﻿namespace Core.ObjectModels.Entities
 {
+    using Firebase.Storage;
+    using Nito.AsyncEx;
+    using System;
     using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
 
     public class Photo : _BaseEntity
     {
-        public string Path { get; set; }
+        public string Path
+        {
+            get;
+            set;
+        }
 
         public int? ReviewId { get; set; }
 

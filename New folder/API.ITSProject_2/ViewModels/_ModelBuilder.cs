@@ -160,6 +160,7 @@
                 MemberId = plan.MemberId.HasValue ? plan.MemberId.Value : -1,
                 IsPublic = plan.IsPublic,
                 GroupName = plan.Group == null ? null : plan.Group.Name,
+                GroupCreatorId = plan.Group == null ? -1 : plan.Group.CreatorId
             };
         }
 
@@ -228,7 +229,7 @@
                 AreaName = plan.Area.Name,
                 GroupName = plan.Group == null ? "" : plan.Group.Name,
                 IsGroupOwner = currentUserId == (plan.Group != null ? plan.Group.CreatorId : -1),
-                IsPlanOwner = currentUserId == plan.CreatorId,
+                IsPlanOwner = currentUserId == plan.MemberId,
                 IsPublic = plan.IsPublic
             };
         }
@@ -598,7 +599,7 @@
         public IEnumerable<CommentViewModels> ConvertToCommentViewModels(IEnumerable<Review> reviews)
         {
             ICollection<CommentViewModels> comments = new List<CommentViewModels>();
-            reviews.ToList().ForEach(_ => ConvertToCommentViewModels(_));
+            reviews.ToList().ForEach(_ => comments.Add(ConvertToCommentViewModels(_)));
 
             return comments;
         }
