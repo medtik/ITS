@@ -24,74 +24,46 @@
                     :error="!!formError.endDate" :error-messages="formError.endDate"
                     label="Ngày kết thúc" type="date">
       </v-text-field>
-    </v-container>
-    <v-flex v-for="(day,index) in plan.days"
-            :key="day.key"
-            class="grey lighten-5">
-      <v-divider></v-divider>
-      <v-flex class="title text-xs-center white" pb-2 pt-4>
-        <span :id="'tab_item_'+day.key">{{day.planDayText}}</span>
-        <v-flex v-if="!isPublic">
-          <v-btn flat @click="onAddLocation(day)">
-            <v-icon>add_location</v-icon>
-            <span>Thêm địa điểm</span>
-          </v-btn>
-          <v-btn flat @click="onAddNote(day)" v-if="isOwnPlan">
-            <v-icon>note_add</v-icon>
-            <span>Thêm ghi chú</span>
-          </v-btn>
+
+      <v-flex v-for="(day,index) in input.days"
+              :key="day.key"
+              class="grey lighten-5">
+        <v-divider></v-divider>
+        <v-flex class="title text-xs-center white" pb-2 pt-4>
+          <span :id="'tab_item_'+day.key">{{day.planDayText}}</span>
+        </v-flex>
+        <!--ITEMS-->
+        <draggable v-model="day.items" :options="{handle:'.handle-bar', group:'days'}">
+          <v-flex py-2 mb-1
+                  v-for="item in day.items"
+                  :key="item.id"
+                  class="white">
+            <LocationFullWidth v-if="item.location"
+                               v-bind="item.location">
+              <template slot="handle">
+                <v-layout class="handle-bar">
+                  <v-icon>
+                    fas fa-grip-vertical
+                  </v-icon>
+                </v-layout>
+              </template>
+            </LocationFullWidth>
+            <NoteFullWidth v-else v-bind="item.note">
+              <template slot="handle">
+                <v-layout class="handle-bar">
+                  <v-icon>
+                    fas fa-grip-vertical
+                  </v-icon>
+                </v-layout>
+              </template>
+            </NoteFullWidth>
+          </v-flex>
+        </draggable>
+        <!--SPACER-->
+        <v-flex v-if="plan.days[index].length <= 0" style="height: 50px">
         </v-flex>
       </v-flex>
-      <!--ITEMS-->
-      <v-flex py-2 mb-1
-              v-for="item in day.items"
-              :key="item.id"
-              class="white">
-        <LocationFullWidth v-if="item.location"
-                           v-bind="item.location"
-                           :isOwn="true"
-                           @delete="onLocationDelete(item)">
-          <template v-if="isOwnPlan" slot="action">
-            <v-layout column align-center>
-              <v-checkbox :value="item.id"
-                          v-model="checkboxValues"
-                          @change="onToggleLocation(item.id)">
-              </v-checkbox>
-              <v-btn icon flat color="red" @click="onLocationDelete(item)">
-                <v-icon>
-                  fas fa-trash
-                </v-icon>
-              </v-btn>
-            </v-layout>
-          </template>
-        </LocationFullWidth>
-        <NoteFullWidth v-else v-bind="item.note"
-                       @delete="onNoteDelete(item,id)">
-          <template v-if="isOwnPlan" slot="action">
-            <v-layout column align-center>
-              <v-checkbox :value="item.id"
-                          v-model="checkboxValues"
-                          @change="onToggleNote(item.id)">
-              </v-checkbox>
-
-              <v-btn icon flat color="red" @click="onNoteDelete(item)">
-                <v-icon>
-                  fas fa-trash
-                </v-icon>
-              </v-btn>
-            </v-layout>
-          </template>
-        </NoteFullWidth>
-      </v-flex>
-      <!--SPACER-->
-      <v-flex v-if="plan.days[index].length <= 0" style="height: 50px">
-      </v-flex>
-    </v-flex>
-    <v-layout v-if="!plan.days"
-              class="title font-weight-bold"
-              justify-center align-center pa-5>
-      Chuyến đi của bạn đang trống
-    </v-layout>
+    </v-container>
     <v-container class="text-xs-center" v-else>
       <v-progress-circular indeterminate size="40" color="primary"></v-progress-circular>
     </v-container>
@@ -100,10 +72,19 @@
 
 <script>
   import {mapState} from "vuex";
+  import {LocationFullWidth} from "../../common/block";
+  import NoteFullWidth from "./NoteFullWidth"
   import Raven from "raven-js";
   import moment from "moment" ;
+  import draggable from 'vuedraggable'
+
   export default {
     name: "PlanEditView",
+    components:{
+      LocationFullWidth,
+      NoteFullWidth,
+      draggable
+    },
     data() {
       return {
         planId: undefined,
@@ -112,11 +93,12 @@
           name: undefined,
           startDate: undefined,
           endDate: undefined,
+          days:[]
         },
         formError:{
-          name,
-          startDate,
-          endDate
+          name: undefined,
+          startDate: undefined,
+          endDate: undefined
         }
       }
     },
@@ -144,6 +126,7 @@
               this.input.name = this.plan.name;
               this.input.startDate = moment(this.plan.startDate).format('YYYY-MM-DD');
               this.input.endDate = moment(this.plan.endDate).format('YYYY-MM-DD');
+              this.input.days = this.plan.days;
             }else{
               Raven.captureException(new Error("Invalid data"));
             }

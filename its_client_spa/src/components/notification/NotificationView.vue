@@ -8,7 +8,7 @@
       <v-progress-circular indeterminate size="40" color="primary"></v-progress-circular>
     </v-container>
     <v-container v-else fluid class="white">
-      <v-layout row justify-center>
+      <v-layout row justify-center wrap>
         <v-flex v-if="groupInvitation" lg6 xs12 pa-1>
           <div class="title">
             Lời mời vào nhóm

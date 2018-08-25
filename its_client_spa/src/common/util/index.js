@@ -3,5 +3,5 @@ import locates from "./Locates";
 
 export {
   axiosInstance,
-  locates
+  locates,
 }
