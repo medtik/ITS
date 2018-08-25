@@ -2,6 +2,7 @@ import axiosInstance from "../util/axiosInstance";
 import RNMsgChannel from 'react-native-webview-messaging';
 import moment from "moment";
 import Raven from "raven-js"
+const root = "http://itssolutiong8.azurewebsites.net/";
 
 export default {
   namespaced: true,
@@ -79,7 +80,7 @@ export default {
 
       return new Promise((resolve, reject) => {
         const xhttp = new XMLHttpRequest();
-        xhttp.open('POST', 'http://itssolution.azurewebsites.net/token', true);
+        xhttp.open('POST', `${root}/token`, true);
         xhttp.send(`grant_type=password&username=${email}&password=${password}`);
         xhttp.onreadystatechange = function () {
           if (this.readyState == 4) {
@@ -111,7 +112,6 @@ export default {
           useId: authResponse.userID,
           appId: context.state.facebookAppId
         })
-          .then()
       }
     },
     signinFacebook(context, payload){
