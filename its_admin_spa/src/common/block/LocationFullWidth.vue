@@ -9,7 +9,9 @@
         </router-link>
       </v-flex>
     </v-layout>
-
+    <v-layout slot="handle" px-1 v-if="$slots.handle" style="width: 100%; height: 100%">
+      <slot name="handle"></slot>
+    </v-layout>
     <v-layout slot="title" px-1>
 
       <v-icon v-if="locationIcon">
@@ -57,7 +59,7 @@
         </v-chip>
       </v-flex>
     </v-layout>
-    <v-layout slot="action" column align-end>
+    <v-layout slot="action" column align-end v-if="$slots.action">
       <slot name="action">
 
       </slot>

@@ -271,21 +271,37 @@
         }
 
         public async Task<_IdentityData> CreateAsync(string UserName)
-            => (new _IdentityData()
+        {
+            User user = new Creator
+            {
+                FullName = UserName
+            };
+            int userId = _userService.CreateUser(user);
+            return new _IdentityData()
             {
                 Data = await _accountService.CreateAsync(new Account
                 {
-                    UserName = UserName
+                    UserName = UserName,
+                    UserId = userId,
+                    Email = "defaultEmail@gmail.com"
                 })
-            });
+            };
+        }
 
         public async Task<_IdentityData> AddLoginAsync(string userId, string a, string b)
         {
-            UserLoginInfo login = new UserLoginInfo(a, b);
-            _IdentityData result = new _IdentityData();
-            result.Data = await _accountService.AddLoginAsync(userId, login);
-
-            return result;
+            try
+            {
+                UserLoginInfo login = new UserLoginInfo(a, b);
+                _IdentityData result = new _IdentityData();
+                IdentityResult reuslttest = await _accountService.AddLoginAsync(userId, login);
+                result.Data = reuslttest;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
         #endregion
     }

@@ -2,24 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7270baf9-4c8b-47c4-9e26-08d97eeabdd3" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ITSSolution/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ITSSolution/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.ITSSolution/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ITSSolution/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.ITSProject/Web.config" beforeDir="false" afterPath="$PROJECT_DIR$/API.ITSProject/Web.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_admin_spa/src/common/layout/ListItemLayout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../its_admin_spa/src/common/layout/ListItemLayout.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_admin_spa/src/common/store/authenticate.js" beforeDir="false" afterPath="$PROJECT_DIR$/../its_admin_spa/src/common/store/authenticate.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_admin_spa/src/common/util/axiosInstance.js" beforeDir="false" afterPath="$PROJECT_DIR$/../its_admin_spa/src/common/util/axiosInstance.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../its_admin_spa/src/common/block/LocationFullWidth.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../its_admin_spa/src/common/block/LocationFullWidth.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../its_admin_spa/src/common/util/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../its_admin_spa/src/common/util/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_client_spa/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../its_client_spa/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_client_spa/src/common/block/PlanFullWidth.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../its_client_spa/src/common/block/PlanFullWidth.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_client_spa/src/common/input/ChoosePlanDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../its_client_spa/src/common/input/ChoosePlanDialog.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_client_spa/src/common/layout/ListItemLayout.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../its_client_spa/src/common/layout/ListItemLayout.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_client_spa/src/common/store/authenticate.js" beforeDir="false" afterPath="$PROJECT_DIR$/../its_client_spa/src/common/store/authenticate.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_client_spa/src/common/util/axiosInstance.js" beforeDir="false" afterPath="$PROJECT_DIR$/../its_client_spa/src/common/util/axiosInstance.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_client_spa/src/common/util/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../its_client_spa/src/common/util/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_client_spa/src/components/notification/NotificationView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../its_client_spa/src/components/notification/NotificationView.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../its_client_spa/src/components/plan/PlanEditView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../its_client_spa/src/components/plan/PlanEditView.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_client_spa/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/../its_client_spa/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_mobile/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../its_mobile/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/httpRequests/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -268,8 +253,8 @@
       <file leaf-file-name="Web.config" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/API.ITSProject/Web.config">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="329">
-              <caret line="107" column="22" lean-forward="true" selection-start-line="107" selection-start-column="22" selection-end-line="107" selection-end-column="22" />
+            <state relative-caret-position="29">
+              <caret line="87" column="12" lean-forward="true" selection-start-line="87" selection-start-column="12" selection-end-line="87" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -334,7 +319,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Service.Implement/Entity/LocationService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Service.Implement/Entity/LocationService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Service.Implement/Entity/_BaseService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Infrastructure.Logging/Service/LoggingService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Infrastructure.Identity/Adapter/IdentityService.cs" root0="FORCE_HIGHLIGHTING" />
@@ -344,18 +329,18 @@
     <setting file="file://$PROJECT_DIR$/Core.ApplicationService/Business/Algorithm/ISearchTreeService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Core.ApplicationService/Business/LogService/ILoggingService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Infrastructure.Entity/Config/LocationConfiguration.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/API.ITSProject/Web.config" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/API.ITSProject/Web.config" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/API.ITSProject/CustomAttribute/AuthorizeRolesAttribute.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/API.ITSProject/Controllers/_BaseController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/API.ITSProject/Controllers/LocationController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/API.ITSProject/Controllers/PlanController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/API.ITSProject/Controllers/_BaseController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/API.ITSProject/Controllers/LocationController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/API.ITSProject/Controllers/PlanController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Core.ObjectModels/Entities/Helper/Clone.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/API.ITSProject/Controllers/GroupController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Infrastructure.Identity/Configuration/ClientConfig.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/API.ITSProject/ViewModels/_ModelBuilder.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/API.ITSProject/ViewModels/LocationViewModels.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Infrastructure.Identity/Configuration/RefreshTokenConfig.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Service.Implement/Entity/PlanService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Service.Implement/Entity/PlanService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/API.ITSProject/Startup.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Infrastructure.Identity/Migrations/201808170910264_recreat_Database.Designer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Service.Implement/Algorithm/SearchTreeService.cs" root0="FORCE_HIGHLIGHTING" />
@@ -396,7 +381,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
     <option name="width" value="1297" />
     <option name="height" value="788" />
@@ -756,7 +741,7 @@
       <workItem from="1535099456497" duration="402000" />
       <workItem from="1535104388476" duration="3137000" />
       <workItem from="1535160489281" duration="467000" />
-      <workItem from="1535163919645" duration="1463000" />
+      <workItem from="1535163919645" duration="2461000" />
     </task>
     <task id="LOCAL-00001" summary="Fix some localized problem in clinet">
       <created>1534724273331</created>
@@ -846,7 +831,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="74586000" />
+    <option name="totallyTimeSpent" value="75584000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -859,6 +844,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32954547" />
       <window_info anchor="right" id="Errors In Solution" order="3" weight="0.32958034" />
@@ -1402,8 +1388,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/API.ITSProject/Web.config">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="107" column="22" lean-forward="true" selection-start-line="107" selection-start-column="22" selection-end-line="107" selection-end-column="22" />
+        <state relative-caret-position="29">
+          <caret line="87" column="12" lean-forward="true" selection-start-line="87" selection-start-column="12" selection-end-line="87" selection-end-column="12" />
         </state>
       </provider>
     </entry>

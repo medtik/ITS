@@ -20,7 +20,7 @@
             //config validator for user model
             this.UserValidator = new UserValidator<Account>(this)
             {
-                RequireUniqueEmail = true,
+                RequireUniqueEmail = false,
                 AllowOnlyAlphanumericUserNames = false
             };
         }
