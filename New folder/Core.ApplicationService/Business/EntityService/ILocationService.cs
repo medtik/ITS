@@ -5,6 +5,7 @@
     using System.Linq.Expressions;
     using System.Collections.Generic;
     using Core.ObjectModels.Entities;
+    using System.Threading.Tasks;
 
     public interface ILocationService
     {
@@ -12,7 +13,7 @@
 
         bool AddReview(Review review);
 
-        bool Create(Location location, Photo priamryPhoto, IEnumerable<Photo> photos, IEnumerable<BusinessHour> businessHours, int[] tagList);
+        Task<bool> Create(Location location, Photo primaryPhoto, IEnumerable<Photo> photos, IEnumerable<BusinessHour> businessHours, int[] tagList);
 
         bool Edit(Location location, Photo priamryPhoto, IEnumerable<Photo> photos, IEnumerable<BusinessHour> businessHours, int[] tagList);
 

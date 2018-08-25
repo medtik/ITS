@@ -60,7 +60,9 @@
     <Compile Include="Database\Log\ILogContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core.ObjectModels\Core.ObjectModels.csproj">
       <Project>{05A448E7-161E-4FAC-90CF-A1B54342B100}</Project>

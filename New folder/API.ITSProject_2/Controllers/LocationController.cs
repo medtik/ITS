@@ -375,7 +375,7 @@ namespace API.ITSProject_2.Controllers
                     Path = avatar,
                     UserId = userId
                 };
-                _photoService.Create(photo);
+                await _photoService.Create2(photo);
 
                 List<LocationPhoto> locationPhotos = new List<LocationPhoto>();
                 locationPhotos.Add(new LocationPhoto
@@ -411,7 +411,7 @@ namespace API.ITSProject_2.Controllers
 
                 IEnumerable<BusinessHour> businessHours = ModelBuilder.ConvertToModels(data.Days);
 
-                bool result = _locationService.Create(location, primaryPhoto, otherPhoto, businessHours, data.Tags);
+                bool result = await _locationService.Create(location, primaryPhoto, otherPhoto, businessHours, data.Tags);
 
                 if (result)
                 {
@@ -448,7 +448,7 @@ namespace API.ITSProject_2.Controllers
 
                     IEnumerable<BusinessHour> businessHours = ModelBuilder.ConvertToModels(data.Days);
 
-                    bool result = _locationService.Create(location, primaryPhoto, otherPhoto, businessHours, data.Tags);
+                    bool result = await _locationService.Create(location, primaryPhoto, otherPhoto, businessHours, data.Tags);
 
                     if (result)
                     {
@@ -492,7 +492,7 @@ namespace API.ITSProject_2.Controllers
                         UserId = userId,
                         Path = item
                     };
-                    _photoService.Create(photo);
+                    await _photoService.Create2(photo);
                     photos.Add(photo);
                 }
                 _locationService.AddReview(new Review

@@ -1,4 +1,5 @@
 ﻿using Core.ObjectModels.Entities;
+using System.Threading.Tasks;
 
 namespace Core.ApplicationService.Business.EntityService
 {
@@ -6,7 +7,7 @@ namespace Core.ApplicationService.Business.EntityService
     {
         string GetBase64(int photoId);
 
-        bool Create(Photo photo);
+        Task<bool> Create2(Photo photo);
 
         bool Update(Photo photo);
     }

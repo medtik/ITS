@@ -228,7 +228,7 @@
                 AreaName = plan.Area.Name,
                 GroupName = plan.Group == null ? "" : plan.Group.Name,
                 IsGroupOwner = currentUserId == (plan.Group != null ? plan.Group.CreatorId : -1),
-                IsPlanOwner = currentUserId == plan.CreatorId,
+                IsPlanOwner = currentUserId == plan.MemberId,
                 IsPublic = plan.IsPublic
             };
         }

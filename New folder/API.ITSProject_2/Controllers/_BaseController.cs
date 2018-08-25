@@ -82,6 +82,14 @@
             return bytes;
         }
 
-       
+        protected MemoryStream ConvertToStream(string base64)
+        {
+            var imageParts = base64.Split(',').ToList<string>();
+            byte[] bytes = Convert.FromBase64String(imageParts[1]);
+            MemoryStream memoryStream = new MemoryStream(bytes);
+            return memoryStream;
+        }
+
+
     }
 }

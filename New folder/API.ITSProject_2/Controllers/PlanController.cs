@@ -369,7 +369,7 @@
 
         [HttpPut]
         [Route("api/Plan/UpdatePlan")]
-        public IHttpActionResult UpdatePlan(UpdatePlanViewModels viewModels, UpdateIndexPlanLocationAndNote updateIndexPlanLocationAndNote)
+        public IHttpActionResult UpdatePlan([FromBody] UpdatePlanViewModels viewModels, [FromBody] UpdateIndexPlanLocationAndNote updateIndexPlanLocationAndNote)
         {
             try
             {
