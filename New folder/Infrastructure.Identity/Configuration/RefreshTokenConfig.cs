@@ -14,7 +14,7 @@
             Property(_ => _.ClientId).IsRequired().HasMaxLength(255); ;
             Property(_ => _.IssuedUtc).IsOptional();
             Property(_ => _.ExpiresUtc).IsOptional();
-            Property(_ => _.ProtectedTicket).IsRequired().HasMaxLength(255);
+            Property(_ => _.ProtectedTicket).IsRequired().IsMaxLength();
         }
     }
 }
