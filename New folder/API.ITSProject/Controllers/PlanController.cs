@@ -104,7 +104,7 @@
             try
             {
                 int userId = (await CurrentUser()).Id;
-                IQueryable<Plan> plans = _planService.GetPlans(userId).Where(_ => !_.IsPublic && _.GroupId == null);
+                var plans = _planService.GetPlans(userId).ToList().Where(_ => !_.IsPublic && _.GroupId == null);
 
                 return Ok(ModelBuilder.ConvertToMyPlan(plans, userId));
             }
@@ -173,7 +173,7 @@
                     Address = location.Address,
                     Location = location.Name,
                     Percent = (tags.Count / commonTags.Count()).ToString(),
-                    PrimaryPhoto = CurrentUrl + location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Id.ToString(),
+                    PrimaryPhoto = location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Path.ToString(),
                     Rating = rating,
                     Reasons = commonTags.Select(tag => tag.Name).ToList(),
                     ReviewCount = location.Reviews.Count,

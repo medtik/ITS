@@ -1,4 +1,4 @@
-﻿namespace API.ITSProject
+﻿namespace API.ITSProject_2
 {
     using System;
     using System.Security.Cryptography;

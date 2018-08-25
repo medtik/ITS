@@ -1,4 +1,4 @@
-﻿namespace API.ITSProject.ViewModels
+﻿namespace API.ITSProject_2.ViewModels
 {
     using System.Collections.Generic;
     using System.Runtime.Serialization;
@@ -32,5 +32,8 @@
 
         [DataMember]
         public string Categories { get; set; }
+
+        [DataMember]
+        public int? TotalTimeStay { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace API.ITSProject.Controllers
+﻿namespace API.ITSProject_2.Controllers
 {
     using System;
     using System.Linq;
@@ -10,7 +10,7 @@
     using Core.ApplicationService.Business.IdentityService;
     using Core.ApplicationService.Business.LogService;
     using Core.ApplicationService.Business.PagingService;
-    using API.ITSProject.ViewModels;
+    using API.ITSProject_2.ViewModels;
 
     public class AreaController : _BaseController
     {
@@ -32,6 +32,7 @@
                 Area area = _areaService.Search(_ => _.Id == id, 
                     _ => _.Locations.Select(__ => __.Reviews),
                     _ => _.Locations.Select(__ => __.Photos.Select(___ => ___.Photo)),
+                    _ => _.Plans.Select(__ => __.Creator),
                     _ => _.Plans.Select(__ => __.Voters),
                     _ => _.Plans.Select(__ => __.PlanLocations.Select(___ => ___.Location).Select(____ => ____.Photos.Select(_____ => _____.Photo))),
                     _ => _.Photos.Select(__ => __.Photo)

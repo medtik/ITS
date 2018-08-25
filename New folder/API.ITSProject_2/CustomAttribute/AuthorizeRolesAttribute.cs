@@ -1,4 +1,4 @@
-﻿namespace API.ITSProject.CustomAttribute
+﻿namespace API.ITSProject_2.CustomAttribute
 {
     using System.Web.Http;
 

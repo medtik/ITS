@@ -8,12 +8,6 @@
 
     public class _ModelBuilder
     {
-        private string CurrentUrl;
-
-        public _ModelBuilder(string currentUrl)
-        {
-            CurrentUrl = currentUrl;
-        }
 
         #region Group
         public GroupLocationSuggestionViewModels ConvertToGroupLocationSuggestionViewModels(LocationSuggestion locationSuggestion)
@@ -201,7 +195,7 @@
                 PlanLocationId = planLocation.Id,
                 LocationId = planLocation.LocationId,
                 Address = planLocation.Location.Address,
-                Photo = CurrentUrl + planLocation.Location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Id.ToString(),
+                Photo = planLocation.Location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Path.ToString(),
                 Title = planLocation.Location.Name,
                 Rating = rating,
                 ReviewCount = ratingCount,
@@ -254,7 +248,7 @@
                 Name = plan.Name,
                 Time = (plan.EndDate.Day - plan.StartDate.Day) + 1,
                 Voter = plan.Voters.Count,
-                Photo = string.IsNullOrWhiteSpace(plan.PlanLocations.FirstOrDefault()?.Location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Id.ToString()) ? null : CurrentUrl + plan.PlanLocations.FirstOrDefault()?.Location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Id.ToString(),
+                Photo = plan.PlanLocations.FirstOrDefault()?.Location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Path.ToString(),
                 AreaId = plan.AreaId,
                 AreaName = plan.Area.Name,
                 CreatorId = plan.CreatorId,
@@ -275,7 +269,7 @@
         {
             AreaDetailViewModels tmpArea = new AreaDetailViewModels
             {
-                CoverPhoto = CurrentUrl + area.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Id.ToString(),
+                CoverPhoto = area.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Path,
                 Id = area.Id,
                 Name = area.Name,
                 Locations = new List<CategoriesLocationCounter>(),
@@ -336,7 +330,7 @@
                 Name = area.Name,
                 LocationCount = area.Locations.Where(_ => !_.IsDelete).Count(),
                 PlanCount = planCount,
-                Photo = CurrentUrl + area.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Id.ToString()
+                Photo = area.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Path
             };
         }
 
@@ -368,8 +362,8 @@
                 RatingCount = ratingCount,
                 BusinessHours = ConvertToBusinessHourViewModels(location.BusinessHours),
                 Tags = location.Tags.Select(_ => _.Name),
-                PrimaryPhoto = CurrentUrl + location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Id.ToString(),
-                OtherPhotos = location.Photos.Where(_ => !_.IsPrimary).Select(_ => _.Photo).Select(_ => CurrentUrl + _.Id.ToString()),
+                PrimaryPhoto = location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Path,
+                OtherPhotos = location.Photos.Where(_ => !_.IsPrimary).Select(_ => _.Photo).Select(_ => _.Path),
                 Comments = ConvertToCommentViewModels(location.Reviews).OrderByDescending(_ => _.Id).Take(5),
                 Category = location.Category,
                 Area = location.Area.Name,
@@ -390,7 +384,7 @@
                 Address = location.Address,
                 Id = location.Id,
                 Name = location.Name,
-                Photo = CurrentUrl + location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Id.ToString(),
+                Photo = location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Path,
                 Rating = rating,
                 Category = location.Category
             };
@@ -424,7 +418,7 @@
                 Categories = location.Category,
                 Rating = rating,
                 ReviewCount = ratingCount,
-                PrimaryPhoto = CurrentUrl + location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Id.ToString()
+                PrimaryPhoto = location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Path
             };
         }
 
@@ -528,7 +522,7 @@
             => new Question
             {
                 Content = question.Content,
-                Categories = question.Categories
+                Categories = question.Categories,
             };
 
         public QuestionDetailsViewModels ConvertToQuestionDetailsViewModels(Question question)
@@ -598,7 +592,7 @@
                 Id = review.Id,
                 Title = review.Title,
                 CreatorName = review.Creator.FullName,
-                Photos = review.Photos.Select(_ => CurrentUrl + _.Id.ToString())
+                Photos = review.Photos.Select(_ => _.Path)
             };
 
         public IEnumerable<CommentViewModels> ConvertToCommentViewModels(IEnumerable<Review> reviews)

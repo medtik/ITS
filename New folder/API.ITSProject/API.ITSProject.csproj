@@ -316,8 +316,12 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\ITSSolution - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\ITSSolution - FTP1.pubxml" />
     <None Include="Properties\PublishProfiles\ITSSolution - Web Deploy.pubxml" />
     <Content Include="Tree\tree.json" />
+    <None Include="Properties\PublishProfiles\ITSSolution - Web Deploy1.pubxml" />
+    <None Include="Properties\PublishProfiles\ITSSolutionG8 - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\ITSSolutionG8 - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -169,7 +169,7 @@ namespace API.ITSProject.Controllers
                     Address = location.Address,
                     Location = location.Name,
                     Percent = (tags.Count / commonTags.Count()).ToString(),
-                    PrimaryPhoto = CurrentUrl + location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Id.ToString(),
+                    PrimaryPhoto = location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Path,
                     Rating = rating,
                     Reasons = commonTags.Select(tag => tag.Name).ToList(),
                     ReviewCount = location.Reviews.Count,

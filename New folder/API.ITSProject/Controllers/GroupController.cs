@@ -266,6 +266,7 @@
                     int userId = (await CurrentUser()).Id;
 
                     plan.MemberId = userId;
+                    plan.GroupId = null;
 
                     _planService.Create(plan);
                 }//add to personal

@@ -1,4 +1,4 @@
-﻿namespace API.ITSProject.Controllers
+﻿namespace API.ITSProject_2.Controllers
 {
     using System;
     using System.Linq;
@@ -12,7 +12,7 @@
     using Core.ApplicationService.Business.LogService;
     using Core.ApplicationService.Business.PagingService;
     using Infrastructure.Identity.Models;
-    using API.ITSProject.ViewModels;
+    using API.ITSProject_2.ViewModels;
     using Core.ObjectModels.Pagination;
 
     public class UserController : _BaseController

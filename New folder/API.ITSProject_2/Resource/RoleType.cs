@@ -1,4 +1,4 @@
-﻿namespace API.ITSProject.Resource
+﻿namespace API.ITSProject_2.Resource
 {
     public enum RoleType
     {

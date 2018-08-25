@@ -1,18 +1,13 @@
-﻿namespace API.ITSProject.ViewModels
+﻿namespace API.ITSProject_2.ViewModels
 {
     using System.Linq;
     using System.Collections.Generic;
     using Core.ObjectModels.Entities;
     using Infrastructure.Identity.Models;
+    using System;
 
     public class _ModelBuilder
     {
-        private string CurrentUrl;
-
-        public _ModelBuilder(string currentUrl)
-        {
-            CurrentUrl = currentUrl;
-        }
 
         #region Group
         public GroupLocationSuggestionViewModels ConvertToGroupLocationSuggestionViewModels(LocationSuggestion locationSuggestion)
@@ -112,6 +107,23 @@
                 PlanDay = planNote.PlanDay ?? 0
             };
 
+        public Location ConvertToModels(EditLocationViewModels model)
+           => new Location
+            {
+                Address = model.Address,
+                AreaId = model.AreaId,
+                Description = model.Desription,
+                EmailAddress = model.Email,
+                IsClosed = model.IsClosed,
+                IsVerified = model.IsVerified,
+                Latitude = model.Lat,
+                Longitude = model.Long,
+                Name = model.Name,
+                PhoneNumber = model.Phone,
+                Website = model.Web,
+                Category = model.Category
+            };
+
         public Plan ConvertToModels(CreatePlanViewModels planLocation)
             => new Plan
             {
@@ -147,7 +159,7 @@
                 AreaName = plan.Area.Name,
                 MemberId = plan.MemberId.HasValue ? plan.MemberId.Value : -1,
                 IsPublic = plan.IsPublic,
-                GroupName = plan.Group == null ? null : plan.Group.Name
+                GroupName = plan.Group == null ? null : plan.Group.Name,
             };
         }
 
@@ -183,14 +195,15 @@
                 PlanLocationId = planLocation.Id,
                 LocationId = planLocation.LocationId,
                 Address = planLocation.Location.Address,
-                Photo = CurrentUrl + planLocation.Location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Id.ToString(),
+                Photo = planLocation.Location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Path.ToString(),
                 Title = planLocation.Location.Name,
                 Rating = rating,
                 ReviewCount = ratingCount,
                 Index = planLocation.Index,
                 PlanDay = planLocation.PlanDay,
                 Category = planLocation.Location.Category,
-                IsDone = planLocation.Done
+                IsDone = planLocation.Done,
+                TotalTimeStay = planLocation.Location.TotalTimeStay
             };
         }
 
@@ -210,11 +223,13 @@
                 EndDate = plan.EndDate,
                 StartDate = plan.StartDate,
                 Name = plan.Name,
-                Locations = ConvertToPlanLocationViewModels(plan.PlanLocations.Select(_ => _.Location)),
+                Locations = ConvertToPlanLocationViewModels(plan.PlanLocations.Select(_ => _.Location).GroupBy(_ => _.Id).Select(_ => _.First())),
                 AreaId = plan.AreaId,
                 AreaName = plan.Area.Name,
                 GroupName = plan.Group == null ? "" : plan.Group.Name,
                 IsGroupOwner = currentUserId == (plan.Group != null ? plan.Group.CreatorId : -1),
+                IsPlanOwner = currentUserId == plan.CreatorId,
+                IsPublic = plan.IsPublic
             };
         }
 
@@ -233,9 +248,11 @@
                 Name = plan.Name,
                 Time = (plan.EndDate.Day - plan.StartDate.Day) + 1,
                 Voter = plan.Voters.Count,
-                Photo = string.IsNullOrWhiteSpace(plan.PlanLocations.FirstOrDefault()?.Location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Id.ToString()) ? null : CurrentUrl + plan.PlanLocations.FirstOrDefault()?.Location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Id.ToString(),
+                Photo = plan.PlanLocations.FirstOrDefault()?.Location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Path.ToString(),
                 AreaId = plan.AreaId,
-                AreaName = plan.Area.Name
+                AreaName = plan.Area.Name,
+                CreatorId = plan.CreatorId,
+                CreatorName = plan.Creator.FullName
             };
 
         public IEnumerable<FeaturedPlanViewModels> ConvertToFeaturedPlanViewModels(IEnumerable<Plan> plans)
@@ -252,12 +269,12 @@
         {
             AreaDetailViewModels tmpArea = new AreaDetailViewModels
             {
-                CoverPhoto = CurrentUrl + area.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Id.ToString(),
+                CoverPhoto = area.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Path,
                 Id = area.Id,
                 Name = area.Name,
                 Locations = new List<CategoriesLocationCounter>(),
                 FeaturedLocation = ConvertToPlanLocationViewModels(area.Locations).OrderByDescending(_ => _.Rating).Take(10).ToList(),
-                FeaturedPlan = ConvertToFeaturedPlanViewModels(area.Plans).OrderByDescending(_ => _.Voter).Take(10).ToList()
+                FeaturedPlan = ConvertToFeaturedPlanViewModels(area.Plans.Where(_ => _.IsPublic)).OrderByDescending(_ => _.Voter).Take(10).ToList()
             };
             foreach (var item in area.Locations)
             {
@@ -313,7 +330,7 @@
                 Name = area.Name,
                 LocationCount = area.Locations.Where(_ => !_.IsDelete).Count(),
                 PlanCount = planCount,
-                Photo = CurrentUrl + area.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Id.ToString()
+                Photo = area.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Path
             };
         }
 
@@ -329,7 +346,7 @@
         #region Location
         public LocationDetailViewModels ConvertToLocationDetailViewModels(Location location)
         {
-            int ratingCount = location.Reviews.Count;
+            int ratingCount = location.Reviews.Count;   
             float rating = location.Reviews.Sum(_ => _.Rating) / ratingCount;
             rating = float.IsNaN(rating) ? 0 : rating;
 
@@ -345,10 +362,16 @@
                 RatingCount = ratingCount,
                 BusinessHours = ConvertToBusinessHourViewModels(location.BusinessHours),
                 Tags = location.Tags.Select(_ => _.Name),
-                PrimaryPhoto = CurrentUrl + location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Id.ToString(),
-                OtherPhotos = location.Photos.Where(_ => !_.IsPrimary).Select(_ => _.Photo).Select(_ => CurrentUrl + _.Id.ToString()),
+                PrimaryPhoto = location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Path,
+                OtherPhotos = location.Photos.Where(_ => !_.IsPrimary).Select(_ => _.Photo).Select(_ => _.Path),
                 Comments = ConvertToCommentViewModels(location.Reviews).OrderByDescending(_ => _.Id).Take(5),
-                Category = location.Category
+                Category = location.Category,
+                Area = location.Area.Name,
+                Description = location.Description,
+                IsClose = location.IsClosed,
+                IsVerified = location.IsVerified,
+                Lat = location.Latitude,
+                Long = location.Longitude
             };
         }
 
@@ -361,7 +384,7 @@
                 Address = location.Address,
                 Id = location.Id,
                 Name = location.Name,
-                Photo = CurrentUrl + location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Id.ToString(),
+                Photo = location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Path,
                 Rating = rating,
                 Category = location.Category
             };
@@ -395,7 +418,7 @@
                 Categories = location.Category,
                 Rating = rating,
                 ReviewCount = ratingCount,
-                PrimaryPhoto = CurrentUrl + location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Id.ToString()
+                PrimaryPhoto = location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Path
             };
         }
 
@@ -499,7 +522,7 @@
             => new Question
             {
                 Content = question.Content,
-                Categories = question.Categories
+                Categories = question.Categories,
             };
 
         public QuestionDetailsViewModels ConvertToQuestionDetailsViewModels(Question question)
@@ -508,9 +531,12 @@
                 Answer = question.Answers.Select(_ => new AnswerViewModels
                 {
                     Content = _.Content,
-                    Id = _.Id
+                    Id = _.Id,
+                    Tags = _.Tags.Select(__ => (__.Id, __.Name)).ToArray()
                 }),
-                Content = question.Content
+                Content = question.Content,
+                Id = question.Id,
+                Category = question.Categories
             };
 
         public IEnumerable<QuestionDetailsViewModels> ConvertToQuestionDetailsViewModels(IEnumerable<Question> question)
@@ -566,7 +592,7 @@
                 Id = review.Id,
                 Title = review.Title,
                 CreatorName = review.Creator.FullName,
-                Photos = review.Photos.Select(_ => CurrentUrl + _.Id.ToString())
+                Photos = review.Photos.Select(_ => _.Path)
             };
 
         public IEnumerable<CommentViewModels> ConvertToCommentViewModels(IEnumerable<Review> reviews)

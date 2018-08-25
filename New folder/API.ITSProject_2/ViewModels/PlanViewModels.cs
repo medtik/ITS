@@ -1,4 +1,6 @@
-﻿namespace API.ITSProject.ViewModels
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace API.ITSProject_2.ViewModels
 {
     using System;
     using System.Collections.Generic;
@@ -126,6 +128,25 @@
         [DataMember]
         public int AreaId { get; set; }
     }
+    
+    [DataContract(Name = "Plan")]
+    public class CreateSuggestedPlanViewModels
+    {
+        [DataMember, Required]
+        public int[] Answers { get; set; }
+        
+        [DataMember, Required]
+        public string Name { get; set; }
+
+        [DataMember, Required]
+        public DateTimeOffset StartDate { get; set; }
+
+        [DataMember, Required]
+        public DateTimeOffset EndDate { get; set; }
+
+        [DataMember,Required]
+        public int AreaId { get; set; }
+    }
 
     [DataContract(Name = "LocationInPlan")]
     public class LocationInPlanViewModels
@@ -169,6 +190,12 @@
 
         [DataMember]
         public string AreaName { get; set; }
+
+        [DataMember]
+        public int CreatorId { get; set; }
+
+        [DataMember]
+        public string CreatorName { get; set; }
     }
 
     [DataContract(Name = "Plan")]
@@ -200,6 +227,12 @@
 
         [DataMember]
         public bool IsGroupOwner { get; set; }
+
+        [DataMember]
+        public bool IsPlanOwner { get; set; }
+
+        [DataMember]
+        public bool IsPublic { get; set; }
     }
 
     [DataContract(Name = "Location")]
@@ -281,6 +314,9 @@
 
         [DataMember]
         public bool IsDone { get; set; }
+
+        [DataMember]
+        public int? TotalTimeStay { get; set; }
     }
 
     [DataContract(Name = "Plan")]
@@ -324,5 +360,8 @@
 
         [DataMember]
         public string GroupName { get; set; }
+
+        [DataMember]
+        public bool IsVoted { get; set; }
     }
 }

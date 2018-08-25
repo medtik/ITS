@@ -1,4 +1,4 @@
-﻿namespace API.ITSProject.Controllers
+﻿namespace API.ITSProject_2.Controllers
 {
     using System.Web;
     using System.Web.Http;
@@ -8,7 +8,7 @@
     using Core.ApplicationService.Business.LogService;
     using Core.ApplicationService.Business.PagingService;
     using Core.ApplicationService.Business.IdentityService;
-    using API.ITSProject.ViewModels;
+    using API.ITSProject_2.ViewModels;
     using Microsoft.Owin.Security;
     using System.Net.Http;
     using System.Security.Cryptography;
@@ -27,13 +27,12 @@
     {
         private _ModelBuilder _modelBuilder;
         protected readonly IPhotoService _photoService;
-        protected readonly string CurrentUrl;
         protected readonly ILoggingService _loggingService;
         protected readonly IPagingService _paggingService;
 
         protected readonly IIdentityService _identityService;
 
-        public _ModelBuilder ModelBuilder => _modelBuilder ?? (_modelBuilder = new _ModelBuilder($"{CurrentContext.Request.Url.GetLeftPart(UriPartial.Authority)}/api/photo/converPhotoBase64?id="));
+        public _ModelBuilder ModelBuilder => _modelBuilder ?? (_modelBuilder = new _ModelBuilder());
 
         protected HttpContext CurrentContext => HttpContext.Current;
         protected IAuthenticationManager Authentication => Request.GetOwinContext().Authentication;
@@ -45,7 +44,6 @@
             _paggingService = paggingService;
             _identityService = identityService;
             _photoService = photoService;
-            CurrentUrl = $"{CurrentContext.Request.Url.GetLeftPart(UriPartial.Authority)}/api/photo/converPhotoBase64?id=";
         }
 
         protected void AddModelError(string message) => ModelState.AddModelError(string.Empty, message);

@@ -1,4 +1,4 @@
-﻿namespace API.ITSProject.Provider
+﻿namespace API.ITSProject_2.Provider
 {
     using System.Collections.Generic;
     using System.Security.Claims;

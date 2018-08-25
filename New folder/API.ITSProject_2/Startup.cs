@@ -1,27 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Web.Http;
-using API.ITSProject.Provider;
-using API.ITSProject.Provider.ExternalLogin;
-using Core.ApplicationService.Business.IdentityService;
-using DependencyResolver;
-using Microsoft.AspNet.Identity;
-using Microsoft.Owin;
-using Microsoft.Owin.Cors;
-using Microsoft.Owin.Security.DataProtection;
-using Microsoft.Owin.Security.Facebook;
-using Microsoft.Owin.Security.OAuth;
-using Ninject;
-using Ninject.Modules;
-using Ninject.Web.Common.OwinHost;
-using Ninject.Web.WebApi.OwinHost;
-using Owin;
+﻿using Microsoft.Owin;
 
 [assembly: OwinStartup(typeof(API.ITSProject_2.Startup))]
-
 namespace API.ITSProject_2
 {
+    using System;
+    using System.Reflection;
+    using System.Web.Http;
+    using System.Collections.Generic;
+    using Owin;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.Owin.Cors;
+    using Microsoft.Owin.Security.OAuth;
+    using Microsoft.Owin.Security.Facebook;
+    using Ninject;
+    using Ninject.Modules;
+    using Ninject.Web.Common.OwinHost;
+    using Ninject.Web.WebApi.OwinHost;
+    using Core.ApplicationService.Business.IdentityService;
+    using DependencyResolver;
+    using API.ITSProject_2.Provider;
+    using API.ITSProject_2.Provider.ExternalLogin;
+    using Microsoft.Owin.Security.DataProtection;
+
     public class Startup
     {
         internal static IDataProtectionProvider DataProtectionProvider;
