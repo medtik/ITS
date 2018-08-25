@@ -148,6 +148,9 @@
 
         }
       },
+      getFormattedDays(){
+
+      },
       validate() {
         let nameError = undefined;
         let startDateError = undefined;
