@@ -14,7 +14,7 @@
       </v-flex>
     </v-layout>
     <v-layout slot="detail">
-      <v-flex class="body-1" v-html="description">
+      <v-flex class="body-1" v-html="description" style="overflow-y: auto; max-height: 250px">
       </v-flex>
     </v-layout>
     <v-layout slot="action" column align-end>

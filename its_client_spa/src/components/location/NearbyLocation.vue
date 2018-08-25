@@ -1,5 +1,8 @@
 <template>
   <v-content>
+    <v-toolbar dark flat color="light-blue darken-2" dense>
+
+    </v-toolbar>
     <v-container v-if="pageLoading">
       <v-progress-circular indeterminate size="40" color="primary"></v-progress-circular>
     </v-container>
@@ -28,7 +31,8 @@
     data() {
       return {
         long,
-        lat
+        lat,
+        title,
       }
     },
     computed: {
@@ -40,7 +44,8 @@
     created() {
       const {
         long,
-        lat
+        lat,
+        title
       } = this.$route.query;
 
       this.long = long;

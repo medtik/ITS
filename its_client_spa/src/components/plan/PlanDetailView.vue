@@ -142,11 +142,11 @@
                             v-model="checkboxValues"
                             @change="onToggleNote(item.id)">
                 </v-checkbox>
-                <v-btn icon flat color="primary" @click="onNoteEdit(item)">
-                  <v-icon>
-                    fas fa-edit
-                  </v-icon>
-                </v-btn>
+                <!--<v-btn icon flat color="primary" @click="onNoteEdit(item)">-->
+                  <!--<v-icon>-->
+                    <!--fas fa-edit-->
+                  <!--</v-icon>-->
+                <!--</v-btn>-->
                 <v-btn icon flat color="red" @click="onNoteDelete(item)">
                   <v-icon>
                     fas fa-trash
@@ -233,9 +233,6 @@
                                    :showPersonal="plan.isPublic || !plan.isOwn"
                                    @select="onAddToGroupSelected"
                                    @close="dialog.choosePlanDestination = false"/>
-    </template>
-    <template v-else>
-
     </template>
 
     <SearchMethodDialog

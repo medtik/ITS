@@ -8,10 +8,15 @@ location suggestion not send extra comment to back
 00:00 -> 00:00 ở location detail
 work on location suggestion
 VotePublic plan
+Tạo chuyến đi tự động chuyển vào trang smart search result
 
 -----
+Working on location map
+working on nearby locations of location
+working on nearby locations of user
+  start in landing page
+
 Edit plan
-Tạo chuyến đi tự động chuyển vào trang smart search result
 validate business hours
 Add "from time - to time" to location in plan detail
 Add travel time to "cách đi"
@@ -21,11 +26,11 @@ work on add photo location
 
 Edit account (client)
 add description to location detail view
+show snackbar(notification) when login
 
-Working on location map
-working on nearby locations of location
-working on nearby locations of user
-  start in landing page
+
+Edit note
+Edit location's comment
 
 working on auto check location of plan (check on multiple plan)
   by send current coor and previous location | server response with current location
