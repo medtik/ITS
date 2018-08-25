@@ -145,11 +145,34 @@
       },
       onConfirmBtnClick() {
         if (this.validate()) {
-
+          this.$store.dispatch('plan/edit',{
+            id: this.planId,
+            ...this.input,
+            ...this.getFormattedDays()
+          })
         }
       },
       getFormattedDays(){
+        let days = _.cloneDeep(this.days);
 
+        const planLocation = _(days)
+          .map(items => {
+            return _.filter(items, item => !!item.location)
+          })
+          .flatten()
+          .value();
+
+        const planNotes = _(days)
+          .map(items => {
+            return _.filter(items, item => !!item.note)
+          })
+          .flatten()
+          .value();
+
+        return {
+          planNotes,
+          planLocation
+        };
       },
       validate() {
         let nameError = undefined;

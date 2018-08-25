@@ -138,7 +138,6 @@
         this.input.birthdate = account.birthdate;
       },
       signout() {
-        this.$store.dispatch('resetUserData');
         this.$store.dispatch('authenticate/logout');
         this.$store.commit('authenticate/nullToken');
         this.$router.push({

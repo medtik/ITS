@@ -2,9 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7270baf9-4c8b-47c4-9e26-08d97eeabdd3" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../its_admin_spa/src/common/block/LocationFullWidth.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../its_admin_spa/src/common/block/LocationFullWidth.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../its_admin_spa/src/common/util/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../its_admin_spa/src/common/util/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ITSSolution/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ITSSolution/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ITSSolution/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ITSSolution/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.ITSProject/Web.config" beforeDir="false" afterPath="$PROJECT_DIR$/API.ITSProject/Web.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../its_admin_spa/src/common/input/ChoosePlanDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../its_admin_spa/src/common/input/ChoosePlanDialog.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../its_admin_spa/src/common/store/authenticate.js" beforeDir="false" afterPath="$PROJECT_DIR$/../its_admin_spa/src/common/store/authenticate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../its_admin_spa/src/common/util/axiosInstance.js" beforeDir="false" afterPath="$PROJECT_DIR$/../its_admin_spa/src/common/util/axiosInstance.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../its_client_spa/.firebaserc" beforeDir="false" afterPath="$PROJECT_DIR$/../its_client_spa/.firebaserc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../its_client_spa/dbo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../its_client_spa/draft_11.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../its_client_spa/firebase.json" beforeDir="false" afterPath="$PROJECT_DIR$/../its_client_spa/firebase.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../its_client_spa/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../its_client_spa/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../its_client_spa/src/common/store/authenticate.js" beforeDir="false" afterPath="$PROJECT_DIR$/../its_client_spa/src/common/store/authenticate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../its_client_spa/src/common/util/axiosInstance.js" beforeDir="false" afterPath="$PROJECT_DIR$/../its_client_spa/src/common/util/axiosInstance.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../its_client_spa/src/components/account/PersonalView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../its_client_spa/src/components/account/PersonalView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../its_client_spa/src/components/account/SigninView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../its_client_spa/src/components/account/SigninView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../its_client_spa/src/components/group/GroupDetailView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../its_client_spa/src/components/group/GroupDetailView.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../its_client_spa/src/components/plan/PlanEditView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../its_client_spa/src/components/plan/PlanEditView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../its_client_spa/src/store/modules/plan.js" beforeDir="false" afterPath="$PROJECT_DIR$/../its_client_spa/src/store/modules/plan.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../its_mobile/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../its_mobile/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../its_mobile/src/ITSWeb.js" beforeDir="false" afterPath="$PROJECT_DIR$/../its_mobile/src/ITSWeb.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.idea/httpRequests/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -133,13 +150,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PlanService.cs" pinned="false" current-in-tab="false">
+      <file leaf-file-name="PlanService.cs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Service.Implement/Entity/PlanService.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="9465">
+            <state relative-caret-position="260">
               <caret line="825" column="22" selection-start-line="825" selection-start-column="22" selection-end-line="825" selection-end-column="22" />
               <folding>
                 <marker date="1535105306677" expanded="false" signature="6:235" ph="..." />
+                <marker date="1535105306677" expanded="true" signature="271:38820" ph="{...}" />
                 <marker date="1535105306677" expanded="false" signature="284:619" ph="..." />
                 <marker date="1535105306677" expanded="true" signature="684:38818" ph="{...}" />
                 <marker date="1535105306677" expanded="true" signature="1064:1164" ph="{...}" />
@@ -198,7 +216,44 @@
                 <marker date="1535105306677" expanded="true" signature="15105:23575" ph="{...}" />
                 <marker date="1535105306677" expanded="true" signature="15147:15214" ph="{...}" />
                 <marker date="1535105306677" expanded="false" signature="15373:15725" ph="hotel" />
+                <marker date="1535105306677" expanded="true" signature="15553:15701" ph="{...}" />
                 <marker date="1535105306677" expanded="false" signature="15739:21752" ph="breakfast" />
+                <marker date="1535105306677" expanded="true" signature="16185:16252" ph="{...}" />
+                <marker date="1535105306677" expanded="true" signature="16345:18825" ph="{...}" />
+                <marker date="1535105306677" expanded="true" signature="16554:18811" ph="{...}" />
+                <marker date="1535105306677" expanded="true" signature="16615:17316" ph="{...}" />
+                <marker date="1535105306677" expanded="true" signature="16716:17294" ph="{...}" />
+                <marker date="1535105306677" expanded="true" signature="16826:17268" ph="{...}" />
+                <marker date="1535105306677" expanded="true" signature="16947:17238" ph="{...}" />
+                <marker date="1535105306677" expanded="true" signature="17063:17204" ph="{...}" />
+                <marker date="1535105306677" expanded="true" signature="17360:18053" ph="{...}" />
+                <marker date="1535105306677" expanded="true" signature="17461:18031" ph="{...}" />
+                <marker date="1535105306677" expanded="true" signature="17571:18005" ph="{...}" />
+                <marker date="1535105306677" expanded="true" signature="17688:17975" ph="{...}" />
+                <marker date="1535105306677" expanded="true" signature="17804:17941" ph="{...}" />
+                <marker date="1535105306677" expanded="true" signature="18098:18793" ph="{...}" />
+                <marker date="1535105306677" expanded="true" signature="18199:18771" ph="{...}" />
+                <marker date="1535105306677" expanded="true" signature="18309:18745" ph="{...}" />
+                <marker date="1535105306677" expanded="true" signature="18427:18715" ph="{...}" />
+                <marker date="1535105306677" expanded="true" signature="18543:18681" ph="{...}" />
+                <marker date="1535105306677" expanded="true" signature="18895:21728" ph="{...}" />
+                <marker date="1535105306677" expanded="true" signature="19014:21714" ph="{...}" />
+                <marker date="1535105306677" expanded="true" signature="19239:21696" ph="{...}" />
+                <marker date="1535105306677" expanded="true" signature="19308:20069" ph="{...}" />
+                <marker date="1535105306677" expanded="true" signature="19417:20043" ph="{...}" />
+                <marker date="1535105306677" expanded="true" signature="19535:20013" ph="{...}" />
+                <marker date="1535105306677" expanded="true" signature="19664:19979" ph="{...}" />
+                <marker date="1535105306677" expanded="true" signature="19788:19941" ph="{...}" />
+                <marker date="1535105306677" expanded="true" signature="20117:20870" ph="{...}" />
+                <marker date="1535105306677" expanded="true" signature="20226:20844" ph="{...}" />
+                <marker date="1535105306677" expanded="true" signature="20344:20814" ph="{...}" />
+                <marker date="1535105306677" expanded="true" signature="20469:20780" ph="{...}" />
+                <marker date="1535105306677" expanded="true" signature="20593:20742" ph="{...}" />
+                <marker date="1535105306677" expanded="true" signature="20919:21674" ph="{...}" />
+                <marker date="1535105306677" expanded="true" signature="21028:21648" ph="{...}" />
+                <marker date="1535105306677" expanded="true" signature="21146:21618" ph="{...}" />
+                <marker date="1535105306677" expanded="true" signature="21272:21584" ph="{...}" />
+                <marker date="1535105306677" expanded="true" signature="21396:21546" ph="{...}" />
                 <marker date="1535105306677" expanded="true" signature="21966:22151" ph="{...}" />
                 <marker date="1535105306677" expanded="true" signature="22289:23446" ph="{...}" />
                 <marker date="1535105306677" expanded="true" signature="22769:23001" ph="{...}" />
@@ -222,6 +277,11 @@
                 <marker date="1535105306677" expanded="true" signature="29871:29982" ph="{...}" />
                 <marker date="1535105306677" expanded="true" signature="30426:32507" ph="{...}" />
                 <marker date="1535105306677" expanded="false" signature="30847:32365" ph="Calculate arrive time" />
+                <marker date="1535105306677" expanded="true" signature="31414:32220" ph="{...}" />
+                <marker date="1535105306677" expanded="true" signature="31530:32206" ph="{...}" />
+                <marker date="1535105306677" expanded="true" signature="31955:32049" ph="{...}" />
+                <marker date="1535105306677" expanded="true" signature="32074:32188" ph="{...}" />
+                <marker date="1535105306677" expanded="true" signature="32253:32341" ph="{...}" />
                 <marker date="1535105306677" expanded="true" signature="32393:32452" ph="{...}" />
                 <marker date="1535105306677" expanded="true" signature="32767:34859" ph="{...}" />
                 <marker date="1535105306677" expanded="true" signature="32920:34701" ph="{...}" />
@@ -250,30 +310,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Web.config" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Web.config" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/API.ITSProject/Web.config">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="29">
-              <caret line="87" column="12" lean-forward="true" selection-start-line="87" selection-start-column="12" selection-end-line="87" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_BaseController.cs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/API.ITSProject/Controllers/_BaseController.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="765">
-              <caret line="72" column="33" selection-start-line="72" selection-start-column="33" selection-end-line="72" selection-end-column="33" />
-              <folding>
-                <marker date="1535160179919" expanded="false" signature="49:810" ph="..." />
-                <marker date="1535160179919" expanded="true" signature="869:3356" ph="{...}" />
-                <marker date="1535160179919" expanded="true" signature="1790:1801" ph="{...}" />
-                <marker date="1535160179919" expanded="true" signature="2068:2751" ph="{...}" />
-                <marker date="1535160179919" expanded="true" signature="2355:2517" ph="{...}" />
-                <marker date="1535160179919" expanded="true" signature="2617:2703" ph="{...}" />
-                <marker date="1535160179919" expanded="true" signature="2806:3341" ph="{...}" />
-                <marker date="1535160179919" expanded="true" signature="2904:3018" ph="/* string converted = base64encodedstring.Replace('-', '+'); ... */" />
-              </folding>
+            <state relative-caret-position="314">
+              <caret line="106" column="83" selection-start-line="106" selection-start-column="83" selection-end-line="106" selection-end-column="83" />
             </state>
           </provider>
         </entry>
@@ -319,7 +360,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Service.Implement/Entity/LocationService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Service.Implement/Entity/LocationService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Service.Implement/Entity/_BaseService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Infrastructure.Logging/Service/LoggingService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Infrastructure.Identity/Adapter/IdentityService.cs" root0="FORCE_HIGHLIGHTING" />
@@ -329,18 +370,18 @@
     <setting file="file://$PROJECT_DIR$/Core.ApplicationService/Business/Algorithm/ISearchTreeService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Core.ApplicationService/Business/LogService/ILoggingService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Infrastructure.Entity/Config/LocationConfiguration.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/API.ITSProject/Web.config" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/API.ITSProject/Web.config" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/API.ITSProject/CustomAttribute/AuthorizeRolesAttribute.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/API.ITSProject/Controllers/_BaseController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/API.ITSProject/Controllers/LocationController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/API.ITSProject/Controllers/PlanController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/API.ITSProject/Controllers/_BaseController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/API.ITSProject/Controllers/LocationController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/API.ITSProject/Controllers/PlanController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Core.ObjectModels/Entities/Helper/Clone.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/API.ITSProject/Controllers/GroupController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Infrastructure.Identity/Configuration/ClientConfig.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/API.ITSProject/ViewModels/_ModelBuilder.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/API.ITSProject/ViewModels/LocationViewModels.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Infrastructure.Identity/Configuration/RefreshTokenConfig.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Service.Implement/Entity/PlanService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Service.Implement/Entity/PlanService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/API.ITSProject/Startup.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Infrastructure.Identity/Migrations/201808170910264_recreat_Database.Designer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Service.Implement/Algorithm/SearchTreeService.cs" root0="FORCE_HIGHLIGHTING" />
@@ -369,6 +410,7 @@
         <option value="$PROJECT_DIR$/API.ITSProject/Controllers/PlanController.cs" />
         <option value="$PROJECT_DIR$/Service.Implement/Entity/PlanService.cs" />
         <option value="$PROJECT_DIR$/API.ITSProject/Web.config" />
+        <option value="$PROJECT_DIR$/API.ITSProject/Controllers/_BaseController.cs" />
       </list>
     </option>
   </component>
@@ -391,7 +433,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="SolutionExplorer">
         <subPane>
           <expand>
@@ -404,18 +445,13 @@
               <item name="ITSSolution (10 projects)" type="977d5f41:SolutionExplorerNodeRider" />
               <item name="API" type="977d5f41:SolutionExplorerNodeRider" />
             </path>
-            <path>
-              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
-              <item name="ITSSolution (10 projects)" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="API" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="API.ITSProject" type="977d5f41:SolutionExplorerNodeRider" />
-            </path>
           </expand>
           <select />
         </subPane>
         <option name="show-file-system" value="false" />
         <option name="show-all-items" value="false" />
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -701,18 +737,18 @@
   <component name="RunManager">
     <configuration name="Default" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="C:/Program Files (x86)/IIS Express/iisexpress.exe" />
-      <option name="PROGRAM_PARAMETERS" value="&quot;/config:$PROJECT_DIR$/.idea/config/applicationhost.config&quot; /site:API.ITSProject /apppool:Clr4IntegratedAppPool" />
+      <option name="PROGRAM_PARAMETERS" value="&quot;/config:$PROJECT_DIR$/.idea/config/applicationhost.config&quot; /site:API.ITSProject_2 /apppool:Clr4IntegratedAppPool" />
       <option name="WORKING_DIRECTORY" value="C:/Program Files (x86)/IIS Express" />
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="USE_MONO" value="0" />
-      <option name="PROJECT_PATH" value="$PROJECT_DIR$/API.ITSProject/API.ITSProject.csproj" />
+      <option name="PROJECT_PATH" value="$PROJECT_DIR$/API.ITSProject_2/API.ITSProject_2.csproj" />
       <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
       <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
       <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
       <option name="PROJECT_KIND" value="Web" />
       <option name="PROJECT_TFM" value=".NETFramework,Version=v4.7.1" />
-      <browser url="http://localhost:56288/" />
+      <browser start="true" url="http://localhost:59728/" />
     </configuration>
   </component>
   <component name="SvnConfiguration">
@@ -741,7 +777,8 @@
       <workItem from="1535099456497" duration="402000" />
       <workItem from="1535104388476" duration="3137000" />
       <workItem from="1535160489281" duration="467000" />
-      <workItem from="1535163919645" duration="2461000" />
+      <workItem from="1535163919645" duration="5937000" />
+      <workItem from="1535177951476" duration="311000" />
     </task>
     <task id="LOCAL-00001" summary="Fix some localized problem in clinet">
       <created>1534724273331</created>
@@ -831,7 +868,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="75584000" />
+    <option name="totallyTimeSpent" value="79371000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -852,14 +889,14 @@
       <window_info anchor="bottom" id="Unit Tests" order="7" weight="0.32954547" />
       <window_info anchor="bottom" id="Database Changes" order="7" weight="0.32954547" />
       <window_info anchor="bottom" id="REST Client" order="7" weight="0.32954547" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="7" visible="true" weight="0.32792208" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32792208" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49167928" weight="0.3262987" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32954547" />
       <window_info anchor="bottom" id="NuGet" order="7" weight="0.32792208" />
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4903357" visible="true" weight="0.21104388" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4903357" visible="true" weight="0.21406959" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.49924356" weight="0.3272727" />
       <window_info anchor="right" id="Database" order="3" weight="0.32829046" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32929292" />
       <window_info id="Structure" order="1" sideWeight="0.509165" side_tool="true" weight="0.4718526" />
       <window_info id="Favorites" order="2" sideWeight="0.5010101" side_tool="true" weight="0.24975026" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.496004" weight="0.36363637" />
@@ -871,7 +908,7 @@
       <window_info anchor="bottom" id="Messages" order="7" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32929292" />
+      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.49924356" weight="0.3272727" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1173,23 +1210,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/API.ITSProject/Controllers/_BaseController.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="72" column="33" selection-start-line="72" selection-start-column="33" selection-end-line="72" selection-end-column="33" />
-          <folding>
-            <marker date="1535160179919" expanded="false" signature="49:810" ph="..." />
-            <marker date="1535160179919" expanded="true" signature="869:3356" ph="{...}" />
-            <marker date="1535160179919" expanded="true" signature="1790:1801" ph="{...}" />
-            <marker date="1535160179919" expanded="true" signature="2068:2751" ph="{...}" />
-            <marker date="1535160179919" expanded="true" signature="2355:2517" ph="{...}" />
-            <marker date="1535160179919" expanded="true" signature="2617:2703" ph="{...}" />
-            <marker date="1535160179919" expanded="true" signature="2806:3341" ph="{...}" />
-            <marker date="1535160179919" expanded="true" signature="2904:3018" ph="/* string converted = base64encodedstring.Replace('-', '+'); ... */" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/API.ITSProject/Controllers/LocationController.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
@@ -1271,12 +1291,38 @@
     <entry file="file://$PROJECT_DIR$/Service.Implement/Entity/LocationService.cs">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/API.ITSProject/Controllers/_BaseController.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="366">
+          <caret line="77" column="16" selection-start-line="77" selection-start-column="16" selection-end-line="77" selection-end-column="16" />
+          <folding>
+            <marker date="1535178017821" expanded="true" signature="36:3358" ph="{...}" />
+            <marker date="1535178017821" expanded="false" signature="49:810" ph="..." />
+            <marker date="1535178017821" expanded="true" signature="869:3356" ph="{...}" />
+            <marker date="1535178017821" expanded="true" signature="1599:1801" ph="{...}" />
+            <marker date="1535178017821" expanded="true" signature="2068:2751" ph="{...}" />
+            <marker date="1535178017821" expanded="true" signature="2355:2517" ph="{...}" />
+            <marker date="1535178017821" expanded="true" signature="2617:2703" ph="{...}" />
+            <marker date="1535178017821" expanded="true" signature="2806:3341" ph="{...}" />
+            <marker date="1535178017821" expanded="true" signature="2904:3018" ph="/* string converted = base64encodedstring.Replace('-', '+'); ... */" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/API.ITSProject/Web.config">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="314">
+          <caret line="106" column="83" selection-start-line="106" selection-start-column="83" selection-end-line="106" selection-end-column="83" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Service.Implement/Entity/PlanService.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9465">
+        <state relative-caret-position="260">
           <caret line="825" column="22" selection-start-line="825" selection-start-column="22" selection-end-line="825" selection-end-column="22" />
           <folding>
             <marker date="1535105306677" expanded="false" signature="6:235" ph="..." />
+            <marker date="1535105306677" expanded="true" signature="271:38820" ph="{...}" />
             <marker date="1535105306677" expanded="false" signature="284:619" ph="..." />
             <marker date="1535105306677" expanded="true" signature="684:38818" ph="{...}" />
             <marker date="1535105306677" expanded="true" signature="1064:1164" ph="{...}" />
@@ -1335,7 +1381,44 @@
             <marker date="1535105306677" expanded="true" signature="15105:23575" ph="{...}" />
             <marker date="1535105306677" expanded="true" signature="15147:15214" ph="{...}" />
             <marker date="1535105306677" expanded="false" signature="15373:15725" ph="hotel" />
+            <marker date="1535105306677" expanded="true" signature="15553:15701" ph="{...}" />
             <marker date="1535105306677" expanded="false" signature="15739:21752" ph="breakfast" />
+            <marker date="1535105306677" expanded="true" signature="16185:16252" ph="{...}" />
+            <marker date="1535105306677" expanded="true" signature="16345:18825" ph="{...}" />
+            <marker date="1535105306677" expanded="true" signature="16554:18811" ph="{...}" />
+            <marker date="1535105306677" expanded="true" signature="16615:17316" ph="{...}" />
+            <marker date="1535105306677" expanded="true" signature="16716:17294" ph="{...}" />
+            <marker date="1535105306677" expanded="true" signature="16826:17268" ph="{...}" />
+            <marker date="1535105306677" expanded="true" signature="16947:17238" ph="{...}" />
+            <marker date="1535105306677" expanded="true" signature="17063:17204" ph="{...}" />
+            <marker date="1535105306677" expanded="true" signature="17360:18053" ph="{...}" />
+            <marker date="1535105306677" expanded="true" signature="17461:18031" ph="{...}" />
+            <marker date="1535105306677" expanded="true" signature="17571:18005" ph="{...}" />
+            <marker date="1535105306677" expanded="true" signature="17688:17975" ph="{...}" />
+            <marker date="1535105306677" expanded="true" signature="17804:17941" ph="{...}" />
+            <marker date="1535105306677" expanded="true" signature="18098:18793" ph="{...}" />
+            <marker date="1535105306677" expanded="true" signature="18199:18771" ph="{...}" />
+            <marker date="1535105306677" expanded="true" signature="18309:18745" ph="{...}" />
+            <marker date="1535105306677" expanded="true" signature="18427:18715" ph="{...}" />
+            <marker date="1535105306677" expanded="true" signature="18543:18681" ph="{...}" />
+            <marker date="1535105306677" expanded="true" signature="18895:21728" ph="{...}" />
+            <marker date="1535105306677" expanded="true" signature="19014:21714" ph="{...}" />
+            <marker date="1535105306677" expanded="true" signature="19239:21696" ph="{...}" />
+            <marker date="1535105306677" expanded="true" signature="19308:20069" ph="{...}" />
+            <marker date="1535105306677" expanded="true" signature="19417:20043" ph="{...}" />
+            <marker date="1535105306677" expanded="true" signature="19535:20013" ph="{...}" />
+            <marker date="1535105306677" expanded="true" signature="19664:19979" ph="{...}" />
+            <marker date="1535105306677" expanded="true" signature="19788:19941" ph="{...}" />
+            <marker date="1535105306677" expanded="true" signature="20117:20870" ph="{...}" />
+            <marker date="1535105306677" expanded="true" signature="20226:20844" ph="{...}" />
+            <marker date="1535105306677" expanded="true" signature="20344:20814" ph="{...}" />
+            <marker date="1535105306677" expanded="true" signature="20469:20780" ph="{...}" />
+            <marker date="1535105306677" expanded="true" signature="20593:20742" ph="{...}" />
+            <marker date="1535105306677" expanded="true" signature="20919:21674" ph="{...}" />
+            <marker date="1535105306677" expanded="true" signature="21028:21648" ph="{...}" />
+            <marker date="1535105306677" expanded="true" signature="21146:21618" ph="{...}" />
+            <marker date="1535105306677" expanded="true" signature="21272:21584" ph="{...}" />
+            <marker date="1535105306677" expanded="true" signature="21396:21546" ph="{...}" />
             <marker date="1535105306677" expanded="true" signature="21966:22151" ph="{...}" />
             <marker date="1535105306677" expanded="true" signature="22289:23446" ph="{...}" />
             <marker date="1535105306677" expanded="true" signature="22769:23001" ph="{...}" />
@@ -1359,6 +1442,11 @@
             <marker date="1535105306677" expanded="true" signature="29871:29982" ph="{...}" />
             <marker date="1535105306677" expanded="true" signature="30426:32507" ph="{...}" />
             <marker date="1535105306677" expanded="false" signature="30847:32365" ph="Calculate arrive time" />
+            <marker date="1535105306677" expanded="true" signature="31414:32220" ph="{...}" />
+            <marker date="1535105306677" expanded="true" signature="31530:32206" ph="{...}" />
+            <marker date="1535105306677" expanded="true" signature="31955:32049" ph="{...}" />
+            <marker date="1535105306677" expanded="true" signature="32074:32188" ph="{...}" />
+            <marker date="1535105306677" expanded="true" signature="32253:32341" ph="{...}" />
             <marker date="1535105306677" expanded="true" signature="32393:32452" ph="{...}" />
             <marker date="1535105306677" expanded="true" signature="32767:34859" ph="{...}" />
             <marker date="1535105306677" expanded="true" signature="32920:34701" ph="{...}" />
@@ -1383,13 +1471,6 @@
             <marker date="1535105306677" expanded="true" signature="38365:38812" ph="{...}" />
             <marker date="1535105306677" expanded="true" signature="38401:38802" ph="{...}" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/API.ITSProject/Web.config">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="29">
-          <caret line="87" column="12" lean-forward="true" selection-start-line="87" selection-start-column="12" selection-end-line="87" selection-end-column="12" />
         </state>
       </provider>
     </entry>

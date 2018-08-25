@@ -123,7 +123,7 @@
 
 <script>
   import Raven from "raven-js";
-  import {mapState} from "vuex";
+  import {mapState, mapGetters} from "vuex";
 
   export default {
     name: "SigninView",
@@ -147,6 +147,10 @@
     computed: {
       ...mapState('account', {
         recoverLoading: state => state.loading.recoverPassword,
+      }),
+      ...mapGetters('authenticate',{
+        isLoggedInEmail: 'isLoggedIn',
+        isLoggedInFacebook: 'isLoggedInFacebook'
       }),
     },
     methods: {
@@ -202,14 +206,6 @@
       },
       signinFacebook() {
         this.$store.dispatch('authenticate/signinFacebook')
-          // .then(value => {
-          //   this.$router.push({
-          //     name: 'Home'
-          //   })
-          // })
-          // .catch(reason => {
-          //   this.error = {...reason};
-          // })
       },
       onRecoverClick() {
         this.emailInputDialog = false;

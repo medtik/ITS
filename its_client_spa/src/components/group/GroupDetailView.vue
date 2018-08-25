@@ -141,7 +141,7 @@
     computed: {
       ...mapGetters('group', {
         group: 'detailedGroup',
-        pageLoading: 'detailedGroupLoading'
+        groupDetailLoading: 'detailedGroupLoading'
       }),
       ...mapState('plan', {
         deleteLoading: (state) => state.loading.delete
@@ -152,6 +152,9 @@
       ...mapState('user', {
         currentUser: 'current'
       }),
+      pageLoading() {
+        return this.groupDetailLoading && !!this.currentUser
+      },
       inviteLink() {
         return {
           name: 'GroupInvite',
@@ -174,7 +177,8 @@
     },
     methods: {
       onLoad() {
-        this.$store.dispatch('group/fetchById', {id: this.groupId})
+        this.$store.dispatch('group/fetchById', {id: this.groupId});
+        this.$store.dispatch('user/fetchCurrentInfo')
       },
       onChoosePlanSelect(plan) {
         this.$store.commit('group/setLoading', {
