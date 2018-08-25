@@ -2,7 +2,9 @@ import axiosInstance from "../util/axiosInstance";
 import RNMsgChannel from 'react-native-webview-messaging';
 import moment from "moment";
 import Raven from "raven-js"
+
 const root = "http://itssolutiong8.azurewebsites.net/";
+
 
 export default {
   namespaced: true,
