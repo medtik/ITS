@@ -14,9 +14,7 @@ export default class ITSWeb extends React.Component {
         super(props);
 
         this.state = {
-            uri: 'http://its8.gear.host/',
-            // uri: 'http://192.168.2.2:80/',
-            // uri: 'http://172.16.3.180:80/',
+            uri: 'https://its-g8.firebaseapp.com/',
             canGoBack: false,
             websiteReady: false,
             pendingNotification: undefined
