@@ -339,7 +339,7 @@
         return moment(this.plan.endDate).format('DD/MM/YYYY');
       },
       isOwnPlan() {
-        return this.plan.isOwner && !this.plan.isPublic
+        return this.plan.isGroupOwner || this.plan.isOwner && !this.plan.isPublic
       },
       isPublic(){
         return this.plan.isPublic;

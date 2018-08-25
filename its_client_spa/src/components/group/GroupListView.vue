@@ -14,13 +14,16 @@
       <v-container class="text-xs-center" v-if="myGroupsLoading">
         <v-progress-circular indeterminate size="40" color="primary"></v-progress-circular>
       </v-container>
-      <v-flex v-else
+      <v-flex v-else-if="groups"
         v-for="group in groups"
               :key="group.id"
               elevation-2
               mt-2>
         <GroupFullWidth v-bind="group"
                         @delete="deleteGroup"/>
+      </v-flex>
+      <v-flex v-else class="title text-xs-center grey lighten-4" py-4>
+        <span>Bạn chưa có nhóm nào</span>
       </v-flex>
       <v-flex style="height: 25vh">
         <!--Holder-->

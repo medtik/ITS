@@ -33,15 +33,17 @@
             </v-flex>
           </v-layout>
         </v-flex>
-        <v-flex my-4>
-          <div class="title">
-            Chuyến đi nổi bật
+        <v-flex justify-start mt-5 v-if="area.featuredPlan && area.featuredPlan.length > 0">
+          <div class="title">Các chuyến đi nổi bật</div>
+          <div style="overflow-x: auto;">
+            <v-layout row my-1>
+              <v-flex v-for="plan in area.featuredPlan"
+                      :key="plan.id"
+                      shrink>
+                <PlanCard v-bind="plan"/>
+              </v-flex>
+            </v-layout>
           </div>
-          <v-layout style="overflow-y: auto;">
-            <v-flex v-for="plan in area.featuredPlan" :key="plan.id" mx-2 mt-2>
-              <PlanCard v-bind="plan"/>
-            </v-flex>
-          </v-layout>
         </v-flex>
         <v-flex style="height: 15vh">
           <!--Holder-->

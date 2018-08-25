@@ -5,7 +5,7 @@
         Chỉnh sửa chuyến đi
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn color="success" :loading="confirmLoading">
+      <v-btn color="success" :loading="confirmLoading" @click="onConfirmBtnClick">
         <v-icon>fas fa-check</v-icon>
         &nbsp; Xác nhận
       </v-btn>
@@ -153,21 +153,28 @@
         }
       },
       getFormattedDays(){
-        let days = _.cloneDeep(this.days);
+        let days = _.cloneDeep(this.input.days);
 
-        const planLocation = _(days)
-          .map(items => {
-            return _.filter(items, item => !!item.location)
-          })
-          .flatten()
-          .value();
+        const planLocation = [];
+        const planNotes = [];
 
-        const planNotes = _(days)
-          .map(items => {
-            return _.filter(items, item => !!item.note)
-          })
-          .flatten()
-          .value();
+        for (let i = 0; i < days.length; i++){
+          const items = days[i];
+          for(let j = 0; j < items.length; j++){
+            const item = items[j];
+            const indexObj = {
+              id: item.id,
+              index: j,
+              planDay: i
+            };
+
+            if(item.location){
+              planLocation.push(indexObj);
+            }else{
+              planNotes.push(indexObj);
+            }
+          }
+        }
 
         return {
           planNotes,
