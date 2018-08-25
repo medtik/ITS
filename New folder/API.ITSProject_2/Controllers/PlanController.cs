@@ -47,13 +47,12 @@
         #region Get
 
         [HttpGet]
-        [Authorize]
         [Route("api/Plan/Details")]
         public async Task<IHttpActionResult> Details([FromUri] int id)
         {
             try
             {
-                int userId = (await CurrentUser()).Id;
+                
                 Plan plan = _planService.Find(id, _ =>
                         _.PlanLocations.Select(__ => __.Location)
                             .Select(___ => ___.Photos.Select(_____ => _____.Photo)),
@@ -65,8 +64,13 @@
                 else
                 {
                     var temp = ModelBuilder.ConvertToPlanDetailViewModels(plan);
-                    temp.IsOwner = temp.MemberId == userId;
-                    temp.IsVoted = plan.Voters.Contains(await CurrentUser());
+                    if (User.Identity.IsAuthenticated)
+                    {
+                        int userId = (await CurrentUser()).Id;
+                        temp.IsOwner = temp.MemberId == userId;
+                        temp.IsVoted = plan.Voters.Contains(await CurrentUser());
+                        temp.IsGroupOwner = temp.GroupCreatorId == userId;
+                    }
                     return Ok(temp);
                 }
             }
@@ -184,7 +188,7 @@
                 resultList.Add(result);
             }
 
-            var locationListResult = resultList.OrderByDescending(_ => _.Reasons.Count)
+            var locationListResult = resultList.OrderByDescending(_ => _.Reasons.Count).ThenByDescending(_ => _.Rating)
                 .Select(model => new Core.ObjectModels.Entities.Helper.TreeViewModels
                 {
                     Address = model.Address,
@@ -369,16 +373,18 @@
 
         [HttpPut]
         [Route("api/Plan/UpdatePlan")]
-        public IHttpActionResult UpdatePlan([FromBody] UpdatePlanViewModels viewModels, [FromBody] UpdateIndexPlanLocationAndNote updateIndexPlanLocationAndNote)
+        public IHttpActionResult UpdatePlan(UpdatePlanViewModel data)
         {
             try
             {
-                Plan plan = _planService.Find(viewModels.Id);
+                if (data == null || data.plan == null || data.updateIndexPlanLocationAndNote == null)
+                    return BadRequest();
+                Plan plan = _planService.Find(data.plan.Id);
                 if (plan == null)
                     return BadRequest();
-                plan.StartDate = viewModels.StartDate;
-                plan.EndDate = viewModels.EndDate;
-                plan.Name = viewModels.Name;
+                plan.StartDate = data.plan.StartDate;
+                plan.EndDate = data.plan.EndDate;
+                plan.Name = data.plan.Name;
 
                 _planService.Update(plan);
 
@@ -386,7 +392,7 @@
                 {
                     bool result = false;
 
-                    foreach (var item in updateIndexPlanLocationAndNote.PlanLocation)
+                    foreach (var item in data.updateIndexPlanLocationAndNote.PlanLocation)
                     {
                         var planLocation = _planService.FindPlanLocation(item.Id);
                         planLocation.Index = item.Index;
@@ -397,7 +403,7 @@
 
                     if (result)
                     {
-                        foreach (var item in updateIndexPlanLocationAndNote.PlanNotes)
+                        foreach (var item in data.updateIndexPlanLocationAndNote.PlanNotes)
                         {
                             var planNote = _planService.FindNote(item.Id);
                             planNote.Index = item.Index;
@@ -418,7 +424,6 @@
 
                     return InternalServerError(ex);
                 }
-                return Ok();
             }
             catch (Exception ex)
             {

@@ -181,7 +181,7 @@ namespace API.ITSProject_2.Controllers
             }
 
 
-            return Ok(resultList.OrderByDescending(_ => _.Reasons.Count));
+            return Ok(resultList.OrderByDescending(_ => _.Reasons.Count).ThenByDescending(_ => _.Rating));
         }
 
         [HttpGet]
@@ -364,10 +364,12 @@ namespace API.ITSProject_2.Controllers
         #region Post
         [HttpPost]
         [Authorize, Route("api/Location/AddImageToLocation")]
-        public async Task<IHttpActionResult> AddImageToLocation([FromBody] int locationId, [FromBody] string avatar)
+        public async Task<IHttpActionResult> AddImageToLocation(PhotoForLocationViewModels view)
         {
             try
             {
+                int locationId = view.LocationId;
+                string avatar = view.Avatar;
                 int userId = (await CurrentUser()).Id;
                 var temp = _locationService.Find(locationId);
                 var photo = new Photo
@@ -480,7 +482,6 @@ namespace API.ITSProject_2.Controllers
         {
             try
             {
-
                 int userId = (await CurrentUser()).Id;
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);

@@ -14,7 +14,7 @@
             HasMany(_ => _.Plans)
                 .WithOptional(_ => _.Group)
                 .HasForeignKey(_ => _.GroupId)
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(true);
             HasMany(_ => _.GroupInvitations)
                 .WithRequired(_ => _.Group)
                 .HasForeignKey(_ => _.GroupId)

@@ -5,6 +5,16 @@
     using System.Runtime.Serialization;
     
     [DataContract]
+    public class PhotoForLocationViewModels
+    {
+        [DataMember]
+        public int LocationId { get; set; }
+
+        [DataMember]
+        public string Avatar { get; set; }
+    }
+
+    [DataContract]
     public class EditLocationViewModels
     {
         [DataMember]
