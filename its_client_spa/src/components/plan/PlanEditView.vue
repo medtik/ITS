@@ -5,7 +5,9 @@
         Chỉnh sửa chuyến đi
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn color="success" :loading="confirmLoading" @click="onConfirmBtnClick">
+      <v-btn color="success"
+             :loading="confirmLoading"
+             @click="onConfirmBtnClick">
         <v-icon>fas fa-check</v-icon>
         &nbsp; Xác nhận
       </v-btn>
@@ -39,7 +41,7 @@
         </v-flex>
         <!--ITEMS-->
         <draggable :list="input.days[index]"
-                   :options="{handle:'.handle-bar', group:'days'}"
+                   :options="{handle:'.handle-bar', group:'days', scrollSensitivity: 200}"
                    style="padding-top: 5rem"
                    class="white">
           <v-flex py-2 mb-1
@@ -145,11 +147,19 @@
       },
       onConfirmBtnClick() {
         if (this.validate()) {
+          this.confirmLoading = true;
           this.$store.dispatch('plan/edit',{
             id: this.planId,
             ...this.input,
             ...this.getFormattedDays()
           })
+            .then(value => {
+              this.confirmLoading = false;
+              this.$router.back();
+            })
+            .catch(value => {
+              this.confirmLoading = false;
+            })
         }
       },
       getFormattedDays(){

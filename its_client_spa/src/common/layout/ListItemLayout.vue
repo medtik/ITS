@@ -69,7 +69,7 @@
   }
 
   .grid-layout.desktop.handle {
-    grid-template-columns: 10% 50% auto;
+    grid-template-columns: 6% 30% auto;
     grid-template-rows: auto auto auto;
     grid-template-areas:
       "handle photo title"
@@ -78,11 +78,11 @@
   }
 
   .grid-layout.mobile.handle {
-    grid-template-columns: 10% 50% auto;
+    grid-template-columns: 6% 30% auto;
     grid-template-rows: auto auto auto;
     grid-template-areas:
       "handle photo title"
-      "handle photo detail"
-      "handle photo detail";
+    "handle photo detail"
+    "handle photo detail";
   }
 </style>

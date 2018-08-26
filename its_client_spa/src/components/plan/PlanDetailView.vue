@@ -25,7 +25,7 @@
         </span>
       </v-toolbar-title>
       <v-spacer v-if="!isSmallScreen"></v-spacer>
-      <v-toolbar-items>
+      <v-toolbar-items v-if="isLoggedIn">
         <v-btn flat
                @click="dialog.choosePlanDestination = true"
                :loading="addPlanToGroupLoading">
