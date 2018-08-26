@@ -41,7 +41,7 @@
         </v-flex>
         <!--ITEMS-->
         <draggable :list="input.days[index]"
-                   :options="{handle:'.handle-bar', group:'days', scrollSensitivity: 200}"
+                   :options="draggableOption"
                    style="padding-top: 5rem"
                    class="white">
           <v-flex py-2 mb-1
@@ -107,6 +107,13 @@
           name: undefined,
           startDate: undefined,
           endDate: undefined
+        },
+        draggableOption:{
+          scroll: true,
+          scrollSensitivity: 200,
+          scrollSpeed: 15,
+          handle:'.handle-bar',
+          group:'days'
         }
       }
     },
