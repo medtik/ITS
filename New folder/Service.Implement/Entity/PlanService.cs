@@ -274,8 +274,7 @@ namespace Service.Implement.Entity
                 for (int i = 1; i <= diffDays; i++)
                 {
                     DateTimeOffset currentDate = plan.StartDate.AddDays(i);
-                    Dictionary<NessecityType, Location> nessecityLocationMap;
-                    PolulateNecessityLocations(plan, locations, currentDate, out nessecityLocationMap, i);
+                    PolulateNecessityLocations(plan, locations, currentDate, out var nessecityLocationMap, i);
                     var locationsWithRouteList = await PolulateEntertainmentLocations(
                         plan,
                         locations,
@@ -295,6 +294,8 @@ namespace Service.Implement.Entity
                     });
 
 
+                    #region Buiding notes
+                    
                     JObject fromHotelJObject = await FetchGoogleRoute(
                         nessecityLocationMap[NessecityType.Hotel],
                         nessecityLocationMap[NessecityType.Breakfast],
@@ -315,7 +316,7 @@ namespace Service.Implement.Entity
                     {
                         Index = index++,
                         PlanDay = i,
-                        Title = "Cách đi",
+                        Title = $"Cách đi từ {hotel.Name} đến {nessecityLocationMap[NessecityType.Breakfast].Name}",
                         Content = builder.ToString()
                     });
                     
@@ -343,7 +344,7 @@ namespace Service.Implement.Entity
                             {
                                 Index = index++,
                                 PlanDay = i,
-                                Title = "Cách đi",
+                                Title = $"Cách đi từ {locationsWithRoute.Value.Key.Name} đến {locationsWithRoute.Value.Value.Name}",
                                 Content = builder.ToString()
                             });
                         
@@ -375,7 +376,7 @@ namespace Service.Implement.Entity
                     {
                         Index = index++,
                         PlanDay = i,
-                        Title = "Cách đi",
+                        Title = $"Cách đi từ {lastLocation.Name} đến {hotel.Name}",
                         Content = builder.ToString()
                     };
                     
@@ -388,6 +389,8 @@ namespace Service.Implement.Entity
                     });
                     
                     notes.Add(toHotel);
+                    #endregion
+
                 }
 
                 _repository.Create(plan);
@@ -682,7 +685,7 @@ namespace Service.Implement.Entity
                 int areaOffSet = 4000;
                 try
                 {
-                    while (locationWithRouteList == null)
+                    while (locationWithRouteList == null && areaOffSet <= 20000)
                     {
                         var locationsBetweenMeal = GetLocationsBetweenMeal(
                             currentMealPair,
@@ -692,10 +695,10 @@ namespace Service.Implement.Entity
                         );
 
                         _loggingService.AddSentryBreadCrum("PolulateEntertainmentLocations",
-                            data: new Dictionary<string, object>
+                            new Dictionary<string, object>
                             {
                                 ["areaOffSet"] = areaOffSet,
-                                ["locationsBetweenMeal_length"] = locationsBetweenMeal.Count
+                                ["locationsBetweenMeal length"] = locationsBetweenMeal.Count
                             });
                         areaOffSet += 4000;
 
@@ -703,8 +706,7 @@ namespace Service.Implement.Entity
                             currentMealPair,
                             nextMealPair,
                             locationsBetweenMeal,
-                            currentDate,
-                            areaOffSet >= 20000
+                            currentDate
                         );
                     }
                 }
@@ -713,23 +715,26 @@ namespace Service.Implement.Entity
                     _loggingService.CaptureSentryException(ex);
                 }
 
-
-                for (int i = 0; i < locationWithRouteList.Count; i++)
+                if (locationWithRouteList != null)
                 {
-                    var locationWithRoute = locationWithRouteList[i];
-                    if (i == 0)
+                    for (int i = 0; i < locationWithRouteList.Count; i++)
                     {
-                        var location = locationWithRoute.Value.Value;
-                        locationList.RemoveAll(tmpLocation => tmpLocation.Id == location.Id);
+                        var locationWithRoute = locationWithRouteList[i];
+                        if (i == 0)
+                        {
+                            var location = locationWithRoute.Value.Value;
+                            locationList.RemoveAll(tmpLocation => tmpLocation.Id == location.Id);
+                        }
+                        else
+                        {
+                            var location = locationWithRoute.Value.Key;
+                            locationList.RemoveAll(tmpLocation => tmpLocation.Id == location.Id);
+                        }
                     }
-                    else
-                    {
-                        var location = locationWithRoute.Value.Key;
-                        locationList.RemoveAll(tmpLocation => tmpLocation.Id == location.Id);
-                    }
+                    result.AddRange(locationWithRouteList);
                 }
+                
 
-                result.AddRange(locationWithRouteList);
             }
 
             return result;
@@ -758,13 +763,22 @@ namespace Service.Implement.Entity
             for (int i = 0; i <= numberOfFraction; i++)
             {
                 GeoCoordinate middleGeoPoint = GetFrationGeoPoint(i / numberOfFraction, originGeo, destinationGeo);
-
+                
                 foreach (var location in locations)
                 {
                     if (location.Category == "Địa điểm thăm quan")
                     {
+                        var isdupped = false;
+                        resultLocations.ForEach(resultLocation =>
+                        {
+                            if (location.Id == resultLocation.Id)
+                            {
+                                isdupped = true;
+                            }
+                        });
+                        
                         GeoCoordinate locationGeo = new GeoCoordinate(location.Latitude, location.Longitude);
-                        if (locationGeo.GetDistanceTo(middleGeoPoint) <= areaOffset)
+                        if (!isdupped && locationGeo.GetDistanceTo(middleGeoPoint) <= areaOffset)
                         {
                             resultLocations.Add(location);
                         }
@@ -779,8 +793,7 @@ namespace Service.Implement.Entity
             KeyValuePair<Location, NessecityType> origin,
             KeyValuePair<Location, NessecityType> destination,
             List<Location> locationsToGo,
-            DateTimeOffset currentDate,
-            bool isLastTry = false)
+            DateTimeOffset currentDate)
         {
             var result = new List<KeyValuePair<JObject, KeyValuePair<Location, Location>>>();
             TimeSpan departureTime =
@@ -788,7 +801,6 @@ namespace Service.Implement.Entity
             TimeSpan arriveTime = GetMealTime(destination.Value);
 
             locationsToGo.RemoveAll(location => !IsLocationOpenIn(location, departureTime, arriveTime, currentDate));
-
 
             #region Calculate arrive time
 
@@ -829,12 +841,7 @@ namespace Service.Implement.Entity
 
             #endregion
 
-            if (isLastTry)
-            {
-                return result;
-            }
-
-            return !enough ? null : result;
+            return enough ? result : null;
         }
 
         private List<KeyValuePair<JObject, KeyValuePair<Location, Location>>> MapLegsAndLocationPair(
@@ -932,7 +939,7 @@ namespace Service.Implement.Entity
                         return true;
                     }
 
-                    if (businessHour.OpenTime >= start && businessHour.CloseTime <= end)
+                    if (start >= businessHour.OpenTime &&  businessHour.CloseTime >= end)
                     {
                         return true;
                     }
@@ -950,7 +957,7 @@ namespace Service.Implement.Entity
         {
             var uriBuilder = new UriBuilder("https://maps.googleapis.com/maps/api/directions/json");
             var query = HttpUtility.ParseQueryString(string.Empty);
-            query["key"] = "AIzaSyDN8SAnYcPJYAoGUszfiRqvVzKH2mCUrVc";
+            query["key"] = "AIzaSyCEm8r5LQCvBGGon-WfuT9u1gJkYZCkYHQ";
             query["language"] = "vi";
             query["units"] = "metric";
             query["origin"] = $"{origin.Latitude},{origin.Longitude}";
