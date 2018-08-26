@@ -619,7 +619,34 @@ export default {
           })
       })
     },
-    edit(context, payload){
+    editNote(context, payload) {
+      const {
+        title,
+        content,
+        id
+      } = payload;
+
+      context.commit('setLoading', {loading: {editNote: true}});
+      return new Promise((resolve, reject) => {
+        //put /api/Plan/EditNote
+
+        axiosInstance.put('api/Plan/EditNote', {
+          "noteId": id,
+          "title": title,
+          "description": content
+        })
+          .then(value => {
+            context.commit('setLoading', {loading: {editNote: false}});
+            resolve();
+          })
+          .catch(reason => {
+            context.commit('setLoading', {loading: {editNote: false}});
+            Raven.captureException(reason);
+            reject();
+          })
+      })
+    },
+    edit(context, payload) {
       // put /api/Plan/UpdatePlan
       const {
         id,
@@ -630,9 +657,9 @@ export default {
         planNotes
       } = payload;
 
-      context.commit('setLoading',{loading: {edit: true}});
+      context.commit('setLoading', {loading: {edit: true}});
       return new Promise((resolve, reject) => {
-        axiosInstance.put('api/Plan/UpdatePlan',{
+        axiosInstance.put('api/Plan/UpdatePlan', {
           "plan": {
             "id": id,
             "name": name,
@@ -644,12 +671,12 @@ export default {
             "planNotes": planNotes
           }
         })
-          .then(value =>{
-            context.commit('setLoading',{loading: {edit: false}});
+          .then(value => {
+            context.commit('setLoading', {loading: {edit: false}});
             resolve();
           })
           .catch(reason => {
-            context.commit('setLoading',{loading: {edit: false}});
+            context.commit('setLoading', {loading: {edit: false}});
             Raven.captureException(reason);
             reject();
           })

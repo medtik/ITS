@@ -45,6 +45,12 @@ export default {
           "locationId": locationId,
           "avatar": photo
         })
+          .then(value => {
+            resolve();
+          })
+          .catch(reason => {
+            reject();
+          })
       })
     },
 
@@ -119,11 +125,12 @@ export default {
         params: {
           longitude: long,
           latitude: lat,
-          radius: (radius/1000)
+          radius: (radius)
         }
       })
         .then(value => {
           context.commit('setLoading', {loading: {nearbyLocations: false}});
+          context.commit('setNearbyLocations', {locations: value.data});
         })
         .catch(reason => {
           Raven.captureException(reason);

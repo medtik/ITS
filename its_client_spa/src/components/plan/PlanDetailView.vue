@@ -200,7 +200,10 @@
     <v-dialog v-model="addNoteDialog.dialog" max-width="450" persistent>
       <!--ADD NOTE-->
       <v-card>
-        <v-card-title class="light-blue title white--text">
+        <v-card-title v-if="addNoteDialog.isEdit" class="light-blue title white--text">
+          Chỉnh sửa ghi chú
+        </v-card-title>
+        <v-card-title v-else class="light-blue title white--text">
           Thêm ghi chú
         </v-card-title>
         <v-card-text>
@@ -214,9 +217,16 @@
             <v-divider/>
             <v-flex>
               <v-btn color="success"
+                     v-if="!addNoteDialog.isEdit"
                      :loading="createNoteLoading"
                      @click="onAddNoteConfirm">
                 Tạo
+              </v-btn>
+              <v-btn color="success"
+                     v-else
+                     :loading="createNoteLoading"
+                     @click="onAddNoteConfirm">
+                Chỉnh sửa
               </v-btn>
               <v-btn color="secondary"
                      @click="addNoteDialog.dialog = false">
@@ -293,9 +303,11 @@
         },
         addNoteDialog: {
           dialog: false,
+          isEdit: false,
           day: undefined,
           titleInput: undefined,
-          descriptionInput: undefined
+          descriptionInput: undefined,
+          noteId: undefined,
         },
         checkboxValues: [],
       }
@@ -382,7 +394,18 @@
       onAddNote(day) {
         this.addNoteDialog = {
           dialog: true,
-          day: day
+          day: day,
+          isEdit: false,
+        }
+      },
+      onNoteEdit(item) {
+        console.debug("edit note", item);
+        this.addNoteDialog = {
+          dialog: true,
+          isEdit: true,
+          descriptionInput: item.note.description,
+          titleInput: item.note.name,
+          noteId: item.id
         }
       },
       onAddNoteConfirm() {
@@ -391,16 +414,30 @@
           return;
         }
 
-        this.$store.dispatch('plan/addNoteToPlan', {
-          title: this.addNoteDialog.titleInput,
-          content: this.addNoteDialog.descriptionInput,
-          planDay: this.addNoteDialog.day.planDay,
-          planId: this.plan.id
-        })
-          .then(() => {
-            this.addNoteDialog.dialog = false;
-            this.loadData();
+        if (!this.addNoteDialog.isEdit) {
+          this.$store.dispatch('plan/addNoteToPlan', {
+            title: this.addNoteDialog.titleInput,
+            content: this.addNoteDialog.descriptionInput,
+            planDay: this.addNoteDialog.day.planDay,
+            planId: this.plan.id
           })
+            .then(() => {
+              this.addNoteDialog.dialog = false;
+              this.loadData();
+            })
+        } else {
+          this.$store.dispatch('plan/editNote', {
+            id: this.addNoteDialog.noteId,
+            title: this.addNoteDialog.titleInput,
+            content: this.addNoteDialog.descriptionInput
+          })
+            .then(() => {
+              this.addNoteDialog.dialog = false;
+              this.loadData();
+            })
+        }
+
+
       },
       onNoteDelete(note) {
         this.$store.dispatch('plan/removeNoteFromPlan', {

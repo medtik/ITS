@@ -308,7 +308,7 @@
         };
 
         if (photo) {
-          this.$store.dispatch('location/addImage', {photo, id: this.location.id})
+          this.$store.dispatch('location/addImage', {photo, locationId: this.location.id})
             .then(location => {
               // this.location = location;
               window.location.reload();
