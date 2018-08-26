@@ -32,6 +32,10 @@
               Đang đóng cửa
             </span>
           </div>
+          <!--<div v-if="location.description">-->
+            <!--<v-textarea >-->
+            <!--</v-textarea>-->
+          <!--</div>-->
         </v-flex>
         <v-flex my-4 mx-2>
           <v-layout align-baseline>
@@ -114,7 +118,7 @@
             </v-flex>
             <v-divider></v-divider>
             <v-flex>
-              <v-btn block flat>
+              <v-btn block flat :to="nearbyLink">
                 <v-icon>far fa-building</v-icon>
                 &nbsp &nbsp Các địa điểm gần đây
               </v-btn>
@@ -192,11 +196,6 @@
       }),
       summaryTag() {
         return this.location.tags;
-        // return [
-        //   {id: 1, name: "Ẩm thực pháp"},
-        //   {id: 2, name: "Có thực đơn chay"},
-        //   {id: 3, name: "Sang trọng"}
-        // ]
       },
       todayHours() {
         if (!this.location.businessHours) {
@@ -274,6 +273,16 @@
           to: todayHour.to.format('HH:mm'),
           isOpen: todayHour.isNow,
           displayString: todayHour.displayString
+        }
+      },
+      nearbyLink(){
+        return {
+          name: "LocationNearbyList",
+          query: {
+            long: this.location.long,
+            lat: this.location.lat,
+            title: `Các địa điểm gần ${this.location.name}`,
+          }
         }
       }
     },

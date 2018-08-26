@@ -633,12 +633,16 @@ export default {
       context.commit('setLoading',{loading: {edit: true}});
       return new Promise((resolve, reject) => {
         axiosInstance.put('api/Plan/UpdatePlan',{
-          id,
-          startDate,
-          endDate,
-          name,
-          planLocation,
-          planNotes
+          "plan": {
+            "id": id,
+            "name": name,
+            "startDate": startDate,
+            "endDate": endDate
+          },
+          "updateIndexPlanLocationAndNote": {
+            "planLocation": planLocation,
+            "planNotes": planNotes
+          }
         })
           .then(value =>{
             context.commit('setLoading',{loading: {edit: false}});

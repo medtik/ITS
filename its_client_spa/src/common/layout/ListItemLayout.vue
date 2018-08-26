@@ -26,8 +26,8 @@
         return {
           'grid-layout': true,
           'desktop': !this.isSmallScreen,
-          'mobile': this.isSmallScreen && this.$slots.action,
-          'mobile-noaction': this.isSmallScreen && !this.$slots.action,
+          'mobile': this.isSmallScreen,
+          'noaction': !this.$slots.action,
           'handle': this.$slots.handle
         }
       },
@@ -56,20 +56,20 @@
     grid-template-areas: "photo title action" "photo detail action" "photo detail action";
   }
 
-  .grid-layout.desktop-noaction {
+  .grid-layout.desktop.noaction {
     grid-template-columns: 15% auto 15%;
     grid-template-rows: auto auto auto;
     grid-template-areas: "photo title action" "photo detail action" "photo detail action";
   }
 
-  .grid-layout.mobile-noaction {
+  .grid-layout.mobile.noaction {
     grid-template-columns: 35% auto;
     grid-template-rows: auto auto auto;
     grid-template-areas: "photo title" "photo detail" "photo detail";
   }
 
   .grid-layout.desktop.handle {
-    grid-template-columns: 10% 30% auto;
+    grid-template-columns: 10% 50% auto;
     grid-template-rows: auto auto auto;
     grid-template-areas:
       "handle photo title"
@@ -78,11 +78,11 @@
   }
 
   .grid-layout.mobile.handle {
-    grid-template-columns: 10% 35% auto;
+    grid-template-columns: 10% 50% auto;
     grid-template-rows: auto auto auto;
     grid-template-areas:
       "handle photo title"
-    "handle photo detail"
-    "handle photo detail";
+      "handle photo detail"
+      "handle photo detail";
   }
 </style>

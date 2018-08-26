@@ -1,9 +1,11 @@
 <template>
   <v-content>
     <v-toolbar dark flat color="light-blue darken-2" dense>
-
+      <v-toolbar-title>
+        {{title}}
+      </v-toolbar-title>
     </v-toolbar>
-    <v-container v-if="pageLoading">
+    <v-container v-if="pageLoading" class="text-xs-center">
       <v-progress-circular indeterminate size="40" color="primary"></v-progress-circular>
     </v-container>
     <v-container fluid pa-0 v-else>
@@ -30,9 +32,9 @@
     },
     data() {
       return {
-        long,
-        lat,
-        title,
+        long: undefined,
+        lat: undefined,
+        title: undefined,
       }
     },
     computed: {
@@ -50,11 +52,13 @@
 
       this.long = long;
       this.lat = lat;
+      this.title = title;
     },
     mounted() {
       this.$store.dispatch('location/fetchNearbyLocations', {
         long: this.long,
-        lat: this.lat
+        lat: this.lat,
+        radius: 5000
       });
     },
   }
