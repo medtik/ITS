@@ -32,10 +32,10 @@
               Đang đóng cửa
             </span>
           </div>
-          <!--<div v-if="location.description">-->
-            <!--<v-textarea >-->
-            <!--</v-textarea>-->
-          <!--</div>-->
+          <v-container v-if="location.description" fluid px-0>
+            <v-textarea label="Mô tả" :value="location.description" readonly>
+            </v-textarea>
+          </v-container>
         </v-flex>
         <v-flex my-4 mx-2>
           <v-layout align-baseline>
@@ -96,13 +96,13 @@
           </v-layout>
           <v-layout v-if="location.comments && location.comments.length > 0"
                     column my-2>
-            <v-flex v-for="review in location.reviews"
-                    :key="review.id"
+            <v-flex v-for="comment in location.comments"
+                    :key="comment.id"
                     elevation-2>
-              <LocationReview v-bind="review" @report="$router.push({name: 'ReviewReport'})"/>
+              <LocationReview v-bind="comment" @report="$router.push({name: 'ReviewReport'})"/>
             </v-flex>
           </v-layout>
-          <v-layout row my-2 justify-center class="subheading">
+          <v-layout v-else row my-2 justify-center class="subheading">
             <span>Chưa có bình luận nào</span>
           </v-layout>
         </v-flex>

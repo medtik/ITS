@@ -42,10 +42,8 @@ export default {
 
       return new Promise((resolve, reject) => {
         axiosInstance.post('api/Location/AddImageToLocation', {
-          params: {
-            locationId,
-            photo
-          }
+          "locationId": locationId,
+          "avatar": photo
         })
       })
     },
