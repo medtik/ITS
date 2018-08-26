@@ -4,11 +4,11 @@
       <v-layout column>
         <v-flex d-flex justify-center>
           <v-avatar size="60">
-            <img :src="user.photo"/>
+            <img :src="avatar"/>
           </v-avatar>
         </v-flex>
         <v-flex d-flex class="text-xs-center">
-          <span>{{user.name}}</span>
+          <span>{{creatorName}}</span>
         </v-flex>
       </v-layout>
     </v-flex>
@@ -63,7 +63,8 @@
       'rating',
       'title',
       'description',
-      'user',
+      'creatorName',
+      'avatar',
       'editMode'
     ],
     methods: {

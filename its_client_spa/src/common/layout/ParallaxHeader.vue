@@ -23,7 +23,7 @@
     props: [
       'src',
       'text',
-      'height'
+      'height',
     ]
   }
 </script>

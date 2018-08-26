@@ -2,7 +2,11 @@
   <v-content>
     <v-container fluid pa-0
                  v-if="!pageLoading">
-      <ParallaxHeader :src="location.primaryPhoto" height="400"/>
+      <!--<ParallaxHeader :src="location.primaryPhoto" height="400"/>-->
+      <!--width: 100%; height: 500px-->
+      <div :style="{'width': '100%', 'height':'500px', 'background-image': `url(${location.primaryPhoto})`,'background-size': 'cover'}">
+
+      </div>
       <v-layout column>
         <v-flex mx-2 my-2>
           <!--Header-->
@@ -192,7 +196,7 @@
     computed: {
       ...mapGetters('location', {
         location: 'detailedLocation',
-        pageLoading: 'detailedLocationLoading'
+        pageLoading: 'detailedLocationLoading',
       }),
       summaryTag() {
         return this.location.tags;
@@ -299,7 +303,6 @@
         }
       },
       onAddImageConfirm(photo) {
-        this.loading.addImgBtn = true;
         this.chooseImageDialog = {
           dialog: false
         };
@@ -308,7 +311,7 @@
           this.$store.dispatch('location/addImage', {photo, id: this.location.id})
             .then(location => {
               // this.location = location;
-              this.loading.addImgBtn = false;
+              window.location.reload();
             })
             .catch(reason => {
               this.error = {
@@ -317,8 +320,6 @@
               }
             })
 
-        } else {
-          this.loading.addImgBtn = false;
         }
       }
     }
