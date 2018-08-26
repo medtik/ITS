@@ -151,7 +151,7 @@
         return this.selectedLocationCount > 0 && !!this.selectedPlanId
       },
       isOwnSelectedPlan() {
-        return this.selectedPlan.isOwner;
+        return !!this.selectedPlan.isGroupOwner || !!this.selectedPlan.isOwner || !!this.selectedPlan.isPlanOwner;
       },
       days() {
         const planDays = [

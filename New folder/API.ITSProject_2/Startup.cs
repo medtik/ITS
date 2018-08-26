@@ -74,13 +74,13 @@ namespace API.ITSProject_2
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
             app.UseFacebookAuthentication(facebookAuthOptions = new FacebookAuthenticationOptions
             {
-                AppId = "497342497392676",
+                AppId = "266318357470729",
                 AppSecret = "c425f789382947f98760dc4b55ca6a9f",
                 Provider = new FacebookAuthServer()
             });
             #endregion
 
-            app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
+            app.UseOAuthBearerAuthentication(OAuthBearerOptions = new OAuthBearerAuthenticationOptions());
             app.UseNinjectMiddleware(CreateKernel).UseNinjectWebApi(config);
         }
     }

@@ -5,7 +5,9 @@
         Chỉnh sửa chuyến đi
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn color="success" :loading="confirmLoading">
+      <v-btn color="success"
+             :loading="confirmLoading"
+             @click="onConfirmBtnClick">
         <v-icon>fas fa-check</v-icon>
         &nbsp; Xác nhận
       </v-btn>
@@ -39,7 +41,7 @@
         </v-flex>
         <!--ITEMS-->
         <draggable :list="input.days[index]"
-                   :options="{handle:'.handle-bar', group:'days'}"
+                   :options="draggableOption"
                    style="padding-top: 5rem"
                    class="white">
           <v-flex py-2 mb-1
@@ -105,6 +107,13 @@
           name: undefined,
           startDate: undefined,
           endDate: undefined
+        },
+        draggableOption:{
+          scroll: true,
+          scrollSensitivity: 200,
+          scrollSpeed: 15,
+          handle:'.handle-bar',
+          group:'days'
         }
       }
     },
@@ -145,29 +154,44 @@
       },
       onConfirmBtnClick() {
         if (this.validate()) {
+          this.confirmLoading = true;
           this.$store.dispatch('plan/edit',{
             id: this.planId,
             ...this.input,
             ...this.getFormattedDays()
           })
+            .then(value => {
+              this.confirmLoading = false;
+              this.$router.back();
+            })
+            .catch(value => {
+              this.confirmLoading = false;
+            })
         }
       },
       getFormattedDays(){
-        let days = _.cloneDeep(this.days);
+        let days = _.cloneDeep(this.input.days);
 
-        const planLocation = _(days)
-          .map(items => {
-            return _.filter(items, item => !!item.location)
-          })
-          .flatten()
-          .value();
+        const planLocation = [];
+        const planNotes = [];
 
-        const planNotes = _(days)
-          .map(items => {
-            return _.filter(items, item => !!item.note)
-          })
-          .flatten()
-          .value();
+        for (let i = 0; i < days.length; i++){
+          const items = days[i];
+          for(let j = 0; j < items.length; j++){
+            const item = items[j];
+            const indexObj = {
+              id: item.id,
+              index: j,
+              planDay: i
+            };
+
+            if(item.location){
+              planLocation.push(indexObj);
+            }else{
+              planNotes.push(indexObj);
+            }
+          }
+        }
 
         return {
           planNotes,

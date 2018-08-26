@@ -9,7 +9,7 @@
     </v-container>
     <v-container v-else fluid class="white">
       <v-layout row justify-center wrap>
-        <v-flex v-if="groupInvitation" lg6 xs12 pa-1>
+        <v-flex v-if="groupInvitation" lg5 xs12 pa-1>
           <div class="title">
             Lời mời vào nhóm
           </div>

@@ -75,7 +75,7 @@
   import GMarker from "./GMarker";
   import DirectionsRenderer from './DirectionsRenderer.js'
   import LocationCard from "../../common/card/LocationCard";
-
+  import {mapState} from "vuex"
 
   export default {
     name: "LocationOnMapView",
@@ -140,7 +140,6 @@
     computed: {
       google: gmapApi,
       mapRef() {
-        //Call this with mapRef.then((map)=>{code here})
         return this.$refs.mapRef.$mapPromise;
       },
       toggledMarkers() {
@@ -161,7 +160,20 @@
           )
         }
         return toggledMarkers;
-      }
+      },
+      ...mapState('location', {
+        pageLoading: state => state.loading.nearbyLocations,
+        nearbyLocations: state => state.nearbyLocations
+      })
+    },
+    created() {
+      const {
+        long,
+        lat,
+      } = this.$route.query;
+
+      this.current.long = long;
+      this.current.lat = lat;
     },
     methods: {
       moveMapTo(long, lat) {

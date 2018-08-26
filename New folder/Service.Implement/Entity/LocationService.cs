@@ -10,8 +10,11 @@
     using Core.ApplicationService.Business.EntityService;
     using Core.ApplicationService.Business.LogService;
     using Core.ObjectModels.Entities.EnumType;
+    using System.Threading.Tasks;
+    using System.IO;
+    using Firebase.Storage;
 
-    public class LocationService : _BaseService<Location>, ILocationService 
+    public class LocationService : _BaseService<Location>, ILocationService
     {
         private readonly IRepository<Photo> _photoRepository;
         private readonly IRepository<LocationSuggestion> _locationSuggestionRepository;
@@ -43,13 +46,13 @@
             try
             {
                 LocationSuggestion suggest = _locationSuggestionRepository.Get(_ => _.Id == suggestionId, _ => _.Locations);
-                
+
                 suggest.Status = RequestStatus.Approved;
 
                 _locationSuggestionRepository.Update(suggest);
                 ICollection<Location> locations = new List<Location>();
                 var plan = _planRepository.Get(_ => _.Id == suggest.PlanId, _ => _.PlanLocations);
-                
+
                 foreach (var item in suggest.Locations)
                 {
                     _planLocationRepository.Create(new PlanLocation
@@ -92,59 +95,77 @@
             }
         }
 
-        public bool Create(Location location, Photo primaryPhoto, IEnumerable<Photo> photos, IEnumerable<BusinessHour> businessHours, int[] tagList)
+        protected MemoryStream ConvertToStream(string base64)
+        {
+            var imageParts = base64.Split(',').ToList<string>();
+            byte[] bytes = Convert.FromBase64String(imageParts[1]);
+            MemoryStream memoryStream = new MemoryStream(bytes);
+            return memoryStream;
+        }
+
+        public async Task<bool> Create(Location location, Photo primaryPhoto, IEnumerable<Photo> photos, IEnumerable<BusinessHour> businessHours, int[] tagList)
         {
             try
             {
-                using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required))
+                base.Create(location);
+
+                List<Tag> tags = new List<Tag>();
+                tagList.ToList().ForEach(_ =>
                 {
-                    base.Create(location);
+                    var ele = _tagRepository.Get(__ => __.Id == _);
+                    tags.Add(ele);
+                });
+                location.Tags = tags;
+                base.Update(location);
 
-                    List<Tag> tags = new List<Tag>();
-                    tagList.ToList().ForEach(_ =>
-                    {
-                        var ele = _tagRepository.Get(__ => __.Id == _);
-                        tags.Add(ele);
-                    });
-                    location.Tags = tags;
-                    base.Update(location);
+                var stream = ConvertToStream(primaryPhoto.Path);
+                var task = new FirebaseStorage("its-g8.appspot.com")
+                 .Child("photo")
+                 .Child($"{Guid.NewGuid()}.jpg")
+                 .PutAsync(stream);
 
-                    _photoRepository.Create(primaryPhoto);
+                primaryPhoto.Path = await task;
+                _photoRepository.Create(primaryPhoto);
+                _unitOfWork.SaveChanges();
+                _locationPhotoRepository.Create(new LocationPhoto
+                {
+                    LocationId = location.Id,
+                    PhotoId = primaryPhoto.Id,
+                    IsPrimary = true
+                });
+
+                foreach (var _ in photos.ToList())
+                {
+                    stream = ConvertToStream(_.Path);
+                    task = new FirebaseStorage("its-g8.appspot.com")
+                     .Child("photo")
+                     .Child($"{Guid.NewGuid()}.jpg")
+                     .PutAsync(stream);
+
+                    _.Path = await task;
+                    _photoRepository.Create(_);
                     _unitOfWork.SaveChanges();
                     _locationPhotoRepository.Create(new LocationPhoto
                     {
                         LocationId = location.Id,
-                        PhotoId = primaryPhoto.Id,
-                        IsPrimary = true
+                        PhotoId = _.Id,
+                        IsPrimary = false
                     });
+                }
 
-                    photos.ToList().ForEach(_ =>
+                businessHours.ToList().ForEach(_ =>
+                {
+                    _businessHourRepository.Create(new BusinessHour
                     {
-                        _photoRepository.Create(_);
-                        _unitOfWork.SaveChanges();
-                        _locationPhotoRepository.Create(new LocationPhoto
-                        {
-                            LocationId = location.Id,
-                            PhotoId = _.Id,
-                            IsPrimary = false
-                        });
+                        LocationId = location.Id,
+                        Day = _.Day,
+                        OpenTime = _.OpenTime,
+                        CloseTime = _.CloseTime
                     });
+                });
 
-                    businessHours.ToList().ForEach(_ =>
-                    {
-                        _businessHourRepository.Create(new BusinessHour
-                        {
-                            LocationId = location.Id,
-                            Day = _.Day,
-                            OpenTime = _.OpenTime,
-                            CloseTime = _.CloseTime
-                        });
-                    });
-
-                    _unitOfWork.SaveChanges();
-                    scope.Complete();
-                    return true;
-                }//end scope
+                _unitOfWork.SaveChanges();
+                return true;
             }
             catch (Exception ex)
             {

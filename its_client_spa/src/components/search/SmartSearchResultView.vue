@@ -20,16 +20,23 @@
               @addLocations="onAddLocationClick"
               @selectingMode="onSelectingMode"
             ></ChoosePlanDaySection>
+
+            <v-flex my-3>
+              <v-btn @click="onCreateSuggestedPlanClick" color="primary" :loading="suggestedBtnLoading">
+                Tạo chuyến đi tự động
+              </v-btn>
+            </v-flex>
           </v-flex>
           <v-flex v-if="!isLoggedIn"
                   shrink my-3
                   class="text-xs-center title">
-            Bạn cần đăng nhập để thêm các địa điểm bên dưới vào chuyến đi
+            Bạn cần đăng nhập để thêm các để sử dụng chuyến đi
             <v-btn color="success" @click="onSigninClick">
-                   Đăng nhập
+              Đăng nhập
             </v-btn>
           </v-flex>
         </v-layout>
+
         <!--RESULT-->
         <v-flex v-for="location in locations"
                 :key="location.id"
@@ -54,12 +61,19 @@
         <!--Holder-->
       </v-flex>
     </v-layout>
+    <!--DIALOG-->
     <MessageInputDialog
       v-bind="messageInputDialog"
       v-model="messageInputDialog.messageInput"
       @confirm="onAddMessageConfirm"
       @close="messageInputDialog.dialog = false"
     ></MessageInputDialog>
+    <CreatePlanDialog
+      :dialog="createPlanDialog.dialog"
+      :areaId="createPlanDialog.areaId"
+      @close="createPlanDialog.dialog = false"
+      @confirm="onCreateSuggestedPlanConfirm">
+    </CreatePlanDialog>
   </v-content>
 </template>
 
@@ -74,30 +88,82 @@
   } from "../../common/input";
   import ChoosePlanDaySection from "./ChoosePlanDaySection"
   import AddToPlanMixin from "./AddToPlanMixin";
-
-  import {mapGetters} from "vuex";
+  import CreatePlanDialog from "../plan/CreatePlanDialog"
+  import {mapGetters, mapState} from "vuex";
 
   export default {
     name: "SmartSearchResultView",
-    mixins:[AddToPlanMixin],
+    mixins: [AddToPlanMixin],
     components: {
       LocationFullWidth,
       PlanFullWidth,
       SuccessDialog,
       ChoosePlanDaySection,
-      MessageInputDialog
+      MessageInputDialog,
+      CreatePlanDialog
     },
-    data(){
+    data() {
       return {
         selectingMode: false,
         messageInputDialog: {},
+
+        createPlanDialog: {
+          dialog: false,
+          areaId: undefined,
+        },
+
+        selectedAreaId: undefined,
+        selectedAnswers: undefined,
       }
     },
     computed: {
       ...mapGetters('smartSearch', {
         locations: 'searchResult'
       }),
+      ...mapState('plan',{
+        suggestedBtnLoading: 'createSuggestedPlan'
+      })
     },
+    created() {
+      const {
+        areaId,
+        answers
+      } = this.$route.params;
+
+      this.selectedAreaId = areaId;
+      this.selectedAnswers = answers;
+    },
+    methods: {
+      onCreateSuggestedPlanClick() {
+        this.createPlanDialog = {
+          dialog: true,
+          areaId: this.$store.state.previousSearchAreaId
+        }
+      },
+      onCreateSuggestedPlanConfirm(inputs) {
+        const {
+          name,
+          startDate,
+          endDate
+        } = inputs;
+
+        this.createPlanDialog = {
+          dialog: false
+        };
+        this.$store.dispatch("plan/createSuggestedPlan", {
+          name,
+          startDate,
+          endDate,
+          areaId: this.selectedAreaId,
+          answers: this.selectedAnswers
+        }).then(value => {
+          this.$router.push({
+            name: 'PlanDetail',
+            query: value
+          })
+        })
+      },
+    }
   }
 </script>
 

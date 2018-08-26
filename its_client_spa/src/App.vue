@@ -37,7 +37,7 @@
         ]
       }
     },
-    mounted(){
+    mounted() {
 
     },
     computed: {

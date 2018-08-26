@@ -2,7 +2,11 @@
   <v-content>
     <v-container fluid pa-0
                  v-if="!pageLoading">
-      <ParallaxHeader :src="location.primaryPhoto" height="400"/>
+      <!--<ParallaxHeader :src="location.primaryPhoto" height="400"/>-->
+      <!--width: 100%; height: 500px-->
+      <div :style="{'width': '100%', 'height':'500px', 'background-image': `url(${location.primaryPhoto})`,'background-size': 'cover'}">
+
+      </div>
       <v-layout column>
         <v-flex mx-2 my-2>
           <!--Header-->
@@ -32,6 +36,10 @@
               Đang đóng cửa
             </span>
           </div>
+          <v-container v-if="location.description" fluid px-0>
+            <v-textarea label="Mô tả" :value="location.description" readonly>
+            </v-textarea>
+          </v-container>
         </v-flex>
         <v-flex my-4 mx-2>
           <v-layout align-baseline>
@@ -92,13 +100,13 @@
           </v-layout>
           <v-layout v-if="location.comments && location.comments.length > 0"
                     column my-2>
-            <v-flex v-for="review in location.reviews"
-                    :key="review.id"
+            <v-flex v-for="comment in location.comments"
+                    :key="comment.id"
                     elevation-2>
-              <LocationReview v-bind="review" @report="$router.push({name: 'ReviewReport'})"/>
+              <LocationReview v-bind="comment" @report="$router.push({name: 'ReviewReport'})"/>
             </v-flex>
           </v-layout>
-          <v-layout row my-2 justify-center class="subheading">
+          <v-layout v-else row my-2 justify-center class="subheading">
             <span>Chưa có bình luận nào</span>
           </v-layout>
         </v-flex>
@@ -114,7 +122,7 @@
             </v-flex>
             <v-divider></v-divider>
             <v-flex>
-              <v-btn block flat>
+              <v-btn block flat :to="nearbyLink">
                 <v-icon>far fa-building</v-icon>
                 &nbsp &nbsp Các địa điểm gần đây
               </v-btn>
@@ -188,15 +196,10 @@
     computed: {
       ...mapGetters('location', {
         location: 'detailedLocation',
-        pageLoading: 'detailedLocationLoading'
+        pageLoading: 'detailedLocationLoading',
       }),
       summaryTag() {
         return this.location.tags;
-        // return [
-        //   {id: 1, name: "Ẩm thực pháp"},
-        //   {id: 2, name: "Có thực đơn chay"},
-        //   {id: 3, name: "Sang trọng"}
-        // ]
       },
       todayHours() {
         if (!this.location.businessHours) {
@@ -275,6 +278,16 @@
           isOpen: todayHour.isNow,
           displayString: todayHour.displayString
         }
+      },
+      nearbyLink(){
+        return {
+          name: "LocationNearbyList",
+          query: {
+            long: this.location.long,
+            lat: this.location.lat,
+            title: `Các địa điểm gần ${this.location.name}`,
+          }
+        }
       }
     },
     mounted() {
@@ -290,16 +303,15 @@
         }
       },
       onAddImageConfirm(photo) {
-        this.loading.addImgBtn = true;
         this.chooseImageDialog = {
           dialog: false
         };
 
         if (photo) {
-          this.$store.dispatch('location/addImage', {photo, id: this.location.id})
+          this.$store.dispatch('location/addImage', {photo, locationId: this.location.id})
             .then(location => {
               // this.location = location;
-              this.loading.addImgBtn = false;
+              window.location.reload();
             })
             .catch(reason => {
               this.error = {
@@ -308,8 +320,6 @@
               }
             })
 
-        } else {
-          this.loading.addImgBtn = false;
         }
       }
     }

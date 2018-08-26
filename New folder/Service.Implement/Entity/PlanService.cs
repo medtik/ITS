@@ -234,6 +234,8 @@ namespace Service.Implement.Entity
         {
             var plan = Find(planId, _ => _.Notes, _ => _.PlanLocations);
             var cloner = Clone.CloneObject(plan);
+            cloner.MemberId = null;
+            cloner.GroupId = null;
             cloner.IsPublic = true;
             foreach (var item in cloner.Notes)
             {
@@ -272,8 +274,8 @@ namespace Service.Implement.Entity
                 for (int i = 1; i <= diffDays; i++)
                 {
                     DateTimeOffset currentDate = plan.StartDate.AddDays(i);
-                    Dictionary<NessecityType, Location> nessecityLocationMap;
-                    PolulateNecessityLocations(plan, locations, currentDate, out nessecityLocationMap, i);
+                    PolulateNecessityLocations(plan, locations, currentDate, out var nessecityLocationMap, i);
+                    
                     var locationsWithRouteList = await PolulateEntertainmentLocations(
                         plan,
                         locations,
@@ -281,6 +283,8 @@ namespace Service.Implement.Entity
                         nessecityLocationMap
                     );
 
+
+                    #region Buiding notes
 
                     int index = 0;
                     var hotel = nessecityLocationMap[NessecityType.Hotel];
@@ -291,8 +295,6 @@ namespace Service.Implement.Entity
                         Done = false,
                         Location = hotel
                     });
-
-
                     JObject fromHotelJObject = await FetchGoogleRoute(
                         nessecityLocationMap[NessecityType.Hotel],
                         nessecityLocationMap[NessecityType.Breakfast],
@@ -300,23 +302,24 @@ namespace Service.Implement.Entity
                     );
 
                     StringBuilder builder = new StringBuilder();
-                    
+
                     JArray fromHotelSteps = fromHotelJObject["routes"][0]["legs"][0]["steps"].Value<JArray>();
-                    builder.Append("Xuất phát từ khách sạn");                        
+                    builder.Append("Xuất phát từ khách sạn");
                     builder.Append("<br/>");
                     foreach (JToken step in fromHotelSteps)
                     {
                         builder.Append(step["html_instructions"]);
                         builder.Append("<br/>");
                     }
+
                     notes.Add(new Note
                     {
                         Index = index++,
                         PlanDay = i,
-                        Title = "Cách đi",
+                        Title = $"Cách đi từ {hotel.Name} đến {nessecityLocationMap[NessecityType.Breakfast].Name}",
                         Content = builder.ToString()
                     });
-                    
+
                     planLocations.Add(new PlanLocation
                     {
                         PlanDay = i,
@@ -329,7 +332,6 @@ namespace Service.Implement.Entity
                     Location lastLocation = null;
                     foreach (var locationsWithRoute in locationsWithRouteList)
                     {
-                       
                         JArray steps = locationsWithRoute.Key["steps"].Value<JArray>();
                         builder.Clear();
                         foreach (JToken step in steps)
@@ -337,14 +339,16 @@ namespace Service.Implement.Entity
                             builder.Append(step["html_instructions"]);
                             builder.Append("<br/>");
                         }
+
                         notes.Add(new Note
-                            {
-                                Index = index++,
-                                PlanDay = i,
-                                Title = "Cách đi",
-                                Content = builder.ToString()
-                            });
-                        
+                        {
+                            Index = index++,
+                            PlanDay = i,
+                            Title =
+                                $"Cách đi từ {locationsWithRoute.Value.Key.Name} đến {locationsWithRoute.Value.Value.Name}",
+                            Content = builder.ToString()
+                        });
+
                         planLocations.Add(new PlanLocation
                         {
                             PlanDay = i,
@@ -354,14 +358,14 @@ namespace Service.Implement.Entity
                         });
                         lastLocation = locationsWithRoute.Value.Value;
                     }
-                    
-                    
+
+
                     JObject toHotelStepsJObject = await FetchGoogleRoute(
                         lastLocation,
                         nessecityLocationMap[NessecityType.Hotel],
                         null
                     );
-                    JArray toHotelSteps = toHotelStepsJObject["routes"][0]["legs"][0]["steps"].Value<JArray>();    
+                    JArray toHotelSteps = toHotelStepsJObject["routes"][0]["legs"][0]["steps"].Value<JArray>();
                     builder.Clear();
                     foreach (JToken step in toHotelSteps)
                     {
@@ -373,10 +377,10 @@ namespace Service.Implement.Entity
                     {
                         Index = index++,
                         PlanDay = i,
-                        Title = "Cách đi",
+                        Title = $"Cách đi từ {lastLocation.Name} đến {hotel.Name}",
                         Content = builder.ToString()
                     };
-                    
+
                     planLocations.Add(new PlanLocation
                     {
                         PlanDay = i,
@@ -384,8 +388,10 @@ namespace Service.Implement.Entity
                         Done = false,
                         Location = nessecityLocationMap[NessecityType.Hotel]
                     });
-                    
+
                     notes.Add(toHotel);
+
+                    #endregion
                 }
 
                 _repository.Create(plan);
@@ -414,6 +420,7 @@ namespace Service.Implement.Entity
         }
 
         private List<TreeViewModels> localList = new List<TreeViewModels>();
+        private int maxDate = 0;
 
         private void PolulateNecessityLocations(
             Plan plan,
@@ -421,14 +428,17 @@ namespace Service.Implement.Entity
             DateTimeOffset currentDate,
             out Dictionary<NessecityType, Location> nessecityLocationMap, int dateIndex)
         {
-            if (dateIndex == 1)
+            if (dateIndex == 1 || localList.Count == maxDate)
             {
+                maxDate = localList.Count;
                 localList = locations;
-            } 
+            }
+
             Location hotel = null;
             Location breakfast = null;
             Location lunch = null;
             Location dinner = null;
+
             #region hotel
 
             var findHotel = locations.Where(_ => _.Categories == "Nơi ở").OrderByDescending(_ => _.Percent);
@@ -510,9 +520,10 @@ namespace Service.Implement.Entity
                     }
                 }
             }
+
             if (breakfast == null || lunch == null || dinner == null)
             {
-                locations = localList;//reset list
+                locations = localList; //reset list
                 foreach (var _ in locations.ToList())
                 {
                     var tmpLocation = _locationRepository.Get(__ => __.Id == _.Id && _.Categories == "Ăn uống",
@@ -573,6 +584,7 @@ namespace Service.Implement.Entity
             }
 
             #endregion
+
             _loggingService.AddSentryBreadCrum(
                 "PolulateNecessityLocations",
                 message: "wrapping up nessecity",
@@ -678,7 +690,7 @@ namespace Service.Implement.Entity
                 int areaOffSet = 4000;
                 try
                 {
-                    while (locationWithRouteList == null)
+                    while (locationWithRouteList == null && areaOffSet <= 20000)
                     {
                         var locationsBetweenMeal = GetLocationsBetweenMeal(
                             currentMealPair,
@@ -688,10 +700,10 @@ namespace Service.Implement.Entity
                         );
 
                         _loggingService.AddSentryBreadCrum("PolulateEntertainmentLocations",
-                            data: new Dictionary<string, object>
+                            new Dictionary<string, object>
                             {
                                 ["areaOffSet"] = areaOffSet,
-                                ["locationsBetweenMeal_length"] = locationsBetweenMeal.Count
+                                ["locationsBetweenMeal length"] = locationsBetweenMeal.Count
                             });
                         areaOffSet += 4000;
 
@@ -699,8 +711,7 @@ namespace Service.Implement.Entity
                             currentMealPair,
                             nextMealPair,
                             locationsBetweenMeal,
-                            currentDate,
-                            areaOffSet >= 20000
+                            currentDate
                         );
                     }
                 }
@@ -709,23 +720,19 @@ namespace Service.Implement.Entity
                     _loggingService.CaptureSentryException(ex);
                 }
 
-
-                for (int i = 0; i < locationWithRouteList.Count; i++)
+                if (locationWithRouteList != null)
                 {
-                    var locationWithRoute = locationWithRouteList[i];
-                    if (i == 0)
+                    foreach (var locationWithRoute in locationWithRouteList)
                     {
-                        var location = locationWithRoute.Value.Value;
-                        locationList.RemoveAll(tmpLocation => tmpLocation.Id == location.Id);
-                    }
-                    else
-                    {
-                        var location = locationWithRoute.Value.Key;
-                        locationList.RemoveAll(tmpLocation => tmpLocation.Id == location.Id);
-                    }
-                }
+                        var fromLocation = locationWithRoute.Value.Key;
+                        var toLocation = locationWithRoute.Value.Value;
 
-                result.AddRange(locationWithRouteList);
+                        treeLocations.RemoveAll(tmpLocation =>
+                            tmpLocation.Id == fromLocation.Id || tmpLocation.Id == toLocation.Id);
+                    }
+
+                    result.AddRange(locationWithRouteList);
+                }
             }
 
             return result;
@@ -759,8 +766,17 @@ namespace Service.Implement.Entity
                 {
                     if (location.Category == "Địa điểm thăm quan")
                     {
+                        var isdupped = false;
+                        resultLocations.ForEach(resultLocation =>
+                        {
+                            if (location.Id == resultLocation.Id)
+                            {
+                                isdupped = true;
+                            }
+                        });
+
                         GeoCoordinate locationGeo = new GeoCoordinate(location.Latitude, location.Longitude);
-                        if (locationGeo.GetDistanceTo(middleGeoPoint) <= areaOffset)
+                        if (!isdupped && locationGeo.GetDistanceTo(middleGeoPoint) <= areaOffset)
                         {
                             resultLocations.Add(location);
                         }
@@ -775,8 +791,7 @@ namespace Service.Implement.Entity
             KeyValuePair<Location, NessecityType> origin,
             KeyValuePair<Location, NessecityType> destination,
             List<Location> locationsToGo,
-            DateTimeOffset currentDate,
-            bool isLastTry = false)
+            DateTimeOffset currentDate)
         {
             var result = new List<KeyValuePair<JObject, KeyValuePair<Location, Location>>>();
             TimeSpan departureTime =
@@ -784,7 +799,6 @@ namespace Service.Implement.Entity
             TimeSpan arriveTime = GetMealTime(destination.Value);
 
             locationsToGo.RemoveAll(location => !IsLocationOpenIn(location, departureTime, arriveTime, currentDate));
-
 
             #region Calculate arrive time
 
@@ -825,12 +839,7 @@ namespace Service.Implement.Entity
 
             #endregion
 
-            if (isLastTry)
-            {
-                return result;
-            }
-
-            return !enough ? null : result;
+            return enough ? result : null;
         }
 
         private List<KeyValuePair<JObject, KeyValuePair<Location, Location>>> MapLegsAndLocationPair(
@@ -928,7 +937,7 @@ namespace Service.Implement.Entity
                         return true;
                     }
 
-                    if (businessHour.OpenTime >= start && businessHour.CloseTime <= end)
+                    if (start >= businessHour.OpenTime && businessHour.CloseTime >= end)
                     {
                         return true;
                     }
@@ -946,7 +955,7 @@ namespace Service.Implement.Entity
         {
             var uriBuilder = new UriBuilder("https://maps.googleapis.com/maps/api/directions/json");
             var query = HttpUtility.ParseQueryString(string.Empty);
-            query["key"] = "AIzaSyDN8SAnYcPJYAoGUszfiRqvVzKH2mCUrVc";
+            query["key"] = "AIzaSyCEm8r5LQCvBGGon-WfuT9u1gJkYZCkYHQ";
             query["language"] = "vi";
             query["units"] = "metric";
             query["origin"] = $"{origin.Latitude},{origin.Longitude}";

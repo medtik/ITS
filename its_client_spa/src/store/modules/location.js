@@ -24,7 +24,7 @@ export default {
     setDetailedLocation(state, payload) {
       state.detailedLocation = payload.location;
     },
-    setNearbyLocations(state, payload){
+    setNearbyLocations(state, payload) {
       state.nearbyLocations = payload.locations;
     },
     setLoading(state, payload) {
@@ -41,11 +41,16 @@ export default {
 
 
       return new Promise((resolve, reject) => {
-        axiosInstance.post('api/Location/AddImageToLocation',{
-          params: {
-
-          }
+        axiosInstance.post('api/Location/AddImageToLocation', {
+          "locationId": locationId,
+          "avatar": photo
         })
+          .then(value => {
+            resolve();
+          })
+          .catch(reason => {
+            reject();
+          })
       })
     },
 
@@ -112,36 +117,25 @@ export default {
     fetchNearbyLocations(context, payload) {
       // get /api/Location/NearbyLocation
       const {
-        long, lat
+        long, lat, radius
       } = payload;
 
-      context.commit('setLoading', {
-        loading: {
-          nearbyLocations: true
-        }
-      });
+      context.commit('setLoading', {loading: {nearbyLocations: true}});
       axiosInstance.get('api/Location/NearbyLocation', {
         params: {
           longitude: long,
           latitude: lat,
-          radius: 1000
+          radius: (radius)
         }
-          .then(value => {
-            context.commit('setLoading', {
-              loading: {
-                nearbyLocations: false
-              }
-            });
-          })
-          .catch(reason => {
-            Raven.captureException(reason);
-            context.commit('setLoading', {
-              loading: {
-                nearbyLocations: false
-              }
-            });
-          })
       })
+        .then(value => {
+          context.commit('setLoading', {loading: {nearbyLocations: false}});
+          context.commit('setNearbyLocations', {locations: value.data});
+        })
+        .catch(reason => {
+          Raven.captureException(reason);
+          context.commit('setLoading', {loading: {nearbyLocations: false}});
+        })
     }
   }
 }

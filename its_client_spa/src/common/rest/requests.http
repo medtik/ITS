@@ -39,3 +39,15 @@ Content-Type: application/json
 Authorization: {{token}}
 
 ###
+
+POST http://{{host}}/api/test2
+Content-Type: application/json
+Authorization: {{token}}
+
+{"answers":[173,174,176,175,177,178],"name":"phong","startDate":"2018-08-31","endDate":"2018-09-1","areaId":2}
+
+###
+
+GET	https://maps.googleapis.com:443/maps/api/directions/json?key=AIzaSyCEm8r5LQCvBGGon-WfuT9u1gJkYZCkYHQ&language=vi&units=metric&origin=10.7709574%2c106.6948746&destination=10.7984659%2c106.6873902
+
+###

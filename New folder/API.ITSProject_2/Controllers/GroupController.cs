@@ -182,18 +182,26 @@
 
         #region Delete
         [HttpDelete]
+        [Authorize]
         [Route("api/Group/RemovePlan")]
-        public IHttpActionResult RemovePlanToGroup(int planId)
+        public async Task<IHttpActionResult> RemovePlanToGroup(int planId)
         {
             try
             {
-                Plan plan = _planService.Find(planId);
+                Plan plan = _planService.Find(planId, _ => _.Group);
                 if (plan != null)
                 {
-                    bool result = _planService.Delete(plan);
+                    bool isAuthor = plan.Group.CreatorId == (await CurrentUser()).Id;
+                    if (isAuthor)
+                    {
+                        bool result = _planService.Delete(plan);
 
-                    if (result)
-                        return Ok();
+                        if (result)
+                            return Ok();
+                    }
+                    else
+                        return Unauthorized();
+                    
                 }
                 return BadRequest();
             }
@@ -258,6 +266,7 @@
                         return BadRequest("Group doesn't existed");
 
                     plan.GroupId = groupId.Value;
+                    plan.MemberId = null;
 
                     _planService.Create(plan);
                 }//add to group

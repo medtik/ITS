@@ -73,6 +73,10 @@
     <Compile Include="Migrations\201808170912095_recreate_Database.Designer.cs">
       <DependentUpon>201808170912095_recreate_Database.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808251650192_asdfg.cs" />
+    <Compile Include="Migrations\201808251650192_asdfg.Designer.cs">
+      <DependentUpon>201808251650192_asdfg.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Repository.cs" />
@@ -99,6 +103,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201808170912095_recreate_Database.resx">
       <DependentUpon>201808170912095_recreate_Database.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808251650192_asdfg.resx">
+      <DependentUpon>201808251650192_asdfg.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

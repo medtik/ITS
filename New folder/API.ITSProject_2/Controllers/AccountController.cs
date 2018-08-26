@@ -249,7 +249,7 @@
 
             if (provider == "Facebook")
             {
-                var appToken = "EAAHEVJLjiCQBAIh7RdDuPS9Ioj0VyZBzbEl66rSrdCYf2ZB6uQspCjfM0qvFYTMzbrKFXohgWkumdrPFpolJEL35iZBnkqfbRtqfe12AfSE1WGvHjmq9NweneAIqw3n41H85hfhxi4rMYw4QIVrS1HxDuwb8LAwOao9nq3QQZBWWaMBBG3cirQFXKPBSNt8ZD";
+                var appToken = "266318357470729";
                 verifyTokenEndPoint = string.Format("https://graph.facebook.com/debug_token?input_token={0}&access_token={1}", accessToken, appToken);
             }
             else if (provider == "Google")
@@ -342,19 +342,19 @@
 
             if (hasRegistered)
             {
-                return BadRequest("External user is already registered");
+                return await ObtainLocalAccessToken(model.Provider, model.ExternalAccessToken);
             }
 
             user = new Account() { UserName = model.UserName };
 
-            IdentityResult result = (await _identityService.CreateAsync(model.UserName)).Data as IdentityResult;
+            string result = await _identityService.CreateAsync(model.UserName);
 
             var info = new ExternalLoginInfo()
             {
                 DefaultUserName = model.UserName,
             };
             
-            result = (await _identityService.AddLoginAsync(user.Id, model.Provider, verifiedAccessToken.user_id)).Data as IdentityResult;
+            IdentityResult result2 = (await _identityService.AddLoginAsync(result, model.Provider, verifiedAccessToken.user_id)).Data as IdentityResult;
 
             //generate access token response
             var accessTokenResponse = GenerateLocalAccessTokenResponse(model.UserName);

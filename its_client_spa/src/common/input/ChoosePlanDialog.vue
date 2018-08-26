@@ -16,7 +16,7 @@
               Chuyến đi cá nhân
             </v-subheader>
 
-            <v-list-tile v-for="(plan) in plans" :key="`plan_${plan.id}`"
+            <v-list-tile v-for="(plan,index) in plans" :key="`plan_${plan.id}_${index}`"
                          @click="selectedPlanId = plan.id">
               <v-list-tile-content>
                 <v-list-tile-title>
