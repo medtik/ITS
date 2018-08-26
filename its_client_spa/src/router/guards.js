@@ -28,11 +28,7 @@ function getDataRedirect(to) {
   switch (to.name) {
     case 'SmartSearchResult': {
       const searchResult = store.getters['smartSearch/searchResult'];
-      const {
-        areaId,
-        answers
-      } = to.params;
-      if (!searchResult || !areaId || !answers) {
+      if (!searchResult) {
         return {
           name: 'SmartSearch'
         };

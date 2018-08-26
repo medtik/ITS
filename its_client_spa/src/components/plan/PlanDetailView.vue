@@ -25,7 +25,7 @@
         </span>
       </v-toolbar-title>
       <v-spacer v-if="!isSmallScreen"></v-spacer>
-      <v-toolbar-items v-if="isLoggedIn">
+      <v-toolbar-items>
         <v-btn flat
                @click="dialog.choosePlanDestination = true"
                :loading="addPlanToGroupLoading">
@@ -142,11 +142,11 @@
                             v-model="checkboxValues"
                             @change="onToggleNote(item.id)">
                 </v-checkbox>
-                <!--<v-btn icon flat color="primary" @click="onNoteEdit(item)">-->
-                  <!--<v-icon>-->
-                    <!--fas fa-edit-->
-                  <!--</v-icon>-->
-                <!--</v-btn>-->
+                <v-btn icon flat color="primary" @click="onNoteEdit(item)">
+                  <v-icon>
+                    fas fa-edit
+                  </v-icon>
+                </v-btn>
                 <v-btn icon flat color="red" @click="onNoteDelete(item)">
                   <v-icon>
                     fas fa-trash
