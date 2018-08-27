@@ -91,6 +91,14 @@
           }
         }
 
+        if (!!this.input.startDate && !!this.input.endDate) {
+          const startDate = moment(this.input.startDate);
+          const endDate = moment(this.input.endDate);
+          if (endDate.diff(startDate, 'days') > 7) {
+            endDateError = "Chuyến đi tự động không quá 7 ngày";
+          }
+        }
+
         this.formError = {
           name: nameError,
           startDate: startDateError,

@@ -124,14 +124,8 @@
         suggestedBtnLoading: 'createSuggestedPlan'
       })
     },
-    created() {
-      const {
-        areaId,
-        answers
-      } = this.$route.params;
-
-      this.selectedAreaId = areaId;
-      this.selectedAnswers = answers;
+    mounted(){
+      this.selectedAnswers = this.$store.state.previousSearchAnswers;
     },
     methods: {
       onCreateSuggestedPlanClick() {

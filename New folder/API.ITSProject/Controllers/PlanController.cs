@@ -60,6 +60,7 @@
                     _ => _.PlanLocations.Select(__ => __.Location.Reviews),
                     _ => _.Notes, _ => _.Area, _ => _.Voters);
 
+                
                 if (plan == null)
                     return BadRequest("Not found");
                 else
@@ -67,6 +68,7 @@
                     var temp = ModelBuilder.ConvertToPlanDetailViewModels(plan);
                     temp.IsOwner = temp.MemberId == userId;
                     temp.IsVoted = plan.Voters.Contains(await CurrentUser());
+                    temp.IsGroupOwner = (await CurrentUser()).Id == (plan.Group?.CreatorId ?? -1);
                     return Ok(temp);
                 }
             }

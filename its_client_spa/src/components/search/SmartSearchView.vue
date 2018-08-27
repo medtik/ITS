@@ -169,6 +169,8 @@
       },
       onSubmit() {
         this.loading.finishBtn = true;
+        this.$store.commit('previousSearchAnswers', {answers: this.selectedAnswers});
+        this.$store.commit('previousSearchAreaId', {areaId: this.selectedAreaId});
         this.$store.dispatch('smartSearch/getSuggestion', {
           answers: this.selectedAnswers,
           areaId: this.selectedAreaId || this.context.areaId
@@ -178,8 +180,6 @@
               name: 'SmartSearchResult',
               params: {
                 ...value,
-                answers: this.selectedAnswers,
-                areaId: this.selectedAreaId
               }
             });
             this.loading.finishBtn = false;

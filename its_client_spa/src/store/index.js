@@ -35,7 +35,8 @@ const store = new Vuex.Store({
     signinContext: {
       returnRoute: undefined
     },
-    previousSearchAreaId: undefined
+    previousSearchAreaId: undefined,
+    previousSearchAnswers: undefined
   },
   getters: {
     searchContext(state) {
@@ -63,6 +64,9 @@ const store = new Vuex.Store({
     },
     previousSearchAreaId(state, payload) {
       state.previousSearchAreaId = payload.areaId;
+    },
+    previousSearchAnswers(state, payload){
+      state.previousSearchAnswers = payload.answers;
     },
     consumeSearchContext(state) {
       state.searchContext = {};
