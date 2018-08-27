@@ -195,14 +195,6 @@
       },
       signinGoogle() {
         this.$store.dispatch('authenticate/signinGoogle')
-          .then(value => {
-            this.$router.push({
-              name: 'Home'
-            })
-          })
-          .catch(reason => {
-            this.error = {...reason};
-          })
       },
       signinFacebook() {
         this.$store.dispatch('authenticate/signinFacebook')
