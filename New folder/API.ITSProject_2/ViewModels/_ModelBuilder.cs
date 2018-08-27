@@ -363,7 +363,7 @@
                 RatingCount = ratingCount,
                 BusinessHours = ConvertToBusinessHourViewModels(location.BusinessHours),
                 Tags = location.Tags.Select(_ => _.Name),
-                PrimaryPhoto = location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Path,
+                PrimaryPhoto = location.Photos.OrderByDescending(_ => _.PhotoId).FirstOrDefault(_ => _.IsPrimary)?.Photo.Path,
                 OtherPhotos = location.Photos.Where(_ => !_.IsPrimary).Select(_ => _.Photo).Select(_ => _.Path),
                 Comments = ConvertToCommentViewModels(location.Reviews).OrderByDescending(_ => _.Id).Take(5),
                 Category = location.Category,

@@ -59,7 +59,7 @@
                 }
                 if (!string.IsNullOrEmpty(nameSearchValue))
                 {
-                    usersSearch = usersSearch.Where(_ => _.Name.Contains(nameSearchValue)).ToList();
+                    usersSearch = usersSearch.Where(_ => _.Name.Contains(nameSearchValue) || _.EmailAddress.Contains(nameSearchValue)).ToList();
                 }//search client
                 else
                 {

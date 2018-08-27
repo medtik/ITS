@@ -1,7 +1,34 @@
 ﻿namespace API.ITSProject_2.ViewModels
 {
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Runtime.Serialization;
+
+    [DataContract(Name = "Area")]
+    public class CreateAreaViewModels
+    {
+        [Required]
+        [DataMember]
+        public string Name { get; set; }
+
+        [DataMember]
+        public IList<int> QuestionIds { get; set; }
+    }
+
+    [DataContract(Name = "Area")]
+    public class EditAreaViewModels
+    {
+        [Required]
+        [DataMember]
+        public int Id { get; set; }
+
+        [Required]
+        [DataMember]
+        public string Name { get; set; }
+
+        [DataMember]
+        public IList<int> QuestionIds { get; set; }
+    }
 
     [DataContract(Name = "Area")]
     public class AreaDetailViewModels

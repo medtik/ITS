@@ -11,15 +11,19 @@
     using Core.ApplicationService.Business.LogService;
     using Core.ApplicationService.Business.PagingService;
     using API.ITSProject_2.ViewModels;
+    using System.Collections.ObjectModel;
 
     public class AreaController : _BaseController
     {
         private readonly IAreaService _areaService;
+        private readonly IQuestionService _questionService;
 
         public AreaController(ILoggingService loggingService, IPagingService paggingService,
-            IIdentityService identityService, IAreaService areaService, IPhotoService photoService) : base(loggingService, paggingService, identityService, photoService)
+            IIdentityService identityService, IAreaService areaService, IPhotoService photoService,
+            IQuestionService questionService) : base(loggingService, paggingService, identityService, photoService)
         {
             this._areaService = areaService;
+            this._questionService = questionService;
         }
 
         #region Get
@@ -135,6 +139,59 @@
                 _loggingService.Write(GetType().Name, nameof(GetFeaturedArea), ex);
 
                 return InternalServerError(ex);
+            }
+        }
+        #endregion
+
+        #region Post
+        public IHttpActionResult Create(CreateAreaViewModels data)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest();
+                }
+                var questionIds = data.QuestionIds ?? new List<int>();
+                var questionList = _questionService.Search(_ => questionIds.Contains(_.Id)).ToList();
+
+                Area area = new Area
+                {
+                    Name = data.Name,
+                    Questions = questionList
+                };
+                _areaService.Create(area);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _loggingService.Write(GetType().Name, nameof(Create), ex);
+                return InternalServerError();
+            }
+        }
+        #endregion
+
+        #region Put
+        public IHttpActionResult Put(EditAreaViewModels data)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest();
+                }
+                var questionIds = data.QuestionIds ?? new List<int>();
+                var questionList = _questionService.Search(_ => questionIds.Contains(_.Id)).ToList();
+
+                var area = _areaService.Find(data.Id, _ => _.Questions);
+                area.Questions = questionList;
+                _areaService.Update(area);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _loggingService.Write(GetType().Name, nameof(Create), ex);
+                return InternalServerError();
             }
         }
         #endregion

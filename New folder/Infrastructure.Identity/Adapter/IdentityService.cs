@@ -50,6 +50,21 @@
             _loggingService = loggingService;
         }
 
+        public async Task ChangeRole(string userId)
+        {
+            bool isUser = await _accountService.IsInRoleAsync(userId, "User");
+            if (isUser)
+            {
+                await _accountService.RemoveFromRoleAsync(userId, "User");
+                await _accountService.AddToRoleAsync(userId, "Administrator");
+            }
+            else
+            {
+                await _accountService.RemoveFromRoleAsync(userId, "Administrator");
+                await _accountService.AddToRoleAsync(userId, "User");
+            }
+        }
+
         public async Task<_IdentityData> Create(string usernameOrEmail, string password, string fullName,
             string address, string phoneNumber, DateTimeOffset birthdate, params string[] roles)
         {

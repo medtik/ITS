@@ -12,6 +12,8 @@
     using Core.ApplicationService.Business.LogService;
     using Core.ApplicationService.Business.PagingService;
     using API.ITSProject_2.ViewModels;
+    using System.Runtime.Serialization;
+    using System.ComponentModel.DataAnnotations;
 
     public class TagController : _BaseController
     {
@@ -138,5 +140,37 @@
                 return InternalServerError(ex);
             }
         }
+
+        [HttpPut]
+        public IHttpActionResult EditTag(EditTagViewModels data)
+        {
+            try
+            {
+                if (!ModelState.IsValid) return BadRequest();
+
+                var tag = _tagService.Find(data.Id);
+                tag.Name = data.Name;
+                tag.Categories = data.Category;
+                _tagService.Update(tag);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _loggingService.Write(GetType().Name, nameof(EditTag), ex);
+
+                return InternalServerError(ex);
+            }
+        }
+    }
+
+    [DataContract]
+    public class EditTagViewModels
+    {
+        [DataMember, Required]
+        public int Id { get; set; }
+        [DataMember, Required]
+        public string Name { get; set; }
+        [DataMember]
+        public string Category { get; set; }
     }
 }

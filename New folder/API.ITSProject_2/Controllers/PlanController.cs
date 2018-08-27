@@ -18,6 +18,7 @@
     using Newtonsoft.Json;
     using System.Net.Http;
     using System.Net.Http.Headers;
+    using System.ComponentModel.DataAnnotations;
 
     public class PlanController : _BaseController
     {
@@ -345,6 +346,41 @@
         #endregion
 
         #region Put
+
+        public class EditNoteViewModels
+        {
+            [Required]
+            public int NoteId { get; set; }
+
+            [Required, MaxLength(255)]
+            public string Title { get; set; }
+
+            public string Description { get; set; }
+        }
+        [HttpPut]
+        [Route("api/Plan/EditNote")]
+        public IHttpActionResult EditNote(EditNoteViewModels note)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            try
+            {
+                var editNote = _planService.FindNote(note.NoteId);
+                editNote.Title = note.Title;
+                editNote.Content = note.Description;
+
+                _planService.UpdatePlanNote(editNote);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _loggingService.Write(GetType().Name, nameof(EditNote), ex);
+                return InternalServerError();
+            }
+            
+        }
+
         [HttpPut]
         [Route("api/Plan/VotePlan")]
         public async Task<IHttpActionResult> VotePlan([FromBody]int planId)

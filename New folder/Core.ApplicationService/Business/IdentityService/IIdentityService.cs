@@ -8,6 +8,8 @@
 
     public interface IIdentityService
     {
+        Task ChangeRole(string userId);
+
         Task<_IdentityData> FindByUsername(string username);
 
         Task<_IdentityData> AddLoginAsync(string userId, string a, string b);
