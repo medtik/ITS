@@ -10,21 +10,25 @@
         <v-text-field
           label="Tên"
           v-model="input.name"
+          :error="!!formError.name" :error-messages="formError.name"
         />
         <AreaInput
           :readonly="lockAreaId"
-          v-model="input.areaId">
+          v-model="input.areaId"
+        >
 
         </AreaInput>
         <v-text-field
           label="Ngày bắt đầu"
           type="date"
           v-model="input.startDate"
+          :error="!!formError.startDate" :error-messages="formError.startDate"
         />
         <v-text-field
           label="Ngày kết thúc"
           type="date"
           v-model="input.endDate"
+          :error="!!formError.endDate" :error-messages="formError.endDate"
         />
       </v-flex>
       <v-flex>
@@ -98,22 +102,24 @@
     },
     methods: {
       onCreate() {
-        this.$store.dispatch('plan/create', {
-          ...this.input
-        }).then((data) => {
-          if (this.isHavingContext) {
-            this.$store.commit('searchContext',{
-              context:{
-                areaId: this.input.areaId,
-                planId: data.id
-              }
-            });
-            this.$router.push(this.context.returnRoute);
-          } else {
-            this.$router.back();
-          }
+        if(this.validate()){
+          this.$store.dispatch('plan/create', {
+            ...this.input
+          }).then((data) => {
+            if (this.isHavingContext) {
+              this.$store.commit('searchContext',{
+                context:{
+                  areaId: this.input.areaId,
+                  planId: data.id
+                }
+              });
+              this.$router.push(this.context.returnRoute);
+            } else {
+              this.$router.back();
+            }
 
-        })
+          })
+        }
       },
       onCancel() {
         this.$router.back();
@@ -122,6 +128,7 @@
         let nameError = undefined;
         let startDateError = undefined;
         let endDateError = undefined;
+        let areaIdError = undefined;
 
         nameError = !this.input.name ? 'Tên không được trống' : undefined;
         startDateError = !this.input.startDate ? 'Ngày bắt đầu không được trống' : undefined;

@@ -202,6 +202,10 @@
 
 
             int userId = (await CurrentUser()).Id;
+            _loggingService.AddSentryBreadCrum("CreateSuggestedPlan", data: new Dictionary<string, object>
+            {
+                ["input model"] = viewModel
+            });
             Plan resultPlan = await _planService.CreateSuggestedPlan(
                 new Plan
                 {

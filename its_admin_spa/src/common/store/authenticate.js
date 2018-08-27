@@ -22,9 +22,6 @@ var googleProvider = new firebase.auth.GoogleAuthProvider();
 var facebookProvider = new firebase.auth.FacebookAuthProvider();
 
 
-
-
-
 export default {
   namespaced: true,
   state: {
@@ -119,52 +116,59 @@ export default {
     },
     signinFacebook() {
       // post /RegisterExternal
-      firebase.auth().signInWithPopup(facebookProvider).then(function(result) {
+      firebase.auth().signInWithPopup(facebookProvider).then(function (result) {
         // This gives you a Facebook Access Token. You can use it to access the Facebook API.
         var token = result.credential.accessToken;
         // The signed-in user info.
         var user = result.user;
 
+        let data = {
+          "email": user.email,
+          "photoUrl": user.photoUrl,
+          "displayName": user.displayName,
+          "uid": user.uid,
+          "provider": "Facebook",
+          "externalAccessToken": token
+        };
 
-        axiosInstance.post('RegisterExternal',{
-          ...user
+
+        axiosInstance.post('RegisterExternal', data);
+
+        Raven.captureMessage("signinFacebook", {
+          extra: data
         });
 
-        console.debug(user);
-        Raven.captureMessage("signinFacebook",{
-          extra:{
-            token,
-            user,
-          }
-        })
-      }).catch(function(error) {
+      }).catch(function (error) {
         Raven.captureException(error);
       });
     },
-    signinGoogle(){
+    signinGoogle() {
       // post /RegisterExternal
-      firebase.auth().signInWithPopup(googleProvider).then(function(result) {
+      firebase.auth().signInWithPopup(googleProvider).then(function (result) {
         // This gives you a Facebook Access Token. You can use it to access the Facebook API.
         var token = result.credential.accessToken;
         var user = result.user;
 
+        let data = {
+          "email": user.email,
+          "photoUrl": user.photoUrl,
+          "displayName": user.displayName,
+          "uid": user.uid,
+          "provider": "Google",
+          "externalAccessToken": token
+        };
 
-        axiosInstance.post('RegisterExternal',{
-          ...user
-        });
-        Raven.captureMessage("signinGoogle",{
-          extra:{
-            token,
-            user,
-          }
+        axiosInstance.post('RegisterExternal', data);
+        Raven.captureMessage("signinGoogle", {
+          extra: data
         });
         // ...
-      }).catch(function(error) {
+      }).catch(function (error) {
         Raven.captureException(error);
       });
     },
     logout(context) {
-      context.dispatch('resetUserData',{}, {root: true});
+      context.dispatch('resetUserData', {}, {root: true});
       firebase.auth().signOut()
     }
   }
