@@ -21,7 +21,7 @@
               @selectingMode="onSelectingMode"
             ></ChoosePlanDaySection>
 
-            <v-flex my-3>
+            <v-flex my-3 v-if="!context.plan">
               <v-btn @click="onCreateSuggestedPlanClick" color="primary" :loading="suggestedBtnLoading">
                 Tạo chuyến đi tự động
               </v-btn>
