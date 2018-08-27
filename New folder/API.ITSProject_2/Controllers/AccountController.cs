@@ -250,7 +250,7 @@
             if (provider == "Facebook")
             {
                 var appToken = "266318357470729";
-                verifyTokenEndPoint = string.Format("https://graph.facebook.com/debug_token?input_token={0}&access_token={1}", accessToken, appToken);
+                verifyTokenEndPoint = string.Format("https://graph.facebook.com/debug_token?input_token={1}&access_token={0}", accessToken, appToken);
             }
             else if (provider == "Google")
             {
@@ -333,7 +333,8 @@
             var verifiedAccessToken = await VerifyExternalAccessToken(model.Provider, model.ExternalAccessToken);
             if (verifiedAccessToken == null)
             {
-                return BadRequest("Invalid Provider or External Access Token");
+                await ObtainLocalAccessToken(model.Provider, model.ExternalAccessToken);
+                //return BadRequest("Invalid Provider or External Access Token");
             }
 
             Account user = (await _identityService.FindAsync(model.Provider, verifiedAccessToken.user_id)).Data as Account;

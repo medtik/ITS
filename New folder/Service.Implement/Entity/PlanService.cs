@@ -274,7 +274,8 @@ namespace Service.Implement.Entity
                 for (int i = 1; i <= diffDays; i++)
                 {
                     DateTimeOffset currentDate = plan.StartDate.AddDays(i);
-                    PolulateNecessityLocations(plan, locations, currentDate, out var nessecityLocationMap, i);
+                    Dictionary<NessecityType, Location> nessecityLocationMap;
+                    PolulateNecessityLocations(plan, locations, currentDate, out  nessecityLocationMap, i);
                     
                     var locationsWithRouteList = await PolulateEntertainmentLocations(
                         plan,

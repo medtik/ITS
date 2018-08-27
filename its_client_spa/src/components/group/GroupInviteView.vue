@@ -11,7 +11,7 @@
                       label="Tìm"
                       v-model="nameInput"
                       v-on:keyup.enter="onSearchEnter"/>
-        <v-list>
+        <v-list two-lines>
           <v-list-tile v-for="user in users"
                        :key="user.id"
                        @click="">
@@ -19,7 +19,9 @@
               <img :src="user.avatar"/>
             </v-list-tile-avatar>
             <v-list-tile-content>
-              {{user.name}}
+
+              <v-list-tile-title>{{user.name}}</v-list-tile-title>
+              <v-list-tile-sub-title>{{user.emailAddress}}</v-list-tile-sub-title>
             </v-list-tile-content>
             <v-list-tile-action>
               <v-btn flat color="success" @click="onInviteUserClick(user.id)">

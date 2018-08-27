@@ -67,13 +67,13 @@ namespace API.ITSProject.Controllers
             IList<LocationViewModels> result = new List<LocationViewModels>();
             var searchLoation = new GeoCoordinate(latitude, longitude);
 
-            var listLocation = _locationService.GetAll();
+            var listLocation = _locationService.GetAll(location => location.Reviews);
 
             foreach (var ele in listLocation)
             {
                 var tmpLocation = new GeoCoordinate(ele.Latitude, ele.Longitude);
 
-                if (searchLoation.GetDistanceTo(tmpLocation) <= radius)
+                if (searchLoation.GetDistanceTo(tmpLocation) <= radius*1000)
                 {
                     result.Add(ModelBuilder.ConvertToViewModels(ele));
                 }// end if check is in radius
@@ -157,11 +157,6 @@ namespace API.ITSProject.Controllers
                 int ratingCount = location.Reviews.Count;
                 var rating = location.Reviews.Sum(_ => _.Rating) / ratingCount;
                 rating = float.IsNaN(rating) ? 0 : rating;
-
-                foreach (Review review in location.Reviews)
-                {
-                    rating += review.Rating;
-                }
 
                 TreeViewModels result = new TreeViewModels
                 {

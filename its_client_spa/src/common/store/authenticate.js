@@ -3,8 +3,8 @@ import RNMsgChannel from 'react-native-webview-messaging';
 import moment from "moment";
 import Raven from "raven-js"
 
-const root = "https://itssolutiong9.azurewebsites.net/";
-// const root = "http://localhost:59728/";
+// const root = "https://itssolutiong9.azurewebsites.net/";
+const root = "http://localhost:59728/";
 
 
 export default {

@@ -112,6 +112,10 @@
           areaId: undefined,
         },
 
+        loading:{
+          createSuggestedPlan: false
+        },
+
         selectedAreaId: undefined,
         selectedAnswers: undefined,
       }
@@ -144,6 +148,7 @@
         this.createPlanDialog = {
           dialog: false
         };
+        this.loading.createSuggestedPlan = true;
         this.$store.dispatch("plan/createSuggestedPlan", {
           name,
           startDate,
@@ -151,6 +156,7 @@
           areaId: this.selectedAreaId,
           answers: this.selectedAnswers
         }).then(value => {
+          this.loading.createSuggestedPlan = false;
           this.$router.push({
             name: 'PlanDetail',
             query: value
