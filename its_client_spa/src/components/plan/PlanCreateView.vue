@@ -68,9 +68,9 @@
           areaId: undefined,
         },
         formError:{
-          name,
-          startDate,
-          endDate
+          name: undefined,
+          startDate: undefined,
+          endDate: undefined
         },
         lockAreaId: false
       }

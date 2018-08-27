@@ -14,6 +14,7 @@ import '@fortawesome/fontawesome-free/css/all.css'
 import {locates} from "./common/util";
 import moment from "moment";
 
+
 moment.locale('vi');
 
 Raven
@@ -92,43 +93,6 @@ RNMsgChannel.on('json', json => {
       break;
   }
 });
-
-window.fbAsyncInit = function () {
-  FB.init({
-    appId: '266318357470729',
-    autoLogAppEvents: true,
-    status: false, // Check login status
-    cookie: true, // Enable cookies to allow the server to access the session
-    xfbml: true,  // Parse XFBML
-    oauth: true,
-    version: 'v3.1'
-  });
-  FB.getLoginStatus(function (response) {
-    Raven.captureMessage("FB login status - init", {
-      extra: {
-        response
-      }
-    });
-    store.commit('authenticate/setFacebookInstance', {
-      instance: FB
-    });
-    store.commit('authenticate/setFacebookAuthentication', {
-      status: response
-    })
-  });
-};
-
-(function (d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) {
-    return;
-  }
-  js = d.createElement(s);
-  js.id = id;
-  js.src = "https://connect.facebook.net/en_US/sdk.js";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-
 
 Vue.config.productionTip = false;
 
