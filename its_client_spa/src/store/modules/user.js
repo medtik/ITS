@@ -55,7 +55,7 @@ export default {
     setLoading(state, payload) {
       state.loading = _.assign(state.loading, payload.loading);
     },
-    setMobileToken(state, payload){
+    setMobileToken(state, payload) {
       const {
         token
       } = payload;
@@ -69,16 +69,31 @@ export default {
         token
       } = payload;
       // put /api/User/SetMobileToken
-      if(context.rootGetters['authenticate/isLoggedIn']){
+      if (context.rootGetters['authenticate/isLoggedIn']) {
         axiosInstance.put('api/User/SetMobileToken?token=' + token);
       }
-      context.commit('setMobileToken',{
+      context.commit('setMobileToken', {
         token: token
       });
     },
     updateAccountInfo(context, payload) {
       console.debug('updateAccountInfo', payload);
-      return Promise.resolve();
+
+      return new Promise((resolve, reject) => {
+        axiosInstance.put('', {
+          "name": "straing",
+          "phoneNumber": "string",
+          "address": "string",
+          "birthdate": "2018-08-27T21:58:17.062Z",
+          "avatar": "string"
+        })
+          .then(value => {
+            resolve();
+          })
+          .catch(value => {
+            reject();
+          })
+      })
     },
     fetchCurrentInfo(context) {
       context.commit('setLoading', {

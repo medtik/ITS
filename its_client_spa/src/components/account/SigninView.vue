@@ -65,14 +65,16 @@
                   <v-divider class="my-2"/>
                 </v-flex>
                 <v-flex xs12 lg6 d-flex class="justify-center">
-                  <v-btn color="red" dark @click="signinGoogle">
+                  <v-btn color="red" dark @click="signinGoogle"
+                  :loading="loading.googleBtn">
                     <v-icon>fab fa-google</v-icon>
                     &nbsp;&nbsp;
                     Đăng nhập Google
                   </v-btn>
                 </v-flex>
                 <v-flex xs12 lg6 d-flex class="justify-center">
-                  <v-btn color="primary" dark @click="signinFacebook">
+                  <v-btn color="primary" dark @click="signinFacebook"
+                         :loading="loading.facebookBtn">
                     <v-icon>fab fa-facebook</v-icon>
                     &nbsp;&nbsp;
                     Đăng nhập Facebook
@@ -130,7 +132,9 @@
     data() {
       return {
         loading: {
-          signinBtn: false
+          signinBtn: false,
+          googleBtn: false,
+          facebookBtn: false
         },
         //RECOVER PASSWORD
         recoverEmailInput: undefined,
@@ -194,10 +198,52 @@
           })
       },
       signinGoogle() {
+        this.loading.googleBtn = true;
         this.$store.dispatch('authenticate/signinGoogle')
+          .then(value => {
+            const returnRoute = this.$store.getters['signinContext'].returnRoute;
+            this.loading.googleBtn = false;
+            Raven.captureBreadcrumb({
+              message: 'signin',
+              category: 'methods',
+              data: {
+                returnRoute
+              }
+            });
+            if (returnRoute) {
+              this.$router.push({
+                ...returnRoute
+              });
+            } else {
+              this.$router.push({
+                name: 'Home'
+              });
+            }
+          })
       },
       signinFacebook() {
+        this.loading.facebookBtn = true;
         this.$store.dispatch('authenticate/signinFacebook')
+          .then(value =>{
+            this.loading.facebookBtn = false;
+            const returnRoute = this.$store.getters['signinContext'].returnRoute;
+            Raven.captureBreadcrumb({
+              message: 'signin',
+              category: 'methods',
+              data: {
+                returnRoute
+              }
+            });
+            if (returnRoute) {
+              this.$router.push({
+                ...returnRoute
+              });
+            } else {
+              this.$router.push({
+                name: 'Home'
+              });
+            }
+          })
       },
       onRecoverClick() {
         this.emailInputDialog = false;
