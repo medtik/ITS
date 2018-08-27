@@ -340,7 +340,7 @@
 
                 if (!hasRegistered)
                 {
-                    await _identityService.Create(model.uid, "abcdefghijklmnopqrstuvwxyz", model.displayName, model.photoUrl, string.Empty, DateTimeOffset.Now, "abc");
+                    await _identityService.Create(model.uid, "abcdefghijklmnopqrstuvwxyz", model.displayName, model.photoUrl, "Photo", DateTimeOffset.Now);
                 }
                 var client = new HttpClient();
 
