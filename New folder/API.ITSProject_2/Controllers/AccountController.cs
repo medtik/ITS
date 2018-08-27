@@ -330,32 +330,24 @@
         {
             try
             {
-<<<<<<< HEAD
                 if (!ModelState.IsValid)
                 {
                     return BadRequest(ModelState);
                 }
-                Account user = (await _identityService.FindAsync(model.Provider, model.UserName)).Data as Account;
-=======
-                await ObtainLocalAccessToken(model.Provider, model.ExternalAccessToken);
-                //return BadRequest("Invalid Provider or External Access Token");
-            }
-
-            Account user = (await _identityService.FindAsync(model.Provider, verifiedAccessToken.user_id)).Data as Account;
->>>>>>> 5e7d109765b7b91e6bea42d7412cfa6fb8b24877
+                Account user = (await _identityService.FindAsync(model.Provider, model.uid)).Data as Account;
 
                 bool hasRegistered = user != null;
 
                 if (!hasRegistered)
                 {
-                    await _identityService.Create(model.UserName, "abcdefghijklmnopqrstuvwxyz", model.FullName, string.Empty, model.PhotoUrl, DateTimeOffset.Now, "abc");
+                    await _identityService.Create(model.uid, "abcdefghijklmnopqrstuvwxyz", model.displayName, model.photoUrl, string.Empty, DateTimeOffset.Now, "abc");
                 }
                 var client = new HttpClient();
 
                 string baseAddress = "http://" + HttpContext.Current.Request.Url.Authority;
                 client.BaseAddress = new Uri(baseAddress);
                 HttpContent content = new FormUrlEncodedContent(new List<KeyValuePair<string, string>>() {
-                        new KeyValuePair<string, string>("username", model.UserName),
+                        new KeyValuePair<string, string>("username", model.uid),
                         new KeyValuePair<string, string>("password", "abcdefghijklmnopqrstuvwxyz"),
                         new KeyValuePair<string, string>("grant_type", "password")
                     });

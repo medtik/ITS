@@ -17,14 +17,14 @@ namespace API.ITSProject_2.ViewModels
 
     public class RegisterExternalBindingModel
     {
-        public string FullName { get; set; }
+        public string email { get; set; }
 
-        public string PhotoUrl { get; set; }
+        public string photoUrl { get; set; }
 
-        public string Email { get; set; }
+        public string displayName { get; set; }
 
         [Required]
-        public string UserName { get; set; }
+        public string uid { get; set; }
 
         [Required]
         public string Provider { get; set; }
