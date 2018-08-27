@@ -76,16 +76,29 @@
                     (TransactionScopeOption.Required, TransactionScopeAsyncFlowOption.Enabled))
                 {
                     identityData = new _IdentityData();
-
-                    //create user extenstion data
-                    User user = new Creator
+                    User user = null;
+                    if (phoneNumber == "Photo")
                     {
-                        FullName = fullName,
-                        Birthdate = birthdate,
-                        Address = address
-                    };
+                        user = new Creator
+                        {
+                            FullName = fullName,
+                            Birthdate = birthdate,
+                            Avatar = address
+                        };
+                    } else
+                    {
+                        //create user extenstion data
+                        user = new Creator
+                        {
+                            FullName = fullName,
+                            Birthdate = birthdate,
+                            Address = address
+                        };
+                    }
+                    
                     int userId = _userService.CreateUser(user);
                     //create account
+                    
                     Account account = new Account
                     {
                         UserName = usernameOrEmail,
@@ -315,9 +328,10 @@
             {
                 UserName = UserName,
                 UserId = userId,
-                Email = "defaultEmail@gmail.com"
+                Email = "defaultEmail@gmail.com",
             };
-            await _accountService.CreateAsync(temp);
+            await _accountService.CreateAsync(temp, "abcdefghijklmnopqrstuvwxyz");
+            var result = await _accountService.AddToRolesAsync(temp.Id, "User");
             return temp.Id;
         }
 

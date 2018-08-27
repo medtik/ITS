@@ -24,6 +24,9 @@
     using Microsoft.Owin.Security;
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.AspNet.Identity.EntityFramework;
+    using System.Web;
+    using System.Collections.Generic;
+    using Newtonsoft.Json;
 
     public class AccountController : _BaseController
     {
@@ -118,7 +121,8 @@
                         else
                             return InternalServerError(new Exception("Can't send email"));
                     }
-                } else
+                }
+                else
                 {
                     return BadRequest("User not existed in system");
                 }
@@ -324,43 +328,39 @@
         [HttpPost, Route("RegisterExternal")]
         public async Task<IHttpActionResult> RegisterExternal(RegisterExternalBindingModel model)
         {
-
-            if (!ModelState.IsValid)
+            try
             {
-                return BadRequest(ModelState);
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+                Account user = (await _identityService.FindAsync(model.Provider, model.uid)).Data as Account;
+
+                bool hasRegistered = user != null;
+
+                if (!hasRegistered)
+                {
+                    await _identityService.Create(model.uid, "abcdefghijklmnopqrstuvwxyz", model.displayName, model.photoUrl, "Photo", DateTimeOffset.Now);
+                }
+                var client = new HttpClient();
+
+                string baseAddress = "http://" + HttpContext.Current.Request.Url.Authority;
+                client.BaseAddress = new Uri(baseAddress);
+                HttpContent content = new FormUrlEncodedContent(new List<KeyValuePair<string, string>>() {
+                        new KeyValuePair<string, string>("username", model.uid),
+                        new KeyValuePair<string, string>("password", "abcdefghijklmnopqrstuvwxyz"),
+                        new KeyValuePair<string, string>("grant_type", "password")
+                    });
+                HttpResponseMessage response = await client.PostAsync("token", content);
+                string message = await response.Content.ReadAsStringAsync();
+                
+                return Ok(message);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
 
-            var verifiedAccessToken = await VerifyExternalAccessToken(model.Provider, model.ExternalAccessToken);
-            if (verifiedAccessToken == null)
-            {
-                await ObtainLocalAccessToken(model.Provider, model.ExternalAccessToken);
-                //return BadRequest("Invalid Provider or External Access Token");
-            }
-
-            Account user = (await _identityService.FindAsync(model.Provider, verifiedAccessToken.user_id)).Data as Account;
-
-            bool hasRegistered = user != null;
-
-            if (hasRegistered)
-            {
-                return await ObtainLocalAccessToken(model.Provider, model.ExternalAccessToken);
-            }
-
-            user = new Account() { UserName = model.UserName };
-
-            string result = await _identityService.CreateAsync(model.UserName);
-
-            var info = new ExternalLoginInfo()
-            {
-                DefaultUserName = model.UserName,
-            };
-            
-            IdentityResult result2 = (await _identityService.AddLoginAsync(result, model.Provider, verifiedAccessToken.user_id)).Data as IdentityResult;
-
-            //generate access token response
-            var accessTokenResponse = GenerateLocalAccessTokenResponse(model.UserName);
-
-            return Ok(accessTokenResponse);
         }
 
         [AllowAnonymous]
@@ -416,11 +416,12 @@
                     {
                         return Ok();
                     }//end if check is existed errors
-                } else
+                }
+                else
                 {
                     return BadRequest(ModelState);
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -438,7 +439,8 @@
             if (data != null)
             {
                 await _identityService.ChangeRole(data.Id);
-            }else
+            }
+            else
             {
                 return BadRequest();
             }

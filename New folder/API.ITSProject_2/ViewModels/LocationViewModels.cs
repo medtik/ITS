@@ -126,6 +126,12 @@
 
         [DataMember]
         public string Categories { get; set; }
+
+        [DataMember]
+        public double Long { get; set; }
+
+        [DataMember]
+        public double Lat { get; set; }
     }
 
     [DataContract(Name = "Location")]
