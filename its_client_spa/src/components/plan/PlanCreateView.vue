@@ -134,7 +134,8 @@
 
         nameError = !this.input.name ? 'Tên không được trống' : undefined;
         startDateError = !this.input.startDate ? 'Ngày bắt đầu không được trống' : undefined;
-        endDateError = !this.input.endDate ? 'Ngày kết thúc không được trống được trống' : undefined;
+        console.log(this.input.startDate, !this.input.startDate, startDateError);
+        endDateError = !this.input.endDate ? 'Ngày kết thúc không được trống' : undefined;
         areaIdError = !this.input.areaId ? "Khu vực không được trống" : undefined;
 
         if (!!this.input.startDate) {
