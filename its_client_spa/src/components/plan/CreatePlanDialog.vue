@@ -73,7 +73,7 @@
 
         nameError = !this.input.name ? 'Tên không được trống' : undefined;
         startDateError = !this.input.startDate ? 'Ngày bắt đầu không được trống' : undefined;
-        endDateError = !this.input.endDate ? 'Ngày kết thúc không được trống được trống' : undefined;
+        endDateError = !this.input.endDate ? 'Ngày kết thúc không được trống' : undefined;
 
         if (!!this.input.startDate) {
           const now = moment();
@@ -87,7 +87,15 @@
           const startDate = moment(this.input.startDate);
           const endDate = moment(this.input.endDate);
           if (endDate.isBefore(startDate, 'day')) {
-            endDateError = "Ngày kết thức phải sau ngày bắt đầu";
+            endDateError = "Ngày kết thúc phải sau ngày bắt đầu";
+          }
+        }
+
+        if (!!this.input.startDate && !!this.input.endDate) {
+          const startDate = moment(this.input.startDate);
+          const endDate = moment(this.input.endDate);
+          if (endDate.diff(startDate, 'days') > 7) {
+            endDateError = "Chuyến đi tự động không quá 7 ngày";
           }
         }
 

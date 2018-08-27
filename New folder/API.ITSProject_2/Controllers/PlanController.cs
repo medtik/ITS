@@ -58,7 +58,7 @@
                         _.PlanLocations.Select(__ => __.Location)
                             .Select(___ => ___.Photos.Select(_____ => _____.Photo)),
                     _ => _.PlanLocations.Select(__ => __.Location.Reviews),
-                    _ => _.Notes, _ => _.Area, _ => _.Voters);
+                    _ => _.Notes, _ => _.Area, _ => _.Voters,_ => _.Group);
 
                 if (plan == null)
                     return BadRequest("Not found");

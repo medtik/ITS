@@ -76,6 +76,8 @@
   import DirectionsRenderer from './DirectionsRenderer.js'
   import LocationCard from "../../common/card/LocationCard";
   import {mapState} from "vuex"
+  import _ from "lodash";
+
 
   export default {
     name: "LocationOnMapView",
@@ -86,7 +88,7 @@
     },
     data() {
       return {
-        current: {id: -1, lat: 10.8290990, lng: 106.6720520, type: 'current', location: {}},
+        current: {id: -1, lat: undefined, lng: undefined, type: 'current', location: {}},
         toggle: {
           activity: true,
           restaurant: true,
@@ -104,26 +106,6 @@
             }
           }
         },
-        markers: [
-          {
-            id: 1,
-            lat: 10.8292360,
-            lng: 106.6714590,
-            type: 'activity',
-            location: {name: 'activity abc', rating: 3.2, id: 1}
-          },
-          {
-            id: 2,
-            lat: 10.8298360,
-            lng: 106.6733590,
-            type: 'restaurant',
-            location: {name: 'restaurant abc', rating: 3.2, id: 1}
-          },
-          {id: 2, lat: 10.8290990, lng: 106.6737590, type: 'activity'},
-          // {id: 3, lat: 10.8270360, lng: 106.6711930, type: 'hotel'},
-          // {id: 4, lat: 10.8294360, lng: 106.6713130, type: 'hotel'},
-          // {id: 5, lat: 10.8282360, lng: 106.6719130, type: 'hotel'},
-        ],
         mapStyles: [
           {
             featureType: 'poi.business',
@@ -164,7 +146,24 @@
       ...mapState('location', {
         pageLoading: state => state.loading.nearbyLocations,
         nearbyLocations: state => state.nearbyLocations
-      })
+      }),
+      markers() {
+        // id: 2,
+        // lat: 10.8298360,
+        // lng: 106.6733590,
+        // type: 'restaurant',
+        // location: {name: 'restaurant abc', rating: 3.2, id: 1}
+        return _.map(this.nearbyLocations, location => {
+          return {
+            id: location.id,
+            lat: location.lat,
+            lng: location.long,
+            type: location.category,
+            location: location
+          }
+        })
+
+      }
     },
     created() {
       const {
@@ -174,6 +173,13 @@
 
       this.current.long = long;
       this.current.lat = lat;
+    },
+    mounted() {
+      this.$store.dispatch('location/fetchNearbyLocations', {
+        long: this.current.long,
+        lat: this.current.lat,
+        radius: 10000
+      });
     },
     methods: {
       moveMapTo(long, lat) {

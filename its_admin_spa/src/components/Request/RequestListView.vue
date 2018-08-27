@@ -21,7 +21,6 @@
             <v-flex ml-3>
               <v-checkbox label="Thay đổi thông tin địa điểm" v-model="filter.changeLocationInfo"/>
               <v-checkbox label="Làm chủ địa điểm" v-model="filter.claimOwner"/>
-              <v-checkbox label="Báo cáo đánh giá" v-model="filter.reportReview"/>
               <v-checkbox label="Đã xử lí" v-model="filter.done"/>
             </v-flex>
 

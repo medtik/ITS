@@ -67,6 +67,11 @@
           endDate: undefined,
           areaId: undefined,
         },
+        formError:{
+          name,
+          startDate,
+          endDate
+        },
         lockAreaId: false
       }
     },
@@ -112,7 +117,49 @@
       },
       onCancel() {
         this.$router.back();
-      }
+      },
+      validate() {
+        let nameError = undefined;
+        let startDateError = undefined;
+        let endDateError = undefined;
+
+        nameError = !this.input.name ? 'Tên không được trống' : undefined;
+        startDateError = !this.input.startDate ? 'Ngày bắt đầu không được trống' : undefined;
+        endDateError = !this.input.endDate ? 'Ngày kết thúc không được trống được trống' : undefined;
+
+        if (!!this.input.startDate) {
+          const now = moment();
+          const startDate = moment(this.input.startDate);
+          if (startDate.isBefore(now, 'day')) {
+            startDateError = "Ngày bắt đầu không được trong quá khứ";
+          }
+        }
+
+        if (!!this.input.startDate && !!this.input.endDate) {
+          const startDate = moment(this.input.startDate);
+          const endDate = moment(this.input.endDate);
+          if (endDate.isBefore(startDate, 'day')) {
+            endDateError = "Ngày kết thức phải sau ngày bắt đầu";
+          }
+        }
+
+        if (!!this.input.startDate && !!this.input.endDate) {
+          const startDate = moment(this.input.startDate);
+          const endDate = moment(this.input.endDate);
+          if (endDate.diff(startDate, 'days') > 30) {
+            endDateError = "Chuyến đi không quá 30 ngày";
+          }
+        }
+
+        this.formError = {
+          name: nameError,
+          startDate: startDateError,
+          endDate: endDateError
+        };
+        return nameError == undefined &&
+          startDateError == undefined &&
+          endDateError == undefined
+      },
     }
   }
 </script>

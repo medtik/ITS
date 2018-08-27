@@ -223,6 +223,14 @@
           }
         }
 
+        if (!!this.input.startDate && !!this.input.endDate) {
+          const startDate = moment(this.input.startDate);
+          const endDate = moment(this.input.endDate);
+          if (endDate.diff(startDate, 'days') > 30) {
+            endDateError = "Chuyến đi không quá 30 ngày";
+          }
+        }
+
         this.formError = {
           name: nameError,
           startDate: startDateError,

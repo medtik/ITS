@@ -363,5 +363,8 @@ namespace API.ITSProject.ViewModels
 
         [DataMember]
         public bool IsVoted { get; set; }
+        
+        [DataMember]
+        public bool IsGroupOwner { get; set; }
     }
 }

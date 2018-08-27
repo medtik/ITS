@@ -167,11 +167,6 @@ namespace API.ITSProject_2.Controllers
                 var rating = location.Reviews.Sum(_ => _.Rating) / ratingCount;
                 rating = float.IsNaN(rating) ? 0 : rating;
 
-                foreach (Review review in location.Reviews)
-                {
-                    rating += review.Rating;
-                }
-
                 TreeViewModels result = new TreeViewModels
                 {
                     Id = location.Id,

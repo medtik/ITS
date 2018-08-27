@@ -330,11 +330,19 @@
         {
             try
             {
+<<<<<<< HEAD
                 if (!ModelState.IsValid)
                 {
                     return BadRequest(ModelState);
                 }
                 Account user = (await _identityService.FindAsync(model.Provider, model.UserName)).Data as Account;
+=======
+                await ObtainLocalAccessToken(model.Provider, model.ExternalAccessToken);
+                //return BadRequest("Invalid Provider or External Access Token");
+            }
+
+            Account user = (await _identityService.FindAsync(model.Provider, verifiedAccessToken.user_id)).Data as Account;
+>>>>>>> 5e7d109765b7b91e6bea42d7412cfa6fb8b24877
 
                 bool hasRegistered = user != null;
 

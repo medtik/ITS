@@ -21,7 +21,7 @@
               @selectingMode="onSelectingMode"
             ></ChoosePlanDaySection>
 
-            <v-flex my-3>
+            <v-flex my-3 v-if="!context.plan">
               <v-btn @click="onCreateSuggestedPlanClick" color="primary" :loading="suggestedBtnLoading">
                 Tạo chuyến đi tự động
               </v-btn>
@@ -112,6 +112,10 @@
           areaId: undefined,
         },
 
+        loading:{
+          createSuggestedPlan: false
+        },
+
         selectedAreaId: undefined,
         selectedAnswers: undefined,
       }
@@ -124,14 +128,8 @@
         suggestedBtnLoading: 'createSuggestedPlan'
       })
     },
-    created() {
-      const {
-        areaId,
-        answers
-      } = this.$route.params;
-
-      this.selectedAreaId = areaId;
-      this.selectedAnswers = answers;
+    mounted(){
+      this.selectedAnswers = this.$store.state.previousSearchAnswers;
     },
     methods: {
       onCreateSuggestedPlanClick() {
@@ -150,6 +148,7 @@
         this.createPlanDialog = {
           dialog: false
         };
+        this.loading.createSuggestedPlan = true;
         this.$store.dispatch("plan/createSuggestedPlan", {
           name,
           startDate,
@@ -157,6 +156,7 @@
           areaId: this.selectedAreaId,
           answers: this.selectedAnswers
         }).then(value => {
+          this.loading.createSuggestedPlan = false;
           this.$router.push({
             name: 'PlanDetail',
             query: value
