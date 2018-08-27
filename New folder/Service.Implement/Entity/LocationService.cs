@@ -297,17 +297,19 @@
         public IEnumerable<LocationSuggestion> GetLocationSuggestion(int userId)
         {
             List<LocationSuggestion> locationSuggestions = new List<LocationSuggestion>();
-            Creator user = _creatorRepository.Get(_ => _.Id == userId, _ => _.Groups.Select(__ => __.Plans.Select(___ => ___.LocationSuggestion.Select(____ => ____.Locations))));
+            Creator user = _creatorRepository.Get(_ => _.Id == userId, _ => _.CreatedGroups.Select(
+                __ => __.Plans.Select(___ => ___.LocationSuggestion.Select(____ => ____.Locations))));
 
-            foreach (var ele in user.Groups)
+            foreach (var ele in user.CreatedGroups)
             {
                 foreach (var item in ele.Plans)
                 {
                     locationSuggestions.AddRange(item.LocationSuggestion);
+
                 }
             }
 
-            return locationSuggestions;
+            return locationSuggestions.GroupBy(_ => _.Id).Select(_ => _.First());
         }
 
         public bool RejectStatusLocationSuggestion(int suggestionId)

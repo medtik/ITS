@@ -28,14 +28,16 @@ namespace API.ITSProject_2.Controllers
         private readonly ILocationService _locationService;
         private readonly ITagService _tagService;
         private readonly ISearchTreeService _searchTreeService;
+        private readonly IPlanService _planService;
 
         public LocationController(ILoggingService loggingService, IPagingService paggingService,
             IIdentityService identityService, ILocationService locationService, ISearchTreeService searchTreeService,
-            ITagService tagService, IPhotoService photoService) : base(loggingService, paggingService, identityService, photoService)
+            ITagService tagService, IPhotoService photoService, IPlanService planService) : base(loggingService, paggingService, identityService, photoService)
         {
             this._locationService = locationService;
             this._tagService = tagService;
             this._searchTreeService = searchTreeService;
+            _planService = planService;
         }
 
         #region Get
@@ -88,7 +90,7 @@ namespace API.ITSProject_2.Controllers
                 _loggingService.Write(GetType().Name, nameof(GetNearbyLocation), ex);
                 return InternalServerError();
             }
-            
+
         }
 
         [HttpGet]
@@ -203,9 +205,10 @@ namespace API.ITSProject_2.Controllers
                     listLocations = _locationService
                     .Search(_ => !_.IsDelete && (string.IsNullOrEmpty(searchValue) ||
                                                  _.Name.Contains(searchValue) ||
-                                                 _.Address.Contains(searchValue)) && 
+                                                 _.Address.Contains(searchValue)) &&
                                                  _.AreaId == areaId.Value, _ => _.Area, _ => _.Reviews, _ => _.Photos.Select(__ => __.Photo));
-                } else
+                }
+                else
                 {
                     listLocations = _locationService
                     .Search(_ => !_.IsDelete && (string.IsNullOrEmpty(searchValue) ||
@@ -216,12 +219,13 @@ namespace API.ITSProject_2.Controllers
                 {
                     pager = _paggingService.ToPagedList(listLocations.OrderByDescending(e => e.Name),
                     pageIndex ?? 1, pageSize ?? 10);
-                } else
+                }
+                else
                 {
                     pager = _paggingService.ToPagedList(listLocations.Where(_ => _.Category == type).OrderByDescending(e => e.Name),
                     pageIndex ?? 1, pageSize ?? 10);
                 }
-                
+
                 currentList = ModelBuilder.ConvertToViewModels(pager.CurrentList);
 
                 return Ok(new
@@ -438,6 +442,61 @@ namespace API.ITSProject_2.Controllers
         #endregion
 
         #region Put
+
+        public class UserPositionViewModels
+        {
+            public int Lat { get; set; }
+
+            public double Long { get; set; }
+
+            public int? LastLocationId { get; set; }
+
+            public DateTimeOffset TimeOfLastLocation { get; set; }
+        }
+
+        [Authorize, HttpPut]
+        [Route("api/Location/UpdateUserPosition")]
+        public async Task<IHttpActionResult> UpdateUserPosition(UserPositionViewModels userPosition)
+        {
+            try
+            {
+                User user = await CurrentUser();
+                int? currentLocationId = null;
+                var searchLoation = new GeoCoordinate(userPosition.Lat, userPosition.Long);//vị trí hiện tại
+                if (userPosition.LastLocationId.HasValue)
+                {
+                    var lastLocation = _locationService.Find(userPosition.LastLocationId.Value);//last location
+                    var tmpLocation = new GeoCoordinate(lastLocation.Latitude, lastLocation.Longitude);
+                    if (searchLoation.GetDistanceTo(tmpLocation) < lastLocation.LocationRadius)
+                    {
+                        currentLocationId = lastLocation.Id;
+                    }
+                    else
+                    {
+                        var plans = _planService.GetPlans(user.Id);
+                        foreach (var item in plans)
+                        {
+                            foreach (var item2 in item.PlanLocations)
+                            {
+                                if (true)
+                                {
+                                    item2.Done = true;
+                                }
+                            }
+                        }
+                    }
+                }
+
+
+                return Ok(currentLocationId);
+            }
+            catch (Exception ex)
+            {
+                _loggingService.Write(GetType().Name, nameof(UpdateUserPosition), ex);
+                return InternalServerError();
+            }
+        }
+
         [HttpPut]
         public async Task<IHttpActionResult> Edit(EditLocationViewModels data)
         {
