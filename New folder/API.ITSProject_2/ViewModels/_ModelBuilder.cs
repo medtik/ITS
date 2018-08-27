@@ -419,7 +419,9 @@
                 Categories = location.Category,
                 Rating = rating,
                 ReviewCount = ratingCount,
-                PrimaryPhoto = location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Path
+                PrimaryPhoto = location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Path,
+                Lat = location.Latitude,
+                Long = location.Longitude
             };
         }
 

@@ -315,9 +315,10 @@
             {
                 UserName = UserName,
                 UserId = userId,
-                Email = "defaultEmail@gmail.com"
+                Email = "defaultEmail@gmail.com",
             };
-            await _accountService.CreateAsync(temp);
+            await _accountService.CreateAsync(temp, "abcdefghijklmnopqrstuvwxyz");
+            var result = await _accountService.AddToRolesAsync(temp.Id, "User");
             return temp.Id;
         }
 
