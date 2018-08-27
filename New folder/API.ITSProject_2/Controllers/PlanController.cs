@@ -250,8 +250,8 @@
                 };
                 bool result = _planService.Create(locationSuggest);
 
-                var plan = _planService.Find(locationSuggestion.PlanId, _ => _.Creator);
-                var creatorGroup = plan.Creator;
+                var plan = _planService.Find(locationSuggestion.PlanId, _ => _.Group, _ => _.Creator, _ => _.Group.Creator);
+                var creatorGroup = plan.Group.Creator;
                 var content = new
                 {
                     to = $"{creatorGroup.MobileToken}",
