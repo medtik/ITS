@@ -451,7 +451,12 @@ namespace API.ITSProject_2.Controllers
 
             public int? LastLocationId { get; set; }
 
-            public DateTimeOffset TimeOfLastLocation { get; set; }
+            public TimeSpan TimeOfLastLocation { get; set; }
+        }
+
+        private bool IsInRange(TimeSpan start, TimeSpan end, TimeSpan time)
+        {
+            return (time > start) && (time < end);
         }
 
         [Authorize, HttpPut]
@@ -478,9 +483,18 @@ namespace API.ITSProject_2.Controllers
                         {
                             foreach (var item2 in item.PlanLocations)
                             {
-                                if (true)
+                                foreach (var item3 in item2.Location.BusinessHours.ToList())
                                 {
-                                    item2.Done = true;
+                                    if (IsInRange(item3.OpenTime, item3.CloseTime, DateTimeOffset.Now.TimeOfDay))
+                                    {
+                                        item2.Done = true;
+                                        _planService.UpdatePlanLocation(item2);
+                                        foreach (var item4 in item.PlanLocations.Select(__ => __.Location))
+                                        {
+                                            item4.TotalStayCount = item4.TotalStayCount + 1;
+                                            item4.TotalTimeStay = (userPosition.TimeOfLastLocation + (DateTimeOffset.Now.TimeOfDay - userPosition.TimeOfLastLocation)).Minutes;
+                                        }
+                                    }
                                 }
                             }
                         }
