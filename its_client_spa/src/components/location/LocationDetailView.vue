@@ -307,8 +307,6 @@
           dialog: false
         };
 
-
-
         if (photo) {
           this.$store.dispatch('location/addImage', {photo, locationId: this.location.id})
             .then(location => {
