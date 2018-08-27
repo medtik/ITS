@@ -114,8 +114,10 @@
                     }
                     else
                     {
+                        bool isAdd = false;
                         foreach (string roleName in roles)
                         {
+                            isAdd = true;
                             if (!await _roleService.RoleExistsAsync(roleName))
                             {
                                 result = await _roleService.CreateAsync(new Role { Name = roleName });
@@ -136,6 +138,10 @@
                                 }
                             }//check is user existed in role
                         }//crawl roles collection
+                        if (!isAdd)
+                        {
+                            await _accountService.AddToRoleAsync(account.Id, "User");
+                        }
                     }//is create account successful
                     if (!identityData.IsError)
                     {

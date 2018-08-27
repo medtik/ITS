@@ -80,6 +80,7 @@
 
                 foreach (var item in list)
                 {
+
                     temp.Add(new
                     {
                         item.Id,
