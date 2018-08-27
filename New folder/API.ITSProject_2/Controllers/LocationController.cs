@@ -64,22 +64,31 @@ namespace API.ITSProject_2.Controllers
         [Route("api/Location/NearbyLocation")]
         public IHttpActionResult GetNearbyLocation(double longitude, double latitude, double radius)
         {
-            IList<LocationViewModels> result = new List<LocationViewModels>();
-            var searchLoation = new GeoCoordinate(latitude, longitude);
-
-            var listLocation = _locationService.GetAll();
-
-            foreach (var ele in listLocation)
+            try
             {
-                var tmpLocation = new GeoCoordinate(ele.Latitude, ele.Longitude);
+                IList<LocationViewModels> result = new List<LocationViewModels>();
+                var searchLoation = new GeoCoordinate(latitude, longitude);
 
-                if (searchLoation.GetDistanceTo(tmpLocation) <= radius)
+                var listLocation = _locationService.GetAll(_ => _.Photos.Select(__ => __.Photo), __ => __.Area, _ => _.Reviews, _ => _.Photos.Select(__ => __.Photo));
+
+                foreach (var ele in listLocation)
                 {
-                    result.Add(ModelBuilder.ConvertToViewModels(ele));
-                }// end if check is in radius
-            }
+                    var tmpLocation = new GeoCoordinate(ele.Latitude, ele.Longitude);
 
-            return Ok(result);
+                    if (searchLoation.GetDistanceTo(tmpLocation) <= radius)
+                    {
+                        result.Add(ModelBuilder.ConvertToViewModels(ele));
+                    }// end if check is in radius
+                }
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _loggingService.Write(GetType().Name, nameof(GetNearbyLocation), ex);
+                return InternalServerError();
+            }
+            
         }
 
         [HttpGet]
@@ -375,7 +384,7 @@ namespace API.ITSProject_2.Controllers
                 var photo = new Photo
                 {
                     Path = avatar,
-                    UserId = userId
+                    UserId = userId,
                 };
                 await _photoService.Create2(photo);
 

@@ -429,6 +429,21 @@
             }
         }
 
+        [HttpPut]
+        [Route("api/Account/ChangeRole")]
+        public async Task<IHttpActionResult> ChangeRole(int userId)
+        {
+            Account data = (_identityService.FindAccount(userId)).Data as Account;
+            if (data != null)
+            {
+                await _identityService.ChangeRole(data.Id);
+            }else
+            {
+                return BadRequest();
+            }
+            return Ok();
+        }
+
         private class ExternalLoginData
         {
             public string LoginProvider { get; set; }

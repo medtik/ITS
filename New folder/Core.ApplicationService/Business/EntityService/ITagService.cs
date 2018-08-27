@@ -12,6 +12,8 @@
 
         bool Delete(int tagId);
 
+        bool Update(Tag tag);
+
         IEnumerable<string> GetCategories();
 
         Tag Find(int tagId, params Expression<Func<Tag, object>>[] includes);

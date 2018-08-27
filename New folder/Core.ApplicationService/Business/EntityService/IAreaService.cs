@@ -12,5 +12,7 @@
         Area Find(int id, params Expression<Func<Area, object>>[] includes);
 
         bool Update(Area area);
+
+        bool Create(Area area);
     }
 }

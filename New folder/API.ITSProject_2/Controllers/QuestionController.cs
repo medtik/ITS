@@ -54,6 +54,13 @@
         }
 
         [HttpGet]
+        [Route("api/Question/QuestionSearch")]
+        public IHttpActionResult QuestionSearch(string content)
+        {
+            return Ok(ModelBuilder.ConvertToQuestionDetailsViewModels(_questionService.Search(_ => _.Content.Contains(content), _ => _.Answers.Select(__ => __.Tags))));
+        }
+
+        [HttpGet]
         [Route("api/Question/QuestionsByArea")]
         public IHttpActionResult GetQuestionByArea(int areaId)
         {
