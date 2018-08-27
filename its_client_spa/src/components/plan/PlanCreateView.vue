@@ -91,7 +91,7 @@
       },
       ...mapGetters('plan', {
         createLoading: 'createLoading',
-        editLoading: 'editLoading'
+        // editLoading: 'editLoading'
       })
     },
     mounted() {
@@ -161,13 +161,11 @@
             endDateError = "Chuyến đi không quá 30 ngày";
           }
         }
+        this.formError.name = nameError;
+        this.formError.startDate = startDateError;
+        this.formError.endDate = endDateError;
+        this.formError.areaId = areaIdError;
 
-        this.formError = {
-          name: nameError,
-          startDate: startDateError,
-          endDate: endDateError,
-          areaId: areaIdError
-        };
         return nameError == undefined &&
           startDateError == undefined &&
           endDateError == undefined &&
