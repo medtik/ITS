@@ -62,7 +62,7 @@ export default {
       return new Promise((resolve, reject) => {
         axiosInstance.get('api/Question', {
           params: {
-            pageIndex: -1
+            pageSize: -1
           }
         })
           .then(value => {

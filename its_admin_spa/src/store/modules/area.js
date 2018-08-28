@@ -1,7 +1,7 @@
 import _areas from "./mockdata/Areas";
 import {axiosInstance} from "../../common/util";
 import formatter from "../../formatter";
-import _ from 'lodash'
+import _ from 'lodash';
 
 function mockShell(bodyFunc, noFail) {
   return new Promise((resolve, reject) => {
@@ -121,13 +121,31 @@ export default {
 
     },
     create(context, payload) {
+      // post /api/Area
+
+      const {
+        content,
+        questions
+      } = payload;
+
       return new Promise((resolve, reject) => {
-        // axiosInstance.post();
-      })
+       axiosInstance.post('api/Area',{
+         content,
+         questions: _.map(questions, "id")
+       })
+     })
     },
     update(context, payload) {
-      return mockShell(() => {
+      const {
+        content,
+        questions
+      } = payload;
 
+      return new Promise((resolve, reject) => {
+        axiosInstance.put('api/Area',{
+          content,
+          questions: _.map(questions, "id")
+        })
       })
     },
     delete(contlext, payload) {

@@ -220,6 +220,10 @@ export default {
         "days": businessHoursInput
       };
 
+      if(data["phone"] == ""){
+        data["phone"] = undefined;
+      }
+
       return new Promise((resolve, reject) => {
         axiosInstance.put('api/location', data)
           .then(value => {

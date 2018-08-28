@@ -38,7 +38,7 @@
           if (!!val) {
             this.businessHours = val;
           }
-        }
+          select }
       }
     },
     methods: {
