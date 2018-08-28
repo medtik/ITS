@@ -8,7 +8,6 @@
         <v-layout column v-else>
           <!--Basic input-->
           <v-flex style="width: 25rem">
-            <v-form :ref="refs.question" lazy-validation>
               <v-text-field label="Nội dung câu hỏi"
                             v-model="textInput"
               ></v-text-field>
@@ -18,7 +17,6 @@
                 label="Thể loại"
                 :loading="loading.categories"
               ></v-combobox>
-            </v-form>
           </v-flex>
           <!--Answer-->
           <v-flex my-3>
@@ -30,7 +28,6 @@
                   </v-toolbar>
                   <v-layout column>
                     <v-flex pa-2>
-                      <v-form :ref="refs.answerText" lazy-validation>
                         <v-layout row style="align-items: center">
                           <v-text-field
                             label="Câu trả lời"
@@ -41,7 +38,6 @@
                             <v-icon>fas fa-plus</v-icon>
                           </v-btn>
                         </v-layout>
-                      </v-form>
                     </v-flex>
                     <v-divider></v-divider>
                     <v-flex px-2 v-for="(answer,index) in answersInput" :key="index">
@@ -49,7 +45,7 @@
                         <v-flex xs11>
                           <v-layout column>
                             <v-flex ml-2>
-                              <span class="subheading">{{answer.text}}</span>
+                              <span class="subheading">{{answer.content}}</span>
                             </v-flex>
                             <v-flex mt-2>
                               <TagsInput
@@ -70,7 +66,7 @@
                           </v-btn>
                         </v-flex>
                       </v-layout>
-                      <v-divider v-if="(index + 1) < question.answers.length"></v-divider>
+                      <v-divider v-if="(index + 1) < question.answer.length"></v-divider>
                     </v-flex>
                   </v-layout>
                 </v-card>
@@ -214,19 +210,6 @@
       this.updateCategories();
     },
     methods: {
-      answerDuplicateRule(){
-        const duplicatedAnswer = _.find(this.answersInput, (answer) =>{
-          return answer.text == this.answerTextInput;
-        });
-        if(duplicatedAnswer){
-          return 'Câu trả lời không được trùng nhau'
-        }else{
-          return true;
-        }
-      },
-      validate() {
-        return this.$refs[this.refs.question].validate();
-      },
       updateCategories() {
         this.loading.categories = true;
         this.$store.dispatch('question/getCategories', {
@@ -240,7 +223,7 @@
       fillInputs() {
         this.textInput = this.question.content;
         this.categoryInput = this.question.category;
-        this.answersInput = this.question.answers;
+        this.answersInput = this.question.answer;
         return Promise.resolve();
       },
       onAddAnswerClick() {
@@ -253,9 +236,6 @@
         }
       },
       onCreateClick() {
-        if (!this.validate()) {
-          return;
-        }
         this.loading.createBtn = true;
         this.$store.dispatch('question/create', {
           text: this.textInput,
