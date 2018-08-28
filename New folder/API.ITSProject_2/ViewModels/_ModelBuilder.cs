@@ -247,7 +247,7 @@
             {
                 Id = plan.Id,
                 Name = plan.Name,
-                Time = (plan.EndDate.Day - plan.StartDate.Day) + 1,
+                Time = (plan.EndDate - plan.StartDate).Days + 1,
                 Voter = plan.Voters.Count,
                 Photo = plan.PlanLocations.FirstOrDefault()?.Location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Path.ToString(),
                 AreaId = plan.AreaId,
@@ -362,12 +362,17 @@
                 Rating = rating,
                 RatingCount = ratingCount,
                 BusinessHours = ConvertToBusinessHourViewModels(location.BusinessHours),
-                Tags = location.Tags.Select(_ => (_.Id, _.Name)),
+                Tags = location.Tags.Select(_ => new TagViewModels
+                {
+                    Id = _.Id,
+                    Name = _.Name,
+                    Categories = _.Categories
+                }),
                 PrimaryPhoto = location.Photos.OrderByDescending(_ => _.PhotoId).FirstOrDefault(_ => _.IsPrimary)?.Photo.Path,
                 OtherPhotos = location.Photos.Where(_ => !_.IsPrimary).Select(_ => _.Photo).Select(_ => _.Path),
                 Comments = ConvertToCommentViewModels(location.Reviews).OrderByDescending(_ => _.Id).Take(5),
                 Category = location.Category,
-                Area = location.Area.Name,
+                Area = location.AreaId.ToString(),
                 Description = location.Description,
                 IsClose = location.IsClosed,
                 IsVerified = location.IsVerified,
@@ -423,11 +428,11 @@
                 PrimaryPhoto = location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Path,
                 Lat = location.Latitude,
                 Long = location.Longitude,
-                Range = 0
+                Range = string.Empty
             };
         }
 
-        public LocationViewModels ConvertToViewModels(Location location, double range)
+        public LocationViewModels ConvertToViewModels(Location location, string range)
         {
             int ratingCount = location.Reviews.Count;
             float rating = location.Reviews.Sum(_ => _.Rating) / ratingCount;
@@ -564,7 +569,11 @@
                 {
                     Content = _.Content,
                     Id = _.Id,
-                    Tags = _.Tags.Select(__ => (__.Id, __.Name)).ToArray()
+                    Tags = _.Tags.Select(__ => new TagViewModels
+                    {
+                        Id = __.Id,
+                        Name = __.Name
+                    })
                 }),
                 Content = question.Content,
                 Id = question.Id,

@@ -1,6 +1,7 @@
 ﻿namespace API.ITSProject_2.ViewModels
 {
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Runtime.Serialization;
 
     [DataContract(Name = "Question")]
@@ -44,19 +45,26 @@
         public string Content { get; set; }
 
         [DataMember]
-        public (int id, string tag)[] Tags { get; set; }
+        public IEnumerable<TagViewModels> Tags { get; set; }
     }
 
     [DataContract(Name = "Question")]
     public class CreateQuestionViewModels
     {
         [DataMember]
+        [Required]
+        public int Id { get; set; }
+
+        [DataMember]
+        [Required(ErrorMessage = "Nội dung không được để trống")]
         public string Content { get; set; }
 
         [DataMember]
+        [Required(ErrorMessage = "Thể loại không được để trống")]
         public string Categories { get; set; }
 
         [DataMember]
+        [Required(ErrorMessage = "Câu trả lời không được trống")]
         public IEnumerable<AnswerForQuestionViewModels> Answers { get; set; }
     }
 
@@ -64,9 +72,11 @@
     {
 
         [DataMember]
+        [Required(ErrorMessage = "Câu trả lời không được trống")]
         public string Answer { get; set; }
 
         [DataMember]
+        [Required(ErrorMessage = "Câu trả lời phải được gắn thẻ")]
         public IEnumerable<int> Tags { get; set; }
     }
 }

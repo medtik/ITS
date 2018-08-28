@@ -14,18 +14,19 @@
     using Infrastructure.Identity.Models;
     using API.ITSProject_2.ViewModels;
     using Core.ObjectModels.Pagination;
+    using API.ITSProject_2.Resource;
 
     public class UserController : _BaseController
     {
         private readonly IUserService _userService;
         private readonly IPlanService _planService;
 
-        public UserController(ILoggingService loggingService, IPagingService paggingService, 
+        public UserController(ILoggingService loggingService, IPagingService paggingService,
             IIdentityService identityService, IUserService userService, IPlanService planService, IPhotoService photoService) : base(loggingService, paggingService, identityService, photoService)
         {
             this._userService = userService;
             this._planService = planService;
-            
+
         }
 
         #region Get
@@ -39,23 +40,46 @@
 
             return Ok(result.Select(_ => new
             {
-                _.Id, _.Status, _.Message, _.GroupId,
+                _.Id,
+                _.Status,
+                _.Message,
+                _.GroupId,
                 GroupName = _.Group.Name,
             }));
         }
 
         [HttpGet]
         [Authorize]
-        public IHttpActionResult SearchUser(string searchValue = "", string nameSearchValue = "", string orderBy = "", int? pageIndex = 1, int? pageSize = 10)
+        public async Task<IHttpActionResult> SearchUser(string searchValue = "", string nameSearchValue = "", string orderBy = "", int? pageIndex = 1, int? pageSize = 10)
         {
             try
             {
+                int userId = (await CurrentUser()).Id;
                 IEnumerable<User> users = _userService.Search(_ => true);
                 IList<SearchUserViewModels> usersSearch = new List<SearchUserViewModels>();
                 foreach (var item in users)
                 {
                     Account accountInfo = (_identityService.FindAccount(item.Id)).Data as Account;
-                    usersSearch.Add(ModelBuilder.ConvertToSearchUserViewModels(item, accountInfo));
+                    if (item.Id != userId)
+                    {
+                        if (!_identityService.IsInRole(nameof(RoleType.SystemAdmin), accountInfo.Id))
+                        {
+                            if (!_identityService.IsInRole(nameof(RoleType.Administrator), accountInfo.Id))
+                            {
+                                if (!string.IsNullOrEmpty(nameSearchValue))
+                                {
+                                    if (!accountInfo.LockoutEnabled)
+                                    {
+                                        usersSearch.Add(ModelBuilder.ConvertToSearchUserViewModels(item, accountInfo));
+                                    }
+                                }//search client
+                                else
+                                {
+                                    usersSearch.Add(ModelBuilder.ConvertToSearchUserViewModels(item, accountInfo));
+                                }//search admin
+                            }
+                        }
+                    }//remove curent user
                 }
                 if (!string.IsNullOrEmpty(nameSearchValue))
                 {
@@ -148,7 +172,7 @@
                 _loggingService.Write(GetType().Name, nameof(SearchUser), ex);
                 return InternalServerError();
             }
-            
+
         }
 
         [HttpGet]

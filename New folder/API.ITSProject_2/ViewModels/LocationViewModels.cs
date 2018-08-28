@@ -145,7 +145,7 @@
         public double Lat { get; set; }
 
         [DataMember]
-        public double Range { get; set; }
+        public string Range { get; set; }
     }
 
     [DataContract(Name = "Location")]
@@ -167,10 +167,12 @@
 
         [DataMember]
         [Required(ErrorMessage = "Kinh độ không được trống")]
+        [Range(-180, 180, ErrorMessage = "Kinh độ không hợp lệ(-180, 180)")]
         public double? Longitude { get; set; }
 
         [DataMember]
         [Required(ErrorMessage = "Vĩ độ không được trống")]
+        [Range(-90, 90, ErrorMessage = "Vĩ độ không hợp lệ(-90, 90)")]
         public double? Latitude { get; set; }
 
         [DataMember]
@@ -227,7 +229,7 @@
         public int RatingCount { get; set; }
 
         [DataMember]
-        public IEnumerable<(int id, string name)> Tags { get; set; }
+        public IEnumerable<TagViewModels> Tags { get; set; }
 
         [DataMember]
         public IEnumerable<BusinessHourViewModels> BusinessHours { get; set; }

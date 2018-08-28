@@ -8,6 +8,10 @@
 
     public interface IIdentityService
     {
+        void LoginAvaiable(string userId);
+
+        bool IsInRole(string roleName, string accountId);
+
         Task ChangeRole(string userId);
 
         Task<_IdentityData> FindByUsername(string username);

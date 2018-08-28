@@ -175,7 +175,7 @@
                     return Ok();
                 } else
                 {
-                    return BadRequest();
+                    return BadRequest(ModelState);
                 }
             }
             catch (Exception ex)
@@ -208,14 +208,16 @@
 
         #region Put
         [HttpPut]
-        public IHttpActionResult EditQuestion(CreateQuestionViewModels data,[FromBody] int id)
+        public IHttpActionResult EditQuestion(CreateQuestionViewModels data)
         {
-
+            
             if (ModelState.IsValid)
             {
+                int id = data.Id;
                 var baseQuestion = _questionService.Find(id, _ => _.Areas);
 
                 var area = baseQuestion.Areas.Select(_ => _areaService.Find(_.Id, __ => __.Questions));
+                _questionService.Delete(baseQuestion.Id);
                 Question question = ModelBuilder.ConvertToModels(data);
                 ICollection<Answer> answers = new List<Answer>();
 
@@ -245,7 +247,7 @@
             }
             else
             {
-                return BadRequest();
+                return BadRequest(ModelState);
             }
         }
         #endregion

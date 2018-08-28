@@ -382,7 +382,7 @@
         }
 
         [HttpPut]
-        [Route("api/Plan/VotePlan")]
+        [Authorize, Route("api/Plan/VotePlan")]
         public async Task<IHttpActionResult> VotePlan([FromBody]int planId)
         {
             try

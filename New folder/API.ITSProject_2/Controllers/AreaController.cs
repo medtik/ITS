@@ -57,6 +57,45 @@
             }
         }
 
+        public class AreaDetailAdminViewModels
+        {
+            public int Id { get; set; }
+
+            public string Name { get; set; }
+
+            public ICollection<QuestionViewModels> Questions { get; set; }
+        }
+
+        [HttpGet]
+        [Route("api/Area/DetailsAdmin")]
+        public IHttpActionResult GetDetailsAdmin(int id)
+        {
+            try
+            {
+                Area area = _areaService.Search(_ => _.Id == id,
+                    _ => _.Questions.Select(__ => __.Answers)).FirstOrDefault();
+                if (area == null)
+                {
+                    return BadRequest("Not found");
+                }
+                else
+                {
+                    return Ok(new AreaDetailAdminViewModels
+                    {
+                        Id = area.Id,
+                        Name = area.Name,
+                        Questions = ModelBuilder.ConvertToViewModels(area.Questions).ToList()
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                _loggingService.Write(GetType().Name, nameof(GetDetails), ex);
+
+                return InternalServerError(ex);
+            }
+        }
+
         [HttpGet]
         public IHttpActionResult Get(string searchValue = "", string orderBy = "", int? pageIndex = 1, int? pageSize = 10)
         {

@@ -50,6 +50,18 @@
             _loggingService = loggingService;
         }
 
+        public bool IsInRole(string roleName, string accountId)
+        {
+            return _accountService.IsInRole(accountId, roleName);
+        }
+
+        public void LoginAvaiable(string userId)
+        {
+            var account = _dbContext.Set<Account>().FirstOrDefault(_ => _.Id == userId);
+            account.LockoutEnabled = !account.LockoutEnabled;
+            _dbContext.SaveChanges();
+        }
+
         public async Task ChangeRole(string userId)
         {
             bool isUser = await _accountService.IsInRoleAsync(userId, "User");
@@ -92,7 +104,6 @@
                         {
                             FullName = fullName,
                             Birthdate = birthdate,
-                            Address = address
                         };
                     }
                     
@@ -104,7 +115,6 @@
                         UserName = usernameOrEmail,
                         UserId = userId,
                         Email = usernameOrEmail,
-                        PhoneNumber = phoneNumber
                     };
                     IdentityResult result = await _accountService.CreateAsync(account, password);
 
@@ -169,7 +179,7 @@
                 if (account == null)
                 {
                     identityData.Errors.Add("Invalid username or password");
-                }
+                } 
                 else
                 {
                     ClaimsIdentity claims = await _accountService
@@ -193,7 +203,7 @@
             {
                 identityData = new _IdentityData();
 
-                Account account = await _accountService.FindAsync(username ?? string.Empty, null);
+                Account account = await _accountService.FindAsync(username ?? string.Empty, "abcdefghijklmnopqrstuvwxyz");
                 identityData.Data = account;
                 return identityData;
             }

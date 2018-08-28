@@ -10,23 +10,14 @@
     using Core.ApplicationService.Business.PagingService;
     using API.ITSProject_2.Resource;
     using API.ITSProject_2.ViewModels;
-    using API.ITSProject_2.Provider.ExternalLogin;
     using System.Net.Http;
     using System.Security.Claims;
     using Infrastructure.Identity.Models;
     using System.Linq;
     using Core.ApplicationService.Business.MailService;
-    using Microsoft.Owin.Security.DataProtection;
-    using System.IO;
     using Core.ApplicationService.Business.EntityService;
-    using Newtonsoft.Json.Linq;
-    using Microsoft.Owin.Security.OAuth;
-    using Microsoft.Owin.Security;
-    using Microsoft.AspNet.Identity.Owin;
-    using Microsoft.AspNet.Identity.EntityFramework;
     using System.Web;
     using System.Collections.Generic;
-    using Newtonsoft.Json;
 
     public class AccountController : _BaseController
     {
@@ -110,6 +101,23 @@
             return match.Value;
         }
 
+        [HttpPut]
+        [Route("api/account/BanAccount")]
+        public IHttpActionResult BanUser(int userId)
+        {
+            try
+            {
+                var account = _identityService.FindAccount(userId).Data as Account;
+                _identityService.LoginAvaiable(account.Id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _loggingService.Write(GetType().Name, nameof(BanUser), ex);
+                return InternalServerError();
+            }
+        }
+
         [AllowAnonymous]
         [HttpPost, Route("RegisterExternal")]
         public async Task<IHttpActionResult> RegisterExternal(RegisterExternalBindingModel model)
@@ -121,12 +129,12 @@
                     return BadRequest(ModelState);
                 }
                 Account user = null;
-                if (model.email != "None")
-                {
-                    user = (await _identityService.FindByUsername(model.email)).Data as Account;
-                } else
+                if (string.IsNullOrWhiteSpace(model.email) || model.email.ToLower() == "none")
                 {
                     user = (await _identityService.FindByUsername(model.uid)).Data as Account;
+                } else
+                {
+                    user = (await _identityService.FindByUsername(model.email)).Data as Account;
                 }
 
                 bool hasRegistered = user != null;
@@ -135,12 +143,11 @@
                 {
                     if (model.email != "None")
                     {
-                        await _identityService.Create(model.email, "abcdefghijklmnopqrstuvwxyz", model.displayName, model.photoUrl, "Photo", DateTimeOffset.Now);
+                        await _identityService.Create(model.email, "abcdefghijklmnopqrstuvwxyz", model.displayName, model.photoUrl, "Photo", DateTimeOffset.Now, nameof(RoleType.User));
                     } else
                     {
-                        await _identityService.Create(model.uid, "abcdefghijklmnopqrstuvwxyz", model.displayName, model.photoUrl, "Photo", DateTimeOffset.Now);
+                        await _identityService.Create(model.uid, "abcdefghijklmnopqrstuvwxyz", model.displayName, model.photoUrl, string.Empty, DateTimeOffset.Now, nameof(RoleType.User));
                     }
-
                 }
                 var client = new HttpClient();
 
@@ -171,6 +178,7 @@
             }
             catch (Exception ex)
             {
+                _loggingService.Write(GetType().Name, nameof(RegisterExternal), ex);
                 throw ex;
             }
 

@@ -111,6 +111,10 @@
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
                 Tag tag = ModelBuilder.ConvertToModels(data);
 
                 _tagService.Create(tag);
@@ -166,11 +170,12 @@
     [DataContract]
     public class EditTagViewModels
     {
-        [DataMember, Required]
-        public int Id { get; set; }
-        [DataMember, Required]
-        public string Name { get; set; }
         [DataMember]
+        [Required]
+        public int Id { get; set; }
+        [DataMember, Required(ErrorMessage = "Tên không được để trống")]
+        public string Name { get; set; }
+        [DataMember, Required(ErrorMessage = "Thể loại không được để trống")]
         public string Category { get; set; }
     }
 }
