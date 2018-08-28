@@ -241,6 +241,7 @@ export default {
               }
             });
             Raven.captureException(reason);
+            reject(reason);
           })
       })
     },

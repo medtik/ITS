@@ -23,7 +23,69 @@ function mockShell(bodyFunc, noFail) {
 
 export default {
   namespaced: true,
+  state: {
+    areas: [],
+    featuredAreas: [],
+    detailedArea: {},
+    loading: {
+      areas: true,
+      detailedArea: true,
+      featuredAreas: false
+    },
+  },
+  getters: {
+    areas(state) {
+      return state.areas;
+    },
+    areasLoading(state) {
+      return state.loading.areas;
+    },
+    featuredAreas(state) {
+      return state.featuredAreas;
+    },
+    featuredAreasLoading(state) {
+      return state.loading.featuredAreas;
+    }
+  },
+  mutations: {
+    setAreas(state, payload) {
+      state.areas = payload.areas;
+    },
+    setFeaturedAreas(state, payload) {
+      state.featuredAreas = payload.areas;
+    },
+    setDetailedArea(state, payload) {
+      state.detailedArea = payload.area;
+    },
+    setLoading(state, payload) {
+      state.loading = _.assign(state.loading, payload.loading);
+    }
+  },
   actions: {
+    getAll(context) {
+      context.commit('setLoading', {loading: {areas: true}});
+      return new Promise((resolve, reject) => {
+        axiosInstance.get('/api/Area', {
+          params: {
+            pageIndex: 1,
+            pageSize: -1,
+          }
+        })
+          .then(value => {
+            context.commit('setAreas', {
+              areas: value.data.currentList
+            });
+            context.commit('setLoading', {loading: {areas: false}});
+            const response = formatter.getAllResponse(value.data);
+            resolve(response);
+          })
+          .catch(reason => {
+            context.commit('setLoading', {loading: {areas: false}});
+            reject(reason.response);
+          })
+      })
+
+    },
     getAllNoParam(context) {
       return new Promise((resolve, reject) => {
         axiosInstance.get('api/area', {
@@ -37,24 +99,30 @@ export default {
           }).catch(reject)
       })
     },
-    getAll(context, payload) {
+    getById(context, payload) {
+      // get /api/Area/Details
+      const {
+        id
+      } = payload;
+
       return new Promise((resolve, reject) => {
-        axiosInstance.get('api/area', {params: formatter.getAllRequest(payload)})
+        axiosInstance.get('api/Area/Details', {
+          params: {
+            id
+          }
+        })
           .then(value => {
-            const response = formatter.getAllResponse(value.data);
-            resolve(response);
-          }).catch(reject)
+            resolve(value.data);
+          })
+          .catch(reason => {
+            reject(reason.response);
+          })
       });
 
     },
-    getById(context, payload) {
-      return mockShell(() => {
-        return _areas.find(item => item.id == payload.id);
-      }, true)
-    },
     create(context, payload) {
-      return mockShell(() => {
-
+      return new Promise((resolve, reject) => {
+        // axiosInstance.post();
       })
     },
     update(context, payload) {
@@ -62,7 +130,7 @@ export default {
 
       })
     },
-    delete(context, payload) {
+    delete(contlext, payload) {
       return mockShell(() => {
         return payload;
       })

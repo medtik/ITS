@@ -43,6 +43,7 @@
 <!--TODO READONLY-->
 <script>
   import _ from "lodash"
+  import moment from "moment"
 
   export default {
     name: "BusinessHoursInput",
@@ -67,8 +68,16 @@
       }
     },
     watch: {
-      value(val){
-        this.input = val;
+      value: {
+        immediate: true,
+        handler(val, oldVal) {
+          let zeroTime = moment("00:00", "HH:mm");
+          if (moment(val.from, "HH:mm").isSame(zeroTime) &&
+            moment(val.to, "HH:mm").isSame(zeroTime)) {
+            this.allDayCheck = true;
+          }
+          this.input = val;
+        }
       }
     },
     methods: {

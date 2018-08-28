@@ -25,8 +25,8 @@
                      :to="link">
           {{locationName}}
         </router-link>
-
       </v-flex>
+
     </v-layout>
     <v-layout slot="detail" column pl-2>
       <StarRating
@@ -90,6 +90,7 @@
       'address',
       'reasons',
       'primaryPhoto',
+      'range',
     ],
     computed: {
       isSmallScreen() {

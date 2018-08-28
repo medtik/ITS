@@ -80,7 +80,32 @@ export default {
           }
         })
           .then(value => {
-            resolve(value.data);
+            let formatted = _(value.data)
+              .mapKeys((value, key) => {
+                switch (key) {
+                  case 'phoneNumber':
+                    return 'phone';
+                  case 'emailAddress':
+                    return 'email';
+                  case 'areaName':
+                    return 'area';
+                  default:
+                    return key;
+                }
+              })
+              .mapValues((value,key)=>{
+                if(key == "area"){
+                  return Number(value);
+                }
+                switch (key) {
+                  case 'area':
+                    return Number(value);
+                  default:
+                    return value;
+                }
+              })
+              .value();
+            resolve(formatted);
           })
           .catch(reason => {
             Raven.captureException(reason);
@@ -140,6 +165,10 @@ export default {
           }
         });
 
+        if(formatted.phoneNumber == ""){
+          formatted.phoneNumber = undefined;
+        }
+
         console.debug("createlocation/formatted", formatted);
 
         axiosInstance.post('api/location', formatted)
@@ -153,6 +182,7 @@ export default {
         nameInput,
         addressInput,
         descriptionInput,
+        phoneInput,
         longInput,
         latInput,
         websiteInput,
@@ -168,7 +198,8 @@ export default {
         secondaryPhotos,
       } = payload;
 
-      axiosInstance.patch('api/location', {
+
+      const data = {
         "id": id,
         "name": nameInput,
         "address": addressInput,
@@ -182,12 +213,29 @@ export default {
         "category": category,
         "isVerified": isVerifiedInput,
         "isClosed": isCloseInput,
-        "tags": tagsInput,
+        "tags": _.map(tagsInput, 'id'),
         "reviews": reviewsInput,
         "primaryPhoto": primaryPhotoInput,
         "otherPhotos": secondaryPhotos,
         "days": businessHoursInput
+      };
+
+      return new Promise((resolve, reject) => {
+        axiosInstance.put('api/location', data)
+          .then(value => {
+            resolve(value.data);
+          })
+          .catch(reason => {
+            let errors = reason;
+            if(reason.status == 400){
+              // {"message":"The request is invalid.","modelState":{"data.Name":["Tên không được trống"],"data.Address":["Địa chỉ không được trống"],"data.Longitude":["Kinh độ không được trống"],"data.Latitude":["Vĩ độ không được trống"],"data.AreaId":["Khu vực không được trống"],"data.Category":["Thể loại không được trống"]}}
+              errors = reason.response.data.modelState;
+            }
+            reject(errors)
+          })
       });
+
+
     },
     delete(context, payload) {
       return new Promise((resolve, reject) => {

@@ -160,7 +160,6 @@ import moment from "moment"
             endDateError = "Chuyến đi không quá 30 ngày";
           }
         }
-        console.log(this.input.startDate, !this.input.startDate, startDateError);
 
         this.formError.name = nameError;
         this.formError.startDate = startDateError;

@@ -143,6 +143,7 @@
 
             var path = CurrentContext.Server.MapPath("/Tree/tree.json");
             Tree tree = _searchTreeService.ReadTree(path);
+            _searchTreeService.WriteTree(path, tree);
             if (tree == null)
             {
                 tree = _searchTreeService.BuildTree(_locationService.GetAll().Include(location => location.Tags)
