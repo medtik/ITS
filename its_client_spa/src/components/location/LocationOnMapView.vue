@@ -64,7 +64,7 @@
           :opened="infoWindow.open"
           @closeclick="infoWindow.open = false"
         >
-          <LocationCard/>
+          <LocationCard v-bind="infoWindow.location"/>
         </GmapInfoWindow>
       </GmapMap>
     </v-container>
