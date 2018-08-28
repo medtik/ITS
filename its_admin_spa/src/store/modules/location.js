@@ -1,4 +1,3 @@
-import _locations from "./mockdata/locations";
 import {axiosInstance} from "../../common/util";
 
 import formatter from "../../formatter";
@@ -70,12 +69,24 @@ export default {
       });
     },
     getById(context, payload) {
-
-      return mockShell(() => {
-        return {
-          location: _locations.find(q => q.id == payload.id)
-        };
-      }, true)
+      // get /api/Details
+      const {
+        id
+      } = payload;
+      return new Promise((resolve, reject) => {
+        axiosInstance.get('api/Details', {
+          params: {
+            id
+          }
+        })
+          .then(value => {
+            resolve(value.data);
+          })
+          .catch(reason => {
+            Raven.captureException(reason);
+            reject();
+          })
+      })
     },
     create(context, payload) {
       return new Promise((resolve, reject) => {
@@ -138,6 +149,7 @@ export default {
     },
     update(context, payload) {
       const {
+        id,
         nameInput,
         addressInput,
         descriptionInput,
@@ -157,6 +169,7 @@ export default {
       } = payload;
 
       axiosInstance.patch('api/location', {
+        "id": id,
         "name": nameInput,
         "address": addressInput,
         "desription": descriptionInput,
@@ -170,6 +183,7 @@ export default {
         "isVerified": isVerifiedInput,
         "isClosed": isCloseInput,
         "tags": tagsInput,
+        "reviews": reviewsInput,
         "primaryPhoto": primaryPhotoInput,
         "otherPhotos": secondaryPhotos,
         "days": businessHoursInput

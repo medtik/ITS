@@ -5,6 +5,9 @@
     </v-container>
     <v-container pa-0 fluid v-else>
       <v-toolbar color="light-blue" dark fixed>
+        <v-toolbar-title>
+          {{title}}
+        </v-toolbar-title>
         <v-spacer></v-spacer>
         <v-toolbar-items>
           <!--<v-btn flat @click="setMapToMyLocation">-->
@@ -99,6 +102,7 @@
     data() {
       return {
         locationId: undefined,
+        title: undefined,
         current: {id: -1, lat: undefined, lng: undefined, type: 'current', location: {}},
         toggle: {
           activity: true,
@@ -118,7 +122,7 @@
             }
           }
         },
-        renderer:undefined,
+        renderer: undefined,
         mapStyles: [
           {
             featureType: 'poi.business',
@@ -194,11 +198,14 @@
       const {
         long,
         lat,
-        locationId
+        locationId,
+        title,
       } = this.$route.query;
+
       this.current.lng = Number(long);
       this.current.lat = Number(lat);
       this.locationId = locationId;
+      this.title = title;
     },
     mounted() {
       this.$store.dispatch('location/fetchNearbyLocations', {
@@ -247,19 +254,20 @@
         })
       },
       toggleInfoWindow(marker) {
-        console.debug(marker.id, marker.type);
-        this.infoWindow.pos = {
-          lat: marker.lat,
-          lng: marker.lng
-        };
-        this.infoWindow.location = marker.location;
+        if (!!marker.location) {
+          this.infoWindow.pos = {
+            lat: marker.lat,
+            lng: marker.lng
+          };
+          this.infoWindow.location = marker.location;
 
-        if (this.infoWindow.markerId === marker.id) {
-          this.infoWindow.open = !this.infoWindow.open;
-        }
-        else {
-          this.infoWindow.open = true;
-          this.infoWindow.markerId = marker.id;
+          if (this.infoWindow.markerId === marker.id) {
+            this.infoWindow.open = !this.infoWindow.open;
+          }
+          else {
+            this.infoWindow.open = true;
+            this.infoWindow.markerId = marker.id;
+          }
         }
       }
     }

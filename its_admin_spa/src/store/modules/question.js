@@ -1,6 +1,8 @@
 import _question from "./mockdata/Questions";
 import {axiosInstance} from "../../common/util";
 import formatter from "../../formatter";
+import Raven from "raven-js";
+
 
 function mockShell(bodyFunc, noFail) {
   return new Promise((resolve, reject) => {
@@ -42,9 +44,24 @@ export default {
       })
     },
     getById(context, payload) {
-      return mockShell(() => {
-        return _question.find(q => q.id == payload.id);
-      }, true)
+      // get /api/Question/Detail
+      const {
+        id
+      } = payload;
+      return new Promise((resolve, reject) => {
+        axiosInstance.get('api/Question/Detail', {
+          params: {
+            id
+          }
+        })
+          .then(value => {
+            resolve(value.data);
+          })
+          .catch(reason => {
+            Raven.captureException(reason);
+            reject();
+          })
+      })
     },
     getCategories(context, payload) {
       return new Promise((resolve, reject) => {
@@ -100,7 +117,21 @@ export default {
 
     },
     update(context, payload) {
-
+      // put /api/Question
+      const {
+        id,
+        content,
+        categories,
+        answers
+      } = payload;
+      axiosInstance.put('api/question', {}, {
+        params: {
+          id,
+          content,
+          categories,
+          answers
+        }
+      })
     },
     delete(context, payload) {
       return new Promise((resolve, reject) => {

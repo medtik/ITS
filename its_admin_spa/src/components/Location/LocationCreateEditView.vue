@@ -1,151 +1,156 @@
 <template>
-  <v-container id="content" fluid>
-    <v-layout row pa-3 style="background-color: white" elevation-4>
-      <v-flex xs12>
-        <span class=title v-if="mode == 'create'">Tạo mới địa điểm</span>
-        <span class=title v-if="mode == 'edit'">Chỉnh sửa địa điểm</span>
-        <v-divider class="my-3"></v-divider>
-        <v-progress-linear v-if="loading.page" color="primary" indeterminate></v-progress-linear>
-        <v-layout column v-else>
-          <v-flex my-3>
-            <span class="subheading">Thông tin cơ bản</span>
-            <v-flex pl-3>
-              <v-text-field
-                label="Tên"
-                v-model="input.nameInput"
-              />
-              <v-text-field
-                label="Địa chỉ"
-                v-model="input.addressInput"
-              />
-              <v-textarea
-                label="Mô tả"
-                v-model="input.descriptionInput"
-              />
-              <v-layout row wrap>
-                <v-flex xs12 md6>
-                  <v-text-field
-                    label="Vĩ độ"
-                    v-model="input.latInput"
-                  />
-                </v-flex>
-                <v-flex xs12 md6>
-                  <v-text-field
-                    label="Kinh độ"
-                    v-model="input.longInput"
-                  />
-                </v-flex>
-              </v-layout>
-              <v-text-field
-                label="Web"
-                v-model="input.websiteInput"
-              />
-              <v-text-field
-                label="Điện thoại"
-                v-model="input.phoneInput"
-              />
-              <v-text-field
-                label="Email"
-                v-model="input.emailInput"
-              />
-              <v-select
-                :items="areas"
-                :loading="loading.areas"
-                v-model="input.areaInput"
-                label="Khu vực"
-                item-text="name"
-                item-value="id"
-              />
-              <LocationCategoryInput
-                v-model="input.category"
-              />
+  <section id="content">
+    <v-container fluid v-if="!loading.page">
+      <v-layout row pa-3 style="background-color: white" elevation-4>
+        <v-flex xs12>
+          <span class=title v-if="mode == 'create'">Tạo mới địa điểm</span>
+          <span class=title v-if="mode == 'edit'">Chỉnh sửa địa điểm</span>
+          <v-divider class="my-3"></v-divider>
+          <v-progress-linear v-if="loading.page" color="primary" indeterminate></v-progress-linear>
+          <v-layout column v-else>
+            <v-flex my-3>
+              <span class="subheading">Thông tin cơ bản</span>
+              <v-flex pl-3>
+                <v-text-field
+                  label="Tên"
+                  v-model="input.nameInput"
+                />
+                <v-text-field
+                  label="Địa chỉ"
+                  v-model="input.addressInput"
+                />
+                <v-textarea
+                  label="Mô tả"
+                  v-model="input.descriptionInput"
+                />
+                <v-layout row wrap>
+                  <v-flex xs12 md6>
+                    <v-text-field
+                      label="Vĩ độ"
+                      v-model="input.latInput"
+                    />
+                  </v-flex>
+                  <v-flex xs12 md6>
+                    <v-text-field
+                      label="Kinh độ"
+                      v-model="input.longInput"
+                    />
+                  </v-flex>
+                </v-layout>
+                <v-text-field
+                  label="Web"
+                  v-model="input.websiteInput"
+                />
+                <v-text-field
+                  label="Điện thoại"
+                  v-model="input.phoneInput"
+                />
+                <v-text-field
+                  label="Email"
+                  v-model="input.emailInput"
+                />
+                <v-select
+                  :items="areas"
+                  :loading="loading.areas"
+                  v-model="input.areaInput"
+                  label="Khu vực"
+                  item-text="name"
+                  item-value="id"
+                />
+                <LocationCategoryInput
+                  v-model="input.category"
+                />
+              </v-flex>
             </v-flex>
-          </v-flex>
-          <v-flex my-3>
-            <span class="subheading">Tình trạng</span>
-            <v-flex pl-3>
-              <v-switch label="Đã xác nhận" color="green" v-model="input.isVerifiedInput"></v-switch>
-              <v-switch label="Ngừng kinh doanh" color="red" v-model="input.isCloseInput"></v-switch>
+            <v-flex my-3>
+              <span class="subheading">Tình trạng</span>
+              <v-flex pl-3>
+                <v-switch label="Đã xác nhận" color="green" v-model="input.isVerifiedInput"></v-switch>
+                <v-switch label="Ngừng kinh doanh" color="red" v-model="input.isCloseInput"></v-switch>
+              </v-flex>
             </v-flex>
-          </v-flex>
-          <v-flex my-3>
-            <span class="subheading">Thời gian hoạt động</span>
-            <v-flex pl-3 mt-2>
-              <LocationBusinessHoursInput
-                v-model="input.businessHoursInput"
-              />
+            <v-flex my-3>
+              <span class="subheading">Thời gian hoạt động</span>
+              <v-flex pl-3 mt-2>
+                <LocationBusinessHoursInput
+                  v-model="input.businessHoursInput"
+                />
+              </v-flex>
             </v-flex>
-          </v-flex>
-          <v-flex my-3 v-if="mode == 'edit'">
-            <span class="subheading">Đánh giá</span>
-            <v-flex pl-3>
-              <LocationReview
-                v-for="review in input.reviewsInput"
-                v-bind="review"
-                v-on:delete="onReviewRemove"
-                :editMode="true"
-                :key="review.id"
-              />
+            <v-flex my-3 v-if="mode == 'edit'">
+              <span class="subheading">Đánh giá</span>
+              <v-flex pl-3>
+                <LocationReview
+                  v-for="review in input.reviewsInput"
+                  v-bind="review"
+                  v-on:delete="onReviewRemove"
+                  :editMode="true"
+                  :key="review.id"
+                />
+              </v-flex>
             </v-flex>
-          </v-flex>
-          <v-flex my-3>
-            <span class="subheading">Thẻ</span>
-            <v-flex pl-3>
-              <TagsInput
-                v-model="input.tagsInput"
-                :admin="true"
-                @create="createEditTag.dialog = true"
-              />
+            <v-flex my-3>
+              <span class="subheading">Thẻ</span>
+              <v-flex pl-3>
+                <TagsInput
+                  v-model="input.tagsInput"
+                  :admin="true"
+                  @create="createEditTag.dialog = true"
+                />
+              </v-flex>
             </v-flex>
-          </v-flex>
-          <v-flex my-3>
-            <span class="subheading">Hình ảnh</span>
-            <v-layout column pl-3 mt-3>
-              <v-label class="subheading">Ảnh bìa</v-label>
-              <v-flex>
-                <PictureInput
-                  v-model="input.primaryPhotoInput"
-                  v-bind="{
+            <v-flex my-3>
+              <span class="subheading">Hình ảnh</span>
+              <v-layout column pl-3 mt-3>
+                <v-label class="subheading">Ảnh bìa</v-label>
+                <v-flex>
+                  <PictureInput
+                    v-model="input.primaryPhotoInput"
+                    v-bind="{
                 width:300,
                 height:300,
                 size:50,
                 text: 'Ảnh bìa',
                 center: false
               }"
-                />
+                  />
+                </v-flex>
+              </v-layout>
+              <v-flex pl-3 mt-3>
+                <v-label class="subheading">Ảnh thêm</v-label>
+                <MultiPhotoInput v-model="input.secondaryPhotos"/>
               </v-flex>
-            </v-layout>
-            <v-flex pl-3 mt-3>
-              <v-label class="subheading">Ảnh thêm</v-label>
-              <MultiPhotoInput v-model="input.secondaryPhotos"/>
             </v-flex>
-          </v-flex>
-          <v-divider/>
-          <v-flex mt-3>
-            <v-btn color="primary"
-                   v-if="mode == 'create'"
-                   :loading="this.loading.createBtn"
-                   @click="onCreateClick">
-              Tạo mới
-            </v-btn>
-            <v-btn color="success"
-                   v-if="mode == 'edit'"
-                   :loading="this.loading.updateBtn"
-                   @click="onUpdateClick">
-              Lưu thay đổi
-            </v-btn>
-            <v-btn color="secondary"
-                   @click="onExitClick">
-              Thoát
-            </v-btn>
-          </v-flex>
-        </v-layout>
-      </v-flex>
-    </v-layout>
-    <TagCreateEditDialog v-bind="createEditTag" v-on:close="createEditTag.dialog = false" @create="onCreateTag"/>
-    <ErrorDialog v-bind="error" v-on:close="error.dialog = false"/>
-    <SuccessDialog v-bind="success" v-on:close="success.dialog = false"/>
-  </v-container>
+            <v-divider/>
+            <v-flex mt-3>
+              <v-btn color="primary"
+                     v-if="mode == 'create'"
+                     :loading="this.loading.createBtn"
+                     @click="onCreateClick">
+                Tạo mới
+              </v-btn>
+              <v-btn color="success"
+                     v-if="mode == 'edit'"
+                     :loading="this.loading.updateBtn"
+                     @click="onUpdateClick">
+                Lưu thay đổi
+              </v-btn>
+              <v-btn color="secondary"
+                     @click="onExitClick">
+                Thoát
+              </v-btn>
+            </v-flex>
+          </v-layout>
+        </v-flex>
+      </v-layout>
+      <TagCreateEditDialog v-bind="createEditTag" v-on:close="createEditTag.dialog = false" @create="onCreateTag"/>
+      <ErrorDialog v-bind="error" v-on:close="error.dialog = false"/>
+      <SuccessDialog v-bind="success" v-on:close="success.dialog = false"/>
+    </v-container>
+    <v-container class="text-xs-center" v-if="loading.page">
+      <v-progress-circular indeterminate size="40" color="primary"></v-progress-circular>
+    </v-container>
+  </section>
 </template>
 
 <script>
@@ -226,7 +231,7 @@
         }
       }
     },
-    created() {
+    mounted() {
       const {
         name,
         query
@@ -234,15 +239,15 @@
 
       if (name == "LocationEdit" && query.id) {
         if (query.id) {
+          this.loadingId = query.id;
           this.mode = 'edit';
           this.loading.page = true;
 
           this.$store.dispatch('location/getById', {
             ...query
           })
-            .then(value => {
-              this.location = value.location;
-              this.setInput(value.location)
+            .then(location => {
+              this.setInput(location)
                 .then(() => {
                   this.loading.page = false
                 })
@@ -260,8 +265,7 @@
           }
         }
       }
-    },
-    mounted() {
+
       if (!this.areas) {
         this.$store.dispatch('area/getAllNoParam')
           .then(value => {
@@ -275,20 +279,21 @@
         return new Promise((resolve, reject) => {
           this.input.nameInput = location.name;
           this.input.addressInput = location.address;
+          this.input.category = location.category;
           this.input.descriptionInput = location.description;
           this.input.longInput = location.long;
           this.input.latInput = location.lat;
           this.input.websiteInput = location.website;
           this.input.phoneInput = location.phone;
-          this.input.emailInput = location.email;
+          this.input.emailInput = location.emailAddress;
           this.input.areaInput = location.area;
           this.input.tagsInput = location.tags;
-          this.input.businessHoursInput.days = location.businessHours;
+          this.input.businessHoursInput = location.businessHours;
           this.input.isVerifiedInput = location.isVerified;
           this.input.isCloseInput = location.isClose;
-          this.input.primaryPhotoInput = location.primaryPhoto.url;
-          this.input.secondaryPhotos = location.photos;
-          this.input.reviewsInput = location.reviews;
+          this.input.primaryPhotoInput = location.primaryPhoto;
+          this.input.secondaryPhotos = location.otherPhotos;
+          this.input.reviewsInput = location.comments;
           resolve();
         })
       },
@@ -323,7 +328,13 @@
           .filter(review => review.id != reviewId)
       },
       onUpdateClick() {
-
+        this.$store.dispatch('location/update', {...this.input,id:this.loadingId})
+          .then(value => {
+            this.success = {
+              dialog: true,
+              message: "Cập nhật địa điểm thành công"
+            }
+          })
       },
       onCreateClick() {
         this.$store.dispatch('location/create', {...this.input})

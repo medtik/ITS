@@ -128,6 +128,15 @@
         <!--Holder-->
       </v-flex>
     </section>
+    <section style="margin-bottom: 56px">
+      <v-footer>
+        <v-layout justify-end row>
+          <v-flex shrink px-2>
+            ITS@2018 - ITS_Global@gmail.com
+          </v-flex>
+        </v-layout>
+      </v-footer>
+    </section>
   </v-content>
 </template>
 

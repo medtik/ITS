@@ -58,7 +58,6 @@
       }
     },
     methods: {
-
       onRemove(tag) {
         const tags = _.remove(this.tags, (val) => val.id !== tag.id);
         this.$emit('input', tags);

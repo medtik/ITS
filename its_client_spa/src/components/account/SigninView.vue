@@ -2,17 +2,7 @@
   <v-content id="content-holder">
     <v-layout justify-center align-center id="layout">
       <v-card id="form">
-        <v-card-title class="light-blue white--text">
-          <v-layout column>
-            <div class="display-2 font-weight-black font-italic text-xs-center">
-              ITS
-            </div>
-            <v-divider class="my-3"/>
-            <div class="title font-weight-medium text-xs-center">
-              Hệ thống hướng dẫn du lịch thông minh
-            </div>
-          </v-layout>
-        </v-card-title>
+        <AppCardTitle/>
         <v-card-text>
           <v-layout column>
             <v-flex>
@@ -126,9 +116,14 @@
 <script>
   import Raven from "raven-js";
   import {mapState, mapGetters} from "vuex";
+  import {AppCardTitle} from "../../common/block";
+
 
   export default {
     name: "SigninView",
+    components:{
+      AppCardTitle
+    },
     data() {
       return {
         loading: {
