@@ -18,33 +18,44 @@
     public class EditLocationViewModels
     {
         [DataMember]
+        public int Id { get; set; }
+
+        [DataMember]
+        [Required(ErrorMessage = "Tên không được trống")]
         public string Name { get; set; }
 
         [DataMember]
+        [Required(ErrorMessage = "Địa chỉ không được trống")]
         public string Address { get; set; }
 
         [DataMember]
         public string Desription { get; set; }
 
         [DataMember]
-        public double Lat { get; set; }
+        [Required(ErrorMessage = "Vĩ độ không được trống")]
+        public double? Lat { get; set; }
 
         [DataMember]
-        public double  Long { get; set; }
+        [Required(ErrorMessage = "Kinh độ không được trống")]
+        public double? Long { get; set; }
 
         [DataMember]
         public string Web { get; set; }
 
         [DataMember]
+        [Phone(ErrorMessage = "Số điện thoại không hợp lệ")]
         public string Phone { get; set; }
 
         [DataMember]
+        [EmailAddress(ErrorMessage = "Email không hợp lệ")]
         public string Email { get; set; }
 
         [DataMember]
-        public int AreaId { get; set; }
+        [Required(ErrorMessage = "Khu vực không được trống")]
+        public int? AreaId { get; set; }
 
         [DataMember]
+        [Required(ErrorMessage = "Thể loại không được trống")]
         public string Category { get; set; }
 
         [DataMember]
@@ -132,6 +143,9 @@
 
         [DataMember]
         public double Lat { get; set; }
+
+        [DataMember]
+        public double Range { get; set; }
     }
 
     [DataContract(Name = "Location")]
@@ -140,9 +154,11 @@
         [DataMember]
         public double Radius { get; set; }
 
-        [DataMember, Required]
+        [DataMember]
+        [Required(ErrorMessage = "Tên không được trống")]
         public string Name { get; set; }
 
+        [Required(ErrorMessage = "Địa chỉ không được trống")]
         [DataMember]
         public string Address { get; set; }
 
@@ -150,18 +166,22 @@
         public string Description { get; set; }
 
         [DataMember]
-        public double Longitude { get; set; }
+        [Required(ErrorMessage = "Kinh độ không được trống")]
+        public double? Longitude { get; set; }
 
         [DataMember]
-        public double Latitude { get; set; }
+        [Required(ErrorMessage = "Vĩ độ không được trống")]
+        public double? Latitude { get; set; }
 
         [DataMember]
         public string Website { get; set; }
 
         [DataMember]
+        [Phone(ErrorMessage = "Số điện thoại không hợp lệ")]
         public string PhoneNumber { get; set; }
 
         [DataMember]
+        [EmailAddress(ErrorMessage = "Email không hợp lệ")]
         public string EmailAddress { get; set; }
 
         [DataMember]
@@ -171,7 +191,8 @@
         public bool IsClosed { get; set; }
 
         [DataMember]
-        public int AreaId { get; set; }
+        [Required(ErrorMessage = "Khu vực không được trống")]
+        public int? AreaId { get; set; }
 
         [DataMember]
         public int[] Tags { get; set; }//list tag id
@@ -186,6 +207,7 @@
         public ICollection<BusinessHourViewModels> Days { get; set; }
 
         [DataMember]
+        [Required(ErrorMessage = "Thể loại không được trống")]
         public string Category { get; set; }
     }
 
@@ -205,7 +227,7 @@
         public int RatingCount { get; set; }
 
         [DataMember]
-        public IEnumerable<string> Tags { get; set; }
+        public IEnumerable<(int id, string name)> Tags { get; set; }
 
         [DataMember]
         public IEnumerable<BusinessHourViewModels> BusinessHours { get; set; }

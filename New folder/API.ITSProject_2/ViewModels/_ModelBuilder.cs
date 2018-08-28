@@ -111,13 +111,13 @@
            => new Location
             {
                 Address = model.Address,
-                AreaId = model.AreaId,
+                AreaId = model.AreaId.Value,
                 Description = model.Desription,
                 EmailAddress = model.Email,
                 IsClosed = model.IsClosed,
                 IsVerified = model.IsVerified,
-                Latitude = model.Lat,
-                Longitude = model.Long,
+                Latitude = model.Lat.Value,
+                Longitude = model.Long.Value,
                 Name = model.Name,
                 PhoneNumber = model.Phone,
                 Website = model.Web,
@@ -274,7 +274,7 @@
                 Id = area.Id,
                 Name = area.Name,
                 Locations = new List<CategoriesLocationCounter>(),
-                FeaturedLocation = ConvertToPlanLocationViewModels(area.Locations).OrderByDescending(_ => _.Rating).Take(10).ToList(),
+                FeaturedLocation = ConvertToPlanLocationViewModels(area.Locations.Where(_ => !_.IsDelete)).OrderByDescending(_ => _.Rating).Take(10).ToList(),
                 FeaturedPlan = ConvertToFeaturedPlanViewModels(area.Plans.Where(_ => _.IsPublic)).OrderByDescending(_ => _.Voter).Take(10).ToList()
             };
             foreach (var item in area.Locations)
@@ -362,7 +362,7 @@
                 Rating = rating,
                 RatingCount = ratingCount,
                 BusinessHours = ConvertToBusinessHourViewModels(location.BusinessHours),
-                Tags = location.Tags.Select(_ => _.Name),
+                Tags = location.Tags.Select(_ => (_.Id, _.Name)),
                 PrimaryPhoto = location.Photos.OrderByDescending(_ => _.PhotoId).FirstOrDefault(_ => _.IsPrimary)?.Photo.Path,
                 OtherPhotos = location.Photos.Where(_ => !_.IsPrimary).Select(_ => _.Photo).Select(_ => _.Path),
                 Comments = ConvertToCommentViewModels(location.Reviews).OrderByDescending(_ => _.Id).Take(5),
@@ -378,7 +378,8 @@
 
         public PlanLocationViewModels ConvertToPlanLocationViewModels(Location location)
         {
-            float rating = location.Reviews.Sum(_ => _.Rating) / location.Reviews.Count;
+            int ratingCount = location.Reviews.Count;   
+            float rating = location.Reviews.Sum(_ => _.Rating) / ratingCount;
             rating = float.IsNaN(rating) ? 0 : rating;
             return new PlanLocationViewModels
             {
@@ -421,7 +422,35 @@
                 ReviewCount = ratingCount,
                 PrimaryPhoto = location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Path,
                 Lat = location.Latitude,
-                Long = location.Longitude
+                Long = location.Longitude,
+                Range = 0
+            };
+        }
+
+        public LocationViewModels ConvertToViewModels(Location location, double range)
+        {
+            int ratingCount = location.Reviews.Count;
+            float rating = location.Reviews.Sum(_ => _.Rating) / ratingCount;
+            rating = float.IsNaN(rating) ? 0 : rating;
+
+            return new LocationViewModels
+            {
+                Id = location.Id,
+                Name = location.Name,
+                Address = location.Address,
+                EmailAddress = location.EmailAddress,
+                IsClosed = location.IsClosed,
+                IsVerified = location.IsVerified,
+                PhoneNumber = location.PhoneNumber,
+                Website = location.Website,
+                AreaName = location.Area.Name,
+                Categories = location.Category,
+                Rating = rating,
+                ReviewCount = ratingCount,
+                PrimaryPhoto = location.Photos.FirstOrDefault(_ => _.IsPrimary)?.Photo.Path,
+                Lat = location.Latitude,
+                Long = location.Longitude,
+                Range = range
             };
         }
 
@@ -439,14 +468,14 @@
             return new Location
             {
                 Address = model.Address,
-                AreaId = model.AreaId,
+                AreaId = model.AreaId.Value,
                 Description = model.Description,
                 EmailAddress = model.EmailAddress,
                 IsClosed = model.IsClosed,
                 IsDelete = false,
                 IsVerified = model.IsVerified,
-                Latitude = model.Latitude,
-                Longitude = model.Longitude,
+                Latitude = model.Latitude.Value,
+                Longitude = model.Longitude.Value,
                 Name = model.Name,
                 PhoneNumber = model.PhoneNumber,
                 Website = model.Website,
