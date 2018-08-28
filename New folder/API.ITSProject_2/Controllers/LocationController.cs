@@ -22,6 +22,8 @@ namespace API.ITSProject_2.Controllers
     using System.Net;
     using System.IO;
     using System.Net.Http.Headers;
+    using System.ComponentModel.DataAnnotations;
+    using Core.ObjectModels.Entities.EnumType;
 
     public class LocationController : _BaseController
     {
@@ -41,6 +43,47 @@ namespace API.ITSProject_2.Controllers
         }
 
         #region Get
+        [HttpGet]
+        [Route("api/Location/GetChangeRequests")]
+        public IHttpActionResult GetRequest(int locationId)
+        {
+            try
+            {
+                var location = _locationService.Find(locationId, _ => _.ChangeRequests, _ => _.ChangeRequests.Select(__ => __.User));
+
+                List<object> temp = new List<object>();
+
+                foreach (var item in location.ChangeRequests)
+                {
+                    temp.Add(new
+                    {
+                        RequestId = item.Id,
+                        User = new
+                        {
+                            Photo = item.User.Avatar,
+                            Name = item.User.FullName
+                        },
+                        item.Status,
+                        Detail = new
+                        {
+                            item.Name,
+                            item.Address,
+                            item.Description,
+                            item.Website,
+                            Phone = item.PhoneNumber,
+                            Email = item.EmailAddress
+                        }
+                    });
+                }
+                return Ok(temp);
+            }
+            catch (Exception ex)
+            {
+                _loggingService.Write(GetType().Name, nameof(GetRequest), ex);
+                return InternalServerError();
+            }
+        }
+
         [HttpGet]
         [Route("api/photo/converPhotoBase64")]
         public HttpResponseMessage ConvertToImage(int id)
@@ -64,26 +107,28 @@ namespace API.ITSProject_2.Controllers
 
         [HttpGet]
         [Route("api/Location/NearbyLocation")]
-        public IHttpActionResult GetNearbyLocation(double longitude, double latitude, double radius)
+        public IHttpActionResult GetNearbyLocation(double longitude, double latitude, double? radius = null)
         {
             try
             {
+                if (!radius.HasValue)
+                    radius = double.MaxValue;
                 IList<LocationViewModels> result = new List<LocationViewModels>();
                 var searchLoation = new GeoCoordinate(latitude, longitude);
 
                 var listLocation = _locationService.GetAll(_ => _.Photos.Select(__ => __.Photo), __ => __.Area, _ => _.Reviews, _ => _.Photos.Select(__ => __.Photo));
-
+                listLocation = listLocation.Where(_ => !_.IsDelete);
                 foreach (var ele in listLocation)
                 {
                     var tmpLocation = new GeoCoordinate(ele.Latitude, ele.Longitude);
-
-                    if (searchLoation.GetDistanceTo(tmpLocation) <= radius)
+                    double range = Math.Abs(searchLoation.GetDistanceTo(tmpLocation) - radius.Value);
+                    if (searchLoation.GetDistanceTo(tmpLocation) <= radius.Value)
                     {
-                        result.Add(ModelBuilder.ConvertToViewModels(ele));
+                        result.Add(ModelBuilder.ConvertToViewModels(ele, range));
                     }// end if check is in radius
                 }
 
-                return Ok(result);
+                return Ok(result.OrderByDescending(_ => _.Range));
             }
             catch (Exception ex)
             {
@@ -99,7 +144,6 @@ namespace API.ITSProject_2.Controllers
         {
             return Ok(_locationService.GetCategories());
         }
-
 
         [HttpGet]
         [Route("api/Details")]
@@ -159,7 +203,7 @@ namespace API.ITSProject_2.Controllers
                 .Include(location => location.Photos.Select(__ => __.Photo))
                 .Where(location => !areaId.HasValue || location.AreaId == areaId)
                 .Where(location => resultIds.Contains(location.Id));
-
+            locationsResult = locationsResult.Where(_ => !_.IsDelete);
             List<TreeViewModels> resultList = new List<TreeViewModels>();
             foreach (Location location in locationsResult)
             {
@@ -370,6 +414,97 @@ namespace API.ITSProject_2.Controllers
         #endregion
 
         #region Post
+        public class ReviewViewModel
+        {
+            public int ReviewId { get; set; }
+
+            public string Message { get; set; }
+        }
+
+        [HttpPost]
+        [Route("api/Location/CreateReview")]
+        public async Task<IHttpActionResult> CreateReview(ReviewViewModel review)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                    return BadRequest();
+
+                Report cr = new Report
+                {
+                    ReviewId = review.ReviewId,
+                    Content = review.Message,
+                    UserId = (await CurrentUser()).Id
+                };
+                _locationService.CreateReport(cr);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _loggingService.Write(GetType().Name, nameof(CreateChangeRequest), ex);
+                return InternalServerError();
+            }
+        }
+
+        public class ChangeRequestViewModels
+        {
+            [Required]
+            public int LocationId { get; set; }
+
+            [Required(ErrorMessage = "Tên không được trống")]
+            public string Name { get; set; }
+
+            [Required(ErrorMessage = "Địa chỉ không được trống")]
+            public string Address { get; set; }
+
+            [Required]
+            public string Description { get; set; }
+
+            [Phone(ErrorMessage = "Số điện thoại không hợp lệ")]
+            public string PhoneNumber { get; set; }
+
+            public string Website { get; set; }
+
+            [EmailAddress(ErrorMessage = "Email không hợp lệ")]
+            public string Email { get; set; }
+
+            public string Tags { get; set; }
+
+            public ICollection<BusinessHourViewModels> BusinessHours { get; set; }
+        }
+
+        [HttpPost]
+        [Route("api/Location/CreateChangeRequest")]
+        public async Task<IHttpActionResult> CreateChangeRequest(ChangeRequestViewModels changeRequest)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                    return BadRequest();
+
+                ChangeRequest cr = new ChangeRequest
+                {
+                    Description = changeRequest.Description,
+                    Address = changeRequest.Address,
+                    EmailAddress = changeRequest.Email,
+                    LocationId = changeRequest.LocationId,
+                    Name = changeRequest.Name,
+                    Website = changeRequest.Website,
+                    Tags = changeRequest.Tags,
+                    UserId = (await CurrentUser()).Id,
+                    PhoneNumber = changeRequest.PhoneNumber,
+                    BusinessHours = JsonConvert.SerializeObject(ModelBuilder.ConvertToModels(changeRequest.BusinessHours))
+                };
+                _locationService.CreateChangeRequest(cr);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _loggingService.Write(GetType().Name, nameof(CreateChangeRequest), ex);
+                return InternalServerError();
+            }
+        }
+
         [HttpPost]
         [Authorize, Route("api/Location/AddImageToLocation")]
         public async Task<IHttpActionResult> AddImageToLocation(PhotoForLocationViewModels view)
@@ -412,6 +547,8 @@ namespace API.ITSProject_2.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
                 int userId = (await CurrentUser()).Id;
 
                 Photo primaryPhoto = ModelBuilder.ConvertToModels(data.PrimaryPhoto, userId);
@@ -442,6 +579,94 @@ namespace API.ITSProject_2.Controllers
         #endregion
 
         #region Put
+        public class TagsABCViewModels
+        {
+            public int Id { get; set; }
+
+            public string Name { get; set; }
+
+            public string Categories { get; set; }
+
+            public int LocationCount { get; set; }
+        }
+
+        [HttpPut]
+        [Route("api/Location/AcceptLocationChangeRequest")]
+        public IHttpActionResult AcceptLocationChangeRequest([FromBody]int requestId)
+        {
+            try
+            {
+                ChangeRequest temp = _locationService.FindChangeRequest(requestId);
+                temp.Status = (int)RequestStatus.Approved;
+                _locationService.UpdateChageRequest(temp);
+
+                List<TagsABCViewModels> tags = JsonConvert.DeserializeObject<List<TagsABCViewModels>>(temp.Tags);
+
+                List<Tag> tags2 = new List<Tag>();
+
+                tags.ForEach(_ => 
+                {
+                    if (_tagService.Find(_.Id) != null)
+                    {
+                        tags2.Add(_tagService.Find(_.Id));
+                    }
+                });
+                var location = _locationService.Find(temp.LocationId);
+
+                location.Address = temp.Address;
+                location.Name = temp.Name;
+                location.Description = temp.Description;
+                location.EmailAddress = temp.EmailAddress;
+                location.Website = temp.Website;
+                location.EmailAddress = temp.EmailAddress;
+                location.PhoneNumber = temp.PhoneNumber;
+                location.Tags = tags2;
+                _locationService.Update(location);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _loggingService.Write(GetType().Name, nameof(AcceptLocationChangeRequest), ex);
+                return InternalServerError();
+            }
+        }
+
+        [HttpPut]
+        [Route("api/Request/DenyReportReview")]
+        public IHttpActionResult DenyReportReview(int reportId)
+        {
+            try
+            {
+                var temp = _locationService.FindChangeRequest(reportId);
+                temp.Status = (int)RequestStatus.Rejected;
+                _locationService.UpdateChageRequest(temp);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _loggingService.Write(GetType().Name, nameof(DenyReportReview), ex);
+                return InternalServerError();
+            }
+        }
+
+        [HttpPut]
+        [Route("api/Request/DenyLocationChangeRequest")]
+        public IHttpActionResult DenyLocationChangeRequest(int requestId)
+        {
+            try
+            {
+                var temp = _locationService.FindChangeRequest(requestId);
+                temp.Status = (int)RequestStatus.Rejected;
+                _locationService.UpdateChageRequest(temp);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _loggingService.Write(GetType().Name, nameof(DenyLocationChangeRequest), ex);
+                return InternalServerError();
+            }
+        }
+
 
         public class UserPositionViewModels
         {
@@ -481,18 +706,43 @@ namespace API.ITSProject_2.Controllers
                         var plans = _planService.GetPlans(user.Id);
                         foreach (var item in plans)
                         {
-                            foreach (var item2 in item.PlanLocations)
+                            if (item.GroupId.HasValue)
                             {
-                                foreach (var item3 in item2.Location.BusinessHours.ToList())
+                                if (item.Group.CreatorId == user.Id)
                                 {
-                                    if (IsInRange(item3.OpenTime, item3.CloseTime, DateTimeOffset.Now.TimeOfDay))
+                                    foreach (var item2 in item.PlanLocations)
                                     {
-                                        item2.Done = true;
-                                        _planService.UpdatePlanLocation(item2);
-                                        foreach (var item4 in item.PlanLocations.Select(__ => __.Location))
+                                        foreach (var item3 in item2.Location.BusinessHours.ToList())
                                         {
-                                            item4.TotalStayCount = item4.TotalStayCount + 1;
-                                            item4.TotalTimeStay = (userPosition.TimeOfLastLocation + (DateTimeOffset.Now.TimeOfDay - userPosition.TimeOfLastLocation)).Minutes;
+                                            if (IsInRange(item3.OpenTime, item3.CloseTime, DateTimeOffset.Now.TimeOfDay))
+                                            {
+                                                item2.Done = true;
+                                                _planService.UpdatePlanLocation(item2);
+                                                foreach (var item4 in item.PlanLocations.Select(__ => __.Location))
+                                                {
+                                                    item4.TotalStayCount = item4.TotalStayCount + 1;
+                                                    item4.TotalTimeStay = item4.TotalTimeStay.Value + ((DateTimeOffset.Now.TimeOfDay - userPosition.TimeOfLastLocation)).Minutes;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                foreach (var item2 in item.PlanLocations)
+                                {
+                                    foreach (var item3 in item2.Location.BusinessHours.ToList())
+                                    {
+                                        if (IsInRange(item3.OpenTime, item3.CloseTime, DateTimeOffset.Now.TimeOfDay))
+                                        {
+                                            item2.Done = true;
+                                            _planService.UpdatePlanLocation(item2);
+                                            foreach (var item4 in item.PlanLocations.Select(__ => __.Location))
+                                            {
+                                                item4.TotalStayCount = item4.TotalStayCount + 1;
+                                                item4.TotalTimeStay = item4.TotalTimeStay.Value + ((DateTimeOffset.Now.TimeOfDay - userPosition.TimeOfLastLocation)).Minutes;
+                                            }
                                         }
                                     }
                                 }
@@ -511,23 +761,24 @@ namespace API.ITSProject_2.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut, Authorize]
         public async Task<IHttpActionResult> Edit(EditLocationViewModels data)
         {
             try
             {
                 try
                 {
+                    if (!ModelState.IsValid)
+                        return BadRequest(ModelState);
+                    Location location = _locationService.Find(data.Id);
                     int userId = (await CurrentUser()).Id;
 
                     Photo primaryPhoto = ModelBuilder.ConvertToModels(data.PrimaryPhoto, userId);
                     IEnumerable<Photo> otherPhoto = ModelBuilder.ConvertToModels(data.OtherPhotos.AsEnumerable(), userId);
 
-                    Location location = ModelBuilder.ConvertToModels(data);
-
                     IEnumerable<BusinessHour> businessHours = ModelBuilder.ConvertToModels(data.Days);
 
-                    bool result = await _locationService.Create(location, primaryPhoto, otherPhoto, businessHours, data.Tags);
+                    bool result = _locationService.Edit(location, primaryPhoto, otherPhoto, businessHours, data.Tags);
 
                     if (result)
                     {
@@ -543,7 +794,6 @@ namespace API.ITSProject_2.Controllers
 
                     return InternalServerError(ex);
                 }
-                return Ok();
             }
             catch (Exception ex)
             {

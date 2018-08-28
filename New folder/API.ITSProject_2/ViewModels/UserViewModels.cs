@@ -8,6 +8,7 @@
     public class UpdateUserViewModels
     {
         [DataMember]
+        [Required(ErrorMessage = "Tên không được trống")]
         public string Name { get; set; }
 
         [DataMember]

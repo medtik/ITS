@@ -26,6 +26,8 @@
         private readonly IRepository<Creator> _creatorRepository;
         private readonly IRepository<Group> _grouprRepository;
         private readonly IRepository<Review> _reviewRepository;
+        private readonly IRepository<Report> _reportRepository;
+        private readonly IRepository<ChangeRequest> _changeRequestRepository;
 
         public LocationService(ILoggingService loggingService, IUnitOfWork unitOfWork) : base(loggingService, unitOfWork)
         {
@@ -39,6 +41,8 @@
             _reviewRepository = unitOfWork.GetRepository<Review>();
             _creatorRepository = unitOfWork.GetRepository<Creator>();
             _grouprRepository = unitOfWork.GetRepository<Group>();
+            _changeRequestRepository = unitOfWork.GetRepository<ChangeRequest>();
+            _reportRepository = unitOfWork.GetRepository<Report>();
         }
 
         public bool AcceptStatusLocationSuggestion(int suggestionId)
@@ -345,6 +349,57 @@
             }
 
             return locations ?? Enumerable.Empty<Location>().AsQueryable();
+        }
+
+        public bool CreateChangeRequest(ChangeRequest cr)
+        {
+            try
+            {
+                using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew))
+                {
+                    _changeRequestRepository.Create(cr);
+                    _unitOfWork.SaveChanges();
+
+                    scope.Complete();
+                    return true;
+                }//end scope
+            }
+            catch (Exception ex)
+            {
+                _loggingService.Write(GetType().Name, nameof(CreateChangeRequest), ex);
+                return false;
+            }
+        }
+
+        public bool CreateReport(Report report)
+        {
+            try
+            {
+                using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew))
+                {
+                    _reportRepository.Create(report);
+                    _unitOfWork.SaveChanges();
+
+                    scope.Complete();
+                    return true;
+                }//end scope
+            }
+            catch (Exception ex)
+            {
+                _loggingService.Write(GetType().Name, nameof(CreateChangeRequest), ex);
+                return false;
+            }
+        }
+
+        public ChangeRequest FindChangeRequest(int id)
+        {
+            return _changeRequestRepository.Get(_ => _.Id == id);
+        }
+
+        public bool UpdateChageRequest(ChangeRequest cr)
+        {
+            _unitOfWork.SaveChanges();
+            return true;
         }
     }
 }

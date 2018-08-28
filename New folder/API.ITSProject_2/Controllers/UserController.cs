@@ -262,12 +262,24 @@
         #endregion
 
         #region Put
+        public static int DateDiffYears(DateTimeOffset startDate, DateTimeOffset endDate)
+        {
+            var yr = endDate.Year - startDate.Year - 1 +
+                     (endDate.Month >= startDate.Month && endDate.Day >= startDate.Day ? 1 : 0);
+            return yr < 0 ? 0 : yr;
+        }
+
         [HttpPut]
         [Authorize, Route("api/User/Update")]
         public async Task<IHttpActionResult> UpdateUser(UpdateUserViewModels viewModels)
         {
             try
             {
+                var year = DateDiffYears(viewModels.Birthdate, DateTimeOffset.Now);
+                if (year <= 10)
+                    ModelState.AddModelError(string.Empty, "Ngày sinh phải cách hiện tại 10 năm");
+                if (!ModelState.IsValid)
+                    return BadRequest();
                 User userInfo = await CurrentUser();
                 Account accountInfo = (await _identityService.FindAccount(User.Identity.GetUserId())).Data as Account;
 

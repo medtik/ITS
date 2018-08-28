@@ -9,6 +9,16 @@
 
     public interface ILocationService
     {
+        bool Update(Location location);
+
+        ChangeRequest FindChangeRequest(int id);
+
+        bool UpdateChageRequest(ChangeRequest cr);
+
+        bool CreateReport(Report report);
+
+        bool CreateChangeRequest(ChangeRequest cr);
+
         IEnumerable<LocationSuggestion> GetLocationSuggestion(int userId);
 
         bool AddReview(Review review);
