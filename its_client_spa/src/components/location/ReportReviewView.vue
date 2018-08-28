@@ -25,7 +25,8 @@
 <!--TODO show review detail on top-->
 <script>
   export default {
-    name: "ReportReviewView"
+    name: "ReportReviewView",
+
   }
 </script>
 

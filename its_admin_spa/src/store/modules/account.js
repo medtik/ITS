@@ -66,6 +66,7 @@ export default {
       return mockShell(() => {
         return _accounts.find(acc => payload.id == acc.id);
       },true);
+
     },
     update(context, payload) {
       return mockShell(() => {
@@ -103,6 +104,9 @@ export default {
         account.ban = false;
         return account;
       })
+    },
+    upgradeAccount(){
+
     }
   }
 };

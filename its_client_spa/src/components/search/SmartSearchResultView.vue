@@ -130,6 +130,7 @@
     },
     mounted(){
       this.selectedAnswers = this.$store.state.previousSearchAnswers;
+      this.selectedAreaId = this.$store.state.previousSearchAreaId;
     },
     methods: {
       onCreateSuggestedPlanClick() {
