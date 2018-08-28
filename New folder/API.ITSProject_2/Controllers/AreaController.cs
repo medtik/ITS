@@ -189,7 +189,7 @@
             {
                 if (!ModelState.IsValid)
                 {
-                    return BadRequest();
+                    return BadRequest(ModelState);
                 }
                 var questionIds = data.QuestionIds ?? new List<int>();
                 var questionList = _questionService.Search(_ => questionIds.Contains(_.Id)).ToList();

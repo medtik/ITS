@@ -553,7 +553,7 @@ namespace API.ITSProject_2.Controllers
 
                     foreach (var item in listBusinessHour)
                     {
-                        if (item.From == new TimeSpan(0, 0, 0) && item.To == new TimeSpan(0, 0, 0))
+                        if (item.From == new TimeSpan(0, 0, 1) && item.To == new TimeSpan(0, 0, 1))
                         {
                             item.To = new TimeSpan(23, 59, 59);
                         }//00:00 - 00:00 là mở cả ngày
@@ -609,7 +609,7 @@ namespace API.ITSProject_2.Controllers
                     return Ok();
                 }
                 else
-                    return BadRequest();
+                    return BadRequest(ModelState);
             }
             catch (Exception ex)
             {

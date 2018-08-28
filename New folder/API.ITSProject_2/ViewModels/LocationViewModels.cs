@@ -206,6 +206,7 @@
         public string[] OtherPhotos { get; set; }//base64
 
         [DataMember]
+        [Required(ErrorMessage = "Vui lòng điền ngày/giờ kinh doanh")]
         public ICollection<BusinessHourViewModels> Days { get; set; }
 
         [DataMember]
