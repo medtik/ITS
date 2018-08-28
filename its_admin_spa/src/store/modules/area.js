@@ -101,13 +101,29 @@ export default {
     },
     getById(context, payload) {
       // get /api/Area/Details
+      const {
+        id
+      } = payload;
 
-      axiosInstance.get();
+      return new Promise((resolve, reject) => {
+        axiosInstance.get('api/Area/Details', {
+          params: {
+            id
+          }
+        })
+          .then(value => {
+            resolve(value.data);
+          })
+          .catch(reason => {
+            reject(reason.response);
+          })
+      });
+
     },
     create(context, payload) {
-     return new Promise((resolve, reject) => {
-       // axiosInstance.post();
-     })
+      return new Promise((resolve, reject) => {
+        // axiosInstance.post();
+      })
     },
     update(context, payload) {
       return mockShell(() => {

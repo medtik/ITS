@@ -19,7 +19,7 @@
 
   export default {
     name: "LocationBusinessHoursInput",
-    components:{
+    components: {
       BusinessHoursInput
     },
     props: [
@@ -28,14 +28,16 @@
     ],
     data() {
       return {
-        businessHours:[]
+        businessHours: []
       }
     },
     watch: {
       value: {
         immediate: true,
-        handler (val, oldVal) {
-          this.businessHours = val;
+        handler(val, oldVal) {
+          if (!!val) {
+            this.businessHours = val;
+          }
         }
       }
     },
@@ -43,12 +45,12 @@
       onInputChange() {
         this.$emit('input', this.businessHours);
       },
-      onAddBusinessHoursClick(){
+      onAddBusinessHoursClick() {
         this.businessHours.push({});
         this.onInputChange();
       },
-      onRemove(val){
-        this.businessHours = _.filter(this.businessHours, (value, index)=>{
+      onRemove(val) {
+        this.businessHours = _.filter(this.businessHours, (value, index) => {
           return index != val;
         });
       }

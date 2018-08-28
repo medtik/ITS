@@ -4,8 +4,8 @@ import moment from "moment";
 import Raven from "raven-js"
 import firebase from "firebase";
 
-const root = "https://itssolutiong9.azurewebsites.net/";
-// const root = "http://localhost:59728/";
+// const root = "https://itssolutiong9.azurewebsites.net/";
+const root = "http://localhost:59728/";
 
 var config = {
   apiKey: "AIzaSyCouzeKTc_xf3r7QJZjCjyEr7rceMB7rgA",

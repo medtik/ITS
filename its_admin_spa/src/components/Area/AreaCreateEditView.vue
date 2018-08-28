@@ -48,6 +48,19 @@
                 </td>
               </template>
             </v-data-table>
+            <!--<v-flex>-->
+              <!--<v-btn v-if="mode == 'create'" color="primary">-->
+                <!--Tạo-->
+              <!--</v-btn>-->
+
+              <!--<v-btn v-if="mode == 'edit'" color="success">-->
+                <!--Xác nhận-->
+              <!--</v-btn>-->
+
+              <!--<v-btn color="secondary">-->
+                <!--Hủy-->
+              <!--</v-btn>-->
+            <!--</v-flex>-->
           </v-flex>
         </v-layout>
       </v-flex>

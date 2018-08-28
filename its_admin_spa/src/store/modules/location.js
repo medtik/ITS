@@ -213,7 +213,7 @@ export default {
         "category": category,
         "isVerified": isVerifiedInput,
         "isClosed": isCloseInput,
-        "tags": _.map(tagsInput, 'id');,
+        "tags": _.map(tagsInput, 'id'),
         "reviews": reviewsInput,
         "primaryPhoto": primaryPhotoInput,
         "otherPhotos": secondaryPhotos,
@@ -228,7 +228,8 @@ export default {
           .catch(reason => {
             let errors = reason;
             if(reason.status == 400){
-              errors = reason.response.data;
+              // {"message":"The request is invalid.","modelState":{"data.Name":["Tên không được trống"],"data.Address":["Địa chỉ không được trống"],"data.Longitude":["Kinh độ không được trống"],"data.Latitude":["Vĩ độ không được trống"],"data.AreaId":["Khu vực không được trống"],"data.Category":["Thể loại không được trống"]}}
+              errors = reason.response.data.modelState;
             }
             reject(errors)
           })
