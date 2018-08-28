@@ -593,6 +593,7 @@
         public ICollection<BusinessHour> ConvertToModels(IEnumerable<BusinessHourViewModels> data)
         {
             ICollection<BusinessHour> businessHours = new List<BusinessHour>();
+            data = data ?? new List<BusinessHourViewModels>();
             data.ToList().ForEach(_ => businessHours.Add(ConvertToModels(_)));
 
             return businessHours;
