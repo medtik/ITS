@@ -118,6 +118,7 @@
             }
           }
         },
+        renderer:undefined,
         mapStyles: [
           {
             featureType: 'poi.business',
@@ -195,7 +196,6 @@
         lat,
         locationId
       } = this.$route.query;
-
       this.current.lng = Number(long);
       this.current.lat = Number(lat);
       this.locationId = locationId;
@@ -206,6 +206,7 @@
         lat: this.current.lat,
         radius: 10000
       });
+      this.renderer = new this.google.maps.DirectionsRenderer();
     },
     methods: {
       moveMapTo(long, lat) {
@@ -239,10 +240,9 @@
         };
         const service = new this.google.maps.DirectionsService();
         service.route(req, (result, status) => {
-          let renderer = new this.google.maps.DirectionsRenderer();
           this.mapRef.then(map => {
-            renderer.setDirections(result);
-            renderer.setMap(map);
+            this.renderer.setDirections(result);
+            this.renderer.setMap(map);
           });
         })
       },
