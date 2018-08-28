@@ -146,11 +146,24 @@
 
                 string baseAddress = "http://" + HttpContext.Current.Request.Url.Authority;
                 client.BaseAddress = new Uri(baseAddress);
-                HttpContent content = new FormUrlEncodedContent(new List<KeyValuePair<string, string>>() {
+                HttpContent content = null;
+                if (model.email == "None")
+                {
+                    content = new FormUrlEncodedContent(new List<KeyValuePair<string, string>>() {
                         new KeyValuePair<string, string>("username", model.uid),
                         new KeyValuePair<string, string>("password", "abcdefghijklmnopqrstuvwxyz"),
                         new KeyValuePair<string, string>("grant_type", "password")
                     });
+                }
+                else
+                {
+                    content = new FormUrlEncodedContent(new List<KeyValuePair<string, string>>() {
+                        new KeyValuePair<string, string>("username", model.email),
+                        new KeyValuePair<string, string>("password", "abcdefghijklmnopqrstuvwxyz"),
+                        new KeyValuePair<string, string>("grant_type", "password")
+                    });
+                }
+                    
                 HttpResponseMessage response = await client.PostAsync("token", content);
                 string message = await response.Content.ReadAsStringAsync();
                 //System.Uri.UnescapeDataString(message);
