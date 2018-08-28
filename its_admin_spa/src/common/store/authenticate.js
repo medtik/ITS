@@ -18,8 +18,8 @@ var config = {
 
 firebase.initializeApp(config);
 
-var googleProvider = new firebase.auth.GoogleAuthProvider();
-var facebookProvider = new firebase.auth.FacebookAuthProvider();
+const googleProvider = new firebase.auth.GoogleAuthProvider();
+const facebookProvider = new firebase.auth.FacebookAuthProvider();
 
 
 export default {
@@ -114,57 +114,93 @@ export default {
         };
       });
     },
-    signinFacebook() {
+    signinFacebook(context) {
       // post /RegisterExternal
-      firebase.auth().signInWithPopup(facebookProvider).then(function (result) {
-        // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-        var token = result.credential.accessToken;
-        // The signed-in user info.
-        var user = result.user;
+      return new Promise((resolve, reject) => {
+        firebase.auth().signInWithPopup(facebookProvider).then(function (result) {
+          // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+          var token = result.credential.accessToken;
+          // The signed-in user info.
+          var user = result.user;
 
-        let data = {
-          "email": user.email,
-          "photoUrl": user.photoUrl,
-          "displayName": user.displayName,
-          "uid": user.uid,
-          "provider": "Facebook",
-          "externalAccessToken": token
-        };
+          let data = {
+            "email": user.email,
+            "photoUrl": user.photoUrl,
+            "displayName": user.displayName,
+            "uid": user.uid,
+            "provider": "Facebook",
+            "externalAccessToken": token
+          };
 
+          Raven.captureMessage("signinFacebook", {
+            extra: data
+          });
 
-        axiosInstance.post('RegisterExternal', data);
+          axiosInstance.post('RegisterExternal', data)
+            .then(value => {
+              context.dispatch('setExternalLoginToken', {data: value.data})
+                .then(value => {
+                  resolve()
+                })
+            })
 
-        Raven.captureMessage("signinFacebook", {
-          extra: data
+        }).catch(function (error) {
+          Raven.captureException(error);
+          reject();
         });
-
-      }).catch(function (error) {
-        Raven.captureException(error);
-      });
+      })
     },
-    signinGoogle() {
+    signinGoogle(context) {
       // post /RegisterExternal
-      firebase.auth().signInWithPopup(googleProvider).then(function (result) {
-        // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-        var token = result.credential.accessToken;
-        var user = result.user;
+      return new Promise((resolve, reject) => {
+        firebase.auth().signInWithPopup(googleProvider)
+          .then(function (result) {
+            // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+            var token = result.credential.accessToken;
+            var user = result.user;
 
-        let data = {
-          "email": user.email,
-          "photoUrl": user.photoUrl,
-          "displayName": user.displayName,
-          "uid": user.uid,
-          "provider": "Google",
-          "externalAccessToken": token
-        };
+            let data = {
+              "email": user.email,
+              "photoUrl": user.photoUrl,
+              "displayName": user.displayName,
+              "uid": user.uid,
+              "provider": "Google",
+              "externalAccessToken": token
+            };
 
-        axiosInstance.post('RegisterExternal', data);
-        Raven.captureMessage("signinGoogle", {
-          extra: data
-        });
-        // ...
-      }).catch(function (error) {
-        Raven.captureException(error);
+            Raven.captureMessage("signinGoogle", {
+              extra: data
+            });
+            axiosInstance.post('RegisterExternal', data)
+              .then(value => {
+                context.dispatch('setExternalLoginToken', {data: value.data})
+                  .then(value => {
+                    resolve()
+                  })
+              })
+          })
+          .catch(function (error) {
+            Raven.captureException(error);
+            reject();
+          })
+      })
+    },
+    setExternalLoginToken(context, payload) {
+      const {
+        data
+      } = payload;
+      const obj = JSON.parse(data);
+      context.commit('setToken',{token: obj});
+      context.dispatch('user/fetchCurrentInfo', {}, {root: true});
+      if (!!context.rootState.user.mobileToken) {
+        context.dispatch('user/updateMobileToken', {}, {root: true});
+      }
+      Raven.captureBreadcrumb({
+        message: 'signin',
+        category: 'methods',
+        data: {
+          obj
+        }
       });
     },
     logout(context) {

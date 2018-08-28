@@ -22,8 +22,8 @@ Authorization: {{token}}
     178
   ],
   "name": "test suggested plan",
-  "startDate": "2018-08-21",
-  "endDate": "2018-08-21",
+  "startDate": "2018-08-31",
+  "endDate": "2018-09-1",
   "areaId": 2
 }
 

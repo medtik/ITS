@@ -107,7 +107,7 @@ export default new Router({
     },
     {
       path: '/location/map',
-      name: 'LocationMap',
+      name: 'NearbyOnMap',
       component: LocationOnMapView
     },
     {
