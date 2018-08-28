@@ -198,6 +198,7 @@ export default {
         secondaryPhotos,
       } = payload;
 
+
       const data = {
         "id": id,
         "name": nameInput,
@@ -212,7 +213,7 @@ export default {
         "category": category,
         "isVerified": isVerifiedInput,
         "isClosed": isCloseInput,
-        "tags": tagsInput,
+        "tags": _.map(tagsInput, 'id');,
         "reviews": reviewsInput,
         "primaryPhoto": primaryPhotoInput,
         "otherPhotos": secondaryPhotos,
@@ -228,8 +229,6 @@ export default {
             let errors = reason;
             if(reason.status == 400){
               errors = reason.response.data;
-
-
             }
             reject(errors)
           })
