@@ -97,8 +97,11 @@
       })
     },
     watch: {
-      value(val) {
-        this.selected = val;
+      value: {
+        immediate: true,
+        handler (val, oldVal) {
+          this.selected = val;
+        }
       },
       dialog(val) {
         if (val && !this.items) {
