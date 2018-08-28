@@ -44,6 +44,7 @@
 <script>
   import _ from "lodash"
   import moment from "moment"
+
   export default {
     name: "BusinessHoursInput",
     props: ['readonly', 'value'],
@@ -70,9 +71,9 @@
       value: {
         immediate: true,
         handler(val, oldVal) {
-          let zeroTime = moment("00:00","HH:mm");
-          if (moment(val.from).isSame(zeroTime) &&
-            moment(val.to).isSame(zeroTime)) {
+          let zeroTime = moment("00:00", "HH:mm");
+          if (moment(val.from, "HH:mm").isSame(zeroTime) &&
+            moment(val.to, "HH:mm").isSame(zeroTime)) {
             this.allDayCheck = true;
           }
           this.input = val;
