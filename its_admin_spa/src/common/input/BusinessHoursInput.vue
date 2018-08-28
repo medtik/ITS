@@ -71,12 +71,14 @@
       value: {
         immediate: true,
         handler(val, oldVal) {
-          let zeroTime = moment("00:00", "HH:mm");
-          if (moment(val.from, "HH:mm").isSame(zeroTime) &&
-            moment(val.to, "HH:mm").isSame(zeroTime)) {
-            this.allDayCheck = true;
+          if(!!val){
+            let zeroTime = moment("00:00", "HH:mm");
+            if (moment(val.from, "HH:mm").isSame(zeroTime) &&
+              moment(val.to, "HH:mm").isSame(zeroTime)) {
+              this.allDayCheck = true;
+            }
+            this.input = val;
           }
-          this.input = val;
         }
       }
     },

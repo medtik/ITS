@@ -145,12 +145,14 @@ export default {
     },
     update(context, payload) {
       const {
+        id,
         name,
         questions
       } = payload;
 
       return new Promise((resolve, reject) => {
         axiosInstance.put('api/Area',{
+          id,
           name,
           questions: _.map(questions, "id")
         })

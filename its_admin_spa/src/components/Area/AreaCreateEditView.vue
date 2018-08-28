@@ -155,6 +155,7 @@
       },
       onEditBtnClick(){
         this.$store.dispatch('area/update',{
+          id: this.$route.query.id,
           name: this.nameInput,
           questions: this.choosenQuestions
         })

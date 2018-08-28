@@ -2,6 +2,7 @@
 using System.Device.Location;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -275,8 +276,8 @@ namespace Service.Implement.Entity
                 {
                     DateTimeOffset currentDate = plan.StartDate.AddDays(i);
                     Dictionary<NessecityType, Location> nessecityLocationMap;
-                    PolulateNecessityLocations(plan, locations, currentDate, out  nessecityLocationMap, i);
-                    
+                    PolulateNecessityLocations(plan, locations, currentDate, out nessecityLocationMap, i);
+
                     var locationsWithRouteList = await PolulateEntertainmentLocations(
                         plan,
                         locations,
@@ -642,6 +643,8 @@ namespace Service.Implement.Entity
                 Dictionary<NessecityType, Location> nessecityLocationMap)
         {
             var result = new List<KeyValuePair<JObject, KeyValuePair<Location, Location>>>();
+            var breakFastToLunchList = new List<KeyValuePair<JObject, KeyValuePair<Location, Location>>>();
+            var lunchToDinnerList = new List<KeyValuePair<JObject, KeyValuePair<Location, Location>>>();
             int[] locationIds = treeLocations.Select(location => location.Id).ToArray();
             List<Location> locationList = _locationRepository
                 .Search(location => locationIds.Contains(location.Id))
@@ -652,15 +655,15 @@ namespace Service.Implement.Entity
                 Location breakfast = _locationRepository.Get(
                     location => nessecityLocationMap[NessecityType.Breakfast].Id == location.Id
                 );
-                ;
+
                 Location lunch = _locationRepository.Get(
                     location => nessecityLocationMap[NessecityType.Lunch].Id == location.Id
                 );
-                ;
+
                 Location dinner = _locationRepository.Get(
                     location => nessecityLocationMap[NessecityType.Dinner].Id == location.Id
                 );
-                ;
+
 
                 KeyValuePair<Location, NessecityType> currentMealPair;
                 KeyValuePair<Location, NessecityType> nextMealPair;
@@ -677,7 +680,7 @@ namespace Service.Implement.Entity
                         break;
                     case NessecityType.Lunch:
                         currentMealPair = new KeyValuePair<Location, NessecityType>(
-                            breakfast, NessecityType.Lunch
+                            lunch, NessecityType.Lunch
                         );
                         nextMealPair = new KeyValuePair<Location, NessecityType>(
                             dinner, NessecityType.Dinner
@@ -730,11 +733,44 @@ namespace Service.Implement.Entity
 
                         treeLocations.RemoveAll(tmpLocation =>
                             tmpLocation.Id == fromLocation.Id || tmpLocation.Id == toLocation.Id);
+
+                        result.Add(locationWithRoute);
                     }
 
-                    result.AddRange(locationWithRouteList);
+//                    result.AddRange(locationWithRouteList);
+//
+//                    switch (currentMealPair.Value)
+//                    {
+//                        case NessecityType.Breakfast:
+//                            breakFastToLunchList = locationWithRouteList;
+//                            break;
+//                        case NessecityType.Lunch:
+//                            lunchToDinnerList = locationWithRouteList;
+//                            break;
+//                    }
                 }
             }
+
+//            JObject responseJObject =
+//                await FetchGoogleRoute(breakFastToLunchList.Last().Value.Value,
+//                    lunchToDinnerList.First().Value.Key,
+//                    null);
+//
+//            JObject leg = responseJObject["routes"][0]["legs"][0].Value<JObject>();
+//
+//            KeyValuePair<JObject, KeyValuePair<Location, Location>> link;
+//
+//            link = new KeyValuePair<JObject, KeyValuePair<Location, Location>>(
+//                leg,
+//                new KeyValuePair<Location, Location>(
+//                    breakFastToLunchList.Last().Value.Value,
+//                    lunchToDinnerList.First().Value.Key
+//                ));
+//
+//            result.AddRange(breakFastToLunchList);
+//            result.Add(link);
+//            result.AddRange(lunchToDinnerList);
+
 
             return result;
         }
@@ -822,14 +858,13 @@ namespace Service.Implement.Entity
 
                     totalTime = totalTime.Add(travelTime + stayTime);
 
-                    if (departureTime.Add(totalTime) < arriveTime)
+                    if (departureTime.Add(totalTime) >= arriveTime)
                     {
-                        result.Add(keyValuePair);
+                        return result;
                     }
                     else
                     {
-                        enough = true;
-                        break;
+                        result.Add(keyValuePair);
                     }
                 }
             }
@@ -840,7 +875,7 @@ namespace Service.Implement.Entity
 
             #endregion
 
-            return enough ? result : null;
+            return null;
         }
 
         private List<KeyValuePair<JObject, KeyValuePair<Location, Location>>> MapLegsAndLocationPair(
@@ -851,53 +886,23 @@ namespace Service.Implement.Entity
             List<Location> middle)
         {
             var result = new List<KeyValuePair<JObject, KeyValuePair<Location, Location>>>();
-            for (int i = 0; i < legs.Count; i++)
+
+            var previousLocation = origin;
+            var previousLeg = legs[0].Value<JObject>();
+            
+            for (int i = 1; i < legs.Count; i++)
             {
-                var leg = legs[i].Value<JObject>();
+                var currentLeg = legs[i].Value<JObject>();
+                var currentLocation = middle[waypointOrder[i-1].Value<int>()];
 
-                KeyValuePair<Location, Location> fromToPair;
-                if (i == 0)
-                {
-                    if (legs.Count > 1)
-                    {
-                        leg.Add("index", waypointOrder.First.Value<int>());
-                        fromToPair = new KeyValuePair<Location, Location>(
-                            origin,
-                            middle[waypointOrder.First.Value<int>()]
-                        );
-                    }
-                    else
-                    {
-                        leg.Add("index", 0);
-                        fromToPair = new KeyValuePair<Location, Location>(
-                            origin,
-                            destination
-                        );
-                    }
-                }
-                else if (i == legs.Count - 1)
-                {
-                    leg.Add("index", waypointOrder.Last.Value<int>() + 1);
-                    fromToPair = new KeyValuePair<Location, Location>(
-                        middle[waypointOrder.Last.Value<int>()],
-                        destination
-                    );
-                }
-                else
-                {
-                    leg.Add("index", waypointOrder[i].Value<int>());
-                    fromToPair = new KeyValuePair<Location, Location>(
-                        middle[waypointOrder[i - 1].Value<int>()],
-                        middle[waypointOrder[i].Value<int>()]
-                    );
-                }
-
-                result.Add(
-                    new KeyValuePair<JObject, KeyValuePair<Location, Location>>(
-                        leg,
-                        fromToPair
-                    )
-                );
+                result.Add(new KeyValuePair<JObject, KeyValuePair<Location, Location>>(
+                    previousLeg,
+                    new KeyValuePair<Location, Location>(previousLocation, currentLocation)
+                ));
+                
+                
+                previousLeg = currentLeg;
+                previousLocation = currentLocation;
             }
 
 //            result.Sort((pair1, pair2) => pair1.Key["index"].Value<int>().CompareTo(pair2.Key["index"].Value<int>()));
@@ -987,7 +992,7 @@ namespace Service.Implement.Entity
                     ["query"] = query.ToString(),
                     ["url"] = uriBuilder.ToString(),
                 });
-            
+
             HttpResponseMessage response = await _client.GetAsync(uriBuilder.ToString());
             response.EnsureSuccessStatusCode();
             string responseBody = await response.Content.ReadAsStringAsync();

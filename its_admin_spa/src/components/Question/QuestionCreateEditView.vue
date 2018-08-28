@@ -11,7 +11,6 @@
             <v-form :ref="refs.question" lazy-validation>
               <v-text-field label="Nội dung câu hỏi"
                             v-model="textInput"
-                            :rules="[rules.questionContent]"
               ></v-text-field>
               <v-combobox
                 v-model="categoryInput"
@@ -36,7 +35,6 @@
                           <v-text-field
                             label="Câu trả lời"
                             v-model="answerTextInput"
-                            :rules="[rules.answerContent,answerDuplicateRule]"
                           ></v-text-field>
                           <v-btn icon flat color="green"
                                  v-on:click="onAddAnswerClick">
@@ -229,10 +227,6 @@
       validate() {
         return this.$refs[this.refs.question].validate();
       },
-      validateNoTagsAnswer() {
-        //tags,text
-
-      },
       updateCategories() {
         this.loading.categories = true;
         this.$store.dispatch('question/getCategories', {
@@ -244,7 +238,7 @@
           })
       },
       fillInputs() {
-        this.textInput = this.question.text;
+        this.textInput = this.question.content;
         this.categoryInput = this.question.category;
         this.answersInput = this.question.answers;
         return Promise.resolve();
