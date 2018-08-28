@@ -7,16 +7,16 @@
       <v-toolbar color="light-blue" dark fixed>
         <v-spacer></v-spacer>
         <v-toolbar-items>
-          <v-btn flat @click="setMapToMyLocation">
-            <v-icon>
-              my_location
-            </v-icon>
-          </v-btn>
-          <v-btn flat @click="getDirection">
-            <v-icon>
-              navigation
-            </v-icon>
-          </v-btn>
+          <!--<v-btn flat @click="setMapToMyLocation">-->
+          <!--<v-icon>-->
+          <!--my_location-->
+          <!--</v-icon>-->
+          <!--</v-btn>-->
+          <!--<v-btn flat @click="getDirection">-->
+          <!--<v-icon>-->
+          <!--navigation-->
+          <!--</v-icon>-->
+          <!--</v-btn>-->
           <v-btn flat
                  :style="{opacity: toggle.restaurant ? 1 : 0.5}"
                  @click="toggle.restaurant = !toggle.restaurant">
@@ -64,7 +64,15 @@
           :opened="infoWindow.open"
           @closeclick="infoWindow.open = false"
         >
-          <LocationCard v-bind="infoWindow.location"/>
+          <v-layout column>
+            <LocationCard v-bind="infoWindow.location"/>
+            <v-btn flat @click="getDirection(current, infoWindow.pos)" block>
+              <v-icon>
+                navigation
+              </v-icon>
+            </v-btn>
+          </v-layout>
+
         </GmapInfoWindow>
       </GmapMap>
     </v-container>
@@ -166,7 +174,7 @@
         // type: 'restaurant',
         // location: {name: 'restaurant abc', rating: 3.2, id: 1}
         return _(this.nearbyLocations)
-          .filter(location =>{
+          .filter(location => {
             return location.id != this.locationId
           })
           .map(location => {
