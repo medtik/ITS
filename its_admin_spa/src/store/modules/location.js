@@ -140,6 +140,10 @@ export default {
           }
         });
 
+        if(formatted.phoneNumber == ""){
+          formatted.phoneNumber = undefined;
+        }
+
         console.debug("createlocation/formatted", formatted);
 
         axiosInstance.post('api/location', formatted)

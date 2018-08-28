@@ -100,9 +100,9 @@ export default {
       })
     },
     getById(context, payload) {
-      return mockShell(() => {
-        return _areas.find(item => item.id == payload.id);
-      }, true)
+      // get /api/Area/Details
+
+      axiosInstance.get();
     },
     create(context, payload) {
      return new Promise((resolve, reject) => {
@@ -114,7 +114,7 @@ export default {
 
       })
     },
-    delete(context, payload) {
+    delete(contlext, payload) {
       return mockShell(() => {
         return payload;
       })
