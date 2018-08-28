@@ -30,7 +30,9 @@ export default {
     loading: {
       areas: true,
       detailedArea: true,
-      featuredAreas: false
+      featuredAreas: false,
+      create: false,
+      edit: false,
     },
   },
   getters: {
@@ -100,13 +102,13 @@ export default {
       })
     },
     getById(context, payload) {
-      // get /api/Area/Details
+      // get /api/Area/DetailsAdmin
       const {
         id
       } = payload;
 
       return new Promise((resolve, reject) => {
-        axiosInstance.get('api/Area/Details', {
+        axiosInstance.get('api/Area/DetailsAdmin', {
           params: {
             id
           }
@@ -124,28 +126,40 @@ export default {
       // post /api/Area
 
       const {
-        content,
+        name,
         questions
       } = payload;
 
       return new Promise((resolve, reject) => {
        axiosInstance.post('api/Area',{
-         content,
+         name,
          questions: _.map(questions, "id")
        })
+         .then(value =>{
+           resolve(value.data);
+         })
+         .catch(reason => {
+           reject(reason.response);
+         })
      })
     },
     update(context, payload) {
       const {
-        content,
+        name,
         questions
       } = payload;
 
       return new Promise((resolve, reject) => {
         axiosInstance.put('api/Area',{
-          content,
+          name,
           questions: _.map(questions, "id")
         })
+          .then(value =>{
+            resolve(value.data);
+          })
+          .catch(reason => {
+            reject(reason.response);
+          })
       })
     },
     delete(contlext, payload) {

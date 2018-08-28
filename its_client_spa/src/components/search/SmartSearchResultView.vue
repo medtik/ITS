@@ -49,13 +49,13 @@
             </template>
           </LocationFullWidth>
         </v-flex>
-        <v-flex>
-          <v-btn block flat color="secondary">
-            Xem thêm
-            &nbsp;
-            <v-icon small>fas fa-angle-down</v-icon>
-          </v-btn>
-        </v-flex>
+        <!--<v-flex>-->
+          <!--<v-btn block flat color="secondary">-->
+            <!--Xem thêm-->
+            <!--&nbsp;-->
+            <!--<v-icon small>fas fa-angle-down</v-icon>-->
+          <!--</v-btn>-->
+        <!--</v-flex>-->
       </v-layout>
       <v-flex style="height: 10vh">
         <!--Holder-->

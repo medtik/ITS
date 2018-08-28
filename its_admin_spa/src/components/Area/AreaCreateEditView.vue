@@ -149,12 +149,18 @@
       },
       onCreateBtnClick(){
         this.$store.dispatch('area/create', {
-          content,
-          choosenQuestions
+          name: this.nameInput,
+          questions: this.choosenQuestions
         })
       },
       onEditBtnClick(){
-        this.$store.dispatch('area/create')
+        this.$store.dispatch('area/update',{
+          name: this.nameInput,
+          questions: this.choosenQuestions
+        })
+      },
+      onCancel(){
+        this.$router.back();
       }
     }
   }
