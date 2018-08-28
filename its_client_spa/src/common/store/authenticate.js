@@ -124,10 +124,7 @@ export default {
           var user = result.user;
 
           let data = {
-            "email": user.email,
-            "photoUrl": user.photoUrl,
-            "displayName": user.displayName,
-            "uid": user.uid,
+            ...user,
             "provider": "Facebook",
             "externalAccessToken": token
           };
@@ -160,10 +157,7 @@ export default {
             var user = result.user;
 
             let data = {
-              "email": user.email,
-              "photoUrl": user.photoUrl,
-              "displayName": user.displayName,
-              "uid": user.uid,
+              ...user,
               "provider": "Google",
               "externalAccessToken": token
             };

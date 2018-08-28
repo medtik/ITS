@@ -57,8 +57,7 @@
     mounted() {
       this.$store.dispatch('location/fetchNearbyLocations', {
         long: this.long,
-        lat: this.lat,
-        radius: 5000
+        lat: this.lat
       });
     },
   }
