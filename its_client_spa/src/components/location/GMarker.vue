@@ -9,6 +9,8 @@
 </template>
 
 <script>
+  import formatter from "../../common/formatter";
+
   import {gmapApi} from 'vue2-google-maps'
 
   export default {
@@ -19,6 +21,7 @@
       'lat',
       'lng',
       'type',
+      'categories',
       'info',
       'iconWidth',
       'iconHeight',
@@ -37,17 +40,16 @@
           case "user":
             url = 'static/icons/baseline_person_pin_black_18dp.png';
             break;
-          case "restaurant":
+          case "Ăn uống":
             url = 'static/icons/baseline_local_dining_black_18dp.png';
             break;
-          case "hotel":
+          case "Nơi ở":
             url = 'static/icons/baseline_local_hotel_black_18dp.png';
             break;
-          case "activity":
+          default:
             url = 'static/icons/baseline_local_play_black_18dp.png';
             break;
-          default:
-            return;
+
         }
         return {
           size: this.google && new this.google.maps.Size(this.iconWidth, this.iconHeight),

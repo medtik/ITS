@@ -5,17 +5,7 @@
         <!--Holder-->
       </v-flex>
       <v-card id="form">
-        <v-card-title class="light-blue white--text">
-          <v-layout column>
-            <div class="display-2 font-weight-black font-italic text-xs-center">
-              ITS
-            </div>
-            <v-divider class="my-2"></v-divider>
-            <div class="title font-weight-medium text-xs-center">
-              Tìm kiếm thông minh
-            </div>
-          </v-layout>
-        </v-card-title>
+        <AppCardTitle/>
         <v-card-text id="card-content">
           <!--AREA-->
           <AreaSelect
@@ -98,6 +88,7 @@
   import {AreaInput} from "../../common/input/";
   import CreatePlanDialog from "../plan/CreatePlanDialog"
   import {mapGetters} from "vuex"
+  import {AppCardTitle} from "../../common/block";
 
 
   export default {
@@ -105,7 +96,8 @@
     components: {
       ParallaxHeader,
       AreaSelect: AreaInput,
-      CreatePlanDialog
+      CreatePlanDialog,
+      AppCardTitle
     },
     data() {
       return {

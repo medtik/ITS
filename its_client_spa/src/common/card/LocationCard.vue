@@ -3,7 +3,7 @@
     <v-card style="width: 300px; height: 100%">
       <v-layout column align-center>
         <v-card-media style="height: 200px">
-          <img :src='photo'/>
+          <img :src='coverPhoto'/>
         </v-card-media>
         <v-card-text>
           <v-layout column>
@@ -45,9 +45,17 @@
       'photo',
       'name',
       'address',
+      'primaryPhoto',
       'rating'
     ],
     computed: {
+      coverPhoto(){
+        if(this.primaryPhoto){
+          return this.primaryPhoto;
+        }else{
+          return this.photo;
+        }
+      },
       routerLink() {
         return {
           to: {

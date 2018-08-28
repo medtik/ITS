@@ -8,6 +8,8 @@
             item-value="id"
             :loading="loading"
             :dark="dark"
+            :error="!!error"
+            :error-messages="errorMessages"
             no-data-text="Chưa có dữ liệu"
   >
 
@@ -22,6 +24,8 @@
     props: [
       'dark',
       'readonly',
+      "error",
+      "errorMessages"
     ],
     mixins: [
       StoreBoundSelectMixin({

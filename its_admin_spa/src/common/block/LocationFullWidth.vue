@@ -69,6 +69,8 @@
 
 <script>
   import StarRating from "vue-star-rating";
+  import formatter from "../formatter";
+
   import {ListItemLayout} from "../../common/layout";
 
   export default {
@@ -99,26 +101,7 @@
           type = this.categories;
         }
 
-        switch (type) {
-          case 'Ăn uống':
-            return 'fas fa-utensils';
-          case 'Nơi ở':
-            return 'fas fa-hotel';
-          case 'Mua sắm':
-            return 'fas fa-shopping-cart';
-          case 'Giải trí':
-            return 'fas fa-gamepad';
-          case 'Địa điểm thăm quan':
-            return 'fas fa-university';
-          case 'Dịch vụ':
-            return 'fas fa-gas-pump';
-          case 'Tiền tệ':
-            return 'fas fa-credit-card';
-          case 'Trụ sở ban ngành':
-            return 'far fa-building';
-          case 'Trạm xăng':
-            return 'fas fa-gas-pump';
-        }
+        return formatter.getCategoryIcon(type);
       },
       locationName() {
         if (this.name) {

@@ -2,17 +2,7 @@
   <v-content id="content-holder">
     <v-layout justify-center align-center id="layout">
       <v-card id="form">
-        <v-card-title class="light-blue white--text">
-          <v-layout column>
-            <div class="display-2 font-weight-black font-italic text-xs-center">
-              ITS
-            </div>
-            <v-divider class="my-3"/>
-            <div class="title font-weight-medium text-xs-center">
-              Hệ thống hướng dẫn du lịch thông minh
-            </div>
-          </v-layout>
-        </v-card-title>
+        <AppCardTitle/>
         <v-card-text>
           <v-layout column>
             <v-flex>
@@ -65,14 +55,16 @@
                   <v-divider class="my-2"/>
                 </v-flex>
                 <v-flex xs12 lg6 d-flex class="justify-center">
-                  <v-btn color="red" dark @click="signinGoogle">
+                  <v-btn color="red" dark @click="signinGoogle"
+                  :loading="loading.googleBtn">
                     <v-icon>fab fa-google</v-icon>
                     &nbsp;&nbsp;
                     Đăng nhập Google
                   </v-btn>
                 </v-flex>
                 <v-flex xs12 lg6 d-flex class="justify-center">
-                  <v-btn color="primary" dark @click="signinFacebook">
+                  <v-btn color="primary" dark @click="signinFacebook"
+                         :loading="loading.facebookBtn">
                     <v-icon>fab fa-facebook</v-icon>
                     &nbsp;&nbsp;
                     Đăng nhập Facebook
@@ -124,13 +116,20 @@
 <script>
   import Raven from "raven-js";
   import {mapState, mapGetters} from "vuex";
+  import {AppCardTitle} from "../../common/block";
+
 
   export default {
     name: "SigninView",
+    components:{
+      AppCardTitle
+    },
     data() {
       return {
         loading: {
-          signinBtn: false
+          signinBtn: false,
+          googleBtn: false,
+          facebookBtn: false
         },
         //RECOVER PASSWORD
         recoverEmailInput: undefined,
@@ -194,10 +193,52 @@
           })
       },
       signinGoogle() {
+        this.loading.googleBtn = true;
         this.$store.dispatch('authenticate/signinGoogle')
+          .then(value => {
+            const returnRoute = this.$store.getters['signinContext'].returnRoute;
+            this.loading.googleBtn = false;
+            Raven.captureBreadcrumb({
+              message: 'signin',
+              category: 'methods',
+              data: {
+                returnRoute
+              }
+            });
+            if (returnRoute) {
+              this.$router.push({
+                ...returnRoute
+              });
+            } else {
+              this.$router.push({
+                name: 'Home'
+              });
+            }
+          })
       },
       signinFacebook() {
+        this.loading.facebookBtn = true;
         this.$store.dispatch('authenticate/signinFacebook')
+          .then(value =>{
+            this.loading.facebookBtn = false;
+            const returnRoute = this.$store.getters['signinContext'].returnRoute;
+            Raven.captureBreadcrumb({
+              message: 'signin',
+              category: 'methods',
+              data: {
+                returnRoute
+              }
+            });
+            if (returnRoute) {
+              this.$router.push({
+                ...returnRoute
+              });
+            } else {
+              this.$router.push({
+                name: 'Home'
+              });
+            }
+          })
       },
       onRecoverClick() {
         this.emailInputDialog = false;

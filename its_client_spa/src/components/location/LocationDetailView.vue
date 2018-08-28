@@ -115,7 +115,7 @@
           <v-layout column my-2>
             <v-divider></v-divider>
             <v-flex>
-              <v-btn block flat :to="{name: 'LocationMap', params:{id:location.id}}">
+              <v-btn block flat :to="nearbyOnMapLink">
                 <v-icon>navigation</v-icon>
                 &nbsp &nbsp Xem trên bản đồ
               </v-btn>
@@ -288,6 +288,16 @@
             title: `Các địa điểm gần ${this.location.name}`,
           }
         }
+      },
+      nearbyOnMapLink(){
+        return {
+          name: "NearbyOnMap",
+          query: {
+            long: this.location.long,
+            lat: this.location.lat,
+            locationId: this.locationId
+          }
+        }
       }
     },
     mounted() {
@@ -306,8 +316,6 @@
         this.chooseImageDialog = {
           dialog: false
         };
-
-
 
         if (photo) {
           this.$store.dispatch('location/addImage', {photo, locationId: this.location.id})

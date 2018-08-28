@@ -15,6 +15,7 @@
         <AreaInput
           :readonly="lockAreaId"
           v-model="input.areaId"
+          :error="formError.areaId" :errorMessages="formError.areaId"
         >
 
         </AreaInput>
@@ -56,7 +57,7 @@
 <script>
   import {mapGetters} from "vuex";
   import {AreaInput} from "../../common/input"
-
+import moment from "moment"
   export default {
     name: "PlanCreateView",
     components: {
@@ -74,7 +75,8 @@
         formError:{
           name: undefined,
           startDate: undefined,
-          endDate: undefined
+          endDate: undefined,
+          areaId: undefined
         },
         lockAreaId: false
       }
@@ -89,7 +91,7 @@
       },
       ...mapGetters('plan', {
         createLoading: 'createLoading',
-        editLoading: 'editLoading'
+        // editLoading: 'editLoading'
       })
     },
     mounted() {
@@ -132,7 +134,8 @@
 
         nameError = !this.input.name ? 'Tên không được trống' : undefined;
         startDateError = !this.input.startDate ? 'Ngày bắt đầu không được trống' : undefined;
-        endDateError = !this.input.endDate ? 'Ngày kết thúc không được trống được trống' : undefined;
+        endDateError = !this.input.endDate ? 'Ngày kết thúc không được trống' : undefined;
+        areaIdError = !this.input.areaId ? "Khu vực không được trống" : undefined;
 
         if (!!this.input.startDate) {
           const now = moment();
@@ -157,15 +160,17 @@
             endDateError = "Chuyến đi không quá 30 ngày";
           }
         }
+        console.log(this.input.startDate, !this.input.startDate, startDateError);
 
-        this.formError = {
-          name: nameError,
-          startDate: startDateError,
-          endDate: endDateError
-        };
+        this.formError.name = nameError;
+        this.formError.startDate = startDateError;
+        this.formError.endDate = endDateError;
+        this.formError.areaId = areaIdError;
+
         return nameError == undefined &&
           startDateError == undefined &&
-          endDateError == undefined
+          endDateError == undefined &&
+          areaIdError == undefined
       },
     }
   }

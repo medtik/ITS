@@ -16,6 +16,7 @@
     "moment": "^2.22.2",
     "passport": "^0.4.0",
     "vue": "^2.5.2",
+    "firebase": "^5.4.1",
     "raven-js": "^3.26.4",
     "react-native-webview-messaging": "^1.2.3",
     "vue-picture-input": "^2.1.6",
