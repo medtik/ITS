@@ -207,7 +207,7 @@
           isCloseInput: undefined,
           tagsInput: [],
           reviewsInput: [],
-          businessHoursInput: [],
+          businessHoursInput: undefined,
           primaryPhotoInput: undefined,
           secondaryPhotoInput: undefined,
           secondaryPhotos: undefined,

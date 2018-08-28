@@ -32,8 +32,11 @@
       }
     },
     watch: {
-      value: function (val) {
-        this.businessHours = val;
+      value: {
+        immediate: true,
+        handler (val, oldVal) {
+          this.businessHours = val;
+        }
       }
     },
     methods: {

@@ -22,7 +22,7 @@
             ></ChoosePlanDaySection>
 
             <v-flex my-3 v-if="!context.plan">
-              <v-btn @click="onCreateSuggestedPlanClick" color="primary" :loading="suggestedBtnLoading">
+              <v-btn @click="onCreateSuggestedPlanClick" color="primary" :loading="createSuggestedPlan">
                 Tạo chuyến đi tự động
               </v-btn>
             </v-flex>
@@ -74,6 +74,10 @@
       @close="createPlanDialog.dialog = false"
       @confirm="onCreateSuggestedPlanConfirm">
     </CreatePlanDialog>
+    <ErrorDialog
+      v-bind="errorDialog"
+      @close="errorDialog.dialog = false"
+    ></ErrorDialog>
   </v-content>
 </template>
 
@@ -82,6 +86,7 @@
     LocationFullWidth,
     PlanFullWidth,
     SuccessDialog,
+    ErrorDialog
   } from "../../common/block";
   import {
     MessageInputDialog
@@ -100,7 +105,8 @@
       SuccessDialog,
       ChoosePlanDaySection,
       MessageInputDialog,
-      CreatePlanDialog
+      CreatePlanDialog,
+      ErrorDialog
     },
     data() {
       return {
@@ -112,8 +118,9 @@
           areaId: undefined,
         },
 
-        loading:{
-          createSuggestedPlan: false
+        errorDialog:{
+          dialog: false,
+          message: ''
         },
 
         selectedAreaId: undefined,
@@ -125,7 +132,7 @@
         locations: 'searchResult'
       }),
       ...mapState('plan',{
-        suggestedBtnLoading: 'createSuggestedPlan'
+        createSuggestedPlan: state => state.loading.createSuggestedPlan
       })
     },
     mounted(){
@@ -149,7 +156,6 @@
         this.createPlanDialog = {
           dialog: false
         };
-        this.loading.createSuggestedPlan = true;
         this.$store.dispatch("plan/createSuggestedPlan", {
           name,
           startDate,
@@ -157,12 +163,17 @@
           areaId: this.selectedAreaId,
           answers: this.selectedAnswers
         }).then(value => {
-          this.loading.createSuggestedPlan = false;
           this.$router.push({
             name: 'PlanDetail',
             query: value
           })
         })
+          .catch(reason => {
+            this.errorDialog = {
+              dialog: true,
+              message: 'Bạn cần phải chọn "Nơi ở" và "Ăn uống" để đủ địa điểm cho chuyến đi tự động',
+            }
+          })
       },
     }
   }
