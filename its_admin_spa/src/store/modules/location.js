@@ -153,6 +153,7 @@ export default {
         nameInput,
         addressInput,
         descriptionInput,
+        phoneInput,
         longInput,
         latInput,
         websiteInput,
@@ -168,7 +169,7 @@ export default {
         secondaryPhotos,
       } = payload;
 
-      axiosInstance.patch('api/location', {
+      const data = {
         "id": id,
         "name": nameInput,
         "address": addressInput,
@@ -187,7 +188,25 @@ export default {
         "primaryPhoto": primaryPhotoInput,
         "otherPhotos": secondaryPhotos,
         "days": businessHoursInput
+      };
+
+      return new Promise((resolve, reject) => {
+        axiosInstance.put('api/location', data)
+          .then(value => {
+            resolve(value.data);
+          })
+          .catch(reason => {
+            let errors = reason;
+            if(reason.status == 400){
+              errors = reason.response.data;
+
+
+            }
+            reject(errors)
+          })
       });
+
+
     },
     delete(context, payload) {
       return new Promise((resolve, reject) => {

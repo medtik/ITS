@@ -49,14 +49,9 @@
                   label="Email"
                   v-model="input.emailInput"
                 />
-                <v-select
-                  :items="areas"
-                  :loading="loading.areas"
+                <AreaInput
                   v-model="input.areaInput"
-                  label="Khu vực"
-                  item-text="name"
-                  item-value="id"
-                />
+                ></AreaInput>
                 <LocationCategoryInput
                   v-model="input.category"
                 />
@@ -167,7 +162,8 @@
     TagsInput,
     LocationBusinessHoursInput,
     MultiPhotoInput,
-    LocationCategoryInput
+    LocationCategoryInput,
+    AreaInput
   } from "../../common/input";
 
   export default {
@@ -181,7 +177,8 @@
       LocationBusinessHoursInput,
       TagCreateEditDialog,
       MultiPhotoInput,
-      LocationCategoryInput
+      LocationCategoryInput,
+      AreaInput
     },
     data() {
       return {
