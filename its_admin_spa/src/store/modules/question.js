@@ -24,6 +24,20 @@ function mockShell(bodyFunc, noFail) {
 
 export default {
   namespaced: true,
+  state:{
+    allQuestions: [],
+    loading:{
+      allQuestions: false
+    }
+  },
+  mutations:{
+    setAllQuestions(state, payload){
+      state.allQuestions = payload.questions;
+    },
+    setLoading(state, payload) {
+      state.loading = _.assign(state.loading, payload.loading);
+    }
+  },
   actions: {
     getAll(context, payload) {
       return new Promise((resolve, reject) => {
@@ -32,6 +46,28 @@ export default {
         })
           .then(value => {
             resolve(formatter.getAllResponse(value.data));
+          })
+          .catch(reason => {
+            let error = [];
+
+            reject({
+              ...reason.response,
+              error
+            })
+          });
+      })
+    },
+    GetAllWithoutParams(context){
+      context.commit('setLoading', {loading: {allQuestions: true}});
+      return new Promise((resolve, reject) => {
+        axiosInstance.get('api/Question', {
+          params: {
+            pageSize: -1
+          }
+        })
+          .then(value => {
+            context.commit('setAllQuestions', {questions: value.data.currentList});
+            context.commit('setLoading', {loading: {allQuestions: false}});
           })
           .catch(reason => {
             let error = [];
