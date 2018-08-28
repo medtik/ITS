@@ -32,7 +32,7 @@
       }
     },
     watch: {
-      value(val, oldVal) {
+      value: function (val) {
         this.businessHours = val;
       }
     },

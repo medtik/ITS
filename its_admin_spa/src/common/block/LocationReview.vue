@@ -22,6 +22,7 @@
                         :show-rating="false"
             />
             <v-btn icon flat color="error"
+                   v-if="!editMode"
                    @click="onReport">
               <v-icon>flag</v-icon>
             </v-btn>

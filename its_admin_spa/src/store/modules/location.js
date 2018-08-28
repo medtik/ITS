@@ -80,7 +80,32 @@ export default {
           }
         })
           .then(value => {
-            resolve(value.data);
+            let formatted = _(value.data)
+              .mapKeys((value, key) => {
+                switch (key) {
+                  case 'phoneNumber':
+                    return 'phone';
+                  case 'emailAddress':
+                    return 'email';
+                  case 'areaName':
+                    return 'area';
+                  default:
+                    return key;
+                }
+              })
+              .mapValues((value,key)=>{
+                if(key == "area"){
+                  return Number(value);
+                }
+                switch (key) {
+                  case 'area':
+                    return Number(value);
+                  default:
+                    return value;
+                }
+              })
+              .value();
+            resolve(formatted);
           })
           .catch(reason => {
             Raven.captureException(reason);
