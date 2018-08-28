@@ -34,7 +34,7 @@
                             v-model="answerTextInput"
                           ></v-text-field>
                           <v-btn icon flat color="green"
-                                 v-on:click="onAddAnswerClick">
+                                 @click="onAddAnswerClick">
                             <v-icon>fas fa-plus</v-icon>
                           </v-btn>
                         </v-layout>
@@ -227,12 +227,13 @@
         return Promise.resolve();
       },
       onAddAnswerClick() {
-        if (this.answerTextInput) {
+        if (!!this.answerTextInput) {
           this.answersInput.push({
-            text: this.answerTextInput
+            content: this.answerTextInput,
+            tags: []
           });
           this.answerTextInput = '';
-          this.$refs[this.refs.answerText].reset()
+          // this.$refs[this.refs.answerText].reset()
         }
       },
       onCreateClick() {
@@ -260,7 +261,8 @@
         this.$store.dispatch('question/update', {
           id: this.questionId,
           text: this.textInput,
-          category: this.categoryInput
+          category: this.categoryInput,
+          answers: this.answersInput
         }).then(question => {
           this.success = {
             dialog: true,

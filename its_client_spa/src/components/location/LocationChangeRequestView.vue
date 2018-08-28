@@ -9,18 +9,23 @@
       <v-flex>
         <v-text-field
           label="Tên"
+          v-model="input.name"
         />
         <v-text-field
           label="Địa chỉ"
+          v-model="input.address"
         />
         <v-text-field
           label="Mô tả"
+          v-model="input.description"
         />
         <v-text-field
           label="Điện thoại"
+          v-model="input.phone"
         />
         <v-text-field
           label="Email"
+          v-model="input.email"
         />
         <v-flex my-2>
           <div class="subheading">
@@ -66,39 +71,18 @@
     data() {
       return {
         input: {
-          businessHours: {
-            day1: {
-              from: undefined,
-              to: undefined
-            },
-            day2: {
-              from: undefined,
-              to: undefined
-            },
-            day3: {
-              from: undefined,
-              to: undefined
-            },
-            day4: {
-              from: undefined,
-              to: undefined
-            },
-            day5: {
-              from: undefined,
-              to: undefined
-            },
-            day6: {
-              from: undefined,
-              to: undefined
-            },
-            day7: {
-              from: undefined,
-              to: undefined
-            },
-          },
-          tags: []
+          businessHours: [],
+          tags: [],
+          name,
+          address,
+          description,
+          phone,
+          email
         }
       }
+    },
+    methods: {
+
     }
   }
 </script>
