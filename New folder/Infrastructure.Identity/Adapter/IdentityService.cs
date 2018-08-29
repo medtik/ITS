@@ -168,6 +168,9 @@
                 if (account == null)
                 {
                     identityData.Errors.Add("Invalid username or password");
+                } if (account.LockoutEnabled)
+                {
+                    identityData.Errors.Add("Bannded");
                 }
                 else
                 {

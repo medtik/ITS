@@ -72,6 +72,7 @@
 
         [DataMember]
         [Required(ErrorMessage = "Câu trả lời không được trống")]
+        [MinLength(1, ErrorMessage = "Câu trả lời không được trống")]
         public string Answer { get; set; }
 
         [DataMember]

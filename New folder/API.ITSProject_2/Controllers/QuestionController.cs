@@ -149,6 +149,14 @@
         {
             try
             {
+                foreach (var item in data.Answers)
+                {
+                    if (item.Tags.Count() == 0)
+                    {
+                        ModelState.AddModelError(string.Empty, "Câu trả lời phải được gắn thẻ");
+                        break;
+                    }
+                }
                 if (ModelState.IsValid)
                 {
                     Question question = ModelBuilder.ConvertToModels(data);
@@ -210,7 +218,14 @@
         [HttpPut]
         public IHttpActionResult EditQuestion(CreateQuestionViewModels data)
         {
-            
+            foreach (var item in data.Answers)
+            {
+                if (item.Tags.Count() == 0)
+                {
+                    ModelState.AddModelError(string.Empty, "Câu trả lời phải được gắn thẻ");
+                    break;
+                }
+            }
             if (ModelState.IsValid)
             {
                 int id = data.Id;
