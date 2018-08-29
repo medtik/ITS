@@ -13,7 +13,7 @@
           <div class="title">
             Lời mời vào nhóm
           </div>
-          <v-list two-line>
+          <v-list v-if="groupInvitation && groupInvitation.length > 0" two-line>
             <v-list-tile v-for="item of groupInvitation" :key="item.key">
               <v-list-tile-content>
                 <v-list-tile-title>
@@ -53,21 +53,27 @@
               </v-list-tile-action>
             </v-list-tile>
           </v-list>
+          <div v-else class="subheading">
+            Bạn chưa có đề nghị thêm địa điểm nào
+          </div>
         </v-flex>
         <v-flex shrink>
           <v-divider vertical></v-divider>
         </v-flex>
-        <v-flex lg6 xs12 pa-1>
+        <v-flex lg6 xs12 pa-1 >
           <div class="title">
             Đề nghị thêm địa điểm
           </div>
-          <v-list>
+          <v-list v-if="locationSuggestions && locationSuggestions.length > 0">
             <v-list two-line>
               <v-list-tile v-for="item of locationSuggestions" :key="item.key">
                 <v-list-tile-content>
                   <v-list-tile-title>
-                    <!--{{item.title}}&nbsp;<a>{{item.data.groupName}}</a>-->
-                    {{item.title}}
+                    Đề nghị thêm:
+                    <router-link v-for="(location, index) in item.data.locations"
+                                 :key="'locationLink_'+index" :to="{name: 'LocationDetail', query:{id: location.item1}}">
+                      {{location.item2}}</router-link>
+                    vào <nhóm></nhóm>
                   </v-list-tile-title>
                   <v-list-tile-sub-title>
                     {{item.message}}
@@ -104,6 +110,9 @@
               </v-list-tile>
             </v-list>
           </v-list>
+          <div v-else class="subheading">
+            Bạn chưa có đề nghị thêm địa điểm nào
+          </div>
         </v-flex>
       </v-layout>
     </v-container>

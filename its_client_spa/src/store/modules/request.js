@@ -8,6 +8,7 @@ export default {
   state: {
     // {id: 3, status: 0, message: null, groupId: 36, groupName: "nhóm phượt 2"}
     groupInvitation: [],
+    // [{"id":36,"comment":"test nè","status":0,"planId":542,"planDay":0,"name":"tlp","locations":[{"item1":44,"item2":"Xôi Gà Bà Chiểu"}]}]
     locationSuggestion:[],
     loading: {
       groupInvitation: true,
@@ -22,7 +23,6 @@ export default {
           key: "LocationSuggestion_" + suggestion.id,
           status: suggestion.status,
           statusText: formatter.getStatusText(suggestion.status),
-          title: `Yêu cầu thêm chuyến đi`,
           message: suggestion.comment,
           type: "LocationSuggestion",
           data: suggestion
