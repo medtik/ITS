@@ -11,15 +11,6 @@
       <v-flex>
         <span class="body-1">{{user.name}}</span>
       </v-flex>
-      <v-flex>
-        <v-chip v-if="isOwner" label outline color="primary">Chủ địa điểm này</v-chip>
-      </v-flex>
-      <v-flex>
-        <v-label class="caption">{{user.phone}}</v-label>
-      </v-flex>
-      <v-flex>
-        <v-label class="caption">{{user.email}}</v-label>
-      </v-flex>
     </v-layout>
     <v-layout style="grid-area: summary" column>
       <span class="subheading">
@@ -33,17 +24,17 @@
               style="align-items: center; grid-area: status">
 
       <v-label>Trạng thái yêu cầu</v-label>
-      <v-chip v-if="status == 1"
+      <v-chip v-if="status == 0"
               label
               outline color="blue">
         <span>Đang chờ</span>
       </v-chip>
-      <v-chip v-if="status == 2"
+      <v-chip v-if="status == 1"
               label
               outline color="green">
         <span>Chấp nhận</span>
       </v-chip>
-      <v-chip v-if="status == 3"
+      <v-chip v-if="status == 2"
               label
               outline color="red">
         <span>Từ chối</span>

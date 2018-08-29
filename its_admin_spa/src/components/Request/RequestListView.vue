@@ -3,36 +3,17 @@
     <v-layout row pa-3 style="background-color: white" elevation-4>
       <v-flex xs12>
         <span class="title">Quản lí Yêu cầu</span>
-        <v-divider class="my-3"></v-divider>
-        <v-card-title>
-          <v-text-field
-            v-model="searchInput"
-            v-on:keyup.enter="onSearchEnter"
-            append-icon="search"
-            label="Tìm"
-            single-line
-            hide-details>
-          </v-text-field>
-          <v-spacer></v-spacer>
-          <v-layout column>
-            <v-flex mb-1>
-              <v-label>Lọc yêu cầu</v-label>
-            </v-flex>
-            <v-flex ml-3>
-              <v-checkbox label="Thay đổi thông tin địa điểm" v-model="filter.changeLocationInfo"/>
-              <v-checkbox label="Làm chủ địa điểm" v-model="filter.claimOwner"/>
-              <v-checkbox label="Đã xử lí" v-model="filter.done"/>
-            </v-flex>
-
-          </v-layout>
-        </v-card-title>
         <v-layout row wrap>
-          <v-progress-linear indeterminate v-if="this.loading"/>
+          <v-progress-linear indeterminate v-if="pageLoading"/>
           <v-flex pa-1 sm12 md8 lg6
-                  v-for="request in requests"
-                  :key="request.id">
-            <RequestReportReview v-if="request.type == 'reportReview'" v-bind="request"/>
-            <RequestChangeLocationInfo v-if="request.type == 'locationChangeRequest'" v-bind="request"/>
+                  v-for="request in changeLocationRequests"
+                  :key="request.requestId">
+            <RequestChangeLocationInfo v-bind="request"/>
+          </v-flex>
+          <v-flex pa-1 sm12 md8 lg6
+          v-for="request in reportReviewRequests"
+          :key="request.id">
+          <RequestReportReview v-bind="request"/>
           </v-flex>
         </v-layout>
         <v-layout v-if="total">
@@ -72,14 +53,19 @@
     },
     data() {
       return {
+        loading:{
+          changeRequests: false,
+          reportReviewRequests: false
+        },
         requests: undefined,
+        changeLocationRequests: undefined,
+        reportReviewRequests: undefined,
         filter: {
           locationChangeRequest: true,
           claimOwner: true,
           reportReview: true,
           done: false
         },
-        loading: true,
         searchInput: '',
         pagination: {
           page: 1,
@@ -101,6 +87,9 @@
       }
     },
     computed: {
+      pageLoading(){
+        return this.loading.changeRequests && this.loading.reportReviewRequests
+      },
       paginationModel() {
         const length = Math.ceil(this.total / this.pagination.rowsPerPage);
         return {
@@ -109,26 +98,28 @@
         }
       }
     },
-    created() {
+    mounted() {
       this.loadData();
     },
     methods: {
       loadData() {
-        this.loading = true;
-        this.$store.dispatch('request/getAll', {
-          search: this.searchInput,
-          pagination: this.pagination,
-          filter: this.filter
-        }).then(value => {
-          this.requests = value.requests;
-          this.total = value.total;
-          this.loading = false
-        }).catch(reason => {
-          this.error = {
-            dialog: true,
-            ...reason
-          }
-        })
+        this.loading.changeRequests = true;
+        this.loading.reportReviewRequests = true;
+
+        this.$store.dispatch('request/getChangeLocationRequest')
+          .then(value => {
+            this.loading.changeRequests = false;
+            this.changeLocationRequests = value;
+          })
+          .catch(reason => {
+          });
+
+        this.$store.dispatch('request/getReportReviewRequests')
+          .then(value => {
+            this.loading.reportReviewRequests = false;
+            this.reportReviewRequests = value;
+          })
+
       },
       onSearchEnter() {
         this.pagination.page = 1;

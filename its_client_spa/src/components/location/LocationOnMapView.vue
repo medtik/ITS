@@ -244,7 +244,7 @@
         })
       },
       toggleInfoWindow(marker) {
-        if (!!marker.location) {
+        if (!!marker.location && marker.location.id) {
           this.infoWindow.pos = {
             lat: marker.lat,
             lng: marker.lng

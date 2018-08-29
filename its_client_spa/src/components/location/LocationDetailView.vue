@@ -4,7 +4,8 @@
                  v-if="!pageLoading">
       <!--<ParallaxHeader :src="location.primaryPhoto" height="400"/>-->
       <!--width: 100%; height: 500px-->
-      <div :style="{'width': '100%', 'height':'500px', 'background-image': `url(${location.primaryPhoto})`,'background-size': 'cover'}">
+      <div
+        :style="{'width': '100%', 'height':'500px', 'background-image': `url(${location.primaryPhoto})`,'background-size': 'cover'}">
 
       </div>
       <v-layout column>
@@ -44,7 +45,8 @@
         <v-flex my-4 mx-2>
           <v-layout align-baseline>
             <v-flex class="title">Hình ảnh</v-flex>
-            <v-btn color="success"
+            <v-btn v-if="isLoggedIn"
+                   color="success"
                    :loading="loading.addImgBtn"
                    @click="onAddPhotoClick">
               <v-icon>add_a_photo</v-icon>
@@ -103,7 +105,7 @@
             <v-flex v-for="comment in location.comments"
                     :key="comment.id"
                     elevation-2>
-              <LocationReview v-bind="comment" @report="$router.push({name: 'ReviewReport'})"/>
+              <LocationReview v-bind="comment" @report="$router.push({name: 'ReviewReport', query:{id:comment.id}})"/>
             </v-flex>
           </v-layout>
           <v-layout v-else row my-2 justify-center class="subheading">
@@ -198,6 +200,9 @@
         location: 'detailedLocation',
         pageLoading: 'detailedLocationLoading',
       }),
+      ...mapGetters('authenticate', {
+        isLoggedIn: 'isLoggedIn'
+      }),
       summaryTag() {
         return this.location.tags;
       },
@@ -253,10 +258,10 @@
               day
             };
 
-            if(from.isSame(zeroTime,"hour") && to.isSame(zeroTime,"hour")){
+            if (from.isSame(zeroTime, "hour") && to.isSame(zeroTime, "hour")) {
               formattedBusinessHour.isNow = true;
               formattedBusinessHour.displayString = `Mở cả ngày`;
-            }else{
+            } else {
               formattedBusinessHour.isNow = now.isBetween(
                 formattedBusinessHour.from,
                 formattedBusinessHour.to,
@@ -279,7 +284,7 @@
           displayString: todayHour.displayString
         }
       },
-      nearbyLink(){
+      nearbyLink() {
         return {
           name: "LocationNearbyList",
           query: {
@@ -289,7 +294,7 @@
           }
         }
       },
-      nearbyOnMapLink(){
+      nearbyOnMapLink() {
         return {
           name: "NearbyOnMap",
           query: {

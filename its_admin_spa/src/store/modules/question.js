@@ -120,14 +120,14 @@ export default {
     create(context, payload) {
       const {
         text,
-        category,
+        categories,
         answers
       } = _.cloneDeep(payload);
 
       return new Promise((resolve, reject) => {
         axiosInstance.post('api/Question', {
           content: text,
-          categories: category,
+          categories: categories,
           answers: _.map(answers, answer => {
             answer.tags = _.map(answer.tags, 'id');
             answer.answer = answer.content;

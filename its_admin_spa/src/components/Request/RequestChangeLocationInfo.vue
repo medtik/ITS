@@ -1,43 +1,42 @@
 <template>
   <Request :user="user"
-           :isOwner="isOwner"
-           :title="title"
+           title="Yêu cầu cập nhật địa điểm"
            :status="status">
     <template slot="detail">
       <v-text-field
         label="Tên"
-        v-model="input.nameInput"
+        v-model="detail.name"
         readonly
       />
       <v-text-field
         label="Địa chỉ"
-        v-model="input.addressInput"
+        v-model="detail.address"
         readonly
       />
       <v-textarea
         label="Mô tả"
-        v-model="input.descriptionInput"
+        v-model="detail.description"
         readonly
       />
       <v-text-field
         label="Website"
-        v-model="input.websiteInput"
+        v-model="detail.website"
         readonly
       />
       <v-text-field
         label="Điện thoại"
-        v-model="input.phoneInput"
+        v-model="detail.phone"
         readonly
       />
       <v-text-field
         label="Email"
-        v-model="input.emailInput"
+        v-model="detail.email"
         readonly
       />
       <!--Business hours-->
-      <LocationBusinessHoursInput v-model="input.businessHoursInput" readonly/>
+      <LocationBusinessHoursInput v-model="detail.businessHours" readonly/>
       <!--Tags-->
-      <TagsInput v-model="input.tagsInput" readonly/>
+      <TagsInput v-model="detail.tags" readonly/>
     </template>
   </Request>
 </template>
@@ -65,13 +64,10 @@
       'location',
       'status',
       'name',
-      'address',
-      'description',
-      'website',
-      'phone',
       'email',
       'businessHours',
-      'tags'
+      'tags',
+      'detail'
     ],
     data() {
       return {
