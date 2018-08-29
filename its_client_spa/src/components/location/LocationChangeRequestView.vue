@@ -15,7 +15,7 @@
           label="Địa chỉ"
           v-model="input.address"
         />
-        <v-text-field
+        <v-textarea
           label="Mô tả"
           v-model="input.description"
         />
@@ -27,12 +27,16 @@
           label="Email"
           v-model="input.email"
         />
-        <v-flex my-2>
-          <div class="subheading">
-            Giờ hoạt động
-          </div>
-          <LocationBusinessHoursInput v-model="input.businessHours"/>
-        </v-flex>
+        <v-text-field
+          label="Website"
+          v-model="input.website"
+        ></v-text-field>
+        <!--<v-flex my-2>-->
+        <!--<div class="subheading">-->
+        <!--Giờ hoạt động-->
+        <!--</div>-->
+        <!--<LocationBusinessHoursInput v-model="input.businessHours"/>-->
+        <!--</v-flex>-->
         <v-flex y-2>
           <div class="subheading">
             Thẻ
@@ -43,7 +47,7 @@
       <v-divider></v-divider>
       <v-flex>
         <v-btn color="success"
-               @click="$router.back()">
+               @click="createLocationChangeRequest">
           Gửi yêu cầu thay đổi
         </v-btn>
         <v-btn color="secondary"
@@ -53,6 +57,7 @@
       </v-flex>
       <v-flex style="height: 15vh">
         <!--Holder-->
+        <SuccessDialog v-bind="successDialog" @close="$router.back()"/>
       </v-flex>
     </v-layout>
   </v-content>
@@ -61,28 +66,65 @@
 <script>
   import LocationBusinessHoursInput from "../../common/input/LocationBusinessHoursInput";
   import TagManageSection from "../../common/input/TagsInput";
+  import {SuccessDialog} from "../../common/block"
+  import {mapState} from "vuex"
 
   export default {
     name: "LocationChangeRequestView",
     components: {
       LocationBusinessHoursInput,
-      TagManageSection
+      TagManageSection,
+      SuccessDialog
     },
     data() {
       return {
         input: {
-          businessHours: [],
-          tags: [],
-          name : undefined,
+          name: undefined,
           address: undefined,
           description: undefined,
           phone: undefined,
-          email: undefined
+          email: undefined,
+          website: undefined,
+          tags: undefined,
+        },
+        successDialog:{
+          dialog: false,
+          message: undefined
         }
       }
     },
+    computed:{
+      ...mapState('location',{
+        location: state => state.detailedLocation
+      })
+    },
+    mounted(){
+      this.setInputs(this.location);
+    },
     methods: {
-
+      setInputs(location){
+        this.input = {
+          name: location.name,
+          address: location.address,
+          description: location.description,
+          phone: location.phoneNumber,
+          email: location.email,
+          website: location.website,
+          tags: location.tags
+        };
+      },
+      createLocationChangeRequest() {
+        this.$store.dispatch('request/createChangeRequest', {
+          id: this.location.id,
+          ...this.input
+        })
+          .then(value => {
+            this.successDialog = {
+              dialog: true,
+              message: "Xin cám ơn bạn đã đóng góp thông tin"
+            }
+          })
+      }
     }
   }
 </script>

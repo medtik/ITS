@@ -69,11 +69,11 @@
               <v-list-tile v-for="item of locationSuggestions" :key="item.key">
                 <v-list-tile-content>
                   <v-list-tile-title>
-                    Đề nghị thêm:
+                    {{item.data.username}} đề nghị thêm:
                     <router-link v-for="(location, index) in item.data.locations"
                                  :key="'locationLink_'+index" :to="{name: 'LocationDetail', query:{id: location.item1}}">
                       {{location.item2}}</router-link>
-                    vào nhóm
+                    vào nhóm {{item.data.planName}}
                   </v-list-tile-title>
                   <v-list-tile-sub-title>
                     {{item.message}}

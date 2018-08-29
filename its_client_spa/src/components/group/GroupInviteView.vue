@@ -48,15 +48,15 @@
 <script>
   import {mapGetters, mapState} from "vuex"
   import _ from "lodash";
-  import {ErrorDialog} from "../../common/block";
-
+  import {ErrorDialog, SuccessDialog} from "../../common/block";
   import {MessageInputDialog} from "../../common/input";
 
   export default {
     name: "GroupInviteView",
     components: {
       MessageInputDialog,
-      ErrorDialog
+      ErrorDialog,
+      SuccessDialog
     },
     data() {
       return {
@@ -69,6 +69,10 @@
         },
         messageInputDialog: {
           dialog: false
+        },
+        successDialog:{
+          dialog: false,
+          message: ''
         },
         errorDialog: {
           dialog: false,

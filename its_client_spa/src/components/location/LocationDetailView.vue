@@ -37,7 +37,7 @@
             </span>
           </div>
           <v-container v-if="location.description" fluid px-0>
-            <v-textarea label="Mô tả" :value="location.description" readonly>
+            <v-textarea label="Mô tả" :value="location.description" disabled>
             </v-textarea>
           </v-container>
         </v-flex>
@@ -66,25 +66,25 @@
           <v-layout column mx-3 my-2>
             <v-text-field
               label="Địa chỉ"
-              readonly
+              disabled
               v-model="location.address"
               prepend-icon="map"
             />
             <v-text-field
               label="Email"
-              readonly
+              disabled
               v-model="location.emailAddress"
               prepend-icon="email"
             />
             <v-text-field
               label="Điện thoại"
-              readonly
+              disabled
               v-model="location.phoneNumber"
               prepend-icon="call"
             />
             <v-text-field
               label="Web"
-              readonly
+              disabled
               v-model="location.website"
               prepend-icon="screen_share"
             />

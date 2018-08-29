@@ -10,16 +10,6 @@
         </v-toolbar-title>
         <v-spacer></v-spacer>
         <v-toolbar-items>
-          <!--<v-btn flat @click="setMapToMyLocation">-->
-          <!--<v-icon>-->
-          <!--my_location-->
-          <!--</v-icon>-->
-          <!--</v-btn>-->
-          <!--<v-btn flat @click="getDirection">-->
-          <!--<v-icon>-->
-          <!--navigation-->
-          <!--</v-icon>-->
-          <!--</v-btn>-->
           <v-btn flat
                  :style="{opacity: toggle.restaurant ? 1 : 0.5}"
                  @click="toggle.restaurant = !toggle.restaurant">

@@ -228,6 +228,41 @@ export default {
             reject(reason.response);
           })
       })
+    },
+    createChangeRequest(context, payload){
+      // post /api/Location/CreateChangeRequest
+      const {
+        id,
+        name,
+        address,
+        desciprtion,
+        phone,
+        email,
+        website,
+        tags
+      } = payload;
+
+      const data  = {
+        "locationId": id,
+        "name": name,
+        "address": address,
+        "description": desciprtion,
+        "phoneNumber": phone,
+        "website": website,
+        "email": email,
+        "tags": _.map(tags, 'id')
+      };
+
+      return new Promise((resolve, reject) => {
+        axiosInstance.post('api/Location/CreateChangeRequest', data)
+          .then(value => {
+            resolve(value.data);
+          })
+          .catch(reason => {
+            Raven.captureException(reason);
+            reject(reason.response);
+          })
+      })
     }
   }
 }

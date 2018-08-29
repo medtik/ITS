@@ -137,6 +137,9 @@
         this.input.address = account.address;
         this.input.birthdate = account.birthdate;
       },
+      updateProfile(){
+
+      },
       signout() {
         this.$store.dispatch('authenticate/logout');
         this.$store.commit('authenticate/nullToken');

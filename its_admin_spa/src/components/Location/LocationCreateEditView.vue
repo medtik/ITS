@@ -14,14 +14,17 @@
                 <v-text-field
                   label="Tên"
                   v-model="input.nameInput"
+                  :error="!!formError.name" :error-messages="formError.name"
                 />
                 <v-text-field
                   label="Địa chỉ"
                   v-model="input.addressInput"
+                  :error="!!formError.address" :error-messages="formError.address"
                 />
                 <v-textarea
                   label="Mô tả"
                   v-model="input.descriptionInput"
+                  :error="!!formError.description" :error-messages="formError.description"
                 />
                 <v-layout row wrap>
                   <v-flex xs12 md6>
@@ -211,6 +214,23 @@
           primaryPhotoInput: undefined,
           secondaryPhotoInput: undefined,
           secondaryPhotos: undefined,
+        },
+        formError:{
+          name: undefined,
+          address: undefined,
+          description: undefined,
+          long: undefined,
+          lat: undefined,
+          website: undefined,
+          phone: undefined,
+          email: undefined,
+          area: undefined,
+          category: undefined,
+          tags: undefined,
+          reviews: undefined,
+          businessHours: undefined,
+          primaryPhoto: undefined,
+          secondaryPhotos: undefined
         },
         //Dialog
         createEditTag: {
