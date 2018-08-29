@@ -643,15 +643,15 @@ namespace Service.Implement.Entity
                 Dictionary<NessecityType, Location> nessecityLocationMap)
         {
             var result = new List<KeyValuePair<JObject, KeyValuePair<Location, Location>>>();
-            var breakFastToLunchList = new List<KeyValuePair<JObject, KeyValuePair<Location, Location>>>();
-            var lunchToDinnerList = new List<KeyValuePair<JObject, KeyValuePair<Location, Location>>>();
-            int[] locationIds = treeLocations.Select(location => location.Id).ToArray();
-            List<Location> locationList = _locationRepository
-                .Search(location => locationIds.Contains(location.Id))
-                .ToList();
+            
 
             foreach (KeyValuePair<NessecityType, Location> nessecityLocation in nessecityLocationMap)
             {
+                int[] locationIds = treeLocations.Select(location => location.Id).ToArray();
+                List<Location> locationList = _locationRepository
+                    .Search(location => locationIds.Contains(location.Id))
+                    .ToList();
+                
                 Location breakfast = _locationRepository.Get(
                     location => nessecityLocationMap[NessecityType.Breakfast].Id == location.Id
                 );
@@ -691,10 +691,11 @@ namespace Service.Implement.Entity
                 }
 
                 List<KeyValuePair<JObject, KeyValuePair<Location, Location>>> locationWithRouteList = null;
-                int areaOffSet = 4000;
+                int areaOffSet = 10000;
                 try
                 {
-                    while (locationWithRouteList == null && areaOffSet <= 20000)
+                    
+                    while (locationWithRouteList == null && areaOffSet <= 45000)
                     {
                         var locationsBetweenMeal = GetLocationsBetweenMeal(
                             currentMealPair,
@@ -709,7 +710,7 @@ namespace Service.Implement.Entity
                                 ["areaOffSet"] = areaOffSet,
                                 ["locationsBetweenMeal length"] = locationsBetweenMeal.Count
                             });
-                        areaOffSet += 4000;
+                        areaOffSet += 5000;
 
                         locationWithRouteList = await FitSchedule(
                             currentMealPair,
@@ -805,9 +806,10 @@ namespace Service.Implement.Entity
             locationsToGo.RemoveAll(location => !IsLocationOpenIn(location, departureTime, arriveTime, currentDate));
 
             #region Calculate arrive time
-            bool isOvertime = false;
+
             try
             {
+                bool isOvertime;
                 do
                 {
                     JObject responseJObject =
