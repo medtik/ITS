@@ -47,7 +47,7 @@
 
         public IEnumerable<Report> GetAllReport()
         {
-            return _reportRepository.GetAllAsQueryable(_ => _.User).ToList();
+            return _reportRepository.GetAllAsQueryable(_ => _.User, _ => _.Review.Creator, _ => _.Review.Photos).ToList();
         }
 
         public IEnumerable<ChangeRequest> GetAllChangeRequest()
@@ -200,10 +200,12 @@
         {
             try
             {
-                var location = _repository.Get(_ => _.Id == data.Id, _ => _.BusinessHours);
-                location.BusinessHours = new List<BusinessHour>();
-                location.Photos = new List<LocationPhoto>();
-                base.Update(location);
+                var location = _repository.Get(_ => _.Id == data.Id, _ => _.BusinessHours, _ => _.Photos);
+                var photoLocationNe = location.Photos;
+                foreach (var item in photoLocationNe.ToList())
+                {
+                    _locationPhotoRepository.Delete(item);
+                }
                 _unitOfWork.SaveChanges();
 
                 location.IsClosed = data.IsClosed;
@@ -221,6 +223,14 @@
                 _unitOfWork.SaveChanges();
 
                 List<Tag> tags = new List<Tag>();
+                var businessHourNe = location.BusinessHours;
+
+                foreach (var item in businessHourNe.ToList())
+                {
+                    _businessHourRepository.Delete(item);
+                }
+                _unitOfWork.SaveChanges();
+
                 tagList.ToList().ForEach(_ =>
                 {
                     var ele = _tagRepository.Get(__ => __.Id == _, __ => __.Locations);

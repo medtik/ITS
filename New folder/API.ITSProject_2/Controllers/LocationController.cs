@@ -428,6 +428,7 @@ namespace API.ITSProject_2.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [Route("api/Location/CreateReview")]
         public async Task<IHttpActionResult> CreateReview(ReviewViewModel review)
         {
@@ -436,14 +437,13 @@ namespace API.ITSProject_2.Controllers
                 if (!ModelState.IsValid)
                     return BadRequest();
 
-                Report cr = new Report
+                bool isOk = _locationService.CreateReport(new Report
                 {
                     ReviewId = review.ReviewId,
                     Content = review.Message,
-                    UserId = (await CurrentUser()).Id
-                };
-                _locationService.CreateReport(cr);
-                return Ok();
+                    UserId = (await CurrentUser()).Id,
+                });
+                return Ok(isOk);
             }
             catch (Exception ex)
             {
@@ -867,15 +867,12 @@ namespace API.ITSProject_2.Controllers
                     {
                         user = new
                         {
-                            DisplayName = item.User.FullName,
-                            item.User.Avatar
+                            Name = item.User.FullName,
+                            Photo = item.User.Avatar
                         },
                         Status = 0,
-                        review = new ReviewViewModel
-                        {
-                            Message = item.Content,
-                            ReviewId = item.ReviewId
-                        }
+                        Content = item.Content,
+                        review = ModelBuilder.ConvertToCommentViewModels(item.Review)
                     });
                 }
                 return Ok(result);

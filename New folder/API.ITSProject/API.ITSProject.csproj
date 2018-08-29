@@ -341,10 +341,6 @@
       <Project>{05A448E7-161E-4FAC-90CF-A1B54342B100}</Project>
       <Name>Core.ObjectModels</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DependencyResolver\DependencyResolver.csproj">
-      <Project>{4553C88D-D350-4662-BBED-1FCBB22EA64D}</Project>
-      <Name>DependencyResolver</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Infrastructure.Identity\Infrastructure.Identity.csproj">
       <Project>{52429DB9-C7BA-4210-AE37-829C11DDDF68}</Project>
       <Name>Infrastructure.Identity</Name>

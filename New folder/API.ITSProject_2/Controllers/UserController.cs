@@ -36,7 +36,7 @@
         {
             int userId = (await CurrentUser()).Id;
 
-            var result = _userService.GetGroupInvitations(userId, _ => _.Group).ToList().OrderBy(_ => _.Status).ThenByDescending(__ => __.Id);
+            var result = _userService.GetGroupInvitations(userId, _ => _.Group.Creator).ToList().OrderBy(_ => _.Status).ThenByDescending(__ => __.Id);
 
             return Ok(result.Select(_ => new
             {
@@ -45,6 +45,7 @@
                 _.Message,
                 _.GroupId,
                 GroupName = _.Group.Name,
+                CreatorName = _.Group.Creator.FullName
             }));
         }
 

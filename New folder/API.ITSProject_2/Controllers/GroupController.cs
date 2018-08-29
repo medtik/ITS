@@ -54,7 +54,7 @@
                         ___.Id,
                         ___.Message,
                         GroupName = ___.Group.Name,
-                        OwnerName = ___.Group.Creator.FullName
+                        OwnerName = ___.Group.Creator.FullName,
                     }));
             }
             catch (Exception ex)
