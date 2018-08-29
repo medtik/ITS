@@ -45,6 +45,17 @@
             _reportRepository = unitOfWork.GetRepository<Report>();
         }
 
+        public IEnumerable<Report> GetAllReport()
+        {
+            return _reportRepository.GetAllAsQueryable(_ => _.User).ToList();
+        }
+
+        public IEnumerable<ChangeRequest> GetAllChangeRequest()
+        {
+            return _changeRequestRepository.GetAllAsQueryable(_ => _.User).ToList();
+        }
+
+
         public bool AcceptStatusLocationSuggestion(int suggestionId)
         {
             try
@@ -189,7 +200,12 @@
         {
             try
             {
-                var location = _repository.Get(_ => _.Id == data.Id);
+                var location = _repository.Get(_ => _.Id == data.Id, _ => _.BusinessHours);
+                location.BusinessHours = new List<BusinessHour>();
+                location.Photos = new List<LocationPhoto>();
+                base.Update(location);
+                _unitOfWork.SaveChanges();
+
                 location.IsClosed = data.IsClosed;
                 location.IsVerified = data.IsVerified;
                 location.Address = data.Address;

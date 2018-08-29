@@ -45,15 +45,15 @@ namespace API.ITSProject_2.Controllers
         #region Get
         [HttpGet]
         [Route("api/Location/GetChangeRequests")]
-        public IHttpActionResult GetRequest(int locationId)
+        public IHttpActionResult GetRequest()
         {
             try
             {
-                var location = _locationService.Find(locationId, _ => _.ChangeRequests, _ => _.ChangeRequests.Select(__ => __.User));
+                var location = _locationService.GetAllChangeRequest();
 
                 List<object> temp = new List<object>();
 
-                foreach (var item in location.ChangeRequests)
+                foreach (var item in location)
                 {
                     temp.Add(new
                     {
@@ -71,8 +71,19 @@ namespace API.ITSProject_2.Controllers
                             item.Description,
                             item.Website,
                             Phone = item.PhoneNumber,
-                            Email = item.EmailAddress
-                        }
+                            Email = item.EmailAddress,
+                            BusinessHours = JsonConvert.DeserializeObject<List<BusinessHourViewModels>>(item.BusinessHours).Select(_ => new BusinessHourViewModels
+                            {
+                                Day = _.Day,
+                                From = _.From,
+                                To = _.To
+                            }),
+                            Tags = JsonConvert.DeserializeObject<List<int>>(item.Tags).Select(_ => new
+                            {
+                                Id = _,
+                                Name = _tagService.Find(_).Name
+                            })
+                        },
                     });
                 }
                 return Ok(temp);
@@ -842,13 +853,45 @@ namespace API.ITSProject_2.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("api/Location/Report")]
+        public IHttpActionResult GetReport()
+        {
+            try
+            {
+                var reports = _locationService.GetAllReport();
+                List<object> result = new List<object>();
+                foreach (var item in reports)
+                {
+                    result.Add(new
+                    {
+                        user = new
+                        {
+                            DisplayName = item.User.FullName,
+                            item.User.Avatar
+                        },
+                        Status = 0,
+                        review = new ReviewViewModel
+                        {
+                            Message = item.Content,
+                            ReviewId = item.ReviewId
+                        }
+                    });
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _loggingService.Write(GetType().Name, nameof(GetReport), ex);
+                return InternalServerError();
+            }
+        }
+
         [HttpPut, Authorize]
         public async Task<IHttpActionResult> Edit(EditLocationViewModels data)
         {
             try
             {
-                if (!ModelState.IsValid)
-                    return BadRequest(ModelState);
                 if (data.Days != null)
                 {
                     var listBusinessHour = data.Days.ToList();
@@ -894,7 +937,7 @@ namespace API.ITSProject_2.Controllers
                 }
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
-                Location location = _locationService.Find(data.Id, _ => _.Photos, 
+                Location location = _locationService.Find(data.Id, _ => _.Photos,
                                                             _ => _.BusinessHours,
                                                             _ => _.Tags, _ => _.Creator, _ => _.LocationSuggestion);
                 int userId = (await CurrentUser()).Id;
@@ -903,9 +946,6 @@ namespace API.ITSProject_2.Controllers
                 IEnumerable<Photo> otherPhoto = ModelBuilder.ConvertToModels(data.OtherPhotos.AsEnumerable(), userId);
 
                 IEnumerable<BusinessHour> businessHours = ModelBuilder.ConvertToModels(data.Days);
-
-                
-                
 
                 bool result = _locationService.Edit(location, primaryPhoto, otherPhoto, businessHours, data.Tags);
 
@@ -918,7 +958,8 @@ namespace API.ITSProject_2.Controllers
                 {
                     return BadRequest();
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 _loggingService.Write(GetType().Name, nameof(Edit), ex);
 

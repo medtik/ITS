@@ -9,6 +9,10 @@
 
     public interface ILocationService
     {
+        IEnumerable<Report> GetAllReport();
+
+        IEnumerable<ChangeRequest> GetAllChangeRequest();
+
         bool Update(Location location);
 
         ChangeRequest FindChangeRequest(int id);
