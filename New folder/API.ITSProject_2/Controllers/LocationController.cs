@@ -480,7 +480,7 @@ namespace API.ITSProject_2.Controllers
             try
             {
                 if (!ModelState.IsValid)
-                    return BadRequest();
+                    return BadRequest(ModelState);
 
                 ChangeRequest cr = new ChangeRequest
                 {
@@ -804,8 +804,8 @@ namespace API.ITSProject_2.Controllers
             }
         }
 
-        [HttpPut, Authorize]
-        public async Task<IHttpActionResult> Edit(EditLocationViewModels data)
+        [HttpPut]
+        public IHttpActionResult Edit(EditLocationViewModels data)
         {
             try
             {
@@ -856,14 +856,18 @@ namespace API.ITSProject_2.Controllers
                 }
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
-                Location location = _locationService.Find(data.Id, _ => _.Photos.Select(__ => __.Photo), 
-                                                            _ => _.BusinessHours, _ => _.Tags);
-                int userId = (await CurrentUser()).Id;
+                Location location = _locationService.Find(data.Id, _ => _.Photos, 
+                                                            _ => _.BusinessHours,
+                                                            _ => _.Tags, _ => _.Creator, _ => _.LocationSuggestion);
+                int userId = 9/*(await CurrentUser()).Id*/;
 
                 Photo primaryPhoto = ModelBuilder.ConvertToModels(data.PrimaryPhoto, userId);
                 IEnumerable<Photo> otherPhoto = ModelBuilder.ConvertToModels(data.OtherPhotos.AsEnumerable(), userId);
 
                 IEnumerable<BusinessHour> businessHours = ModelBuilder.ConvertToModels(data.Days);
+
+                
+                
 
                 bool result = _locationService.Edit(location, primaryPhoto, otherPhoto, businessHours, data.Tags);
 

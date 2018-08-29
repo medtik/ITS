@@ -88,7 +88,8 @@
                         item.Status,
                         item.PlanId,
                         item.PlanDay,
-                        item.Plan.Name,
+                        PlanName = item.Plan.Name,
+                        UserName = item.User.FullName,
                         Locations = item.Locations.Select(_ => (_.Id, _.Name))
                     });
                 }

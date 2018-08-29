@@ -89,27 +89,16 @@
                 {
                     identityData = new _IdentityData();
                     User user = null;
-                    if (phoneNumber == "Photo")
+                    //create user extenstion data
+                    user = new Creator
                     {
-                        user = new Creator
-                        {
-                            FullName = fullName,
-                            Birthdate = birthdate,
-                            Avatar = address
-                        };
-                    } else
-                    {
-                        //create user extenstion data
-                        user = new Creator
-                        {
-                            FullName = fullName,
-                            Birthdate = birthdate,
-                        };
-                    }
-                    
+                        FullName = fullName,
+                        Birthdate = birthdate,
+                    };
+
                     int userId = _userService.CreateUser(user);
                     //create account
-                    
+
                     Account account = new Account
                     {
                         UserName = usernameOrEmail,
@@ -179,7 +168,7 @@
                 if (account == null)
                 {
                     identityData.Errors.Add("Invalid username or password");
-                } 
+                }
                 else
                 {
                     ClaimsIdentity claims = await _accountService

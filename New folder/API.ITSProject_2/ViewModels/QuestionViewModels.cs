@@ -52,7 +52,6 @@
     public class CreateQuestionViewModels
     {
         [DataMember]
-        [Required]
         public int Id { get; set; }
 
         [DataMember]

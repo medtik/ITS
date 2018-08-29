@@ -29,18 +29,18 @@
         public string Address { get; set; }
 
         [DataMember]
-        public string Desription { get; set; }
+        public string Description { get; set; }
 
         [DataMember]
         [Required(ErrorMessage = "Vĩ độ không được trống")]
-        public double? Lat { get; set; }
+        public double? Latitude { get; set; }
 
         [DataMember]
         [Required(ErrorMessage = "Kinh độ không được trống")]
-        public double? Long { get; set; }
+        public double? Longitude { get; set; }
 
         [DataMember]
-        public string Web { get; set; }
+        public string Website { get; set; }
 
         [DataMember]
         [Phone(ErrorMessage = "Số điện thoại không hợp lệ")]
@@ -151,7 +151,7 @@
     [DataContract(Name = "Location")]
     public class CreateLocationViewModels
     {
-        [DataMember]
+        [DataMember] 
         public double Radius { get; set; }
 
         [DataMember]

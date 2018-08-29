@@ -129,26 +129,12 @@
                     return BadRequest(ModelState);
                 }
                 Account user = null;
-                if (string.IsNullOrWhiteSpace(model.email) || model.email.ToLower() == "none")
-                {
-                    user = (await _identityService.FindByUsername(model.uid)).Data as Account;
-                } else
-                {
-                    user = (await _identityService.FindByUsername(model.email)).Data as Account;
-                }
+                user = (await _identityService.FindByUsername(model.uid)).Data as Account;
 
                 bool hasRegistered = user != null;
 
                 if (!hasRegistered)
-                {
-                    if (model.email != "None")
-                    {
-                        await _identityService.Create(model.email, "abcdefghijklmnopqrstuvwxyz", model.displayName, model.photoUrl, "Photo", DateTimeOffset.Now, nameof(RoleType.User));
-                    } else
-                    {
-                        await _identityService.Create(model.uid, "abcdefghijklmnopqrstuvwxyz", model.displayName, model.photoUrl, string.Empty, DateTimeOffset.Now, nameof(RoleType.User));
-                    }
-                }
+                    await _identityService.Create(model.uid, "abcdefghijklmnopqrstuvwxyz", model.displayName, model.photoUrl, string.Empty, DateTimeOffset.Now, nameof(RoleType.User));
                 var client = new HttpClient();
 
                 string baseAddress = "http://" + HttpContext.Current.Request.Url.Authority;
@@ -170,7 +156,7 @@
                         new KeyValuePair<string, string>("grant_type", "password")
                     });
                 }
-                    
+
                 HttpResponseMessage response = await client.PostAsync("token", content);
                 string message = await response.Content.ReadAsStringAsync();
                 //System.Uri.UnescapeDataString(message);

@@ -723,7 +723,7 @@
                 Plan plan = _planService.Find(planId);
                 if (plan != null)
                 {
-                    if (userId == plan.CreatorId)
+                    if (userId == plan.MemberId)
                     {
                         bool result = _planService.Delete(plan);
 

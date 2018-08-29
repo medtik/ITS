@@ -216,7 +216,7 @@
                 int id = data.Id;
                 var baseQuestion = _questionService.Find(id, _ => _.Areas);
 
-                var area = baseQuestion.Areas.Select(_ => _areaService.Find(_.Id, __ => __.Questions));
+                var areas = baseQuestion.Areas.Select(_ => _areaService.Find(_.Id, __ => __.Questions)).ToList();
                 _questionService.Delete(baseQuestion.Id);
                 Question question = ModelBuilder.ConvertToModels(data);
                 ICollection<Answer> answers = new List<Answer>();
@@ -237,12 +237,7 @@
                         });
                     });
                 }
-                _questionService.Create(question, answers);
-                foreach (var item in area)
-                {
-                    item.Questions.Add(question);
-                    _areaService.Update(item);
-                }
+                _questionService.Create(question, answers, areas);
                 return Ok();
             }
             else
