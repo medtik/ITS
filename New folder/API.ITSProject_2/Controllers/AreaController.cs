@@ -191,8 +191,15 @@
                 {
                     return BadRequest(ModelState);
                 }
-                var questionIds = data.QuestionIds ?? new List<int>();
-                var questionList = _questionService.Search(_ => questionIds.Contains(_.Id)).ToList();
+                var questionIds = data.Questions ?? new List<int>();
+                var questionList = new List<Question>();
+                foreach (var item in _questionService.GetAll())
+                {
+                    if (questionIds.Contains(item.Id))
+                    {
+                        questionList.Add(item);
+                    }
+                }
 
                 Area area = new Area
                 {
@@ -217,12 +224,15 @@
             {
                 if (!ModelState.IsValid)
                 {
-                    return BadRequest();
+                    return BadRequest(ModelState);
                 }
-                var questionIds = data.QuestionIds ?? new List<int>();
+                var questionIds = data.Questions ?? new List<int>();
                 var questionList = _questionService.Search(_ => questionIds.Contains(_.Id)).ToList();
 
                 var area = _areaService.Find(data.Id, _ => _.Questions);
+                area.Questions = null;
+
+                _areaService.Update(area);
                 area.Questions = questionList;
                 _areaService.Update(area);
                 return Ok();

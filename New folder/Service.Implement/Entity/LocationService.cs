@@ -193,12 +193,13 @@
                 {
                     location.Tags = new List<Tag>();
                     location.BusinessHours = new List<BusinessHour>();
+                    location.Photos = new List<LocationPhoto>();
                     base.Update(location);
 
                     List<Tag> tags = new List<Tag>();
                     tagList.ToList().ForEach(_ =>
                     {
-                        var ele = _tagRepository.Get(__ => __.Id == _);
+                        var ele = _tagRepository.Get(__ => __.Id == _, __ => __.Locations);
                         tags.Add(ele);
                     });
                     location.Tags = tags;

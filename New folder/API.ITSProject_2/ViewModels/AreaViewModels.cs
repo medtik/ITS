@@ -12,7 +12,7 @@
         public string Name { get; set; }
 
         [DataMember]
-        public IList<int> QuestionIds { get; set; }
+        public IList<int> Questions { get; set; }
     }
 
     [DataContract(Name = "Area")]
@@ -27,7 +27,7 @@
         public string Name { get; set; }
 
         [DataMember]
-        public IList<int> QuestionIds { get; set; }
+        public IList<int> Questions { get; set; }
     }
 
     [DataContract(Name = "Area")]
