@@ -29,6 +29,9 @@
 
     </v-layout>
     <v-layout slot="detail" column pl-2>
+      <v-flex class="font-weight-black subheading">
+        {{range}} km
+      </v-flex>
       <StarRating
         read-only
         :rating="rating"

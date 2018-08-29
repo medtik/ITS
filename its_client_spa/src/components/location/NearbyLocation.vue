@@ -23,6 +23,7 @@
 <script>
   import {LocationFullWidth} from "../../common/block";
   import {mapState} from "vuex";
+  import _ from "lodash";
 
 
   export default {
@@ -40,7 +41,7 @@
     computed: {
       ...mapState('location', {
         pageLoading: state => state.loading.nearbyLocations,
-        nearbyLocations: state => state.nearbyLocations
+        nearbyLocations: state => _.filter(state.nearbyLocations, (location) => {return location.range > 0})
       })
     },
     created() {
