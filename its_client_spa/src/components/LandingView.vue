@@ -71,16 +71,9 @@
     <section v-if="false">
       <!--NEARBY-->
       <v-layout column my-5>
-        <v-flex class="text-xs-center display-1 font-weight-black">
-          Gần đây
-        </v-flex>
-        <v-flex>
-          <v-layout row pa-1>
-            <v-flex>
-
-            </v-flex>
-          </v-layout>
-        </v-flex>
+        <v-btn color="light-blue lighten-1">
+          Gần tôi
+        </v-btn>
       </v-layout>
     </section>
 

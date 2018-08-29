@@ -10,12 +10,14 @@
           <v-flex style="width: 25rem">
             <v-text-field label="Nội dung câu hỏi"
                           v-model="textInput"
+                          :error='!!formError["data.Content"]' :error-messages="formError['data.Content']"
             ></v-text-field>
             <v-combobox
               v-model="categoryInput"
               :items="categories"
               label="Thể loại"
               :loading="loading.categories"
+              :error='!!formError["data.Categories"]' :error-messages="formError['data.Categories']"
             ></v-combobox>
           </v-flex>
           <!--Answer-->
@@ -24,7 +26,7 @@
               <v-flex xs12>
                 <v-card elevation-5>
                   <v-toolbar flat dark color="blue darken-1">
-        8            <v-toolbar-title>Câu trả lời</v-toolbar-title>
+                    <v-toolbar-title>Câu trả lời</v-toolbar-title>
                   </v-toolbar>
                   <v-layout column>
                     <v-flex pa-2>
@@ -70,6 +72,12 @@
                       </v-layout>
                       <v-divider v-if="(index + 1) < answersInput.length"></v-divider>
                     </v-flex>
+                    <v-alert
+                      :value="!!formError['data.Answers']"
+                      type="error"
+                    >
+                      {{formError['data.Answers']}}
+                    </v-alert>
                   </v-layout>
                 </v-card>
               </v-flex>
@@ -176,6 +184,11 @@
         editAnswerDialog: false,
         editAnswerIndex: undefined,
         editedAnswer: {},
+        formError: {
+          ['data.Content']: undefined,
+          ['data.Categories']: undefined,
+          ['data.Answers']: undefined,
+        }
       }
     },
     created() {
@@ -197,7 +210,8 @@
               this.error = {
                 dialog: true,
                 message: reason.message
-              }
+              };
+
             })
         } else {
           this.error = {
@@ -223,6 +237,7 @@
             this.categories = value.categories;
             this.loading.categories = false;
           })
+
       },
       fillInputs() {
         this.textInput = this.question.content;
@@ -252,11 +267,8 @@
           };
           this.loading.createBtn = false;
         }).catch(reason => {
-          this.error = {
-            dialog: true,
-            message: reason.message
-          };
           this.loading.createBtn = false;
+          this.formError = reason.response.data.modelState
         })
       },
       onUpdateClick() {
@@ -271,6 +283,9 @@
             name: 'QuestionList'
           });
         })
+          .catch(reason =>{
+            this.formError = reason.response.data.modelState
+          })
       },
       onDialogConfirmCreate(item) {
         this.$store.dispatch('tag/create', {tag: item})
@@ -293,7 +308,7 @@
           return index != removeIndex;
         })
       },
-      onEditAnswer(editIndex){
+      onEditAnswer(editIndex) {
         this.editedAnswer = _(this.answersInput)
           .filter((val, index) => {
             return index == editIndex;
