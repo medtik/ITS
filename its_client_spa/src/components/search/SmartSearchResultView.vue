@@ -171,7 +171,7 @@
           .catch(reason => {
             this.errorDialog = {
               dialog: true,
-              message: 'Bạn cần phải chọn "Nơi ở" và "Ăn uống" để đủ địa điểm cho chuyến đi tự động',
+              message: 'Bạn cần phải chọn "Nơi ở", "Ăn uống", và "Địa điểm thăm quan" để đủ địa điểm cho chuyến đi tự động',
             }
           })
       },

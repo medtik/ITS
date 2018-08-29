@@ -4,8 +4,8 @@ import moment from "moment";
 import Raven from "raven-js"
 import firebase from "firebase";
 
-const root = "https://itssolutiong9.azurewebsites.net/";
-// const root = "http://localhost:59728/";
+// const root = "https://itssolutiong9.azurewebsites.net/";
+const root = "http://localhost:59728/";
 
 var config = {
   apiKey: "AIzaSyCouzeKTc_xf3r7QJZjCjyEr7rceMB7rgA",
@@ -15,7 +15,6 @@ var config = {
   storageBucket: "its-g8.appspot.com",
   messagingSenderId: "917708153355"
 };
-
 firebase.initializeApp(config);
 
 const googleProvider = new firebase.auth.GoogleAuthProvider();
@@ -124,7 +123,10 @@ export default {
           var user = result.user;
 
           let data = {
-            ...user,
+              "email": !!user.email ? user.email : 'Non',
+              "photoUrl": user.photoUrl,
+              "displayName": user.displayName,
+              "uid": user.uid,
             "provider": "Facebook",
             "externalAccessToken": token
           };
@@ -157,7 +159,10 @@ export default {
             var user = result.user;
 
             let data = {
-              ...user,
+              "email": !!user.email ? user.email : 'Non',
+              "photoUrl": user.photoUrl,
+              "displayName": user.displayName,
+              "uid": user.uid,
               "provider": "Google",
               "externalAccessToken": token
             };

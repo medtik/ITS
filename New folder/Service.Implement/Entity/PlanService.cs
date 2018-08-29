@@ -736,41 +736,8 @@ namespace Service.Implement.Entity
 
                         result.Add(locationWithRoute);
                     }
-
-//                    result.AddRange(locationWithRouteList);
-//
-//                    switch (currentMealPair.Value)
-//                    {
-//                        case NessecityType.Breakfast:
-//                            breakFastToLunchList = locationWithRouteList;
-//                            break;
-//                        case NessecityType.Lunch:
-//                            lunchToDinnerList = locationWithRouteList;
-//                            break;
-//                    }
                 }
             }
-
-//            JObject responseJObject =
-//                await FetchGoogleRoute(breakFastToLunchList.Last().Value.Value,
-//                    lunchToDinnerList.First().Value.Key,
-//                    null);
-//
-//            JObject leg = responseJObject["routes"][0]["legs"][0].Value<JObject>();
-//
-//            KeyValuePair<JObject, KeyValuePair<Location, Location>> link;
-//
-//            link = new KeyValuePair<JObject, KeyValuePair<Location, Location>>(
-//                leg,
-//                new KeyValuePair<Location, Location>(
-//                    breakFastToLunchList.Last().Value.Value,
-//                    lunchToDinnerList.First().Value.Key
-//                ));
-//
-//            result.AddRange(breakFastToLunchList);
-//            result.Add(link);
-//            result.AddRange(lunchToDinnerList);
-
 
             return result;
         }
@@ -838,35 +805,40 @@ namespace Service.Implement.Entity
             locationsToGo.RemoveAll(location => !IsLocationOpenIn(location, departureTime, arriveTime, currentDate));
 
             #region Calculate arrive time
-
-            JObject responseJObject =
-                await FetchGoogleRoute(origin.Key, destination.Key, locationsToGo.Take(23).ToList(), true);
-
-            JArray legs = responseJObject["routes"][0]["legs"].Value<JArray>();
-            JArray waypointOrder = responseJObject["routes"][0]["waypoint_order"].Value<JArray>();
-
-            var map = MapLegsAndLocationPair(legs, waypointOrder, origin.Key, destination.Key, locationsToGo);
-            TimeSpan totalTime = new TimeSpan(0);
-            bool enough = false;
+            bool isOvertime = false;
             try
             {
-                foreach (KeyValuePair<JObject, KeyValuePair<Location, Location>> keyValuePair in map)
+                do
                 {
-                    int travelTimeMinutes = keyValuePair.Key["duration"]["value"].Value<int>();
-                    TimeSpan travelTime = new TimeSpan(0, 0, 0, travelTimeMinutes, 0);
-                    TimeSpan stayTime = GetLocationStayTime(keyValuePair.Value.Key);
+                    JObject responseJObject =
+                        await FetchGoogleRoute(origin.Key, destination.Key, locationsToGo.Take(23).ToList(), true);
 
-                    totalTime = totalTime.Add(travelTime + stayTime);
+                    JArray legs = responseJObject["routes"][0]["legs"].Value<JArray>();
+                    JArray waypointOrder = responseJObject["routes"][0]["waypoint_order"].Value<JArray>();
+                    var map = MapLegsAndLocationPair(legs, waypointOrder, origin.Key, destination.Key, locationsToGo);
+                    
+                    TimeSpan totalTime = new TimeSpan(0);
+                    foreach (KeyValuePair<JObject, KeyValuePair<Location, Location>> keyValuePair in map)
+                    {
+                        int travelTimeMinutes = keyValuePair.Key["duration"]["value"].Value<int>();
+                        TimeSpan travelTime = new TimeSpan(0, 0, 0, travelTimeMinutes, 0);
+                        TimeSpan stayTime = GetLocationStayTime(keyValuePair.Value.Key);
+                        totalTime = totalTime.Add(travelTime + stayTime);
+
+                    }
 
                     if (departureTime.Add(totalTime) >= arriveTime)
                     {
-                        return result;
+                        isOvertime = true;
+                        locationsToGo.RemoveAt(locationsToGo.Count - 1);
+
                     }
                     else
                     {
-                        result.Add(keyValuePair);
+                        isOvertime = false;
+                        result.AddRange(map);
                     }
-                }
+                } while (isOvertime);
             }
             catch (Exception ex)
             {
@@ -875,7 +847,7 @@ namespace Service.Implement.Entity
 
             #endregion
 
-            return null;
+            return result;
         }
 
         private List<KeyValuePair<JObject, KeyValuePair<Location, Location>>> MapLegsAndLocationPair(
@@ -889,23 +861,27 @@ namespace Service.Implement.Entity
 
             var previousLocation = origin;
             var previousLeg = legs[0].Value<JObject>();
-            
-            for (int i = 1; i < legs.Count; i++)
+            for (int i = 1; i < legs.Count + 1; i++)
             {
-                var currentLeg = legs[i].Value<JObject>();
-                var currentLocation = middle[waypointOrder[i-1].Value<int>()];
+                Location currentLocation = null;
+                try
+                {
+                    currentLocation = middle[waypointOrder[i - 1].Value<int>()];
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    currentLocation = destination;
+                }
 
                 result.Add(new KeyValuePair<JObject, KeyValuePair<Location, Location>>(
                     previousLeg,
                     new KeyValuePair<Location, Location>(previousLocation, currentLocation)
                 ));
-                
-                
-                previousLeg = currentLeg;
+
+
+                previousLeg = i < (legs.Count) ? legs[i].Value<JObject>() : null;
                 previousLocation = currentLocation;
             }
-
-//            result.Sort((pair1, pair2) => pair1.Key["index"].Value<int>().CompareTo(pair2.Key["index"].Value<int>()));
 
             return result;
         }
