@@ -12,7 +12,6 @@
             :error-messages="errorMessages"
             no-data-text="Chưa có dữ liệu"
   >
-
   </v-select>
 </template>
 
