@@ -1,10 +1,9 @@
 import React from "react" ;
-import {View, StyleSheet, Dimensions, BackHandler} from "react-native" ;
+import {View, StyleSheet, Dimensions, BackHandler, Platform} from "react-native" ;
 import {WebView} from 'react-native-webview-messaging/WebView';
 import notification from '../config/SetupNotification';
-import {Notifications} from "expo";
-
-import Sentry from "sentry-expo";
+import { Constants, Location, Permissions, Notifications } from 'expo';
+import Sentry from 'sentry-expo';
 
 const ref = {
     webview: "REF_WEBVIEW"
@@ -31,11 +30,34 @@ export default class ITSWeb extends React.Component {
         BackHandler.addEventListener('hardwareBackPress', this.onHardwareBack);
         Notifications.addListener(this.handleNotification.bind(this));
         this.registerWebChannel();
+
+        if (Platform.OS === 'android' && !Constants.isDevice) {
+            this.setState({
+                errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
+            });
+        } else {
+            this._getLocationAsync();
+        }
     }
 
     componentWillUnmount() {
         BackHandler.removeEventListener('hardwareBackPress', this.onHardwareBack);
     }
+
+    _getLocationAsync = async () => {
+        let { status } = await Permissions.askAsync(Permissions.LOCATION);
+        if (status !== 'granted') {
+            this.setState({
+                errorMessage: 'Permission to access location was denied',
+            });
+            this.timer = setInterval(()=> this._updateLocation(), 60000)
+        }
+    };
+
+    _updateLocation = async () => {
+        let location = await Location.getCurrentPositionAsync({});
+        console.debug('_updateLocation',location);
+    };
 
     onLayout() {
         const dimension = Dimensions.get('window');

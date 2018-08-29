@@ -9,14 +9,14 @@ export default {
     // {id: 3, status: 0, message: null, groupId: 36, groupName: "nhóm phượt 2"}
     groupInvitation: [],
     // [{"id":36,"comment":"test nè","status":0,"planId":542,"planDay":0,"name":"tlp","locations":[{"item1":44,"item2":"Xôi Gà Bà Chiểu"}]}]
-    locationSuggestion:[],
+    locationSuggestion: [],
     loading: {
       groupInvitation: true,
-      locationSuggestion:true
+      locationSuggestion: true
     }
   },
   getters: {
-    locationSuggestions(state){
+    locationSuggestions(state) {
       return _.map(state.locationSuggestion, (suggestion) => {
         return {
           id: suggestion.id,
@@ -29,7 +29,7 @@ export default {
         }
       });
     },
-    groupInvitations(state){
+    groupInvitations(state) {
       return _.map(state.groupInvitation, (invitation) => {
         return {
           id: invitation.id,
@@ -206,13 +206,63 @@ export default {
 
       axiosInstance.put('api/Group/DenyGroupInvitation?groupInvitationId=' + id)
     },
-    sendReportReview(context, payload){
+    sendReportReview(context, payload) {
+      // post /api/Location/CreateReview
       const {
         reviewId,
-        message
+        commentInput
       } = payload;
 
+      return new Promise((resolve, reject) => {
+        axiosInstance.post('api/Location/CreateReview', {
+          params: {
+            reviewId,
+            commentInput
+          }
+        })
+          .then(value => {
+            resolve(value.data);
+          })
+          .catch(reason => {
+            Raven.captureException(reason);
+            reject(reason.response);
+          })
+      })
+    },
+    createChangeRequest(context, payload){
+      // post /api/Location/CreateChangeRequest
+      const {
+        id,
+        name,
+        address,
+        desciprtion,
+        phone,
+        email,
+        website,
+        tags
+      } = payload;
 
+      const data  = {
+        "locationId": id,
+        "name": name,
+        "address": address,
+        "description": desciprtion,
+        "phoneNumber": phone,
+        "website": website,
+        "email": email,
+        "tags": _.map(tags, 'id')
+      };
+
+      return new Promise((resolve, reject) => {
+        axiosInstance.post('api/Location/CreateChangeRequest', data)
+          .then(value => {
+            resolve(value.data);
+          })
+          .catch(reason => {
+            Raven.captureException(reason);
+            reject(reason.response);
+          })
+      })
     }
   }
 }

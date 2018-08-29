@@ -14,7 +14,7 @@ function mockShell(bodyFunc, noFail) {
       } else {
         //error
         reject({
-          message: 'Có lỗi xẩy ra !'
+          message: 'Có lỗi xảy ra !'
         })
       }
 

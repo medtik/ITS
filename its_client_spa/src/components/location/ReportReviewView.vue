@@ -7,11 +7,10 @@
     </v-toolbar>
     <v-layout column mx-2>
       <v-flex my-2>
-        <v-textarea label="Mô tả thêm"/>
+        <v-textarea label="Mô tả thêm" v-model="commentInput"/>
       </v-flex>
       <v-flex my-2>
-        <v-btn color="success"
-               @click="$router.back()">
+        <v-btn color="success" :loading="btnLoading" @click="onSendBtnClick">
           Gửi
         </v-btn>
         <v-btn color="secondary"
@@ -28,7 +27,9 @@
     name: "ReportReviewView",
     data(){
       return {
-        reviewId: undefined
+        btnLoading : false,
+        reviewId: undefined,
+        commentInput: undefined
       };
     },
     created(){
@@ -40,7 +41,19 @@
     },
     methods:{
       onSendBtnClick(){
-
+        this.btnLoading = true;
+        this.$store.dispatch('request/sendReportReview',{
+          reviewId: this.reviewId,
+          commentInput: this.commentInput
+        })
+          .then(value => {
+            this.btnLoading = false;
+            this.$router.back();
+          })
+          .catch(reason => {
+            this.btnLoading = false;
+            this.$router.back();
+          })
       },
       onCancel(){
         this.$router.back();
