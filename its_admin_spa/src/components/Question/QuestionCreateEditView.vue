@@ -8,18 +8,15 @@
         <v-layout column v-else>
           <!--Basic input-->
           <v-flex style="width: 25rem">
-            <v-form :ref="refs.question" lazy-validation>
-              <v-text-field label="Nội dung câu hỏi"
-                            v-model="textInput"
-                            :rules="[rules.questionContent]"
-              ></v-text-field>
-              <v-combobox
-                v-model="categoryInput"
-                :items="categories"
-                label="Thể loại"
-                :loading="loading.categories"
-              ></v-combobox>
-            </v-form>
+            <v-text-field label="Nội dung câu hỏi"
+                          v-model="textInput"
+            ></v-text-field>
+            <v-combobox
+              v-model="categoryInput"
+              :items="categories"
+              label="Thể loại"
+              :loading="loading.categories"
+            ></v-combobox>
           </v-flex>
           <!--Answer-->
           <v-flex my-3>
@@ -31,27 +28,26 @@
                   </v-toolbar>
                   <v-layout column>
                     <v-flex pa-2>
-                      <v-form :ref="refs.answerText" lazy-validation>
-                        <v-layout row style="align-items: center">
-                          <v-text-field
-                            label="Câu trả lời"
-                            v-model="answerTextInput"
-                            :rules="[rules.answerContent,answerDuplicateRule]"
-                          ></v-text-field>
-                          <v-btn icon flat color="green"
-                                 v-on:click="onAddAnswerClick">
-                            <v-icon>fas fa-plus</v-icon>
-                          </v-btn>
-                        </v-layout>
-                      </v-form>
+                      <v-layout row style="align-items: center">
+                        <v-text-field
+                          label="Câu trả lời"
+                          v-model="answerTextInput"
+                        ></v-text-field>
+                        <v-btn icon flat color="green"
+                               v-on:click="onAddAnswerClick">
+                          <v-icon>fas fa-plus</v-icon>
+                        </v-btn>
+                      </v-layout>
                     </v-flex>
                     <v-divider></v-divider>
-                    <v-flex px-2 v-for="(answer,index) in answersInput" :key="index">
+                    <v-flex v-if="answersInput && answersInput.length > 0"
+                            v-for="(answer, index) in answersInput" :key="index"
+                            px-2>
                       <v-layout row py-2>
                         <v-flex xs11>
                           <v-layout column>
                             <v-flex ml-2>
-                              <span class="subheading">{{answer.text}}</span>
+                              <span class="subheading">{{answer.content}}</span>
                             </v-flex>
                             <v-flex mt-2>
                               <TagsInput
@@ -64,15 +60,15 @@
                         </v-flex>
                         <v-flex xs1 style="text-align: end;">
                           <v-btn icon flat color="success"
-                                 v-on:click="editAnswerDialog = true">
+                                 @click="onEditAnswer(index)">
                             <v-icon>edit</v-icon>
                           </v-btn>
-                          <v-btn icon flat color="red">
+                          <v-btn icon flat color="red" @click="onRemoveAnswer(index)">
                             <v-icon>delete</v-icon>
                           </v-btn>
                         </v-flex>
                       </v-layout>
-                      <v-divider v-if="(index + 1) < question.answers.length"></v-divider>
+                      <v-divider v-if="(index + 1) < answersInput.length"></v-divider>
                     </v-flex>
                   </v-layout>
                 </v-card>
@@ -109,7 +105,7 @@
         </v-card-title>
         <v-layout column pa-4>
           <v-flex>
-            <v-text-field label="Tên" v-model="editedAnswer.name"></v-text-field>
+            <v-text-field label="Nội dung" v-model="editedAnswer.content"></v-text-field>
           </v-flex>
           <v-flex>
             <v-btn color="green" dark v-on:click="onSaveEditAnswer">Lưu thay đổi</v-btn>
@@ -136,6 +132,7 @@
   import {FormRuleMixin} from "../../common/mixin";
   import TagCreateEditDialog from "../Tag/TagCreateEditDialog" ;
   import _ from "lodash";
+
   export default {
     name: "QuestionCreateEditView",
     mixins: [FormRuleMixin],
@@ -177,6 +174,7 @@
           dialog: false,
         },
         editAnswerDialog: false,
+        editAnswerIndex: undefined,
         editedAnswer: {},
       }
     },
@@ -216,23 +214,6 @@
       this.updateCategories();
     },
     methods: {
-      answerDuplicateRule(){
-        const duplicatedAnswer = _.find(this.answersInput, (answer) =>{
-          return answer.text == this.answerTextInput;
-        });
-        if(duplicatedAnswer){
-          return 'Câu trả lời không được trùng nhau'
-        }else{
-          return true;
-        }
-      },
-      validate() {
-        return this.$refs[this.refs.question].validate();
-      },
-      validateNoTagsAnswer() {
-        //tags,text
-
-      },
       updateCategories() {
         this.loading.categories = true;
         this.$store.dispatch('question/getCategories', {
@@ -244,24 +225,21 @@
           })
       },
       fillInputs() {
-        this.textInput = this.question.text;
+        this.textInput = this.question.content;
         this.categoryInput = this.question.category;
-        this.answersInput = this.question.answers;
+        this.answersInput = this.question.answer;
         return Promise.resolve();
       },
       onAddAnswerClick() {
         if (this.answerTextInput) {
           this.answersInput.push({
-            text: this.answerTextInput
+            content: this.answerTextInput
           });
           this.answerTextInput = '';
-          this.$refs[this.refs.answerText].reset()
+          // this.content[this.refs.answerText].reset()
         }
       },
       onCreateClick() {
-        if (!this.validate()) {
-          return;
-        }
         this.loading.createBtn = true;
         this.$store.dispatch('question/create', {
           text: this.textInput,
@@ -285,20 +263,13 @@
         this.loading.updateBtn = true;
         this.$store.dispatch('question/update', {
           id: this.questionId,
-          text: this.textInput,
-          category: this.categoryInput
-        }).then(question => {
-          this.success = {
-            dialog: true,
-            message: `Cập nhật thành công câu hỏi ${question.text}`
-          };
-          this.loading.updateBtn = false;
-        }).catch(reason => {
-          this.error = {
-            dialog: true,
-            message: reason.message
-          };
-          this.loading.updateBtn = false;
+          content: this.textInput,
+          categories: this.categoryInput,
+          answers: this.answersInput
+        }).then(() => {
+          this.$router.push({
+            name: 'QuestionList'
+          });
         })
       },
       onDialogConfirmCreate(item) {
@@ -317,8 +288,23 @@
           dialog: false
         }
       },
+      onRemoveAnswer(removeIndex) {
+        this.answersInput = _.filter(this.answersInput, (val, index) => {
+          return index != removeIndex;
+        })
+      },
+      onEditAnswer(editIndex){
+        this.editedAnswer = _(this.answersInput)
+          .filter((val, index) => {
+            return index == editIndex;
+          })
+          .head();
+        this.editAnswerDialog = true;
+        this.editAnswerIndex = editIndex;
+      },
       onSaveEditAnswer() {
         this.editAnswerDialog = false;
+
       },
       onExitClick() {
         this.$router.back();

@@ -32,7 +32,7 @@
               </v-flex>
             </v-layout>
             <v-list>
-              <v-list-tile v-for="(question, index) in this.choosenQuestions" :key="question">
+              <v-list-tile v-for="(question, index) in this.choosenQuestions" :key="index">
                 <v-list-tile-title>{{question.content}}</v-list-tile-title>
                 <v-list-tile-action>
                   <v-btn color="red" flat @click="removeQuestion(question.id)">
@@ -149,12 +149,19 @@
       },
       onCreateBtnClick(){
         this.$store.dispatch('area/create', {
-          content,
-          choosenQuestions
+          name: this.nameInput,
+          questions: this.choosenQuestions
         })
       },
       onEditBtnClick(){
-        this.$store.dispatch('area/create')
+        this.$store.dispatch('area/update',{
+          id: this.$route.query.id,
+          name: this.nameInput,
+          questions: this.choosenQuestions
+        })
+      },
+      onCancel(){
+        this.$router.back();
       }
     }
   }

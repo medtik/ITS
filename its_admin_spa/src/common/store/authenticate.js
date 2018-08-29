@@ -15,7 +15,6 @@ var config = {
   storageBucket: "its-g8.appspot.com",
   messagingSenderId: "917708153355"
 };
-
 firebase.initializeApp(config);
 
 const googleProvider = new firebase.auth.GoogleAuthProvider();
@@ -124,10 +123,10 @@ export default {
           var user = result.user;
 
           let data = {
-            "email": user.email,
-            "photoUrl": user.photoUrl,
-            "displayName": user.displayName,
-            "uid": user.uid,
+              "email": !!user.email ? user.email : 'Non',
+              "photoUrl": user.photoUrl,
+              "displayName": user.displayName,
+              "uid": user.uid,
             "provider": "Facebook",
             "externalAccessToken": token
           };
@@ -160,7 +159,7 @@ export default {
             var user = result.user;
 
             let data = {
-              "email": user.email,
+              "email": !!user.email ? user.email : 'Non',
               "photoUrl": user.photoUrl,
               "displayName": user.displayName,
               "uid": user.uid,

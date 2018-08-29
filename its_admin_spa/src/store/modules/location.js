@@ -169,6 +169,14 @@ export default {
           formatted.phoneNumber = undefined;
         }
 
+        if(!!formatted.longitude){
+          formatted.longitude = Number(formatted.longitude);
+        }
+
+        if(!!formatted.latitude){
+          formatted.latitude = Number(formatted.latitude);
+        }
+
         console.debug("createlocation/formatted", formatted);
 
         axiosInstance.post('api/location', formatted)
@@ -222,6 +230,14 @@ export default {
 
       if(data["phone"] == ""){
         data["phone"] = undefined;
+      }
+
+      if(!!data["lat"]){
+        data["lat"] = Number(data["lat"]);
+      }
+
+      if(!!data["long"]){
+        data["long"] = Number(data["long"]);
       }
 
       return new Promise((resolve, reject) => {

@@ -88,7 +88,7 @@
     ],
     data() {
       return {
-        selectedGroup: {},
+        selectedGroup: -1,
       }
     },
     computed: {

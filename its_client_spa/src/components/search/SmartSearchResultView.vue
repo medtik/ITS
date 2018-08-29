@@ -49,13 +49,13 @@
             </template>
           </LocationFullWidth>
         </v-flex>
-        <v-flex>
-          <v-btn block flat color="secondary">
-            Xem thêm
-            &nbsp;
-            <v-icon small>fas fa-angle-down</v-icon>
-          </v-btn>
-        </v-flex>
+        <!--<v-flex>-->
+          <!--<v-btn block flat color="secondary">-->
+            <!--Xem thêm-->
+            <!--&nbsp;-->
+            <!--<v-icon small>fas fa-angle-down</v-icon>-->
+          <!--</v-btn>-->
+        <!--</v-flex>-->
       </v-layout>
       <v-flex style="height: 10vh">
         <!--Holder-->
@@ -171,7 +171,7 @@
           .catch(reason => {
             this.errorDialog = {
               dialog: true,
-              message: 'Bạn cần phải chọn "Nơi ở" và "Ăn uống" để đủ địa điểm cho chuyến đi tự động',
+              message: 'Bạn cần phải chọn "Nơi ở", "Ăn uống", và "Địa điểm thăm quan" để đủ địa điểm cho chuyến đi tự động',
             }
           })
       },
