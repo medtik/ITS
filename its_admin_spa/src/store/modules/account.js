@@ -125,17 +125,23 @@ export default {
       })
     },
     ban(context, payload) {
-      return mockShell(() => {
-        let account = _accounts.find(acc => payload.id == acc.id);
-        account.ban = true;
-        return account;
-      })
-    },
-    unBan(context, payload) {
-      return mockShell(() => {
-        let account = _accounts.find(acc => payload.id == acc.id);
-        account.ban = false;
-        return account;
+      // put /api/account/BanAccount
+      const {
+        id
+      } = payload;
+
+      return new Promise((resolve, reject) => {
+        axiosInstance.put('api/account/BanAccount', {}, {
+          params:{
+            userId: id
+          }
+        })
+          .then(value =>{
+            resolve(value);
+          })
+          .catch(reason => {
+            reject(reason);
+          })
       })
     },
     upgradeAccount() {

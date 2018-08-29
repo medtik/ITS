@@ -14,11 +14,11 @@
             single-line
             hide-details>
           </v-text-field>
-          <v-spacer></v-spacer>
-          <v-btn color="primary"
-                 :to="{name:'AccountCreate'}">
-            Tạo mới
-          </v-btn>
+          <!--<v-spacer></v-spacer>-->
+          <!--<v-btn color="primary"-->
+                 <!--:to="{name:'AccountCreate'}">-->
+            <!--Tạo mới-->
+          <!--</v-btn>-->
         </v-card-title>
         <v-data-table
           :items="items"
@@ -151,37 +151,41 @@
         this.loadData();
       },
       banClick(item) {
-        this.loading = true;
-        const handleSuccess = (account) => {
-          item = {
-            ...account
-          };
-          let statusText = account.ban ? 'Khóa' : 'Hoạt động';
-          this.success = {
-            dialog: true,
-            message: `Tài khoản ${account.name} chuyển thành ${statusText}`
-          };
-
-          this.loading = false;
-        };
-        const handleError = (error) => {
-          this.error = {
-            dialog: true,
-            message: error.message
-          };
-          this.loading = false;
-        };
-        if (item.ban) {
-          this.$store.dispatch('account/unBan', {
-            id: item.id
-          }).then(handleSuccess)
-            .catch(handleError)
-        } else {
-          this.$store.dispatch('account/ban', {
-            id: item.id
-          }).then(handleSuccess)
-            .catch(handleError)
-        }
+        this.$store.dispatch('account/ban')
+          .then(value => {
+            this.loadData();
+          })
+        // this.loading = true;
+        // const handleSuccess = (account) => {
+        //   item = {
+        //     ...account
+        //   };
+        //   let statusText = account.ban ? 'Khóa' : 'Hoạt động';
+        //   this.success = {
+        //     dialog: true,
+        //     message: `Tài khoản ${account.name} chuyển thành ${statusText}`
+        //   };
+        //
+        //   this.loading = false;
+        // };
+        // const handleError = (error) => {
+        //   this.error = {
+        //     dialog: true,
+        //     message: error.message
+        //   };
+        //   this.loading = false;
+        // };
+        // if (item.ban) {
+        //   this.$store.dispatch('account/unBan', {
+        //     id: item.id
+        //   }).then(handleSuccess)
+        //     .catch(handleError)
+        // } else {
+        //   this.$store.dispatch('account/ban', {
+        //     id: item.id
+        //   }).then(handleSuccess)
+        //     .catch(handleError)
+        // }
 
       },
     }

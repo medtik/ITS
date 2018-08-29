@@ -57,11 +57,6 @@
                 text: 'Danh sách',
                 icon: 'fas fa-bars',
                 to: {name: 'AccountList'}
-              },
-              {
-                text: 'Tạo mới',
-                icon: 'fas fa-plus',
-                to: {name: 'AccountCreate'}
               }
             ]
           },

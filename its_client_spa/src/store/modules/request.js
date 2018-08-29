@@ -18,6 +18,11 @@ export default {
   getters: {
     locationSuggestions(state) {
       return _.map(state.locationSuggestion, (suggestion) => {
+        let plandayText = "Chưa lên lịch";
+        if(suggestion.planDay != 0){
+          plandayText = `ngày ${suggestion.planDay}`
+        }
+
         return {
           id: suggestion.id,
           key: "LocationSuggestion_" + suggestion.id,
@@ -25,7 +30,10 @@ export default {
           statusText: formatter.getStatusText(suggestion.status),
           message: suggestion.comment,
           type: "LocationSuggestion",
-          data: suggestion
+          data: {
+            ...suggestion,
+            plandayText
+          }
         }
       });
     },
@@ -36,7 +44,7 @@ export default {
           key: "GroupInvitation_" + invitation.id,
           status: invitation.status,
           statusText: formatter.getStatusText(invitation.status),
-          title: `Mời vào`,
+          title: `${invitation.creatorName} mời vào`,
           message: invitation.message,
           type: "GroupInvitation",
           data: invitation
