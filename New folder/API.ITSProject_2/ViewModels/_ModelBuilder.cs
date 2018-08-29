@@ -112,15 +112,15 @@
             {
                 Address = model.Address,
                 AreaId = model.AreaId.Value,
-                Description = model.Desription,
+                Description = model.Description,
                 EmailAddress = model.Email,
                 IsClosed = model.IsClosed,
                 IsVerified = model.IsVerified,
-                Latitude = model.Lat.Value,
-                Longitude = model.Long.Value,
+                Latitude = model.Latitude.Value,
+                Longitude = model.Longitude.Value,
                 Name = model.Name,
                 PhoneNumber = model.Phone,
-                Website = model.Web,
+                Website = model.Website,
                 Category = model.Category
             };
 
@@ -559,7 +559,7 @@
             => new Question
             {
                 Content = question.Content,
-                Categories = question.Categories,
+                Categories = question.Categories
             };
 
         public QuestionDetailsViewModels ConvertToQuestionDetailsViewModels(Question question)

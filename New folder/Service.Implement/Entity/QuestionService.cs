@@ -13,10 +13,12 @@
     public class QuestionService : _BaseService<Question>, IQuestionService
     {
         private readonly IRepository<Answer> _answerRepository;
+        private readonly IRepository<Area> _areaRepository;
 
         public QuestionService(ILoggingService loggingService, IUnitOfWork unitOfWork) : base(loggingService, unitOfWork)
         {
             _answerRepository = unitOfWork.GetRepository<Answer>();
+            _areaRepository = unitOfWork.GetRepository<Area>();
         }
 
         public bool Create(Question question, IEnumerable<Answer> answers)
@@ -30,6 +32,34 @@
                     {
                         answer.QuestionId = question.Id;
                         _answerRepository.Create(answer);
+                    }
+                    _unitOfWork.SaveChanges();
+                    scope.Complete();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                _loggingService.Write(GetType().Name, nameof(Create), ex);
+                return false;
+            }
+        }
+
+        public bool Create(Question question, IEnumerable<Answer> answers, IEnumerable<Area> areas)
+        {
+            try
+            {
+                using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required))
+                {
+                    base.Create(question);
+                    foreach (var answer in answers)
+                    {
+                        answer.QuestionId = question.Id;
+                        _answerRepository.Create(answer);
+                    }
+                    foreach (var area in areas)
+                    {
+                        area.Questions.Add(question);
                     }
                     _unitOfWork.SaveChanges();
                     scope.Complete();

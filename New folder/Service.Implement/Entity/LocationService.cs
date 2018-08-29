@@ -185,16 +185,26 @@
             return Update(entity);
         }
 
-        public bool Edit(Location location, Photo priamryPhoto, IEnumerable<Photo> photos, IEnumerable<BusinessHour> businessHours, int[] tagList)
+        public bool Edit(Location data, Photo priamryPhoto, IEnumerable<Photo> photos, IEnumerable<BusinessHour> businessHours, int[] tagList)
         {
             try
             {
                 using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required))
                 {
-                    location.Tags = new List<Tag>();
-                    location.BusinessHours = new List<BusinessHour>();
-                    location.Photos = new List<LocationPhoto>();
+                    var location = _repository.Get(_ => _.Id == data.Id);
+                    location.IsClosed = data.IsClosed;
+                    location.IsVerified = data.IsVerified;
+                    location.Address = data.Address;
+                    location.AreaId = data.AreaId;
+                    location.Category = data.Category;
+                    location.EmailAddress = data.EmailAddress;
+                    location.Description = data.Description;
+                    location.Latitude = data.Latitude;
+                    location.Name = data.Name;
+
+
                     base.Update(location);
+                    _unitOfWork.SaveChanges();
 
                     List<Tag> tags = new List<Tag>();
                     tagList.ToList().ForEach(_ =>
@@ -204,6 +214,7 @@
                     });
                     location.Tags = tags;
                     base.Update(location);
+                    _unitOfWork.SaveChanges();
 
                     _photoRepository.Create(priamryPhoto);
                     _unitOfWork.SaveChanges();
@@ -244,7 +255,7 @@
             }
             catch (Exception ex)
             {
-                _loggingService.Write(GetType().Name, nameof(Create), ex);
+                _loggingService.Write(GetType().Name, nameof(Edit), ex);
                 return false;
             }
         }
@@ -303,7 +314,8 @@
         {
             List<LocationSuggestion> locationSuggestions = new List<LocationSuggestion>();
             Creator user = _creatorRepository.Get(_ => _.Id == userId, _ => _.CreatedGroups.Select(
-                __ => __.Plans.Select(___ => ___.LocationSuggestion.Select(____ => ____.Locations))));
+                __ => __.Plans.Select(___ => ___.LocationSuggestion.Select(____ => ____.Locations))),
+                _ => _.CreatedGroups.Select(__ => __.Plans.Select(___ => ___.LocationSuggestion.Select(____ => ____.User))));
 
             foreach (var ele in user.CreatedGroups)
             {

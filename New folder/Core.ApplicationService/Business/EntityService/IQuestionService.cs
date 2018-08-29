@@ -8,6 +8,8 @@
 
     public interface IQuestionService
     {
+        bool Create(Question question, IEnumerable<Answer> answers, IEnumerable<Area> areas);
+
         bool Create(Question question, IEnumerable<Answer> answer);
 
         bool Delete(int questionId);
