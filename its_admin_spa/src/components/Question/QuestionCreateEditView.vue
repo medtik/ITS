@@ -24,7 +24,7 @@
               <v-flex xs12>
                 <v-card elevation-5>
                   <v-toolbar flat dark color="blue darken-1">
-                    <v-toolbar-title>Câu trả lời</v-toolbar-title>
+        8            <v-toolbar-title>Câu trả lời</v-toolbar-title>
                   </v-toolbar>
                   <v-layout column>
                     <v-flex pa-2>

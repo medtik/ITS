@@ -73,11 +73,11 @@
         input: {
           businessHours: [],
           tags: [],
-          name,
-          address,
-          description,
-          phone,
-          email
+          name : undefined,
+          address: undefined,
+          description: undefined,
+          phone: undefined,
+          email: undefined
         }
       }
     },
