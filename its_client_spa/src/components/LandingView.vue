@@ -68,12 +68,14 @@
       </v-parallax>
     </section>
 
-    <section v-if="false">
+    <section>
       <!--NEARBY-->
-      <v-layout column my-5>
-        <v-btn color="light-blue lighten-1">
-          Gần tôi
-        </v-btn>
+      <v-layout row my-5 justify-center>
+        <v-flex shrink>
+          <v-btn color="light-blue lighten-1" dark>
+            Địa điểm gần tôi
+          </v-btn>
+        </v-flex>
       </v-layout>
     </section>
 
@@ -146,6 +148,16 @@
       AreaCard,
       PlanCard,
       ParallaxHeader
+    },
+    data(){
+      return {
+        nearbyLink: {
+          name: 'LocationNearbyList',
+          query:{
+            title: "Gần tôi"
+          }
+        }
+      }
     },
     computed: {
       ...mapGetters('plan', {

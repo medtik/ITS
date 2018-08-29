@@ -258,7 +258,7 @@
         this.loading.createBtn = true;
         this.$store.dispatch('question/create', {
           text: this.textInput,
-          category: this.categoryInput,
+          categories: this.categoryInput,
           answers: this.answersInput
         }).then(() => {
           this.success = {

@@ -31,12 +31,12 @@
           label="Website"
           v-model="input.website"
         ></v-text-field>
-        <!--<v-flex my-2>-->
-        <!--<div class="subheading">-->
-        <!--Giờ hoạt động-->
-        <!--</div>-->
-        <!--<LocationBusinessHoursInput v-model="input.businessHours"/>-->
-        <!--</v-flex>-->
+        <v-flex my-2>
+          <div class="subheading">
+            Giờ hoạt động
+          </div>
+          <LocationBusinessHoursInput v-model="input.businessHours"/>
+        </v-flex>
         <v-flex y-2>
           <div class="subheading">
             Thẻ
@@ -86,23 +86,24 @@
           email: undefined,
           website: undefined,
           tags: undefined,
+          businessHours: undefined
         },
-        successDialog:{
+        successDialog: {
           dialog: false,
           message: undefined
         }
       }
     },
-    computed:{
-      ...mapState('location',{
+    computed: {
+      ...mapState('location', {
         location: state => state.detailedLocation
       })
     },
-    mounted(){
+    mounted() {
       this.setInputs(this.location);
     },
     methods: {
-      setInputs(location){
+      setInputs(location) {
         this.input = {
           name: location.name,
           address: location.address,
@@ -110,7 +111,8 @@
           phone: location.phoneNumber,
           email: location.email,
           website: location.website,
-          tags: location.tags
+          tags: location.tags,
+          businessHours: location.businessHours
         };
       },
       createLocationChangeRequest() {

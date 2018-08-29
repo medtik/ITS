@@ -34,10 +34,10 @@
     },
     created(){
       const {
-        reviewId,
+        id,
       } = this.$route.query;
 
-      this.reviewId = reviewId;
+      this.reviewId = id;
     },
     methods:{
       onSendBtnClick(){

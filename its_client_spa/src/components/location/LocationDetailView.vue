@@ -103,7 +103,7 @@
             <v-flex v-for="comment in location.comments"
                     :key="comment.id"
                     elevation-2>
-              <LocationReview v-bind="comment" @report="$router.push({name: 'ReviewReport'})"/>
+              <LocationReview v-bind="comment" @report="$router.push({name: 'ReviewReport', query:{id:comment.id}})"/>
             </v-flex>
           </v-layout>
           <v-layout v-else row my-2 justify-center class="subheading">

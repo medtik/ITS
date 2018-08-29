@@ -9,8 +9,7 @@ import QuestionModule from "./modules/question"
 import TagModule from "./modules/tag"
 import LocationModule from "./modules/location"
 import AreaModule from "./modules/area"
-import RequestModule from "./modules/request"
-
+import RequestModule from "./modules/request";
 Vue.use(Vuex);
 
 const store = new Vuex.Store({

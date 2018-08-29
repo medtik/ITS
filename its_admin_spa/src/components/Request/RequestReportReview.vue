@@ -1,10 +1,17 @@
 <template>
   <Request :user="user"
-           :isOwner="isOwner"
-           :title="title"
+           title="Báo cáo bình luận"
            :status="status">
     <template slot="detail">
-      <LocationReview v-bind="review"/>
+      <v-layout column>
+        <v-flex>
+          Comment thêm
+        </v-flex>
+        <v-flex>
+          <LocationReview v-bind="review"/>
+        </v-flex>
+      </v-layout>
+
     </template>
   </Request>
 </template>

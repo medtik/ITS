@@ -1,7 +1,7 @@
 import _claimOwner from "./mockdata/ClaimOwnerRequests";
 import _changeRequest from "./mockdata/LocationChangeRequests";
 import _reportReview from "./mockdata/ReportReviewRequest";
-
+import {axiosInstance} from "../../common/util"
 import _ from 'lodash'
 
 function mockShell(bodyFunc, noFail) {
@@ -25,43 +25,28 @@ function mockShell(bodyFunc, noFail) {
 export default {
   namespaced: true,
   actions: {
-    getAll(context, payload) {
-      return mockShell(() => {
-        const _requests = _.concat(_changeRequest, _claimOwner, _reportReview);
-        let total = _requests.length;
-        // let requests = _requests.filter(request => {
-        //   return (
-        //     (request.title && request.title.indexOf(payload.search) >= 0)
-        //   )
-        // });
-        let requests = _requests;
-
-        if (payload.pagination.sortBy) {
-          requests = requests.sort((a, b) => {
-            const sortA = a[payload.pagination.sortBy];
-            const sortB = b[payload.pagination.sortBy];
-
-            if (payload.pagination.descending) {
-              if (sortA < sortB) return 1;
-              if (sortA > sortB) return -1;
-              return 0
-            } else {
-              if (sortA < sortB) return -1;
-              if (sortA > sortB) return 1;
-              return 0
-            }
+    getChangeLocationRequest() {
+      return new Promise((resolve, reject) => {
+        axiosInstance.get('api/Location/GetChangeRequests')
+          .then(value => {
+            resolve(value.data);
           })
-        }
-
-        if (payload.pagination.rowsPerPage > 0) {
-          requests = requests.slice((payload.pagination.page - 1) * payload.pagination.rowsPerPage, payload.pagination.page * payload.pagination.rowsPerPage)
-        }
-
-        return {
-          requests,
-          total
-        }
-      }, true);
+          .catch(reason => {
+            reject(reason.response);
+          })
+      })
+    },
+    getReportReviewRequests(){
+      // get /api/Location/Report
+      return new Promise((resolve, reject) => {
+        axiosInstance.get('api/Location/Report')
+          .then(value => {
+            resolve(value.data);
+          })
+          .catch(reason => {
+            reject(reason.response);
+          })
+      })
     },
     getById(context, payload) {
       return mockShell(() => {

@@ -19,7 +19,6 @@
     </v-container>
   </v-content>
 </template>
-<!--TODO test this-->
 <script>
   import {LocationFullWidth} from "../../common/block";
   import {mapState} from "vuex";

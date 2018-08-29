@@ -235,22 +235,24 @@ export default {
         id,
         name,
         address,
-        desciprtion,
+        description,
         phone,
         email,
         website,
-        tags
+        tags,
+        businessHours
       } = payload;
 
       const data  = {
         "locationId": id,
         "name": name,
         "address": address,
-        "description": desciprtion,
+        "description": description,
         "phoneNumber": phone,
         "website": website,
+        "businessHours": businessHours,
         "email": email,
-        "tags": _.map(tags, 'id')
+        "tags": JSON.stringify(_.map(tags, 'id'))
       };
 
       return new Promise((resolve, reject) => {
