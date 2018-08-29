@@ -86,10 +86,10 @@
                 />
               </v-flex>
               <v-alert
-                :value="!!formError['data.Days']"
+                :value="!!formError['']"
                 type="error"
               >
-                {{formError['data.Days']}}
+                {{formError[''][0]}}
               </v-alert>
             </v-flex>
             <v-flex my-3 v-if="mode == 'edit'">
@@ -270,7 +270,7 @@
           ['data.Tags']: undefined,
           ['data.PrimaryPhoto']: undefined,
           ['data.OtherPhotos']: undefined,
-          ['data.Days']: undefined,
+          ['']: undefined,
         },
         //Dialog
         createEditTag: {

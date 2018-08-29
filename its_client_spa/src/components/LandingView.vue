@@ -68,11 +68,11 @@
       </v-parallax>
     </section>
 
-    <section>
+    <section v-if="isHaveCoors">l
       <!--NEARBY-->
       <v-layout row my-5 justify-center>
         <v-flex shrink>
-          <v-btn color="light-blue lighten-1" dark>
+          <v-btn color="light-blue lighten-1" dark :to="nearbyLink">
             Địa điểm gần tôi
           </v-btn>
         </v-flex>
@@ -149,14 +149,12 @@
       PlanCard,
       ParallaxHeader
     },
-    data(){
+    data() {
       return {
-        nearbyLink: {
-          name: 'LocationNearbyList',
-          query:{
-            title: "Gần tôi"
-          }
-        }
+        lat: undefined,
+        long: undefined,
+
+
       }
     },
     computed: {
@@ -168,11 +166,36 @@
         featuredAreas: 'featuredAreas',
         featuredAreasLoading: 'featuredAreasLoading'
       }),
+      ...mapGetters('authenticate', {
+        isLoggedIn: 'isLoggedIn'
+      }),
+      isHaveCoors(){
+        return !!this.lat && !!this.long
+      },
+      nearbyLink() {
+        return {
+          name: 'NearbyOnMap',
+          query: {
+            title: "Gần tôi",
+            lat: this.lat,
+            long: this.long
+          }
+        }
+      }
     },
     mounted() {
       this.$store.dispatch('area/getFeatured');
       this.$store.dispatch('plan/getFeatured');
-    }
+      navigator.geolocation.getCurrentPosition(position => {
+        this.lat = position.coords.latitude;
+        this.long = position.coords.longitude;
+
+        if (this.isLoggedIn) {
+
+        }
+      });
+    },
+
   }
 </script>
 
