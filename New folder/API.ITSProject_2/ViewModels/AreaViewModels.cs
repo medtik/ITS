@@ -7,7 +7,7 @@
     [DataContract(Name = "Area")]
     public class CreateAreaViewModels
     {
-        [Required]
+        [Required(ErrorMessage = "Tên không được để trống")]
         [DataMember]
         public string Name { get; set; }
 
@@ -18,11 +18,11 @@
     [DataContract(Name = "Area")]
     public class EditAreaViewModels
     {
-        [Required]
+        [Required(ErrorMessage = "Id không thể trống")]
         [DataMember]
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Tên không được để trống")]
         [DataMember]
         public string Name { get; set; }
 

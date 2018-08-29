@@ -45,15 +45,15 @@ namespace API.ITSProject_2.Controllers
         #region Get
         [HttpGet]
         [Route("api/Location/GetChangeRequests")]
-        public IHttpActionResult GetRequest(int locationId)
+        public IHttpActionResult GetRequest()
         {
             try
             {
-                var location = _locationService.Find(locationId, _ => _.ChangeRequests, _ => _.ChangeRequests.Select(__ => __.User));
+                var location = _locationService.GetAllChangeRequest();
 
                 List<object> temp = new List<object>();
 
-                foreach (var item in location.ChangeRequests)
+                foreach (var item in location)
                 {
                     temp.Add(new
                     {
@@ -71,8 +71,19 @@ namespace API.ITSProject_2.Controllers
                             item.Description,
                             item.Website,
                             Phone = item.PhoneNumber,
-                            Email = item.EmailAddress
-                        }
+                            Email = item.EmailAddress,
+                            BusinessHours = JsonConvert.DeserializeObject<List<BusinessHourViewModels>>(item.BusinessHours).Select(_ => new BusinessHourViewModels
+                            {
+                                Day = _.Day,
+                                From = _.From,
+                                To = _.To
+                            }),
+                            Tags = JsonConvert.DeserializeObject<List<int>>(item.Tags).Select(_ => new
+                            {
+                                Id = _,
+                                Name = _tagService.Find(_).Name
+                            })
+                        },
                     });
                 }
                 return Ok(temp);
@@ -474,6 +485,49 @@ namespace API.ITSProject_2.Controllers
         {
             try
             {
+                if (changeRequest.BusinessHours != null)
+                {
+                    var listBusinessHour = changeRequest.BusinessHours.ToList();
+
+                    foreach (var item in listBusinessHour)
+                    {
+                        if (item.From == new TimeSpan(0, 0, 01) && item.To == new TimeSpan(0, 0, 01))
+                        {
+                            item.To = new TimeSpan(23, 59, 59);
+                        }//00:00 - 00:00 là mở cả ngày
+                        int range = item.From.CompareTo(item.To);
+                        if (range > 0)
+                        {
+                            ModelState.AddModelError(string.Empty, "Bắt đầu ở ngày này và kết thúc ở ngày khác");
+                        }//tránh khung giờ qua ngày khác
+                        string date = item.Day;
+                        int countDuplicateDate = listBusinessHour.Count(_ => _.Day == date);
+                        if (countDuplicateDate > 1)
+                        {
+                            var list = new List<BusinessHourViewModels>();
+                            listBusinessHour.ForEach(_ =>
+                            {
+                                if (_.Day == date)
+                                {
+                                    list.Add(_);//list chứa tất cả các giờ có cùng ngày
+                                }
+                            });
+                            List<TimeRange> ranges = new List<TimeRange>();
+                            for (int i = 0; i < list.Count; i++)
+                            {
+                                ranges.Add(new TimeRange(list[i].From, list[i].To));
+                            }
+                            list.ForEach(_ =>
+                            {
+                                TimeRange range2 = new TimeRange(_.From, _.To);
+                                if (ranges.Contains(range2))
+                                {
+                                    ModelState.AddModelError(string.Empty, "Thời gian hoạt động không hợp lệ");
+                                }
+                            });
+                        }//trong cùng 1 ngày
+                    }
+                }
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
 
@@ -799,13 +853,45 @@ namespace API.ITSProject_2.Controllers
             }
         }
 
-        [HttpPut]
-        public IHttpActionResult Edit(EditLocationViewModels data)
+        [HttpGet]
+        [Route("api/Location/Report")]
+        public IHttpActionResult GetReport()
         {
             try
             {
-                if (!ModelState.IsValid)
-                    return BadRequest(ModelState);
+                var reports = _locationService.GetAllReport();
+                List<object> result = new List<object>();
+                foreach (var item in reports)
+                {
+                    result.Add(new
+                    {
+                        user = new
+                        {
+                            DisplayName = item.User.FullName,
+                            item.User.Avatar
+                        },
+                        Status = 0,
+                        review = new ReviewViewModel
+                        {
+                            Message = item.Content,
+                            ReviewId = item.ReviewId
+                        }
+                    });
+                }
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _loggingService.Write(GetType().Name, nameof(GetReport), ex);
+                return InternalServerError();
+            }
+        }
+
+        [HttpPut, Authorize]
+        public async Task<IHttpActionResult> Edit(EditLocationViewModels data)
+        {
+            try
+            {
                 if (data.Days != null)
                 {
                     var listBusinessHour = data.Days.ToList();
@@ -851,18 +937,15 @@ namespace API.ITSProject_2.Controllers
                 }
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
-                Location location = _locationService.Find(data.Id, _ => _.Photos, 
+                Location location = _locationService.Find(data.Id, _ => _.Photos,
                                                             _ => _.BusinessHours,
                                                             _ => _.Tags, _ => _.Creator, _ => _.LocationSuggestion);
-                int userId = 9/*(await CurrentUser()).Id*/;
+                int userId = (await CurrentUser()).Id;
 
                 Photo primaryPhoto = ModelBuilder.ConvertToModels(data.PrimaryPhoto, userId);
                 IEnumerable<Photo> otherPhoto = ModelBuilder.ConvertToModels(data.OtherPhotos.AsEnumerable(), userId);
 
                 IEnumerable<BusinessHour> businessHours = ModelBuilder.ConvertToModels(data.Days);
-
-                
-                
 
                 bool result = _locationService.Edit(location, primaryPhoto, otherPhoto, businessHours, data.Tags);
 
@@ -875,7 +958,8 @@ namespace API.ITSProject_2.Controllers
                 {
                     return BadRequest();
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 _loggingService.Write(GetType().Name, nameof(Edit), ex);
 

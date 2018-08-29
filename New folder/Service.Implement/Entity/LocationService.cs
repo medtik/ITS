@@ -45,6 +45,17 @@
             _reportRepository = unitOfWork.GetRepository<Report>();
         }
 
+        public IEnumerable<Report> GetAllReport()
+        {
+            return _reportRepository.GetAllAsQueryable(_ => _.User).ToList();
+        }
+
+        public IEnumerable<ChangeRequest> GetAllChangeRequest()
+        {
+            return _changeRequestRepository.GetAllAsQueryable(_ => _.User).ToList();
+        }
+
+
         public bool AcceptStatusLocationSuggestion(int suggestionId)
         {
             try
@@ -189,69 +200,70 @@
         {
             try
             {
-                using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required))
+                var location = _repository.Get(_ => _.Id == data.Id, _ => _.BusinessHours);
+                location.BusinessHours = new List<BusinessHour>();
+                location.Photos = new List<LocationPhoto>();
+                base.Update(location);
+                _unitOfWork.SaveChanges();
+
+                location.IsClosed = data.IsClosed;
+                location.IsVerified = data.IsVerified;
+                location.Address = data.Address;
+                location.AreaId = data.AreaId;
+                location.Category = data.Category;
+                location.EmailAddress = data.EmailAddress;
+                location.Description = data.Description;
+                location.Latitude = data.Latitude;
+                location.Name = data.Name;
+
+
+                base.Update(location);
+                _unitOfWork.SaveChanges();
+
+                List<Tag> tags = new List<Tag>();
+                tagList.ToList().ForEach(_ =>
                 {
-                    var location = _repository.Get(_ => _.Id == data.Id);
-                    location.IsClosed = data.IsClosed;
-                    location.IsVerified = data.IsVerified;
-                    location.Address = data.Address;
-                    location.AreaId = data.AreaId;
-                    location.Category = data.Category;
-                    location.EmailAddress = data.EmailAddress;
-                    location.Description = data.Description;
-                    location.Latitude = data.Latitude;
-                    location.Name = data.Name;
+                    var ele = _tagRepository.Get(__ => __.Id == _, __ => __.Locations);
+                    tags.Add(ele);
+                });
+                location.Tags = tags;
+                base.Update(location);
+                _unitOfWork.SaveChanges();
 
+                _photoRepository.Create(priamryPhoto);
+                _unitOfWork.SaveChanges();
+                _locationPhotoRepository.Create(new LocationPhoto
+                {
+                    LocationId = location.Id,
+                    PhotoId = priamryPhoto.Id,
+                    IsPrimary = true
+                });
 
-                    base.Update(location);
-                    _unitOfWork.SaveChanges();
-
-                    List<Tag> tags = new List<Tag>();
-                    tagList.ToList().ForEach(_ =>
-                    {
-                        var ele = _tagRepository.Get(__ => __.Id == _, __ => __.Locations);
-                        tags.Add(ele);
-                    });
-                    location.Tags = tags;
-                    base.Update(location);
-                    _unitOfWork.SaveChanges();
-
-                    _photoRepository.Create(priamryPhoto);
+                photos.ToList().ForEach(_ =>
+                {
+                    _photoRepository.Create(_);
                     _unitOfWork.SaveChanges();
                     _locationPhotoRepository.Create(new LocationPhoto
                     {
                         LocationId = location.Id,
-                        PhotoId = priamryPhoto.Id,
-                        IsPrimary = true
+                        PhotoId = _.Id,
+                        IsPrimary = false
                     });
+                });
 
-                    photos.ToList().ForEach(_ =>
+                businessHours.ToList().ForEach(_ =>
+                {
+                    _businessHourRepository.Create(new BusinessHour
                     {
-                        _photoRepository.Create(_);
-                        _unitOfWork.SaveChanges();
-                        _locationPhotoRepository.Create(new LocationPhoto
-                        {
-                            LocationId = location.Id,
-                            PhotoId = _.Id,
-                            IsPrimary = false
-                        });
+                        LocationId = location.Id,
+                        Day = _.Day,
+                        OpenTime = _.OpenTime,
+                        CloseTime = _.CloseTime
                     });
+                });
 
-                    businessHours.ToList().ForEach(_ =>
-                    {
-                        _businessHourRepository.Create(new BusinessHour
-                        {
-                            LocationId = location.Id,
-                            Day = _.Day,
-                            OpenTime = _.OpenTime,
-                            CloseTime = _.CloseTime
-                        });
-                    });
-
-                    _unitOfWork.SaveChanges();
-                    scope.Complete();
-                    return true;
-                }//end scope
+                _unitOfWork.SaveChanges();
+                return true;
             }
             catch (Exception ex)
             {
