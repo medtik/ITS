@@ -73,7 +73,7 @@
                     <router-link v-for="(location, index) in item.data.locations"
                                  :key="'locationLink_'+index" :to="{name: 'LocationDetail', query:{id: location.item1}}">
                       {{location.item2}}</router-link>
-                    vào <nhóm></nhóm>
+                    vào nhóm
                   </v-list-tile-title>
                   <v-list-tile-sub-title>
                     {{item.message}}

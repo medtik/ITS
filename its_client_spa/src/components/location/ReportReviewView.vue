@@ -15,7 +15,7 @@
           Gửi
         </v-btn>
         <v-btn color="secondary"
-               @click="$router.back()">
+               @click="onCancel">
           Hủy
         </v-btn>
       </v-flex>
@@ -26,7 +26,26 @@
 <script>
   export default {
     name: "ReportReviewView",
+    data(){
+      return {
+        reviewId: undefined
+      };
+    },
+    created(){
+      const {
+        reviewId,
+      } = this.$route.query;
 
+      this.reviewId = reviewId;
+    },
+    methods:{
+      onSendBtnClick(){
+
+      },
+      onCancel(){
+        this.$router.back();
+      }
+    }
   }
 </script>
 

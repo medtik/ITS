@@ -205,6 +205,14 @@ export default {
       } = payload;
 
       axiosInstance.put('api/Group/DenyGroupInvitation?groupInvitationId=' + id)
+    },
+    sendReportReview(context, payload){
+      const {
+        reviewId,
+        message
+      } = payload;
+
+
     }
   }
 }
