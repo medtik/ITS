@@ -86,6 +86,10 @@
         pagination: {},
         total: undefined,
         searchInput: '',
+        formError:{
+          ['data.Name']: undefined,
+          ['data.Categories']: undefined
+        },
         //TABLE
         error: {
           dialog: false,
@@ -166,7 +170,6 @@
             this.loadData();
           })
           .catch(reason => {
-            console.debug('onDialogConfirmCreate-catch', reason);
             this.error = {
               dialog: true,
               message: 'Có lỗi xảy ra'
@@ -174,7 +177,8 @@
           });
         this.createEditDialog = {
           dialog: false
-        }
+        };
+        this.formError = reason.data.modelState;
       },
       onDialogConfirmEdit(item) {
         this.createEditDialog = {

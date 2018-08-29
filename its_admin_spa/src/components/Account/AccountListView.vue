@@ -28,8 +28,8 @@
           :loading="loading">
           <template slot="items" slot-scope="props">
             <td>{{ props.item.name }}</td>
-            <td>{{ props.item.email }}</td>
-            <td>{{ props.item.phone }}</td>
+            <td>{{ props.item.emailAddress }}</td>
+            <td>{{ props.item.phoneNumber }}</td>
             <td>{{ props.item.birthdate }}</td>
             <td>{{ props.item.address }}</td>
             <td>
@@ -88,8 +88,8 @@
         items: [],
         headers: [
           {text: 'Tên', value: 'name'},
-          {text: 'Email', value: 'email'},
-          {text: 'Điện thoại', value: 'phone'},
+          {text: 'Email', value: 'emailAddress'},
+          {text: 'Điện thoại', value: 'phoneNumber'},
           {text: 'Ngày sinh', value: 'birthdate'},
           {text: 'Địa chỉ', value: 'address'},
           {text: 'Khóa', value: 'ban'},

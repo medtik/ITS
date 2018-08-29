@@ -86,10 +86,11 @@
                 />
               </v-flex>
               <v-alert
+                v-if="!!formError['']"
                 :value="!!formError['']"
                 type="error"
               >
-                {{formError[''][0]}}
+               {{formError[''][0]}}
               </v-alert>
             </v-flex>
             <v-flex my-3 v-if="mode == 'edit'">

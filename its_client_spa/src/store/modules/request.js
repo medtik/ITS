@@ -214,11 +214,9 @@ export default {
       } = payload;
 
       return new Promise((resolve, reject) => {
-        axiosInstance.post('api/Location/CreateReview', {
-          params: {
-            reviewId,
-            commentInput
-          }
+        axiosInstance.post('api/Location/CreateReview',{
+          reviewId,
+          message: commentInput
         })
           .then(value => {
             resolve(value.data);
