@@ -169,7 +169,7 @@
             console.debug('onDialogConfirmCreate-catch', reason);
             this.error = {
               dialog: true,
-              message: 'Có lỗi xẩy ra'
+              message: 'Có lỗi xảy ra'
             }
           });
         this.createEditDialog = {

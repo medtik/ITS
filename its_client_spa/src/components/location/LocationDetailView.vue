@@ -48,7 +48,7 @@
                    :loading="loading.addImgBtn"
                    @click="onAddPhotoClick">
               <v-icon>add_a_photo</v-icon>
-              &nbsp &nbsp
+              &nbsp; &nbsp;
               Thêm ảnh
             </v-btn>
           </v-layout>

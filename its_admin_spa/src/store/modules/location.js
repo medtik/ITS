@@ -179,9 +179,17 @@ export default {
 
         console.debug("createlocation/formatted", formatted);
 
-        axiosInstance.post('api/location', formatted)
-          .then(resolve)
-          .catch(reject)
+        return new Promise((resolve1, reject1) => {
+          axiosInstance.post('api/location', formatted)
+            .then(value => {
+              resolve();
+            })
+            .catch(reason => {
+              Raven.captureException(reason);
+              reject(reason.response.data.modelState)
+            })
+        })
+
       })
     },
     update(context, payload) {

@@ -14,49 +14,60 @@
                 <v-text-field
                   label="Tên"
                   v-model="input.nameInput"
-                  :error="!!formError.name" :error-messages="formError.name"
+                  :error='!!formError["data.Name"]' :error-messages="formError['data.Name']"
                 />
                 <v-text-field
                   label="Địa chỉ"
                   v-model="input.addressInput"
-                  :error="!!formError.address" :error-messages="formError.address"
+                  :error="!!formError['data.Address']" :error-messages="formError['data.Address']"
                 />
                 <v-textarea
                   label="Mô tả"
                   v-model="input.descriptionInput"
-                  :error="!!formError.description" :error-messages="formError.description"
+                  :error="!!formError['data.Description']" :error-messages="formError['data.Description']"
                 />
                 <v-layout row wrap>
                   <v-flex xs12 md6>
                     <v-text-field
                       label="Vĩ độ"
                       v-model="input.latInput"
+                      :error="!!formError['data.Lat']" :error-messages="formError['data.Lat']"
                     />
                   </v-flex>
                   <v-flex xs12 md6>
                     <v-text-field
                       label="Kinh độ"
                       v-model="input.longInput"
+                      :error="!!formError['data.Long']" :error-messages="formError['data.Long']"
                     />
                   </v-flex>
                 </v-layout>
                 <v-text-field
                   label="Web"
                   v-model="input.websiteInput"
+                  :error="!!formError['data.Website']" :error-messages="formError['data.Website']"
                 />
                 <v-text-field
                   label="Điện thoại"
                   v-model="input.phoneInput"
+                  :error="!!formError['data.Phone']" :error-messages="formError['data.Phone']"
+
                 />
                 <v-text-field
                   label="Email"
                   v-model="input.emailInput"
+                  :error="!!formError['data.Email']" :error-messages="formError['data.Email']"
+
                 />
                 <AreaInput
                   v-model="input.areaInput"
+                  :error="!!formError['data.AreaId']" :errorMessages="formError['data.AreaId']"
+
                 ></AreaInput>
                 <LocationCategoryInput
                   v-model="input.category"
+                  :error="!!formError['data.Category']" :error-messages="formError['data.Category']"
+
                 />
               </v-flex>
             </v-flex>
@@ -74,6 +85,12 @@
                   v-model="input.businessHoursInput"
                 />
               </v-flex>
+              <v-alert
+                :value="!!formError['data.Days']"
+                type="error"
+              >
+                {{formError['data.Days']}}
+              </v-alert>
             </v-flex>
             <v-flex my-3 v-if="mode == 'edit'">
               <span class="subheading">Đánh giá</span>
@@ -85,6 +102,12 @@
                   :editMode="true"
                   :key="review.id"
                 />
+                <v-alert
+                  :value="!!formError.reviews"
+                  type="error"
+                >
+                  {{formError.reviews}}
+                </v-alert>
               </v-flex>
             </v-flex>
             <v-flex my-3>
@@ -95,6 +118,12 @@
                   :admin="true"
                   @create="createEditTag.dialog = true"
                 />
+                <v-alert
+                  :value="!!formError.tags"
+                  type="error"
+                >
+                  {{formError.tags}}
+                </v-alert>
               </v-flex>
             </v-flex>
             <v-flex my-3>
@@ -113,10 +142,22 @@
               }"
                   />
                 </v-flex>
+                <v-alert
+                  :value="!!formError.primaryPhoto"
+                  type="error"
+                >
+                  {{formError.primaryPhoto}}
+                </v-alert>
               </v-layout>
               <v-flex pl-3 mt-3>
                 <v-label class="subheading">Ảnh thêm</v-label>
                 <MultiPhotoInput v-model="input.secondaryPhotos"/>
+                <v-alert
+                  :value="!!formError.secondaryPhotos"
+                  type="error"
+                >
+                  {{formError.primaryPhoto}}
+                </v-alert>
               </v-flex>
             </v-flex>
             <v-divider/>
@@ -215,22 +256,21 @@
           secondaryPhotoInput: undefined,
           secondaryPhotos: undefined,
         },
-        formError:{
-          name: undefined,
-          address: undefined,
-          description: undefined,
-          long: undefined,
-          lat: undefined,
-          website: undefined,
-          phone: undefined,
-          email: undefined,
-          area: undefined,
-          category: undefined,
-          tags: undefined,
-          reviews: undefined,
-          businessHours: undefined,
-          primaryPhoto: undefined,
-          secondaryPhotos: undefined
+        formError: {
+          ['data.Name']: undefined,
+          ['data.Address']: undefined,
+          ['data.Description']: undefined,
+          ['data.Long']: undefined,
+          ['data.Lat']: undefined,
+          ['data.Website']: undefined,
+          ['data.Phone']: undefined,
+          ['data.Email']: undefined,
+          ['data.AreaId']: undefined,
+          ['data.Category']: undefined,
+          ['data.Tags']: undefined,
+          ['data.PrimaryPhoto']: undefined,
+          ['data.OtherPhotos']: undefined,
+          ['data.Days']: undefined,
         },
         //Dialog
         createEditTag: {
@@ -332,7 +372,7 @@
             console.debug('onDialogConfirmCreate-catch', reason);
             this.error = {
               dialog: true,
-              message: 'Có lỗi xẩy ra'
+              message: 'Có lỗi xảy ra'
             }
           });
         this.createEditTag.dialog = true;
@@ -345,12 +385,15 @@
           .filter(review => review.id != reviewId)
       },
       onUpdateClick() {
-        this.$store.dispatch('location/update', {...this.input,id:this.loadingId})
+        this.$store.dispatch('location/update', {...this.input, id: this.loadingId})
           .then(value => {
             this.success = {
               dialog: true,
               message: "Cập nhật địa điểm thành công"
             }
+          })
+          .catch(errors => {
+            this.formError = _.cloneDeep(errors);
           })
       },
       onCreateClick() {
@@ -360,6 +403,9 @@
               dialog: true,
               message: "Tạo mới địa điểm thành công"
             }
+          })
+          .catch(errors => {
+            this.formError = _.cloneDeep(errors);
           })
       },
       onExitClick() {

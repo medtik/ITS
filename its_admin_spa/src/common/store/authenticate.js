@@ -101,7 +101,7 @@ export default {
               const responseObj = JSON.parse(this.responseText);
               resolve(responseObj);
             } else {
-              let message = 'Có lỗi xẩy ra';
+              let message = 'Có lỗi xảy ra';
               if (this.status === 400) {
                 message = 'Sai tên đăng nhập hoặc mật khẩu'
               }
