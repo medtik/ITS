@@ -220,8 +220,8 @@ export default {
         "name": nameInput,
         "address": addressInput,
         "desription": descriptionInput,
-        "lat": latInput,
-        "long": longInput,
+        "Latitude": latInput,
+        "Longitude": longInput,
         "web": websiteInput,
         "phone": phoneInput,
         "email": emailInput,
@@ -254,12 +254,7 @@ export default {
             resolve(value.data);
           })
           .catch(reason => {
-            let errors = reason;
-            if(reason.status == 400){
-              // {"message":"The request is invalid.","modelState":{"data.Name":["Tên không được trống"],"data.Address":["Địa chỉ không được trống"],"data.Longitude":["Kinh độ không được trống"],"data.Latitude":["Vĩ độ không được trống"],"data.AreaId":["Khu vực không được trống"],"data.Category":["Thể loại không được trống"]}}
-              errors = reason.response.data.modelState;
-            }
-            reject(errors)
+            reject(reason.response.data.modelState)
           })
       });
 

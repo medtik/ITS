@@ -138,12 +138,7 @@ export default {
             resolve()
           })
           .catch(reason => {
-            let error = [];
-
-            reject({
-              ...reason.response,
-              error
-            })
+            reject(reason);
           })
       });
 

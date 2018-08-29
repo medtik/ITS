@@ -188,13 +188,8 @@ namespace API.ITSProject_2.Controllers
                 )
                 .ToList();
 
-            var path = CurrentContext.Server.MapPath("/Tree/tree.json");
-            Tree tree = _searchTreeService.ReadTree(path);
-            if (tree == null)
-            {
-                tree = _searchTreeService.BuildTree(_locationService.GetAll().Include(location => location.Tags).ToList());
-                _searchTreeService.WriteTree(path, tree);
-            }
+            Tree tree = _searchTreeService.BuildTree(_locationService.GetAll().Include(location => location.Tags)
+                .ToList());
 
             var resultIds = _searchTreeService.SearchTree(tags, tree);
             var locationsResult = _locationService.GetAll()

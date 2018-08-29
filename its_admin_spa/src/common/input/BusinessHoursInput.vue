@@ -95,6 +95,11 @@
           returnVal.from = "00:00";
           returnVal.to = "00:00";
         }
+
+        if(!returnVal.from){
+          returnVal.from = ""
+        }
+
         this.$emit('input', returnVal);
       }
     }

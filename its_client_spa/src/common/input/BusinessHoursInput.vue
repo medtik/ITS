@@ -13,12 +13,14 @@
       <v-text-field
         label="Mở cửa"
         v-model="input.from"
+        :rule="[rules.hoursFormat]"
         @input="emitInput"
         :readonly="readonly"
         placeholder="Giờ:phút"/>
     </v-flex>
     <v-flex v-if="!allDayCheck">
       <v-text-field
+        :rule="[rules.hoursFormat]"
         label="Đóng cửa"
         v-model="input.to"
         @input="emitInput"
@@ -64,7 +66,10 @@
           from: undefined,
           to: undefined,
         },
-        allDayCheck: false
+        allDayCheck: false,
+        rules: {
+          hoursFormat: value => moment(value, "HH:mm").isValid() || "Giờ làm việc không hợp lệ",
+        }
       }
     },
     watch: {
@@ -83,12 +88,18 @@
       }
     },
     methods: {
+
       emitInput() {
         const returnVal = _.cloneDeep(this.input);
         if (this.allDayCheck) {
           returnVal.from = "00:00";
           returnVal.to = "00:00";
         }
+
+        if(!returnVal.from){
+          returnVal.from = ""
+        }
+
         this.$emit('input', returnVal);
       }
     }

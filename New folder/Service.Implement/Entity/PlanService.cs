@@ -443,7 +443,7 @@ namespace Service.Implement.Entity
 
             #region hotel
 
-            var findHotel = locations.Where(_ => _.Categories == "Nơi ở").OrderByDescending(_ => _.Percent);
+            var findHotel = locations.Where(_ => _.Categories == "Nơi ở").OrderByDescending(_ => _.Reasons.Count);
             if (findHotel.ElementAtOrDefault(0) != null)
             {
                 hotel = _locationRepository.Get(_ => _.Id == findHotel.ElementAtOrDefault(0).Id, _ => _.BusinessHours);
@@ -803,7 +803,15 @@ namespace Service.Implement.Entity
                 GetMealTime(origin.Value).Add(GetLocationStayTime(origin.Key));
             TimeSpan arriveTime = GetMealTime(destination.Value);
 
-            locationsToGo.RemoveAll(location => !IsLocationOpenIn(location, departureTime, arriveTime, currentDate));
+            try
+            {
+                locationsToGo.RemoveAll(location =>
+                    !IsLocationOpenIn(location, departureTime, arriveTime, currentDate));
+            }
+            catch (Exception ex)
+            {
+                _loggingService.CaptureSentryException(ex);
+            }
 
             #region Calculate arrive time
 

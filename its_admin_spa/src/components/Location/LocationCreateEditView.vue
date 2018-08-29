@@ -31,14 +31,14 @@
                     <v-text-field
                       label="Vĩ độ"
                       v-model="input.latInput"
-                      :error="!!formError['data.Lat']" :error-messages="formError['data.Lat']"
+                      :error="!!formError['data.Latitude']" :error-messages="formError['data.Latitude']"
                     />
                   </v-flex>
                   <v-flex xs12 md6>
                     <v-text-field
                       label="Kinh độ"
                       v-model="input.longInput"
-                      :error="!!formError['data.Long']" :error-messages="formError['data.Long']"
+                      :error="!!formError['data.Longitude']" :error-messages="formError['data.Longitude']"
                     />
                   </v-flex>
                 </v-layout>
@@ -50,13 +50,13 @@
                 <v-text-field
                   label="Điện thoại"
                   v-model="input.phoneInput"
-                  :error="!!formError['data.Phone']" :error-messages="formError['data.Phone']"
+                  :error="!!formError['data.PhoneNumber']" :error-messages="formError['data.PhoneNumber']"
 
                 />
                 <v-text-field
                   label="Email"
                   v-model="input.emailInput"
-                  :error="!!formError['data.Email']" :error-messages="formError['data.Email']"
+                  :error="!!formError['data.EmailAddress']" :error-messages="formError['data.EmailAddress']"
 
                 />
                 <AreaInput
@@ -260,11 +260,11 @@
           ['data.Name']: undefined,
           ['data.Address']: undefined,
           ['data.Description']: undefined,
-          ['data.Long']: undefined,
-          ['data.Lat']: undefined,
+          ['data.Longitude']: undefined,
+          ['data.Latitude']: undefined,
           ['data.Website']: undefined,
-          ['data.Phone']: undefined,
-          ['data.Email']: undefined,
+          ['data.PhoneNumber']: undefined,
+          ['data.EmailAddress']: undefined,
           ['data.AreaId']: undefined,
           ['data.Category']: undefined,
           ['data.Tags']: undefined,

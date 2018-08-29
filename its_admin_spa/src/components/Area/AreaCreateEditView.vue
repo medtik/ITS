@@ -12,7 +12,9 @@
           <v-flex>
             <v-text-field
               label="Tên"
-              v-model="nameInput"/>
+              v-model="nameInput"
+              :error='!!formError["data.Name"]' :error-messages="formError['data.Name']"
+            />
           </v-flex>
           <v-flex mt-4>
             <span class="subheading">Câu hỏi cho khu vực</span>
@@ -83,6 +85,9 @@
         loading: {
           page: true
         },
+        formError:{
+          ['data.Name']: undefined,
+        },
         //DIALOG START
         error: {
           dialog: false,
@@ -152,6 +157,9 @@
           name: this.nameInput,
           questions: this.choosenQuestions
         })
+          .catch(reason => {
+            this.formError = _.cloneDeep(reason.data.modelState);
+          })
       },
       onEditBtnClick(){
         this.$store.dispatch('area/update',{
@@ -159,6 +167,9 @@
           name: this.nameInput,
           questions: this.choosenQuestions
         })
+          .catch(reason => {
+            this.formError = _.cloneDeep(reason.data.modelState);
+          })
       },
       onCancel(){
         this.$router.back();
