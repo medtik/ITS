@@ -56,7 +56,7 @@
           <v-flex v-if="!isLoggedIn"
                   shrink my-3
                   class="text-xs-center title">
-            Bạn cần đăng nhập để thêm các địa điểm bên dưới vào chuyến đi
+            Bạn cần đăng nhập để quản lý lịch trình
             <v-btn color="success" @click="onSigninClick">
               Đăng nhập
             </v-btn>

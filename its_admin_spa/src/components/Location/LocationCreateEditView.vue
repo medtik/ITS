@@ -86,11 +86,12 @@
                 />
               </v-flex>
               <v-alert
-                v-if="!!formError['']"
-                :value="!!formError['']"
+                :value="!!formError['businessHours']"
                 type="error"
               >
-               {{formError[''][0]}}
+                <span v-if="formError['businessHours']">
+                  {{formError['businessHours'][0]}}
+                </span>
               </v-alert>
             </v-flex>
             <v-flex my-3 v-if="mode == 'edit'">
@@ -271,7 +272,7 @@
           ['data.Tags']: undefined,
           ['data.PrimaryPhoto']: undefined,
           ['data.OtherPhotos']: undefined,
-          ['']: undefined,
+          ['businessHours']: undefined,
         },
         //Dialog
         createEditTag: {
@@ -395,6 +396,10 @@
           })
           .catch(errors => {
             this.formError = _.cloneDeep(errors);
+
+            if (this.formError['']) {
+              this.formError['businessHours'] = this.formError[''];
+            }
           })
       },
       onCreateClick() {
@@ -407,6 +412,10 @@
           })
           .catch(errors => {
             this.formError = _.cloneDeep(errors);
+            if (this.formError['']) {
+              this.formError['businessHours'] = this.formError[''];
+            }
+
           })
       },
       onExitClick() {
