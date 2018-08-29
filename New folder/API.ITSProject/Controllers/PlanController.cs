@@ -169,6 +169,8 @@
                     rating += review.Rating;
                 }
 
+                
+
                 TreeViewModels result = new TreeViewModels
                 {
                     Id = location.Id,
@@ -183,7 +185,12 @@
                     TotalTimeStay = location.TotalTimeStay
                 };
 
-                resultList.Add(result);
+
+                if (location.Tags.All(tag => tag.Name != "cafe"))
+                {
+                    resultList.Add(result);                    
+                }
+                
             }
 
             var locationListResult = resultList.OrderByDescending(_ => _.Reasons.Count)
@@ -206,6 +213,7 @@
             {
                 ["input model"] = viewModel
             });
+            
             Plan resultPlan = await _planService.CreateSuggestedPlan(
                 new Plan
                 {

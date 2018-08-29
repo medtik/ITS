@@ -374,7 +374,10 @@
         const {
           group
         } = payload;
-        const successMessage = group.name ?
+
+
+
+        const successMessage = (!!group && !!group.name) ?
           `Thêm chuyến đi hiện tại vào ${group.name} thành công.` :
           `Thêm chuyến đi thành công.`;
 

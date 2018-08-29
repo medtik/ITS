@@ -32,7 +32,7 @@
               </v-flex>
             </v-layout>
             <v-list>
-              <v-list-tile v-for="(question, index) in this.choosenQuestions" :key="question">
+              <v-list-tile v-for="(question, index) in this.choosenQuestions" :key="index">
                 <v-list-tile-title>{{question.content}}</v-list-tile-title>
                 <v-list-tile-action>
                   <v-btn color="red" flat @click="removeQuestion(question.id)">

@@ -8,15 +8,15 @@
         <v-layout column v-else>
           <!--Basic input-->
           <v-flex style="width: 25rem">
-              <v-text-field label="Nội dung câu hỏi"
-                            v-model="textInput"
-              ></v-text-field>
-              <v-combobox
-                v-model="categoryInput"
-                :items="categories"
-                label="Thể loại"
-                :loading="loading.categories"
-              ></v-combobox>
+            <v-text-field label="Nội dung câu hỏi"
+                          v-model="textInput"
+            ></v-text-field>
+            <v-combobox
+              v-model="categoryInput"
+              :items="categories"
+              label="Thể loại"
+              :loading="loading.categories"
+            ></v-combobox>
           </v-flex>
           <!--Answer-->
           <v-flex my-3>
@@ -28,19 +28,21 @@
                   </v-toolbar>
                   <v-layout column>
                     <v-flex pa-2>
-                        <v-layout row style="align-items: center">
-                          <v-text-field
-                            label="Câu trả lời"
-                            v-model="answerTextInput"
-                          ></v-text-field>
-                          <v-btn icon flat color="green"
-                                 @click="onAddAnswerClick">
-                            <v-icon>fas fa-plus</v-icon>
-                          </v-btn>
-                        </v-layout>
+                      <v-layout row style="align-items: center">
+                        <v-text-field
+                          label="Câu trả lời"
+                          v-model="answerTextInput"
+                        ></v-text-field>
+                        <v-btn icon flat color="green"
+                               v-on:click="onAddAnswerClick">
+                          <v-icon>fas fa-plus</v-icon>
+                        </v-btn>
+                      </v-layout>
                     </v-flex>
                     <v-divider></v-divider>
-                    <v-flex px-2 v-for="(answer,index) in answersInput" :key="index">
+                    <v-flex v-if="answersInput && answersInput.length > 0"
+                            v-for="(answer, index) in answersInput" :key="index"
+                            px-2>
                       <v-layout row py-2>
                         <v-flex xs11>
                           <v-layout column>
@@ -58,15 +60,15 @@
                         </v-flex>
                         <v-flex xs1 style="text-align: end;">
                           <v-btn icon flat color="success"
-                                 v-on:click="editAnswerDialog = true">
+                                 @click="onEditAnswer(index)">
                             <v-icon>edit</v-icon>
                           </v-btn>
-                          <v-btn icon flat color="red">
+                          <v-btn icon flat color="red" @click="onRemoveAnswer(index)">
                             <v-icon>delete</v-icon>
                           </v-btn>
                         </v-flex>
                       </v-layout>
-                      <v-divider v-if="(index + 1) < question.answer.length"></v-divider>
+                      <v-divider v-if="(index + 1) < answersInput.length"></v-divider>
                     </v-flex>
                   </v-layout>
                 </v-card>
@@ -103,7 +105,7 @@
         </v-card-title>
         <v-layout column pa-4>
           <v-flex>
-            <v-text-field label="Tên" v-model="editedAnswer.name"></v-text-field>
+            <v-text-field label="Nội dung" v-model="editedAnswer.content"></v-text-field>
           </v-flex>
           <v-flex>
             <v-btn color="green" dark v-on:click="onSaveEditAnswer">Lưu thay đổi</v-btn>
@@ -130,6 +132,7 @@
   import {FormRuleMixin} from "../../common/mixin";
   import TagCreateEditDialog from "../Tag/TagCreateEditDialog" ;
   import _ from "lodash";
+
   export default {
     name: "QuestionCreateEditView",
     mixins: [FormRuleMixin],
@@ -171,6 +174,7 @@
           dialog: false,
         },
         editAnswerDialog: false,
+        editAnswerIndex: undefined,
         editedAnswer: {},
       }
     },
@@ -227,13 +231,12 @@
         return Promise.resolve();
       },
       onAddAnswerClick() {
-        if (!!this.answerTextInput) {
+        if (this.answerTextInput) {
           this.answersInput.push({
-            content: this.answerTextInput,
-            tags: []
+            content: this.answerTextInput
           });
           this.answerTextInput = '';
-          // this.$refs[this.refs.answerText].reset()
+          // this.content[this.refs.answerText].reset()
         }
       },
       onCreateClick() {
@@ -260,21 +263,13 @@
         this.loading.updateBtn = true;
         this.$store.dispatch('question/update', {
           id: this.questionId,
-          text: this.textInput,
-          category: this.categoryInput,
+          content: this.textInput,
+          categories: this.categoryInput,
           answers: this.answersInput
-        }).then(question => {
-          this.success = {
-            dialog: true,
-            message: `Cập nhật thành công câu hỏi ${question.text}`
-          };
-          this.loading.updateBtn = false;
-        }).catch(reason => {
-          this.error = {
-            dialog: true,
-            message: reason.message
-          };
-          this.loading.updateBtn = false;
+        }).then(() => {
+          this.$router.push({
+            name: 'QuestionList'
+          });
         })
       },
       onDialogConfirmCreate(item) {
@@ -293,8 +288,23 @@
           dialog: false
         }
       },
+      onRemoveAnswer(removeIndex) {
+        this.answersInput = _.filter(this.answersInput, (val, index) => {
+          return index != removeIndex;
+        })
+      },
+      onEditAnswer(editIndex){
+        this.editedAnswer = _(this.answersInput)
+          .filter((val, index) => {
+            return index == editIndex;
+          })
+          .head();
+        this.editAnswerDialog = true;
+        this.editAnswerIndex = editIndex;
+      },
       onSaveEditAnswer() {
         this.editAnswerDialog = false;
+
       },
       onExitClick() {
         this.$router.back();

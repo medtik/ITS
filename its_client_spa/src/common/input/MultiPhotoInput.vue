@@ -17,13 +17,12 @@
               wrap
               row>
       <v-flex v-for="(photo,index) in photos"
-              pa-2
-              xs4
+              pa-2 shrink
               style="flex-grow: 0.05"
               :key="index">
         <v-card>
           <v-card-media>
-            <img :src="photo" height="200"/>
+            <img :src="photo" height="200px" style="width: auto"/>
           </v-card-media>
           <v-card-actions>
             <v-btn color="red" flat block

@@ -1,0 +1,8 @@
+[
+  {
+    "origin": ["http://localhost","localhost","127.0.0.1", "https://its-g8-ad.firebaseapp.com"],
+    "responseHeader": ["Content-Type"],
+    "method": ["GET", "HEAD", "DELETE"],
+    "maxAgeSeconds": 3600
+  }
+]

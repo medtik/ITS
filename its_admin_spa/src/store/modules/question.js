@@ -24,14 +24,14 @@ function mockShell(bodyFunc, noFail) {
 
 export default {
   namespaced: true,
-  state:{
+  state: {
     allQuestions: [],
-    loading:{
+    loading: {
       allQuestions: false
     }
   },
-  mutations:{
-    setAllQuestions(state, payload){
+  mutations: {
+    setAllQuestions(state, payload) {
       state.allQuestions = payload.questions;
     },
     setLoading(state, payload) {
@@ -57,7 +57,7 @@ export default {
           });
       })
     },
-    GetAllWithoutParams(context){
+    GetAllWithoutParams(context) {
       context.commit('setLoading', {loading: {allQuestions: true}});
       return new Promise((resolve, reject) => {
         axiosInstance.get('api/Question', {
@@ -129,11 +129,8 @@ export default {
           content: text,
           categories: category,
           answers: _.map(answers, answer => {
-            answer.tags = _.map(answer.tags, (tag) => {
-              return tag.id
-            });
-            answer.answer = answer.text;
-            answer.text = undefined;
+            answer.tags = _.map(answer.tags, 'id');
+            answer.answer = answer.content;
             return answer;
           })
         })
@@ -159,14 +156,26 @@ export default {
         content,
         categories,
         answers
-      } = payload;
-      axiosInstance.put('api/question', {}, {
-        params: {
-          id,
-          content,
-          categories,
-          answers
-        }
+      } = _.cloneDeep(payload);
+
+      return new Promise((resolve, reject) => {
+        axiosInstance.put('api/question', {
+          "id": id,
+          "content": content,
+          "categories": categories,
+          "answers": _.map(answers, answer => {
+            answer.tags = _.map(answer.tags, 'id');
+            answer.answer = answer.content;
+            return answer;
+          })
+        })
+          .then(value => {
+            resolve(value.data)
+          })
+          .catch(reason => {
+            Raven.captureException(reason);
+            reject(reason);
+          })
       })
     },
     delete(context, payload) {
