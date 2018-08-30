@@ -196,11 +196,21 @@
             return Update(entity);
         }
 
-        public bool Edit(Location data, Photo priamryPhoto, IEnumerable<Photo> photos, IEnumerable<BusinessHour> businessHours, int[] tagList)
+        public bool Edit(Location data, Photo priamryPhoto, IEnumerable<Photo> photos, IEnumerable<BusinessHour> businessHours, int[] tagList, ICollection<int> reviewIds)
         {
             try
             {
-                var location = _repository.Get(_ => _.Id == data.Id, _ => _.BusinessHours, _ => _.Photos);
+                var location = _repository.Get(_ => _.Id == data.Id, _ => _.BusinessHours, _ => _.Photos, _ => _.Reviews);
+                var reviews = location.Reviews.ToList();
+                foreach (var item in reviews.ToList())
+                {
+                    if (reviews.Any(_ => !reviewIds.Contains(_.Id)))
+                    {
+                        _reviewRepository.Delete(item);
+                    }
+                }
+                _unitOfWork.SaveChanges();
+
                 var photoLocationNe = location.Photos;
                 foreach (var item in photoLocationNe.ToList())
                 {

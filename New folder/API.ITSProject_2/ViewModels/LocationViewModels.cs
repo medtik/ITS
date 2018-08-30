@@ -75,6 +75,9 @@
 
         [DataMember]
         public ICollection<BusinessHourViewModels> Days { get; set; }
+
+        [DataMember]
+        public ICollection<int> ReviewIds { get; set; }
     }
 
     [DataContract]

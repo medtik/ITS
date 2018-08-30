@@ -944,7 +944,7 @@ namespace API.ITSProject_2.Controllers
 
                 IEnumerable<BusinessHour> businessHours = ModelBuilder.ConvertToModels(data.Days);
 
-                bool result = _locationService.Edit(location, primaryPhoto, otherPhoto, businessHours, data.Tags);
+                bool result = _locationService.Edit(location, primaryPhoto, otherPhoto, businessHours, data.Tags, data.ReviewIds);
 
                 if (result)
                 {
