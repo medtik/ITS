@@ -4,8 +4,8 @@ import moment from "moment";
 import Raven from "raven-js"
 import firebase from "firebase";
 
-// const root = "https://itssolutiong9.azurewebsites.net/";
-const root = "http://localhost:59728/";
+const root = "https://itssolutiong9.azurewebsites.net/";
+// const root = "http://localhost:59728/";
 
 var config = {
   apiKey: "AIzaSyCouzeKTc_xf3r7QJZjCjyEr7rceMB7rgA",
@@ -26,6 +26,7 @@ export default {
   state: {
     facebookAppId: "266318357470729",
     token: undefined,
+    firebaseInstance: firebase
   },
   getters: {
     isLoggedIn(state) {
@@ -123,7 +124,7 @@ export default {
           var user = result.user;
 
           let data = {
-              "email": !!user.email ? user.email : 'Non',
+              "email": user.email,
               "photoUrl": user.photoUrl,
               "displayName": user.displayName,
               "uid": user.uid,
@@ -132,17 +133,11 @@ export default {
           };
 
           Raven.captureMessage("signinFacebook", {
-            extra: data
+            extra: {
+              data,
+              user
+            }
           });
-
-          axiosInstance.post('RegisterExternal', data)
-            .then(value => {
-              context.dispatch('setExternalLoginToken', {data: value.data})
-                .then(value => {
-                  resolve()
-                })
-            })
-
         }).catch(function (error) {
           Raven.captureException(error);
           reject();
@@ -159,7 +154,7 @@ export default {
             var user = result.user;
 
             let data = {
-              "email": !!user.email ? user.email : 'Non',
+              "email": user.email,
               "photoUrl": user.photoUrl,
               "displayName": user.displayName,
               "uid": user.uid,
@@ -168,15 +163,11 @@ export default {
             };
 
             Raven.captureMessage("signinGoogle", {
-              extra: data
+              extra: {
+                data,
+                user
+              }
             });
-            axiosInstance.post('RegisterExternal', data)
-              .then(value => {
-                context.dispatch('setExternalLoginToken', {data: value.data})
-                  .then(value => {
-                    resolve()
-                  })
-              })
           })
           .catch(function (error) {
             Raven.captureException(error);

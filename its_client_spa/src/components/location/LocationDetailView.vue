@@ -215,7 +215,7 @@
           .map(businessHour => {
             const fromTime = moment(businessHour.from, "HH:mm");
             const toTime = moment(businessHour.to, "HH:mm");
-            const zeroTime = moment("00:00", "HH:mm");
+            const zeroTime = moment("00:01", "HH:mm");
             let day;
             switch (businessHour.day) {
               case 'day1':

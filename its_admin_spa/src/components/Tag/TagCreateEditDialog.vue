@@ -78,7 +78,7 @@
       dialog(val, oldVal) {
         if (val && this.item) {
           this.nameInput = this.item.name;
-          this.categoryInput = this.item.category;
+          this.categoryInput = this.item.categories;
         }
       }
     },

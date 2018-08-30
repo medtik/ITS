@@ -4,8 +4,8 @@
            :status="status">
     <template slot="detail">
       <v-layout column>
-        <v-flex>
-          Comment thêm
+        <v-flex ma-1 class="subheading">
+          {{message}}
         </v-flex>
         <v-flex>
           <LocationReview v-bind="review"/>
@@ -33,7 +33,8 @@
       'user',
       'location',
       'status',
-      'review'
+      'review',
+      'message'
     ]
   }
 </script>

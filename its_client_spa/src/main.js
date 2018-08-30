@@ -96,6 +96,15 @@ RNMsgChannel.on('json', json => {
 
 Vue.config.productionTip = false;
 
+// const user = store.authenticate.firebase.auth().currentUser;
+// Raven.captureMessage('current user', {
+//   extra: user
+// });
+// if(user){
+//
+// }
+
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
